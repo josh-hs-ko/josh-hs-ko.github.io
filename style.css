@@ -1,0 +1,121 @@
+.main {
+  margin-top: 3ex;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #333333;
+  text-align: justify;
+}
+
+span.line {
+  display: inline-block;
+}
+
+a:link, a:visited {
+  color: #333333;
+}
+
+a:active {
+  color: grey;
+}
+
+.panel-default > .publication {
+  background: transparent;
+}
+
+.name {
+  font-weight: 600;
+  color: #002147;
+  word-spacing: .2em;
+}
+
+.header {
+  text-align: left;
+}
+
+.header p {
+  margin-bottom: 0;
+}
+
+.section {
+  margin-top: 3ex;
+}
+
+.section-title {
+  margin-top: 0;
+  color: #002147;
+}
+
+.publication {
+  margin-bottom: 2ex;
+  text-align: left;
+}
+
+.publication-title {
+  font-weight: 600;
+  margin-bottom: .25ex;
+}
+
+.publication-authors {
+  margin-bottom: .25ex;
+}
+
+.publication-venue {
+  margin-bottom: .25ex;
+}
+
+.publication-year {
+  margin-left: .75em;
+}
+
+.publication-links {
+  margin-top: .25ex;
+  margin-bottom: .5ex;
+}
+
+.publication-links a {
+  color: white;
+}
+
+.publication-info {
+  margin-top: .75ex;
+  margin-bottom: .75ex;
+}
+
+.publication-info-title {
+  font-weight: 600;
+}
+
+.publication-more-info {
+  cursor: pointer;
+}
+
+.photo {
+  text-align: right;
+}
+
+dl {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+dd {
+  margin-bottom: 1ex;
+}
+
+.expertise-list {
+  margin-top: 1.25ex;
+  line-height: 32px;
+  text-align: left;
+}
+
+.expertise {
+  font-size: 14px;
+  background-color: #002147;
+}
+
+.acknowledgements {
+  text-align: center;
+  font-size:12px;
+  margin-top: 4ex;
+  margin-bottom: 4ex;
+}
