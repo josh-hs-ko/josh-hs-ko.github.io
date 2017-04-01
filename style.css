@@ -86,6 +86,10 @@ a:active {
   font-weight: 600;
 }
 
+.publication-type {
+  margin-right: .75em;
+}
+
 .publication-more-info {
   cursor: pointer;
 }
