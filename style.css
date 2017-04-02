@@ -1,13 +1,9 @@
-.main {
-  margin-top: 3ex;
-  font-family: "Open Sans", sans-serif;
-  font-size: 16px;
-  color: #333333;
-  text-align: justify;
+body {
+  background-color: #faf6e8;
 }
 
-span.line {
-  display: inline-block;
+p {
+  text-align: justify;
 }
 
 a:link, a:visited {
@@ -18,8 +14,11 @@ a:active {
   color: grey;
 }
 
-.panel-default > .publication {
-  background: transparent;
+.main {
+  margin-top: 3ex;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  color: #333333;
 }
 
 .name {
@@ -28,12 +27,16 @@ a:active {
   word-spacing: .2em;
 }
 
-.header {
-  text-align: left;
+span.line {
+  display: inline-block;
 }
 
 .header p {
   margin-bottom: 0;
+}
+
+.photo {
+  text-align: right;
 }
 
 .section {
@@ -42,13 +45,30 @@ a:active {
 
 .section-title {
   margin-top: 0;
-  text-align: left;
   color: #002147;
+}
+
+.expertise-list {
+  margin-top: 1.25ex;
+  line-height: 32px;
+  text-align: left;
+}
+
+.expertise {
+  font-size: 14px;
+  background-color: #194778;
+}
+
+dl {
+  margin-bottom: 0;
+}
+
+dd {
+  margin-bottom: 1ex;
 }
 
 .publication {
   margin-bottom: 2ex;
-  text-align: left;
 }
 
 .publication-title {
@@ -77,6 +97,10 @@ a:active {
   color: white;
 }
 
+.panel-publication-info {
+  background: #fefcf8;
+}
+
 .publication-info {
   margin-top: .75ex;
   margin-bottom: .75ex;
@@ -92,30 +116,6 @@ a:active {
 
 .publication-more-info {
   cursor: pointer;
-}
-
-.photo {
-  text-align: right;
-}
-
-dl {
-  margin-bottom: 0;
-  text-align: left;
-}
-
-dd {
-  margin-bottom: 1ex;
-}
-
-.expertise-list {
-  margin-top: 1.25ex;
-  line-height: 32px;
-  text-align: left;
-}
-
-.expertise {
-  font-size: 14px;
-  background-color: #194778;
 }
 
 .acknowledgements {
