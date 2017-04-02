@@ -36,8 +36,14 @@ a:active {
 }
 
 .header p {
+  margin-left: 1em;
   margin-bottom: 0;
   text-align: left;
+  text-indent: -1em;
+  hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  -webkit-hyphens: none;
 }
 
 span.line {
@@ -108,7 +114,7 @@ dd {
 }
 
 .panel-publication-info {
-  margin-top: -8px;
+  margin-top: -1ex;
   background: #fefcf8;
 }
 
