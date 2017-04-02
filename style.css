@@ -24,6 +24,10 @@ a:active {
   color: #333333;
 }
 
+.header {
+  margin-top: 0ex;
+}
+
 .name {
   font-weight: 600;
   color: #002147;
@@ -31,23 +35,13 @@ a:active {
   line-height: 48px;
 }
 
-.header {
-  margin-top: 0ex;
-}
-
-.header p {
-  margin-left: 1em;
-  margin-bottom: 0;
-  text-align: left;
-  text-indent: -1em;
-  hyphens: none;
-  -moz-hyphens: none;
-  -ms-hyphens: none;
-  -webkit-hyphens: none;
-}
-
-span.line {
+span.name-block {
   display: inline-block;
+}
+
+.personal-info {
+  margin-left: 1em;
+  text-indent: -1em;
 }
 
 .photo {
@@ -75,12 +69,17 @@ span.line {
   background-color: #194778;
 }
 
-dl {
-  margin-bottom: 0;
+.entry {
+  margin-bottom: 1ex;
 }
 
-dd {
-  margin-bottom: 1ex;
+.main-entry {
+  font-weight: 600;
+}
+
+.sub-entry {
+  margin-left: 1em;
+  text-indent: -1em;
 }
 
 .publication {
@@ -94,10 +93,14 @@ dd {
 
 .publication-authors {
   margin-bottom: .25ex;
+  margin-left: 1em;
+  text-indent: -1em;
 }
 
 .publication-venue {
   margin-bottom: .25ex;
+  margin-left: 1em;
+  text-indent: -1em;
 }
 
 .publication-venue span.venue {
