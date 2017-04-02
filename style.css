@@ -100,8 +100,8 @@ dd {
   margin-bottom: .25ex;
 }
 
-.publication-year {
-  margin-left: .75em;
+.publication-venue span.venue {
+  margin-right: .5em;
 }
 
 .publication-links {
