@@ -28,7 +28,7 @@ a:active {
 }
 
 .header {
-  margin-top: 2ex;
+  margin-top: 0ex;
 }
 
 .header p {
@@ -41,7 +41,7 @@ span.line {
 
 .photo {
   margin-top: 3.5ex;
-  text-align: right;
+  float: right;
 }
 
 .section {
