@@ -24,6 +24,7 @@ a:active {
   font-weight: 600;
   color: #002147;
   word-spacing: .2em;
+  line-height: 48px;
 }
 
 .header {
@@ -94,7 +95,7 @@ dd {
 
 .publication-links {
   margin-top: -.4ex;
-  line-height: 32px;
+  line-height: 30px;
 }
 
 .publication-links a {
