@@ -34,6 +34,7 @@ a:active {
 
 .header p {
   margin-bottom: 0;
+  text-align: left;
 }
 
 span.line {
