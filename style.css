@@ -5,6 +5,9 @@ body {
 p {
   text-align: justify;
   hyphens: auto;
+  -moz-hyphens: auto;
+  -ms-hyphens: auto;
+  -webkit-hyphens: auto;
 }
 
 a:link, a:visited {
