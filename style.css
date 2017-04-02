@@ -124,17 +124,20 @@ span.name-block {
 }
 
 .panel-publication-info-body {
-  margin-top: -1.5ex;
-  margin-bottom: -3.25ex;
+  margin-top: -.75ex;
+  margin-bottom: -3.5ex;
 }
 
 .publication-info {
-  margin-top: .75ex;
-  margin-bottom: .75ex;
+  margin-bottom: 1.5ex;
 }
 
 .publication-info-title {
   font-weight: 600;
+}
+
+.publication-info p {
+  margin-bottom: 1.5ex;
 }
 
 .publication-type {
