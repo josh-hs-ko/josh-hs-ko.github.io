@@ -114,8 +114,9 @@ dd {
   margin-right: .75em;
 }
 
-.publication-more-info {
+.publication-more-info:hover {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .acknowledgements {
