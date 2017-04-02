@@ -56,11 +56,12 @@ span.name-block {
 
 .section-title {
   margin-top: 0;
+  margin-bottom: 1.25ex;
   color: #002147;
 }
 
 .expertise-list {
-  margin-top: 1.25ex;
+  margin-bottom: 2ex;
   line-height: 32px;
   text-align: left;
 }
@@ -120,6 +121,11 @@ span.name-block {
 .panel-publication-info {
   margin-top: -1.5ex;
   background: #fefcf8;
+}
+
+.panel-publication-info-body {
+  margin-top: -1.5ex;
+  margin-bottom: -3.25ex;
 }
 
 .publication-info {
