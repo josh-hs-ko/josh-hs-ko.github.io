@@ -15,7 +15,6 @@ a:active {
 }
 
 .main {
-  margin-top: 3ex;
   font-family: "Open Sans", sans-serif;
   font-size: 16px;
   color: #333333;
@@ -27,15 +26,20 @@ a:active {
   word-spacing: .2em;
 }
 
-span.line {
-  display: inline-block;
+.header {
+  margin-top: 2ex;
 }
 
 .header p {
   margin-bottom: 0;
 }
 
+span.line {
+  display: inline-block;
+}
+
 .photo {
+  margin-top: 3.5ex;
   text-align: right;
 }
 
@@ -89,8 +93,8 @@ dd {
 }
 
 .publication-links {
-  margin-top: .25ex;
-  margin-bottom: .5ex;
+  margin-top: -.4ex;
+  line-height: 32px;
 }
 
 .publication-links a {
