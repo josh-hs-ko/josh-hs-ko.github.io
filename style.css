@@ -11,12 +11,27 @@ p {
   -webkit-hyphens: auto;
 }
 
-a:link, a:visited {
+a, a:hover {
   color: #333333;
 }
 
 a:active {
   color: grey;
+}
+
+a {
+  text-decoration: underline;
+  text-decoration-color: #d4d4d4;
+  -moz-text-decoration-color: #d4d4d4;
+  -ms-text-decoration-color: #d4d4d4;
+  -webkit-text-decoration-color: #d4d4d4;
+}
+
+a:hover {
+  text-decoration-color: currentColor;
+  -moz-text-decoration-color: currentColor;
+  -ms-text-decoration-color: currentColor;
+  -webkit-text-decoration-color: currentColor;
 }
 
 .main {
@@ -116,6 +131,11 @@ span.name-block {
 
 .publication-links a {
   color: white;
+  text-decoration: none;
+}
+
+.publication-links a:active {
+  color: #ffff66;
 }
 
 .panel-publication-info {
@@ -147,6 +167,10 @@ span.name-block {
 .publication-more-info:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.publication-more-info:active {
+  color: #ffff66;
 }
 
 .acknowledgements {
