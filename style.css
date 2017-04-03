@@ -123,12 +123,12 @@ span.name-block {
   background: #fefcf8;
 }
 
-.panel-publication-info-body {
+.publication-info {
   margin-top: -.75ex;
   margin-bottom: -3.5ex;
 }
 
-.publication-info {
+.publication-info-entry {
   margin-bottom: 1.5ex;
 }
 
