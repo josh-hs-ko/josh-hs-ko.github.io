@@ -184,6 +184,7 @@ span.name-block {
 .panel-publication-info {
   margin-top: -1.5ex;
   background: #fefcf8;
+  box-shadow: none;
 }
 
 .publication-info {
