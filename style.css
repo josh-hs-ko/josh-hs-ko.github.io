@@ -60,12 +60,15 @@ span.name-block {
   text-indent: -1em;
 }
 
-#photo {
+.photo {
   margin-top: 4ex;
+  float: right;
+}
+
+#photo {
   width: 200px;
   height: 200px;
   border-radius: 4px;
-  float: right;
 }
 
 #navbar {
