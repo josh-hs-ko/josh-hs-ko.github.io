@@ -61,8 +61,51 @@ span.name-block {
 }
 
 .photo {
-  margin-top: 3.5ex;
+  margin-top: 4ex;
   float: right;
+}
+
+#navbar {
+  margin-top: 4ex;
+  background: #f1e3bb;
+  border: none;
+  box-shadow: none;
+}
+
+#navbar a {
+  color: #592c35;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+#navbar a:hover {
+  text-decoration: underline;
+}
+
+#navbar a:active {
+  color: #e1a358;
+}
+
+#navbar li {
+  margin-left: 1em;
+}
+
+@media (min-width: 768px) {
+
+  .navbar-nav {
+    margin: 0 auto;
+    display: table;
+    table-layout: auto;
+    float: none;
+    width: 730px;
+  }
+
+  .navbar-nav > li {
+    display: table-cell;
+    float: none;
+    text-align: center;
+  }
+
 }
 
 .section {
