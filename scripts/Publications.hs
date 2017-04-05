@@ -261,6 +261,7 @@ publicationList =
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
+                   , ("Note", "This paper has been superseded by <a href=\"#publication-685cb02c\">an extended journal version</a>.", Nothing)
                    , ("Abstract", "Dependently typed programmers are encouraged to use inductive families to integrate constraints with data construction. Different constraints are used in different contexts, leading to different versions of datatypes for the same data structure. Modular implementation of common operations for these structurally similar datatypes has been a longstanding problem. We propose a datatype-generic solution based on McBride’s datatype ornaments, exploiting an isomorphism whose interpretation borrows ideas from realisability. Relevant properties of the operations are separately proven for each constraint, and after the programmer selects several constraints to impose on a basic datatype and synthesises an inductive family incorporating those constraints, the operations can be routinely upgraded to work with the synthesised inductive family.", Nothing)
                    ]
       }
@@ -300,6 +301,7 @@ publicationList =
       , info     = [ ("LNCS", "5133", Nothing)
                    , ("Pages", "268–283", Nothing)
                    , ("DOI", "10.1007/978-3-540-70594-9_15", Nothing)
+                   , ("Note", "This paper has been superseded by <a href=\"#publication-41007bea\">an extended journal version</a>.", Nothing)
                    , ("Abstract", "Dependent type theory is rich enough to express that a program satisfies an input/output relational specification, but it could be hard to construct the proof term. On the other hand, squiggolists know very well how to show that one relation is included in another by algebraic reasoning. We demonstrate how to encode functional and relational derivations in a dependently typed programming language. A program is coupled with an algebraic derivation from a specification, whose correctness is guaranteed by the type system.", Nothing)
                    ]
       }

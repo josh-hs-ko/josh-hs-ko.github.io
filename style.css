@@ -152,6 +152,22 @@ span.name-block {
   margin-bottom: 2.5ex;
 }
 
+.publication:target {
+  margin-top: -.5ex;
+  padding-top: .5ex;
+  margin-bottom: 2ex;
+  padding-bottom: .5ex;
+  margin-left: -.5ex;
+  padding-left: .5ex;
+  margin-right: -.5ex;
+  padding-right: .5ex;
+  background: #f1e3bb;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #592c35;
+  border-radius: 4px;
+}
+
 .publication-title {
   font-weight: 600;
   margin-bottom: .25ex;

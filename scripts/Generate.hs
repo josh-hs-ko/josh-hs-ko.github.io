@@ -5,6 +5,7 @@ import PermVenues
 import Publications
 
 import Data.List
+import Data.Hash.MD5 as MD5
 import Text.PrettyPrint
 import System.IO.Strict as Strict
 
@@ -49,11 +50,13 @@ renderVenueAndYear pvs n m y =
         IncludeYear -> addLink (inlineElement "span" [("class", ["venue"])] (text n <> space) <> int y)
         ExcludeYear -> inlineElement "span" [("class", ["venue"])] (addLink (text n) <> space) <> int y
 
-renderPublication :: [Author] -> [PermVenue] -> (Publication, Int) -> Doc
-renderPublication as pvs (p, pid) =
-  let pidStr = "publication-" ++ show pid
-  in  (blockElement "div" [("class", ["publication"])] $
-         blockElement "div" [("class", ["publication-title"])] (text (title p)) $+$
+renderPublication :: [Author] -> [PermVenue] -> Publication -> Doc
+renderPublication as pvs p =
+  let md5    = take 8 (md5s (MD5.Str (title p ++ concat (authors p) ++ venue p ++ show (year p))))
+      pubId  = "publication-"      ++ md5
+      infoId = "publication-info-" ++ md5
+  in  (blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
+         blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$
          blockElement "div" [("class", ["publication-authors"])] (oxfordList (map (renderAuthor as) (authors p))) $+$
          blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (venueURL p) (year p)) $+$
          (blockElement "div" [("class", ["publication-links"])] $
@@ -73,10 +76,10 @@ renderPublication as pvs (p, pid) =
             else inlineElement "span" [("class", ["label", "label-info", "publication-more-info"]),
                                        ("onclick", ["none()"]),
                                        ("data-toggle", ["collapse"]),
-                                       ("data-target", ['#':pidStr])] (text "More info"))) $+$
+                                       ("data-target", ['#':infoId])] (text "More info"))) $+$
       if null (info p)
       then empty
-      else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [pidStr])] $
+      else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [infoId])] $
              blockElement "div" [("class", ["panel-body"])] $
                blockElement "div" [("class", ["publication-info"])] $
                  foldr ($+$) empty
@@ -104,9 +107,7 @@ process inputStr =
   in  unlines ls0 ++
       render (nest indent $
                 text start $+$
-                foldr ($+$) empty
-                  (map (renderPublication authorList permVenueList)
-                       (zip publicationList (reverse (take (length publicationList) [0..])))) $+$
+                foldr ($+$) empty (map (renderPublication authorList permVenueList) publicationList) $+$
                 text end) ++ "\n" ++
       unlines ls1
 
