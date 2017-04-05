@@ -113,4 +113,4 @@ process inputStr =
 
 main :: IO ()
 main = let targetFile = "index.html"
-       in  Strict.readFile "index.html" >>= writeFile "index.html" . process
+       in  Strict.readFile targetFile >>= writeFile targetFile . process
