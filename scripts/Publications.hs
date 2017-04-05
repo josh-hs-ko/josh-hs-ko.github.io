@@ -63,7 +63,7 @@ publicationList =
       , venue    = "International Workshop on Bidirectional Transformations (BX)"
       , venueURL = Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear)
       , year     = 2017
-      , pubType  = Just (Published, "Accepted for publication")
+      , pubType  = Just (Published, "To appear")
       , links    = []
       , info     = []
       }
