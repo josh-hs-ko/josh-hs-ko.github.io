@@ -183,6 +183,10 @@ span.name-block {
   text-decoration: none;
 }
 
+.publication-links a:hover {
+  text-decoration: underline;
+}
+
 .publication-links a:active {
   color: #ffff66;
 }
@@ -195,11 +199,7 @@ span.name-block {
 
 .publication-info {
   margin-top: -.75ex;
-  margin-bottom: -3.5ex;
-}
-
-.publication-info-entry {
-  margin-bottom: 1.5ex;
+  margin-bottom: -2ex;
 }
 
 .publication-info-title {
