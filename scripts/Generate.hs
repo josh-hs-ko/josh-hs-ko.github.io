@@ -93,7 +93,7 @@ renderPublication as pvs p =
                                             ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
                                             (_, 'h':'t':'t':'p':_, _) -> Just c
                                             _ -> Nothing
-                               in  inlineElement "p" [] (maybe id hyperlink murl  (text c))))
+                               in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
                         (info p))
 
 process :: String -> String
