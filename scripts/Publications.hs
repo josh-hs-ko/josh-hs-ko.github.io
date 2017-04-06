@@ -8,8 +8,7 @@ data HyperlinkYear = IncludeYear | ExcludeYear
 data Publication = Publication
   { title    :: String
   , authors  :: [String]
-  , venue    :: String
-  , venueURL :: Maybe (String, HyperlinkYear)
+  , venue    :: Maybe (String, Maybe (String, HyperlinkYear))
   , year     :: Int
   , pubType  :: Maybe (PublicationType, String)
   , links    :: [(String, String)]
@@ -25,8 +24,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "arXiv"
-      , venueURL = Nothing
+      , venue    = Just ("arXiv", Nothing)
       , year     = 2017
       , pubType  = Just (Unpublished, "Technical report")
       , links    = [ ("PDF (arXiv)", "https://arxiv.org/pdf/1703.09542")
@@ -41,10 +39,9 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "In submission"
-      , venueURL = Nothing
+      , venue    = Nothing
       , year     = 2017
-      , pubType  = Just (Unpublished, "Draft manuscript")
+      , pubType  = Just (Unpublished, "In submission")
       , links    = [ ("PDF (draft)", "manuscripts/BiGUL-logic.pdf")
                    , ("Agda code (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
                    ]
@@ -60,8 +57,7 @@ publicationList =
                    , "Erhan Leblebici"
                    , "Bernhard Westfechtel"
                    ]
-      , venue    = "International Workshop on Bidirectional Transformations (BX)"
-      , venueURL = Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear)
+      , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
       , year     = 2017
       , pubType  = Just (Published, "To appear")
       , links    = []
@@ -72,8 +68,7 @@ publicationList =
       , authors  = [ "Zhenjiang Hu"
                    , "Hsiang-Shang Ko"
                    ]
-      , venue    = "Oxford Summer School on Bidirectional Transformations"
-      , venueURL = Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear)
+      , venue    = Just ("Oxford Summer School on Bidirectional Transformations", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year     = 2017
       , pubType  = Just (Unpublished, "Draft manuscript (publication planned)")
       , links    = [ ("PDF (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SummerSchool16/paper/BiGUL_tutorial.pdf")
@@ -87,8 +82,7 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Jeremy Gibbons"
                    ]
-      , venue    = "Journal of Functional Programming"
-      , venueURL = Nothing
+      , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2017
       , pubType  = Nothing
       , links    = [ ("PDF (preprint)", "manuscripts/OrnJFP.pdf")
@@ -110,8 +104,7 @@ publicationList =
                    , "João Saraiva"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "International Conference on Software Language Engineering (SLE)"
-      , venueURL = Just ("http://www.sleconf.org/2016/", IncludeYear)
+      , venue    = Just ("International Conference on Software Language Engineering (SLE)", Just ("http://www.sleconf.org/2016/", IncludeYear))
       , year     = 2016
       , pubType  = Nothing
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21371")
@@ -128,8 +121,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "GRACE Center, National Institute of Informatics"
-      , venueURL = Nothing
+      , venue    = Just ("GRACE Center, National Institute of Informatics", Nothing)
       , year     = 2016
       , pubType  = Just (Unpublished, "Technical report")
       , links    = [ ("PDF (revised version)", "manuscripts/BiGUL-delta-alignment.pdf")
@@ -137,6 +129,7 @@ publicationList =
                    ]
       , info     = [ ("Number", "GRACE-TR 2016-03", Nothing)
                    , ("URL", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf", Nothing)
+                   , ("Note", "The revised version uses a concrete running example and contains more explanations.", Nothing)
                    , ("Abstract", "There are two approaches to bidirectional programming. One is the get-based method where one writes <em>get</em> and <em>put</em> is automatically derived, and the other is the put-based method where one writes <em>put</em> and <em>get</em> is automatically derived. In this paper, we argue that the put-based method deserves more attention, because a good language for programming <em>put</em> can not only give full control over the behavior of bidirectional transformations, but also enable us to efficiently develop various domain-specific bidirectional languages and use them seamlessly in one framework, which would be non-trivial with the get-based method. We demonstrate how the matching/delta/generic lenses can be implemented in BiGUL, a putback-based bidirectional language.", Nothing)
                    ]
       }
@@ -147,8 +140,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "International Workshop on Bidirectional Transformations (BX)"
-      , venueURL = Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear)
+      , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
       , year     = 2016
       , pubType  = Nothing
       , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
@@ -164,8 +156,7 @@ publicationList =
                    , "Tao Zan"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "Workshop on Partial Evaluation and Program Manipulation (PEPM)"
-      , venueURL = Just ("http://conf.researchr.org/home/pepm-2016", IncludeYear)
+      , venue    = Just ("Workshop on Partial Evaluation and Program Manipulation (PEPM)", Just ("http://conf.researchr.org/home/pepm-2016", IncludeYear))
       , year     = 2016
       , pubType  = Nothing
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21372")
@@ -173,27 +164,28 @@ publicationList =
                    ]
       , info     = [ ("Pages", "61–72", Nothing)
                    , ("DOI", "10.1145/2847538.2847544", Nothing)
+                   , ("Note", "The version of BiGUL described in this paper is outdated. See the <a href=\"#publication-73b6cfa2\">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL, or the <a href=\"#publication-5d3c0d1a\">Oxford tutorial</a> for a gentler treatment.", Nothing)
                    , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. The logic of a putback transformation is more sophisticated than that of a forward transformation and does not always give rise to well-behaved bidirectional programs; this calls for more robust language design to support development of well-behaved putback transformations. In this paper, we design and implement a concise core language BiGUL for putback-based bidirectional programming to serve as a foundation for higher-level putback-based languages. BiGUL is completely formally verified in the dependently typed programming language Agda to guarantee that any putback transformation written in BiGUL is well-behaved.", Nothing)
                    ]
       }
   , Publication
-      { title    = "BiYacc: Roll your parser and reflective printer into one (tool paper)"
+      { title    = "BiYacc: Roll your parser and reflective printer into one"
       , authors  = [ "Zirun Zhu"
                    , "Hsiang-Shang Ko"
                    , "Pedro Martins"
                    , "João Saraiva"
                    , "Zhenjiang Hu"
                    ]
-      , venue    = "International Workshop on Bidirectional Transformations (BX)"
-      , venueURL = Just ("http://bx-community.wikidot.com/bx2015:home", IncludeYear)
+      , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2015:home", IncludeYear))
       , year     = 2015
-      , pubType  = Nothing
+      , pubType  = Just (Published, "Tool paper")
       , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
                    , ("Demo site", "http://biyacc.yozora.moe")
                    ]
       , info     = [ ("Pages", "43–50", Nothing)
                    , ("URL", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf", Nothing)
                    , ("DOI", "10.1145/2847538.2847544", Nothing)
+                   , ("See also", "the more complete <a href=\"#publication-4342d3dd\">SLE’16 paper</a>, which, in particular, describes the internals of BiYacc in much more detail.", Nothing)
                    , ("Abstract", "Language designers usually need to implement parsers and printers. Despite being two related programs, in practice they are designed and implemented separately. This approach has an obvious disadvantage: as a language evolves, both its parser and printer need to be separately revised and kept synchronised. Such tasks are routine but complicated and error-prone. To facilitate these tasks, we propose a language called BiYacc, whose programs denote both a parser and a printer. In essence, BiYacc is a domain-specific language for writing <em>putback-based</em> bidirectional transformations — the printer is a putback transformation, and the parser is the corresponding get transformation. The pairs of parsers and printers generated by BiYacc are thus always guaranteed to satisfy the usual round-trip properties. The highlight that distinguishes this <em>reflective</em> printer from others is that the printer — being a putback transformation — accepts not only an abstract syntax tree but also a string, and produces an updated string consistent with the given abstract syntax tree. We can thus make use of the additional input string, with mechanisms such as simultaneous pattern matching on the view and the source, to provide users with full control over the printing-strategies.", Nothing)
                    ]
       }
@@ -201,8 +193,7 @@ publicationList =
       { title    = "Analysis and synthesis of inductive families"
       , authors  = [ "Hsiang-Shang Ko"
                    ]
-      , venue    = "University of Oxford"
-      , venueURL = Nothing
+      , venue    = Just ("University of Oxford", Nothing)
       , year     = 2014
       , pubType  = Just (Published, "DPhil dissertation")
       , links    = [ ("PDF (GitHub)", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
@@ -220,14 +211,15 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Jeremy Gibbons"
                    ]
-      , venue    = "Workshop on Dependently Typed Programming (DTP)"
-      , venueURL = Just ("http://www.seas.upenn.edu/~sweirich/dtp13/", IncludeYear)
+      , venue    = Just ("Workshop on Dependently Typed Programming (DTP)", Just ("http://www.seas.upenn.edu/~sweirich/dtp13/", IncludeYear))
       , year     = 2013
       , pubType  = Nothing
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21373")
+                   , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
+                   , ("See also", "my <a href=\"#publication-9c9a95f3\">DPhil dissertation</a>, which subsumes and streamlines the content of this paper, and includes more examples.", Nothing)
                    , ("Abstract", "Dependently typed programming is hard, because ideally dependently typed programs should share structure with their correctness proofs, but there are very few guidelines on how one can arrive at such integrated programs. McBride’s algebraic ornamentation provides a methodological advancement, by which the programmer can derive a datatype from a specification involving a fold, such that a program that constructs elements of that datatype would be correct by construction. It is thus an effective method that leads the programmer from a specification to a dependently typed program. We enhance the applicability of this method by generalising algebraic ornamentation to a relational setting and bringing in relational algebraic methods, resulting in a hybrid approach that makes essential use of both dependently typed programming and relational program derivation. A dependently typed solution to the minimum coin change problem is presented as a demonstration of this hybrid approach. We also give a theoretically interesting “completeness theorem” of relational algebraic ornaments, which sheds some light on the expressive power of ornaments and inductive families.", Nothing)
                    ]
       }
@@ -236,15 +228,16 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Jeremy Gibbons"
                    ]
-      , venue    = "Progress in Informatics"
-      , venueURL = Nothing
+      , venue    = Just ("Progress in Informatics", Nothing)
       , year     = 2013
       , pubType  = Nothing
       , links    = [ ("PDF (NII)", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
+                   , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
                    , ("DOI", "10.2201/NiiPi.2013.10.5", Nothing)
+                   , ("See also", "my <a href=\"#publication-9c9a95f3\">DPhil dissertation</a>, which subsumes and streamlines the content of this paper, and includes more examples.", Nothing)
                    , ("Abstract", "Dependently typed programmers are encouraged to use inductive families to integrate constraints with data construction. Different constraints are used in different contexts, leading to different versions of datatypes for the same data structure. For example, sequences might be constrained by length or by an ordering on elements, giving rise to different datatypes “vectors” and “sorted lists” for the same underlying data structure of sequences. Modular implementation of common operations for these structurally similar datatypes has been a longstanding problem. We propose a datatype-generic solution, in which we axiomatise a family of isomorphisms between datatypes and their more refined versions as datatype refinements, and show that McBride’s ornaments can be translated into such refinements. With the ornament-induced refinements, relevant properties of the operations can be separately proven for each constraint, and after the programmer selects several constraints to impose on a basic datatype and synthesises a new datatype incorporating those constraints, the operations can be routinely upgraded to work with the synthesised datatype.", Nothing)
                    ]
       }
@@ -253,15 +246,14 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Jeremy Gibbons"
                    ]
-      , venue    = "Workshop on Generic Programming (WGP)"
-      , venueURL = Just ("http://www.wgp-sigplan.org/farmer/doku.php?id=2011", IncludeYear)
+      , venue    = Just ("Workshop on Generic Programming (WGP)", Just ("http://www.wgp-sigplan.org/farmer/doku.php?id=2011", IncludeYear))
       , year     = 2011
       , pubType  = Just (Warning, "Superseded")
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21374")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
-                   , ("Note", "This paper has been superseded by <a href=\"#publication-685cb02c\">an extended journal version</a>.", Nothing)
+                   , ("Note", "This paper has been superseded by an <a href=\"#publication-685cb02c\">extended version in Progress in Informatics</a>.", Nothing)
                    , ("Abstract", "Dependently typed programmers are encouraged to use inductive families to integrate constraints with data construction. Different constraints are used in different contexts, leading to different versions of datatypes for the same data structure. Modular implementation of common operations for these structurally similar datatypes has been a longstanding problem. We propose a datatype-generic solution based on McBride’s datatype ornaments, exploiting an isomorphism whose interpretation borrows ideas from realisability. Relevant properties of the operations are separately proven for each constraint, and after the programmer selects several constraints to impose on a basic datatype and synthesises an inductive family incorporating those constraints, the operations can be routinely upgraded to work with the synthesised inductive family.", Nothing)
                    ]
       }
@@ -271,8 +263,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Patrik Jansson"
                    ]
-      , venue    = "Journal of Functional Programming"
-      , venueURL = Nothing
+      , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , pubType  = Nothing
       , links    = [ ("PDF (preprint)", "manuscripts/AoPA-JFP.pdf")
@@ -291,8 +282,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Patrik Jansson"
                    ]
-      , venue    = "Mathematics of Program Construction (MPC)"
-      , venueURL = Just ("http://mpc08.lri.fr", IncludeYear)
+      , venue    = Just ("Mathematics of Program Construction (MPC)", Just ("http://mpc08.lri.fr", IncludeYear))
       , year     = 2008
       , pubType  = Just (Warning, "Superseded")
       , links    = [ ("PDF (preprint)", "manuscripts/AoPA-MPC.pdf")
@@ -301,7 +291,7 @@ publicationList =
       , info     = [ ("LNCS", "5133", Nothing)
                    , ("Pages", "268–283", Nothing)
                    , ("DOI", "10.1007/978-3-540-70594-9_15", Nothing)
-                   , ("Note", "This paper has been superseded by <a href=\"#publication-41007bea\">an extended journal version</a>.", Nothing)
+                   , ("Note", "This paper has been superseded by an <a href=\"#publication-41007bea\">extended version in the Journal of Functional Programming</a>.", Nothing)
                    , ("Abstract", "Dependent type theory is rich enough to express that a program satisfies an input/output relational specification, but it could be hard to construct the proof term. On the other hand, squiggolists know very well how to show that one relation is included in another by algebraic reasoning. We demonstrate how to encode functional and relational derivations in a dependently typed programming language. A program is coupled with an algebraic derivation from a specification, whose correctness is guaranteed by the type system.", Nothing)
                    ]
       }

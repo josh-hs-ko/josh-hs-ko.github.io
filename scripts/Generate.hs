@@ -43,8 +43,9 @@ oxfordList [d0, d1]     = d0 <+> text "and" <+> d1
 oxfordList [d0, d1, d2] = d0 <> comma <+> d1 <> comma <+> text "and" <+> d2
 oxfordList (d:ds)       = d <> comma <+> oxfordList ds
 
-renderVenueAndYear :: [PermVenue] -> String -> Maybe (String, HyperlinkYear) -> Int -> Doc
-renderVenueAndYear pvs n m y =
+renderVenueAndYear :: [PermVenue] -> Maybe (String, Maybe (String, HyperlinkYear)) -> Int -> Doc
+renderVenueAndYear pvs Nothing       y = int y
+renderVenueAndYear pvs (Just (n, m)) y =
   let addLink = maybe id hyperlink (maybe (fmap permVenueURL (find ((== n) . permVenueName) pvs)) (Just . fst) m)
   in  case maybe ExcludeYear snd m of
         IncludeYear -> addLink (inlineElement "span" [("class", ["venue"])] (text n <> space) <> int y)
@@ -52,13 +53,13 @@ renderVenueAndYear pvs n m y =
 
 renderPublication :: [Author] -> [PermVenue] -> Publication -> Doc
 renderPublication as pvs p =
-  let md5    = take 8 (md5s (MD5.Str (title p ++ concat (authors p) ++ venue p ++ show (year p))))
+  let md5    = take 8 (md5s (MD5.Str (title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p))))
       pubId  = "publication-"      ++ md5
       infoId = "publication-info-" ++ md5
   in  (blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
          blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$
          blockElement "div" [("class", ["publication-authors"])] (oxfordList (map (renderAuthor as) (authors p))) $+$
-         blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (venueURL p) (year p)) $+$
+         blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (year p)) $+$
          (blockElement "div" [("class", ["publication-links"])] $
             maybe empty
               (\(pt, str) -> inlineElement "span"
