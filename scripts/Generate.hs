@@ -56,46 +56,47 @@ renderPublication as pvs p =
   let md5    = take 8 (md5s (MD5.Str (title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p))))
       pubId  = "publication-"      ++ md5
       infoId = "publication-info-" ++ md5
-  in  (blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
-         blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$
-         blockElement "div" [("class", ["publication-authors"])] (oxfordList (map (renderAuthor as) (authors p))) $+$
-         blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (year p)) $+$
-         (blockElement "div" [("class", ["publication-links"])] $
-            maybe empty
-              (\(pt, str) -> inlineElement "span"
-                               [("class", ["label",
-                                           "label-" ++ publicationType "success" "warning" "danger" pt,
-                                           "publication-type"])]
-                               (text str))
-              (pubType p) $+$
-            foldr ($+$) empty
-              (map (\(str, link) -> inlineElement "span" [("class", ["label", "label-primary"])]
-                                      (hyperlink link (text str)))
-                 (links p)) $+$
-            if null (info p)
-            then empty
-            else inlineElement "span" [("class", ["label", "label-info", "publication-more-info"]),
-                                       ("onclick", ["none()"]),
-                                       ("data-toggle", ["collapse"]),
-                                       ("data-target", ['#':infoId])] (text "More info"))) $+$
-      if null (info p)
-      then empty
-      else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [infoId])] $
-             blockElement "div" [("class", ["panel-body"])] $
-               blockElement "div" [("class", ["publication-info"])] $
-                 foldr ($+$) empty
-                   (map (\(n, c, ml) ->
-                           blockElement "div" [("class", ["row", "publication-info-entry"])] $
-                             blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
-                             (blockElement "div" [("class", ["col-sm-10"])] $
-                               let murl = case (n, c, ml) of
-                                            (_, _, Just url) -> Just url
-                                            ("DOI", _, _) -> Just ("http://dx.doi.org/" ++ c)
-                                            ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
-                                            (_, 'h':'t':'t':'p':_, _) -> Just c
-                                            _ -> Nothing
-                               in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
-                        (info p))
+  in  blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
+        (blockElement "div" [("class", ["publication-entry"])] $
+           blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$
+           blockElement "div" [("class", ["publication-authors"])] (oxfordList (map (renderAuthor as) (authors p))) $+$
+           blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (year p)) $+$
+           (blockElement "div" [("class", ["publication-links"])] $
+              maybe empty
+                (\(pt, str) -> inlineElement "span"
+                                 [("class", ["label",
+                                             "label-" ++ publicationType "success" "warning" "danger" pt,
+                                             "publication-type"])]
+                                 (text str))
+                (pubType p) $+$
+              foldr ($+$) empty
+                (map (\(str, link) -> inlineElement "span" [("class", ["label", "label-primary"])]
+                                        (hyperlink link (text str)))
+                   (links p)) $+$
+              if null (info p)
+              then empty
+              else inlineElement "span" [("class", ["label", "label-info", "publication-more-info"]),
+                                         ("onclick", ["none()"]),
+                                         ("data-toggle", ["collapse"]),
+                                         ("data-target", ['#':infoId])] (text "More info"))) $+$
+        if null (info p)
+        then empty
+        else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [infoId])] $
+               blockElement "div" [("class", ["panel-body"])] $
+                 blockElement "div" [("class", ["publication-info"])] $
+                   foldr ($+$) empty
+                     (map (\(n, c, ml) ->
+                             blockElement "div" [("class", ["row", "publication-info-entry"])] $
+                               blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
+                               (blockElement "div" [("class", ["col-sm-10"])] $
+                                 let murl = case (n, c, ml) of
+                                              (_, _, Just url) -> Just url
+                                              ("DOI", _, _) -> Just ("http://dx.doi.org/" ++ c)
+                                              ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
+                                              (_, 'h':'t':'t':'p':_, _) -> Just c
+                                              _ -> Nothing
+                                 in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
+                          (info p))
 
 process :: String -> String
 process inputStr =

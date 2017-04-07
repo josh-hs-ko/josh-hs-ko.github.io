@@ -153,17 +153,17 @@ span.name-block {
 }
 
 .publication:target {
-  margin-top: -.5ex;
-  padding-top: .5ex;
-  margin-bottom: 2ex;
-  padding-bottom: .5ex;
-  margin-left: -.5ex;
-  padding-left: .5ex;
-  margin-right: -.5ex;
-  padding-right: .5ex;
+  margin-top: -1.25ex;
+  padding-top: 1ex;
+  margin-bottom: 1.25ex;
+  padding-bottom: 1ex;
+  margin-left: -1.25ex;
+  padding-left: 1ex;
+  margin-right: -1.25ex;
+  padding-right: 1ex;
   background: #f1e3bb;
   border-style: solid;
-  border-width: 2px;
+  border-width: .25ex;
   border-color: #592c35;
   border-radius: 4px;
 }
@@ -208,13 +208,14 @@ span.name-block {
 }
 
 .panel-publication-info {
-  margin-top: -1.5ex;
+  margin-top: 1ex;
+  margin-bottom: 0ex;
   background: #fefcf8;
   box-shadow: none;
 }
 
 .publication-info {
-  margin-top: -.75ex;
+  margin-top: -.5ex;
   margin-bottom: -2ex;
 }
 
