@@ -10,7 +10,7 @@ data Publication = Publication
   , authors  :: [String]
   , venue    :: Maybe (String, Maybe (String, HyperlinkYear))
   , year     :: Int
-  , pubType  :: Maybe (PublicationType, String)
+  , types    :: [(PublicationType, String)]
   , links    :: [(String, String)]
   , info     :: [(String, String, Maybe String)]
   }
@@ -26,7 +26,8 @@ publicationList =
                    ]
       , venue    = Just ("arXiv", Nothing)
       , year     = 2017
-      , pubType  = Just (Unpublished, "Technical report")
+      , types    = [ (Unpublished, "Technical report")
+                   ]
       , links    = [ ("PDF (arXiv)", "https://arxiv.org/pdf/1703.09542")
                    , ("Repository (Bitbucket)", "https://bitbucket.org/zyz915/palgol")
                    ]
@@ -41,7 +42,8 @@ publicationList =
                    ]
       , venue    = Nothing
       , year     = 2017
-      , pubType  = Just (Unpublished, "In submission")
+      , types    = [ (Unpublished, "In submission")
+                   ]
       , links    = [ ("PDF (draft)", "manuscripts/BiGUL-logic.pdf")
                    , ("Agda code (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
                    ]
@@ -59,7 +61,8 @@ publicationList =
                    ]
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
       , year     = 2017
-      , pubType  = Just (Published, "To appear")
+      , types    = [ (Published, "To appear")
+                   ]
       , links    = []
       , info     = []
       }
@@ -70,7 +73,9 @@ publicationList =
                    ]
       , venue    = Just ("Oxford Summer School on Bidirectional Transformations", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year     = 2017
-      , pubType  = Just (Unpublished, "Draft manuscript (publication planned)")
+      , types    = [ (Unpublished, "Draft manuscript")
+                   , (Warning, "Publication planned")
+                   ]
       , links    = [ ("PDF (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SummerSchool16/paper/BiGUL_tutorial.pdf")
                    , ("Repository (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul")
                    ]
@@ -84,7 +89,7 @@ publicationList =
                    ]
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2017
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (preprint)", "manuscripts/OrnJFP.pdf")
                    , ("Agda code (JFP)", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
                    ]
@@ -106,7 +111,7 @@ publicationList =
                    ]
       , venue    = Just ("International Conference on Software Language Engineering (SLE)", Just ("http://www.sleconf.org/2016/", IncludeYear))
       , year     = 2016
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21371")
                    , ("Demo site", "http://biyacc.yozora.moe")
                    ]
@@ -123,7 +128,8 @@ publicationList =
                    ]
       , venue    = Just ("GRACE Center, National Institute of Informatics", Nothing)
       , year     = 2016
-      , pubType  = Just (Unpublished, "Technical report")
+      , types    = [ (Unpublished, "Technical report")
+                   ]
       , links    = [ ("PDF (revised version)", "manuscripts/BiGUL-delta-alignment.pdf")
                    , ("PDF (GRACE Center)", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf")
                    ]
@@ -142,7 +148,7 @@ publicationList =
                    ]
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
       , year     = 2016
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
                    ]
       , info     = [ ("Pages", "77–89", Nothing)
@@ -158,7 +164,7 @@ publicationList =
                    ]
       , venue    = Just ("Workshop on Partial Evaluation and Program Manipulation (PEPM)", Just ("http://conf.researchr.org/home/pepm-2016", IncludeYear))
       , year     = 2016
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21372")
                    , ("Repository (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul")
                    ]
@@ -178,7 +184,8 @@ publicationList =
                    ]
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2015:home", IncludeYear))
       , year     = 2015
-      , pubType  = Just (Published, "Tool paper")
+      , types    = [ (Published, "Tool paper")
+                   ]
       , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
                    , ("Demo site", "http://biyacc.yozora.moe")
                    ]
@@ -195,7 +202,8 @@ publicationList =
                    ]
       , venue    = Just ("University of Oxford", Nothing)
       , year     = 2014
-      , pubType  = Just (Published, "DPhil dissertation")
+      , types    = [ (Published, "DPhil dissertation")
+                   ]
       , links    = [ ("PDF (GitHub)", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
                    , ("PDF (Oxford)", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
                    , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
@@ -213,7 +221,7 @@ publicationList =
                    ]
       , venue    = Just ("Workshop on Dependently Typed Programming (DTP)", Just ("http://www.seas.upenn.edu/~sweirich/dtp13/", IncludeYear))
       , year     = 2013
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21373")
                    , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
@@ -230,7 +238,7 @@ publicationList =
                    ]
       , venue    = Just ("Progress in Informatics", Nothing)
       , year     = 2013
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (NII)", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
                    , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
@@ -248,7 +256,8 @@ publicationList =
                    ]
       , venue    = Just ("Workshop on Generic Programming (WGP)", Just ("http://www.wgp-sigplan.org/farmer/doku.php?id=2011", IncludeYear))
       , year     = 2011
-      , pubType  = Just (Warning, "Superseded")
+      , types    = [ (Warning, "Superseded")
+                   ]
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21374")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
@@ -265,7 +274,7 @@ publicationList =
                    ]
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
-      , pubType  = Nothing
+      , types    = []
       , links    = [ ("PDF (preprint)", "manuscripts/AoPA-JFP.pdf")
                    , ("Repository (GitHub)", "https://github.com/scmu/aopa")
                    ]
@@ -284,7 +293,8 @@ publicationList =
                    ]
       , venue    = Just ("Mathematics of Program Construction (MPC)", Just ("http://mpc08.lri.fr", IncludeYear))
       , year     = 2008
-      , pubType  = Just (Warning, "Superseded")
+      , types    = [ (Warning, "Superseded")
+                   ]
       , links    = [ ("PDF (preprint)", "manuscripts/AoPA-MPC.pdf")
                    , ("Repository (GitHub)", "https://github.com/scmu/aopa")
                    ]

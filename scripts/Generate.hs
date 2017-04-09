@@ -62,13 +62,15 @@ renderPublication as pvs p =
            blockElement "div" [("class", ["publication-authors"])] (oxfordList (map (renderAuthor as) (authors p))) $+$
            blockElement "div" [("class", ["publication-venue"])] (renderVenueAndYear pvs (venue p) (year p)) $+$
            (blockElement "div" [("class", ["publication-links"])] $
-              maybe empty
-                (\(pt, str) -> inlineElement "span"
-                                 [("class", ["label",
-                                             "label-" ++ publicationType "success" "warning" "danger" pt,
-                                             "publication-type"])]
-                                 (text str))
-                (pubType p) $+$
+              (if null (types p)
+               then empty
+               else (blockElement "span" [("class", ["publication-types"])] $
+                       foldr ($+$) empty $
+                         map (\(pt, str) ->
+                                inlineElement "span"
+                                  [("class", ["label", "label-" ++ publicationType "success" "warning" "danger" pt])]
+                                  (text str))
+                             (types p))) $+$
               foldr ($+$) empty
                 (map (\(str, link) -> inlineElement "span" [("class", ["label", "label-primary"])]
                                         (hyperlink link (text str)))
