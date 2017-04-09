@@ -223,7 +223,6 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21373")
-                   , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -240,7 +239,6 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF (NII)", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
