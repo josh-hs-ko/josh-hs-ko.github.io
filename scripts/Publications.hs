@@ -94,8 +94,7 @@ publicationList =
                    , ("Agda code (JFP)", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
                    ]
       , info     = [ ("Volume", "27", Nothing)
-                   , ("Issue", "e2", Nothing)
-                   , ("Pages", "1–43", Nothing)
+                   , ("Number", "e2", Nothing)
                    , ("DOI", "10.1017/S0956796816000307", Nothing)
                    , ("Abstract", "Dependently typed programming advocates the use of various indexed versions of the same shape of data, but the formal relationship amongst these structurally similar datatypes usually needs to be established manually and tediously. Ornaments have been proposed as a formal mechanism to manage the relationships between such datatype variants. In this paper, we conduct a case study under an ornament framework; the case study concerns programming binomial heaps and their operations — including insertion and minimum extraction — by viewing them as lifted versions of binary numbers and numeric operations. We show how current dependently typed programming technology can lead to a clean treatment of the binomial heap constraints when implementing heap operations. We also identify some gaps between the current technology and an ideal dependently typed programming language that we would wish to have for our development.", Nothing)
                    ]
