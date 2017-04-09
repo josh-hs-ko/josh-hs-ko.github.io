@@ -103,13 +103,16 @@ span.name-block {
     display: table;
     table-layout: auto;
     float: none;
-    width: 730px;
   }
 
   .navbar-nav > li {
     display: table-cell;
+    padding-left: .25em;
+    padding-right: .25em;
+    width: 1px;
     float: none;
     text-align: center;
+    white-space: nowrap;
   }
 
 }
