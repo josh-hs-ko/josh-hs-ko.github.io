@@ -64,7 +64,8 @@ publicationList =
       , types    = [ (Published, "To appear")
                    ]
       , links    = []
-      , info     = []
+      , info     = [ ("Abstract", "Bidirectional transformation (bx) approaches provide a systematic way of specifying, restoring, and maintaining the consistency of related models. The current diversity of bx approaches is certainly beneficial, but it also poses challenges, especially when it comes to comparing the different approaches and corresponding bx tools that implement them. Although a benchmark for bx (referred to as a <em>benchmarx</em>) has been identified in the community as an important and currently still missing contribution, only a rather abstract description and characterisation of what a benchmarx should be has been published to date. In this paper, therefore, we focus on providing a practical and pragmatic framework, on which future concrete benchmarx can be built. To demonstrate its feasibility, we present a first non-trivial benchmarx based on a well-known example, and use it to compare and evaluate three bx tools, chosen to cover the broad spectrum of bx approaches.", Nothing)
+                   ]
       }
   , Publication
       { title    = "Principle and practice of bidirectional programming in BiGUL"
@@ -222,6 +223,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21373")
+                   , ("Agda code (ACM)", "http://dl.acm.org/ft_gateway.cfm?id=2502413&type=zip")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
