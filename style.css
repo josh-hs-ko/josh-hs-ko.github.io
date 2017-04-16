@@ -210,6 +210,10 @@ span.name-block {
   color: #ffff66;
 }
 
+.link-note {
+  margin-left: .25em;
+}
+
 .panel-publication-info {
   margin-top: 1ex;
   margin-bottom: 0ex;

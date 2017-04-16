@@ -11,7 +11,7 @@ data Publication = Publication
   , venue    :: Maybe (String, Maybe (String, HyperlinkYear))
   , year     :: Int
   , types    :: [(PublicationType, String)]
-  , links    :: [(String, String)]
+  , links    :: [(String, Maybe String, String)]
   , info     :: [(String, String, Maybe String)]
   }
 
@@ -28,8 +28,8 @@ publicationList =
       , year     = 2017
       , types    = [ (Unpublished, "Technical report")
                    ]
-      , links    = [ ("PDF (arXiv)", "https://arxiv.org/pdf/1703.09542")
-                   , ("Repository (Bitbucket)", "https://bitbucket.org/zyz915/palgol")
+      , links    = [ ("PDF", Just "arXiv", "https://arxiv.org/pdf/1703.09542")
+                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
                    ]
       , info     = [ ("arXiv", "1703.09542", Nothing)
                    , ("Abstract", "Pregel is a popular parallel computing model for dealing with large-scale graphs. However, it can be tricky to implement graph algorithms correctly and efficiently in Pregel’s vertex-centric model, as programmers need to carefully restructure an algorithm in terms of supersteps and message passing, which are low-level and detached from the algorithm descriptions. Some domain-specific languages (DSLs) have been proposed to provide more intuitive ways to implement graph algorithms, but none of them can flexibly describe remote access (reading or writing attributes of other vertices through references), causing a still wide range of algorithms hard to implement.</p><p>To address this problem, we design and implement Palgol, a more declarative and powerful DSL which supports remote access. In particular, programmers can use a more declarative syntax called <em>global field access</em> to directly read data on remote vertices. By structuring supersteps in a high-level vertex-centric computation model and analyzing the logic patterns of global field access, we provide a novel algorithm for compiling Palgol programs to efficient Pregel code. We demonstrate the power of Palgol by using it to implement a bunch of practical Pregel algorithms and compare them with hand-written code. The evaluation result shows that the efficiency of Palgol is comparable with that of hand-written code.", Nothing)
@@ -44,8 +44,8 @@ publicationList =
       , year     = 2017
       , types    = [ (Unpublished, "In submission")
                    ]
-      , links    = [ ("PDF (draft)", "manuscripts/BiGUL-logic.pdf")
-                   , ("Agda code (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
+      , links    = [ ("PDF", Nothing, "manuscripts/BiGUL-logic.pdf")
+                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
                    ]
       , info     = [ ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation problems, Foster et al.’s asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are highly declarative, and only allow the programmer to specify a consistency relation with limited control over the behaviour of the automatically derived consistency restorer. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must be empowered to fully control and reason about the consistency restoration behaviour of their bidirectional programs. The putback-based approach to bidirectional programming was proposed to address this issue once and for all, and this paper takes the approach one step further by proposing a Hoare-style logic for Ko et al.’s putback-based language BiGUL. With this Hoare-style logic, the BiGUL programmer can precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction. The theory underlying the Hoare-style logic has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                    ]
@@ -77,8 +77,8 @@ publicationList =
       , types    = [ (Unpublished, "Draft manuscript")
                    , (Warning, "Publication planned")
                    ]
-      , links    = [ ("PDF (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SummerSchool16/paper/BiGUL_tutorial.pdf")
-                   , ("Repository (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul")
+      , links    = [ ("PDF", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SummerSchool16/paper/BiGUL_tutorial.pdf")
+                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.", Nothing)
                    ]
@@ -91,8 +91,8 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2017
       , types    = []
-      , links    = [ ("PDF (preprint)", "manuscripts/OrnJFP.pdf")
-                   , ("Agda code (JFP)", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/OrnJFP.pdf")
+                   , ("Agda code", Just "JFP", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
                    ]
       , info     = [ ("Volume", "27", Nothing)
                    , ("Number", "e2", Nothing)
@@ -112,8 +112,8 @@ publicationList =
       , venue    = Just ("International Conference on Software Language Engineering (SLE)", Just ("http://www.sleconf.org/2016/", IncludeYear))
       , year     = 2016
       , types    = []
-      , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21371")
-                   , ("Demo site", "http://biyacc.yozora.moe")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21371")
+                   , ("Demo site", Nothing, "http://biyacc.yozora.moe")
                    ]
       , info     = [ ("Pages", "2–14", Nothing)
                    , ("DOI", "10.1145/2997364.2997369", Nothing)
@@ -130,8 +130,8 @@ publicationList =
       , year     = 2016
       , types    = [ (Unpublished, "Technical report")
                    ]
-      , links    = [ ("PDF (revised version)", "manuscripts/BiGUL-delta-alignment.pdf")
-                   , ("PDF (GRACE Center)", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf")
+      , links    = [ ("PDF", Just "revised version", "manuscripts/BiGUL-delta-alignment.pdf")
+                   , ("PDF", Just "GRACE Center", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf")
                    ]
       , info     = [ ("Number", "GRACE-TR 2016-03", Nothing)
                    , ("URL", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf", Nothing)
@@ -149,7 +149,7 @@ publicationList =
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
       , year     = 2016
       , types    = []
-      , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
+      , links    = [ ("PDF", Just "CEUR-WS", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
                    ]
       , info     = [ ("Pages", "77–89", Nothing)
                    , ("URL", "http://ceur-ws.org/Vol-1571/paper_3.pdf", Nothing)
@@ -165,8 +165,8 @@ publicationList =
       , venue    = Just ("Workshop on Partial Evaluation and Program Manipulation (PEPM)", Just ("http://conf.researchr.org/home/pepm-2016", IncludeYear))
       , year     = 2016
       , types    = []
-      , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21372")
-                   , ("Repository (Bitbucket)", "https://bitbucket.org/prl_tokyo/bigul")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
+                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Pages", "61–72", Nothing)
                    , ("DOI", "10.1145/2847538.2847544", Nothing)
@@ -186,8 +186,8 @@ publicationList =
       , year     = 2015
       , types    = [ (Published, "Tool paper")
                    ]
-      , links    = [ ("PDF (CEUR-WS)", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
-                   , ("Demo site", "http://biyacc.yozora.moe")
+      , links    = [ ("PDF", Just "CEUR-WS", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
+                   , ("Demo site", Nothing, "http://biyacc.yozora.moe")
                    ]
       , info     = [ ("Pages", "43–50", Nothing)
                    , ("URL", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf", Nothing)
@@ -204,9 +204,9 @@ publicationList =
       , year     = 2014
       , types    = [ (Published, "DPhil dissertation")
                    ]
-      , links    = [ ("PDF (GitHub)", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
-                   , ("PDF (Oxford)", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
-                   , ("Agda code (GitHub)", "https://github.com/josh-hs-ko/Thesis")
+      , links    = [ ("PDF", Just "GitHub", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
+                   , ("PDF", Just "Oxford", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
+                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                    , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
@@ -222,8 +222,8 @@ publicationList =
       , venue    = Just ("Workshop on Dependently Typed Programming (DTP)", Just ("http://www.seas.upenn.edu/~sweirich/dtp13/", IncludeYear))
       , year     = 2013
       , types    = []
-      , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21373")
-                   , ("Agda code (ACM)", "http://dl.acm.org/ft_gateway.cfm?id=2502413&type=zip")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
+                   , ("Agda code", Just "ACM", "http://dl.acm.org/ft_gateway.cfm?id=2502413&type=zip")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -239,7 +239,7 @@ publicationList =
       , venue    = Just ("Progress in Informatics", Nothing)
       , year     = 2013
       , types    = []
-      , links    = [ ("PDF (NII)", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
+      , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -257,7 +257,7 @@ publicationList =
       , year     = 2011
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF (ACM Author-Izer)", "https://dl.acm.org/authorize?N21374")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
@@ -274,8 +274,8 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , types    = []
-      , links    = [ ("PDF (preprint)", "manuscripts/AoPA-JFP.pdf")
-                   , ("Repository (GitHub)", "https://github.com/scmu/aopa")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-JFP.pdf")
+                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
                    , ("Issue", "5", Nothing)
@@ -294,8 +294,8 @@ publicationList =
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF (preprint)", "manuscripts/AoPA-MPC.pdf")
-                   , ("Repository (GitHub)", "https://github.com/scmu/aopa")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-MPC.pdf")
+                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
                    , ("Pages", "268–283", Nothing)
