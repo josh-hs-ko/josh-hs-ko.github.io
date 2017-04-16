@@ -240,6 +240,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
+                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
