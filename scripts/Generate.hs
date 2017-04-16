@@ -94,7 +94,7 @@ renderPublication as pvs p =
                                (blockElement "div" [("class", ["col-sm-10"])] $
                                  let murl = case (n, c, ml) of
                                               (_, _, Just url) -> Just url
-                                              ("DOI", _, _) -> Just ("http://dx.doi.org/" ++ c)
+                                              ("DOI", _, _) -> Just ("https://doi.org/" ++ c)
                                               ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
                                               (_, 'h':'t':'t':'p':_, _) -> Just c
                                               _ -> Nothing
