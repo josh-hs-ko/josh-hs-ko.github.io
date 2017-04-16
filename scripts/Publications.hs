@@ -291,7 +291,7 @@ publicationList =
                    , "Hsiang-Shang Ko"
                    , "Patrik Jansson"
                    ]
-      , venue    = Just ("Mathematics of Program Construction (MPC)", Just ("http://mpc08.lri.fr", IncludeYear))
+      , venue    = Just ("International Conference on Mathematics of Program Construction (MPC)", Just ("http://mpc08.lri.fr", IncludeYear))
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
