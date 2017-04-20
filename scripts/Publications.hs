@@ -223,7 +223,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
-                   , ("Agda code", Just "ACM", "http://dl.acm.org/ft_gateway.cfm?id=2502413&type=zip")
+                   , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2502413&preflayout=flat#formats")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
