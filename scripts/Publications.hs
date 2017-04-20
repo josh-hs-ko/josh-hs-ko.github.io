@@ -149,7 +149,7 @@ publicationList =
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
       , year     = 2016
       , types    = []
-      , links    = [ ("PDF", Just "CEUR-WS", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
+      , links    = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
                    ]
       , info     = [ ("Pages", "77–89", Nothing)
                    , ("URL", "http://ceur-ws.org/Vol-1571/paper_3.pdf", Nothing)
@@ -186,7 +186,7 @@ publicationList =
       , year     = 2015
       , types    = [ (Published, "Tool paper")
                    ]
-      , links    = [ ("PDF", Just "CEUR-WS", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
+      , links    = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
                    , ("Demo site", Nothing, "http://biyacc.yozora.moe")
                    ]
       , info     = [ ("Pages", "43–50", Nothing)
