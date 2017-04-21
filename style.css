@@ -212,26 +212,30 @@ span.name-block {
 
 .link-note {
   margin-left: .25em;
+  font-size: 10px;
 }
 
 .panel-publication-info {
   margin-top: 1ex;
-  margin-bottom: 0ex;
+  margin-bottom: 0;
   background: #fefcf8;
   box-shadow: none;
 }
 
-.publication-info {
-  margin-top: -.5ex;
-  margin-bottom: -2ex;
+.panel-body {
+  padding-top: .75ex;
+  padding-bottom: .75ex;
 }
 
 .publication-info-title {
   font-weight: 600;
+  padding-top: .75ex;
 }
 
 .publication-info p {
-  margin-bottom: 1.5ex;
+  margin: 0;
+  padding-top: .75ex;
+  padding-bottom: .75ex;
 }
 
 .publication-types {

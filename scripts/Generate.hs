@@ -85,21 +85,20 @@ renderPublication as pvs p =
         if null (info p)
         then empty
         else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [infoId])] $
-               blockElement "div" [("class", ["panel-body"])] $
-                 blockElement "div" [("class", ["publication-info"])] $
-                   foldr ($+$) empty
-                     (map (\(n, c, ml) ->
-                             blockElement "div" [("class", ["row", "publication-info-entry"])] $
-                               blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
-                               (blockElement "div" [("class", ["col-sm-10"])] $
-                                 let murl = case (n, c, ml) of
-                                              (_, _, Just url) -> Just url
-                                              ("DOI", _, _) -> Just ("https://doi.org/" ++ c)
-                                              ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
-                                              (_, 'h':'t':'t':'p':_, _) -> Just c
-                                              _ -> Nothing
-                                 in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
-                          (info p))
+               blockElement "div" [("class", ["panel-body", "publication-info"])] $
+                 foldr ($+$) empty
+                   (map (\(n, c, ml) ->
+                           blockElement "div" [("class", ["row"])] $
+                             blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
+                             (blockElement "div" [("class", ["col-sm-10"])] $
+                               let murl = case (n, c, ml) of
+                                            (_, _, Just url) -> Just url
+                                            ("DOI", _, _) -> Just ("https://doi.org/" ++ c)
+                                            ("arXiv", _, _) -> Just ("https://arxiv.org/abs/" ++ c)
+                                            (_, 'h':'t':'t':'p':_, _) -> Just c
+                                            _ -> Nothing
+                               in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
+                        (info p))
 
 process :: String -> String
 process inputStr =
