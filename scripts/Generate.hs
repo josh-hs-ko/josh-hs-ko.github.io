@@ -89,8 +89,7 @@ renderPublication as pvs p =
                  foldr ($+$) empty
                    (map (\(n, c, ml) ->
                            blockElement "div" [("class", ["row"])] $
-                             (blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] $
-                               inlineElement "p" [] (text n)) $+$
+                             blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
                              (blockElement "div" [("class", ["col-sm-10"])] $
                                let murl = case (n, c, ml) of
                                             (_, _, Just url) -> Just url

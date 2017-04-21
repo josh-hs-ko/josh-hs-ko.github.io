@@ -237,6 +237,7 @@ span.name-block {
 }
 
 .publication-info-title {
+  margin-top: .75ex;
   font-weight: 600;
 }
 
