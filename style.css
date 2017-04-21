@@ -193,8 +193,11 @@ span.name-block {
 }
 
 .publication-links {
-  margin-top: -.4ex;
   line-height: 30px;
+}
+
+.publication-types {
+  margin-right: .5em;
 }
 
 .publication-links a {
@@ -227,19 +230,14 @@ span.name-block {
   padding-bottom: .75ex;
 }
 
-.publication-info-title {
-  font-weight: 600;
-  padding-top: .75ex;
-}
-
 .publication-info p {
   margin: 0;
   padding-top: .75ex;
   padding-bottom: .75ex;
 }
 
-.publication-types {
-  margin-right: .5em;
+.publication-info-title {
+  font-weight: 600;
 }
 
 .publication-more-info:hover {
