@@ -74,7 +74,7 @@ renderPublication as pvs p =
               foldr ($+$) empty
                 (map (\(str, mnote, link) ->
                         inlineElement "span" [("class", ["label", "label-primary"])]
-                          (hyperlink link (text str <> maybe empty (inlineElement "sub" [("class", ["link-note"])] . text) mnote)))
+                          (hyperlink link (text str <> maybe empty (inlineElement "span" [("class", ["link-note"])] . parens . text) mnote)))
                      (links p)) $+$
               if null (info p)
               then empty

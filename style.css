@@ -8,6 +8,7 @@ p {
   hyphens: auto;
   -moz-hyphens: auto;
   -ms-hyphens: auto;
+  -o-hyphens: auto;
   -webkit-hyphens: auto;
 }
 
@@ -24,6 +25,7 @@ a {
   text-decoration-color: #d4d4d4;
   -moz-text-decoration-color: #d4d4d4;
   -ms-text-decoration-color: #d4d4d4;
+  -o-text-decoration-color: #d4d4d4;
   -webkit-text-decoration-color: #d4d4d4;
 }
 
@@ -31,6 +33,7 @@ a:hover {
   text-decoration-color: currentColor;
   -moz-text-decoration-color: currentColor;
   -ms-text-decoration-color: currentColor;
+  -o-text-decoration-color: currentColor;
   -webkit-text-decoration-color: currentColor;
 }
 
@@ -214,8 +217,8 @@ span.name-block {
 }
 
 .link-note {
-  margin-left: .25em;
-  font-size: 10px;
+  font-weight: 400;
+  margin-left: .4em;
 }
 
 .panel-publication-info {
