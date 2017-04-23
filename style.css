@@ -27,6 +27,11 @@ a {
   -ms-text-decoration-color: #d4d4d4;
   -o-text-decoration-color: #d4d4d4;
   -webkit-text-decoration-color: #d4d4d4;
+  transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
 }
 
 a:hover {
@@ -88,7 +93,7 @@ span.name-block {
 }
 
 #navbar a:hover {
-  text-decoration: underline;
+  color: #be7847;
 }
 
 #navbar a:active {
@@ -233,11 +238,6 @@ span.name-block {
   border: 1px solid #1e4e82;
   border-radius: 4px;
   text-decoration: none;
-  transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -ms-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
-  -webkit-transition: all .2s ease-in-out;
 }
 
 .publication-link:hover {
@@ -283,6 +283,11 @@ span.name-block {
 .publication-more-info {
   color: #006c46;
   border: 1px solid #006c46;
+  transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
 }
 
 .publication-more-info:hover {
