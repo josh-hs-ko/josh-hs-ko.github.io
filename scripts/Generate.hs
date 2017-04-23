@@ -64,24 +64,26 @@ renderPublication as pvs p =
            (blockElement "div" [("class", ["publication-links"])] $
               (if null (types p)
                then empty
-               else (blockElement "span" [("class", ["publication-types"])] $
-                       foldr ($+$) empty $
-                         map (\(pt, str) ->
+               else foldr ($+$) empty
+                      (map (\(pt, str) ->
+                              inlineElement "span" [("class", ["publication-link-outer"])] $
                                 inlineElement "span"
-                                  [("class", ["label", "label-" ++ publicationType "success" "warning" "danger" pt])]
+                                  [("class", ["publication-type", "type-" ++ publicationType "published" "warning" "unpublished" pt])]
                                   (text str))
-                             (types p))) $+$
+                           (types p))) $+$
               foldr ($+$) empty
                 (map (\(str, mnote, link) ->
-                        inlineElement "span" [("class", ["label", "label-primary"])]
-                          (hyperlink link (text str <> maybe empty (inlineElement "span" [("class", ["link-note"])] . parens . text) mnote)))
+                        inlineElement "span" [("class", ["publication-link-outer"])] $
+                          inlineElement "a" [("class", ["publication-link"]), ("href", [link])] $
+                            text str <> maybe empty (inlineElement "span" [("class", ["link-note"])] . parens . text) mnote)
                      (links p)) $+$
               if null (info p)
               then empty
-              else inlineElement "span" [("class", ["label", "label-info", "publication-more-info"]),
-                                         ("onclick", ["none()"]),
-                                         ("data-toggle", ["collapse"]),
-                                         ("data-target", ['#':infoId])] (text "More info"))) $+$
+              else inlineElement "span" [("class", ["publication-link-outer"])]
+                     (inlineElement "span" [("class", ["publication-link", "publication-more-info"]),
+                                            ("onclick", ["none()"]),
+                                            ("data-toggle", ["collapse"]),
+                                            ("data-target", ['#':infoId])] (text "More info")))) $+$
         if null (info p)
         then empty
         else blockElement "div" [("class", ["panel", "panel-publication-info", "collapse"]), ("id", [infoId])] $

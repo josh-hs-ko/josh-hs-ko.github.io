@@ -137,6 +137,7 @@ span.name-block {
 }
 
 .expertise {
+  font-weight: 600;
   font-size: 14px;
   background-color: #887b1b;
 }
@@ -195,30 +196,65 @@ span.name-block {
   margin-right: .5em;
 }
 
-.publication-links {
-  line-height: 30px;
-}
-
-.publication-types {
+.publication-type {
+  font-weight: 600;
+  font-size: 14px;
   margin-right: .5em;
 }
 
-.publication-links a {
-  color: white;
+.type-published {
+  color: #00ab28;
+}
+
+.type-warning {
+  color: #a97318;
+}
+
+.type-unpublished {
+  color: #ed2634;
+}
+
+.publication-link-outer {
+  display: inline-block;
+  margin: 0;
+  padding-top: 4px;
+  padding-bottom: 2px;
+}
+
+.publication-link {
+  font-weight: 600;
+  font-size: 14px;
+  color: #1e4e82;
+  white-space: nowrap;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid #1e4e82;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all .2s ease-in-out;
+  -moz-transition: all .2s ease-in-out;
+  -ms-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  -webkit-transition: all .2s ease-in-out;
+}
+
+.publication-link:hover {
+  color: #3264ff;
+  border: 1px solid #3264ff;
   text-decoration: none;
 }
 
-.publication-links a:hover {
-  text-decoration: underline;
-}
-
-.publication-links a:active {
-  color: #ffff66;
+.publication-link:active {
+  color: #3296ff;
+  border: 1px solid #3296ff;
 }
 
 .link-note {
   font-weight: 400;
-  margin-left: .4em;
+  font-size: 12px;
+  margin-left: .25em;
 }
 
 .panel-publication-info {
@@ -244,13 +280,20 @@ span.name-block {
   font-weight: 600;
 }
 
+.publication-more-info {
+  color: #006c46;
+  border: 1px solid #006c46;
+}
+
 .publication-more-info:hover {
   cursor: pointer;
-  text-decoration: underline;
+  color: #00b400;
+  border: 1px solid #00b400;
 }
 
 .publication-more-info:active {
-  color: #ffff66;
+  color: #00dc00;
+  border: 1px solid #00dc00;
 }
 
 .acknowledgements {
