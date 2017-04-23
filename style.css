@@ -241,14 +241,14 @@ span.name-block {
 }
 
 .publication-link:hover {
-  color: #3264ff;
-  border: 1px solid #3264ff;
+  color: #0096ff;
+  border: 1px solid #0096ff;
   text-decoration: none;
 }
 
 .publication-link:active {
-  color: #3296ff;
-  border: 1px solid #3296ff;
+  color: #00c8ff;
+  border: 1px solid #00c8ff;
 }
 
 .link-note {
@@ -287,13 +287,13 @@ span.name-block {
 
 .publication-more-info:hover {
   cursor: pointer;
-  color: #00b400;
-  border: 1px solid #00b400;
+  color: #00c800;
+  border: 1px solid #00c800;
 }
 
 .publication-more-info:active {
-  color: #00dc00;
-  border: 1px solid #00dc00;
+  color: #00e900;
+  border: 1px solid #00e900;
 }
 
 .acknowledgements {
