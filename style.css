@@ -137,14 +137,16 @@ span.name-block {
 
 .expertise-list {
   margin-bottom: 2ex;
-  line-height: 3.65ex;
-  text-align: left;
+  line-height: 3.5ex;
+  text-align: center;
 }
 
 .expertise {
   font-weight: 600;
-  font-size: 14px;
-  background-color: #887b1b;
+  color: #887b1b;
+  white-space: nowrap;
+  margin-left: .4em;
+  margin-right: .4em;
 }
 
 .entry {
