@@ -306,6 +306,16 @@ span.name-block {
 .acknowledgements {
   text-align: center;
   font-size:12px;
-  margin-top: 4ex;
   margin-bottom: 4ex;
 }
+
+.PRL-emblem {
+  margin-bottom: 4ex;
+  text-align: center;
+}
+
+#PRL-emblem {
+  width: 50px;
+  height: 50px;
+}
+
