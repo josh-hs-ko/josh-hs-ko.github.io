@@ -61,10 +61,13 @@ publicationList =
                    ]
       , venue    = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
       , year     = 2017
-      , types    = [ (Published, "To appear")
+      , types    = []
+      , links    = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1827/paper6.pdf")
+                   , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
                    ]
-      , links    = []
-      , info     = [ ("Abstract", "Bidirectional transformation (bx) approaches provide a systematic way of specifying, restoring, and maintaining the consistency of related models. The current diversity of bx approaches is certainly beneficial, but it also poses challenges, especially when it comes to comparing the different approaches and corresponding bx tools that implement them. Although a benchmark for bx (referred to as a <em>benchmarx</em>) has been identified in the community as an important and currently still missing contribution, only a rather abstract description and characterisation of what a benchmarx should be has been published to date. In this paper, therefore, we focus on providing a practical and pragmatic framework, on which future concrete benchmarx can be built. To demonstrate its feasibility, we present a first non-trivial benchmarx based on a well-known example, and use it to compare and evaluate three bx tools, chosen to cover the broad spectrum of bx approaches.", Nothing)
+      , info     = [ ("Pages", "15–30", Nothing)
+                   , ("URL", "http://ceur-ws.org/Vol-1827/paper6.pdf", Nothing)
+                   , ("Abstract", "Bidirectional transformation (bx) approaches provide a systematic way of specifying, restoring, and maintaining the consistency of related models. The current diversity of bx approaches is certainly beneficial, but it also poses challenges, especially when it comes to comparing the different approaches and corresponding bx tools that implement them. Although a benchmark for bx (referred to as a <em>benchmarx</em>) has been identified in the community as an important and currently still missing contribution, only a rather abstract description and characterisation of what a benchmarx should be has been published to date. In this paper, therefore, we focus on providing a practical and pragmatic framework, on which future concrete benchmarx can be built. To demonstrate its feasibility, we present a first non-trivial benchmarx based on a well-known example, and use it to compare and evaluate three bx tools, chosen to cover the broad spectrum of bx approaches.", Nothing)
                    ]
       }
   , Publication
