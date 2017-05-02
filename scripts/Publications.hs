@@ -42,7 +42,7 @@ publicationList =
                    ]
       , venue    = Nothing
       , year     = 2017
-      , types    = [ (Unpublished, "In submission")
+      , types    = [ (Unpublished, "Draft manuscript")
                    ]
       , links    = [ ("PDF", Nothing, "manuscripts/BiGUL-logic.pdf")
                    , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
