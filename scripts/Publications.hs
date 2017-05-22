@@ -80,10 +80,11 @@ publicationList =
       , types    = [ (Unpublished, "Draft manuscript")
                    , (Warning, "Publication planned")
                    ]
-      , links    = [ ("PDF", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SummerSchool16/paper/BiGUL_tutorial.pdf")
+      , links    = [ ("PDF", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/raw/master/SSBX16/tutorial.pdf")
                    , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
                    ]
-      , info     = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.", Nothing)
+      , info     = [ ("Last updated", "19 April 2017", Nothing)
+                   , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.", Nothing)
                    ]
       }
   , Publication
