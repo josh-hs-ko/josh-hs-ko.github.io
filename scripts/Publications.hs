@@ -46,7 +46,7 @@ publicationList =
                    ]
       , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
                    , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
-                   , ("Agda code", Just "browsable HTML", "Agda/BiGUL-Logic/Everything.html")
+                   , ("Agda code", Just "HTML", "Agda/BiGUL-Logic/Everything.html")
                    ]
       , info     = [ ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al. (2007)’s asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are highly declarative, and only allow the programmer to specify a consistency relation with limited control over the behaviour of the automatically derived consistency restorer. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must be empowered to fully control and reason about the consistency restoration behaviour of their bidirectional programs. The putback-based approach to bidirectional programming was proposed to address this issue once and for all, and this paper takes the approach one step further by proposing a Hoare-style logic for Ko et al. (2016)'s putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory underlying the Hoare-style logic has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                    ]
@@ -97,7 +97,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "preprint", "manuscripts/JFP17.pdf")
                    , ("Agda code", Just "JFP", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
-                   , ("Agda code", Just "browsable HTML", "Agda/JFP17/Everything.html")
+                   , ("Agda code", Just "HTML", "Agda/JFP17/Everything.html")
                    ]
       , info     = [ ("Volume", "27", Nothing)
                    , ("Number", "e2", Nothing)
@@ -172,7 +172,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
                    , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2847544&preflayout=flat#formats")
-                   , ("Agda code", Just "browsable HTML", "Agda/PEPM16/BiGUL.Everything.html")
+                   , ("Agda code", Just "HTML", "Agda/PEPM16/BiGUL.Everything.html")
                    , ("Slides", Nothing, "slides/PEPM16.pdf")
                    , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
                    ]
@@ -214,7 +214,7 @@ publicationList =
       , links    = [ ("PDF", Just "revised version", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
                    , ("PDF", Just "Oxford", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
                    , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
-                   , ("Agda code", Just "browsable HTML", "Agda/Thesis/Everything.html")
+                   , ("Agda code", Just "HTML", "Agda/Thesis/Everything.html")
                    ]
       , info     = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                    , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
