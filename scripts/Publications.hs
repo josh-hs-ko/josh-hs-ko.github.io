@@ -248,7 +248,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Supplementary material", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/pcOrn")
+                   , ("Agda code", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/pcOrn")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -267,7 +267,7 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
-                   , ("Supplementary material", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/OAOAOO")
+                   , ("Agda code & slides", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/OAOAOO")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
