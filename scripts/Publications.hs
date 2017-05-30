@@ -29,7 +29,7 @@ publicationList =
       , types    = [ (Unpublished, "Technical report")
                    ]
       , links    = [ ("PDF", Just "arXiv", "https://arxiv.org/pdf/1703.09542")
-                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
+                   , ("Repository", Nothing, "https://bitbucket.org/zyz915/palgol")
                    ]
       , info     = [ ("arXiv", "1703.09542", Nothing)
                    , ("Abstract", "Pregel is a popular parallel computing model for dealing with large-scale graphs. However, it can be tricky to implement graph algorithms correctly and efficiently in Pregel’s vertex-centric model, as programmers need to carefully restructure an algorithm in terms of supersteps and message passing, which are low-level and detached from the algorithm descriptions. Some domain-specific languages (DSLs) have been proposed to provide more intuitive ways to implement graph algorithms, but none of them can flexibly describe remote access (reading or writing attributes of other vertices through references), causing a still wide range of algorithms hard to implement.</p><p>To address this problem, we design and implement Palgol, a more declarative and powerful DSL which supports remote access. In particular, programmers can use a more declarative syntax called <em>global field access</em> to directly read data on remote vertices. By structuring supersteps in a high-level vertex-centric computation model and analyzing the logic patterns of global field access, we provide a novel algorithm for compiling Palgol programs to efficient Pregel code. We demonstrate the power of Palgol by using it to implement a bunch of practical Pregel algorithms and compare them with hand-written code. The evaluation result shows that the efficiency of Palgol is comparable with that of hand-written code.", Nothing)
@@ -45,7 +45,7 @@ publicationList =
       , types    = [ (Unpublished, "Draft manuscript")
                    ]
       , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
-                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
+                   , ("Agda code", Nothing, "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
                    ]
       , info     = [ ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al. (2007)’s asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are highly declarative, and only allow the programmer to specify a consistency relation with limited control over the behaviour of the automatically derived consistency restorer. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must be empowered to fully control and reason about the consistency restoration behaviour of their bidirectional programs. The putback-based approach to bidirectional programming was proposed to address this issue once and for all, and this paper takes the approach one step further by proposing a Hoare-style logic for Ko et al. (2016)'s putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory underlying the Hoare-style logic has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                    ]
@@ -63,7 +63,7 @@ publicationList =
       , year     = 2017
       , types    = []
       , links    = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1827/paper6.pdf")
-                   , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
+                   , ("Repository", Nothing, "https://github.com/eMoflon/benchmarx")
                    ]
       , info     = [ ("Pages", "15–30", Nothing)
                    , ("URL", "http://ceur-ws.org/Vol-1827/paper6.pdf", Nothing)
@@ -81,7 +81,7 @@ publicationList =
                    , (Warning, "Publication planned")
                    ]
       , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/master/SSBX16/tutorial.pdf")
-                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
+                   , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.", Nothing)
                    ]
@@ -169,7 +169,7 @@ publicationList =
       , year     = 2016
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
-                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
+                   , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Pages", "61–72", Nothing)
                    , ("DOI", "10.1145/2847538.2847544", Nothing)
@@ -208,7 +208,7 @@ publicationList =
                    ]
       , links    = [ ("PDF", Just "revised version", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
                    , ("PDF", Just "Oxford", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
-                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
+                   , ("Agda code", Nothing, "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                    , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
@@ -242,7 +242,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
+                   , ("Agda code", Nothing, "https://github.com/josh-hs-ko/Thesis")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -278,7 +278,7 @@ publicationList =
       , year     = 2009
       , types    = []
       , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-JFP.pdf")
-                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
+                   , ("Repository", Nothing, "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
                    , ("Issue", "5", Nothing)
@@ -298,7 +298,7 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-MPC.pdf")
-                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
+                   , ("Repository", Nothing, "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
                    , ("Pages", "268–283", Nothing)
