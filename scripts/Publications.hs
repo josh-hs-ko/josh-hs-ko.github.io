@@ -96,6 +96,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "preprint", "manuscripts/OrnJFP.pdf")
                    , ("Agda code", Just "JFP", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
+                   , ("Agda code", Just "browsable HTML", "Agda/JFP17/Everything.html")
                    ]
       , info     = [ ("Volume", "27", Nothing)
                    , ("Number", "e2", Nothing)
