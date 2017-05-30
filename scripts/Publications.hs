@@ -94,7 +94,7 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2017
       , types    = []
-      , links    = [ ("PDF", Just "preprint", "manuscripts/OrnJFP.pdf")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/JFP17.pdf")
                    , ("Agda code", Just "JFP", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
                    , ("Agda code", Just "browsable HTML", "Agda/JFP17/Everything.html")
                    ]
@@ -172,6 +172,7 @@ publicationList =
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
                    , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2847544&preflayout=flat#formats")
                    , ("Agda code", Just "browsable HTML", "Agda/PEPM16/BiGUL.Everything.html")
+                   , ("Slides", Nothing, "slides/PEPM16.pdf")
                    , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Pages", "61–72", Nothing)
@@ -230,6 +231,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
                    , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2502413&preflayout=flat#formats")
+                   , ("Slides", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/algOrn/DTP.pdf")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -282,7 +284,7 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , types    = []
-      , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-JFP.pdf")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/JFP09.pdf")
                    , ("Repository", Nothing, "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
@@ -302,7 +304,7 @@ publicationList =
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF", Just "preprint", "manuscripts/AoPA-MPC.pdf")
+      , links    = [ ("PDF", Just "preprint", "manuscripts/MPC08.pdf")
                    , ("Repository", Nothing, "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
