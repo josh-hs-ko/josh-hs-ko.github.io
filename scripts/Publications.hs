@@ -81,7 +81,7 @@ publicationList =
                    , (Warning, "Publication planned")
                    ]
       , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/master/SSBX16/tutorial.pdf")
-                   , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
+                   , ("Literate Haskell source", Nothing, "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16")
                    ]
       , info     = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.", Nothing)
                    ]
@@ -169,6 +169,8 @@ publicationList =
       , year     = 2016
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
+                   , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2847544&preflayout=flat#formats")
+                   , ("Agda code", Just "browsable HTML", "Agda/PEPM16/BiGUL.Everything.html")
                    , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
                    ]
       , info     = [ ("Pages", "61–72", Nothing)

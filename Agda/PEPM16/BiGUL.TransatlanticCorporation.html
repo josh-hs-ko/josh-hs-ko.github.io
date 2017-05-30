@@ -1,0 +1,2921 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >BiGUL.TransatlanticCorporation</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- The transatlantic corporation example (Section 4).</a
+      ><a name="54"
+      >
+
+</a
+      ><a name="56" class="Keyword"
+      >module</a
+      ><a name="62"
+      > </a
+      ><a name="63" href="BiGUL.TransatlanticCorporation.html#1" class="Module"
+      >BiGUL.TransatlanticCorporation</a
+      ><a name="93"
+      > </a
+      ><a name="94" class="Keyword"
+      >where</a
+      ><a name="99"
+      >
+
+</a
+      ><a name="101" class="Keyword"
+      >open</a
+      ><a name="105"
+      > </a
+      ><a name="106" class="Keyword"
+      >import</a
+      ><a name="112"
+      > </a
+      ><a name="113" href="BiGUL.Utilities.html#1" class="Module"
+      >BiGUL.Utilities</a
+      ><a name="128"
+      >
+</a
+      ><a name="129" class="Keyword"
+      >open</a
+      ><a name="133"
+      > </a
+      ><a name="134" class="Keyword"
+      >import</a
+      ><a name="140"
+      > </a
+      ><a name="141" href="BiGUL.Partiality.html#1" class="Module"
+      >BiGUL.Partiality</a
+      ><a name="157"
+      >
+</a
+      ><a name="158" class="Keyword"
+      >open</a
+      ><a name="162"
+      > </a
+      ><a name="163" class="Keyword"
+      >import</a
+      ><a name="169"
+      > </a
+      ><a name="170" href="BiGUL.Lens.html#1" class="Module"
+      >BiGUL.Lens</a
+      ><a name="180"
+      >
+</a
+      ><a name="181" class="Keyword"
+      >open</a
+      ><a name="185"
+      > </a
+      ><a name="186" class="Keyword"
+      >import</a
+      ><a name="192"
+      > </a
+      ><a name="193" href="BiGUL.Universe.html#1" class="Module"
+      >BiGUL.Universe</a
+      ><a name="207"
+      >
+</a
+      ><a name="208" class="Keyword"
+      >open</a
+      ><a name="212"
+      > </a
+      ><a name="213" class="Keyword"
+      >import</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="BiGUL.BiGUL.html#1" class="Module"
+      >BiGUL.BiGUL</a
+      ><a name="231"
+      >
+</a
+      ><a name="232" class="Keyword"
+      >open</a
+      ><a name="236"
+      > </a
+      ><a name="237" class="Keyword"
+      >import</a
+      ><a name="243"
+      > </a
+      ><a name="244" href="BiGUL.ViewRearrangement.html#1" class="Module"
+      >BiGUL.ViewRearrangement</a
+      ><a name="267"
+      >
+
+</a
+      ><a name="269" class="Keyword"
+      >open</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Keyword"
+      >import</a
+      ><a name="280"
+      > </a
+      ><a name="281" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="289"
+      >
+</a
+      ><a name="290" class="Keyword"
+      >open</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Keyword"
+      >import</a
+      ><a name="301"
+      > </a
+      ><a name="302" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="314"
+      >
+</a
+      ><a name="315" class="Keyword"
+      >open</a
+      ><a name="319"
+      > </a
+      ><a name="320" class="Keyword"
+      >import</a
+      ><a name="326"
+      > </a
+      ><a name="327" href="Data.Sum.html#1" class="Module"
+      >Data.Sum</a
+      ><a name="335"
+      >
+</a
+      ><a name="336" class="Keyword"
+      >open</a
+      ><a name="340"
+      > </a
+      ><a name="341" class="Keyword"
+      >import</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="357"
+      >
+</a
+      ><a name="358" class="Keyword"
+      >open</a
+      ><a name="362"
+      > </a
+      ><a name="363" class="Keyword"
+      >import</a
+      ><a name="369"
+      > </a
+      ><a name="370" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="380"
+      >
+</a
+      ><a name="381" class="Keyword"
+      >open</a
+      ><a name="385"
+      > </a
+      ><a name="386" class="Keyword"
+      >import</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="401"
+      >
+</a
+      ><a name="402" class="Keyword"
+      >open</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Keyword"
+      >import</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="Data.Fin.html#1" class="Module"
+      >Data.Fin</a
+      ><a name="422"
+      >
+</a
+      ><a name="423" class="Keyword"
+      >open</a
+      ><a name="427"
+      > </a
+      ><a name="428" class="Keyword"
+      >import</a
+      ><a name="434"
+      > </a
+      ><a name="435" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="444"
+      >
+</a
+      ><a name="445" class="Keyword"
+      >open</a
+      ><a name="449"
+      > </a
+      ><a name="450" class="Keyword"
+      >import</a
+      ><a name="456"
+      > </a
+      ><a name="457" href="Data.String.html#1" class="Module"
+      >Data.String</a
+      ><a name="468"
+      >
+</a
+      ><a name="469" class="Keyword"
+      >open</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Keyword"
+      >import</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="Relation.Nullary.html#1" class="Module"
+      >Relation.Nullary</a
+      ><a name="497"
+      >
+</a
+      ><a name="498" class="Keyword"
+      >open</a
+      ><a name="502"
+      > </a
+      ><a name="503" class="Keyword"
+      >import</a
+      ><a name="509"
+      > </a
+      ><a name="510" href="Relation.Nullary.Decidable.html#1" class="Module"
+      >Relation.Nullary.Decidable</a
+      ><a name="536"
+      >
+</a
+      ><a name="537" class="Keyword"
+      >open</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Keyword"
+      >import</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="586"
+      >
+
+
+</a
+      ><a name="589" href="BiGUL.TransatlanticCorporation.html#589" class="Function"
+      >k&#8469;</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Symbol"
+      >:</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >{</a
+      ><a name="595" href="BiGUL.TransatlanticCorporation.html#595" class="Bound"
+      >n</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Symbol"
+      >:</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="600" class="Symbol"
+      >}</a
+      ><a name="601"
+      > </a
+      ><a name="602" class="Symbol"
+      >&#8594;</a
+      ><a name="603"
+      > </a
+      ><a name="604" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="605"
+      > </a
+      ><a name="606" href="BiGUL.TransatlanticCorporation.html#595" class="Bound"
+      >n</a
+      ><a name="607"
+      >
+</a
+      ><a name="608" href="BiGUL.TransatlanticCorporation.html#589" class="Function"
+      >k&#8469;</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >=</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="BiGUL.Universe.html#529" class="InductiveConstructor"
+      >k</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="Data.Nat.Base.html#3467" class="Function Operator"
+      >Data.Nat._&#8799;_</a
+      ><a name="629"
+      >
+
+</a
+      ><a name="631" href="BiGUL.TransatlanticCorporation.html#631" class="Function"
+      >kString</a
+      ><a name="638"
+      > </a
+      ><a name="639" class="Symbol"
+      >:</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >{</a
+      ><a name="642" href="BiGUL.TransatlanticCorporation.html#642" class="Bound"
+      >n</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >:</a
+      ><a name="645"
+      > </a
+      ><a name="646" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="647" class="Symbol"
+      >}</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >&#8594;</a
+      ><a name="650"
+      > </a
+      ><a name="651" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="BiGUL.TransatlanticCorporation.html#642" class="Bound"
+      >n</a
+      ><a name="654"
+      >
+</a
+      ><a name="655" href="BiGUL.TransatlanticCorporation.html#631" class="Function"
+      >kString</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >=</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="BiGUL.Universe.html#529" class="InductiveConstructor"
+      >k</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="673"
+      > </a
+      ><a name="674" href="Data.String.html#1196" class="Function Operator"
+      >Data.String._&#8799;_</a
+      ><a name="689"
+      >
+
+</a
+      ><a name="691" href="BiGUL.TransatlanticCorporation.html#691" class="Function"
+      >Name</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >:</a
+      ><a name="697"
+      > </a
+      ><a name="698" class="Symbol"
+      >{</a
+      ><a name="699" href="BiGUL.TransatlanticCorporation.html#699" class="Bound"
+      >n</a
+      ><a name="700"
+      > </a
+      ><a name="701" class="Symbol"
+      >:</a
+      ><a name="702"
+      > </a
+      ><a name="703" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="704" class="Symbol"
+      >}</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >&#8594;</a
+      ><a name="707"
+      > </a
+      ><a name="708" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="BiGUL.TransatlanticCorporation.html#699" class="Bound"
+      >n</a
+      ><a name="711"
+      >
+</a
+      ><a name="712" href="BiGUL.TransatlanticCorporation.html#691" class="Function"
+      >Name</a
+      ><a name="716"
+      > </a
+      ><a name="717" class="Symbol"
+      >=</a
+      ><a name="718"
+      > </a
+      ><a name="719" href="BiGUL.TransatlanticCorporation.html#631" class="Function"
+      >kString</a
+      ><a name="726"
+      >
+
+</a
+      ><a name="728" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >:</a
+      ><a name="736"
+      > </a
+      ><a name="737" class="Symbol"
+      >{</a
+      ><a name="738" href="BiGUL.TransatlanticCorporation.html#738" class="Bound"
+      >n</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="Symbol"
+      >:</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="743" class="Symbol"
+      >}</a
+      ><a name="744"
+      > </a
+      ><a name="745" class="Symbol"
+      >&#8594;</a
+      ><a name="746"
+      > </a
+      ><a name="747" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="BiGUL.TransatlanticCorporation.html#738" class="Bound"
+      >n</a
+      ><a name="750"
+      >
+</a
+      ><a name="751" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >=</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="BiGUL.TransatlanticCorporation.html#589" class="Function"
+      >k&#8469;</a
+      ><a name="762"
+      >
+
+</a
+      ><a name="764" href="BiGUL.TransatlanticCorporation.html#764" class="Function"
+      >UKLocation</a
+      ><a name="774"
+      > </a
+      ><a name="775" class="Symbol"
+      >:</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="Symbol"
+      >{</a
+      ><a name="778" href="BiGUL.TransatlanticCorporation.html#778" class="Bound"
+      >n</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Symbol"
+      >:</a
+      ><a name="781"
+      > </a
+      ><a name="782" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="783" class="Symbol"
+      >}</a
+      ><a name="784"
+      > </a
+      ><a name="785" class="Symbol"
+      >&#8594;</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="BiGUL.TransatlanticCorporation.html#778" class="Bound"
+      >n</a
+      ><a name="790"
+      >
+</a
+      ><a name="791" href="BiGUL.TransatlanticCorporation.html#764" class="Function"
+      >UKLocation</a
+      ><a name="801"
+      > </a
+      ><a name="802" class="Symbol"
+      >=</a
+      ><a name="803"
+      > </a
+      ><a name="804" href="BiGUL.TransatlanticCorporation.html#631" class="Function"
+      >kString</a
+      ><a name="811"
+      >
+
+</a
+      ><a name="813" href="BiGUL.TransatlanticCorporation.html#813" class="Function"
+      >USLocation</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >:</a
+      ><a name="825"
+      > </a
+      ><a name="826" class="Symbol"
+      >{</a
+      ><a name="827" href="BiGUL.TransatlanticCorporation.html#827" class="Bound"
+      >n</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >:</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="832" class="Symbol"
+      >}</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >&#8594;</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="837"
+      > </a
+      ><a name="838" href="BiGUL.TransatlanticCorporation.html#827" class="Bound"
+      >n</a
+      ><a name="839"
+      >
+</a
+      ><a name="840" href="BiGUL.TransatlanticCorporation.html#813" class="Function"
+      >USLocation</a
+      ><a name="850"
+      > </a
+      ><a name="851" class="Symbol"
+      >=</a
+      ><a name="852"
+      > </a
+      ><a name="853" href="BiGUL.TransatlanticCorporation.html#631" class="Function"
+      >kString</a
+      ><a name="860"
+      >
+
+</a
+      ><a name="862" class="Comment"
+      >-- British or American office location</a
+      ><a name="900"
+      >
+</a
+      ><a name="901" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="909"
+      > </a
+      ><a name="910" class="Symbol"
+      >:</a
+      ><a name="911"
+      > </a
+      ><a name="912" class="Symbol"
+      >{</a
+      ><a name="913" href="BiGUL.TransatlanticCorporation.html#913" class="Bound"
+      >n</a
+      ><a name="914"
+      > </a
+      ><a name="915" class="Symbol"
+      >:</a
+      ><a name="916"
+      > </a
+      ><a name="917" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="918" class="Symbol"
+      >}</a
+      ><a name="919"
+      > </a
+      ><a name="920" class="Symbol"
+      >&#8594;</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="923"
+      > </a
+      ><a name="924" href="BiGUL.TransatlanticCorporation.html#913" class="Bound"
+      >n</a
+      ><a name="925"
+      >
+</a
+      ><a name="926" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="934"
+      > </a
+      ><a name="935" class="Symbol"
+      >=</a
+      ><a name="936"
+      > </a
+      ><a name="937" href="BiGUL.TransatlanticCorporation.html#764" class="Function"
+      >UKLocation</a
+      ><a name="947"
+      > </a
+      ><a name="948" href="BiGUL.Universe.html#599" class="InductiveConstructor Operator"
+      >&#8853;</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="BiGUL.TransatlanticCorporation.html#813" class="Function"
+      >USLocation</a
+      ><a name="960"
+      >
+
+</a
+      ><a name="962" class="Comment"
+      >-- name, salary, British or American office location</a
+      ><a name="1014"
+      >
+</a
+      ><a name="1015" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" class="Symbol"
+      >:</a
+      ><a name="1025"
+      > </a
+      ><a name="1026" class="Symbol"
+      >{</a
+      ><a name="1027" href="BiGUL.TransatlanticCorporation.html#1027" class="Bound"
+      >n</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >:</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="1032" class="Symbol"
+      >}</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" class="Symbol"
+      >&#8594;</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="BiGUL.TransatlanticCorporation.html#1027" class="Bound"
+      >n</a
+      ><a name="1039"
+      >
+</a
+      ><a name="1040" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >=</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="BiGUL.TransatlanticCorporation.html#691" class="Function"
+      >Name</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >(</a
+      ><a name="1059" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1076" class="Symbol"
+      >)</a
+      ><a name="1077"
+      >
+
+</a
+      ><a name="1079" class="Comment"
+      >-- name, British or American office location</a
+      ><a name="1123"
+      >
+</a
+      ><a name="1124" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" class="Symbol"
+      >:</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" class="Symbol"
+      >{</a
+      ><a name="1134" href="BiGUL.TransatlanticCorporation.html#1134" class="Bound"
+      >n</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" class="Symbol"
+      >:</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="1139" class="Symbol"
+      >}</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" class="Symbol"
+      >&#8594;</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="BiGUL.TransatlanticCorporation.html#1134" class="Bound"
+      >n</a
+      ><a name="1146"
+      >
+</a
+      ><a name="1147" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" class="Symbol"
+      >=</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" href="BiGUL.TransatlanticCorporation.html#691" class="Function"
+      >Name</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1171"
+      >
+
+</a
+      ><a name="1173" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" class="Symbol"
+      >:</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="BiGUL.Universe.html#889" class="Function"
+      >Functor</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" class="Number"
+      >0</a
+      ><a name="1191"
+      >
+</a
+      ><a name="1192" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" class="Symbol"
+      >()</a
+      ><a name="1201"
+      >
+
+</a
+      ><a name="1203" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >:</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="Data.Fin.html#842" class="Datatype"
+      >Fin</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Number"
+      >0</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" class="Symbol"
+      >&#8594;</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="PrimitiveType"
+      >Set</a
+      ><a name="1226"
+      >
+</a
+      ><a name="1227" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" class="Symbol"
+      >()</a
+      ><a name="1239"
+      >
+
+</a
+      ><a name="1241" href="BiGUL.TransatlanticCorporation.html#1241" class="Function"
+      >relocate-to-UK</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" class="Symbol"
+      >:</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" class="Symbol"
+      >(</a
+      ><a name="1272" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1289" class="Symbol"
+      >)</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" class="Symbol"
+      >(</a
+      ><a name="1292" href="BiGUL.Universe.html#586" class="InductiveConstructor"
+      >one</a
+      ><a name="1295"
+      > </a
+      ><a name="1296" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="BiGUL.TransatlanticCorporation.html#764" class="Function"
+      >UKLocation</a
+      ><a name="1308" class="Symbol"
+      >)</a
+      ><a name="1309"
+      >
+</a
+      ><a name="1310" href="BiGUL.TransatlanticCorporation.html#1241" class="Function"
+      >relocate-to-UK</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >=</a
+      ><a name="1326"
+      >
+  </a
+      ><a name="1329" href="BiGUL.BiGUL.html#971" class="InductiveConstructor"
+      >caseS</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >((</a
+      ><a name="1337" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="Data.Maybe.Base.html#831" class="Function"
+      >is-just</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="Data.Sum.html#1320" class="Function"
+      >isInj&#8321;</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" href="BiGUL.BiGUL.html#2503" class="InductiveConstructor"
+      >normal</a
+      ><a name="1379"
+      >   </a
+      ><a name="1382" class="Symbol"
+      >(</a
+      ><a name="1383" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" class="Symbol"
+      >(</a
+      ><a name="1391" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >(</a
+      ><a name="1401" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="1405"
+      >  </a
+      ><a name="1407" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1410" class="Symbol"
+      >))</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >((</a
+      ><a name="1415" href="Data.Product.html#1621" class="Function Operator"
+      >,</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="BiGUL.BiGUL.html#638" class="InductiveConstructor"
+      >skip</a
+      ><a name="1421" class="Symbol"
+      >)</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" class="Symbol"
+      >(</a
+      ><a name="1426" href="Data.Product.html#1621" class="Function Operator"
+      >,</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="1435" class="Symbol"
+      >))))</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1441"
+      >
+         </a
+      ><a name="1451" class="Symbol"
+      >(</a
+      ><a name="1452" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" class="Symbol"
+      >(</a
+      ><a name="1459" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="1470" class="Symbol"
+      >)</a
+      ><a name="1471"
+      >               </a
+      ><a name="1486" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="BiGUL.BiGUL.html#2550" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Symbol"
+      >(&#955;</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" href="BiGUL.TransatlanticCorporation.html#1500" class="Bound"
+      >s</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" class="Symbol"
+      >&#8594;</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" class="Symbol"
+      >(</a
+      ><a name="1512" href="Data.Nat.Base.html#3327" class="Function Operator"
+      >&#8968;</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" href="BiGUL.TransatlanticCorporation.html#1500" class="Bound"
+      >s</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="Data.Nat.Base.html#3327" class="Function Operator"
+      >/2&#8969;</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" class="String"
+      >&quot;&quot;</a
+      ><a name="1535" class="Symbol"
+      >)))</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1543" class="Symbol"
+      >)</a
+      ><a name="1544"
+      >
+
+</a
+      ><a name="1546" href="BiGUL.TransatlanticCorporation.html#1546" class="Function"
+      >relocate-to-US</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" class="Symbol"
+      >:</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1568"
+      > </a
+      ><a name="1569" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >(</a
+      ><a name="1577" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1594" class="Symbol"
+      >)</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >(</a
+      ><a name="1597" href="BiGUL.Universe.html#586" class="InductiveConstructor"
+      >one</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="BiGUL.TransatlanticCorporation.html#813" class="Function"
+      >USLocation</a
+      ><a name="1613" class="Symbol"
+      >)</a
+      ><a name="1614"
+      >
+</a
+      ><a name="1615" href="BiGUL.TransatlanticCorporation.html#1546" class="Function"
+      >relocate-to-US</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >=</a
+      ><a name="1631"
+      >
+  </a
+      ><a name="1634" href="BiGUL.BiGUL.html#971" class="InductiveConstructor"
+      >caseS</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" class="Symbol"
+      >((</a
+      ><a name="1642" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Data.Maybe.Base.html#831" class="Function"
+      >is-just</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Data.Sum.html#1431" class="Function"
+      >isInj&#8322;</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" href="BiGUL.BiGUL.html#2503" class="InductiveConstructor"
+      >normal</a
+      ><a name="1684"
+      >   </a
+      ><a name="1687" class="Symbol"
+      >(</a
+      ><a name="1688" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" class="Symbol"
+      >(</a
+      ><a name="1696" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1704"
+      > </a
+      ><a name="1705" class="Symbol"
+      >(</a
+      ><a name="1706" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1715" class="Symbol"
+      >))</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >((</a
+      ><a name="1720" href="Data.Product.html#1621" class="Function Operator"
+      >,</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="BiGUL.BiGUL.html#638" class="InductiveConstructor"
+      >skip</a
+      ><a name="1726" class="Symbol"
+      >)</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >(</a
+      ><a name="1731" href="Data.Product.html#1621" class="Function Operator"
+      >,</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="1740" class="Symbol"
+      >))))</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1746"
+      >
+         </a
+      ><a name="1756" class="Symbol"
+      >(</a
+      ><a name="1757" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" class="Symbol"
+      >(</a
+      ><a name="1764" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="1775" class="Symbol"
+      >)</a
+      ><a name="1776"
+      >               </a
+      ><a name="1791" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="BiGUL.BiGUL.html#2550" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" class="Symbol"
+      >(&#955;</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="BiGUL.TransatlanticCorporation.html#1805" class="Bound"
+      >s</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" class="Symbol"
+      >&#8594;</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" class="Symbol"
+      >(</a
+      ><a name="1817" class="Number"
+      >2</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" href="Data.Nat.Base.html#1102" class="Primitive Operator"
+      >*</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="BiGUL.TransatlanticCorporation.html#1805" class="Bound"
+      >s</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" class="String"
+      >&quot;&quot;</a
+      ><a name="1838" class="Symbol"
+      >)))</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1846" class="Symbol"
+      >)</a
+      ><a name="1847"
+      >
+
+</a
+      ><a name="1849" href="BiGUL.TransatlanticCorporation.html#1849" class="Function"
+      >adjust-salary-and-office</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Symbol"
+      >:</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" class="Symbol"
+      >(</a
+      ><a name="1890" href="BiGUL.TransatlanticCorporation.html#728" class="Function"
+      >Salary</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1907" class="Symbol"
+      >)</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" href="BiGUL.TransatlanticCorporation.html#901" class="Function"
+      >Location</a
+      ><a name="1917"
+      >
+</a
+      ><a name="1918" href="BiGUL.TransatlanticCorporation.html#1849" class="Function"
+      >adjust-salary-and-office</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" class="Symbol"
+      >=</a
+      ><a name="1944"
+      >
+  </a
+      ><a name="1947" href="BiGUL.BiGUL.html#1047" class="InductiveConstructor"
+      >caseV</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" class="Symbol"
+      >((</a
+      ><a name="1955" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="Data.Maybe.Base.html#831" class="Function"
+      >is-just</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="Data.Sum.html#1320" class="Function"
+      >isInj&#8321;</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" href="BiGUL.BiGUL.html#811" class="InductiveConstructor"
+      >rearr</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" class="Symbol"
+      >(</a
+      ><a name="1990" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="1994"
+      >  </a
+      ><a name="1996" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1999" class="Symbol"
+      >)</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" class="Symbol"
+      >(</a
+      ><a name="2002" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" class="Symbol"
+      >(</a
+      ><a name="2008" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2012" class="Symbol"
+      >)</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="2017" class="Symbol"
+      >)</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >(</a
+      ><a name="2020" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2029" class="Symbol"
+      >)</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="BiGUL.TransatlanticCorporation.html#1241" class="Function"
+      >relocate-to-UK</a
+      ><a name="2045" class="Symbol"
+      >)</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2048"
+      >
+         </a
+      ><a name="2058" class="Symbol"
+      >(</a
+      ><a name="2059" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" class="Symbol"
+      >(</a
+      ><a name="2066" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="2077" class="Symbol"
+      >)</a
+      ><a name="2078"
+      >       </a
+      ><a name="2085" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="BiGUL.BiGUL.html#811" class="InductiveConstructor"
+      >rearr</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" class="Symbol"
+      >(</a
+      ><a name="2094" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="2103" class="Symbol"
+      >)</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" class="Symbol"
+      >(</a
+      ><a name="2106" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >(</a
+      ><a name="2112" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2116" class="Symbol"
+      >)</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="2121" class="Symbol"
+      >)</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >(</a
+      ><a name="2124" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2133" class="Symbol"
+      >)</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" href="BiGUL.TransatlanticCorporation.html#1546" class="Function"
+      >relocate-to-US</a
+      ><a name="2149" class="Symbol"
+      >)</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="2155" class="Symbol"
+      >)</a
+      ><a name="2156"
+      >
+
+</a
+      ><a name="2158" href="BiGUL.TransatlanticCorporation.html#2158" class="Function"
+      >relocate-employee</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="Symbol"
+      >:</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="2206"
+      >
+</a
+      ><a name="2207" href="BiGUL.TransatlanticCorporation.html#2158" class="Function"
+      >relocate-employee</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" class="Symbol"
+      >=</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" class="Symbol"
+      >(</a
+      ><a name="2235" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="2247" class="Symbol"
+      >)</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" class="Symbol"
+      >((_</a
+      ><a name="2252"
+      > </a
+      ><a name="2253" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="2262" class="Symbol"
+      >)</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" class="Symbol"
+      >(_</a
+      ><a name="2268"
+      > </a
+      ><a name="2269" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" href="BiGUL.TransatlanticCorporation.html#1849" class="Function"
+      >adjust-salary-and-office</a
+      ><a name="2295" class="Symbol"
+      >))</a
+      ><a name="2297"
+      >
+
+</a
+      ><a name="2299" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" class="Symbol"
+      >:</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="2325"
+      > </a
+      ><a name="2326" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" class="Symbol"
+      >(</a
+      ><a name="2334" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="2347" class="Symbol"
+      >)</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" class="Symbol"
+      >(</a
+      ><a name="2350" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="2361" class="Symbol"
+      >)</a
+      ><a name="2362"
+      >
+</a
+      ><a name="2363" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" class="Symbol"
+      >=</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="BiGUL.BiGUL.html#1123" class="InductiveConstructor"
+      >align</a
+      ><a name="2389"
+      >
+  </a
+      ><a name="2392" class="Symbol"
+      >(</a
+      ><a name="2393" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >(</a
+      ><a name="2400" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="2411" class="Symbol"
+      >))</a
+      ><a name="2413"
+      >
+  </a
+      ><a name="2416" class="Symbol"
+      >((</a
+      ><a name="2418" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="Symbol"
+      >(</a
+      ><a name="2432" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2447" class="Symbol"
+      >)</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" class="Symbol"
+      >&#8594;</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" class="Symbol"
+      >(</a
+      ><a name="2461" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2467"
+      > </a
+      ><a name="2468" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2476" class="Symbol"
+      >)</a
+      ><a name="2477"
+      > </a
+      ><a name="2478" class="Symbol"
+      >&#8594;</a
+      ><a name="2479"
+      > </a
+      ><a name="2480" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2483"
+      > </a
+      ><a name="2484" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="2488" class="Symbol"
+      >)</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" href="Function.html#2481" class="Function Operator"
+      >&#8715;</a
+      ><a name="2491"
+      >
+     </a
+      ><a name="2497" class="Symbol"
+      >(&#955;</a
+      ><a name="2499"
+      > </a
+      ><a name="2500" class="Symbol"
+      >{</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" class="Symbol"
+      >(</a
+      ><a name="2503" href="BiGUL.TransatlanticCorporation.html#2503" class="Bound"
+      >sname</a
+      ><a name="2508"
+      > </a
+      ><a name="2509" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" class="Symbol"
+      >_)</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" class="Symbol"
+      >(</a
+      ><a name="2515" href="BiGUL.TransatlanticCorporation.html#2515" class="Bound"
+      >vname</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" class="Symbol"
+      >_)</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" class="Symbol"
+      >&#8594;</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" href="Relation.Nullary.Decidable.html#822" class="Function Operator"
+      >&#8970;</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" href="BiGUL.TransatlanticCorporation.html#2503" class="Bound"
+      >sname</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" href="Data.String.html#1196" class="Function Operator"
+      >Data.String.&#8799;</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="BiGUL.TransatlanticCorporation.html#2515" class="Bound"
+      >vname</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" href="Relation.Nullary.Decidable.html#822" class="Function Operator"
+      >&#8971;</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" class="Symbol"
+      >}))</a
+      ><a name="2568"
+      >
+  </a
+      ><a name="2571" href="BiGUL.TransatlanticCorporation.html#2158" class="Function"
+      >relocate-employee</a
+      ><a name="2588"
+      >
+  </a
+      ><a name="2591" class="Symbol"
+      >((</a
+      ><a name="2593" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2599"
+      > </a
+      ><a name="2600" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" class="Symbol"
+      >(</a
+      ><a name="2603" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2609"
+      > </a
+      ><a name="2610" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2618" class="Symbol"
+      >)</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" class="Symbol"
+      >&#8594;</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" class="Symbol"
+      >(</a
+      ><a name="2627" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2635"
+      > </a
+      ><a name="2636" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" class="Symbol"
+      >(</a
+      ><a name="2641" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" href="Data.String.Base.html#577" class="Postulate"
+      >String</a
+      ><a name="2656" class="Symbol"
+      >)))</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="Function.html#2481" class="Function Operator"
+      >&#8715;</a
+      ><a name="2661"
+      >
+     </a
+      ><a name="2667" class="Symbol"
+      >(&#955;</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" class="Symbol"
+      >{</a
+      ><a name="2671"
+      > </a
+      ><a name="2672" class="Symbol"
+      >(</a
+      ><a name="2673" href="BiGUL.TransatlanticCorporation.html#2673" class="Bound"
+      >name</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" href="BiGUL.TransatlanticCorporation.html#2680" class="Bound"
+      >location</a
+      ><a name="2688" class="Symbol"
+      >)</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" class="Symbol"
+      >&#8594;</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" class="Symbol"
+      >(</a
+      ><a name="2700" class="String"
+      >&quot;&quot;</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" class="Number"
+      >0</a
+      ><a name="2706"
+      > </a
+      ><a name="2707" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" href="BiGUL.TransatlanticCorporation.html#2680" class="Bound"
+      >location</a
+      ><a name="2717" class="Symbol"
+      >)</a
+      ><a name="2718"
+      > </a
+      ><a name="2719" class="Symbol"
+      >}))</a
+      ><a name="2722"
+      >
+  </a
+      ><a name="2725" class="Symbol"
+      >(</a
+      ><a name="2726" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" class="Symbol"
+      >(</a
+      ><a name="2733" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" href="Data.Maybe.Base.html#403" class="InductiveConstructor"
+      >nothing</a
+      ><a name="2747" class="Symbol"
+      >))</a
+      ><a name="2749"
+      >
+
+</a
+      ><a name="2751" href="BiGUL.TransatlanticCorporation.html#2751" class="Function"
+      >relocate-employees-CompleteExpr</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >:</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="2828"
+      >
+</a
+      ><a name="2829" href="BiGUL.TransatlanticCorporation.html#2751" class="Function"
+      >relocate-employees-CompleteExpr</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" class="Symbol"
+      >=</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" class="Symbol"
+      >(</a
+      ><a name="2869" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" class="Symbol"
+      >(</a
+      ><a name="2884" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2891" class="Symbol"
+      >)</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2897" class="Symbol"
+      >)</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" class="Symbol"
+      >(</a
+      ><a name="2902" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" class="Symbol"
+      >(</a
+      ><a name="2917" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2924" class="Symbol"
+      >)</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2930" class="Symbol"
+      >)</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2936"
+      >
+
+</a
+      ><a name="2938" href="BiGUL.TransatlanticCorporation.html#2938" class="Function"
+      >employees</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" class="Symbol"
+      >:</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="2951"
+      > </a
+      ><a name="2952" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="2956"
+      > </a
+      ><a name="2957" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="2977"
+      >
+</a
+      ><a name="2978" href="BiGUL.TransatlanticCorporation.html#2938" class="Function"
+      >employees</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" class="Symbol"
+      >=</a
+      ><a name="2989"
+      > </a
+      ><a name="2990" class="Symbol"
+      >(</a
+      ><a name="2991" class="String"
+      >&quot;Jeremy Gibbons&quot;</a
+      ><a name="3007"
+      > </a
+      ><a name="3008" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" class="Number"
+      >82495</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3022"
+      > </a
+      ><a name="3023" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" class="Symbol"
+      >)</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3046"
+      >
+            </a
+      ><a name="3059" class="Symbol"
+      >(</a
+      ><a name="3060" class="String"
+      >&quot;Meng Wang&quot;</a
+      ><a name="3071"
+      >      </a
+      ><a name="3077" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Number"
+      >13590</a
+      ><a name="3084"
+      > </a
+      ><a name="3085" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3086"
+      > </a
+      ><a name="3087" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3091"
+      > </a
+      ><a name="3092" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" class="Symbol"
+      >)</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3115"
+      >
+            </a
+      ><a name="3128" class="Symbol"
+      >(</a
+      ><a name="3129" class="String"
+      >&quot;Nate Foster&quot;</a
+      ><a name="3142"
+      >    </a
+      ><a name="3146" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3147"
+      > </a
+      ><a name="3148" class="Number"
+      >97000</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" class="String"
+      >&quot;Cornell University&quot;</a
+      ><a name="3181" class="Symbol"
+      >)</a
+      ><a name="3182"
+      > </a
+      ><a name="3183" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3184"
+      >
+            </a
+      ><a name="3197" class="Symbol"
+      >(</a
+      ><a name="3198" class="String"
+      >&quot;Hugo Pacheco&quot;</a
+      ><a name="3212"
+      >   </a
+      ><a name="3215" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3216"
+      > </a
+      ><a name="3217" class="Number"
+      >35000</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" class="String"
+      >&quot;Cornell University&quot;</a
+      ><a name="3250" class="Symbol"
+      >)</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3256"
+      >
+
+</a
+      ><a name="3258" href="BiGUL.TransatlanticCorporation.html#3258" class="Function"
+      >locations</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" class="Symbol"
+      >:</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="3271"
+      > </a
+      ><a name="3272" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="3276"
+      > </a
+      ><a name="3277" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="3283"
+      > </a
+      ><a name="3284" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="3295"
+      >
+</a
+      ><a name="3296" href="BiGUL.TransatlanticCorporation.html#3258" class="Function"
+      >locations</a
+      ><a name="3305"
+      > </a
+      ><a name="3306" class="Symbol"
+      >=</a
+      ><a name="3307"
+      > </a
+      ><a name="3308" class="Symbol"
+      >(</a
+      ><a name="3309" class="String"
+      >&quot;Jeremy Gibbons&quot;</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3327"
+      > </a
+      ><a name="3328" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3332"
+      > </a
+      ><a name="3333" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" class="Symbol"
+      >)</a
+      ><a name="3354"
+      > </a
+      ><a name="3355" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3356"
+      >
+            </a
+      ><a name="3369" class="Symbol"
+      >(</a
+      ><a name="3370" class="String"
+      >&quot;Meng Wang&quot;</a
+      ><a name="3381"
+      >      </a
+      ><a name="3387" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3388"
+      > </a
+      ><a name="3389" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" class="Symbol"
+      >)</a
+      ><a name="3415"
+      > </a
+      ><a name="3416" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3417"
+      >
+            </a
+      ><a name="3430" class="Symbol"
+      >(</a
+      ><a name="3431" class="String"
+      >&quot;Nate Foster&quot;</a
+      ><a name="3444"
+      >    </a
+      ><a name="3448" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3449"
+      > </a
+      ><a name="3450" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" class="String"
+      >&quot;Cornell University&quot;</a
+      ><a name="3475" class="Symbol"
+      >)</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3478"
+      >
+            </a
+      ><a name="3491" class="Symbol"
+      >(</a
+      ><a name="3492" class="String"
+      >&quot;Hugo Pacheco&quot;</a
+      ><a name="3506"
+      >   </a
+      ><a name="3509" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3510"
+      > </a
+      ><a name="3511" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="3515"
+      > </a
+      ><a name="3516" class="String"
+      >&quot;Cornell University&quot;</a
+      ><a name="3536" class="Symbol"
+      >)</a
+      ><a name="3537"
+      > </a
+      ><a name="3538" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3539"
+      > </a
+      ><a name="3540" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3542"
+      >
+
+</a
+      ><a name="3544" href="BiGUL.TransatlanticCorporation.html#3544" class="Function"
+      >locations'</a
+      ><a name="3554"
+      > </a
+      ><a name="3555" class="Symbol"
+      >:</a
+      ><a name="3556"
+      > </a
+      ><a name="3557" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="3558"
+      > </a
+      ><a name="3559" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="3570"
+      > </a
+      ><a name="3571" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="3582"
+      >
+</a
+      ><a name="3583" href="BiGUL.TransatlanticCorporation.html#3544" class="Function"
+      >locations'</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" class="Symbol"
+      >=</a
+      ><a name="3595"
+      > </a
+      ><a name="3596" class="Symbol"
+      >(</a
+      ><a name="3597" class="String"
+      >&quot;Jeremy Gibbons&quot;</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3620"
+      > </a
+      ><a name="3621" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" class="Symbol"
+      >)</a
+      ><a name="3642"
+      > </a
+      ><a name="3643" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3644"
+      >
+             </a
+      ><a name="3658" class="Symbol"
+      >(</a
+      ><a name="3659" class="String"
+      >&quot;Nate Foster&quot;</a
+      ><a name="3672"
+      >    </a
+      ><a name="3676" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3677"
+      > </a
+      ><a name="3678" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3682"
+      > </a
+      ><a name="3683" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3702"
+      > </a
+      ><a name="3703" class="Symbol"
+      >)</a
+      ><a name="3704"
+      > </a
+      ><a name="3705" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3706"
+      >
+             </a
+      ><a name="3720" class="Symbol"
+      >(</a
+      ><a name="3721" class="String"
+      >&quot;Josh Ko&quot;</a
+      ><a name="3730"
+      >        </a
+      ><a name="3738" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3739"
+      > </a
+      ><a name="3740" href="Data.Sum.html#489" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="3744"
+      > </a
+      ><a name="3745" class="String"
+      >&quot;Oxford University&quot;</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" class="Symbol"
+      >)</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3768"
+      >
+             </a
+      ><a name="3782" class="Symbol"
+      >(</a
+      ><a name="3783" class="String"
+      >&quot;Meng Wang&quot;</a
+      ><a name="3794"
+      >      </a
+      ><a name="3800" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" href="Data.Sum.html#514" class="InductiveConstructor"
+      >inj&#8322;</a
+      ><a name="3806"
+      > </a
+      ><a name="3807" class="String"
+      >&quot;Harvard University&quot;</a
+      ><a name="3827" class="Symbol"
+      >)</a
+      ><a name="3828"
+      > </a
+      ><a name="3829" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3830"
+      > </a
+      ><a name="3831" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3833"
+      >
+
+</a
+      ><a name="3835" href="BiGUL.TransatlanticCorporation.html#3835" class="Function"
+      >test-get</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" class="Symbol"
+      >:</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="3851"
+      > </a
+      ><a name="3852" class="Symbol"
+      >(</a
+      ><a name="3853" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="3854"
+      > </a
+      ><a name="3855" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" href="BiGUL.TransatlanticCorporation.html#1124" class="Function"
+      >Office</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="3878" class="Symbol"
+      >)</a
+      ><a name="3879"
+      >
+</a
+      ><a name="3880" href="BiGUL.TransatlanticCorporation.html#3835" class="Function"
+      >test-get</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" class="Symbol"
+      >=</a
+      ><a name="3890"
+      > </a
+      ><a name="3891" href="BiGUL.Partiality.html#942" class="Function"
+      >runPar</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" class="Symbol"
+      >(</a
+      ><a name="3899" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="3907"
+      > </a
+      ><a name="3908" class="Symbol"
+      >(</a
+      ><a name="3909" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="3922"
+      > </a
+      ><a name="3923" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="3941"
+      > </a
+      ><a name="3942" href="BiGUL.TransatlanticCorporation.html#2751" class="Function"
+      >relocate-employees-CompleteExpr</a
+      ><a name="3973" class="Symbol"
+      >)</a
+      ><a name="3974"
+      > </a
+      ><a name="3975" href="BiGUL.TransatlanticCorporation.html#2938" class="Function"
+      >employees</a
+      ><a name="3984" class="Symbol"
+      >)</a
+      ><a name="3985"
+      >
+
+</a
+      ><a name="3987" href="BiGUL.TransatlanticCorporation.html#3987" class="Function"
+      >test-put</a
+      ><a name="3995"
+      > </a
+      ><a name="3996" class="Symbol"
+      >:</a
+      ><a name="3997"
+      > </a
+      ><a name="3998" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="4003"
+      > </a
+      ><a name="4004" class="Symbol"
+      >(</a
+      ><a name="4005" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="4006"
+      > </a
+      ><a name="4007" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="4020"
+      > </a
+      ><a name="4021" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="4022"
+      > </a
+      ><a name="4023" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="4032" class="Symbol"
+      >)</a
+      ><a name="4033"
+      >
+</a
+      ><a name="4034" href="BiGUL.TransatlanticCorporation.html#3987" class="Function"
+      >test-put</a
+      ><a name="4042"
+      > </a
+      ><a name="4043" class="Symbol"
+      >=</a
+      ><a name="4044"
+      > </a
+      ><a name="4045" href="BiGUL.Partiality.html#942" class="Function"
+      >runPar</a
+      ><a name="4051"
+      > </a
+      ><a name="4052" class="Symbol"
+      >(</a
+      ><a name="4053" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="4061"
+      > </a
+      ><a name="4062" class="Symbol"
+      >(</a
+      ><a name="4063" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4069"
+      > </a
+      ><a name="4070" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="4076"
+      > </a
+      ><a name="4077" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="4095"
+      > </a
+      ><a name="4096" href="BiGUL.TransatlanticCorporation.html#2751" class="Function"
+      >relocate-employees-CompleteExpr</a
+      ><a name="4127" class="Symbol"
+      >)</a
+      ><a name="4128"
+      > </a
+      ><a name="4129" href="BiGUL.TransatlanticCorporation.html#2938" class="Function"
+      >employees</a
+      ><a name="4138"
+      > </a
+      ><a name="4139" href="BiGUL.TransatlanticCorporation.html#3258" class="Function"
+      >locations</a
+      ><a name="4148" class="Symbol"
+      >)</a
+      ><a name="4149"
+      >
+
+</a
+      ><a name="4151" href="BiGUL.TransatlanticCorporation.html#4151" class="Function"
+      >test-put'</a
+      ><a name="4160"
+      > </a
+      ><a name="4161" class="Symbol"
+      >:</a
+      ><a name="4162"
+      > </a
+      ><a name="4163" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="4168"
+      > </a
+      ><a name="4169" class="Symbol"
+      >(</a
+      ><a name="4170" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="4171"
+      > </a
+      ><a name="4172" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="4176"
+      > </a
+      ><a name="4177" href="BiGUL.TransatlanticCorporation.html#1015" class="Function"
+      >Employee</a
+      ><a name="4185"
+      > </a
+      ><a name="4186" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="4187"
+      > </a
+      ><a name="4188" href="BiGUL.TransatlanticCorporation.html#1203" class="Function"
+      >emptyTEnv</a
+      ><a name="4197" class="Symbol"
+      >)</a
+      ><a name="4198"
+      >
+</a
+      ><a name="4199" href="BiGUL.TransatlanticCorporation.html#4151" class="Function"
+      >test-put'</a
+      ><a name="4208"
+      > </a
+      ><a name="4209" class="Symbol"
+      >=</a
+      ><a name="4210"
+      > </a
+      ><a name="4211" href="BiGUL.Partiality.html#942" class="Function"
+      >runPar</a
+      ><a name="4217"
+      > </a
+      ><a name="4218" class="Symbol"
+      >(</a
+      ><a name="4219" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="4227"
+      > </a
+      ><a name="4228" class="Symbol"
+      >(</a
+      ><a name="4229" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4235"
+      > </a
+      ><a name="4236" href="BiGUL.TransatlanticCorporation.html#1173" class="Function"
+      >emptyF</a
+      ><a name="4242"
+      > </a
+      ><a name="4243" href="BiGUL.TransatlanticCorporation.html#2299" class="Function"
+      >relocate-employees</a
+      ><a name="4261"
+      > </a
+      ><a name="4262" href="BiGUL.TransatlanticCorporation.html#2751" class="Function"
+      >relocate-employees-CompleteExpr</a
+      ><a name="4293" class="Symbol"
+      >)</a
+      ><a name="4294"
+      > </a
+      ><a name="4295" href="BiGUL.TransatlanticCorporation.html#2938" class="Function"
+      >employees</a
+      ><a name="4304"
+      > </a
+      ><a name="4305" href="BiGUL.TransatlanticCorporation.html#3544" class="Function"
+      >locations'</a
+      ><a name="4315" class="Symbol"
+      >)</a
+      ><a name="4316"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

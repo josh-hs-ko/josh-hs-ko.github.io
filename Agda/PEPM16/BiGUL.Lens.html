@@ -1,0 +1,2857 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >BiGUL.Lens</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Basic definitions of lenses and the uniqueness lemma (put uniquely determines get).</a
+      ><a name="87"
+      >
+
+</a
+      ><a name="89" class="Keyword"
+      >module</a
+      ><a name="95"
+      > </a
+      ><a name="96" href="BiGUL.Lens.html#1" class="Module"
+      >BiGUL.Lens</a
+      ><a name="106"
+      > </a
+      ><a name="107" class="Keyword"
+      >where</a
+      ><a name="112"
+      >
+
+</a
+      ><a name="114" class="Keyword"
+      >open</a
+      ><a name="118"
+      > </a
+      ><a name="119" class="Keyword"
+      >import</a
+      ><a name="125"
+      > </a
+      ><a name="126" href="BiGUL.Partiality.html#1" class="Module"
+      >BiGUL.Partiality</a
+      ><a name="142"
+      >
+</a
+      ><a name="143" class="Keyword"
+      >open</a
+      ><a name="147"
+      > </a
+      ><a name="148" class="Keyword"
+      >import</a
+      ><a name="154"
+      > </a
+      ><a name="155" href="BiGUL.Utilities.html#1" class="Module"
+      >BiGUL.Utilities</a
+      ><a name="170"
+      >
+
+</a
+      ><a name="172" class="Keyword"
+      >open</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Keyword"
+      >import</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="192"
+      >
+</a
+      ><a name="193" class="Keyword"
+      >open</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Keyword"
+      >import</a
+      ><a name="204"
+      > </a
+      ><a name="205" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="217"
+      >
+</a
+      ><a name="218" class="Keyword"
+      >open</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Keyword"
+      >import</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="267"
+      >
+
+
+</a
+      ><a name="270" class="Keyword"
+      >record</a
+      ><a name="276"
+      > </a
+      ><a name="277" href="BiGUL.Lens.html#277" class="Record"
+      >Lens</a
+      ><a name="281"
+      > </a
+      ><a name="282" class="Symbol"
+      >(</a
+      ><a name="283" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="284"
+      > </a
+      ><a name="285" href="BiGUL.Lens.html#285" class="Bound"
+      >V</a
+      ><a name="286"
+      > </a
+      ><a name="287" class="Symbol"
+      >:</a
+      ><a name="288"
+      > </a
+      ><a name="289" class="PrimitiveType"
+      >Set</a
+      ><a name="292" class="Symbol"
+      >)</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Symbol"
+      >:</a
+      ><a name="295"
+      > </a
+      ><a name="296" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Keyword"
+      >where</a
+      ><a name="306"
+      >
+  </a
+      ><a name="309" class="Keyword"
+      >field</a
+      ><a name="314"
+      >
+    </a
+      ><a name="319" href="BiGUL.Lens.html#319" class="Field"
+      >put</a
+      ><a name="322"
+      > </a
+      ><a name="323" class="Symbol"
+      >:</a
+      ><a name="324"
+      > </a
+      ><a name="325" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="326"
+      > </a
+      ><a name="327" class="Symbol"
+      >&#8594;</a
+      ><a name="328"
+      > </a
+      ><a name="329" href="BiGUL.Lens.html#285" class="Bound"
+      >V</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >&#8594;</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="336"
+      > </a
+      ><a name="337" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="338"
+      >
+    </a
+      ><a name="343" href="BiGUL.Lens.html#343" class="Field"
+      >get</a
+      ><a name="346"
+      > </a
+      ><a name="347" class="Symbol"
+      >:</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="350"
+      > </a
+      ><a name="351" class="Symbol"
+      >&#8594;</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="356"
+      > </a
+      ><a name="357" href="BiGUL.Lens.html#285" class="Bound"
+      >V</a
+      ><a name="358"
+      >
+    </a
+      ><a name="363" href="BiGUL.Lens.html#363" class="Field"
+      >PutGet</a
+      ><a name="369"
+      > </a
+      ><a name="370" class="Symbol"
+      >:</a
+      ><a name="371"
+      > </a
+      ><a name="372" class="Symbol"
+      >{</a
+      ><a name="373" href="BiGUL.Lens.html#373" class="Bound"
+      >s</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="Symbol"
+      >:</a
+      ><a name="376"
+      > </a
+      ><a name="377" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="378" class="Symbol"
+      >}</a
+      ><a name="379"
+      > </a
+      ><a name="380" class="Symbol"
+      >{</a
+      ><a name="381" href="BiGUL.Lens.html#381" class="Bound"
+      >v</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >:</a
+      ><a name="384"
+      > </a
+      ><a name="385" href="BiGUL.Lens.html#285" class="Bound"
+      >V</a
+      ><a name="386" class="Symbol"
+      >}</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Symbol"
+      >{</a
+      ><a name="389" href="BiGUL.Lens.html#389" class="Bound"
+      >s'</a
+      ><a name="391"
+      > </a
+      ><a name="392" class="Symbol"
+      >:</a
+      ><a name="393"
+      > </a
+      ><a name="394" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="395" class="Symbol"
+      >}</a
+      ><a name="396"
+      > </a
+      ><a name="397" class="Symbol"
+      >&#8594;</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="BiGUL.Lens.html#319" class="Bound"
+      >put</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="BiGUL.Lens.html#373" class="Bound"
+      >s</a
+      ><a name="404"
+      > </a
+      ><a name="405" href="BiGUL.Lens.html#381" class="Bound"
+      >v</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="408"
+      > </a
+      ><a name="409" href="BiGUL.Lens.html#389" class="Bound"
+      >s'</a
+      ><a name="411"
+      > </a
+      ><a name="412" class="Symbol"
+      >&#8594;</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="BiGUL.Lens.html#343" class="Bound"
+      >get</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="BiGUL.Lens.html#389" class="Bound"
+      >s'</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="422"
+      > </a
+      ><a name="423" href="BiGUL.Lens.html#381" class="Bound"
+      >v</a
+      ><a name="424"
+      >
+    </a
+      ><a name="429" href="BiGUL.Lens.html#429" class="Field"
+      >GetPut</a
+      ><a name="435"
+      > </a
+      ><a name="436" class="Symbol"
+      >:</a
+      ><a name="437"
+      > </a
+      ><a name="438" class="Symbol"
+      >{</a
+      ><a name="439" href="BiGUL.Lens.html#439" class="Bound"
+      >s</a
+      ><a name="440"
+      > </a
+      ><a name="441" class="Symbol"
+      >:</a
+      ><a name="442"
+      > </a
+      ><a name="443" href="BiGUL.Lens.html#283" class="Bound"
+      >S</a
+      ><a name="444" class="Symbol"
+      >}</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >{</a
+      ><a name="447" href="BiGUL.Lens.html#447" class="Bound"
+      >v</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Symbol"
+      >:</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="BiGUL.Lens.html#285" class="Bound"
+      >V</a
+      ><a name="452" class="Symbol"
+      >}</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >&#8594;</a
+      ><a name="455"
+      > </a
+      ><a name="456" href="BiGUL.Lens.html#343" class="Bound"
+      >get</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="BiGUL.Lens.html#439" class="Bound"
+      >s</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="BiGUL.Lens.html#447" class="Bound"
+      >v</a
+      ><a name="465"
+      > </a
+      ><a name="466" class="Symbol"
+      >&#8594;</a
+      ><a name="467"
+      > </a
+      ><a name="468" href="BiGUL.Lens.html#319" class="Bound"
+      >put</a
+      ><a name="471"
+      > </a
+      ><a name="472" href="BiGUL.Lens.html#439" class="Bound"
+      >s</a
+      ><a name="473"
+      > </a
+      ><a name="474" href="BiGUL.Lens.html#447" class="Bound"
+      >v</a
+      ><a name="475"
+      > </a
+      ><a name="476" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="BiGUL.Lens.html#439" class="Bound"
+      >s</a
+      ><a name="479"
+      >
+
+</a
+      ><a name="481" class="Keyword"
+      >infix</a
+      ><a name="486"
+      > </a
+      ><a name="487" class="Number"
+      >1</a
+      ><a name="488"
+      > _&#8646;_
+
+</a
+      ><a name="494" href="BiGUL.Lens.html#494" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="497"
+      > </a
+      ><a name="498" class="Symbol"
+      >:</a
+      ><a name="499"
+      > </a
+      ><a name="500" class="PrimitiveType"
+      >Set</a
+      ><a name="503"
+      > </a
+      ><a name="504" class="Symbol"
+      >&#8594;</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="PrimitiveType"
+      >Set</a
+      ><a name="509"
+      > </a
+      ><a name="510" class="Symbol"
+      >&#8594;</a
+      ><a name="511"
+      > </a
+      ><a name="512" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="516"
+      >
+</a
+      ><a name="517" href="BiGUL.Lens.html#494" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="520"
+      > </a
+      ><a name="521" class="Symbol"
+      >=</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="BiGUL.Lens.html#277" class="Record"
+      >Lens</a
+      ><a name="527"
+      >
+
+</a
+      ><a name="529" href="BiGUL.Lens.html#529" class="Function Operator"
+      >_&#8828;&#7486;_</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >:</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >{</a
+      ><a name="537" href="BiGUL.Lens.html#537" class="Bound"
+      >A</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="Symbol"
+      >:</a
+      ><a name="540"
+      > </a
+      ><a name="541" class="PrimitiveType"
+      >Set</a
+      ><a name="544" class="Symbol"
+      >}</a
+      ><a name="545"
+      > </a
+      ><a name="546" class="Symbol"
+      >&#8594;</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="BiGUL.Lens.html#537" class="Bound"
+      >A</a
+      ><a name="553"
+      > </a
+      ><a name="554" class="Symbol"
+      >&#8594;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="559"
+      > </a
+      ><a name="560" href="BiGUL.Lens.html#537" class="Bound"
+      >A</a
+      ><a name="561"
+      > </a
+      ><a name="562" class="Symbol"
+      >&#8594;</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="568"
+      >
+</a
+      ><a name="569" href="BiGUL.Lens.html#569" class="Bound"
+      >mx</a
+      ><a name="571"
+      > </a
+      ><a name="572" href="BiGUL.Lens.html#529" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="574"
+      > </a
+      ><a name="575" href="BiGUL.Lens.html#575" class="Bound"
+      >my</a
+      ><a name="577"
+      > </a
+      ><a name="578" class="Symbol"
+      >=</a
+      ><a name="579"
+      > </a
+      ><a name="580" class="Symbol"
+      >&#8704;</a
+      ><a name="581"
+      > </a
+      ><a name="582" class="Symbol"
+      >{</a
+      ><a name="583" href="BiGUL.Lens.html#583" class="Bound"
+      >a</a
+      ><a name="584" class="Symbol"
+      >}</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Symbol"
+      >&#8594;</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="BiGUL.Lens.html#569" class="Bound"
+      >mx</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="BiGUL.Lens.html#583" class="Bound"
+      >a</a
+      ><a name="594"
+      > </a
+      ><a name="595" class="Symbol"
+      >&#8594;</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="BiGUL.Lens.html#575" class="Bound"
+      >my</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="601"
+      > </a
+      ><a name="602" href="BiGUL.Lens.html#583" class="Bound"
+      >a</a
+      ><a name="603"
+      >
+
+</a
+      ><a name="605" href="BiGUL.Lens.html#605" class="Function Operator"
+      >_&#8776;&#7486;_</a
+      ><a name="609"
+      > </a
+      ><a name="610" class="Symbol"
+      >:</a
+      ><a name="611"
+      > </a
+      ><a name="612" class="Symbol"
+      >{</a
+      ><a name="613" href="BiGUL.Lens.html#613" class="Bound"
+      >A</a
+      ><a name="614"
+      > </a
+      ><a name="615" class="Symbol"
+      >:</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="PrimitiveType"
+      >Set</a
+      ><a name="620" class="Symbol"
+      >}</a
+      ><a name="621"
+      > </a
+      ><a name="622" class="Symbol"
+      >&#8594;</a
+      ><a name="623"
+      > </a
+      ><a name="624" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="627"
+      > </a
+      ><a name="628" href="BiGUL.Lens.html#613" class="Bound"
+      >A</a
+      ><a name="629"
+      > </a
+      ><a name="630" class="Symbol"
+      >&#8594;</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="BiGUL.Lens.html#613" class="Bound"
+      >A</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Symbol"
+      >&#8594;</a
+      ><a name="639"
+      > </a
+      ><a name="640" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="644"
+      >
+</a
+      ><a name="645" href="BiGUL.Lens.html#645" class="Bound"
+      >mx</a
+      ><a name="647"
+      > </a
+      ><a name="648" href="BiGUL.Lens.html#605" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="650"
+      > </a
+      ><a name="651" href="BiGUL.Lens.html#651" class="Bound"
+      >my</a
+      ><a name="653"
+      > </a
+      ><a name="654" class="Symbol"
+      >=</a
+      ><a name="655"
+      > </a
+      ><a name="656" class="Symbol"
+      >(</a
+      ><a name="657" href="BiGUL.Lens.html#645" class="Bound"
+      >mx</a
+      ><a name="659"
+      > </a
+      ><a name="660" href="BiGUL.Lens.html#529" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="662"
+      > </a
+      ><a name="663" href="BiGUL.Lens.html#651" class="Bound"
+      >my</a
+      ><a name="665" class="Symbol"
+      >)</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="668"
+      > </a
+      ><a name="669" class="Symbol"
+      >(</a
+      ><a name="670" href="BiGUL.Lens.html#651" class="Bound"
+      >my</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="BiGUL.Lens.html#529" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="BiGUL.Lens.html#645" class="Bound"
+      >mx</a
+      ><a name="678" class="Symbol"
+      >)</a
+      ><a name="679"
+      >
+
+</a
+      ><a name="681" href="BiGUL.Lens.html#681" class="Function"
+      >uniqueness-lemma</a
+      ><a name="697"
+      > </a
+      ><a name="698" class="Symbol"
+      >:</a
+      ><a name="699"
+      > </a
+      ><a name="700" class="Symbol"
+      >{</a
+      ><a name="701" href="BiGUL.Lens.html#701" class="Bound"
+      >S</a
+      ><a name="702"
+      > </a
+      ><a name="703" href="BiGUL.Lens.html#703" class="Bound"
+      >V</a
+      ><a name="704"
+      > </a
+      ><a name="705" class="Symbol"
+      >:</a
+      ><a name="706"
+      > </a
+      ><a name="707" class="PrimitiveType"
+      >Set</a
+      ><a name="710" class="Symbol"
+      >}</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >(</a
+      ><a name="713" href="BiGUL.Lens.html#713" class="Bound"
+      >l</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="BiGUL.Lens.html#715" class="Bound"
+      >l'</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >:</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="BiGUL.Lens.html#701" class="Bound"
+      >S</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="BiGUL.Lens.html#703" class="Bound"
+      >V</a
+      ><a name="725" class="Symbol"
+      >)</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >{</a
+      ><a name="728" href="BiGUL.Lens.html#728" class="Bound"
+      >s</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >:</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="BiGUL.Lens.html#701" class="Bound"
+      >S</a
+      ><a name="733" class="Symbol"
+      >}</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >{</a
+      ><a name="736" href="BiGUL.Lens.html#736" class="Bound"
+      >v</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >:</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="BiGUL.Lens.html#703" class="Bound"
+      >V</a
+      ><a name="741" class="Symbol"
+      >}</a
+      ><a name="742"
+      > </a
+      ><a name="743" class="Symbol"
+      >&#8594;</a
+      ><a name="744"
+      >
+                   </a
+      ><a name="764" class="Symbol"
+      >({</a
+      ><a name="766" href="BiGUL.Lens.html#766" class="Bound"
+      >s</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >:</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="BiGUL.Lens.html#701" class="Bound"
+      >S</a
+      ><a name="771" class="Symbol"
+      >}</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Symbol"
+      >{</a
+      ><a name="774" href="BiGUL.Lens.html#774" class="Bound"
+      >v</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >:</a
+      ><a name="777"
+      > </a
+      ><a name="778" href="BiGUL.Lens.html#703" class="Bound"
+      >V</a
+      ><a name="779" class="Symbol"
+      >}</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >&#8594;</a
+      ><a name="782"
+      > </a
+      ><a name="783" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="BiGUL.Lens.html#713" class="Bound"
+      >l</a
+      ><a name="793"
+      > </a
+      ><a name="794" href="BiGUL.Lens.html#766" class="Bound"
+      >s</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="BiGUL.Lens.html#774" class="Bound"
+      >v</a
+      ><a name="797"
+      > </a
+      ><a name="798" href="BiGUL.Lens.html#529" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="800"
+      > </a
+      ><a name="801" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="809"
+      > </a
+      ><a name="810" href="BiGUL.Lens.html#715" class="Bound"
+      >l'</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="BiGUL.Lens.html#766" class="Bound"
+      >s</a
+      ><a name="814"
+      > </a
+      ><a name="815" href="BiGUL.Lens.html#774" class="Bound"
+      >v</a
+      ><a name="816" class="Symbol"
+      >)</a
+      ><a name="817"
+      > </a
+      ><a name="818" class="Symbol"
+      >&#8594;</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="828"
+      > </a
+      ><a name="829" href="BiGUL.Lens.html#713" class="Bound"
+      >l</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="BiGUL.Lens.html#728" class="Bound"
+      >s</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="834"
+      > </a
+      ><a name="835" href="BiGUL.Lens.html#736" class="Bound"
+      >v</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Symbol"
+      >&#8594;</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="BiGUL.Lens.html#715" class="Bound"
+      >l'</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="BiGUL.Lens.html#728" class="Bound"
+      >s</a
+      ><a name="852"
+      > </a
+      ><a name="853" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="BiGUL.Lens.html#736" class="Bound"
+      >v</a
+      ><a name="856"
+      >
+</a
+      ><a name="857" href="BiGUL.Lens.html#681" class="Function"
+      >uniqueness-lemma</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="BiGUL.Lens.html#874" class="Bound"
+      >l</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="BiGUL.Lens.html#876" class="Bound"
+      >l'</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="BiGUL.Lens.html#879" class="Bound"
+      >put-&#8828;</a
+      ><a name="884"
+      > </a
+      ><a name="885" class="Symbol"
+      >=</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="898"
+      > </a
+      ><a name="899" href="BiGUL.Lens.html#876" class="Bound"
+      >l'</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="BiGUL.Lens.html#879" class="Bound"
+      >put-&#8828;</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="923"
+      > </a
+      ><a name="924" href="BiGUL.Lens.html#874" class="Bound"
+      >l</a
+      ><a name="925"
+      >
+
+</a
+      ><a name="927" href="BiGUL.Lens.html#927" class="Function"
+      >uniqueness</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >:</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >{</a
+      ><a name="941" href="BiGUL.Lens.html#941" class="Bound"
+      >S</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="BiGUL.Lens.html#943" class="Bound"
+      >V</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >:</a
+      ><a name="946"
+      > </a
+      ><a name="947" class="PrimitiveType"
+      >Set</a
+      ><a name="950" class="Symbol"
+      >}</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Symbol"
+      >(</a
+      ><a name="953" href="BiGUL.Lens.html#953" class="Bound"
+      >l</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="BiGUL.Lens.html#955" class="Bound"
+      >l'</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >:</a
+      ><a name="959"
+      > </a
+      ><a name="960" href="BiGUL.Lens.html#941" class="Bound"
+      >S</a
+      ><a name="961"
+      > </a
+      ><a name="962" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="963"
+      > </a
+      ><a name="964" href="BiGUL.Lens.html#943" class="Bound"
+      >V</a
+      ><a name="965" class="Symbol"
+      >)</a
+      ><a name="966"
+      > </a
+      ><a name="967" class="Symbol"
+      >&#8594;</a
+      ><a name="968"
+      >
+             </a
+      ><a name="982" class="Symbol"
+      >({</a
+      ><a name="984" href="BiGUL.Lens.html#984" class="Bound"
+      >s</a
+      ><a name="985"
+      > </a
+      ><a name="986" class="Symbol"
+      >:</a
+      ><a name="987"
+      > </a
+      ><a name="988" href="BiGUL.Lens.html#941" class="Bound"
+      >S</a
+      ><a name="989" class="Symbol"
+      >}</a
+      ><a name="990"
+      > </a
+      ><a name="991" class="Symbol"
+      >{</a
+      ><a name="992" href="BiGUL.Lens.html#992" class="Bound"
+      >v</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >:</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="BiGUL.Lens.html#943" class="Bound"
+      >V</a
+      ><a name="997" class="Symbol"
+      >}</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >&#8594;</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1009"
+      > </a
+      ><a name="1010" href="BiGUL.Lens.html#953" class="Bound"
+      >l</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" href="BiGUL.Lens.html#984" class="Bound"
+      >s</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" href="BiGUL.Lens.html#992" class="Bound"
+      >v</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="BiGUL.Lens.html#605" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1027"
+      > </a
+      ><a name="1028" href="BiGUL.Lens.html#955" class="Bound"
+      >l'</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" href="BiGUL.Lens.html#984" class="Bound"
+      >s</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="BiGUL.Lens.html#992" class="Bound"
+      >v</a
+      ><a name="1034" class="Symbol"
+      >)</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" class="Symbol"
+      >&#8594;</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Symbol"
+      >{</a
+      ><a name="1039" href="BiGUL.Lens.html#1039" class="Bound"
+      >s</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" class="Symbol"
+      >:</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" href="BiGUL.Lens.html#941" class="Bound"
+      >S</a
+      ><a name="1044" class="Symbol"
+      >}</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" class="Symbol"
+      >&#8594;</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" href="BiGUL.Lens.html#953" class="Bound"
+      >l</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" href="BiGUL.Lens.html#1039" class="Bound"
+      >s</a
+      ><a name="1060"
+      > </a
+      ><a name="1061" href="BiGUL.Lens.html#605" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1072"
+      > </a
+      ><a name="1073" href="BiGUL.Lens.html#955" class="Bound"
+      >l'</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="BiGUL.Lens.html#1039" class="Bound"
+      >s</a
+      ><a name="1077"
+      >
+</a
+      ><a name="1078" href="BiGUL.Lens.html#927" class="Function"
+      >uniqueness</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" href="BiGUL.Lens.html#1089" class="Bound"
+      >l</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" href="BiGUL.Lens.html#1091" class="Bound"
+      >l'</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="BiGUL.Lens.html#1094" class="Bound"
+      >put-eq</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" class="Symbol"
+      >=</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="BiGUL.Lens.html#681" class="Function"
+      >uniqueness-lemma</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="BiGUL.Lens.html#1089" class="Bound"
+      >l</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="BiGUL.Lens.html#1091" class="Bound"
+      >l'</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" class="Symbol"
+      >(</a
+      ><a name="1126" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="BiGUL.Lens.html#1094" class="Bound"
+      >put-eq</a
+      ><a name="1138" class="Symbol"
+      >)</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="BiGUL.Lens.html#681" class="Function"
+      >uniqueness-lemma</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="BiGUL.Lens.html#1091" class="Bound"
+      >l'</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="BiGUL.Lens.html#1089" class="Bound"
+      >l</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" class="Symbol"
+      >(</a
+      ><a name="1165" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" href="BiGUL.Lens.html#1094" class="Bound"
+      >put-eq</a
+      ><a name="1177" class="Symbol"
+      >)</a
+      ><a name="1178"
+      >
+
+</a
+      ><a name="1180" class="Keyword"
+      >infixr</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" class="Number"
+      >3</a
+      ><a name="1188"
+      > _&#8596;_
+
+</a
+      ><a name="1194" href="BiGUL.Lens.html#1194" class="Function Operator"
+      >_&#8596;_</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" class="Symbol"
+      >:</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >{</a
+      ><a name="1201" href="BiGUL.Lens.html#1201" class="Bound"
+      >A</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="BiGUL.Lens.html#1203" class="Bound"
+      >B</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="BiGUL.Lens.html#1205" class="Bound"
+      >C</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" class="Symbol"
+      >:</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" class="PrimitiveType"
+      >Set</a
+      ><a name="1212" class="Symbol"
+      >}</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >&#8594;</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="BiGUL.Lens.html#1201" class="Bound"
+      >A</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" href="BiGUL.Lens.html#1203" class="Bound"
+      >B</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" class="Symbol"
+      >&#8594;</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="BiGUL.Lens.html#1203" class="Bound"
+      >B</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="BiGUL.Lens.html#1205" class="Bound"
+      >C</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" class="Symbol"
+      >&#8594;</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="BiGUL.Lens.html#1201" class="Bound"
+      >A</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="BiGUL.Lens.html#1205" class="Bound"
+      >C</a
+      ><a name="1237"
+      >
+</a
+      ><a name="1238" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" href="BiGUL.Lens.html#1194" class="Function Operator"
+      >&#8596;</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="BiGUL.Lens.html#1242" class="Bound"
+      >r</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" class="Symbol"
+      >=</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" class="Keyword"
+      >record</a
+      ><a name="1252"
+      >
+  </a
+      ><a name="1255" class="Symbol"
+      >{</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" class="Field"
+      >put</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >=</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >&#955;</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="BiGUL.Lens.html#1265" class="Bound"
+      >a</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" href="BiGUL.Lens.html#1267" class="Bound"
+      >c</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" class="Symbol"
+      >&#8594;</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="BiGUL.Lens.html#1265" class="Bound"
+      >a</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="Symbol"
+      >&#955;</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="BiGUL.Lens.html#1290" class="Bound"
+      >b</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" class="Symbol"
+      >&#8594;</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" href="BiGUL.Lens.html#1242" class="Bound"
+      >r</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" href="BiGUL.Lens.html#1290" class="Bound"
+      >b</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="BiGUL.Lens.html#1267" class="Bound"
+      >c</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="BiGUL.Lens.html#1265" class="Bound"
+      >a</a
+      ><a name="1325"
+      >
+  </a
+      ><a name="1328" class="Symbol"
+      >;</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Field"
+      >get</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="Symbol"
+      >=</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="BiGUL.Lens.html#1242" class="Bound"
+      >r</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="BiGUL.Partiality.html#2025" class="Function Operator"
+      >&lt;=&lt;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1361"
+      >
+  </a
+      ><a name="1364" class="Symbol"
+      >;</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" class="Field"
+      >PutGet</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >=</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >&#955;</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >{</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" class="Symbol"
+      >(</a
+      ><a name="1380" href="BiGUL.Lens.html#1380" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="BiGUL.Lens.html#1394" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="BiGUL.Lens.html#1409" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="1422" class="Symbol"
+      >)</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" class="Symbol"
+      >&#8594;</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" href="BiGUL.Lens.html#1409" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" href="BiGUL.Lens.html#1242" class="Bound"
+      >r</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" href="BiGUL.Lens.html#1394" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Symbol"
+      >}</a
+      ><a name="1484"
+      >
+  </a
+      ><a name="1487" class="Symbol"
+      >;</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" class="Field"
+      >GetPut</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" class="Symbol"
+      >=</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >&#955;</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" class="Symbol"
+      >{</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" class="Symbol"
+      >(</a
+      ><a name="1503" href="BiGUL.Lens.html#1503" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" href="BiGUL.Lens.html#1517" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="1526" class="Symbol"
+      >)</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" class="Symbol"
+      >&#8594;</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" href="BiGUL.Lens.html#1503" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="BiGUL.Lens.html#1242" class="Bound"
+      >r</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="BiGUL.Lens.html#1517" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="BiGUL.Lens.html#1238" class="Bound"
+      >l</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="BiGUL.Lens.html#1503" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >}</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" class="Symbol"
+      >}</a
+      ><a name="1599"
+      >
+
+</a
+      ><a name="1601" href="BiGUL.Lens.html#1601" class="Function Operator"
+      >_&#9665;_</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" class="Symbol"
+      >:</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" class="Symbol"
+      >{</a
+      ><a name="1608" href="BiGUL.Lens.html#1608" class="Bound"
+      >A</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="BiGUL.Lens.html#1610" class="Bound"
+      >B</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" href="BiGUL.Lens.html#1612" class="Bound"
+      >C</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" class="Symbol"
+      >:</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="PrimitiveType"
+      >Set</a
+      ><a name="1619" class="Symbol"
+      >}</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" class="Symbol"
+      >&#8594;</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="BiGUL.Lens.html#1608" class="Bound"
+      >A</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" href="BiGUL.Lens.html#1610" class="Bound"
+      >B</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" class="Symbol"
+      >&#8594;</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" href="BiGUL.Lens.html#1610" class="Bound"
+      >B</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" href="BiGUL.Partiality.html#12312" class="Function Operator"
+      >&#8773;</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" href="BiGUL.Lens.html#1612" class="Bound"
+      >C</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >&#8594;</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" href="BiGUL.Lens.html#1608" class="Bound"
+      >A</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="BiGUL.Lens.html#1612" class="Bound"
+      >C</a
+      ><a name="1644"
+      >
+</a
+      ><a name="1645" href="BiGUL.Lens.html#1645" class="Bound"
+      >l</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" href="BiGUL.Lens.html#1601" class="Function Operator"
+      >&#9665;</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="BiGUL.Lens.html#1649" class="Bound"
+      >iso</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" class="Symbol"
+      >=</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" class="Keyword"
+      >record</a
+      ><a name="1661"
+      >
+  </a
+      ><a name="1664" class="Symbol"
+      >{</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" class="Field"
+      >put</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" class="Symbol"
+      >=</a
+      ><a name="1671"
+      > </a
+      ><a name="1672" class="Symbol"
+      >&#955;</a
+      ><a name="1673"
+      > </a
+      ><a name="1674" href="BiGUL.Lens.html#1674" class="Bound"
+      >a</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="BiGUL.Lens.html#1676" class="Bound"
+      >c</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" class="Symbol"
+      >&#8594;</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="BiGUL.Partiality.html#12157" class="Field"
+      >Iso.from</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" href="BiGUL.Lens.html#1649" class="Bound"
+      >iso</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" href="BiGUL.Lens.html#1676" class="Bound"
+      >c</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="BiGUL.Lens.html#1645" class="Bound"
+      >l</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="BiGUL.Lens.html#1674" class="Bound"
+      >a</a
+      ><a name="1711"
+      >
+  </a
+      ><a name="1714" class="Symbol"
+      >;</a
+      ><a name="1715"
+      > </a
+      ><a name="1716" class="Field"
+      >get</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" class="Symbol"
+      >=</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="BiGUL.Partiality.html#12136" class="Field"
+      >Iso.to</a
+      ><a name="1728"
+      > </a
+      ><a name="1729" href="BiGUL.Lens.html#1649" class="Bound"
+      >iso</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="BiGUL.Partiality.html#2025" class="Function Operator"
+      >&lt;=&lt;</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="BiGUL.Lens.html#1645" class="Bound"
+      >l</a
+      ><a name="1747"
+      >
+  </a
+      ><a name="1750" class="Symbol"
+      >;</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" class="Field"
+      >PutGet</a
+      ><a name="1758"
+      > </a
+      ><a name="1759" class="Symbol"
+      >=</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Symbol"
+      >&#955;</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" class="Symbol"
+      >{</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" class="Symbol"
+      >(</a
+      ><a name="1766" href="BiGUL.Lens.html#1766" class="Bound"
+      >from-v&#8614;v'</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1779"
+      > </a
+      ><a name="1780" href="BiGUL.Lens.html#1780" class="Bound"
+      >put-s-v'&#8614;s'</a
+      ><a name="1791" class="Symbol"
+      >)</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" class="Symbol"
+      >&#8594;</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="BiGUL.Lens.html#1645" class="Bound"
+      >l</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" href="BiGUL.Lens.html#1780" class="Bound"
+      >put-s-v'&#8614;s'</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="BiGUL.Partiality.html#12240" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" href="BiGUL.Lens.html#1649" class="Bound"
+      >iso</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="BiGUL.Lens.html#1766" class="Bound"
+      >from-v&#8614;v'</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" class="Symbol"
+      >}</a
+      ><a name="1860"
+      >
+  </a
+      ><a name="1863" class="Symbol"
+      >;</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Field"
+      >GetPut</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" class="Symbol"
+      >=</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Symbol"
+      >&#955;</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >{</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" class="Symbol"
+      >(</a
+      ><a name="1879" href="BiGUL.Lens.html#1879" class="Bound"
+      >get-s&#8614;v</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="BiGUL.Lens.html#1891" class="Bound"
+      >to-v&#8614;v'</a
+      ><a name="1898" class="Symbol"
+      >)</a
+      ><a name="1899"
+      > </a
+      ><a name="1900" class="Symbol"
+      >&#8594;</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" href="BiGUL.Partiality.html#12178" class="Field"
+      >Iso.to-from-inverse</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" href="BiGUL.Lens.html#1649" class="Bound"
+      >iso</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" href="BiGUL.Lens.html#1891" class="Bound"
+      >to-v&#8614;v'</a
+      ><a name="1933"
+      > </a
+      ><a name="1934" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" href="BiGUL.Lens.html#1645" class="Bound"
+      >l</a
+      ><a name="1951"
+      > </a
+      ><a name="1952" href="BiGUL.Lens.html#1879" class="Bound"
+      >get-s&#8614;v</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" class="Symbol"
+      >}</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >}</a
+      ><a name="1963"
+      > 
+
+</a
+      ><a name="1966" href="BiGUL.Lens.html#1966" class="Function Operator"
+      >_&#8597;_</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" class="Symbol"
+      >:</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >{</a
+      ><a name="1973" href="BiGUL.Lens.html#1973" class="Bound"
+      >A</a
+      ><a name="1974"
+      > </a
+      ><a name="1975" href="BiGUL.Lens.html#1975" class="Bound"
+      >B</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" href="BiGUL.Lens.html#1977" class="Bound"
+      >C</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="BiGUL.Lens.html#1979" class="Bound"
+      >D</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" class="Symbol"
+      >:</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="PrimitiveType"
+      >Set</a
+      ><a name="1986" class="Symbol"
+      >}</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" class="Symbol"
+      >&#8594;</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" href="BiGUL.Lens.html#1973" class="Bound"
+      >A</a
+      ><a name="1991"
+      > </a
+      ><a name="1992" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="BiGUL.Lens.html#1975" class="Bound"
+      >B</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" class="Symbol"
+      >&#8594;</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="BiGUL.Lens.html#1977" class="Bound"
+      >C</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" href="BiGUL.Lens.html#1979" class="Bound"
+      >D</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" class="Symbol"
+      >&#8594;</a
+      ><a name="2005"
+      > </a
+      ><a name="2006" href="BiGUL.Lens.html#1973" class="Bound"
+      >A</a
+      ><a name="2007"
+      > </a
+      ><a name="2008" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" href="BiGUL.Lens.html#1977" class="Bound"
+      >C</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="BiGUL.Lens.html#1975" class="Bound"
+      >B</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" href="BiGUL.Lens.html#1979" class="Bound"
+      >D</a
+      ><a name="2019"
+      >
+</a
+      ><a name="2020" href="BiGUL.Lens.html#2020" class="Bound"
+      >l</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" href="BiGUL.Lens.html#1966" class="Function Operator"
+      >&#8597;</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" href="BiGUL.Lens.html#2024" class="Bound"
+      >r</a
+      ><a name="2025"
+      > </a
+      ><a name="2026" class="Symbol"
+      >=</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" class="Keyword"
+      >record</a
+      ><a name="2034"
+      >
+  </a
+      ><a name="2037" class="Symbol"
+      >{</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Field"
+      >put</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" class="Symbol"
+      >=</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" class="Symbol"
+      >&#955;</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" class="Symbol"
+      >{</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" class="Symbol"
+      >(</a
+      ><a name="2050" href="BiGUL.Lens.html#2050" class="Bound"
+      >a</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2053"
+      > </a
+      ><a name="2054" href="BiGUL.Lens.html#2054" class="Bound"
+      >c</a
+      ><a name="2055" class="Symbol"
+      >)</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" class="Symbol"
+      >(</a
+      ><a name="2058" href="BiGUL.Lens.html#2058" class="Bound"
+      >b</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="BiGUL.Lens.html#2062" class="Bound"
+      >d</a
+      ><a name="2063" class="Symbol"
+      >)</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" class="Symbol"
+      >&#8594;</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="BiGUL.Partiality.html#2204" class="Function"
+      >liftPar&#8322;</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2079"
+      > </a
+      ><a name="2080" class="Symbol"
+      >(</a
+      ><a name="2081" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="BiGUL.Lens.html#2020" class="Bound"
+      >l</a
+      ><a name="2091"
+      > </a
+      ><a name="2092" href="BiGUL.Lens.html#2050" class="Bound"
+      >a</a
+      ><a name="2093"
+      > </a
+      ><a name="2094" href="BiGUL.Lens.html#2058" class="Bound"
+      >b</a
+      ><a name="2095" class="Symbol"
+      >)</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" class="Symbol"
+      >(</a
+      ><a name="2098" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="BiGUL.Lens.html#2024" class="Bound"
+      >r</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="BiGUL.Lens.html#2054" class="Bound"
+      >c</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="BiGUL.Lens.html#2062" class="Bound"
+      >d</a
+      ><a name="2112" class="Symbol"
+      >)</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" class="Symbol"
+      >}</a
+      ><a name="2115"
+      >
+  </a
+      ><a name="2118" class="Symbol"
+      >;</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Field"
+      >get</a
+      ><a name="2123"
+      > </a
+      ><a name="2124" class="Symbol"
+      >=</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" class="Symbol"
+      >&#955;</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" class="Symbol"
+      >{</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" class="Symbol"
+      >(</a
+      ><a name="2131" href="BiGUL.Lens.html#2131" class="Bound"
+      >a</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" href="BiGUL.Lens.html#2135" class="Bound"
+      >c</a
+      ><a name="2136" class="Symbol"
+      >)</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" class="Symbol"
+      >&#8594;</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" href="BiGUL.Partiality.html#2204" class="Function"
+      >liftPar&#8322;</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" class="Symbol"
+      >(</a
+      ><a name="2154" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" href="BiGUL.Lens.html#2020" class="Bound"
+      >l</a
+      ><a name="2164"
+      > </a
+      ><a name="2165" href="BiGUL.Lens.html#2131" class="Bound"
+      >a</a
+      ><a name="2166" class="Symbol"
+      >)</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" class="Symbol"
+      >(</a
+      ><a name="2169" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="BiGUL.Lens.html#2024" class="Bound"
+      >r</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="BiGUL.Lens.html#2135" class="Bound"
+      >c</a
+      ><a name="2181" class="Symbol"
+      >)</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" class="Symbol"
+      >}</a
+      ><a name="2184"
+      >
+  </a
+      ><a name="2187" class="Symbol"
+      >;</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" class="Field"
+      >PutGet</a
+      ><a name="2195"
+      > </a
+      ><a name="2196" class="Symbol"
+      >=</a
+      ><a name="2197"
+      > </a
+      ><a name="2198" class="Symbol"
+      >&#955;</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" class="Symbol"
+      >{</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" class="Symbol"
+      >(</a
+      ><a name="2203" href="BiGUL.Lens.html#2203" class="Bound"
+      >put-l&#8614;</a
+      ><a name="2209"
+      > </a
+      ><a name="2210" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" href="BiGUL.Lens.html#2214" class="Bound"
+      >put-r&#8614;</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2236" class="Symbol"
+      >)</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" class="Symbol"
+      >&#8594;</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" href="BiGUL.Lens.html#2020" class="Bound"
+      >l</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="BiGUL.Lens.html#2203" class="Bound"
+      >put-l&#8614;</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="2276"
+      > </a
+      ><a name="2277" href="BiGUL.Lens.html#2024" class="Bound"
+      >r</a
+      ><a name="2278"
+      > </a
+      ><a name="2279" href="BiGUL.Lens.html#2214" class="Bound"
+      >put-r&#8614;</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2296"
+      > </a
+      ><a name="2297" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" class="Symbol"
+      >}</a
+      ><a name="2303"
+      >
+  </a
+      ><a name="2306" class="Symbol"
+      >;</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Field"
+      >GetPut</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" class="Symbol"
+      >=</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >&#955;</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >{</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" class="Symbol"
+      >(</a
+      ><a name="2322" href="BiGUL.Lens.html#2322" class="Bound"
+      >get-l&#8614;</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="BiGUL.Lens.html#2333" class="Bound"
+      >get-r&#8614;</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2355" class="Symbol"
+      >)</a
+      ><a name="2356"
+      > </a
+      ><a name="2357" class="Symbol"
+      >&#8594;</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" href="BiGUL.Lens.html#2020" class="Bound"
+      >l</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" href="BiGUL.Lens.html#2322" class="Bound"
+      >get-l&#8614;</a
+      ><a name="2379"
+      > </a
+      ><a name="2380" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" href="BiGUL.Lens.html#2024" class="Bound"
+      >r</a
+      ><a name="2397"
+      > </a
+      ><a name="2398" href="BiGUL.Lens.html#2333" class="Bound"
+      >get-r&#8614;</a
+      ><a name="2404"
+      > </a
+      ><a name="2405" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" class="Symbol"
+      >}</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >}</a
+      ><a name="2424"
+      >
+
+</a
+      ><a name="2426" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="2434"
+      > </a
+      ><a name="2435" class="Symbol"
+      >:</a
+      ><a name="2436"
+      > </a
+      ><a name="2437" class="Symbol"
+      >{</a
+      ><a name="2438" href="BiGUL.Lens.html#2438" class="Bound"
+      >A</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="BiGUL.Lens.html#2440" class="Bound"
+      >B</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" class="Symbol"
+      >:</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="PrimitiveType"
+      >Set</a
+      ><a name="2447" class="Symbol"
+      >}</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" class="Symbol"
+      >&#8594;</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" href="BiGUL.Lens.html#2438" class="Bound"
+      >A</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" href="BiGUL.Partiality.html#12312" class="Function Operator"
+      >&#8773;</a
+      ><a name="2454"
+      > </a
+      ><a name="2455" href="BiGUL.Lens.html#2440" class="Bound"
+      >B</a
+      ><a name="2456"
+      > </a
+      ><a name="2457" class="Symbol"
+      >&#8594;</a
+      ><a name="2458"
+      > </a
+      ><a name="2459" href="BiGUL.Lens.html#2438" class="Bound"
+      >A</a
+      ><a name="2460"
+      > </a
+      ><a name="2461" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" href="BiGUL.Lens.html#2440" class="Bound"
+      >B</a
+      ><a name="2464"
+      >
+</a
+      ><a name="2465" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" href="BiGUL.Lens.html#2474" class="Bound"
+      >iso</a
+      ><a name="2477"
+      > </a
+      ><a name="2478" class="Symbol"
+      >=</a
+      ><a name="2479"
+      > </a
+      ><a name="2480" class="Keyword"
+      >record</a
+      ><a name="2486"
+      >
+  </a
+      ><a name="2489" class="Symbol"
+      >{</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" class="Field"
+      >put</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" class="Symbol"
+      >=</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" class="Symbol"
+      >(</a
+      ><a name="2504" href="BiGUL.Partiality.html#12157" class="Field"
+      >Iso.from</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" href="BiGUL.Lens.html#2474" class="Bound"
+      >iso</a
+      ><a name="2516" class="Symbol"
+      >)</a
+      ><a name="2517"
+      >
+  </a
+      ><a name="2520" class="Symbol"
+      >;</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" class="Field"
+      >get</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" class="Symbol"
+      >=</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="BiGUL.Partiality.html#12136" class="Field"
+      >Iso.to</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" href="BiGUL.Lens.html#2474" class="Bound"
+      >iso</a
+      ><a name="2538"
+      >
+  </a
+      ><a name="2541" class="Symbol"
+      >;</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" class="Field"
+      >PutGet</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >=</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="BiGUL.Partiality.html#12240" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" href="BiGUL.Lens.html#2474" class="Bound"
+      >iso</a
+      ><a name="2575"
+      >
+  </a
+      ><a name="2578" class="Symbol"
+      >;</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Field"
+      >GetPut</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" class="Symbol"
+      >=</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="BiGUL.Partiality.html#12178" class="Field"
+      >Iso.to-from-inverse</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="BiGUL.Lens.html#2474" class="Bound"
+      >iso</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" class="Symbol"
+      >}</a
+      ><a name="2614"
+      >
+
+</a
+      ><a name="2616" href="BiGUL.Lens.html#2616" class="Function"
+      >skip-lens</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" class="Symbol"
+      >:</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" class="Symbol"
+      >{</a
+      ><a name="2629" href="BiGUL.Lens.html#2629" class="Bound"
+      >S</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" class="Symbol"
+      >:</a
+      ><a name="2632"
+      > </a
+      ><a name="2633" class="PrimitiveType"
+      >Set</a
+      ><a name="2636" class="Symbol"
+      >}</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" class="Symbol"
+      >&#8594;</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" href="BiGUL.Lens.html#2629" class="Bound"
+      >S</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="2645"
+      >
+</a
+      ><a name="2646" href="BiGUL.Lens.html#2616" class="Function"
+      >skip-lens</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >=</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" class="Keyword"
+      >record</a
+      ><a name="2664"
+      >
+  </a
+      ><a name="2667" class="Symbol"
+      >{</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" class="Field"
+      >put</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" class="Symbol"
+      >=</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" class="Symbol"
+      >&#955;</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="BiGUL.Lens.html#2677" class="Bound"
+      >s</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" href="BiGUL.Lens.html#2679" class="Bound"
+      >_</a
+      ><a name="2680"
+      > </a
+      ><a name="2681" class="Symbol"
+      >&#8594;</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" href="BiGUL.Lens.html#2677" class="Bound"
+      >s</a
+      ><a name="2691"
+      >
+  </a
+      ><a name="2694" class="Symbol"
+      >;</a
+      ><a name="2695"
+      > </a
+      ><a name="2696" class="Field"
+      >get</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" class="Symbol"
+      >=</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" class="Symbol"
+      >&#955;</a
+      ><a name="2703"
+      > </a
+      ><a name="2704" href="BiGUL.Lens.html#2704" class="Bound"
+      >s</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" class="Symbol"
+      >&#8594;</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2717"
+      >
+  </a
+      ><a name="2720" class="Symbol"
+      >;</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" class="Field"
+      >PutGet</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >=</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" class="Symbol"
+      >&#955;</a
+      ><a name="2732"
+      > </a
+      ><a name="2733" class="Symbol"
+      >{</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >{</a
+      ><a name="2736" class="DottedPattern Symbol"
+      >._</a
+      ><a name="2738" class="Symbol"
+      >}</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" class="Symbol"
+      >(</a
+      ><a name="2741" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2747"
+      > </a
+      ><a name="2748" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2752" class="Symbol"
+      >)</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" class="Symbol"
+      >&#8594;</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2767"
+      > </a
+      ><a name="2768" class="Symbol"
+      >}</a
+      ><a name="2769"
+      >
+  </a
+      ><a name="2772" class="Symbol"
+      >;</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" class="Field"
+      >GetPut</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" class="Symbol"
+      >=</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >&#955;</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="BiGUL.Lens.html#2785" class="Bound"
+      >_</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" class="Symbol"
+      >&#8594;</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2795"
+      > </a
+      ><a name="2796" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >}</a
+      ><a name="2802"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

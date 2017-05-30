@@ -1,0 +1,1842 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >BiGUL.CompSeq</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- A simplified version of the monad reification trick presented in Section 2.</a
+      ><a name="79"
+      >
+
+</a
+      ><a name="81" class="Keyword"
+      >module</a
+      ><a name="87"
+      > </a
+      ><a name="88" href="BiGUL.CompSeq.html#1" class="Module"
+      >BiGUL.CompSeq</a
+      ><a name="101"
+      > </a
+      ><a name="102" class="Keyword"
+      >where</a
+      ><a name="107"
+      >
+
+</a
+      ><a name="109" class="Keyword"
+      >open</a
+      ><a name="113"
+      > </a
+      ><a name="114" class="Keyword"
+      >import</a
+      ><a name="120"
+      > </a
+      ><a name="121" href="BiGUL.Utilities.html#1" class="Module"
+      >BiGUL.Utilities</a
+      ><a name="136"
+      >
+</a
+      ><a name="137" class="Keyword"
+      >open</a
+      ><a name="141"
+      > </a
+      ><a name="142" class="Keyword"
+      >import</a
+      ><a name="148"
+      > </a
+      ><a name="149" href="BiGUL.Partiality.html#1" class="Module"
+      >BiGUL.Partiality</a
+      ><a name="165"
+      > </a
+      ><a name="166" class="Keyword"
+      >hiding</a
+      ><a name="172"
+      > </a
+      ><a name="173" class="Symbol"
+      >(</a
+      ><a name="174"
+      >_&#8614;_</a
+      ><a name="177" class="Symbol"
+      >)</a
+      ><a name="178"
+      >
+
+</a
+      ><a name="180" class="Keyword"
+      >open</a
+      ><a name="184"
+      > </a
+      ><a name="185" class="Keyword"
+      >import</a
+      ><a name="191"
+      > </a
+      ><a name="192" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="204"
+      >
+</a
+      ><a name="205" class="Keyword"
+      >open</a
+      ><a name="209"
+      > </a
+      ><a name="210" class="Keyword"
+      >import</a
+      ><a name="216"
+      > </a
+      ><a name="217" href="Data.Sum.html#1" class="Module"
+      >Data.Sum</a
+      ><a name="225"
+      >
+</a
+      ><a name="226" class="Keyword"
+      >open</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Keyword"
+      >import</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="247"
+      >
+</a
+      ><a name="248" class="Keyword"
+      >open</a
+      ><a name="252"
+      > </a
+      ><a name="253" class="Keyword"
+      >import</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="297"
+      >
+
+
+</a
+      ><a name="300" class="Keyword"
+      >infix</a
+      ><a name="305"
+      > </a
+      ><a name="306" class="Number"
+      >0</a
+      ><a name="307"
+      > _&#8614;_ _/&#8614;
+
+</a
+      ><a name="317" class="Keyword"
+      >mutual</a
+      ><a name="323"
+      >
+
+  </a
+      ><a name="327" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >_&#8614;_</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >:</a
+      ><a name="332"
+      > </a
+      ><a name="333" class="Symbol"
+      >{</a
+      ><a name="334" href="BiGUL.CompSeq.html#334" class="Bound"
+      >A</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Symbol"
+      >:</a
+      ><a name="337"
+      > </a
+      ><a name="338" class="PrimitiveType"
+      >Set</a
+      ><a name="341" class="Symbol"
+      >}</a
+      ><a name="342"
+      > </a
+      ><a name="343" class="Symbol"
+      >&#8594;</a
+      ><a name="344"
+      > </a
+      ><a name="345" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="BiGUL.CompSeq.html#334" class="Bound"
+      >A</a
+      ><a name="350"
+      > </a
+      ><a name="351" class="Symbol"
+      >&#8594;</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="BiGUL.CompSeq.html#334" class="Bound"
+      >A</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >&#8594;</a
+      ><a name="356"
+      > </a
+      ><a name="357" class="PrimitiveType"
+      >Set</a
+      ><a name="360"
+      >
+  </a
+      ><a name="363" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="369"
+      > </a
+      ><a name="370" href="BiGUL.CompSeq.html#370" class="Bound"
+      >x</a
+      ><a name="371"
+      >             </a
+      ><a name="384" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="BiGUL.CompSeq.html#386" class="Bound"
+      >x'</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >=</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="BiGUL.CompSeq.html#370" class="Bound"
+      >x</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="BiGUL.CompSeq.html#386" class="Bound"
+      >x'</a
+      ><a name="397"
+      >
+  </a
+      ><a name="400" href="BiGUL.CompSeq.html#400" class="Bound"
+      >mx</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="BiGUL.CompSeq.html#407" class="Bound"
+      >f</a
+      ><a name="408"
+      >             </a
+      ><a name="421" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="422"
+      > </a
+      ><a name="423" href="BiGUL.CompSeq.html#423" class="Bound"
+      >y</a
+      ><a name="424"
+      >  </a
+      ><a name="426" class="Symbol"
+      >=</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="Data.Product.html#823" class="Function"
+      >&#8707;</a
+      ><a name="429"
+      > </a
+      ><a name="430" class="Symbol"
+      >&#955;</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="BiGUL.CompSeq.html#432" class="Bound"
+      >x</a
+      ><a name="433"
+      > </a
+      ><a name="434" class="Symbol"
+      >&#8594;</a
+      ><a name="435"
+      > </a
+      ><a name="436" class="Symbol"
+      >(</a
+      ><a name="437" href="BiGUL.CompSeq.html#400" class="Bound"
+      >mx</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="BiGUL.CompSeq.html#432" class="Bound"
+      >x</a
+      ><a name="443" class="Symbol"
+      >)</a
+      ><a name="444"
+      > </a
+      ><a name="445" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Symbol"
+      >(</a
+      ><a name="448" href="BiGUL.CompSeq.html#407" class="Bound"
+      >f</a
+      ><a name="449"
+      > </a
+      ><a name="450" href="BiGUL.CompSeq.html#432" class="Bound"
+      >x</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="453"
+      > </a
+      ><a name="454" href="BiGUL.CompSeq.html#423" class="Bound"
+      >y</a
+      ><a name="455" class="Symbol"
+      >)</a
+      ><a name="456"
+      >
+  </a
+      ><a name="459" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="463"
+      >                 </a
+      ><a name="480" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="BiGUL.CompSeq.html#482" class="Bound"
+      >x</a
+      ><a name="483"
+      >  </a
+      ><a name="485" class="Symbol"
+      >=</a
+      ><a name="486"
+      > </a
+      ><a name="487" href="BiGUL.Utilities.html#366" class="Datatype"
+      >&#8869;</a
+      ><a name="488"
+      >
+  </a
+      ><a name="491" href="BiGUL.Partiality.html#760" class="InductiveConstructor"
+      >catch</a
+      ><a name="496"
+      > </a
+      ><a name="497" href="BiGUL.CompSeq.html#497" class="Bound"
+      >mx</a
+      ><a name="499"
+      > </a
+      ><a name="500" href="BiGUL.CompSeq.html#500" class="Bound"
+      >f</a
+      ><a name="501"
+      > </a
+      ><a name="502" href="BiGUL.CompSeq.html#502" class="Bound"
+      >my</a
+      ><a name="504"
+      >        </a
+      ><a name="512" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="513"
+      > </a
+      ><a name="514" href="BiGUL.CompSeq.html#514" class="Bound"
+      >y</a
+      ><a name="515"
+      >  </a
+      ><a name="517" class="Symbol"
+      >=</a
+      ><a name="518"
+      > </a
+      ><a name="519" class="Symbol"
+      >(</a
+      ><a name="520" href="Data.Product.html#823" class="Function"
+      >&#8707;</a
+      ><a name="521"
+      > </a
+      ><a name="522" class="Symbol"
+      >&#955;</a
+      ><a name="523"
+      > </a
+      ><a name="524" href="BiGUL.CompSeq.html#524" class="Bound"
+      >x</a
+      ><a name="525"
+      > </a
+      ><a name="526" class="Symbol"
+      >&#8594;</a
+      ><a name="527"
+      > </a
+      ><a name="528" class="Symbol"
+      >(</a
+      ><a name="529" href="BiGUL.CompSeq.html#497" class="Bound"
+      >mx</a
+      ><a name="531"
+      > </a
+      ><a name="532" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="533"
+      > </a
+      ><a name="534" href="BiGUL.CompSeq.html#524" class="Bound"
+      >x</a
+      ><a name="535" class="Symbol"
+      >)</a
+      ><a name="536"
+      > </a
+      ><a name="537" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="538"
+      > </a
+      ><a name="539" class="Symbol"
+      >(</a
+      ><a name="540" href="BiGUL.CompSeq.html#500" class="Bound"
+      >f</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="BiGUL.CompSeq.html#524" class="Bound"
+      >x</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="545"
+      > </a
+      ><a name="546" href="BiGUL.CompSeq.html#514" class="Bound"
+      >y</a
+      ><a name="547" class="Symbol"
+      >))</a
+      ><a name="549"
+      > </a
+      ><a name="550" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="551"
+      > </a
+      ><a name="552" class="Symbol"
+      >((</a
+      ><a name="554" href="BiGUL.CompSeq.html#497" class="Bound"
+      >mx</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="559" class="Symbol"
+      >)</a
+      ><a name="560"
+      > </a
+      ><a name="561" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="562"
+      > </a
+      ><a name="563" class="Symbol"
+      >(</a
+      ><a name="564" href="BiGUL.CompSeq.html#502" class="Bound"
+      >my</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="568"
+      > </a
+      ><a name="569" href="BiGUL.CompSeq.html#514" class="Bound"
+      >y</a
+      ><a name="570" class="Symbol"
+      >))</a
+      ><a name="572"
+      >
+  </a
+      ><a name="575" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >assert</a
+      ><a name="581"
+      >     </a
+      ><a name="586" href="BiGUL.CompSeq.html#586" class="Bound"
+      >b</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="BiGUL.CompSeq.html#593" class="Bound"
+      >mx</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="597"
+      > </a
+      ><a name="598" href="BiGUL.CompSeq.html#598" class="Bound"
+      >x</a
+      ><a name="599"
+      >  </a
+      ><a name="601" class="Symbol"
+      >=</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >(</a
+      ><a name="604" href="BiGUL.CompSeq.html#586" class="Bound"
+      >b</a
+      ><a name="605"
+      > </a
+      ><a name="606" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="612"
+      > </a
+      ><a name="613" class="Symbol"
+      >)</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="616"
+      > </a
+      ><a name="617" class="Symbol"
+      >(</a
+      ><a name="618" href="BiGUL.CompSeq.html#593" class="Bound"
+      >mx</a
+      ><a name="620"
+      > </a
+      ><a name="621" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="622"
+      > </a
+      ><a name="623" href="BiGUL.CompSeq.html#598" class="Bound"
+      >x</a
+      ><a name="624" class="Symbol"
+      >)</a
+      ><a name="625"
+      >   
+  </a
+      ><a name="631" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >assert-not</a
+      ><a name="641"
+      > </a
+      ><a name="642" href="BiGUL.CompSeq.html#642" class="Bound"
+      >b</a
+      ><a name="643"
+      > </a
+      ><a name="644" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="BiGUL.CompSeq.html#649" class="Bound"
+      >mx</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="BiGUL.CompSeq.html#654" class="Bound"
+      >x</a
+      ><a name="655"
+      >  </a
+      ><a name="657" class="Symbol"
+      >=</a
+      ><a name="658"
+      > </a
+      ><a name="659" class="Symbol"
+      >(</a
+      ><a name="660" href="BiGUL.CompSeq.html#642" class="Bound"
+      >b</a
+      ><a name="661"
+      > </a
+      ><a name="662" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="663"
+      > </a
+      ><a name="664" href="Data.Bool.Base.html#565" class="InductiveConstructor"
+      >false</a
+      ><a name="669" class="Symbol"
+      >)</a
+      ><a name="670"
+      > </a
+      ><a name="671" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="672"
+      > </a
+      ><a name="673" class="Symbol"
+      >(</a
+      ><a name="674" href="BiGUL.CompSeq.html#649" class="Bound"
+      >mx</a
+      ><a name="676"
+      > </a
+      ><a name="677" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="678"
+      > </a
+      ><a name="679" href="BiGUL.CompSeq.html#654" class="Bound"
+      >x</a
+      ><a name="680" class="Symbol"
+      >)</a
+      ><a name="681"
+      >   
+
+  </a
+      ><a name="688" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >_/&#8614;</a
+      ><a name="691"
+      > </a
+      ><a name="692" class="Symbol"
+      >:</a
+      ><a name="693"
+      > </a
+      ><a name="694" class="Symbol"
+      >{</a
+      ><a name="695" href="BiGUL.CompSeq.html#695" class="Bound"
+      >A</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >:</a
+      ><a name="698"
+      > </a
+      ><a name="699" class="PrimitiveType"
+      >Set</a
+      ><a name="702" class="Symbol"
+      >}</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="Symbol"
+      >&#8594;</a
+      ><a name="705"
+      > </a
+      ><a name="706" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="BiGUL.CompSeq.html#695" class="Bound"
+      >A</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >&#8594;</a
+      ><a name="713"
+      > </a
+      ><a name="714" class="PrimitiveType"
+      >Set</a
+      ><a name="717"
+      >
+  </a
+      ><a name="720" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="BiGUL.CompSeq.html#727" class="Bound"
+      >x</a
+      ><a name="728"
+      >             </a
+      ><a name="741" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="Symbol"
+      >=</a
+      ><a name="745"
+      > </a
+      ><a name="746" href="BiGUL.Utilities.html#366" class="Datatype"
+      >&#8869;</a
+      ><a name="747"
+      >
+  </a
+      ><a name="750" href="BiGUL.CompSeq.html#750" class="Bound"
+      >mx</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="756"
+      > </a
+      ><a name="757" href="BiGUL.CompSeq.html#757" class="Bound"
+      >f</a
+      ><a name="758"
+      >             </a
+      ><a name="771" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >=</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >(</a
+      ><a name="777" href="BiGUL.CompSeq.html#750" class="Bound"
+      >mx</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="782" class="Symbol"
+      >)</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="785"
+      > </a
+      ><a name="786" class="Symbol"
+      >(</a
+      ><a name="787" href="Data.Product.html#823" class="Function"
+      >&#8707;</a
+      ><a name="788"
+      > </a
+      ><a name="789" class="Symbol"
+      >&#955;</a
+      ><a name="790"
+      > </a
+      ><a name="791" href="BiGUL.CompSeq.html#791" class="Bound"
+      >x</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Symbol"
+      >&#8594;</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >(</a
+      ><a name="796" href="BiGUL.CompSeq.html#750" class="Bound"
+      >mx</a
+      ><a name="798"
+      > </a
+      ><a name="799" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="800"
+      > </a
+      ><a name="801" href="BiGUL.CompSeq.html#791" class="Bound"
+      >x</a
+      ><a name="802" class="Symbol"
+      >)</a
+      ><a name="803"
+      > </a
+      ><a name="804" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="805"
+      > </a
+      ><a name="806" class="Symbol"
+      >(</a
+      ><a name="807" href="BiGUL.CompSeq.html#757" class="Bound"
+      >f</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="BiGUL.CompSeq.html#791" class="Bound"
+      >x</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="813" class="Symbol"
+      >))</a
+      ><a name="815"
+      >
+  </a
+      ><a name="818" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="822"
+      >                 </a
+      ><a name="839" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="841"
+      > </a
+      ><a name="842" class="Symbol"
+      >=</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="845"
+      >
+  </a
+      ><a name="848" href="BiGUL.Partiality.html#760" class="InductiveConstructor"
+      >catch</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="BiGUL.CompSeq.html#854" class="Bound"
+      >mx</a
+      ><a name="856"
+      > </a
+      ><a name="857" href="BiGUL.CompSeq.html#857" class="Bound"
+      >f</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="BiGUL.CompSeq.html#859" class="Bound"
+      >my</a
+      ><a name="861"
+      >        </a
+      ><a name="869" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >=</a
+      ><a name="873"
+      > </a
+      ><a name="874" class="Symbol"
+      >(</a
+      ><a name="875" href="Data.Product.html#823" class="Function"
+      >&#8707;</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >&#955;</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="BiGUL.CompSeq.html#879" class="Bound"
+      >x</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >&#8594;</a
+      ><a name="882"
+      > </a
+      ><a name="883" class="Symbol"
+      >(</a
+      ><a name="884" href="BiGUL.CompSeq.html#854" class="Bound"
+      >mx</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="BiGUL.CompSeq.html#879" class="Bound"
+      >x</a
+      ><a name="890" class="Symbol"
+      >)</a
+      ><a name="891"
+      > </a
+      ><a name="892" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="893"
+      > </a
+      ><a name="894" class="Symbol"
+      >(</a
+      ><a name="895" href="BiGUL.CompSeq.html#857" class="Bound"
+      >f</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="BiGUL.CompSeq.html#879" class="Bound"
+      >x</a
+      ><a name="898"
+      > </a
+      ><a name="899" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="901" class="Symbol"
+      >))</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="905"
+      > </a
+      ><a name="906" class="Symbol"
+      >((</a
+      ><a name="908" href="BiGUL.CompSeq.html#854" class="Bound"
+      >mx</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="913" class="Symbol"
+      >)</a
+      ><a name="914"
+      > </a
+      ><a name="915" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="916"
+      > </a
+      ><a name="917" class="Symbol"
+      >(</a
+      ><a name="918" href="BiGUL.CompSeq.html#859" class="Bound"
+      >my</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="923" class="Symbol"
+      >))</a
+      ><a name="925"
+      >
+  </a
+      ><a name="928" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >assert</a
+      ><a name="934"
+      >     </a
+      ><a name="939" href="BiGUL.CompSeq.html#939" class="Bound"
+      >b</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="BiGUL.CompSeq.html#946" class="Bound"
+      >mx</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Symbol"
+      >=</a
+      ><a name="953"
+      > </a
+      ><a name="954" class="Symbol"
+      >(</a
+      ><a name="955" href="BiGUL.CompSeq.html#939" class="Bound"
+      >b</a
+      ><a name="956"
+      > </a
+      ><a name="957" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="958"
+      > </a
+      ><a name="959" href="Data.Bool.Base.html#565" class="InductiveConstructor"
+      >false</a
+      ><a name="964" class="Symbol"
+      >)</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="967"
+      > </a
+      ><a name="968" class="Symbol"
+      >((</a
+      ><a name="970" href="BiGUL.CompSeq.html#939" class="Bound"
+      >b</a
+      ><a name="971"
+      > </a
+      ><a name="972" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="978"
+      > </a
+      ><a name="979" class="Symbol"
+      >)</a
+      ><a name="980"
+      > </a
+      ><a name="981" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="982"
+      > </a
+      ><a name="983" class="Symbol"
+      >(</a
+      ><a name="984" href="BiGUL.CompSeq.html#946" class="Bound"
+      >mx</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="989" class="Symbol"
+      >))</a
+      ><a name="991"
+      >
+  </a
+      ><a name="994" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >assert-not</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="BiGUL.CompSeq.html#1005" class="Bound"
+      >b</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" href="BiGUL.CompSeq.html#1012" class="Bound"
+      >mx</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >=</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" class="Symbol"
+      >(</a
+      ><a name="1021" href="BiGUL.CompSeq.html#1005" class="Bound"
+      >b</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="1029"
+      > </a
+      ><a name="1030" class="Symbol"
+      >)</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" href="Data.Sum.html#433" class="Datatype Operator"
+      >&#8846;</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" class="Symbol"
+      >((</a
+      ><a name="1036" href="BiGUL.CompSeq.html#1005" class="Bound"
+      >b</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="Relation.Binary.Core.html#4497" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" href="Data.Bool.Base.html#565" class="InductiveConstructor"
+      >false</a
+      ><a name="1045" class="Symbol"
+      >)</a
+      ><a name="1046"
+      > </a
+      ><a name="1047" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >(</a
+      ><a name="1050" href="BiGUL.CompSeq.html#1012" class="Bound"
+      >mx</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="BiGUL.CompSeq.html#688" class="Function Operator"
+      >/&#8614;</a
+      ><a name="1055" class="Symbol"
+      >))</a
+      ><a name="1057"
+      >
+
+</a
+      ><a name="1059" class="Keyword"
+      >record</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="BiGUL.CompSeq.html#1066" class="Record"
+      >Lens</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >(</a
+      ><a name="1072" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="BiGUL.CompSeq.html#1074" class="Bound"
+      >V</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" class="Symbol"
+      >:</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="PrimitiveType"
+      >Set</a
+      ><a name="1081" class="Symbol"
+      >)</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >:</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Keyword"
+      >where</a
+      ><a name="1095"
+      >
+  </a
+      ><a name="1098" class="Keyword"
+      >field</a
+      ><a name="1103"
+      >
+    </a
+      ><a name="1108" href="BiGUL.CompSeq.html#1108" class="Field"
+      >put</a
+      ><a name="1111"
+      >  </a
+      ><a name="1113" class="Symbol"
+      >:</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" class="Symbol"
+      >&#8594;</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="BiGUL.CompSeq.html#1074" class="Bound"
+      >V</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" class="Symbol"
+      >&#8594;</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1128"
+      >
+    </a
+      ><a name="1133" href="BiGUL.CompSeq.html#1133" class="Field"
+      >get</a
+      ><a name="1136"
+      >  </a
+      ><a name="1138" class="Symbol"
+      >:</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="Symbol"
+      >&#8594;</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="BiGUL.CompSeq.html#1074" class="Bound"
+      >V</a
+      ><a name="1149"
+      >
+    </a
+      ><a name="1154" href="BiGUL.CompSeq.html#1154" class="Field"
+      >PutGet</a
+      ><a name="1160"
+      >  </a
+      ><a name="1162" class="Symbol"
+      >:</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" class="Symbol"
+      >{</a
+      ><a name="1165" href="BiGUL.CompSeq.html#1165" class="Bound"
+      >s</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="BiGUL.CompSeq.html#1167" class="Bound"
+      >s'</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" class="Symbol"
+      >:</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1173" class="Symbol"
+      >}</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" class="Symbol"
+      >{</a
+      ><a name="1176" href="BiGUL.CompSeq.html#1176" class="Bound"
+      >v</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" class="Symbol"
+      >:</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="BiGUL.CompSeq.html#1074" class="Bound"
+      >V</a
+      ><a name="1181" class="Symbol"
+      >}</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" class="Symbol"
+      >&#8594;</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" class="Symbol"
+      >(</a
+      ><a name="1186" href="BiGUL.CompSeq.html#1108" class="Bound"
+      >put</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" href="BiGUL.CompSeq.html#1165" class="Bound"
+      >s</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="BiGUL.CompSeq.html#1176" class="Bound"
+      >v</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="BiGUL.CompSeq.html#1167" class="Bound"
+      >s'</a
+      ><a name="1198" class="Symbol"
+      >)</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >&#8594;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" class="Symbol"
+      >(</a
+      ><a name="1203" href="BiGUL.CompSeq.html#1133" class="Bound"
+      >get</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" href="BiGUL.CompSeq.html#1167" class="Bound"
+      >s'</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" href="BiGUL.CompSeq.html#1176" class="Bound"
+      >v</a
+      ><a name="1213" class="Symbol"
+      >)</a
+      ><a name="1214"
+      >
+    </a
+      ><a name="1219" href="BiGUL.CompSeq.html#1219" class="Field"
+      >GetPut</a
+      ><a name="1225"
+      >  </a
+      ><a name="1227" class="Symbol"
+      >:</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" class="Symbol"
+      >{</a
+      ><a name="1230" href="BiGUL.CompSeq.html#1230" class="Bound"
+      >s</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" class="Symbol"
+      >:</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" href="BiGUL.CompSeq.html#1072" class="Bound"
+      >S</a
+      ><a name="1235" class="Symbol"
+      >}</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" class="Symbol"
+      >{</a
+      ><a name="1238" href="BiGUL.CompSeq.html#1238" class="Bound"
+      >v</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >:</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="BiGUL.CompSeq.html#1074" class="Bound"
+      >V</a
+      ><a name="1243" class="Symbol"
+      >}</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" class="Symbol"
+      >&#8594;</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Symbol"
+      >(</a
+      ><a name="1248" href="BiGUL.CompSeq.html#1133" class="Bound"
+      >get</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="BiGUL.CompSeq.html#1230" class="Bound"
+      >s</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" href="BiGUL.CompSeq.html#1238" class="Bound"
+      >v</a
+      ><a name="1257" class="Symbol"
+      >)</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >&#8594;</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" class="Symbol"
+      >(</a
+      ><a name="1262" href="BiGUL.CompSeq.html#1108" class="Bound"
+      >put</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="BiGUL.CompSeq.html#1230" class="Bound"
+      >s</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="BiGUL.CompSeq.html#1238" class="Bound"
+      >v</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="BiGUL.CompSeq.html#327" class="Function Operator"
+      >&#8614;</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="BiGUL.CompSeq.html#1230" class="Bound"
+      >s</a
+      ><a name="1273" class="Symbol"
+      >)</a
+      ><a name="1274"
+      >
+
+</a
+      ><a name="1276" href="BiGUL.CompSeq.html#1276" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" class="Symbol"
+      >:</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" class="PrimitiveType"
+      >Set</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" class="Symbol"
+      >&#8594;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="PrimitiveType"
+      >Set</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" class="Symbol"
+      >&#8594;</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1298"
+      >
+</a
+      ><a name="1299" href="BiGUL.CompSeq.html#1299" class="Bound"
+      >S</a
+      ><a name="1300"
+      > </a
+      ><a name="1301" href="BiGUL.CompSeq.html#1276" class="Function Operator"
+      >&#8646;</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" href="BiGUL.CompSeq.html#1303" class="Bound"
+      >V</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Symbol"
+      >=</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" href="BiGUL.CompSeq.html#1066" class="Record"
+      >Lens</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" href="BiGUL.CompSeq.html#1299" class="Bound"
+      >S</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="BiGUL.CompSeq.html#1303" class="Bound"
+      >V</a
+      ><a name="1315"
+      >
+
+</a
+      ><a name="1317" href="BiGUL.CompSeq.html#1317" class="Function Operator"
+      >_&#8596;_</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" class="Symbol"
+      >:</a
+      ><a name="1322"
+      > </a
+      ><a name="1323" class="Symbol"
+      >{</a
+      ><a name="1324" href="BiGUL.CompSeq.html#1324" class="Bound"
+      >A</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="BiGUL.CompSeq.html#1326" class="Bound"
+      >B</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="BiGUL.CompSeq.html#1328" class="Bound"
+      >C</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Symbol"
+      >:</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" class="PrimitiveType"
+      >Set</a
+      ><a name="1335" class="Symbol"
+      >}</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" class="Symbol"
+      >&#8594;</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="BiGUL.CompSeq.html#1324" class="Bound"
+      >A</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="BiGUL.CompSeq.html#1276" class="Function Operator"
+      >&#8646;</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" href="BiGUL.CompSeq.html#1326" class="Bound"
+      >B</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" class="Symbol"
+      >&#8594;</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="BiGUL.CompSeq.html#1326" class="Bound"
+      >B</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="BiGUL.CompSeq.html#1276" class="Function Operator"
+      >&#8646;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="BiGUL.CompSeq.html#1328" class="Bound"
+      >C</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" class="Symbol"
+      >&#8594;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="BiGUL.CompSeq.html#1324" class="Bound"
+      >A</a
+      ><a name="1356"
+      > </a
+      ><a name="1357" href="BiGUL.CompSeq.html#1276" class="Function Operator"
+      >&#8646;</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="BiGUL.CompSeq.html#1328" class="Bound"
+      >C</a
+      ><a name="1360"
+      >
+</a
+      ><a name="1361" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="BiGUL.CompSeq.html#1317" class="Function Operator"
+      >&#8596;</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="BiGUL.CompSeq.html#1365" class="Bound"
+      >r</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >=</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" class="Keyword"
+      >record</a
+      ><a name="1375"
+      >
+  </a
+      ><a name="1378" class="Symbol"
+      >{</a
+      ><a name="1379"
+      >  </a
+      ><a name="1381" class="Field"
+      >put</a
+      ><a name="1384"
+      >  </a
+      ><a name="1386" class="Symbol"
+      >=</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >&#955;</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="BiGUL.CompSeq.html#1390" class="Bound"
+      >a</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" href="BiGUL.CompSeq.html#1392" class="Bound"
+      >c</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" class="Symbol"
+      >&#8594;</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" href="BiGUL.CompSeq.html#1133" class="Field"
+      >Lens.get</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" href="BiGUL.CompSeq.html#1390" class="Bound"
+      >a</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" class="Symbol"
+      >&#955;</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="BiGUL.CompSeq.html#1415" class="Bound"
+      >b</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >&#8594;</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" href="BiGUL.CompSeq.html#1108" class="Field"
+      >Lens.put</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" href="BiGUL.CompSeq.html#1365" class="Bound"
+      >r</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" href="BiGUL.CompSeq.html#1415" class="Bound"
+      >b</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="BiGUL.CompSeq.html#1392" class="Bound"
+      >c</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" href="BiGUL.CompSeq.html#1108" class="Field"
+      >Lens.put</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="BiGUL.CompSeq.html#1390" class="Bound"
+      >a</a
+      ><a name="1450"
+      >
+  </a
+      ><a name="1453" class="Symbol"
+      >;</a
+      ><a name="1454"
+      >  </a
+      ><a name="1456" class="Field"
+      >get</a
+      ><a name="1459"
+      >  </a
+      ><a name="1461" class="Symbol"
+      >=</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" class="Symbol"
+      >&#955;</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="BiGUL.CompSeq.html#1465" class="Bound"
+      >a</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >&#8594;</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="BiGUL.CompSeq.html#1133" class="Field"
+      >Lens.get</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="BiGUL.CompSeq.html#1465" class="Bound"
+      >a</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" href="BiGUL.CompSeq.html#1133" class="Field"
+      >Lens.get</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="BiGUL.CompSeq.html#1365" class="Bound"
+      >r</a
+      ><a name="1496"
+      >
+  </a
+      ><a name="1499" class="Symbol"
+      >;</a
+      ><a name="1500"
+      >  </a
+      ><a name="1502" class="Field"
+      >PutGet</a
+      ><a name="1508"
+      >  </a
+      ><a name="1510" class="Symbol"
+      >=</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >&#955;</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" class="Symbol"
+      >{</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >(</a
+      ><a name="1517" href="BiGUL.CompSeq.html#1517" class="Bound"
+      >b</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" href="BiGUL.CompSeq.html#1521" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="BiGUL.CompSeq.html#1533" class="Bound"
+      >b'</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" href="BiGUL.CompSeq.html#1538" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" href="BiGUL.CompSeq.html#1551" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="1564" class="Symbol"
+      >)</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" class="Symbol"
+      >&#8594;</a
+      ><a name="1567"
+      >
+                   </a
+      ><a name="1587" href="BiGUL.CompSeq.html#1533" class="Bound"
+      >b'</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="BiGUL.CompSeq.html#1154" class="Field"
+      >Lens.PutGet</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="BiGUL.CompSeq.html#1551" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="1619"
+      > </a
+      ><a name="1620" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" href="BiGUL.CompSeq.html#1154" class="Field"
+      >Lens.PutGet</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="BiGUL.CompSeq.html#1365" class="Bound"
+      >r</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" href="BiGUL.CompSeq.html#1538" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" class="Symbol"
+      >}</a
+      ><a name="1648"
+      >
+  </a
+      ><a name="1651" class="Symbol"
+      >;</a
+      ><a name="1652"
+      >  </a
+      ><a name="1654" class="Field"
+      >GetPut</a
+      ><a name="1660"
+      >  </a
+      ><a name="1662" class="Symbol"
+      >=</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" class="Symbol"
+      >&#955;</a
+      ><a name="1665"
+      > </a
+      ><a name="1666" class="Symbol"
+      >{</a
+      ><a name="1667"
+      > </a
+      ><a name="1668" class="Symbol"
+      >(</a
+      ><a name="1669" href="BiGUL.CompSeq.html#1669" class="Bound"
+      >b</a
+      ><a name="1670"
+      > </a
+      ><a name="1671" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" href="BiGUL.CompSeq.html#1673" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="BiGUL.CompSeq.html#1685" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="1694" class="Symbol"
+      >)</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" class="Symbol"
+      >&#8594;</a
+      ><a name="1697"
+      >
+                   </a
+      ><a name="1717" href="BiGUL.CompSeq.html#1669" class="Bound"
+      >b</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1720"
+      > </a
+      ><a name="1721" href="BiGUL.CompSeq.html#1673" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="BiGUL.CompSeq.html#1669" class="Bound"
+      >b</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="BiGUL.CompSeq.html#1219" class="Field"
+      >Lens.GetPut</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="BiGUL.CompSeq.html#1365" class="Bound"
+      >r</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="BiGUL.CompSeq.html#1685" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" href="BiGUL.CompSeq.html#1219" class="Field"
+      >Lens.GetPut</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="BiGUL.CompSeq.html#1361" class="Bound"
+      >l</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="BiGUL.CompSeq.html#1673" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="1786"
+      > </a
+      ><a name="1787" class="Symbol"
+      >}</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >}</a
+      ><a name="1790"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

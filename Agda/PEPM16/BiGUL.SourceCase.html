@@ -1,0 +1,3584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >BiGUL.SourceCase</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Source case analysis (Section 3.4).</a
+      ><a name="39"
+      >
+
+</a
+      ><a name="41" class="Keyword"
+      >module</a
+      ><a name="47"
+      > </a
+      ><a name="48" href="BiGUL.SourceCase.html#1" class="Module"
+      >BiGUL.SourceCase</a
+      ><a name="64"
+      > </a
+      ><a name="65" class="Symbol"
+      >(</a
+      ><a name="66" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="67"
+      > </a
+      ><a name="68" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="69"
+      > </a
+      ><a name="70" class="Symbol"
+      >:</a
+      ><a name="71"
+      > </a
+      ><a name="72" class="PrimitiveType"
+      >Set</a
+      ><a name="75" class="Symbol"
+      >)</a
+      ><a name="76"
+      > </a
+      ><a name="77" class="Keyword"
+      >where</a
+      ><a name="82"
+      >
+
+</a
+      ><a name="84" class="Keyword"
+      >open</a
+      ><a name="88"
+      > </a
+      ><a name="89" class="Keyword"
+      >import</a
+      ><a name="95"
+      > </a
+      ><a name="96" href="BiGUL.Utilities.html#1" class="Module"
+      >BiGUL.Utilities</a
+      ><a name="111"
+      >
+</a
+      ><a name="112" class="Keyword"
+      >open</a
+      ><a name="116"
+      > </a
+      ><a name="117" class="Keyword"
+      >import</a
+      ><a name="123"
+      > </a
+      ><a name="124" href="BiGUL.Partiality.html#1" class="Module"
+      >BiGUL.Partiality</a
+      ><a name="140"
+      >
+</a
+      ><a name="141" class="Keyword"
+      >open</a
+      ><a name="145"
+      > </a
+      ><a name="146" class="Keyword"
+      >import</a
+      ><a name="152"
+      > </a
+      ><a name="153" href="BiGUL.Lens.html#1" class="Module"
+      >BiGUL.Lens</a
+      ><a name="163"
+      >
+
+</a
+      ><a name="165" class="Keyword"
+      >open</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="Keyword"
+      >import</a
+      ><a name="176"
+      > </a
+      ><a name="177" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="182"
+      >
+</a
+      ><a name="183" class="Keyword"
+      >open</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="Keyword"
+      >import</a
+      ><a name="194"
+      > </a
+      ><a name="195" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="203"
+      >
+</a
+      ><a name="204" class="Keyword"
+      >open</a
+      ><a name="208"
+      > </a
+      ><a name="209" class="Keyword"
+      >import</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="225"
+      >
+</a
+      ><a name="226" class="Keyword"
+      >open</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Keyword"
+      >import</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="250"
+      >
+</a
+      ><a name="251" class="Keyword"
+      >open</a
+      ><a name="255"
+      > </a
+      ><a name="256" class="Keyword"
+      >import</a
+      ><a name="262"
+      > </a
+      ><a name="263" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="272"
+      >
+</a
+      ><a name="273" class="Keyword"
+      >open</a
+      ><a name="277"
+      > </a
+      ><a name="278" class="Keyword"
+      >import</a
+      ><a name="284"
+      > </a
+      ><a name="285" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="322"
+      >
+
+
+</a
+      ><a name="325" class="Keyword"
+      >data</a
+      ><a name="329"
+      > </a
+      ><a name="330" href="BiGUL.SourceCase.html#330" class="Datatype"
+      >BranchType</a
+      ><a name="340"
+      > </a
+      ><a name="341" class="Symbol"
+      >:</a
+      ><a name="342"
+      > </a
+      ><a name="343" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Keyword"
+      >where</a
+      ><a name="353"
+      >
+  </a
+      ><a name="356" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="362"
+      >   </a
+      ><a name="365" class="Symbol"
+      >:</a
+      ><a name="366"
+      > </a
+      ><a name="367" class="Symbol"
+      >(</a
+      ><a name="368" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="369"
+      > </a
+      ><a name="370" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="371"
+      > </a
+      ><a name="372" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="373" class="Symbol"
+      >)</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="Symbol"
+      >&#8594;</a
+      ><a name="376"
+      > </a
+      ><a name="377" href="BiGUL.SourceCase.html#330" class="Datatype"
+      >BranchType</a
+      ><a name="387"
+      >
+  </a
+      ><a name="390" href="BiGUL.SourceCase.html#390" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="398"
+      > </a
+      ><a name="399" class="Symbol"
+      >:</a
+      ><a name="400"
+      > </a
+      ><a name="401" class="Symbol"
+      >(</a
+      ><a name="402" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="403"
+      > </a
+      ><a name="404" class="Symbol"
+      >&#8594;</a
+      ><a name="405"
+      > </a
+      ><a name="406" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="409"
+      > </a
+      ><a name="410" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="411" class="Symbol"
+      >)</a
+      ><a name="412"
+      > </a
+      ><a name="413" class="Symbol"
+      >&#8594;</a
+      ><a name="414"
+      > </a
+      ><a name="415" href="BiGUL.SourceCase.html#330" class="Datatype"
+      >BranchType</a
+      ><a name="425"
+      >
+
+</a
+      ><a name="427" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="433"
+      > </a
+      ><a name="434" class="Symbol"
+      >:</a
+      ><a name="435"
+      > </a
+      ><a name="436" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="440"
+      >
+</a
+      ><a name="441" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="447"
+      > </a
+      ><a name="448" class="Symbol"
+      >=</a
+      ><a name="449"
+      > </a
+      ><a name="450" class="Symbol"
+      >(</a
+      ><a name="451" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="452"
+      > </a
+      ><a name="453" class="Symbol"
+      >&#8594;</a
+      ><a name="454"
+      > </a
+      ><a name="455" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="458"
+      > </a
+      ><a name="459" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="463" class="Symbol"
+      >)</a
+      ><a name="464"
+      > </a
+      ><a name="465" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="BiGUL.SourceCase.html#330" class="Datatype"
+      >BranchType</a
+      ><a name="477"
+      >
+
+</a
+      ><a name="479" href="BiGUL.SourceCase.html#479" class="Function"
+      >elimBranchType</a
+      ><a name="493"
+      > </a
+      ><a name="494" class="Symbol"
+      >:</a
+      ><a name="495"
+      > </a
+      ><a name="496" class="Symbol"
+      >{</a
+      ><a name="497" href="BiGUL.SourceCase.html#497" class="Bound"
+      >l</a
+      ><a name="498"
+      > </a
+      ><a name="499" class="Symbol"
+      >:</a
+      ><a name="500"
+      > </a
+      ><a name="501" href="Agda.Primitive.html#379" class="Postulate"
+      >Level</a
+      ><a name="506" class="Symbol"
+      >}</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="Symbol"
+      >{</a
+      ><a name="509" href="BiGUL.SourceCase.html#509" class="Bound"
+      >A</a
+      ><a name="510"
+      > </a
+      ><a name="511" class="Symbol"
+      >:</a
+      ><a name="512"
+      > </a
+      ><a name="513" class="PrimitiveType"
+      >Set</a
+      ><a name="516"
+      > </a
+      ><a name="517" href="BiGUL.SourceCase.html#497" class="Bound"
+      >l</a
+      ><a name="518" class="Symbol"
+      >}</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="Symbol"
+      >&#8594;</a
+      ><a name="521"
+      > </a
+      ><a name="522" class="Symbol"
+      >((</a
+      ><a name="524" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="525"
+      > </a
+      ><a name="526" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="529" class="Symbol"
+      >)</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >&#8594;</a
+      ><a name="532"
+      > </a
+      ><a name="533" href="BiGUL.SourceCase.html#509" class="Bound"
+      >A</a
+      ><a name="534" class="Symbol"
+      >)</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >&#8594;</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Symbol"
+      >((</a
+      ><a name="540" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >&#8594;</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="549" class="Symbol"
+      >)</a
+      ><a name="550"
+      > </a
+      ><a name="551" class="Symbol"
+      >&#8594;</a
+      ><a name="552"
+      > </a
+      ><a name="553" href="BiGUL.SourceCase.html#509" class="Bound"
+      >A</a
+      ><a name="554" class="Symbol"
+      >)</a
+      ><a name="555"
+      > </a
+      ><a name="556" class="Symbol"
+      >&#8594;</a
+      ><a name="557"
+      > </a
+      ><a name="558" href="BiGUL.SourceCase.html#330" class="Datatype"
+      >BranchType</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >&#8594;</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="BiGUL.SourceCase.html#509" class="Bound"
+      >A</a
+      ><a name="572"
+      >
+</a
+      ><a name="573" href="BiGUL.SourceCase.html#479" class="Function"
+      >elimBranchType</a
+      ><a name="587"
+      > </a
+      ><a name="588" href="BiGUL.SourceCase.html#588" class="Bound"
+      >f</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="BiGUL.SourceCase.html#590" class="Bound"
+      >g</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Symbol"
+      >(</a
+      ><a name="593" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="599"
+      >   </a
+      ><a name="602" href="BiGUL.SourceCase.html#602" class="Bound"
+      >l</a
+      ><a name="603" class="Symbol"
+      >)</a
+      ><a name="604"
+      > </a
+      ><a name="605" class="Symbol"
+      >=</a
+      ><a name="606"
+      > </a
+      ><a name="607" href="BiGUL.SourceCase.html#588" class="Bound"
+      >f</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="BiGUL.SourceCase.html#602" class="Bound"
+      >l</a
+      ><a name="610"
+      >
+</a
+      ><a name="611" href="BiGUL.SourceCase.html#479" class="Function"
+      >elimBranchType</a
+      ><a name="625"
+      > </a
+      ><a name="626" href="BiGUL.SourceCase.html#626" class="Bound"
+      >f</a
+      ><a name="627"
+      > </a
+      ><a name="628" href="BiGUL.SourceCase.html#628" class="Bound"
+      >g</a
+      ><a name="629"
+      > </a
+      ><a name="630" class="Symbol"
+      >(</a
+      ><a name="631" href="BiGUL.SourceCase.html#390" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="BiGUL.SourceCase.html#640" class="Bound"
+      >u</a
+      ><a name="641" class="Symbol"
+      >)</a
+      ><a name="642"
+      > </a
+      ><a name="643" class="Symbol"
+      >=</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="BiGUL.SourceCase.html#628" class="Bound"
+      >g</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="BiGUL.SourceCase.html#640" class="Bound"
+      >u</a
+      ><a name="648"
+      >
+
+</a
+      ><a name="650" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="665"
+      > </a
+      ><a name="666" class="Symbol"
+      >:</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >&#8594;</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="683"
+      > </a
+      ><a name="684" class="Symbol"
+      >&#8594;</a
+      ><a name="685"
+      > </a
+      ><a name="686" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="689"
+      > </a
+      ><a name="690" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="691"
+      >
+</a
+      ><a name="692" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="707"
+      > </a
+      ><a name="708" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="BiGUL.SourceCase.html#711" class="Bound"
+      >s</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >=</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="724"
+      >
+</a
+      ><a name="725" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="740"
+      > </a
+      ><a name="741" class="Symbol"
+      >((</a
+      ><a name="743" href="BiGUL.SourceCase.html#743" class="Bound"
+      >p</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="746"
+      > </a
+      ><a name="747" class="Symbol"
+      >_)</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="BiGUL.SourceCase.html#752" class="Bound"
+      >bs</a
+      ><a name="754" class="Symbol"
+      >)</a
+      ><a name="755"
+      > </a
+      ><a name="756" href="BiGUL.SourceCase.html#756" class="Bound"
+      >s</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >=</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="BiGUL.SourceCase.html#743" class="Bound"
+      >p</a
+      ><a name="761"
+      > </a
+      ><a name="762" href="BiGUL.SourceCase.html#756" class="Bound"
+      >s</a
+      ><a name="763"
+      > </a
+      ><a name="764" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >&#955;</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="BiGUL.SourceCase.html#770" class="Bound"
+      >b</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >&#8594;</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >assert-not</a
+      ><a name="784"
+      > </a
+      ><a name="785" href="BiGUL.SourceCase.html#770" class="Bound"
+      >b</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="BiGUL.Partiality.html#887" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="BiGUL.SourceCase.html#752" class="Bound"
+      >bs</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="BiGUL.SourceCase.html#756" class="Bound"
+      >s</a
+      ><a name="812"
+      >
+
+</a
+      ><a name="814" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="833"
+      > </a
+      ><a name="834" class="Symbol"
+      >:</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="847"
+      > </a
+      ><a name="848" class="Symbol"
+      >&#8594;</a
+      ><a name="849"
+      > </a
+      ><a name="850" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="861"
+      > </a
+      ><a name="862" class="Symbol"
+      >&#8594;</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >&#8594;</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >&#8594;</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >(</a
+      ><a name="873" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="874"
+      > </a
+      ><a name="875" class="Symbol"
+      >&#8594;</a
+      ><a name="876"
+      > </a
+      ><a name="877" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="880"
+      > </a
+      ><a name="881" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="882" class="Symbol"
+      >)</a
+      ><a name="883"
+      > </a
+      ><a name="884" class="Symbol"
+      >&#8594;</a
+      ><a name="885"
+      > </a
+      ><a name="886" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="891"
+      >
+</a
+      ><a name="892" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="914"
+      >              </a
+      ><a name="928" href="BiGUL.SourceCase.html#928" class="Bound"
+      >bs'</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="BiGUL.SourceCase.html#932" class="Bound"
+      >s</a
+      ><a name="933"
+      > </a
+      ><a name="934" href="BiGUL.SourceCase.html#934" class="Bound"
+      >v</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="BiGUL.SourceCase.html#936" class="Bound"
+      >f</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >=</a
+      ><a name="939"
+      > </a
+      ><a name="940" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="944"
+      >
+</a
+      ><a name="945" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="964"
+      > </a
+      ><a name="965" class="Symbol"
+      >((</a
+      ><a name="967" href="BiGUL.SourceCase.html#967" class="Bound"
+      >p</a
+      ><a name="968"
+      > </a
+      ><a name="969" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="970"
+      > </a
+      ><a name="971" href="BiGUL.SourceCase.html#971" class="Bound"
+      >bt</a
+      ><a name="973" class="Symbol"
+      >)</a
+      ><a name="974"
+      > </a
+      ><a name="975" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="976"
+      > </a
+      ><a name="977" href="BiGUL.SourceCase.html#977" class="Bound"
+      >bs</a
+      ><a name="979" class="Symbol"
+      >)</a
+      ><a name="980"
+      > </a
+      ><a name="981" href="BiGUL.SourceCase.html#981" class="Bound"
+      >bs'</a
+      ><a name="984"
+      > </a
+      ><a name="985" href="BiGUL.SourceCase.html#985" class="Bound"
+      >s</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="BiGUL.SourceCase.html#987" class="Bound"
+      >v</a
+      ><a name="988"
+      > </a
+      ><a name="989" href="BiGUL.SourceCase.html#989" class="Bound"
+      >f</a
+      ><a name="990"
+      > </a
+      ><a name="991" class="Symbol"
+      >=</a
+      ><a name="992"
+      >
+  </a
+      ><a name="995" href="BiGUL.SourceCase.html#967" class="Bound"
+      >p</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="BiGUL.SourceCase.html#985" class="Bound"
+      >s</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >&#955;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="BiGUL.SourceCase.html#1005" class="Bound"
+      >b</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" class="Symbol"
+      >&#8594;</a
+      ><a name="1008"
+      >
+  </a
+      ><a name="1011" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >if</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" href="BiGUL.SourceCase.html#1005" class="Bound"
+      >b</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >then</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" href="BiGUL.SourceCase.html#479" class="Function"
+      >elimBranchType</a
+      ><a name="1035"
+      >
+              </a
+      ><a name="1050" class="Symbol"
+      >(&#955;</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="BiGUL.SourceCase.html#1053" class="Bound"
+      >lens</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >&#8594;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="BiGUL.Lens.html#319" class="Field"
+      >Lens.put</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" href="BiGUL.SourceCase.html#1053" class="Bound"
+      >lens</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="BiGUL.SourceCase.html#985" class="Bound"
+      >s</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="BiGUL.SourceCase.html#987" class="Bound"
+      >v</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" class="Symbol"
+      >&#955;</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="BiGUL.SourceCase.html#1084" class="Bound"
+      >s'</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" class="Symbol"
+      >&#8594;</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" href="BiGUL.SourceCase.html#967" class="Bound"
+      >p</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" href="BiGUL.SourceCase.html#1084" class="Bound"
+      >s'</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" class="Symbol"
+      >&#955;</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="BiGUL.SourceCase.html#1100" class="Bound"
+      >b'</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" class="Symbol"
+      >&#8594;</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >assert</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" href="BiGUL.SourceCase.html#1100" class="Bound"
+      >b'</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="BiGUL.Partiality.html#831" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="BiGUL.SourceCase.html#981" class="Bound"
+      >bs'</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="BiGUL.SourceCase.html#1084" class="Bound"
+      >s'</a
+      ><a name="1142"
+      > </a
+      ><a name="1143" href="BiGUL.Partiality.html#1938" class="Function Operator"
+      >&gt;&gt;</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" href="BiGUL.Partiality.html#611" class="InductiveConstructor"
+      >return</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" href="BiGUL.SourceCase.html#1084" class="Bound"
+      >s'</a
+      ><a name="1155" class="Symbol"
+      >)</a
+      ><a name="1156"
+      >
+              </a
+      ><a name="1171" class="Symbol"
+      >(&#955;</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="BiGUL.SourceCase.html#1174" class="Bound"
+      >u</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" class="Symbol"
+      >&#8594;</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="BiGUL.SourceCase.html#1174" class="Bound"
+      >u</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="BiGUL.SourceCase.html#985" class="Bound"
+      >s</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" href="BiGUL.SourceCase.html#989" class="Bound"
+      >f</a
+      ><a name="1187" class="Symbol"
+      >)</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="BiGUL.SourceCase.html#971" class="Bound"
+      >bt</a
+      ><a name="1191"
+      >
+       </a
+      ><a name="1199" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >else</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="BiGUL.SourceCase.html#977" class="Bound"
+      >bs</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >((</a
+      ><a name="1229" href="BiGUL.SourceCase.html#967" class="Bound"
+      >p</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="BiGUL.SourceCase.html#971" class="Bound"
+      >bt</a
+      ><a name="1235" class="Symbol"
+      >)</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="BiGUL.SourceCase.html#981" class="Bound"
+      >bs'</a
+      ><a name="1242" class="Symbol"
+      >)</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" href="BiGUL.SourceCase.html#985" class="Bound"
+      >s</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" href="BiGUL.SourceCase.html#987" class="Bound"
+      >v</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="BiGUL.SourceCase.html#989" class="Bound"
+      >f</a
+      ><a name="1249"
+      >
+
+</a
+      ><a name="1251" href="BiGUL.SourceCase.html#1251" class="Function"
+      >put</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >:</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1261"
+      > </a
+      ><a name="1262" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" class="Symbol"
+      >&#8594;</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="1272"
+      > </a
+      ><a name="1273" class="Symbol"
+      >&#8594;</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" class="Symbol"
+      >&#8594;</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="1284"
+      >
+</a
+      ><a name="1285" href="BiGUL.SourceCase.html#1251" class="Function"
+      >put</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" href="BiGUL.SourceCase.html#1289" class="Bound"
+      >bs</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" href="BiGUL.SourceCase.html#1292" class="Bound"
+      >s</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="BiGUL.SourceCase.html#1294" class="Bound"
+      >v</a
+      ><a name="1295"
+      > </a
+      ><a name="1296" class="Symbol"
+      >=</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" href="BiGUL.SourceCase.html#1289" class="Bound"
+      >bs</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="BiGUL.SourceCase.html#1292" class="Bound"
+      >s</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="BiGUL.SourceCase.html#1294" class="Bound"
+      >v</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" class="Symbol"
+      >(&#955;</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="BiGUL.SourceCase.html#1331" class="Bound"
+      >s'</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="Symbol"
+      >&#8594;</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="BiGUL.SourceCase.html#1289" class="Bound"
+      >bs</a
+      ><a name="1358"
+      > </a
+      ><a name="1359" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="BiGUL.SourceCase.html#1331" class="Bound"
+      >s'</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="BiGUL.SourceCase.html#1294" class="Bound"
+      >v</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >(</a
+      ><a name="1368" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="1378" class="Symbol"
+      >))</a
+      ><a name="1380"
+      >
+
+</a
+      ><a name="1382" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" class="Symbol"
+      >:</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >&#8594;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" class="Symbol"
+      >&#8594;</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="1411"
+      >
+</a
+      ><a name="1412" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1418"
+      >              </a
+      ><a name="1432" href="BiGUL.SourceCase.html#1432" class="Bound"
+      >s</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" class="Symbol"
+      >=</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="1440"
+      >
+</a
+      ><a name="1441" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" class="Symbol"
+      >((</a
+      ><a name="1447" href="BiGUL.SourceCase.html#1447" class="Bound"
+      >p</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="BiGUL.SourceCase.html#1451" class="Bound"
+      >bt</a
+      ><a name="1453" class="Symbol"
+      >)</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" href="BiGUL.SourceCase.html#1457" class="Bound"
+      >bs</a
+      ><a name="1459" class="Symbol"
+      >)</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" href="BiGUL.SourceCase.html#1461" class="Bound"
+      >s</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" class="Symbol"
+      >=</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="BiGUL.SourceCase.html#1447" class="Bound"
+      >p</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="BiGUL.SourceCase.html#1461" class="Bound"
+      >s</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="BiGUL.Partiality.html#656" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" class="Symbol"
+      >&#955;</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" href="BiGUL.SourceCase.html#1475" class="Bound"
+      >b</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" class="Symbol"
+      >&#8594;</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >if</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="BiGUL.SourceCase.html#1475" class="Bound"
+      >b</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >then</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="BiGUL.SourceCase.html#479" class="Function"
+      >elimBranchType</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" class="Symbol"
+      >(&#955;</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" href="BiGUL.SourceCase.html#1507" class="Bound"
+      >lens</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" class="Symbol"
+      >&#8594;</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="BiGUL.Lens.html#343" class="Field"
+      >Lens.get</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" href="BiGUL.SourceCase.html#1507" class="Bound"
+      >lens</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" href="BiGUL.SourceCase.html#1461" class="Bound"
+      >s</a
+      ><a name="1529" class="Symbol"
+      >)</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" class="Symbol"
+      >(</a
+      ><a name="1532" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="1542" class="Symbol"
+      >)</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" href="BiGUL.SourceCase.html#1451" class="Bound"
+      >bt</a
+      ><a name="1546"
+      >
+                                           </a
+      ><a name="1590" href="Data.Bool.Base.html#1127" class="Function Operator"
+      >else</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="BiGUL.SourceCase.html#1457" class="Bound"
+      >bs</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="BiGUL.SourceCase.html#1461" class="Bound"
+      >s</a
+      ><a name="1603"
+      >
+
+</a
+      ><a name="1605" href="BiGUL.SourceCase.html#1605" class="Function"
+      >get-revcat</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="Symbol"
+      >:</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" class="Symbol"
+      >(</a
+      ><a name="1619" href="BiGUL.SourceCase.html#1619" class="Bound"
+      >bs</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" class="Symbol"
+      >:</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="1635" class="Symbol"
+      >)</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" class="Symbol"
+      >{</a
+      ><a name="1638" href="BiGUL.SourceCase.html#1638" class="Bound"
+      >s</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" class="Symbol"
+      >:</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="1643" class="Symbol"
+      >}</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" class="Symbol"
+      >{</a
+      ><a name="1646" href="BiGUL.SourceCase.html#1646" class="Bound"
+      >v</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" class="Symbol"
+      >:</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="1651" class="Symbol"
+      >}</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" class="Symbol"
+      >(</a
+      ><a name="1654" href="BiGUL.SourceCase.html#1654" class="Bound"
+      >bs'</a
+      ><a name="1657"
+      > </a
+      ><a name="1658" class="Symbol"
+      >:</a
+      ><a name="1659"
+      > </a
+      ><a name="1660" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="1671" class="Symbol"
+      >)</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >&#8594;</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" href="BiGUL.SourceCase.html#1654" class="Bound"
+      >bs'</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="BiGUL.SourceCase.html#1638" class="Bound"
+      >s</a
+      ><a name="1696"
+      > </a
+      ><a name="1697" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" class="Symbol"
+      >&#8594;</a
+      ><a name="1703"
+      >
+             </a
+      ><a name="1717" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1720"
+      > </a
+      ><a name="1721" href="BiGUL.SourceCase.html#1619" class="Bound"
+      >bs</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="BiGUL.SourceCase.html#1638" class="Bound"
+      >s</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="BiGUL.SourceCase.html#1646" class="Bound"
+      >v</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >&#8594;</a
+      ><a name="1731"
+      > </a
+      ><a name="1732" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" class="Symbol"
+      >(</a
+      ><a name="1737" href="BiGUL.Utilities.html#1618" class="Function"
+      >revcat</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="BiGUL.SourceCase.html#1654" class="Bound"
+      >bs'</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="BiGUL.SourceCase.html#1619" class="Bound"
+      >bs</a
+      ><a name="1750" class="Symbol"
+      >)</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" href="BiGUL.SourceCase.html#1638" class="Bound"
+      >s</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" href="BiGUL.SourceCase.html#1646" class="Bound"
+      >v</a
+      ><a name="1757"
+      >
+</a
+      ><a name="1758" href="BiGUL.SourceCase.html#1605" class="Function"
+      >get-revcat</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" href="BiGUL.SourceCase.html#1769" class="Bound"
+      >bs</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="1774"
+      >               </a
+      ><a name="1789" class="Symbol"
+      >_</a
+      ><a name="1790"
+      >    </a
+      ><a name="1794" href="BiGUL.SourceCase.html#1794" class="Bound"
+      >get&#8614;</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" class="Symbol"
+      >=</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="BiGUL.SourceCase.html#1794" class="Bound"
+      >get&#8614;</a
+      ><a name="1805"
+      >
+</a
+      ><a name="1806" href="BiGUL.SourceCase.html#1605" class="Function"
+      >get-revcat</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="BiGUL.SourceCase.html#1817" class="Bound"
+      >bs</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >((</a
+      ><a name="1822" href="BiGUL.SourceCase.html#1822" class="Bound"
+      >p</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="BiGUL.SourceCase.html#1826" class="Bound"
+      >bt</a
+      ><a name="1828" class="Symbol"
+      >)</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="BiGUL.SourceCase.html#1832" class="Bound"
+      >bs'</a
+      ><a name="1835" class="Symbol"
+      >)</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >(</a
+      ><a name="1838" href="BiGUL.SourceCase.html#1838" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="BiGUL.Partiality.html#3388" class="InductiveConstructor Operator"
+      >assert-not</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" href="BiGUL.Partiality.html#3388" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" href="BiGUL.SourceCase.html#1873" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="1889" class="Symbol"
+      >)</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="BiGUL.SourceCase.html#1891" class="Bound"
+      >get&#8614;</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" class="Symbol"
+      >=</a
+      ><a name="1897"
+      >
+  </a
+      ><a name="1900" href="BiGUL.SourceCase.html#1605" class="Function"
+      >get-revcat</a
+      ><a name="1910"
+      > </a
+      ><a name="1911" class="Symbol"
+      >((</a
+      ><a name="1913" href="BiGUL.SourceCase.html#1822" class="Bound"
+      >p</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1916"
+      > </a
+      ><a name="1917" href="BiGUL.SourceCase.html#1826" class="Bound"
+      >bt</a
+      ><a name="1919" class="Symbol"
+      >)</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="BiGUL.SourceCase.html#1817" class="Bound"
+      >bs</a
+      ><a name="1925" class="Symbol"
+      >)</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" href="BiGUL.SourceCase.html#1832" class="Bound"
+      >bs'</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="BiGUL.SourceCase.html#1873" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" class="Symbol"
+      >(</a
+      ><a name="1949" href="BiGUL.SourceCase.html#1838" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" href="BiGUL.SourceCase.html#1891" class="Bound"
+      >get&#8614;</a
+      ><a name="1967" class="Symbol"
+      >)</a
+      ><a name="1968"
+      >
+
+</a
+      ><a name="1970" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" class="Symbol"
+      >:</a
+      ><a name="1994"
+      >
+  </a
+      ><a name="1997" class="Symbol"
+      >(</a
+      ><a name="1998" href="BiGUL.SourceCase.html#1998" class="Bound"
+      >bs</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" class="Symbol"
+      >:</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="2007"
+      > </a
+      ><a name="2008" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="2014" class="Symbol"
+      >)</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" class="Symbol"
+      >{</a
+      ><a name="2017" href="BiGUL.SourceCase.html#2017" class="Bound"
+      >s</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >:</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2022" class="Symbol"
+      >}</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" class="Symbol"
+      >{</a
+      ><a name="2025" href="BiGUL.SourceCase.html#2025" class="Bound"
+      >v</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" class="Symbol"
+      >:</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="2030" class="Symbol"
+      >}</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" class="Symbol"
+      >{</a
+      ><a name="2033" href="BiGUL.SourceCase.html#2033" class="Bound"
+      >s'</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" class="Symbol"
+      >:</a
+      ><a name="2037"
+      > </a
+      ><a name="2038" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2039" class="Symbol"
+      >}</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" class="Symbol"
+      >(</a
+      ><a name="2042" href="BiGUL.SourceCase.html#2042" class="Bound"
+      >bs'</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Symbol"
+      >:</a
+      ><a name="2047"
+      > </a
+      ><a name="2048" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="2059" class="Symbol"
+      >)</a
+      ><a name="2060"
+      > </a
+      ><a name="2061" class="Symbol"
+      >&#8594;</a
+      ><a name="2062"
+      >
+  </a
+      ><a name="2065" class="Symbol"
+      >{</a
+      ><a name="2066" href="BiGUL.SourceCase.html#2066" class="Bound"
+      >cont</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >:</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" class="Symbol"
+      >&#8594;</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2082" class="Symbol"
+      >}</a
+      ><a name="2083"
+      > </a
+      ><a name="2084" class="Symbol"
+      >&#8594;</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" class="Symbol"
+      >({</a
+      ><a name="2088" href="BiGUL.SourceCase.html#2088" class="Bound"
+      >s</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="BiGUL.SourceCase.html#2090" class="Bound"
+      >s'</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" class="Symbol"
+      >:</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2096" class="Symbol"
+      >}</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" class="Symbol"
+      >&#8594;</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="BiGUL.SourceCase.html#2066" class="Bound"
+      >cont</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="BiGUL.SourceCase.html#2088" class="Bound"
+      >s</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="BiGUL.SourceCase.html#2090" class="Bound"
+      >s'</a
+      ><a name="2111"
+      > </a
+      ><a name="2112" class="Symbol"
+      >&#8594;</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" class="Symbol"
+      >(</a
+      ><a name="2119" href="BiGUL.Utilities.html#1618" class="Function"
+      >revcat</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="BiGUL.SourceCase.html#2042" class="Bound"
+      >bs'</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="BiGUL.SourceCase.html#1998" class="Bound"
+      >bs</a
+      ><a name="2132" class="Symbol"
+      >)</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" href="BiGUL.SourceCase.html#2090" class="Bound"
+      >s'</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2138"
+      > </a
+      ><a name="2139" href="BiGUL.SourceCase.html#2025" class="Bound"
+      >v</a
+      ><a name="2140" class="Symbol"
+      >)</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >&#8594;</a
+      ><a name="2143"
+      >
+  </a
+      ><a name="2146" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" href="BiGUL.SourceCase.html#1998" class="Bound"
+      >bs</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="BiGUL.SourceCase.html#2042" class="Bound"
+      >bs'</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" href="BiGUL.SourceCase.html#2017" class="Bound"
+      >s</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" href="BiGUL.SourceCase.html#2025" class="Bound"
+      >v</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" href="BiGUL.SourceCase.html#2066" class="Bound"
+      >cont</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="BiGUL.SourceCase.html#2033" class="Bound"
+      >s'</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" class="Symbol"
+      >&#8594;</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" class="Symbol"
+      >(</a
+      ><a name="2194" href="BiGUL.Utilities.html#1618" class="Function"
+      >revcat</a
+      ><a name="2200"
+      > </a
+      ><a name="2201" href="BiGUL.SourceCase.html#2042" class="Bound"
+      >bs'</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="BiGUL.SourceCase.html#1998" class="Bound"
+      >bs</a
+      ><a name="2207" class="Symbol"
+      >)</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="BiGUL.SourceCase.html#2033" class="Bound"
+      >s'</a
+      ><a name="2211"
+      > </a
+      ><a name="2212" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2213"
+      > </a
+      ><a name="2214" href="BiGUL.SourceCase.html#2025" class="Bound"
+      >v</a
+      ><a name="2215"
+      >
+</a
+      ><a name="2216" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="2241"
+      >                      </a
+      ><a name="2263" href="BiGUL.SourceCase.html#2263" class="Bound"
+      >bs'</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" href="BiGUL.SourceCase.html#2267" class="Bound"
+      >PutGet-cont</a
+      ><a name="2278"
+      > </a
+      ><a name="2279" class="Symbol"
+      >()</a
+      ><a name="2281"
+      >
+</a
+      ><a name="2282" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" class="Symbol"
+      >((</a
+      ><a name="2307" href="BiGUL.SourceCase.html#2307" class="Bound"
+      >p</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2310"
+      > </a
+      ><a name="2311" href="BiGUL.SourceCase.html#2311" class="Bound"
+      >bt</a
+      ><a name="2313" class="Symbol"
+      >)</a
+      ><a name="2314"
+      >         </a
+      ><a name="2323" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" href="BiGUL.SourceCase.html#2325" class="Bound"
+      >bs</a
+      ><a name="2327" class="Symbol"
+      >)</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" href="BiGUL.SourceCase.html#2329" class="Bound"
+      >bs'</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="BiGUL.SourceCase.html#2333" class="Bound"
+      >PutGet-cont</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" class="Symbol"
+      >(</a
+      ><a name="2346" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" class="Symbol"
+      >{</a
+      ><a name="2353" class="Argument"
+      >x</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" class="Symbol"
+      >=</a
+      ><a name="2356"
+      > </a
+      ><a name="2357" href="Data.Bool.Base.html#565" class="InductiveConstructor"
+      >false</a
+      ><a name="2362" class="Symbol"
+      >}</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" href="BiGUL.SourceCase.html#2364" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="BiGUL.SourceCase.html#2374" class="Bound"
+      >put&#8614;</a
+      ><a name="2378" class="Symbol"
+      >)</a
+      ><a name="2379"
+      > </a
+      ><a name="2380" class="Symbol"
+      >=</a
+      ><a name="2381"
+      >
+  </a
+      ><a name="2384" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="BiGUL.SourceCase.html#2325" class="Bound"
+      >bs</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" class="Symbol"
+      >((</a
+      ><a name="2412" href="BiGUL.SourceCase.html#2307" class="Bound"
+      >p</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2415"
+      > </a
+      ><a name="2416" href="BiGUL.SourceCase.html#2311" class="Bound"
+      >bt</a
+      ><a name="2418" class="Symbol"
+      >)</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="BiGUL.SourceCase.html#2329" class="Bound"
+      >bs'</a
+      ><a name="2425" class="Symbol"
+      >)</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="BiGUL.SourceCase.html#2333" class="Bound"
+      >PutGet-cont</a
+      ><a name="2438"
+      > </a
+      ><a name="2439" href="BiGUL.SourceCase.html#2374" class="Bound"
+      >put&#8614;</a
+      ><a name="2443"
+      >
+</a
+      ><a name="2444" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" class="Symbol"
+      >((</a
+      ><a name="2469" href="BiGUL.SourceCase.html#2469" class="Bound"
+      >p</a
+      ><a name="2470"
+      > </a
+      ><a name="2471" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="2479"
+      >   </a
+      ><a name="2482" href="BiGUL.SourceCase.html#2482" class="Bound"
+      >l</a
+      ><a name="2483" class="Symbol"
+      >)</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" href="BiGUL.SourceCase.html#2487" class="Bound"
+      >bs</a
+      ><a name="2489" class="Symbol"
+      >)</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" href="BiGUL.SourceCase.html#2491" class="Bound"
+      >bs'</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="BiGUL.SourceCase.html#2495" class="Bound"
+      >PutGet-cont</a
+      ><a name="2506"
+      >
+  </a
+      ><a name="2509" class="Symbol"
+      >(</a
+      ><a name="2510" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" class="Symbol"
+      >{</a
+      ><a name="2517" class="Argument"
+      >x</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" class="Symbol"
+      >=</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" class="Symbol"
+      >}</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="BiGUL.SourceCase.html#2528" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >(</a
+      ><a name="2538" href="BiGUL.SourceCase.html#2538" class="Bound"
+      >put-s-v&#8614;s'</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2552"
+      > </a
+      ><a name="2553" href="BiGUL.SourceCase.html#2553" class="Bound"
+      >p-s'&#8614;true</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="BiGUL.Partiality.html#3259" class="InductiveConstructor Operator"
+      >assert</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="BiGUL.Partiality.html#3259" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" class="Symbol"
+      >(</a
+      ><a name="2585" href="BiGUL.SourceCase.html#2585" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="2601"
+      > </a
+      ><a name="2602" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="2617" class="Symbol"
+      >)))</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >=</a
+      ><a name="2622"
+      >
+  </a
+      ><a name="2625" href="BiGUL.SourceCase.html#1605" class="Function"
+      >get-revcat</a
+      ><a name="2635"
+      > </a
+      ><a name="2636" class="Symbol"
+      >((</a
+      ><a name="2638" href="BiGUL.SourceCase.html#2469" class="Bound"
+      >p</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" href="BiGUL.SourceCase.html#2482" class="Bound"
+      >l</a
+      ><a name="2650" class="Symbol"
+      >)</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" href="BiGUL.SourceCase.html#2487" class="Bound"
+      >bs</a
+      ><a name="2656" class="Symbol"
+      >)</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" href="BiGUL.SourceCase.html#2491" class="Bound"
+      >bs'</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="BiGUL.SourceCase.html#2585" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >(</a
+      ><a name="2680" href="BiGUL.SourceCase.html#2553" class="Bound"
+      >p-s'&#8614;true</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" href="BiGUL.Lens.html#363" class="Field"
+      >Lens.PutGet</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" href="BiGUL.SourceCase.html#2482" class="Bound"
+      >l</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="BiGUL.SourceCase.html#2538" class="Bound"
+      >put-s-v&#8614;s'</a
+      ><a name="2718" class="Symbol"
+      >)</a
+      ><a name="2719"
+      >
+</a
+      ><a name="2720" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2742"
+      > </a
+      ><a name="2743" class="Symbol"
+      >((</a
+      ><a name="2745" href="BiGUL.SourceCase.html#2745" class="Bound"
+      >p</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" href="BiGUL.SourceCase.html#390" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="BiGUL.SourceCase.html#2758" class="Bound"
+      >u</a
+      ><a name="2759" class="Symbol"
+      >)</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="BiGUL.SourceCase.html#2763" class="Bound"
+      >bs</a
+      ><a name="2765" class="Symbol"
+      >)</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" href="BiGUL.SourceCase.html#2767" class="Bound"
+      >bs'</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" href="BiGUL.SourceCase.html#2771" class="Bound"
+      >PutGet-cont</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >(</a
+      ><a name="2784" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" class="Symbol"
+      >{</a
+      ><a name="2791" class="Argument"
+      >x</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" class="Symbol"
+      >=</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="2799"
+      > </a
+      ><a name="2800" class="Symbol"
+      >}</a
+      ><a name="2801"
+      > </a
+      ><a name="2802" href="BiGUL.SourceCase.html#2802" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="2810"
+      >  </a
+      ><a name="2812" class="Symbol"
+      >(</a
+      ><a name="2813" href="BiGUL.SourceCase.html#2813" class="Bound"
+      >u&#8614;</a
+      ><a name="2815"
+      > </a
+      ><a name="2816" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" href="BiGUL.SourceCase.html#2820" class="Bound"
+      >cont&#8614;</a
+      ><a name="2825" class="Symbol"
+      >))</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" class="Symbol"
+      >=</a
+      ><a name="2829"
+      >
+  </a
+      ><a name="2832" href="BiGUL.SourceCase.html#2771" class="Bound"
+      >PutGet-cont</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" href="BiGUL.SourceCase.html#2820" class="Bound"
+      >cont&#8614;</a
+      ><a name="2849"
+      >
+
+</a
+      ><a name="2851" href="BiGUL.SourceCase.html#2851" class="Function"
+      >PutGet</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" class="Symbol"
+      >:</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" class="Symbol"
+      >(</a
+      ><a name="2861" href="BiGUL.SourceCase.html#2861" class="Bound"
+      >bs</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" class="Symbol"
+      >:</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="2870"
+      > </a
+      ><a name="2871" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="2877" class="Symbol"
+      >)</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" class="Symbol"
+      >{</a
+      ><a name="2880" href="BiGUL.SourceCase.html#2880" class="Bound"
+      >s</a
+      ><a name="2881"
+      > </a
+      ><a name="2882" class="Symbol"
+      >:</a
+      ><a name="2883"
+      > </a
+      ><a name="2884" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2885" class="Symbol"
+      >}</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" class="Symbol"
+      >{</a
+      ><a name="2888" href="BiGUL.SourceCase.html#2888" class="Bound"
+      >v</a
+      ><a name="2889"
+      > </a
+      ><a name="2890" class="Symbol"
+      >:</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="2893" class="Symbol"
+      >}</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" class="Symbol"
+      >{</a
+      ><a name="2896" href="BiGUL.SourceCase.html#2896" class="Bound"
+      >s'</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" class="Symbol"
+      >:</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="2902" class="Symbol"
+      >}</a
+      ><a name="2903"
+      > </a
+      ><a name="2904" class="Symbol"
+      >&#8594;</a
+      ><a name="2905"
+      > </a
+      ><a name="2906" href="BiGUL.SourceCase.html#1251" class="Function"
+      >put</a
+      ><a name="2909"
+      > </a
+      ><a name="2910" href="BiGUL.SourceCase.html#2861" class="Bound"
+      >bs</a
+      ><a name="2912"
+      > </a
+      ><a name="2913" href="BiGUL.SourceCase.html#2880" class="Bound"
+      >s</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" href="BiGUL.SourceCase.html#2888" class="Bound"
+      >v</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="BiGUL.SourceCase.html#2896" class="Bound"
+      >s'</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" class="Symbol"
+      >&#8594;</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" href="BiGUL.SourceCase.html#2861" class="Bound"
+      >bs</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="BiGUL.SourceCase.html#2896" class="Bound"
+      >s'</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="BiGUL.SourceCase.html#2888" class="Bound"
+      >v</a
+      ><a name="2937"
+      >
+</a
+      ><a name="2938" href="BiGUL.SourceCase.html#2851" class="Function"
+      >PutGet</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" href="BiGUL.SourceCase.html#2945" class="Bound"
+      >bs</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" class="Symbol"
+      >=</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="2972"
+      > </a
+      ><a name="2973" href="BiGUL.SourceCase.html#2945" class="Bound"
+      >bs</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="2978"
+      > </a
+      ><a name="2979" class="Symbol"
+      >(</a
+      ><a name="2980" href="BiGUL.SourceCase.html#1970" class="Function"
+      >PutGet-with-adaptation</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" href="BiGUL.SourceCase.html#2945" class="Bound"
+      >bs</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" class="Symbol"
+      >(&#955;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" class="Symbol"
+      >()))</a
+      ><a name="3016"
+      >
+
+</a
+      ><a name="3018" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" class="Symbol"
+      >:</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" class="Symbol"
+      >(</a
+      ><a name="3044" href="BiGUL.SourceCase.html#3044" class="Bound"
+      >bs</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" class="Symbol"
+      >:</a
+      ><a name="3048"
+      > </a
+      ><a name="3049" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="3060" class="Symbol"
+      >)</a
+      ><a name="3061"
+      > </a
+      ><a name="3062" class="Symbol"
+      >{</a
+      ><a name="3063" href="BiGUL.SourceCase.html#3063" class="Bound"
+      >f</a
+      ><a name="3064"
+      > </a
+      ><a name="3065" class="Symbol"
+      >:</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" class="Symbol"
+      >&#8594;</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="3074"
+      > </a
+      ><a name="3075" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3076" class="Symbol"
+      >}</a
+      ><a name="3077"
+      > </a
+      ><a name="3078" class="Symbol"
+      >{</a
+      ><a name="3079" href="BiGUL.SourceCase.html#3079" class="Bound"
+      >s</a
+      ><a name="3080"
+      > </a
+      ><a name="3081" class="Symbol"
+      >:</a
+      ><a name="3082"
+      > </a
+      ><a name="3083" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3084" class="Symbol"
+      >}</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" class="Symbol"
+      >{</a
+      ><a name="3087" href="BiGUL.SourceCase.html#3087" class="Bound"
+      >v</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" class="Symbol"
+      >:</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="3092" class="Symbol"
+      >}</a
+      ><a name="3093"
+      >
+                         </a
+      ><a name="3119" class="Symbol"
+      >(</a
+      ><a name="3120" href="BiGUL.SourceCase.html#3120" class="Bound"
+      >bs'</a
+      ><a name="3123"
+      > </a
+      ><a name="3124" class="Symbol"
+      >:</a
+      ><a name="3125"
+      > </a
+      ><a name="3126" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="3130"
+      > </a
+      ><a name="3131" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="3137" class="Symbol"
+      >)</a
+      ><a name="3138"
+      > </a
+      ><a name="3139" class="Symbol"
+      >&#8594;</a
+      ><a name="3140"
+      > </a
+      ><a name="3141" href="BiGUL.SourceCase.html#650" class="Function"
+      >check-diversion</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" href="BiGUL.SourceCase.html#3120" class="Bound"
+      >bs'</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" href="BiGUL.SourceCase.html#3079" class="Bound"
+      >s</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="3164"
+      > </a
+      ><a name="3165" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" class="Symbol"
+      >&#8594;</a
+      ><a name="3169"
+      >
+                         </a
+      ><a name="3195" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="3198"
+      > </a
+      ><a name="3199" href="BiGUL.SourceCase.html#3044" class="Bound"
+      >bs</a
+      ><a name="3201"
+      > </a
+      ><a name="3202" href="BiGUL.SourceCase.html#3079" class="Bound"
+      >s</a
+      ><a name="3203"
+      > </a
+      ><a name="3204" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="3205"
+      > </a
+      ><a name="3206" href="BiGUL.SourceCase.html#3087" class="Bound"
+      >v</a
+      ><a name="3207"
+      > </a
+      ><a name="3208" class="Symbol"
+      >&#8594;</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" href="BiGUL.SourceCase.html#3044" class="Bound"
+      >bs</a
+      ><a name="3232"
+      > </a
+      ><a name="3233" href="BiGUL.SourceCase.html#3120" class="Bound"
+      >bs'</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" href="BiGUL.SourceCase.html#3079" class="Bound"
+      >s</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" href="BiGUL.SourceCase.html#3087" class="Bound"
+      >v</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" href="BiGUL.SourceCase.html#3063" class="Bound"
+      >f</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="3244"
+      > </a
+      ><a name="3245" href="BiGUL.SourceCase.html#3079" class="Bound"
+      >s</a
+      ><a name="3246"
+      >
+</a
+      ><a name="3247" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3272"
+      >                      </a
+      ><a name="3294" href="BiGUL.SourceCase.html#3294" class="Bound"
+      >bs'</a
+      ><a name="3297"
+      > </a
+      ><a name="3298" href="BiGUL.SourceCase.html#3298" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3314"
+      > </a
+      ><a name="3315" class="Symbol"
+      >()</a
+      ><a name="3317"
+      >
+</a
+      ><a name="3318" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" class="Symbol"
+      >((</a
+      ><a name="3343" href="BiGUL.SourceCase.html#3343" class="Bound"
+      >p</a
+      ><a name="3344"
+      > </a
+      ><a name="3345" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" href="BiGUL.SourceCase.html#3347" class="Bound"
+      >bt</a
+      ><a name="3349"
+      >        </a
+      ><a name="3357" class="Symbol"
+      >)</a
+      ><a name="3358"
+      > </a
+      ><a name="3359" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3360"
+      > </a
+      ><a name="3361" href="BiGUL.SourceCase.html#3361" class="Bound"
+      >bs</a
+      ><a name="3363" class="Symbol"
+      >)</a
+      ><a name="3364"
+      > </a
+      ><a name="3365" href="BiGUL.SourceCase.html#3365" class="Bound"
+      >bs'</a
+      ><a name="3368"
+      > </a
+      ><a name="3369" href="BiGUL.SourceCase.html#3369" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3385"
+      > </a
+      ><a name="3386" class="Symbol"
+      >(</a
+      ><a name="3387" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="3392"
+      > </a
+      ><a name="3393" class="Symbol"
+      >{</a
+      ><a name="3394" class="Argument"
+      >x</a
+      ><a name="3395"
+      > </a
+      ><a name="3396" class="Symbol"
+      >=</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" href="Data.Bool.Base.html#565" class="InductiveConstructor"
+      >false</a
+      ><a name="3403" class="Symbol"
+      >}</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" href="BiGUL.SourceCase.html#3405" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="3414"
+      > </a
+      ><a name="3415" href="BiGUL.SourceCase.html#3415" class="Bound"
+      >get&#8614;</a
+      ><a name="3419" class="Symbol"
+      >)</a
+      ><a name="3420"
+      > </a
+      ><a name="3421" class="Symbol"
+      >=</a
+      ><a name="3422"
+      >
+  </a
+      ><a name="3425" href="BiGUL.SourceCase.html#3405" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3438"
+      > </a
+      ><a name="3439" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3461"
+      > </a
+      ><a name="3462" href="BiGUL.SourceCase.html#3361" class="Bound"
+      >bs</a
+      ><a name="3464"
+      > </a
+      ><a name="3465" class="Symbol"
+      >((</a
+      ><a name="3467" href="BiGUL.SourceCase.html#3343" class="Bound"
+      >p</a
+      ><a name="3468"
+      > </a
+      ><a name="3469" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3470"
+      > </a
+      ><a name="3471" href="BiGUL.SourceCase.html#3347" class="Bound"
+      >bt</a
+      ><a name="3473" class="Symbol"
+      >)</a
+      ><a name="3474"
+      > </a
+      ><a name="3475" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" href="BiGUL.SourceCase.html#3365" class="Bound"
+      >bs'</a
+      ><a name="3480" class="Symbol"
+      >)</a
+      ><a name="3481"
+      > </a
+      ><a name="3482" class="Symbol"
+      >(</a
+      ><a name="3483" href="BiGUL.SourceCase.html#3405" class="Bound"
+      >p-s&#8614;false</a
+      ><a name="3492"
+      > </a
+      ><a name="3493" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3496"
+      > </a
+      ><a name="3497" href="BiGUL.Partiality.html#3388" class="InductiveConstructor Operator"
+      >assert-not</a
+      ><a name="3507"
+      > </a
+      ><a name="3508" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="3512"
+      > </a
+      ><a name="3513" href="BiGUL.Partiality.html#3388" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="BiGUL.SourceCase.html#3369" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3534" class="Symbol"
+      >)</a
+      ><a name="3535"
+      > </a
+      ><a name="3536" href="BiGUL.SourceCase.html#3415" class="Bound"
+      >get&#8614;</a
+      ><a name="3540"
+      >
+</a
+      ><a name="3541" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" class="Symbol"
+      >((</a
+      ><a name="3566" href="BiGUL.SourceCase.html#3566" class="Bound"
+      >p</a
+      ><a name="3567"
+      > </a
+      ><a name="3568" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3569"
+      > </a
+      ><a name="3570" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="3576"
+      >   </a
+      ><a name="3579" href="BiGUL.SourceCase.html#3579" class="Bound"
+      >l</a
+      ><a name="3580" class="Symbol"
+      >)</a
+      ><a name="3581"
+      > </a
+      ><a name="3582" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" href="BiGUL.SourceCase.html#3584" class="Bound"
+      >bs</a
+      ><a name="3586" class="Symbol"
+      >)</a
+      ><a name="3587"
+      > </a
+      ><a name="3588" href="BiGUL.SourceCase.html#3588" class="Bound"
+      >bs'</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" href="BiGUL.SourceCase.html#3592" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3608"
+      > </a
+      ><a name="3609" class="Symbol"
+      >(</a
+      ><a name="3610" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" class="Symbol"
+      >{</a
+      ><a name="3617" class="Argument"
+      >x</a
+      ><a name="3618"
+      > </a
+      ><a name="3619" class="Symbol"
+      >=</a
+      ><a name="3620"
+      > </a
+      ><a name="3621" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="3625"
+      > </a
+      ><a name="3626" class="Symbol"
+      >}</a
+      ><a name="3627"
+      > </a
+      ><a name="3628" href="BiGUL.SourceCase.html#3628" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="3636"
+      >  </a
+      ><a name="3638" href="BiGUL.SourceCase.html#3638" class="Bound"
+      >get&#8614;</a
+      ><a name="3642" class="Symbol"
+      >)</a
+      ><a name="3643"
+      > </a
+      ><a name="3644" class="Symbol"
+      >=</a
+      ><a name="3645"
+      >
+  </a
+      ><a name="3648" href="BiGUL.SourceCase.html#3628" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="3656"
+      > </a
+      ><a name="3657" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3660"
+      > </a
+      ><a name="3661" href="BiGUL.Lens.html#429" class="Field"
+      >Lens.GetPut</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" href="BiGUL.SourceCase.html#3579" class="Bound"
+      >l</a
+      ><a name="3674"
+      > </a
+      ><a name="3675" href="BiGUL.SourceCase.html#3638" class="Bound"
+      >get&#8614;</a
+      ><a name="3679"
+      > </a
+      ><a name="3680" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3683"
+      > </a
+      ><a name="3684" href="BiGUL.SourceCase.html#3628" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="3692"
+      > </a
+      ><a name="3693" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3696"
+      > </a
+      ><a name="3697" href="BiGUL.Partiality.html#3259" class="InductiveConstructor Operator"
+      >assert</a
+      ><a name="3703"
+      > </a
+      ><a name="3704" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="3708"
+      > </a
+      ><a name="3709" href="BiGUL.Partiality.html#3259" class="InductiveConstructor Operator"
+      >then</a
+      ><a name="3713"
+      > </a
+      ><a name="3714" class="Symbol"
+      >(</a
+      ><a name="3715" href="BiGUL.SourceCase.html#3592" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3735"
+      > </a
+      ><a name="3736" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="3742"
+      > </a
+      ><a name="3743" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="3747" class="Symbol"
+      >)</a
+      ><a name="3748"
+      >
+</a
+      ><a name="3749" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" class="Symbol"
+      >((</a
+      ><a name="3774" href="BiGUL.SourceCase.html#3774" class="Bound"
+      >p</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3777"
+      > </a
+      ><a name="3778" href="BiGUL.SourceCase.html#390" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="3786"
+      > </a
+      ><a name="3787" href="BiGUL.SourceCase.html#3787" class="Bound"
+      >u</a
+      ><a name="3788" class="Symbol"
+      >)</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3791"
+      > </a
+      ><a name="3792" href="BiGUL.SourceCase.html#3792" class="Bound"
+      >bs</a
+      ><a name="3794" class="Symbol"
+      >)</a
+      ><a name="3795"
+      > </a
+      ><a name="3796" href="BiGUL.SourceCase.html#3796" class="Bound"
+      >bs'</a
+      ><a name="3799"
+      > </a
+      ><a name="3800" href="BiGUL.SourceCase.html#3800" class="Bound"
+      >check-diversion&#8614;</a
+      ><a name="3816"
+      > </a
+      ><a name="3817" class="Symbol"
+      >(</a
+      ><a name="3818" href="BiGUL.Partiality.html#2795" class="InductiveConstructor Operator"
+      >_&gt;&gt;=_</a
+      ><a name="3823"
+      > </a
+      ><a name="3824" class="Symbol"
+      >{</a
+      ><a name="3825" class="Argument"
+      >x</a
+      ><a name="3826"
+      > </a
+      ><a name="3827" class="Symbol"
+      >=</a
+      ><a name="3828"
+      > </a
+      ><a name="3829" href="Data.Bool.Base.html#550" class="InductiveConstructor"
+      >true</a
+      ><a name="3833"
+      > </a
+      ><a name="3834" class="Symbol"
+      >}</a
+      ><a name="3835"
+      > </a
+      ><a name="3836" href="BiGUL.SourceCase.html#3836" class="Bound"
+      >p-s&#8614;true</a
+      ><a name="3844"
+      >  </a
+      ><a name="3846" class="Symbol"
+      >()</a
+      ><a name="3848"
+      >  </a
+      ><a name="3850" class="Symbol"
+      >)</a
+      ><a name="3851"
+      >
+
+</a
+      ><a name="3853" href="BiGUL.SourceCase.html#3853" class="Function"
+      >GetPut</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" class="Symbol"
+      >:</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" class="Symbol"
+      >(</a
+      ><a name="3863" href="BiGUL.SourceCase.html#3863" class="Bound"
+      >bs</a
+      ><a name="3865"
+      > </a
+      ><a name="3866" class="Symbol"
+      >:</a
+      ><a name="3867"
+      > </a
+      ><a name="3868" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="3872"
+      > </a
+      ><a name="3873" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="3879" class="Symbol"
+      >)</a
+      ><a name="3880"
+      > </a
+      ><a name="3881" class="Symbol"
+      >{</a
+      ><a name="3882" href="BiGUL.SourceCase.html#3882" class="Bound"
+      >f</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" class="Symbol"
+      >:</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3887"
+      > </a
+      ><a name="3888" class="Symbol"
+      >&#8594;</a
+      ><a name="3889"
+      > </a
+      ><a name="3890" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="3893"
+      > </a
+      ><a name="3894" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3895" class="Symbol"
+      >}</a
+      ><a name="3896"
+      > </a
+      ><a name="3897" class="Symbol"
+      >{</a
+      ><a name="3898" href="BiGUL.SourceCase.html#3898" class="Bound"
+      >s</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" class="Symbol"
+      >:</a
+      ><a name="3901"
+      > </a
+      ><a name="3902" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="3903" class="Symbol"
+      >}</a
+      ><a name="3904"
+      > </a
+      ><a name="3905" class="Symbol"
+      >{</a
+      ><a name="3906" href="BiGUL.SourceCase.html#3906" class="Bound"
+      >v</a
+      ><a name="3907"
+      > </a
+      ><a name="3908" class="Symbol"
+      >:</a
+      ><a name="3909"
+      > </a
+      ><a name="3910" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="3911" class="Symbol"
+      >}</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" class="Symbol"
+      >&#8594;</a
+      ><a name="3914"
+      > </a
+      ><a name="3915" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="3918"
+      > </a
+      ><a name="3919" href="BiGUL.SourceCase.html#3863" class="Bound"
+      >bs</a
+      ><a name="3921"
+      > </a
+      ><a name="3922" href="BiGUL.SourceCase.html#3898" class="Bound"
+      >s</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="3925"
+      > </a
+      ><a name="3926" href="BiGUL.SourceCase.html#3906" class="Bound"
+      >v</a
+      ><a name="3927"
+      > </a
+      ><a name="3928" class="Symbol"
+      >&#8594;</a
+      ><a name="3929"
+      > </a
+      ><a name="3930" href="BiGUL.SourceCase.html#1251" class="Function"
+      >put</a
+      ><a name="3933"
+      > </a
+      ><a name="3934" href="BiGUL.SourceCase.html#3863" class="Bound"
+      >bs</a
+      ><a name="3936"
+      > </a
+      ><a name="3937" href="BiGUL.SourceCase.html#3898" class="Bound"
+      >s</a
+      ><a name="3938"
+      > </a
+      ><a name="3939" href="BiGUL.SourceCase.html#3906" class="Bound"
+      >v</a
+      ><a name="3940"
+      > </a
+      ><a name="3941" href="BiGUL.Partiality.html#4647" class="Function Operator"
+      >&#8614;</a
+      ><a name="3942"
+      > </a
+      ><a name="3943" href="BiGUL.SourceCase.html#3898" class="Bound"
+      >s</a
+      ><a name="3944"
+      >
+</a
+      ><a name="3945" href="BiGUL.SourceCase.html#3853" class="Function"
+      >GetPut</a
+      ><a name="3951"
+      > </a
+      ><a name="3952" href="BiGUL.SourceCase.html#3952" class="Bound"
+      >bs</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" class="Symbol"
+      >=</a
+      ><a name="3956"
+      > </a
+      ><a name="3957" href="BiGUL.SourceCase.html#3018" class="Function"
+      >GetPut-with-adaptation</a
+      ><a name="3979"
+      > </a
+      ><a name="3980" href="BiGUL.SourceCase.html#3952" class="Bound"
+      >bs</a
+      ><a name="3982"
+      > </a
+      ><a name="3983" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="3985"
+      > </a
+      ><a name="3986" class="Symbol"
+      >(</a
+      ><a name="3987" href="BiGUL.Partiality.html#2725" class="InductiveConstructor"
+      >return</a
+      ><a name="3993"
+      > </a
+      ><a name="3994" href="Relation.Binary.Core.html#4547" class="InductiveConstructor"
+      >refl</a
+      ><a name="3998" class="Symbol"
+      >)</a
+      ><a name="3999"
+      >
+
+</a
+      ><a name="4001" href="BiGUL.SourceCase.html#4001" class="Function"
+      >caseS-lens</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" class="Symbol"
+      >:</a
+      ><a name="4013"
+      > </a
+      ><a name="4014" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" href="BiGUL.SourceCase.html#427" class="Function"
+      >Branch</a
+      ><a name="4025"
+      > </a
+      ><a name="4026" class="Symbol"
+      >&#8594;</a
+      ><a name="4027"
+      > </a
+      ><a name="4028" href="BiGUL.SourceCase.html#66" class="Bound"
+      >S</a
+      ><a name="4029"
+      > </a
+      ><a name="4030" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="4031"
+      > </a
+      ><a name="4032" href="BiGUL.SourceCase.html#68" class="Bound"
+      >V</a
+      ><a name="4033"
+      >
+</a
+      ><a name="4034" href="BiGUL.SourceCase.html#4001" class="Function"
+      >caseS-lens</a
+      ><a name="4044"
+      > </a
+      ><a name="4045" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4047"
+      > </a
+      ><a name="4048" class="Symbol"
+      >=</a
+      ><a name="4049"
+      > </a
+      ><a name="4050" class="Keyword"
+      >record</a
+      ><a name="4056"
+      >
+  </a
+      ><a name="4059" class="Symbol"
+      >{</a
+      ><a name="4060"
+      > </a
+      ><a name="4061" class="Field"
+      >put</a
+      ><a name="4064"
+      > </a
+      ><a name="4065" class="Symbol"
+      >=</a
+      ><a name="4066"
+      > </a
+      ><a name="4067" href="BiGUL.SourceCase.html#1251" class="Function"
+      >put</a
+      ><a name="4070"
+      > </a
+      ><a name="4071" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4073" class="Symbol"
+      >;</a
+      ><a name="4074"
+      > </a
+      ><a name="4075" class="Field"
+      >get</a
+      ><a name="4078"
+      > </a
+      ><a name="4079" class="Symbol"
+      >=</a
+      ><a name="4080"
+      > </a
+      ><a name="4081" href="BiGUL.SourceCase.html#1382" class="Function"
+      >get</a
+      ><a name="4084"
+      > </a
+      ><a name="4085" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4087" class="Symbol"
+      >;</a
+      ><a name="4088"
+      > </a
+      ><a name="4089" class="Field"
+      >PutGet</a
+      ><a name="4095"
+      > </a
+      ><a name="4096" class="Symbol"
+      >=</a
+      ><a name="4097"
+      > </a
+      ><a name="4098" href="BiGUL.SourceCase.html#2851" class="Function"
+      >PutGet</a
+      ><a name="4104"
+      > </a
+      ><a name="4105" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4107" class="Symbol"
+      >;</a
+      ><a name="4108"
+      >
+    </a
+      ><a name="4113" class="Field"
+      >GetPut</a
+      ><a name="4119"
+      > </a
+      ><a name="4120" class="Symbol"
+      >=</a
+      ><a name="4121"
+      > </a
+      ><a name="4122" class="Symbol"
+      >&#955;</a
+      ><a name="4123"
+      > </a
+      ><a name="4124" class="Symbol"
+      >{</a
+      ><a name="4125" href="BiGUL.SourceCase.html#4125" class="Bound"
+      >_</a
+      ><a name="4126" class="Symbol"
+      >}</a
+      ><a name="4127"
+      > </a
+      ><a name="4128" class="Symbol"
+      >{</a
+      ><a name="4129" href="BiGUL.SourceCase.html#4129" class="Bound"
+      >v</a
+      ><a name="4130" class="Symbol"
+      >}</a
+      ><a name="4131"
+      > </a
+      ><a name="4132" class="Symbol"
+      >&#8594;</a
+      ><a name="4133"
+      > </a
+      ><a name="4134" href="BiGUL.SourceCase.html#3853" class="Function"
+      >GetPut</a
+      ><a name="4140"
+      > </a
+      ><a name="4141" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4143"
+      > </a
+      ><a name="4144" class="Symbol"
+      >{&#955;</a
+      ><a name="4146"
+      > </a
+      ><a name="4147" href="BiGUL.SourceCase.html#4147" class="Bound"
+      >s'</a
+      ><a name="4149"
+      > </a
+      ><a name="4150" class="Symbol"
+      >&#8594;</a
+      ><a name="4151"
+      > </a
+      ><a name="4152" href="BiGUL.SourceCase.html#814" class="Function"
+      >put-with-adaptation</a
+      ><a name="4171"
+      > </a
+      ><a name="4172" href="BiGUL.SourceCase.html#4045" class="Bound"
+      >bs</a
+      ><a name="4174"
+      > </a
+      ><a name="4175" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="4177"
+      > </a
+      ><a name="4178" href="BiGUL.SourceCase.html#4147" class="Bound"
+      >s'</a
+      ><a name="4180"
+      > </a
+      ><a name="4181" href="BiGUL.SourceCase.html#4129" class="Bound"
+      >v</a
+      ><a name="4182"
+      > </a
+      ><a name="4183" class="Symbol"
+      >(</a
+      ><a name="4184" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" href="BiGUL.Partiality.html#719" class="InductiveConstructor"
+      >fail</a
+      ><a name="4194" class="Symbol"
+      >)}</a
+      ><a name="4196"
+      > </a
+      ><a name="4197" class="Symbol"
+      >}</a
+      ><a name="4198"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

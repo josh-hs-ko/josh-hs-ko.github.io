@@ -1,0 +1,5184 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >BiGUL.BiGUL</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Definitions of BiGUL and its interpreter.</a
+      ><a name="45"
+      >
+
+</a
+      ><a name="47" class="Keyword"
+      >open</a
+      ><a name="51"
+      > </a
+      ><a name="52" class="Keyword"
+      >import</a
+      ><a name="58"
+      > </a
+      ><a name="59" href="BiGUL.Universe.html#1" class="Module"
+      >BiGUL.Universe</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Keyword"
+      >open</a
+      ><a name="78"
+      > </a
+      ><a name="79" class="Keyword"
+      >import</a
+      ><a name="85"
+      > </a
+      ><a name="86" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="94"
+      >
+
+</a
+      ><a name="96" class="Keyword"
+      >module</a
+      ><a name="102"
+      > </a
+      ><a name="103" href="BiGUL.BiGUL.html#1" class="Module"
+      >BiGUL.BiGUL</a
+      ><a name="114"
+      > </a
+      ><a name="115" class="Symbol"
+      >{</a
+      ><a name="116" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Symbol"
+      >:</a
+      ><a name="119"
+      > </a
+      ><a name="120" href="Data.Nat.Base.html#682" class="Datatype"
+      >&#8469;</a
+      ><a name="121" class="Symbol"
+      >}</a
+      ><a name="122"
+      > </a
+      ><a name="123" class="Symbol"
+      >(</a
+      ><a name="124" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="125"
+      > </a
+      ><a name="126" class="Symbol"
+      >:</a
+      ><a name="127"
+      > </a
+      ><a name="128" href="BiGUL.Universe.html#889" class="Function"
+      >Functor</a
+      ><a name="135"
+      > </a
+      ><a name="136" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="137" class="Symbol"
+      >)</a
+      ><a name="138"
+      > </a
+      ><a name="139" class="Keyword"
+      >where</a
+      ><a name="144"
+      >
+
+</a
+      ><a name="146" class="Keyword"
+      >open</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Keyword"
+      >import</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="BiGUL.Utilities.html#1" class="Module"
+      >BiGUL.Utilities</a
+      ><a name="173"
+      >
+</a
+      ><a name="174" class="Keyword"
+      >open</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="Keyword"
+      >import</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="BiGUL.Partiality.html#1" class="Module"
+      >BiGUL.Partiality</a
+      ><a name="202"
+      >
+</a
+      ><a name="203" class="Keyword"
+      >open</a
+      ><a name="207"
+      > </a
+      ><a name="208" class="Keyword"
+      >import</a
+      ><a name="214"
+      > </a
+      ><a name="215" href="BiGUL.Lens.html#1" class="Module"
+      >BiGUL.Lens</a
+      ><a name="225"
+      >
+</a
+      ><a name="226" class="Keyword"
+      >open</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Keyword"
+      >import</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="BiGUL.ViewRearrangement.html#1" class="Module"
+      >BiGUL.ViewRearrangement</a
+      ><a name="261"
+      >
+</a
+      ><a name="262" class="Keyword"
+      >open</a
+      ><a name="266"
+      > </a
+      ><a name="267" class="Keyword"
+      >import</a
+      ><a name="273"
+      > </a
+      ><a name="274" href="BiGUL.SourceCase.html#1" class="Module"
+      >BiGUL.SourceCase</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Symbol"
+      >as</a
+      ><a name="293"
+      > </a
+      ><a name="294" class="Module"
+      >SourceCase</a
+      ><a name="304"
+      >
+</a
+      ><a name="305" class="Keyword"
+      >open</a
+      ><a name="309"
+      > </a
+      ><a name="310" class="Keyword"
+      >import</a
+      ><a name="316"
+      > </a
+      ><a name="317" href="BiGUL.ViewCase.html#1" class="Module"
+      >BiGUL.ViewCase</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Symbol"
+      >as</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Module"
+      >ViewCase</a
+      ><a name="343"
+      >
+</a
+      ><a name="344" class="Keyword"
+      >open</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Keyword"
+      >import</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="BiGUL.ListAlignment.html#1" class="Module"
+      >BiGUL.ListAlignment</a
+      ><a name="375"
+      >
+
+</a
+      ><a name="377" class="Keyword"
+      >open</a
+      ><a name="381"
+      > </a
+      ><a name="382" class="Keyword"
+      >import</a
+      ><a name="388"
+      > </a
+      ><a name="389" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="401"
+      >
+</a
+      ><a name="402" class="Keyword"
+      >open</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Keyword"
+      >import</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="423"
+      >
+</a
+      ><a name="424" class="Keyword"
+      >open</a
+      ><a name="428"
+      > </a
+      ><a name="429" class="Keyword"
+      >import</a
+      ><a name="435"
+      > </a
+      ><a name="436" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="446"
+      >
+</a
+      ><a name="447" class="Keyword"
+      >open</a
+      ><a name="451"
+      > </a
+      ><a name="452" class="Keyword"
+      >import</a
+      ><a name="458"
+      > </a
+      ><a name="459" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="468"
+      >
+</a
+      ><a name="469" class="Keyword"
+      >open</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Keyword"
+      >import</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="Relation.Nullary.html#1" class="Module"
+      >Relation.Nullary</a
+      ><a name="497"
+      >
+</a
+      ><a name="498" class="Keyword"
+      >open</a
+      ><a name="502"
+      > </a
+      ><a name="503" class="Keyword"
+      >import</a
+      ><a name="509"
+      > </a
+      ><a name="510" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="547"
+      >
+
+
+</a
+      ><a name="550" class="Keyword"
+      >mutual</a
+      ><a name="556"
+      >
+
+  </a
+      ><a name="560" class="Keyword"
+      >data</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="Symbol"
+      >:</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="574"
+      > </a
+      ><a name="575" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="576"
+      > </a
+      ><a name="577" class="Symbol"
+      >&#8594;</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="580"
+      > </a
+      ><a name="581" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >&#8594;</a
+      ><a name="584"
+      > </a
+      ><a name="585" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="589"
+      > </a
+      ><a name="590" class="Keyword"
+      >where</a
+      ><a name="595"
+      >
+    </a
+      ><a name="600" href="BiGUL.BiGUL.html#600" class="InductiveConstructor"
+      >fail</a
+      ><a name="604"
+      >    </a
+      ><a name="608" class="Symbol"
+      >:</a
+      ><a name="609"
+      > </a
+      ><a name="610" class="Symbol"
+      >{</a
+      ><a name="611" href="BiGUL.BiGUL.html#611" class="Bound"
+      >S</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="BiGUL.BiGUL.html#613" class="Bound"
+      >V</a
+      ><a name="614"
+      > </a
+      ><a name="615" class="Symbol"
+      >:</a
+      ><a name="616"
+      > </a
+      ><a name="617" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="618"
+      > </a
+      ><a name="619" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="620" class="Symbol"
+      >}</a
+      ><a name="621"
+      > </a
+      ><a name="622" class="Symbol"
+      >&#8594;</a
+      ><a name="623"
+      > </a
+      ><a name="624" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="629"
+      > </a
+      ><a name="630" href="BiGUL.BiGUL.html#611" class="Bound"
+      >S</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="BiGUL.BiGUL.html#613" class="Bound"
+      >V</a
+      ><a name="633"
+      >
+    </a
+      ><a name="638" href="BiGUL.BiGUL.html#638" class="InductiveConstructor"
+      >skip</a
+      ><a name="642"
+      >    </a
+      ><a name="646" class="Symbol"
+      >:</a
+      ><a name="647"
+      > </a
+      ><a name="648" class="Symbol"
+      >{</a
+      ><a name="649" href="BiGUL.BiGUL.html#649" class="Bound"
+      >S</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >:</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="656" class="Symbol"
+      >}</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >&#8594;</a
+      ><a name="659"
+      > </a
+      ><a name="660" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="BiGUL.BiGUL.html#649" class="Bound"
+      >S</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="BiGUL.Universe.html#586" class="InductiveConstructor"
+      >one</a
+      ><a name="671"
+      >
+    </a
+      ><a name="676" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="683"
+      > </a
+      ><a name="684" class="Symbol"
+      >:</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >{</a
+      ><a name="687" href="BiGUL.BiGUL.html#687" class="Bound"
+      >S</a
+      ><a name="688"
+      > </a
+      ><a name="689" class="Symbol"
+      >:</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="694" class="Symbol"
+      >}</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >&#8594;</a
+      ><a name="697"
+      > </a
+      ><a name="698" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="BiGUL.BiGUL.html#687" class="Bound"
+      >S</a
+      ><a name="705"
+      > </a
+      ><a name="706" href="BiGUL.BiGUL.html#687" class="Bound"
+      >S</a
+      ><a name="707"
+      >
+    </a
+      ><a name="712" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="718"
+      >  </a
+      ><a name="720" class="Symbol"
+      >:</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >{</a
+      ><a name="723" href="BiGUL.BiGUL.html#723" class="Bound"
+      >S</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >:</a
+      ><a name="726"
+      > </a
+      ><a name="727" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="730" class="Symbol"
+      >}</a
+      ><a name="731"
+      > </a
+      ><a name="732" class="Symbol"
+      >&#8594;</a
+      ><a name="733"
+      > </a
+      ><a name="734" class="Symbol"
+      >(</a
+      ><a name="735" href="BiGUL.BiGUL.html#735" class="Bound"
+      >pat</a
+      ><a name="738"
+      > </a
+      ><a name="739" class="Symbol"
+      >:</a
+      ><a name="740"
+      > </a
+      ><a name="741" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="750"
+      > </a
+      ><a name="751" href="BiGUL.BiGUL.html#723" class="Bound"
+      >S</a
+      ><a name="752" class="Symbol"
+      >)</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >(</a
+      ><a name="755" href="BiGUL.BiGUL.html#755" class="Bound"
+      >bs</a
+      ><a name="757"
+      > </a
+      ><a name="758" class="Symbol"
+      >:</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="768"
+      > </a
+      ><a name="769" href="BiGUL.BiGUL.html#735" class="Bound"
+      >pat</a
+      ><a name="772" class="Symbol"
+      >)</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Symbol"
+      >&#8594;</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="781"
+      > </a
+      ><a name="782" href="BiGUL.BiGUL.html#723" class="Bound"
+      >S</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >(</a
+      ><a name="785" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="798"
+      > </a
+      ><a name="799" href="BiGUL.BiGUL.html#735" class="Bound"
+      >pat</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="BiGUL.BiGUL.html#755" class="Bound"
+      >bs</a
+      ><a name="805" class="Symbol"
+      >)</a
+      ><a name="806"
+      >
+    </a
+      ><a name="811" href="BiGUL.BiGUL.html#811" class="InductiveConstructor"
+      >rearr</a
+      ><a name="816"
+      >   </a
+      ><a name="819" class="Symbol"
+      >:</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >{</a
+      ><a name="822" href="BiGUL.BiGUL.html#822" class="Bound"
+      >S</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="BiGUL.BiGUL.html#824" class="Bound"
+      >V</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="BiGUL.BiGUL.html#826" class="Bound"
+      >V'</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >:</a
+      ><a name="830"
+      > </a
+      ><a name="831" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="832"
+      > </a
+      ><a name="833" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="834" class="Symbol"
+      >}</a
+      ><a name="835"
+      > </a
+      ><a name="836" class="Symbol"
+      >&#8594;</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >(</a
+      ><a name="839" href="BiGUL.BiGUL.html#839" class="Bound"
+      >vpat</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >:</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="855"
+      > </a
+      ><a name="856" href="BiGUL.BiGUL.html#824" class="Bound"
+      >V</a
+      ><a name="857" class="Symbol"
+      >)</a
+      ><a name="858"
+      > </a
+      ><a name="859" class="Symbol"
+      >(</a
+      ><a name="860" href="BiGUL.BiGUL.html#860" class="Bound"
+      >vpat'</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >:</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="BiGUL.BiGUL.html#826" class="Bound"
+      >V'</a
+      ><a name="880" class="Symbol"
+      >)</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >(</a
+      ><a name="883" href="BiGUL.BiGUL.html#883" class="Bound"
+      >expr</a
+      ><a name="887"
+      > </a
+      ><a name="888" class="Symbol"
+      >:</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="BiGUL.ViewRearrangement.html#1540" class="Function"
+      >Expr</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="BiGUL.BiGUL.html#839" class="Bound"
+      >vpat</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="BiGUL.BiGUL.html#860" class="Bound"
+      >vpat'</a
+      ><a name="905" class="Symbol"
+      >)</a
+      ><a name="906"
+      >
+                               </a
+      ><a name="938" class="Symbol"
+      >(</a
+      ><a name="939" href="BiGUL.BiGUL.html#939" class="Bound"
+      >b</a
+      ><a name="940"
+      > </a
+      ><a name="941" class="Symbol"
+      >:</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="BiGUL.BiGUL.html#822" class="Bound"
+      >S</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="BiGUL.BiGUL.html#826" class="Bound"
+      >V'</a
+      ><a name="953" class="Symbol"
+      >)</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="Symbol"
+      >&#8594;</a
+      ><a name="956"
+      > </a
+      ><a name="957" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="BiGUL.BiGUL.html#822" class="Bound"
+      >S</a
+      ><a name="964"
+      > </a
+      ><a name="965" href="BiGUL.BiGUL.html#824" class="Bound"
+      >V</a
+      ><a name="966"
+      >
+    </a
+      ><a name="971" href="BiGUL.BiGUL.html#971" class="InductiveConstructor"
+      >caseS</a
+      ><a name="976"
+      >   </a
+      ><a name="979" class="Symbol"
+      >:</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >{</a
+      ><a name="982" href="BiGUL.BiGUL.html#982" class="Bound"
+      >S</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="BiGUL.BiGUL.html#984" class="Bound"
+      >V</a
+      ><a name="985"
+      > </a
+      ><a name="986" class="Symbol"
+      >:</a
+      ><a name="987"
+      > </a
+      ><a name="988" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="989"
+      > </a
+      ><a name="990" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="991" class="Symbol"
+      >}</a
+      ><a name="992"
+      > </a
+      ><a name="993" class="Symbol"
+      >&#8594;</a
+      ><a name="994"
+      > </a
+      ><a name="995" class="Symbol"
+      >(</a
+      ><a name="996" href="BiGUL.BiGUL.html#996" class="Bound"
+      >branches</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" class="Symbol"
+      >:</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" class="Symbol"
+      >(</a
+      ><a name="1013" href="BiGUL.BiGUL.html#2620" class="Function"
+      >CaseSBranch</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="BiGUL.BiGUL.html#982" class="Bound"
+      >S</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="BiGUL.BiGUL.html#984" class="Bound"
+      >V</a
+      ><a name="1028" class="Symbol"
+      >))</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >&#8594;</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="BiGUL.BiGUL.html#982" class="Bound"
+      >S</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" href="BiGUL.BiGUL.html#984" class="Bound"
+      >V</a
+      ><a name="1042"
+      >
+    </a
+      ><a name="1047" href="BiGUL.BiGUL.html#1047" class="InductiveConstructor"
+      >caseV</a
+      ><a name="1052"
+      >   </a
+      ><a name="1055" class="Symbol"
+      >:</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" class="Symbol"
+      >{</a
+      ><a name="1058" href="BiGUL.BiGUL.html#1058" class="Bound"
+      >S</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="BiGUL.BiGUL.html#1060" class="Bound"
+      >V</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >:</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1067" class="Symbol"
+      >}</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" class="Symbol"
+      >&#8594;</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >(</a
+      ><a name="1072" href="BiGUL.BiGUL.html#1072" class="Bound"
+      >branches</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" class="Symbol"
+      >:</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" class="Symbol"
+      >(</a
+      ><a name="1089" href="BiGUL.BiGUL.html#2723" class="Function"
+      >CaseVBranch</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="BiGUL.BiGUL.html#1058" class="Bound"
+      >S</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="BiGUL.BiGUL.html#1060" class="Bound"
+      >V</a
+      ><a name="1104" class="Symbol"
+      >))</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" class="Symbol"
+      >&#8594;</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="BiGUL.BiGUL.html#1058" class="Bound"
+      >S</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" href="BiGUL.BiGUL.html#1060" class="Bound"
+      >V</a
+      ><a name="1118"
+      >
+    </a
+      ><a name="1123" href="BiGUL.BiGUL.html#1123" class="InductiveConstructor"
+      >align</a
+      ><a name="1128"
+      >   </a
+      ><a name="1131" class="Symbol"
+      >:</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" class="Symbol"
+      >{</a
+      ><a name="1134" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="BiGUL.BiGUL.html#1136" class="Bound"
+      >V</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" class="Symbol"
+      >:</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1143" class="Symbol"
+      >}</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" class="Symbol"
+      >&#8594;</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" class="Symbol"
+      >(</a
+      ><a name="1148" href="BiGUL.BiGUL.html#1148" class="Bound"
+      >source-condition</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" class="Symbol"
+      >:</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" class="Symbol"
+      >(</a
+      ><a name="1174" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1177" class="Symbol"
+      >)</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" class="Symbol"
+      >&#8594;</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="1189" class="Symbol"
+      >)</a
+      ><a name="1190"
+      >
+                            </a
+      ><a name="1219" class="Symbol"
+      >(</a
+      ><a name="1220" href="BiGUL.BiGUL.html#1220" class="Bound"
+      >match?</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >:</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >(</a
+      ><a name="1236" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1239" class="Symbol"
+      >)</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" class="Symbol"
+      >&#8594;</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="BiGUL.BiGUL.html#1136" class="Bound"
+      >V</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" class="Symbol"
+      >(</a
+      ><a name="1250" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1253" class="Symbol"
+      >)</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >&#8594;</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="1265" class="Symbol"
+      >)</a
+      ><a name="1266"
+      >
+                            </a
+      ><a name="1295" class="Symbol"
+      >(</a
+      ><a name="1296" href="BiGUL.BiGUL.html#1296" class="Bound"
+      >b</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" class="Symbol"
+      >:</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="BiGUL.BiGUL.html#1136" class="Bound"
+      >V</a
+      ><a name="1309" class="Symbol"
+      >)</a
+      ><a name="1310"
+      >
+                            </a
+      ><a name="1339" class="Symbol"
+      >(</a
+      ><a name="1340" href="BiGUL.BiGUL.html#1340" class="Bound"
+      >create</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="Symbol"
+      >:</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="BiGUL.BiGUL.html#1136" class="Bound"
+      >V</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" class="Symbol"
+      >(</a
+      ><a name="1356" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1359" class="Symbol"
+      >)</a
+      ><a name="1360"
+      > </a
+      ><a name="1361" class="Symbol"
+      >&#8594;</a
+      ><a name="1362"
+      > </a
+      ><a name="1363" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" class="Symbol"
+      >(</a
+      ><a name="1368" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" class="Symbol"
+      >(</a
+      ><a name="1375" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1378" class="Symbol"
+      >)))</a
+      ><a name="1381"
+      >
+                            </a
+      ><a name="1410" class="Symbol"
+      >(</a
+      ><a name="1411" href="BiGUL.BiGUL.html#1411" class="Bound"
+      >conceal</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" class="Symbol"
+      >:</a
+      ><a name="1420"
+      > </a
+      ><a name="1421" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1426"
+      > </a
+      ><a name="1427" class="Symbol"
+      >(</a
+      ><a name="1428" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1431" class="Symbol"
+      >)</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="Symbol"
+      >&#8594;</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" class="Symbol"
+      >(</a
+      ><a name="1440" href="Data.Maybe.Base.html#335" class="Datatype"
+      >Maybe</a
+      ><a name="1445"
+      > </a
+      ><a name="1446" class="Symbol"
+      >(</a
+      ><a name="1447" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" class="Symbol"
+      >(</a
+      ><a name="1454" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1457" class="Symbol"
+      >))))</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" class="Symbol"
+      >&#8594;</a
+      ><a name="1463"
+      >
+                            </a
+      ><a name="1492" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >(</a
+      ><a name="1499" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" href="BiGUL.BiGUL.html#1134" class="Bound"
+      >S</a
+      ><a name="1505" class="Symbol"
+      >)</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" class="Symbol"
+      >(</a
+      ><a name="1508" href="BiGUL.Universe.html#653" class="InductiveConstructor"
+      >list</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" href="BiGUL.BiGUL.html#1136" class="Bound"
+      >V</a
+      ><a name="1514" class="Symbol"
+      >)</a
+      ><a name="1515"
+      >
+
+  </a
+      ><a name="1519" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" class="Symbol"
+      >:</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" class="Symbol"
+      >{</a
+      ><a name="1531" href="BiGUL.BiGUL.html#1531" class="Bound"
+      >G</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" class="Symbol"
+      >:</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1538" class="Symbol"
+      >}</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" class="Symbol"
+      >&#8594;</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="BiGUL.BiGUL.html#1531" class="Bound"
+      >G</a
+      ><a name="1553"
+      > </a
+      ><a name="1554" class="Symbol"
+      >&#8594;</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1560"
+      >
+  </a
+      ><a name="1563" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >{</a
+      ><a name="1573" href="BiGUL.BiGUL.html#1573" class="Bound"
+      >G</a
+      ><a name="1574" class="Symbol"
+      >}</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1579"
+      >          </a
+      ><a name="1589" class="Symbol"
+      >=</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="BiGUL.BiGUL.html#1594" class="Bound"
+      >H</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" href="BiGUL.BiGUL.html#1573" class="Bound"
+      >G</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" href="BiGUL.BiGUL.html#1594" class="Bound"
+      >H</a
+      ><a name="1613"
+      >
+  </a
+      ><a name="1616" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" class="Symbol"
+      >(</a
+      ><a name="1626" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" href="BiGUL.BiGUL.html#1628" class="Bound"
+      >x</a
+      ><a name="1629"
+      >           </a
+      ><a name="1640" class="Symbol"
+      >)</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >=</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="1645"
+      >
+  </a
+      ><a name="1648" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" class="Symbol"
+      >(</a
+      ><a name="1658" href="BiGUL.Universe.html#3420" class="InductiveConstructor"
+      >child</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" href="BiGUL.BiGUL.html#1664" class="Bound"
+      >pat</a
+      ><a name="1667"
+      >     </a
+      ><a name="1672" class="Symbol"
+      >)</a
+      ><a name="1673"
+      > </a
+      ><a name="1674" class="Symbol"
+      >=</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="BiGUL.BiGUL.html#1664" class="Bound"
+      >pat</a
+      ><a name="1688"
+      >
+  </a
+      ><a name="1691" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" class="Symbol"
+      >(</a
+      ><a name="1701" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="BiGUL.BiGUL.html#1706" class="Bound"
+      >pat</a
+      ><a name="1709"
+      >      </a
+      ><a name="1715" class="Symbol"
+      >)</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" class="Symbol"
+      >=</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="BiGUL.BiGUL.html#1706" class="Bound"
+      >pat</a
+      ><a name="1731"
+      >
+  </a
+      ><a name="1734" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >(</a
+      ><a name="1744" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="1749"
+      > </a
+      ><a name="1750" href="BiGUL.BiGUL.html#1750" class="Bound"
+      >pat</a
+      ><a name="1753"
+      >     </a
+      ><a name="1758" class="Symbol"
+      >)</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" class="Symbol"
+      >=</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="BiGUL.BiGUL.html#1750" class="Bound"
+      >pat</a
+      ><a name="1774"
+      >
+  </a
+      ><a name="1777" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >(</a
+      ><a name="1787" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="BiGUL.BiGUL.html#1792" class="Bound"
+      >lpat</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="BiGUL.BiGUL.html#1797" class="Bound"
+      >rpat</a
+      ><a name="1801" class="Symbol"
+      >)</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >=</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" href="BiGUL.BiGUL.html#1792" class="Bound"
+      >lpat</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="BiGUL.BiGUL.html#1797" class="Bound"
+      >rpat</a
+      ><a name="1834"
+      >
+  </a
+      ><a name="1837" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >(</a
+      ><a name="1847" href="BiGUL.Universe.html#3694" class="InductiveConstructor"
+      >elem</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="BiGUL.BiGUL.html#1852" class="Bound"
+      >hpat</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="BiGUL.BiGUL.html#1857" class="Bound"
+      >tpat</a
+      ><a name="1861" class="Symbol"
+      >)</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" class="Symbol"
+      >=</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" href="BiGUL.BiGUL.html#1852" class="Bound"
+      >hpat</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1880"
+      > </a
+      ><a name="1881" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" href="BiGUL.BiGUL.html#1857" class="Bound"
+      >tpat</a
+      ><a name="1894"
+      >
+
+  </a
+      ><a name="1898" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" class="Symbol"
+      >:</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" class="Symbol"
+      >{</a
+      ><a name="1915" href="BiGUL.BiGUL.html#1915" class="Bound"
+      >G</a
+      ><a name="1916"
+      > </a
+      ><a name="1917" class="Symbol"
+      >:</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1922" class="Symbol"
+      >}</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" class="Symbol"
+      >(</a
+      ><a name="1925" href="BiGUL.BiGUL.html#1925" class="Bound"
+      >pat</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" class="Symbol"
+      >:</a
+      ><a name="1930"
+      > </a
+      ><a name="1931" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" href="BiGUL.BiGUL.html#1915" class="Bound"
+      >G</a
+      ><a name="1942" class="Symbol"
+      >)</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >&#8594;</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" href="BiGUL.BiGUL.html#1925" class="Bound"
+      >pat</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" class="Symbol"
+      >&#8594;</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="1964"
+      >
+  </a
+      ><a name="1967" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="1980"
+      > </a
+      ><a name="1981" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="1984"
+      >              </a
+      ><a name="1998" class="Symbol"
+      >(</a
+      ><a name="1999" href="BiGUL.BiGUL.html#1999" class="Bound"
+      >H</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" class="Symbol"
+      >_)</a
+      ><a name="2005"
+      >    </a
+      ><a name="2009" class="Symbol"
+      >=</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="BiGUL.BiGUL.html#1999" class="Bound"
+      >H</a
+      ><a name="2012"
+      >
+  </a
+      ><a name="2015" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" class="Symbol"
+      >(</a
+      ><a name="2030" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" href="BiGUL.BiGUL.html#2032" class="Bound"
+      >x</a
+      ><a name="2033"
+      >           </a
+      ><a name="2044" class="Symbol"
+      >)</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="BiGUL.Utilities.html#355" class="InductiveConstructor"
+      >tt</a
+      ><a name="2048"
+      >         </a
+      ><a name="2057" class="Symbol"
+      >=</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" href="BiGUL.Universe.html#586" class="InductiveConstructor"
+      >one</a
+      ><a name="2062"
+      >
+  </a
+      ><a name="2065" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >(</a
+      ><a name="2080" href="BiGUL.Universe.html#3420" class="InductiveConstructor"
+      >child</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" href="BiGUL.BiGUL.html#2086" class="Bound"
+      >pat</a
+      ><a name="2089"
+      >     </a
+      ><a name="2094" class="Symbol"
+      >)</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" href="BiGUL.BiGUL.html#2096" class="Bound"
+      >bs</a
+      ><a name="2098"
+      >         </a
+      ><a name="2107" class="Symbol"
+      >=</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" href="BiGUL.BiGUL.html#2086" class="Bound"
+      >pat</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" href="BiGUL.BiGUL.html#2096" class="Bound"
+      >bs</a
+      ><a name="2129"
+      >
+  </a
+      ><a name="2132" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" class="Symbol"
+      >(</a
+      ><a name="2147" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="2151"
+      > </a
+      ><a name="2152" href="BiGUL.BiGUL.html#2152" class="Bound"
+      >pat</a
+      ><a name="2155"
+      >      </a
+      ><a name="2161" class="Symbol"
+      >)</a
+      ><a name="2162"
+      > </a
+      ><a name="2163" href="BiGUL.BiGUL.html#2163" class="Bound"
+      >bs</a
+      ><a name="2165"
+      >         </a
+      ><a name="2174" class="Symbol"
+      >=</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" href="BiGUL.BiGUL.html#2152" class="Bound"
+      >pat</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" href="BiGUL.BiGUL.html#2163" class="Bound"
+      >bs</a
+      ><a name="2196"
+      >
+  </a
+      ><a name="2199" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >(</a
+      ><a name="2214" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" href="BiGUL.BiGUL.html#2220" class="Bound"
+      >pat</a
+      ><a name="2223"
+      >     </a
+      ><a name="2228" class="Symbol"
+      >)</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="BiGUL.BiGUL.html#2230" class="Bound"
+      >bs</a
+      ><a name="2232"
+      >         </a
+      ><a name="2241" class="Symbol"
+      >=</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" href="BiGUL.BiGUL.html#2220" class="Bound"
+      >pat</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" href="BiGUL.BiGUL.html#2230" class="Bound"
+      >bs</a
+      ><a name="2263"
+      >
+  </a
+      ><a name="2266" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" class="Symbol"
+      >(</a
+      ><a name="2281" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="BiGUL.BiGUL.html#2286" class="Bound"
+      >lpat</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" href="BiGUL.BiGUL.html#2291" class="Bound"
+      >rpat</a
+      ><a name="2295" class="Symbol"
+      >)</a
+      ><a name="2296"
+      > </a
+      ><a name="2297" class="Symbol"
+      >(</a
+      ><a name="2298" href="BiGUL.BiGUL.html#2298" class="Bound"
+      >bs</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" href="BiGUL.BiGUL.html#2303" class="Bound"
+      >bs'</a
+      ><a name="2306" class="Symbol"
+      >)</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Symbol"
+      >=</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2323"
+      > </a
+      ><a name="2324" href="BiGUL.BiGUL.html#2286" class="Bound"
+      >lpat</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" href="BiGUL.BiGUL.html#2298" class="Bound"
+      >bs</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="2333"
+      > </a
+      ><a name="2334" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="BiGUL.BiGUL.html#2291" class="Bound"
+      >rpat</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="BiGUL.BiGUL.html#2303" class="Bound"
+      >bs'</a
+      ><a name="2356"
+      >
+  </a
+      ><a name="2359" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" class="Symbol"
+      >(</a
+      ><a name="2374" href="BiGUL.Universe.html#3694" class="InductiveConstructor"
+      >elem</a
+      ><a name="2378"
+      > </a
+      ><a name="2379" href="BiGUL.BiGUL.html#2379" class="Bound"
+      >hpat</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="BiGUL.BiGUL.html#2384" class="Bound"
+      >tpat</a
+      ><a name="2388" class="Symbol"
+      >)</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" class="Symbol"
+      >(</a
+      ><a name="2391" href="BiGUL.BiGUL.html#2391" class="Bound"
+      >bs</a
+      ><a name="2393"
+      > </a
+      ><a name="2394" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" href="BiGUL.BiGUL.html#2396" class="Bound"
+      >bs'</a
+      ><a name="2399" class="Symbol"
+      >)</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" class="Symbol"
+      >=</a
+      ><a name="2402"
+      > </a
+      ><a name="2403" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" href="BiGUL.BiGUL.html#2379" class="Bound"
+      >hpat</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="BiGUL.BiGUL.html#2391" class="Bound"
+      >bs</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" href="BiGUL.Universe.html#626" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="2440"
+      > </a
+      ><a name="2441" href="BiGUL.BiGUL.html#2384" class="Bound"
+      >tpat</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="BiGUL.BiGUL.html#2396" class="Bound"
+      >bs'</a
+      ><a name="2449"
+      >
+
+  </a
+      ><a name="2453" class="Keyword"
+      >data</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" href="BiGUL.BiGUL.html#2458" class="Datatype"
+      >CaseSBranchType</a
+      ><a name="2473"
+      > </a
+      ><a name="2474" class="Symbol"
+      >(</a
+      ><a name="2475" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="BiGUL.BiGUL.html#2477" class="Bound"
+      >V</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" class="Symbol"
+      >:</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="2484" class="Symbol"
+      >)</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" class="Symbol"
+      >:</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Keyword"
+      >where</a
+      ><a name="2498"
+      >
+    </a
+      ><a name="2503" href="BiGUL.BiGUL.html#2503" class="InductiveConstructor"
+      >normal</a
+      ><a name="2509"
+      >   </a
+      ><a name="2512" class="Symbol"
+      >:</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" href="BiGUL.BiGUL.html#2477" class="Bound"
+      >V</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" class="Symbol"
+      >&#8594;</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="BiGUL.BiGUL.html#2458" class="Datatype"
+      >CaseSBranchType</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="BiGUL.BiGUL.html#2477" class="Bound"
+      >V</a
+      ><a name="2545"
+      >
+    </a
+      ><a name="2550" href="BiGUL.BiGUL.html#2550" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" class="Symbol"
+      >:</a
+      ><a name="2560"
+      > </a
+      ><a name="2561" class="Symbol"
+      >(</a
+      ><a name="2562" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2565"
+      > </a
+      ><a name="2566" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" class="Symbol"
+      >(</a
+      ><a name="2569" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="2572" class="Symbol"
+      >)</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" class="Symbol"
+      >&#8594;</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >(</a
+      ><a name="2581" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" class="Symbol"
+      >(</a
+      ><a name="2588" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="2591" class="Symbol"
+      >)))</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" class="Symbol"
+      >&#8594;</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="BiGUL.BiGUL.html#2458" class="Datatype"
+      >CaseSBranchType</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" href="BiGUL.BiGUL.html#2475" class="Bound"
+      >S</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="BiGUL.BiGUL.html#2477" class="Bound"
+      >V</a
+      ><a name="2616"
+      >
+
+  </a
+      ><a name="2620" href="BiGUL.BiGUL.html#2620" class="Function"
+      >CaseSBranch</a
+      ><a name="2631"
+      > </a
+      ><a name="2632" class="Symbol"
+      >:</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" class="Symbol"
+      >(</a
+      ><a name="2635" href="BiGUL.BiGUL.html#2635" class="Bound"
+      >S</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" href="BiGUL.BiGUL.html#2637" class="Bound"
+      >V</a
+      ><a name="2638"
+      > </a
+      ><a name="2639" class="Symbol"
+      >:</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="2642"
+      > </a
+      ><a name="2643" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="2644" class="Symbol"
+      >)</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" class="Symbol"
+      >&#8594;</a
+      ><a name="2647"
+      > </a
+      ><a name="2648" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="2652"
+      >
+  </a
+      ><a name="2655" href="BiGUL.BiGUL.html#2620" class="Function"
+      >CaseSBranch</a
+      ><a name="2666"
+      > </a
+      ><a name="2667" href="BiGUL.BiGUL.html#2667" class="Bound"
+      >S</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="BiGUL.BiGUL.html#2669" class="Bound"
+      >V</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" class="Symbol"
+      >=</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" class="Symbol"
+      >(</a
+      ><a name="2674" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="2675"
+      > </a
+      ><a name="2676" href="BiGUL.BiGUL.html#2667" class="Bound"
+      >S</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" class="Symbol"
+      >(</a
+      ><a name="2681" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="2684" class="Symbol"
+      >)</a
+      ><a name="2685"
+      > </a
+      ><a name="2686" class="Symbol"
+      >&#8594;</a
+      ><a name="2687"
+      > </a
+      ><a name="2688" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2691"
+      > </a
+      ><a name="2692" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="2696" class="Symbol"
+      >)</a
+      ><a name="2697"
+      > </a
+      ><a name="2698" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="BiGUL.BiGUL.html#2458" class="Datatype"
+      >CaseSBranchType</a
+      ><a name="2715"
+      > </a
+      ><a name="2716" href="BiGUL.BiGUL.html#2667" class="Bound"
+      >S</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="BiGUL.BiGUL.html#2669" class="Bound"
+      >V</a
+      ><a name="2719"
+      >
+
+  </a
+      ><a name="2723" href="BiGUL.BiGUL.html#2723" class="Function"
+      >CaseVBranch</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >:</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="Symbol"
+      >(</a
+      ><a name="2738" href="BiGUL.BiGUL.html#2738" class="Bound"
+      >S</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" href="BiGUL.BiGUL.html#2740" class="Bound"
+      >V</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" class="Symbol"
+      >:</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="2745"
+      > </a
+      ><a name="2746" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="2747" class="Symbol"
+      >)</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >&#8594;</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="2755"
+      >
+  </a
+      ><a name="2758" href="BiGUL.BiGUL.html#2723" class="Function"
+      >CaseVBranch</a
+      ><a name="2769"
+      > </a
+      ><a name="2770" href="BiGUL.BiGUL.html#2770" class="Bound"
+      >S</a
+      ><a name="2771"
+      > </a
+      ><a name="2772" href="BiGUL.BiGUL.html#2772" class="Bound"
+      >V</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" class="Symbol"
+      >=</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" class="Symbol"
+      >(</a
+      ><a name="2777" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" href="BiGUL.BiGUL.html#2772" class="Bound"
+      >V</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >(</a
+      ><a name="2784" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="2785"
+      > </a
+      ><a name="2786" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="2787" class="Symbol"
+      >)</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" class="Symbol"
+      >&#8594;</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="BiGUL.Partiality.html#586" class="Datatype"
+      >Par</a
+      ><a name="2794"
+      > </a
+      ><a name="2795" href="Data.Bool.Base.html#531" class="Datatype"
+      >Bool</a
+      ><a name="2799" class="Symbol"
+      >)</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" href="BiGUL.BiGUL.html#2770" class="Bound"
+      >S</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="BiGUL.BiGUL.html#2772" class="Bound"
+      >V</a
+      ><a name="2812"
+      >
+
+</a
+      ><a name="2814" class="Keyword"
+      >mutual</a
+      ><a name="2820"
+      >
+
+  </a
+      ><a name="2824" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2841"
+      > </a
+      ><a name="2842" class="Symbol"
+      >:</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" class="Symbol"
+      >{</a
+      ><a name="2845" href="BiGUL.BiGUL.html#2845" class="Bound"
+      >S</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="BiGUL.BiGUL.html#2847" class="Bound"
+      >V</a
+      ><a name="2848"
+      > </a
+      ><a name="2849" class="Symbol"
+      >:</a
+      ><a name="2850"
+      > </a
+      ><a name="2851" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="2854" class="Symbol"
+      >}</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" class="Symbol"
+      >&#8594;</a
+      ><a name="2857"
+      > </a
+      ><a name="2858" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="BiGUL.BiGUL.html#2845" class="Bound"
+      >S</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="BiGUL.BiGUL.html#2847" class="Bound"
+      >V</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" class="Symbol"
+      >&#8594;</a
+      ><a name="2869"
+      > </a
+      ><a name="2870" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="2874"
+      >
+  </a
+      ><a name="2877" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2894"
+      > </a
+      ><a name="2895" href="BiGUL.BiGUL.html#600" class="InductiveConstructor"
+      >fail</a
+      ><a name="2899"
+      > </a
+      ><a name="2900" class="Symbol"
+      >=</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="2903"
+      >
+  </a
+      ><a name="2906" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="BiGUL.BiGUL.html#638" class="InductiveConstructor"
+      >skip</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" class="Symbol"
+      >=</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="2932"
+      >
+  </a
+      ><a name="2935" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" class="Symbol"
+      >=</a
+      ><a name="2962"
+      > </a
+      ><a name="2963" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="2964"
+      >
+  </a
+      ><a name="2967" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" class="Symbol"
+      >(</a
+      ><a name="2986" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="2992"
+      > </a
+      ><a name="2993" href="BiGUL.BiGUL.html#2993" class="Bound"
+      >pat</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="BiGUL.BiGUL.html#2997" class="Bound"
+      >bs</a
+      ><a name="2999" class="Symbol"
+      >)</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" class="Symbol"
+      >=</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="BiGUL.BiGUL.html#2993" class="Bound"
+      >pat</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="BiGUL.BiGUL.html#2997" class="Bound"
+      >bs</a
+      ><a name="3030"
+      >
+  </a
+      ><a name="3033" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >(</a
+      ><a name="3052" href="BiGUL.BiGUL.html#811" class="InductiveConstructor"
+      >rearr</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="BiGUL.BiGUL.html#3058" class="Bound"
+      >vpat</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" href="BiGUL.BiGUL.html#3063" class="Bound"
+      >vpat'</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" href="BiGUL.BiGUL.html#3069" class="Bound"
+      >expr</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="BiGUL.BiGUL.html#3074" class="Bound"
+      >b</a
+      ><a name="3075" class="Symbol"
+      >)</a
+      ><a name="3076"
+      > </a
+      ><a name="3077" class="Symbol"
+      >=</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" href="BiGUL.ViewRearrangement.html#7936" class="Function"
+      >CompleteExpr</a
+      ><a name="3091"
+      > </a
+      ><a name="3092" href="BiGUL.BiGUL.html#3058" class="Bound"
+      >vpat</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" href="BiGUL.BiGUL.html#3063" class="Bound"
+      >vpat'</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" href="BiGUL.BiGUL.html#3069" class="Bound"
+      >expr</a
+      ><a name="3107"
+      > </a
+      ><a name="3108" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="3109"
+      > </a
+      ><a name="3110" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3127"
+      > </a
+      ><a name="3128" href="BiGUL.BiGUL.html#3074" class="Bound"
+      >b</a
+      ><a name="3129"
+      >
+  </a
+      ><a name="3132" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3149"
+      > </a
+      ><a name="3150" class="Symbol"
+      >(</a
+      ><a name="3151" href="BiGUL.BiGUL.html#971" class="InductiveConstructor"
+      >caseS</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" href="BiGUL.BiGUL.html#3157" class="Bound"
+      >branches</a
+      ><a name="3165" class="Symbol"
+      >)</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" class="Symbol"
+      >=</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="3194"
+      > </a
+      ><a name="3195" href="BiGUL.BiGUL.html#3157" class="Bound"
+      >branches</a
+      ><a name="3203"
+      >
+  </a
+      ><a name="3206" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3223"
+      > </a
+      ><a name="3224" class="Symbol"
+      >(</a
+      ><a name="3225" href="BiGUL.BiGUL.html#1047" class="InductiveConstructor"
+      >caseV</a
+      ><a name="3230"
+      > </a
+      ><a name="3231" href="BiGUL.BiGUL.html#3231" class="Bound"
+      >branches</a
+      ><a name="3239" class="Symbol"
+      >)</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" class="Symbol"
+      >=</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="3268"
+      > </a
+      ><a name="3269" href="BiGUL.BiGUL.html#3231" class="Bound"
+      >branches</a
+      ><a name="3277"
+      >
+  </a
+      ><a name="3280" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3297"
+      > </a
+      ><a name="3298" class="Symbol"
+      >(</a
+      ><a name="3299" href="BiGUL.BiGUL.html#1123" class="InductiveConstructor"
+      >align</a
+      ><a name="3304"
+      > </a
+      ><a name="3305" href="BiGUL.BiGUL.html#3305" class="Bound"
+      >source-condition</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" href="BiGUL.BiGUL.html#3322" class="Bound"
+      >match?</a
+      ><a name="3328"
+      > </a
+      ><a name="3329" href="BiGUL.BiGUL.html#3329" class="Bound"
+      >b</a
+      ><a name="3330"
+      > </a
+      ><a name="3331" href="BiGUL.BiGUL.html#3331" class="Bound"
+      >create</a
+      ><a name="3337"
+      > </a
+      ><a name="3338" href="BiGUL.BiGUL.html#3338" class="Bound"
+      >conceal</a
+      ><a name="3345" class="Symbol"
+      >)</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >=</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3366"
+      > </a
+      ><a name="3367" href="BiGUL.BiGUL.html#3329" class="Bound"
+      >b</a
+      ><a name="3368"
+      >
+
+  </a
+      ><a name="3372" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3392"
+      > </a
+      ><a name="3393" class="Symbol"
+      >:</a
+      ><a name="3394"
+      > </a
+      ><a name="3395" class="Symbol"
+      >{</a
+      ><a name="3396" href="BiGUL.BiGUL.html#3396" class="Bound"
+      >S</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" class="Symbol"
+      >:</a
+      ><a name="3399"
+      > </a
+      ><a name="3400" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="3401"
+      > </a
+      ><a name="3402" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="3403" class="Symbol"
+      >}</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" class="Symbol"
+      >(</a
+      ><a name="3406" href="BiGUL.BiGUL.html#3406" class="Bound"
+      >pat</a
+      ><a name="3409"
+      > </a
+      ><a name="3410" class="Symbol"
+      >:</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="3421"
+      > </a
+      ><a name="3422" href="BiGUL.BiGUL.html#3396" class="Bound"
+      >S</a
+      ><a name="3423" class="Symbol"
+      >)</a
+      ><a name="3424"
+      > </a
+      ><a name="3425" class="Symbol"
+      >&#8594;</a
+      ><a name="3426"
+      > </a
+      ><a name="3427" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="3435"
+      > </a
+      ><a name="3436" href="BiGUL.BiGUL.html#3406" class="Bound"
+      >pat</a
+      ><a name="3439"
+      > </a
+      ><a name="3440" class="Symbol"
+      >&#8594;</a
+      ><a name="3441"
+      > </a
+      ><a name="3442" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="3446"
+      >
+  </a
+      ><a name="3449" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="3473"
+      >              </a
+      ><a name="3487" class="Symbol"
+      >(_</a
+      ><a name="3489"
+      > </a
+      ><a name="3490" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" href="BiGUL.BiGUL.html#3492" class="Bound"
+      >b</a
+      ><a name="3493" class="Symbol"
+      >)</a
+      ><a name="3494"
+      >    </a
+      ><a name="3498" class="Symbol"
+      >=</a
+      ><a name="3499"
+      > </a
+      ><a name="3500" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="BiGUL.BiGUL.html#3492" class="Bound"
+      >b</a
+      ><a name="3519"
+      >
+  </a
+      ><a name="3522" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3542"
+      > </a
+      ><a name="3543" class="Symbol"
+      >(</a
+      ><a name="3544" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="3545"
+      > </a
+      ><a name="3546" href="BiGUL.BiGUL.html#3546" class="Bound"
+      >x</a
+      ><a name="3547" class="Symbol"
+      >)</a
+      ><a name="3548"
+      >            </a
+      ><a name="3560" href="BiGUL.BiGUL.html#3560" class="Bound"
+      >bs</a
+      ><a name="3562"
+      >         </a
+      ><a name="3571" class="Symbol"
+      >=</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="3574"
+      >
+  </a
+      ><a name="3577" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3597"
+      > </a
+      ><a name="3598" class="Symbol"
+      >(</a
+      ><a name="3599" href="BiGUL.Universe.html#3420" class="InductiveConstructor"
+      >child</a
+      ><a name="3604"
+      > </a
+      ><a name="3605" href="BiGUL.BiGUL.html#3605" class="Bound"
+      >pat</a
+      ><a name="3608" class="Symbol"
+      >)</a
+      ><a name="3609"
+      >      </a
+      ><a name="3615" href="BiGUL.BiGUL.html#3615" class="Bound"
+      >bs</a
+      ><a name="3617"
+      >         </a
+      ><a name="3626" class="Symbol"
+      >=</a
+      ><a name="3627"
+      > </a
+      ><a name="3628" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="BiGUL.BiGUL.html#3605" class="Bound"
+      >pat</a
+      ><a name="3652"
+      > </a
+      ><a name="3653" href="BiGUL.BiGUL.html#3615" class="Bound"
+      >bs</a
+      ><a name="3655"
+      >
+  </a
+      ><a name="3658" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3678"
+      > </a
+      ><a name="3679" class="Symbol"
+      >(</a
+      ><a name="3680" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="3684"
+      >  </a
+      ><a name="3686" href="BiGUL.BiGUL.html#3686" class="Bound"
+      >pat</a
+      ><a name="3689" class="Symbol"
+      >)</a
+      ><a name="3690"
+      >      </a
+      ><a name="3696" href="BiGUL.BiGUL.html#3696" class="Bound"
+      >bs</a
+      ><a name="3698"
+      >         </a
+      ><a name="3707" class="Symbol"
+      >=</a
+      ><a name="3708"
+      > </a
+      ><a name="3709" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3729"
+      > </a
+      ><a name="3730" href="BiGUL.BiGUL.html#3686" class="Bound"
+      >pat</a
+      ><a name="3733"
+      > </a
+      ><a name="3734" href="BiGUL.BiGUL.html#3696" class="Bound"
+      >bs</a
+      ><a name="3736"
+      >
+  </a
+      ><a name="3739" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3759"
+      > </a
+      ><a name="3760" class="Symbol"
+      >(</a
+      ><a name="3761" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" href="BiGUL.BiGUL.html#3767" class="Bound"
+      >pat</a
+      ><a name="3770" class="Symbol"
+      >)</a
+      ><a name="3771"
+      >      </a
+      ><a name="3777" href="BiGUL.BiGUL.html#3777" class="Bound"
+      >bs</a
+      ><a name="3779"
+      >         </a
+      ><a name="3788" class="Symbol"
+      >=</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3810"
+      > </a
+      ><a name="3811" href="BiGUL.BiGUL.html#3767" class="Bound"
+      >pat</a
+      ><a name="3814"
+      > </a
+      ><a name="3815" href="BiGUL.BiGUL.html#3777" class="Bound"
+      >bs</a
+      ><a name="3817"
+      >
+  </a
+      ><a name="3820" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3840"
+      > </a
+      ><a name="3841" class="Symbol"
+      >(</a
+      ><a name="3842" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="3846"
+      > </a
+      ><a name="3847" href="BiGUL.BiGUL.html#3847" class="Bound"
+      >lpat</a
+      ><a name="3851"
+      > </a
+      ><a name="3852" href="BiGUL.BiGUL.html#3852" class="Bound"
+      >rpat</a
+      ><a name="3856" class="Symbol"
+      >)</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" class="Symbol"
+      >(</a
+      ><a name="3859" href="BiGUL.BiGUL.html#3859" class="Bound"
+      >bs</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3863"
+      > </a
+      ><a name="3864" href="BiGUL.BiGUL.html#3864" class="Bound"
+      >bs'</a
+      ><a name="3867" class="Symbol"
+      >)</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" class="Symbol"
+      >=</a
+      ><a name="3870"
+      > </a
+      ><a name="3871" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3891"
+      > </a
+      ><a name="3892" href="BiGUL.BiGUL.html#3847" class="Bound"
+      >lpat</a
+      ><a name="3896"
+      > </a
+      ><a name="3897" href="BiGUL.BiGUL.html#3859" class="Bound"
+      >bs</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="3901"
+      > </a
+      ><a name="3902" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3922"
+      > </a
+      ><a name="3923" href="BiGUL.BiGUL.html#3852" class="Bound"
+      >rpat</a
+      ><a name="3927"
+      > </a
+      ><a name="3928" href="BiGUL.BiGUL.html#3864" class="Bound"
+      >bs'</a
+      ><a name="3931"
+      >
+  </a
+      ><a name="3934" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="3954"
+      > </a
+      ><a name="3955" class="Symbol"
+      >(</a
+      ><a name="3956" href="BiGUL.Universe.html#3694" class="InductiveConstructor"
+      >elem</a
+      ><a name="3960"
+      > </a
+      ><a name="3961" href="BiGUL.BiGUL.html#3961" class="Bound"
+      >hpat</a
+      ><a name="3965"
+      > </a
+      ><a name="3966" href="BiGUL.BiGUL.html#3966" class="Bound"
+      >tpat</a
+      ><a name="3970" class="Symbol"
+      >)</a
+      ><a name="3971"
+      > </a
+      ><a name="3972" class="Symbol"
+      >(</a
+      ><a name="3973" href="BiGUL.BiGUL.html#3973" class="Bound"
+      >bs</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3977"
+      > </a
+      ><a name="3978" href="BiGUL.BiGUL.html#3978" class="Bound"
+      >bs'</a
+      ><a name="3981" class="Symbol"
+      >)</a
+      ><a name="3982"
+      > </a
+      ><a name="3983" class="Symbol"
+      >=</a
+      ><a name="3984"
+      > </a
+      ><a name="3985" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="4005"
+      > </a
+      ><a name="4006" href="BiGUL.BiGUL.html#3961" class="Bound"
+      >hpat</a
+      ><a name="4010"
+      > </a
+      ><a name="4011" href="BiGUL.BiGUL.html#3973" class="Bound"
+      >bs</a
+      ><a name="4013"
+      > </a
+      ><a name="4014" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="4015"
+      > </a
+      ><a name="4016" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="4036"
+      > </a
+      ><a name="4037" href="BiGUL.BiGUL.html#3966" class="Bound"
+      >tpat</a
+      ><a name="4041"
+      > </a
+      ><a name="4042" href="BiGUL.BiGUL.html#3978" class="Bound"
+      >bs'</a
+      ><a name="4045"
+      >
+
+  </a
+      ><a name="4049" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4074"
+      > </a
+      ><a name="4075" class="Symbol"
+      >:</a
+      ><a name="4076"
+      > </a
+      ><a name="4077" class="Symbol"
+      >{</a
+      ><a name="4078" href="BiGUL.BiGUL.html#4078" class="Bound"
+      >S</a
+      ><a name="4079"
+      > </a
+      ><a name="4080" href="BiGUL.BiGUL.html#4080" class="Bound"
+      >V</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" class="Symbol"
+      >:</a
+      ><a name="4083"
+      > </a
+      ><a name="4084" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="4085"
+      > </a
+      ><a name="4086" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="4087" class="Symbol"
+      >}</a
+      ><a name="4088"
+      > </a
+      ><a name="4089" class="Symbol"
+      >&#8594;</a
+      ><a name="4090"
+      > </a
+      ><a name="4091" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="4095"
+      > </a
+      ><a name="4096" class="Symbol"
+      >(</a
+      ><a name="4097" href="BiGUL.BiGUL.html#2620" class="Function"
+      >CaseSBranch</a
+      ><a name="4108"
+      > </a
+      ><a name="4109" href="BiGUL.BiGUL.html#4078" class="Bound"
+      >S</a
+      ><a name="4110"
+      > </a
+      ><a name="4111" href="BiGUL.BiGUL.html#4080" class="Bound"
+      >V</a
+      ><a name="4112" class="Symbol"
+      >)</a
+      ><a name="4113"
+      > </a
+      ><a name="4114" class="Symbol"
+      >&#8594;</a
+      ><a name="4115"
+      > </a
+      ><a name="4116" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="4120"
+      >
+  </a
+      ><a name="4123" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4148"
+      > </a
+      ><a name="4149" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="4151"
+      >                            </a
+      ><a name="4179" class="Symbol"
+      >=</a
+      ><a name="4180"
+      > </a
+      ><a name="4181" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="4182"
+      >
+  </a
+      ><a name="4185" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4210"
+      > </a
+      ><a name="4211" class="Symbol"
+      >((</a
+      ><a name="4213" href="BiGUL.BiGUL.html#4213" class="Bound"
+      >p</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4216"
+      > </a
+      ><a name="4217" href="BiGUL.BiGUL.html#2503" class="InductiveConstructor"
+      >normal</a
+      ><a name="4223"
+      >   </a
+      ><a name="4226" href="BiGUL.BiGUL.html#4226" class="Bound"
+      >b</a
+      ><a name="4227" class="Symbol"
+      >)</a
+      ><a name="4228"
+      > </a
+      ><a name="4229" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="4230"
+      > </a
+      ><a name="4231" href="BiGUL.BiGUL.html#4231" class="Bound"
+      >branches</a
+      ><a name="4239" class="Symbol"
+      >)</a
+      ><a name="4240"
+      > </a
+      ><a name="4241" class="Symbol"
+      >=</a
+      ><a name="4242"
+      > </a
+      ><a name="4243" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="4260"
+      > </a
+      ><a name="4261" href="BiGUL.BiGUL.html#4226" class="Bound"
+      >b</a
+      ><a name="4262"
+      > </a
+      ><a name="4263" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="4264"
+      > </a
+      ><a name="4265" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4290"
+      > </a
+      ><a name="4291" href="BiGUL.BiGUL.html#4231" class="Bound"
+      >branches</a
+      ><a name="4299"
+      >
+  </a
+      ><a name="4302" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4327"
+      > </a
+      ><a name="4328" class="Symbol"
+      >((</a
+      ><a name="4330" href="BiGUL.BiGUL.html#4330" class="Bound"
+      >p</a
+      ><a name="4331"
+      > </a
+      ><a name="4332" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4333"
+      > </a
+      ><a name="4334" href="BiGUL.BiGUL.html#2550" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="4342"
+      > </a
+      ><a name="4343" href="BiGUL.BiGUL.html#4343" class="Bound"
+      >u</a
+      ><a name="4344" class="Symbol"
+      >)</a
+      ><a name="4345"
+      > </a
+      ><a name="4346" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="4347"
+      > </a
+      ><a name="4348" href="BiGUL.BiGUL.html#4348" class="Bound"
+      >branches</a
+      ><a name="4356" class="Symbol"
+      >)</a
+      ><a name="4357"
+      > </a
+      ><a name="4358" class="Symbol"
+      >=</a
+      ><a name="4359"
+      > </a
+      ><a name="4360" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="4385"
+      > </a
+      ><a name="4386" href="BiGUL.BiGUL.html#4348" class="Bound"
+      >branches</a
+      ><a name="4394"
+      >
+
+  </a
+      ><a name="4398" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="4423"
+      > </a
+      ><a name="4424" class="Symbol"
+      >:</a
+      ><a name="4425"
+      > </a
+      ><a name="4426" class="Symbol"
+      >{</a
+      ><a name="4427" href="BiGUL.BiGUL.html#4427" class="Bound"
+      >S</a
+      ><a name="4428"
+      > </a
+      ><a name="4429" href="BiGUL.BiGUL.html#4429" class="Bound"
+      >V</a
+      ><a name="4430"
+      > </a
+      ><a name="4431" class="Symbol"
+      >:</a
+      ><a name="4432"
+      > </a
+      ><a name="4433" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="4434"
+      > </a
+      ><a name="4435" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="4436" class="Symbol"
+      >}</a
+      ><a name="4437"
+      > </a
+      ><a name="4438" class="Symbol"
+      >&#8594;</a
+      ><a name="4439"
+      > </a
+      ><a name="4440" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="4444"
+      > </a
+      ><a name="4445" class="Symbol"
+      >(</a
+      ><a name="4446" href="BiGUL.BiGUL.html#2723" class="Function"
+      >CaseVBranch</a
+      ><a name="4457"
+      > </a
+      ><a name="4458" href="BiGUL.BiGUL.html#4427" class="Bound"
+      >S</a
+      ><a name="4459"
+      > </a
+      ><a name="4460" href="BiGUL.BiGUL.html#4429" class="Bound"
+      >V</a
+      ><a name="4461" class="Symbol"
+      >)</a
+      ><a name="4462"
+      > </a
+      ><a name="4463" class="Symbol"
+      >&#8594;</a
+      ><a name="4464"
+      > </a
+      ><a name="4465" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="4469"
+      >
+  </a
+      ><a name="4472" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="4497"
+      > </a
+      ><a name="4498" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="4500"
+      >                     </a
+      ><a name="4521" class="Symbol"
+      >=</a
+      ><a name="4522"
+      > </a
+      ><a name="4523" href="BiGUL.Utilities.html#313" class="Record"
+      >&#8868;</a
+      ><a name="4524"
+      >
+  </a
+      ><a name="4527" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="4552"
+      > </a
+      ><a name="4553" class="Symbol"
+      >((</a
+      ><a name="4555" href="BiGUL.BiGUL.html#4555" class="Bound"
+      >pat</a
+      ><a name="4558"
+      > </a
+      ><a name="4559" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" href="BiGUL.BiGUL.html#4561" class="Bound"
+      >b</a
+      ><a name="4562" class="Symbol"
+      >)</a
+      ><a name="4563"
+      > </a
+      ><a name="4564" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="4565"
+      > </a
+      ><a name="4566" href="BiGUL.BiGUL.html#4566" class="Bound"
+      >branches</a
+      ><a name="4574" class="Symbol"
+      >)</a
+      ><a name="4575"
+      > </a
+      ><a name="4576" class="Symbol"
+      >=</a
+      ><a name="4577"
+      > </a
+      ><a name="4578" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="4595"
+      > </a
+      ><a name="4596" href="BiGUL.BiGUL.html#4561" class="Bound"
+      >b</a
+      ><a name="4597"
+      > </a
+      ><a name="4598" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="4599"
+      > </a
+      ><a name="4600" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="4625"
+      > </a
+      ><a name="4626" href="BiGUL.BiGUL.html#4566" class="Bound"
+      >branches</a
+      ><a name="4634"
+      >
+
+</a
+      ><a name="4636" class="Keyword"
+      >mutual</a
+      ><a name="4642"
+      >
+
+  </a
+      ><a name="4646" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4652"
+      > </a
+      ><a name="4653" class="Symbol"
+      >:</a
+      ><a name="4654"
+      > </a
+      ><a name="4655" class="Symbol"
+      >{</a
+      ><a name="4656" href="BiGUL.BiGUL.html#4656" class="Bound"
+      >S</a
+      ><a name="4657"
+      > </a
+      ><a name="4658" href="BiGUL.BiGUL.html#4658" class="Bound"
+      >V</a
+      ><a name="4659"
+      > </a
+      ><a name="4660" class="Symbol"
+      >:</a
+      ><a name="4661"
+      > </a
+      ><a name="4662" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="4663"
+      > </a
+      ><a name="4664" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="4665" class="Symbol"
+      >}</a
+      ><a name="4666"
+      > </a
+      ><a name="4667" class="Symbol"
+      >(</a
+      ><a name="4668" href="BiGUL.BiGUL.html#4668" class="Bound"
+      >b</a
+      ><a name="4669"
+      > </a
+      ><a name="4670" class="Symbol"
+      >:</a
+      ><a name="4671"
+      > </a
+      ><a name="4672" href="BiGUL.BiGUL.html#565" class="Datatype"
+      >BiGUL</a
+      ><a name="4677"
+      > </a
+      ><a name="4678" href="BiGUL.BiGUL.html#4656" class="Bound"
+      >S</a
+      ><a name="4679"
+      > </a
+      ><a name="4680" href="BiGUL.BiGUL.html#4658" class="Bound"
+      >V</a
+      ><a name="4681" class="Symbol"
+      >)</a
+      ><a name="4682"
+      > </a
+      ><a name="4683" class="Symbol"
+      >&#8594;</a
+      ><a name="4684"
+      > </a
+      ><a name="4685" href="BiGUL.BiGUL.html#2824" class="Function"
+      >BiGULCompleteExpr</a
+      ><a name="4702"
+      > </a
+      ><a name="4703" href="BiGUL.BiGUL.html#4668" class="Bound"
+      >b</a
+      ><a name="4704"
+      > </a
+      ><a name="4705" class="Symbol"
+      >&#8594;</a
+      ><a name="4706"
+      > </a
+      ><a name="4707" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="4708"
+      > </a
+      ><a name="4709" href="BiGUL.BiGUL.html#4656" class="Bound"
+      >S</a
+      ><a name="4710"
+      > </a
+      ><a name="4711" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="4712"
+      > </a
+      ><a name="4713" class="Symbol"
+      >(</a
+      ><a name="4714" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="4715"
+      > </a
+      ><a name="4716" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="4717" class="Symbol"
+      >)</a
+      ><a name="4718"
+      > </a
+      ><a name="4719" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="4720"
+      > </a
+      ><a name="4721" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="4722"
+      > </a
+      ><a name="4723" href="BiGUL.BiGUL.html#4658" class="Bound"
+      >V</a
+      ><a name="4724"
+      > </a
+      ><a name="4725" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="4726"
+      > </a
+      ><a name="4727" class="Symbol"
+      >(</a
+      ><a name="4728" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="4729"
+      > </a
+      ><a name="4730" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="4731" class="Symbol"
+      >)</a
+      ><a name="4732"
+      >
+  </a
+      ><a name="4735" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4741"
+      > </a
+      ><a name="4742" href="BiGUL.BiGUL.html#600" class="InductiveConstructor"
+      >fail</a
+      ><a name="4746"
+      > </a
+      ><a name="4747" href="BiGUL.BiGUL.html#4747" class="Bound"
+      >c</a
+      ><a name="4748"
+      > </a
+      ><a name="4749" class="Symbol"
+      >=</a
+      ><a name="4750"
+      > </a
+      ><a name="4751" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="4759"
+      > </a
+      ><a name="4760" href="BiGUL.Partiality.html#12346" class="Function"
+      >empty-iso</a
+      ><a name="4769"
+      >
+  </a
+      ><a name="4772" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4778"
+      > </a
+      ><a name="4779" href="BiGUL.BiGUL.html#638" class="InductiveConstructor"
+      >skip</a
+      ><a name="4783"
+      > </a
+      ><a name="4784" href="BiGUL.BiGUL.html#4784" class="Bound"
+      >c</a
+      ><a name="4785"
+      > </a
+      ><a name="4786" class="Symbol"
+      >=</a
+      ><a name="4787"
+      > </a
+      ><a name="4788" href="BiGUL.Lens.html#2616" class="Function"
+      >skip-lens</a
+      ><a name="4797"
+      >
+  </a
+      ><a name="4800" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4806"
+      > </a
+      ><a name="4807" href="BiGUL.BiGUL.html#676" class="InductiveConstructor"
+      >replace</a
+      ><a name="4814"
+      > </a
+      ><a name="4815" href="BiGUL.BiGUL.html#4815" class="Bound"
+      >c</a
+      ><a name="4816"
+      > </a
+      ><a name="4817" class="Symbol"
+      >=</a
+      ><a name="4818"
+      > </a
+      ><a name="4819" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="4827"
+      > </a
+      ><a name="4828" href="BiGUL.Partiality.html#12498" class="Function"
+      >id-iso</a
+      ><a name="4834"
+      >
+  </a
+      ><a name="4837" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4843"
+      > </a
+      ><a name="4844" class="Symbol"
+      >(</a
+      ><a name="4845" href="BiGUL.BiGUL.html#712" class="InductiveConstructor"
+      >update</a
+      ><a name="4851"
+      > </a
+      ><a name="4852" href="BiGUL.BiGUL.html#4852" class="Bound"
+      >pat</a
+      ><a name="4855"
+      > </a
+      ><a name="4856" href="BiGUL.BiGUL.html#4856" class="Bound"
+      >bs</a
+      ><a name="4858" class="Symbol"
+      >)</a
+      ><a name="4859"
+      > </a
+      ><a name="4860" href="BiGUL.BiGUL.html#4860" class="Bound"
+      >c</a
+      ><a name="4861"
+      > </a
+      ><a name="4862" class="Symbol"
+      >=</a
+      ><a name="4863"
+      > </a
+      ><a name="4864" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="4872"
+      > </a
+      ><a name="4873" class="Symbol"
+      >(</a
+      ><a name="4874" href="BiGUL.Universe.html#9816" class="Function"
+      >pat-iso</a
+      ><a name="4881"
+      > </a
+      ><a name="4882" href="BiGUL.BiGUL.html#4852" class="Bound"
+      >pat</a
+      ><a name="4885" class="Symbol"
+      >)</a
+      ><a name="4886"
+      > </a
+      ><a name="4887" href="BiGUL.Lens.html#1194" class="Function Operator"
+      >&#8596;</a
+      ><a name="4888"
+      > </a
+      ><a name="4889" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="4902"
+      > </a
+      ><a name="4903" href="BiGUL.BiGUL.html#4852" class="Bound"
+      >pat</a
+      ><a name="4906"
+      > </a
+      ><a name="4907" href="BiGUL.BiGUL.html#4856" class="Bound"
+      >bs</a
+      ><a name="4909"
+      > </a
+      ><a name="4910" href="BiGUL.BiGUL.html#4860" class="Bound"
+      >c</a
+      ><a name="4911"
+      >
+  </a
+      ><a name="4914" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4920"
+      > </a
+      ><a name="4921" class="Symbol"
+      >(</a
+      ><a name="4922" href="BiGUL.BiGUL.html#811" class="InductiveConstructor"
+      >rearr</a
+      ><a name="4927"
+      > </a
+      ><a name="4928" href="BiGUL.BiGUL.html#4928" class="Bound"
+      >vpat</a
+      ><a name="4932"
+      > </a
+      ><a name="4933" href="BiGUL.BiGUL.html#4933" class="Bound"
+      >vpat'</a
+      ><a name="4938"
+      > </a
+      ><a name="4939" href="BiGUL.BiGUL.html#4939" class="Bound"
+      >expr</a
+      ><a name="4943"
+      > </a
+      ><a name="4944" href="BiGUL.BiGUL.html#4944" class="Bound"
+      >b</a
+      ><a name="4945" class="Symbol"
+      >)</a
+      ><a name="4946"
+      > </a
+      ><a name="4947" class="Symbol"
+      >(</a
+      ><a name="4948" href="BiGUL.BiGUL.html#4948" class="Bound"
+      >c</a
+      ><a name="4949"
+      > </a
+      ><a name="4950" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4951"
+      > </a
+      ><a name="4952" href="BiGUL.BiGUL.html#4952" class="Bound"
+      >c'</a
+      ><a name="4954" class="Symbol"
+      >)</a
+      ><a name="4955"
+      > </a
+      ><a name="4956" class="Symbol"
+      >=</a
+      ><a name="4957"
+      > </a
+      ><a name="4958" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="4964"
+      > </a
+      ><a name="4965" href="BiGUL.BiGUL.html#4944" class="Bound"
+      >b</a
+      ><a name="4966"
+      > </a
+      ><a name="4967" href="BiGUL.BiGUL.html#4952" class="Bound"
+      >c'</a
+      ><a name="4969"
+      > </a
+      ><a name="4970" href="BiGUL.Lens.html#1601" class="Function Operator"
+      >&#9665;</a
+      ><a name="4971"
+      > </a
+      ><a name="4972" href="BiGUL.ViewRearrangement.html#36589" class="Function"
+      >view-rearrangement-iso</a
+      ><a name="4994"
+      > </a
+      ><a name="4995" href="BiGUL.BiGUL.html#4928" class="Bound"
+      >vpat</a
+      ><a name="4999"
+      > </a
+      ><a name="5000" href="BiGUL.BiGUL.html#4933" class="Bound"
+      >vpat'</a
+      ><a name="5005"
+      > </a
+      ><a name="5006" href="BiGUL.BiGUL.html#4939" class="Bound"
+      >expr</a
+      ><a name="5010"
+      > </a
+      ><a name="5011" href="BiGUL.BiGUL.html#4948" class="Bound"
+      >c</a
+      ><a name="5012"
+      >
+  </a
+      ><a name="5015" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="5021"
+      > </a
+      ><a name="5022" class="Symbol"
+      >(</a
+      ><a name="5023" href="BiGUL.BiGUL.html#971" class="InductiveConstructor"
+      >caseS</a
+      ><a name="5028"
+      > </a
+      ><a name="5029" class="Symbol"
+      >{</a
+      ><a name="5030" href="BiGUL.BiGUL.html#5030" class="Bound"
+      >S</a
+      ><a name="5031" class="Symbol"
+      >}</a
+      ><a name="5032"
+      > </a
+      ><a name="5033" class="Symbol"
+      >{</a
+      ><a name="5034" href="BiGUL.BiGUL.html#5034" class="Bound"
+      >V</a
+      ><a name="5035" class="Symbol"
+      >}</a
+      ><a name="5036"
+      > </a
+      ><a name="5037" href="BiGUL.BiGUL.html#5037" class="Bound"
+      >branches</a
+      ><a name="5045" class="Symbol"
+      >)</a
+      ><a name="5046"
+      > </a
+      ><a name="5047" href="BiGUL.BiGUL.html#5047" class="Bound"
+      >c</a
+      ><a name="5048"
+      > </a
+      ><a name="5049" class="Symbol"
+      >=</a
+      ><a name="5050"
+      > </a
+      ><a name="5051" href="BiGUL.SourceCase.html#4001" class="Function"
+      >caseS-lens</a
+      ><a name="5061"
+      > </a
+      ><a name="5062" class="Symbol"
+      >(</a
+      ><a name="5063" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="5064"
+      > </a
+      ><a name="5065" href="BiGUL.BiGUL.html#5030" class="Bound"
+      >S</a
+      ><a name="5066"
+      > </a
+      ><a name="5067" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="5068"
+      > </a
+      ><a name="5069" class="Symbol"
+      >(</a
+      ><a name="5070" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="5071"
+      > </a
+      ><a name="5072" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="5073" class="Symbol"
+      >))</a
+      ><a name="5075"
+      > </a
+      ><a name="5076" class="Symbol"
+      >(</a
+      ><a name="5077" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="5078"
+      > </a
+      ><a name="5079" href="BiGUL.BiGUL.html#5034" class="Bound"
+      >V</a
+      ><a name="5080"
+      > </a
+      ><a name="5081" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="5082"
+      > </a
+      ><a name="5083" class="Symbol"
+      >(</a
+      ><a name="5084" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="5085"
+      > </a
+      ><a name="5086" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="5087" class="Symbol"
+      >))</a
+      ><a name="5089"
+      > </a
+      ><a name="5090" class="Symbol"
+      >(</a
+      ><a name="5091" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="5109"
+      > </a
+      ><a name="5110" href="BiGUL.BiGUL.html#5037" class="Bound"
+      >branches</a
+      ><a name="5118"
+      > </a
+      ><a name="5119" href="BiGUL.BiGUL.html#5047" class="Bound"
+      >c</a
+      ><a name="5120" class="Symbol"
+      >)</a
+      ><a name="5121"
+      >
+  </a
+      ><a name="5124" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="5130"
+      > </a
+      ><a name="5131" class="Symbol"
+      >(</a
+      ><a name="5132" href="BiGUL.BiGUL.html#1047" class="InductiveConstructor"
+      >caseV</a
+      ><a name="5137"
+      > </a
+      ><a name="5138" class="Symbol"
+      >{</a
+      ><a name="5139" class="Argument"
+      >V</a
+      ><a name="5140"
+      > </a
+      ><a name="5141" class="Symbol"
+      >=</a
+      ><a name="5142"
+      > </a
+      ><a name="5143" href="BiGUL.BiGUL.html#5143" class="Bound"
+      >V</a
+      ><a name="5144" class="Symbol"
+      >}</a
+      ><a name="5145"
+      > </a
+      ><a name="5146" href="BiGUL.BiGUL.html#5146" class="Bound"
+      >branches</a
+      ><a name="5154" class="Symbol"
+      >)</a
+      ><a name="5155"
+      > </a
+      ><a name="5156" href="BiGUL.BiGUL.html#5156" class="Bound"
+      >c</a
+      ><a name="5157"
+      > </a
+      ><a name="5158" class="Symbol"
+      >=</a
+      ><a name="5159"
+      > </a
+      ><a name="5160" href="BiGUL.ViewCase.html#2351" class="Function"
+      >caseV-lens</a
+      ><a name="5170"
+      > </a
+      ><a name="5171" class="Symbol"
+      >_</a
+      ><a name="5172"
+      > </a
+      ><a name="5173" class="Symbol"
+      >_</a
+      ><a name="5174"
+      > </a
+      ><a name="5175" class="Symbol"
+      >(</a
+      ><a name="5176" href="BiGUL.Universe.html#1788" class="Function"
+      >U-dec</a
+      ><a name="5181"
+      > </a
+      ><a name="5182" href="BiGUL.BiGUL.html#5143" class="Bound"
+      >V</a
+      ><a name="5183" class="Symbol"
+      >)</a
+      ><a name="5184"
+      > </a
+      ><a name="5185" class="Symbol"
+      >(</a
+      ><a name="5186" href="BiGUL.BiGUL.html#6582" class="Function"
+      >interp-CaseVBranch</a
+      ><a name="5204"
+      > </a
+      ><a name="5205" href="BiGUL.BiGUL.html#5146" class="Bound"
+      >branches</a
+      ><a name="5213"
+      > </a
+      ><a name="5214" href="BiGUL.BiGUL.html#5156" class="Bound"
+      >c</a
+      ><a name="5215" class="Symbol"
+      >)</a
+      ><a name="5216"
+      >
+  </a
+      ><a name="5219" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="5225"
+      > </a
+      ><a name="5226" class="Symbol"
+      >(</a
+      ><a name="5227" href="BiGUL.BiGUL.html#1123" class="InductiveConstructor"
+      >align</a
+      ><a name="5232"
+      > </a
+      ><a name="5233" href="BiGUL.BiGUL.html#5233" class="Bound"
+      >source-condition</a
+      ><a name="5249"
+      > </a
+      ><a name="5250" href="BiGUL.BiGUL.html#5250" class="Bound"
+      >match?</a
+      ><a name="5256"
+      > </a
+      ><a name="5257" href="BiGUL.BiGUL.html#5257" class="Bound"
+      >b</a
+      ><a name="5258"
+      > </a
+      ><a name="5259" href="BiGUL.BiGUL.html#5259" class="Bound"
+      >create</a
+      ><a name="5265"
+      > </a
+      ><a name="5266" href="BiGUL.BiGUL.html#5266" class="Bound"
+      >conceal</a
+      ><a name="5273" class="Symbol"
+      >)</a
+      ><a name="5274"
+      > </a
+      ><a name="5275" href="BiGUL.BiGUL.html#5275" class="Bound"
+      >c</a
+      ><a name="5276"
+      > </a
+      ><a name="5277" class="Symbol"
+      >=</a
+      ><a name="5278"
+      > </a
+      ><a name="5279" href="BiGUL.ListAlignment.html#14653" class="Function"
+      >align-lens</a
+      ><a name="5289"
+      > </a
+      ><a name="5290" href="BiGUL.BiGUL.html#5233" class="Bound"
+      >source-condition</a
+      ><a name="5306"
+      > </a
+      ><a name="5307" href="BiGUL.BiGUL.html#5250" class="Bound"
+      >match?</a
+      ><a name="5313"
+      > </a
+      ><a name="5314" class="Symbol"
+      >(</a
+      ><a name="5315" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="5321"
+      > </a
+      ><a name="5322" href="BiGUL.BiGUL.html#5257" class="Bound"
+      >b</a
+      ><a name="5323"
+      > </a
+      ><a name="5324" href="BiGUL.BiGUL.html#5275" class="Bound"
+      >c</a
+      ><a name="5325" class="Symbol"
+      >)</a
+      ><a name="5326"
+      > </a
+      ><a name="5327" href="BiGUL.BiGUL.html#5259" class="Bound"
+      >create</a
+      ><a name="5333"
+      > </a
+      ><a name="5334" href="BiGUL.BiGUL.html#5266" class="Bound"
+      >conceal</a
+      ><a name="5341"
+      >
+
+  </a
+      ><a name="5345" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5358"
+      > </a
+      ><a name="5359" class="Symbol"
+      >:</a
+      ><a name="5360"
+      > </a
+      ><a name="5361" class="Symbol"
+      >{</a
+      ><a name="5362" href="BiGUL.BiGUL.html#5362" class="Bound"
+      >S</a
+      ><a name="5363"
+      > </a
+      ><a name="5364" class="Symbol"
+      >:</a
+      ><a name="5365"
+      > </a
+      ><a name="5366" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="5367"
+      > </a
+      ><a name="5368" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="5369" class="Symbol"
+      >}</a
+      ><a name="5370"
+      > </a
+      ><a name="5371" class="Symbol"
+      >(</a
+      ><a name="5372" href="BiGUL.BiGUL.html#5372" class="Bound"
+      >pat</a
+      ><a name="5375"
+      > </a
+      ><a name="5376" class="Symbol"
+      >:</a
+      ><a name="5377"
+      > </a
+      ><a name="5378" href="BiGUL.Universe.html#3281" class="Datatype"
+      >Pattern</a
+      ><a name="5385"
+      > </a
+      ><a name="5386" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="5387"
+      > </a
+      ><a name="5388" href="BiGUL.BiGUL.html#5362" class="Bound"
+      >S</a
+      ><a name="5389" class="Symbol"
+      >)</a
+      ><a name="5390"
+      > </a
+      ><a name="5391" class="Symbol"
+      >(</a
+      ><a name="5392" href="BiGUL.BiGUL.html#5392" class="Bound"
+      >bs</a
+      ><a name="5394"
+      > </a
+      ><a name="5395" class="Symbol"
+      >:</a
+      ><a name="5396"
+      > </a
+      ><a name="5397" href="BiGUL.BiGUL.html#1519" class="Function"
+      >PatBiGUL</a
+      ><a name="5405"
+      > </a
+      ><a name="5406" href="BiGUL.BiGUL.html#5372" class="Bound"
+      >pat</a
+      ><a name="5409" class="Symbol"
+      >)</a
+      ><a name="5410"
+      > </a
+      ><a name="5411" class="Symbol"
+      >&#8594;</a
+      ><a name="5412"
+      > </a
+      ><a name="5413" href="BiGUL.BiGUL.html#3372" class="Function"
+      >PatBiGULCompleteExpr</a
+      ><a name="5433"
+      > </a
+      ><a name="5434" href="BiGUL.BiGUL.html#5372" class="Bound"
+      >pat</a
+      ><a name="5437"
+      > </a
+      ><a name="5438" href="BiGUL.BiGUL.html#5392" class="Bound"
+      >bs</a
+      ><a name="5440"
+      > </a
+      ><a name="5441" class="Symbol"
+      >&#8594;</a
+      ><a name="5442"
+      >
+                  </a
+      ><a name="5461" href="BiGUL.Universe.html#5158" class="Function"
+      >PatResult</a
+      ><a name="5470"
+      > </a
+      ><a name="5471" href="BiGUL.BiGUL.html#5372" class="Bound"
+      >pat</a
+      ><a name="5474"
+      > </a
+      ><a name="5475" href="BiGUL.Lens.html#494" class="Function Operator"
+      >&#8646;</a
+      ><a name="5476"
+      > </a
+      ><a name="5477" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="5478"
+      > </a
+      ><a name="5479" href="BiGUL.BiGUL.html#1898" class="Function"
+      >PatBiGULViews</a
+      ><a name="5492"
+      > </a
+      ><a name="5493" href="BiGUL.BiGUL.html#5372" class="Bound"
+      >pat</a
+      ><a name="5496"
+      > </a
+      ><a name="5497" href="BiGUL.BiGUL.html#5392" class="Bound"
+      >bs</a
+      ><a name="5499"
+      > </a
+      ><a name="5500" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="5501"
+      > </a
+      ><a name="5502" class="Symbol"
+      >(</a
+      ><a name="5503" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="5504"
+      > </a
+      ><a name="5505" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="5506" class="Symbol"
+      >)</a
+      ><a name="5507"
+      >
+  </a
+      ><a name="5510" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5523"
+      > </a
+      ><a name="5524" href="BiGUL.Universe.html#3334" class="InductiveConstructor"
+      >var</a
+      ><a name="5527"
+      >              </a
+      ><a name="5541" class="Symbol"
+      >(_</a
+      ><a name="5543"
+      > </a
+      ><a name="5544" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5545"
+      > </a
+      ><a name="5546" href="BiGUL.BiGUL.html#5546" class="Bound"
+      >b</a
+      ><a name="5547" class="Symbol"
+      >)</a
+      ><a name="5548"
+      >    </a
+      ><a name="5552" href="BiGUL.BiGUL.html#5552" class="Bound"
+      >c</a
+      ><a name="5553"
+      >        </a
+      ><a name="5561" class="Symbol"
+      >=</a
+      ><a name="5562"
+      > </a
+      ><a name="5563" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="5569"
+      > </a
+      ><a name="5570" href="BiGUL.BiGUL.html#5546" class="Bound"
+      >b</a
+      ><a name="5571"
+      > </a
+      ><a name="5572" href="BiGUL.BiGUL.html#5552" class="Bound"
+      >c</a
+      ><a name="5573"
+      >
+  </a
+      ><a name="5576" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5589"
+      > </a
+      ><a name="5590" class="Symbol"
+      >(</a
+      ><a name="5591" href="BiGUL.Universe.html#3368" class="InductiveConstructor"
+      >k</a
+      ><a name="5592"
+      > </a
+      ><a name="5593" href="BiGUL.BiGUL.html#5593" class="Bound"
+      >x</a
+      ><a name="5594" class="Symbol"
+      >)</a
+      ><a name="5595"
+      >            </a
+      ><a name="5607" href="BiGUL.BiGUL.html#5607" class="Bound"
+      >bs</a
+      ><a name="5609"
+      >         </a
+      ><a name="5618" href="BiGUL.BiGUL.html#5618" class="Bound"
+      >c</a
+      ><a name="5619"
+      >        </a
+      ><a name="5627" class="Symbol"
+      >=</a
+      ><a name="5628"
+      > </a
+      ><a name="5629" href="BiGUL.Lens.html#2426" class="Function"
+      >iso-lens</a
+      ><a name="5637"
+      > </a
+      ><a name="5638" href="BiGUL.Partiality.html#12498" class="Function"
+      >id-iso</a
+      ><a name="5644"
+      >
+  </a
+      ><a name="5647" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5660"
+      > </a
+      ><a name="5661" class="Symbol"
+      >(</a
+      ><a name="5662" href="BiGUL.Universe.html#3420" class="InductiveConstructor"
+      >child</a
+      ><a name="5667"
+      > </a
+      ><a name="5668" href="BiGUL.BiGUL.html#5668" class="Bound"
+      >pat</a
+      ><a name="5671" class="Symbol"
+      >)</a
+      ><a name="5672"
+      >      </a
+      ><a name="5678" href="BiGUL.BiGUL.html#5678" class="Bound"
+      >bs</a
+      ><a name="5680"
+      >         </a
+      ><a name="5689" href="BiGUL.BiGUL.html#5689" class="Bound"
+      >c</a
+      ><a name="5690"
+      >        </a
+      ><a name="5698" class="Symbol"
+      >=</a
+      ><a name="5699"
+      > </a
+      ><a name="5700" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5713"
+      > </a
+      ><a name="5714" href="BiGUL.BiGUL.html#5668" class="Bound"
+      >pat</a
+      ><a name="5717"
+      > </a
+      ><a name="5718" href="BiGUL.BiGUL.html#5678" class="Bound"
+      >bs</a
+      ><a name="5720"
+      > </a
+      ><a name="5721" href="BiGUL.BiGUL.html#5689" class="Bound"
+      >c</a
+      ><a name="5722"
+      >
+  </a
+      ><a name="5725" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5738"
+      > </a
+      ><a name="5739" class="Symbol"
+      >(</a
+      ><a name="5740" href="BiGUL.Universe.html#3486" class="InductiveConstructor"
+      >left</a
+      ><a name="5744"
+      >  </a
+      ><a name="5746" href="BiGUL.BiGUL.html#5746" class="Bound"
+      >pat</a
+      ><a name="5749" class="Symbol"
+      >)</a
+      ><a name="5750"
+      >      </a
+      ><a name="5756" href="BiGUL.BiGUL.html#5756" class="Bound"
+      >bs</a
+      ><a name="5758"
+      >         </a
+      ><a name="5767" href="BiGUL.BiGUL.html#5767" class="Bound"
+      >c</a
+      ><a name="5768"
+      >        </a
+      ><a name="5776" class="Symbol"
+      >=</a
+      ><a name="5777"
+      > </a
+      ><a name="5778" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5791"
+      > </a
+      ><a name="5792" href="BiGUL.BiGUL.html#5746" class="Bound"
+      >pat</a
+      ><a name="5795"
+      > </a
+      ><a name="5796" href="BiGUL.BiGUL.html#5756" class="Bound"
+      >bs</a
+      ><a name="5798"
+      > </a
+      ><a name="5799" href="BiGUL.BiGUL.html#5767" class="Bound"
+      >c</a
+      ><a name="5800"
+      >
+  </a
+      ><a name="5803" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5816"
+      > </a
+      ><a name="5817" class="Symbol"
+      >(</a
+      ><a name="5818" href="BiGUL.Universe.html#3548" class="InductiveConstructor"
+      >right</a
+      ><a name="5823"
+      > </a
+      ><a name="5824" href="BiGUL.BiGUL.html#5824" class="Bound"
+      >pat</a
+      ><a name="5827" class="Symbol"
+      >)</a
+      ><a name="5828"
+      >      </a
+      ><a name="5834" href="BiGUL.BiGUL.html#5834" class="Bound"
+      >bs</a
+      ><a name="5836"
+      >         </a
+      ><a name="5845" href="BiGUL.BiGUL.html#5845" class="Bound"
+      >c</a
+      ><a name="5846"
+      >        </a
+      ><a name="5854" class="Symbol"
+      >=</a
+      ><a name="5855"
+      > </a
+      ><a name="5856" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5869"
+      > </a
+      ><a name="5870" href="BiGUL.BiGUL.html#5824" class="Bound"
+      >pat</a
+      ><a name="5873"
+      > </a
+      ><a name="5874" href="BiGUL.BiGUL.html#5834" class="Bound"
+      >bs</a
+      ><a name="5876"
+      > </a
+      ><a name="5877" href="BiGUL.BiGUL.html#5845" class="Bound"
+      >c</a
+      ><a name="5878"
+      >
+  </a
+      ><a name="5881" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5894"
+      > </a
+      ><a name="5895" class="Symbol"
+      >(</a
+      ><a name="5896" href="BiGUL.Universe.html#3610" class="InductiveConstructor"
+      >prod</a
+      ><a name="5900"
+      > </a
+      ><a name="5901" href="BiGUL.BiGUL.html#5901" class="Bound"
+      >lpat</a
+      ><a name="5905"
+      > </a
+      ><a name="5906" href="BiGUL.BiGUL.html#5906" class="Bound"
+      >rpat</a
+      ><a name="5910" class="Symbol"
+      >)</a
+      ><a name="5911"
+      > </a
+      ><a name="5912" class="Symbol"
+      >(</a
+      ><a name="5913" href="BiGUL.BiGUL.html#5913" class="Bound"
+      >bs</a
+      ><a name="5915"
+      > </a
+      ><a name="5916" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5917"
+      > </a
+      ><a name="5918" href="BiGUL.BiGUL.html#5918" class="Bound"
+      >bs'</a
+      ><a name="5921" class="Symbol"
+      >)</a
+      ><a name="5922"
+      > </a
+      ><a name="5923" class="Symbol"
+      >(</a
+      ><a name="5924" href="BiGUL.BiGUL.html#5924" class="Bound"
+      >c</a
+      ><a name="5925"
+      > </a
+      ><a name="5926" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5927"
+      > </a
+      ><a name="5928" href="BiGUL.BiGUL.html#5928" class="Bound"
+      >c'</a
+      ><a name="5930" class="Symbol"
+      >)</a
+      ><a name="5931"
+      > </a
+      ><a name="5932" class="Symbol"
+      >=</a
+      ><a name="5933"
+      > </a
+      ><a name="5934" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5947"
+      > </a
+      ><a name="5948" href="BiGUL.BiGUL.html#5901" class="Bound"
+      >lpat</a
+      ><a name="5952"
+      > </a
+      ><a name="5953" href="BiGUL.BiGUL.html#5913" class="Bound"
+      >bs</a
+      ><a name="5955"
+      > </a
+      ><a name="5956" href="BiGUL.BiGUL.html#5924" class="Bound"
+      >c</a
+      ><a name="5957"
+      > </a
+      ><a name="5958" href="BiGUL.Lens.html#1966" class="Function Operator"
+      >&#8597;</a
+      ><a name="5959"
+      > </a
+      ><a name="5960" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="5973"
+      > </a
+      ><a name="5974" href="BiGUL.BiGUL.html#5906" class="Bound"
+      >rpat</a
+      ><a name="5978"
+      > </a
+      ><a name="5979" href="BiGUL.BiGUL.html#5918" class="Bound"
+      >bs'</a
+      ><a name="5982"
+      > </a
+      ><a name="5983" href="BiGUL.BiGUL.html#5928" class="Bound"
+      >c'</a
+      ><a name="5985"
+      >
+  </a
+      ><a name="5988" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="6001"
+      > </a
+      ><a name="6002" class="Symbol"
+      >(</a
+      ><a name="6003" href="BiGUL.Universe.html#3694" class="InductiveConstructor"
+      >elem</a
+      ><a name="6007"
+      > </a
+      ><a name="6008" href="BiGUL.BiGUL.html#6008" class="Bound"
+      >hpat</a
+      ><a name="6012"
+      > </a
+      ><a name="6013" href="BiGUL.BiGUL.html#6013" class="Bound"
+      >tpat</a
+      ><a name="6017" class="Symbol"
+      >)</a
+      ><a name="6018"
+      > </a
+      ><a name="6019" class="Symbol"
+      >(</a
+      ><a name="6020" href="BiGUL.BiGUL.html#6020" class="Bound"
+      >bs</a
+      ><a name="6022"
+      > </a
+      ><a name="6023" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6024"
+      > </a
+      ><a name="6025" href="BiGUL.BiGUL.html#6025" class="Bound"
+      >bs'</a
+      ><a name="6028" class="Symbol"
+      >)</a
+      ><a name="6029"
+      > </a
+      ><a name="6030" class="Symbol"
+      >(</a
+      ><a name="6031" href="BiGUL.BiGUL.html#6031" class="Bound"
+      >c</a
+      ><a name="6032"
+      > </a
+      ><a name="6033" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6034"
+      > </a
+      ><a name="6035" href="BiGUL.BiGUL.html#6035" class="Bound"
+      >c'</a
+      ><a name="6037" class="Symbol"
+      >)</a
+      ><a name="6038"
+      > </a
+      ><a name="6039" class="Symbol"
+      >=</a
+      ><a name="6040"
+      > </a
+      ><a name="6041" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="6054"
+      > </a
+      ><a name="6055" href="BiGUL.BiGUL.html#6008" class="Bound"
+      >hpat</a
+      ><a name="6059"
+      > </a
+      ><a name="6060" href="BiGUL.BiGUL.html#6020" class="Bound"
+      >bs</a
+      ><a name="6062"
+      > </a
+      ><a name="6063" href="BiGUL.BiGUL.html#6031" class="Bound"
+      >c</a
+      ><a name="6064"
+      > </a
+      ><a name="6065" href="BiGUL.Lens.html#1966" class="Function Operator"
+      >&#8597;</a
+      ><a name="6066"
+      > </a
+      ><a name="6067" href="BiGUL.BiGUL.html#5345" class="Function"
+      >interp-update</a
+      ><a name="6080"
+      > </a
+      ><a name="6081" href="BiGUL.BiGUL.html#6013" class="Bound"
+      >tpat</a
+      ><a name="6085"
+      > </a
+      ><a name="6086" href="BiGUL.BiGUL.html#6025" class="Bound"
+      >bs'</a
+      ><a name="6089"
+      > </a
+      ><a name="6090" href="BiGUL.BiGUL.html#6035" class="Bound"
+      >c'</a
+      ><a name="6092"
+      >
+
+  </a
+      ><a name="6096" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6114"
+      > </a
+      ><a name="6115" class="Symbol"
+      >:</a
+      ><a name="6116"
+      > </a
+      ><a name="6117" class="Symbol"
+      >{</a
+      ><a name="6118" href="BiGUL.BiGUL.html#6118" class="Bound"
+      >S</a
+      ><a name="6119"
+      > </a
+      ><a name="6120" href="BiGUL.BiGUL.html#6120" class="Bound"
+      >V</a
+      ><a name="6121"
+      > </a
+      ><a name="6122" class="Symbol"
+      >:</a
+      ><a name="6123"
+      > </a
+      ><a name="6124" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="6125"
+      > </a
+      ><a name="6126" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="6127" class="Symbol"
+      >}</a
+      ><a name="6128"
+      > </a
+      ><a name="6129" class="Symbol"
+      >(</a
+      ><a name="6130" href="BiGUL.BiGUL.html#6130" class="Bound"
+      >branches</a
+      ><a name="6138"
+      > </a
+      ><a name="6139" class="Symbol"
+      >:</a
+      ><a name="6140"
+      > </a
+      ><a name="6141" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="6145"
+      > </a
+      ><a name="6146" class="Symbol"
+      >(</a
+      ><a name="6147" href="BiGUL.BiGUL.html#2620" class="Function"
+      >CaseSBranch</a
+      ><a name="6158"
+      > </a
+      ><a name="6159" href="BiGUL.BiGUL.html#6118" class="Bound"
+      >S</a
+      ><a name="6160"
+      > </a
+      ><a name="6161" href="BiGUL.BiGUL.html#6120" class="Bound"
+      >V</a
+      ><a name="6162" class="Symbol"
+      >))</a
+      ><a name="6164"
+      > </a
+      ><a name="6165" class="Symbol"
+      >&#8594;</a
+      ><a name="6166"
+      > </a
+      ><a name="6167" href="BiGUL.BiGUL.html#4049" class="Function"
+      >CaseSBranchesCompleteExpr</a
+      ><a name="6192"
+      > </a
+      ><a name="6193" href="BiGUL.BiGUL.html#6130" class="Bound"
+      >branches</a
+      ><a name="6201"
+      > </a
+      ><a name="6202" class="Symbol"
+      >&#8594;</a
+      ><a name="6203"
+      >
+                       </a
+      ><a name="6227" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="6231"
+      > </a
+      ><a name="6232" class="Symbol"
+      >(</a
+      ><a name="6233" href="BiGUL.SourceCase.html#427" class="Function"
+      >SourceCase.Branch</a
+      ><a name="6250"
+      > </a
+      ><a name="6251" class="Symbol"
+      >(</a
+      ><a name="6252" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="6253"
+      > </a
+      ><a name="6254" href="BiGUL.BiGUL.html#6118" class="Bound"
+      >S</a
+      ><a name="6255"
+      > </a
+      ><a name="6256" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="6257"
+      > </a
+      ><a name="6258" class="Symbol"
+      >(</a
+      ><a name="6259" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="6260"
+      > </a
+      ><a name="6261" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="6262" class="Symbol"
+      >))</a
+      ><a name="6264"
+      > </a
+      ><a name="6265" class="Symbol"
+      >(</a
+      ><a name="6266" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="6267"
+      > </a
+      ><a name="6268" href="BiGUL.BiGUL.html#6120" class="Bound"
+      >V</a
+      ><a name="6269"
+      > </a
+      ><a name="6270" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="6271"
+      > </a
+      ><a name="6272" class="Symbol"
+      >(</a
+      ><a name="6273" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="6274"
+      > </a
+      ><a name="6275" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="6276" class="Symbol"
+      >)))</a
+      ><a name="6279"
+      >
+  </a
+      ><a name="6282" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6300"
+      > </a
+      ><a name="6301" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="6303"
+      >                            </a
+      ><a name="6331" href="BiGUL.BiGUL.html#6331" class="Bound"
+      >c</a
+      ><a name="6332"
+      >        </a
+      ><a name="6340" class="Symbol"
+      >=</a
+      ><a name="6341"
+      > </a
+      ><a name="6342" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="6344"
+      >
+  </a
+      ><a name="6347" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6365"
+      > </a
+      ><a name="6366" class="Symbol"
+      >((</a
+      ><a name="6368" href="BiGUL.BiGUL.html#6368" class="Bound"
+      >p</a
+      ><a name="6369"
+      > </a
+      ><a name="6370" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6371"
+      > </a
+      ><a name="6372" href="BiGUL.BiGUL.html#2503" class="InductiveConstructor"
+      >normal</a
+      ><a name="6378"
+      >   </a
+      ><a name="6381" href="BiGUL.BiGUL.html#6381" class="Bound"
+      >b</a
+      ><a name="6382" class="Symbol"
+      >)</a
+      ><a name="6383"
+      > </a
+      ><a name="6384" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6385"
+      > </a
+      ><a name="6386" href="BiGUL.BiGUL.html#6386" class="Bound"
+      >branches</a
+      ><a name="6394" class="Symbol"
+      >)</a
+      ><a name="6395"
+      > </a
+      ><a name="6396" class="Symbol"
+      >(</a
+      ><a name="6397" href="BiGUL.BiGUL.html#6397" class="Bound"
+      >c</a
+      ><a name="6398"
+      > </a
+      ><a name="6399" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6400"
+      > </a
+      ><a name="6401" href="BiGUL.BiGUL.html#6401" class="Bound"
+      >c'</a
+      ><a name="6403" class="Symbol"
+      >)</a
+      ><a name="6404"
+      > </a
+      ><a name="6405" class="Symbol"
+      >=</a
+      ><a name="6406"
+      > </a
+      ><a name="6407" class="Symbol"
+      >(</a
+      ><a name="6408" href="BiGUL.BiGUL.html#6368" class="Bound"
+      >p</a
+      ><a name="6409"
+      > </a
+      ><a name="6410" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6411"
+      > </a
+      ><a name="6412" href="BiGUL.SourceCase.html#356" class="InductiveConstructor"
+      >normal</a
+      ><a name="6418"
+      > </a
+      ><a name="6419" class="Symbol"
+      >(</a
+      ><a name="6420" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="6426"
+      > </a
+      ><a name="6427" href="BiGUL.BiGUL.html#6381" class="Bound"
+      >b</a
+      ><a name="6428"
+      > </a
+      ><a name="6429" href="BiGUL.BiGUL.html#6397" class="Bound"
+      >c</a
+      ><a name="6430" class="Symbol"
+      >))</a
+      ><a name="6432"
+      > </a
+      ><a name="6433" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6434"
+      > </a
+      ><a name="6435" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6453"
+      > </a
+      ><a name="6454" href="BiGUL.BiGUL.html#6386" class="Bound"
+      >branches</a
+      ><a name="6462"
+      > </a
+      ><a name="6463" href="BiGUL.BiGUL.html#6401" class="Bound"
+      >c'</a
+      ><a name="6465"
+      >
+  </a
+      ><a name="6468" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6486"
+      > </a
+      ><a name="6487" class="Symbol"
+      >((</a
+      ><a name="6489" href="BiGUL.BiGUL.html#6489" class="Bound"
+      >p</a
+      ><a name="6490"
+      > </a
+      ><a name="6491" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6492"
+      > </a
+      ><a name="6493" href="BiGUL.BiGUL.html#2550" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="6501"
+      > </a
+      ><a name="6502" href="BiGUL.BiGUL.html#6502" class="Bound"
+      >u</a
+      ><a name="6503" class="Symbol"
+      >)</a
+      ><a name="6504"
+      > </a
+      ><a name="6505" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6506"
+      > </a
+      ><a name="6507" href="BiGUL.BiGUL.html#6507" class="Bound"
+      >branches</a
+      ><a name="6515" class="Symbol"
+      >)</a
+      ><a name="6516"
+      > </a
+      ><a name="6517" href="BiGUL.BiGUL.html#6517" class="Bound"
+      >c</a
+      ><a name="6518"
+      >        </a
+      ><a name="6526" class="Symbol"
+      >=</a
+      ><a name="6527"
+      > </a
+      ><a name="6528" class="Symbol"
+      >(</a
+      ><a name="6529" href="BiGUL.BiGUL.html#6489" class="Bound"
+      >p</a
+      ><a name="6530"
+      > </a
+      ><a name="6531" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6532"
+      > </a
+      ><a name="6533" href="BiGUL.SourceCase.html#390" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="6541"
+      > </a
+      ><a name="6542" href="BiGUL.BiGUL.html#6502" class="Bound"
+      >u</a
+      ><a name="6543" class="Symbol"
+      >)</a
+      ><a name="6544"
+      > </a
+      ><a name="6545" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6546"
+      > </a
+      ><a name="6547" href="BiGUL.BiGUL.html#6096" class="Function"
+      >interp-CaseSBranch</a
+      ><a name="6565"
+      > </a
+      ><a name="6566" href="BiGUL.BiGUL.html#6507" class="Bound"
+      >branches</a
+      ><a name="6574"
+      > </a
+      ><a name="6575" href="BiGUL.BiGUL.html#6517" class="Bound"
+      >c</a
+      ><a name="6576"
+      >
+  
+  </a
+      ><a name="6582" href="BiGUL.BiGUL.html#6582" class="Function"
+      >interp-CaseVBranch</a
+      ><a name="6600"
+      > </a
+      ><a name="6601" class="Symbol"
+      >:</a
+      ><a name="6602"
+      > </a
+      ><a name="6603" class="Symbol"
+      >{</a
+      ><a name="6604" href="BiGUL.BiGUL.html#6604" class="Bound"
+      >S</a
+      ><a name="6605"
+      > </a
+      ><a name="6606" href="BiGUL.BiGUL.html#6606" class="Bound"
+      >V</a
+      ><a name="6607"
+      > </a
+      ><a name="6608" class="Symbol"
+      >:</a
+      ><a name="6609"
+      > </a
+      ><a name="6610" href="BiGUL.Universe.html#477" class="Datatype"
+      >U</a
+      ><a name="6611"
+      > </a
+      ><a name="6612" href="BiGUL.BiGUL.html#116" class="Bound"
+      >n</a
+      ><a name="6613" class="Symbol"
+      >}</a
+      ><a name="6614"
+      > </a
+      ><a name="6615" class="Symbol"
+      >(</a
+      ><a name="6616" href="BiGUL.BiGUL.html#6616" class="Bound"
+      >branches</a
+      ><a name="6624"
+      > </a
+      ><a name="6625" class="Symbol"
+      >:</a
+      ><a name="6626"
+      > </a
+      ><a name="6627" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="6631"
+      > </a
+      ><a name="6632" class="Symbol"
+      >(</a
+      ><a name="6633" href="BiGUL.BiGUL.html#2723" class="Function"
+      >CaseVBranch</a
+      ><a name="6644"
+      > </a
+      ><a name="6645" href="BiGUL.BiGUL.html#6604" class="Bound"
+      >S</a
+      ><a name="6646"
+      > </a
+      ><a name="6647" href="BiGUL.BiGUL.html#6606" class="Bound"
+      >V</a
+      ><a name="6648" class="Symbol"
+      >))</a
+      ><a name="6650"
+      > </a
+      ><a name="6651" class="Symbol"
+      >&#8594;</a
+      ><a name="6652"
+      > </a
+      ><a name="6653" href="BiGUL.BiGUL.html#4398" class="Function"
+      >CaseVBranchesCompleteExpr</a
+      ><a name="6678"
+      > </a
+      ><a name="6679" href="BiGUL.BiGUL.html#6616" class="Bound"
+      >branches</a
+      ><a name="6687"
+      > </a
+      ><a name="6688" class="Symbol"
+      >&#8594;</a
+      ><a name="6689"
+      >
+                       </a
+      ><a name="6713" href="Data.List.Base.html#669" class="Datatype"
+      >List</a
+      ><a name="6717"
+      > </a
+      ><a name="6718" class="Symbol"
+      >(</a
+      ><a name="6719" href="BiGUL.ViewCase.html#502" class="Function"
+      >ViewCase.Branch</a
+      ><a name="6734"
+      > </a
+      ><a name="6735" class="Symbol"
+      >(</a
+      ><a name="6736" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="6737"
+      > </a
+      ><a name="6738" href="BiGUL.BiGUL.html#6604" class="Bound"
+      >S</a
+      ><a name="6739"
+      > </a
+      ><a name="6740" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="6741"
+      > </a
+      ><a name="6742" class="Symbol"
+      >(</a
+      ><a name="6743" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="6744"
+      > </a
+      ><a name="6745" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="6746" class="Symbol"
+      >))</a
+      ><a name="6748"
+      > </a
+      ><a name="6749" class="Symbol"
+      >(</a
+      ><a name="6750" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10214;</a
+      ><a name="6751"
+      > </a
+      ><a name="6752" href="BiGUL.BiGUL.html#6606" class="Bound"
+      >V</a
+      ><a name="6753"
+      > </a
+      ><a name="6754" href="BiGUL.Universe.html#679" class="Function Operator"
+      >&#10215;</a
+      ><a name="6755"
+      > </a
+      ><a name="6756" class="Symbol"
+      >(</a
+      ><a name="6757" href="BiGUL.Universe.html#938" class="Datatype"
+      >&#956;</a
+      ><a name="6758"
+      > </a
+      ><a name="6759" href="BiGUL.BiGUL.html#124" class="Bound"
+      >F</a
+      ><a name="6760" class="Symbol"
+      >))</a
+      ><a name="6762"
+      > </a
+      ><a name="6763" class="Symbol"
+      >(</a
+      ><a name="6764" href="BiGUL.Universe.html#1788" class="Function"
+      >U-dec</a
+      ><a name="6769"
+      > </a
+      ><a name="6770" href="BiGUL.BiGUL.html#6606" class="Bound"
+      >V</a
+      ><a name="6771" class="Symbol"
+      >))</a
+      ><a name="6773"
+      >
+  </a
+      ><a name="6776" href="BiGUL.BiGUL.html#6582" class="Function"
+      >interp-CaseVBranch</a
+      ><a name="6794"
+      > </a
+      ><a name="6795" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="6797"
+      >                   </a
+      ><a name="6816" href="BiGUL.BiGUL.html#6816" class="Bound"
+      >c</a
+      ><a name="6817"
+      >        </a
+      ><a name="6825" class="Symbol"
+      >=</a
+      ><a name="6826"
+      > </a
+      ><a name="6827" href="Data.List.Base.html#706" class="InductiveConstructor"
+      >[]</a
+      ><a name="6829"
+      >
+  </a
+      ><a name="6832" href="BiGUL.BiGUL.html#6582" class="Function"
+      >interp-CaseVBranch</a
+      ><a name="6850"
+      > </a
+      ><a name="6851" class="Symbol"
+      >((</a
+      ><a name="6853" href="BiGUL.BiGUL.html#6853" class="Bound"
+      >p</a
+      ><a name="6854"
+      > </a
+      ><a name="6855" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6856"
+      > </a
+      ><a name="6857" href="BiGUL.BiGUL.html#6857" class="Bound"
+      >b</a
+      ><a name="6858" class="Symbol"
+      >)</a
+      ><a name="6859"
+      > </a
+      ><a name="6860" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6861"
+      > </a
+      ><a name="6862" href="BiGUL.BiGUL.html#6862" class="Bound"
+      >branches</a
+      ><a name="6870" class="Symbol"
+      >)</a
+      ><a name="6871"
+      > </a
+      ><a name="6872" class="Symbol"
+      >(</a
+      ><a name="6873" href="BiGUL.BiGUL.html#6873" class="Bound"
+      >c</a
+      ><a name="6874"
+      > </a
+      ><a name="6875" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6876"
+      > </a
+      ><a name="6877" href="BiGUL.BiGUL.html#6877" class="Bound"
+      >c'</a
+      ><a name="6879" class="Symbol"
+      >)</a
+      ><a name="6880"
+      > </a
+      ><a name="6881" class="Symbol"
+      >=</a
+      ><a name="6882"
+      > </a
+      ><a name="6883" class="Symbol"
+      >(</a
+      ><a name="6884" href="BiGUL.BiGUL.html#6853" class="Bound"
+      >p</a
+      ><a name="6885"
+      > </a
+      ><a name="6886" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6887"
+      > </a
+      ><a name="6888" href="BiGUL.BiGUL.html#4646" class="Function"
+      >interp</a
+      ><a name="6894"
+      > </a
+      ><a name="6895" href="BiGUL.BiGUL.html#6857" class="Bound"
+      >b</a
+      ><a name="6896"
+      > </a
+      ><a name="6897" href="BiGUL.BiGUL.html#6873" class="Bound"
+      >c</a
+      ><a name="6898" class="Symbol"
+      >)</a
+      ><a name="6899"
+      > </a
+      ><a name="6900" href="Data.List.Base.html#721" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="6901"
+      > </a
+      ><a name="6902" href="BiGUL.BiGUL.html#6582" class="Function"
+      >interp-CaseVBranch</a
+      ><a name="6920"
+      > </a
+      ><a name="6921" href="BiGUL.BiGUL.html#6862" class="Bound"
+      >branches</a
+      ><a name="6929"
+      > </a
+      ><a name="6930" href="BiGUL.BiGUL.html#6877" class="Bound"
+      >c'</a
+      ><a name="6932"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>
