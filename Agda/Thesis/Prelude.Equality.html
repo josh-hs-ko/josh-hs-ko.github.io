@@ -1,0 +1,1827 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Prelude.Equality</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- This module defines the J rule for propositional equality, a generalised K rule for heterogeneous equality,</a
+      ><a name="111"
+      >
+</a
+      ><a name="112" class="Comment"
+      >-- and a predicate specifying when an element of a setoid is the unique inhabitant of the setoid.</a
+      ><a name="209"
+      >
+
+</a
+      ><a name="211" class="Keyword"
+      >module</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="Prelude.Equality.html#1" class="Module"
+      >Prelude.Equality</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Keyword"
+      >where</a
+      ><a name="240"
+      >
+
+</a
+      ><a name="242" class="Keyword"
+      >open</a
+      ><a name="246"
+      > </a
+      ><a name="247" class="Keyword"
+      >import</a
+      ><a name="253"
+      > </a
+      ><a name="254" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="259"
+      >
+</a
+      ><a name="260" class="Keyword"
+      >open</a
+      ><a name="264"
+      > </a
+      ><a name="265" class="Keyword"
+      >import</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="280"
+      > </a
+      ><a name="281" class="Keyword"
+      >using</a
+      ><a name="286"
+      > </a
+      ><a name="287" class="Symbol"
+      >(</a
+      ><a name="288" href="Function.html#2039" class="Function Operator"
+      >_on_</a
+      ><a name="292" class="Symbol"
+      >)</a
+      ><a name="293"
+      >
+</a
+      ><a name="294" class="Keyword"
+      >open</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Keyword"
+      >import</a
+      ><a name="305"
+      > </a
+      ><a name="306" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="318"
+      > </a
+      ><a name="319" class="Keyword"
+      >using</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Symbol"
+      >(</a
+      ><a name="326" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="327" class="Symbol"
+      >;</a
+      ><a name="328"
+      > </a
+      ><a name="329" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="337" class="Symbol"
+      >;</a
+      ><a name="338"
+      > </a
+      ><a name="339" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="342" class="Symbol"
+      >;</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="347" class="Symbol"
+      >)</a
+      ><a name="348"
+      > </a
+      ><a name="349" class="Keyword"
+      >renaming</a
+      ><a name="357"
+      > </a
+      ><a name="358" class="Symbol"
+      >(</a
+      ><a name="359" href="Data.Product.html#1872" class="Function"
+      >map</a
+      ><a name="362"
+      > </a
+      ><a name="363" class="Symbol"
+      >to</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Data.Product.html#1872" class="Function"
+      >_**_</a
+      ><a name="370" class="Symbol"
+      >)</a
+      ><a name="371"
+      >
+</a
+      ><a name="372" class="Keyword"
+      >open</a
+      ><a name="376"
+      > </a
+      ><a name="377" class="Keyword"
+      >import</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="399"
+      > </a
+      ><a name="400" class="Keyword"
+      >using</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >(</a
+      ><a name="407" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="413" class="Symbol"
+      >;</a
+      ><a name="414"
+      > </a
+      ><a name="415" class="Keyword"
+      >module</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="428" class="Symbol"
+      >)</a
+      ><a name="429"
+      >
+</a
+      ><a name="430" class="Keyword"
+      >open</a
+      ><a name="434"
+      > </a
+      ><a name="435" class="Keyword"
+      >import</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="479"
+      > </a
+      ><a name="480" class="Keyword"
+      >using</a
+      ><a name="485"
+      > </a
+      ><a name="486" class="Symbol"
+      >(</a
+      ><a name="487" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="490" class="Symbol"
+      >;</a
+      ><a name="491"
+      > </a
+      ><a name="492" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="496" class="Symbol"
+      >)</a
+      ><a name="497"
+      >
+</a
+      ><a name="498" class="Keyword"
+      >open</a
+      ><a name="502"
+      > </a
+      ><a name="503" class="Keyword"
+      >import</a
+      ><a name="509"
+      > </a
+      ><a name="510" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="547"
+      > </a
+      ><a name="548" class="Keyword"
+      >using</a
+      ><a name="553"
+      > </a
+      ><a name="554" class="Symbol"
+      >(</a
+      ><a name="555" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="558" class="Symbol"
+      >)</a
+      ><a name="559"
+      > </a
+      ><a name="560" class="Keyword"
+      >renaming</a
+      ><a name="568"
+      > </a
+      ><a name="569" class="Symbol"
+      >(</a
+      ><a name="570" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >refl</a
+      ><a name="574"
+      > </a
+      ><a name="575" class="Symbol"
+      >to</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="583" class="Symbol"
+      >)</a
+      ><a name="584"
+      >
+
+
+</a
+      ><a name="587" class="Comment"
+      >--------</a
+      ><a name="595"
+      >
+</a
+      ><a name="596" class="Comment"
+      >-- the J rule</a
+      ><a name="609"
+      >
+
+</a
+      ><a name="611" href="Prelude.Equality.html#611" class="Function"
+      >elim-&#8801;</a
+      ><a name="617"
+      > </a
+      ><a name="618" class="Symbol"
+      >:</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >&#8704;</a
+      ><a name="621"
+      > </a
+      ><a name="622" class="Symbol"
+      >{</a
+      ><a name="623" href="Prelude.Equality.html#623" class="Bound"
+      >a</a
+      ><a name="624"
+      > </a
+      ><a name="625" href="Prelude.Equality.html#625" class="Bound"
+      >b</a
+      ><a name="626" class="Symbol"
+      >}</a
+      ><a name="627"
+      > </a
+      ><a name="628" class="Symbol"
+      >{</a
+      ><a name="629" href="Prelude.Equality.html#629" class="Bound"
+      >A</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >:</a
+      ><a name="632"
+      > </a
+      ><a name="633" class="PrimitiveType"
+      >Set</a
+      ><a name="636"
+      > </a
+      ><a name="637" href="Prelude.Equality.html#623" class="Bound"
+      >a</a
+      ><a name="638" class="Symbol"
+      >}</a
+      ><a name="639"
+      > </a
+      ><a name="640" class="Symbol"
+      >{</a
+      ><a name="641" href="Prelude.Equality.html#641" class="Bound"
+      >x</a
+      ><a name="642"
+      > </a
+      ><a name="643" class="Symbol"
+      >:</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="Prelude.Equality.html#629" class="Bound"
+      >A</a
+      ><a name="646" class="Symbol"
+      >}</a
+      ><a name="647"
+      > </a
+      ><a name="648" class="Symbol"
+      >(</a
+      ><a name="649" href="Prelude.Equality.html#649" class="Bound"
+      >P</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="Symbol"
+      >:</a
+      ><a name="652"
+      > </a
+      ><a name="653" class="Symbol"
+      >{</a
+      ><a name="654" href="Prelude.Equality.html#654" class="Bound"
+      >y</a
+      ><a name="655"
+      > </a
+      ><a name="656" class="Symbol"
+      >:</a
+      ><a name="657"
+      > </a
+      ><a name="658" href="Prelude.Equality.html#629" class="Bound"
+      >A</a
+      ><a name="659" class="Symbol"
+      >}</a
+      ><a name="660"
+      > </a
+      ><a name="661" class="Symbol"
+      >&#8594;</a
+      ><a name="662"
+      > </a
+      ><a name="663" href="Prelude.Equality.html#641" class="Bound"
+      >x</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Prelude.Equality.html#654" class="Bound"
+      >y</a
+      ><a name="668"
+      > </a
+      ><a name="669" class="Symbol"
+      >&#8594;</a
+      ><a name="670"
+      > </a
+      ><a name="671" class="PrimitiveType"
+      >Set</a
+      ><a name="674"
+      > </a
+      ><a name="675" href="Prelude.Equality.html#625" class="Bound"
+      >b</a
+      ><a name="676" class="Symbol"
+      >)</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >&#8594;</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="Prelude.Equality.html#649" class="Bound"
+      >P</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="686"
+      > </a
+      ><a name="687" class="Symbol"
+      >&#8594;</a
+      ><a name="688"
+      > </a
+      ><a name="689" class="Symbol"
+      >{</a
+      ><a name="690" href="Prelude.Equality.html#690" class="Bound"
+      >y</a
+      ><a name="691"
+      > </a
+      ><a name="692" class="Symbol"
+      >:</a
+      ><a name="693"
+      > </a
+      ><a name="694" href="Prelude.Equality.html#629" class="Bound"
+      >A</a
+      ><a name="695" class="Symbol"
+      >}</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >(</a
+      ><a name="698" href="Prelude.Equality.html#698" class="Bound"
+      >eq</a
+      ><a name="700"
+      > </a
+      ><a name="701" class="Symbol"
+      >:</a
+      ><a name="702"
+      > </a
+      ><a name="703" href="Prelude.Equality.html#641" class="Bound"
+      >x</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="Prelude.Equality.html#690" class="Bound"
+      >y</a
+      ><a name="708" class="Symbol"
+      >)</a
+      ><a name="709"
+      > </a
+      ><a name="710" class="Symbol"
+      >&#8594;</a
+      ><a name="711"
+      > </a
+      ><a name="712" href="Prelude.Equality.html#649" class="Bound"
+      >P</a
+      ><a name="713"
+      > </a
+      ><a name="714" href="Prelude.Equality.html#698" class="Bound"
+      >eq</a
+      ><a name="716"
+      >
+</a
+      ><a name="717" href="Prelude.Equality.html#611" class="Function"
+      >elim-&#8801;</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="Prelude.Equality.html#724" class="Bound"
+      >P</a
+      ><a name="725"
+      > </a
+      ><a name="726" href="Prelude.Equality.html#726" class="Bound"
+      >p</a
+      ><a name="727"
+      > </a
+      ><a name="728" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="732"
+      > </a
+      ><a name="733" class="Symbol"
+      >=</a
+      ><a name="734"
+      > </a
+      ><a name="735" href="Prelude.Equality.html#726" class="Bound"
+      >p</a
+      ><a name="736"
+      >
+
+
+</a
+      ><a name="739" class="Comment"
+      >--------</a
+      ><a name="747"
+      >
+</a
+      ><a name="748" class="Comment"
+      >-- generalised uniqueness of identity proofs</a
+      ><a name="792"
+      >
+
+</a
+      ><a name="794" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="812"
+      > </a
+      ><a name="813" class="Symbol"
+      >:</a
+      ><a name="814"
+      > </a
+      ><a name="815" class="Symbol"
+      >&#8704;</a
+      ><a name="816"
+      > </a
+      ><a name="817" class="Symbol"
+      >{</a
+      ><a name="818" href="Prelude.Equality.html#818" class="Bound"
+      >a</a
+      ><a name="819" class="Symbol"
+      >}</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Symbol"
+      >{</a
+      ><a name="822" href="Prelude.Equality.html#822" class="Bound"
+      >A</a
+      ><a name="823"
+      > </a
+      ><a name="824" class="Symbol"
+      >:</a
+      ><a name="825"
+      > </a
+      ><a name="826" class="PrimitiveType"
+      >Set</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="Prelude.Equality.html#818" class="Bound"
+      >a</a
+      ><a name="831" class="Symbol"
+      >}</a
+      ><a name="832"
+      > </a
+      ><a name="833" class="Symbol"
+      >{</a
+      ><a name="834" href="Prelude.Equality.html#834" class="Bound"
+      >x</a
+      ><a name="835"
+      > </a
+      ><a name="836" href="Prelude.Equality.html#836" class="Bound"
+      >x'</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Prelude.Equality.html#839" class="Bound"
+      >y</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="Prelude.Equality.html#841" class="Bound"
+      >y'</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >:</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="Prelude.Equality.html#822" class="Bound"
+      >A</a
+      ><a name="847" class="Symbol"
+      >}</a
+      ><a name="848"
+      > </a
+      ><a name="849" class="Symbol"
+      >&#8594;</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="Prelude.Equality.html#834" class="Bound"
+      >x</a
+      ><a name="852"
+      > </a
+      ><a name="853" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="854"
+      > </a
+      ><a name="855" href="Prelude.Equality.html#836" class="Bound"
+      >x'</a
+      ><a name="857"
+      > </a
+      ><a name="858" class="Symbol"
+      >&#8594;</a
+      ><a name="859"
+      > </a
+      ><a name="860" href="Prelude.Equality.html#839" class="Bound"
+      >y</a
+      ><a name="861"
+      > </a
+      ><a name="862" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="863"
+      > </a
+      ><a name="864" href="Prelude.Equality.html#841" class="Bound"
+      >y'</a
+      ><a name="866"
+      > </a
+      ><a name="867" class="Symbol"
+      >&#8594;</a
+      ><a name="868"
+      > </a
+      ><a name="869" class="Symbol"
+      >{</a
+      ><a name="870" href="Prelude.Equality.html#870" class="Bound"
+      >eq</a
+      ><a name="872"
+      > </a
+      ><a name="873" class="Symbol"
+      >:</a
+      ><a name="874"
+      > </a
+      ><a name="875" href="Prelude.Equality.html#834" class="Bound"
+      >x</a
+      ><a name="876"
+      > </a
+      ><a name="877" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="878"
+      > </a
+      ><a name="879" href="Prelude.Equality.html#839" class="Bound"
+      >y</a
+      ><a name="880" class="Symbol"
+      >}</a
+      ><a name="881"
+      > </a
+      ><a name="882" class="Symbol"
+      >{</a
+      ><a name="883" href="Prelude.Equality.html#883" class="Bound"
+      >eq'</a
+      ><a name="886"
+      > </a
+      ><a name="887" class="Symbol"
+      >:</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="Prelude.Equality.html#836" class="Bound"
+      >x'</a
+      ><a name="891"
+      > </a
+      ><a name="892" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="Prelude.Equality.html#841" class="Bound"
+      >y'</a
+      ><a name="896" class="Symbol"
+      >}</a
+      ><a name="897"
+      > </a
+      ><a name="898" class="Symbol"
+      >&#8594;</a
+      ><a name="899"
+      > </a
+      ><a name="900" href="Prelude.Equality.html#870" class="Bound"
+      >eq</a
+      ><a name="902"
+      > </a
+      ><a name="903" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="904"
+      > </a
+      ><a name="905" href="Prelude.Equality.html#883" class="Bound"
+      >eq'</a
+      ><a name="908"
+      >
+</a
+      ><a name="909" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="927"
+      > </a
+      ><a name="928" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >{</a
+      ><a name="939" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="943" class="Symbol"
+      >}</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >{</a
+      ><a name="946" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="950" class="Symbol"
+      >}</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Symbol"
+      >=</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="959"
+      >
+
+
+</a
+      ><a name="962" class="Comment"
+      >--------</a
+      ><a name="970"
+      >
+</a
+      ><a name="971" class="Comment"
+      >-- unique inhabitant</a
+      ><a name="991"
+      >
+
+</a
+      ><a name="993" href="Prelude.Equality.html#993" class="Function"
+      >Unique</a
+      ><a name="999"
+      > </a
+      ><a name="1000" class="Symbol"
+      >:</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" class="Symbol"
+      >{</a
+      ><a name="1003" href="Prelude.Equality.html#1003" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Prelude.Equality.html#1006" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >:</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1016" class="Symbol"
+      >}</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >(</a
+      ><a name="1019" href="Prelude.Equality.html#1019" class="Bound"
+      >S</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" class="Symbol"
+      >:</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1029"
+      > </a
+      ><a name="1030" href="Prelude.Equality.html#1003" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1032"
+      > </a
+      ><a name="1033" href="Prelude.Equality.html#1006" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1035" class="Symbol"
+      >)</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" class="Symbol"
+      >&#8594;</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="Relation.Binary.html#1971" class="Field"
+      >Setoid.Carrier</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" href="Prelude.Equality.html#1019" class="Bound"
+      >S</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" class="Symbol"
+      >&#8594;</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="PrimitiveType"
+      >Set</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >(</a
+      ><a name="1063" href="Prelude.Equality.html#1003" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="Agda.Primitive.html#655" class="Primitive Operator"
+      >&#8852;</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="Prelude.Equality.html#1006" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1070" class="Symbol"
+      >)</a
+      ><a name="1071"
+      >
+</a
+      ><a name="1072" href="Prelude.Equality.html#993" class="Function"
+      >Unique</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" href="Prelude.Equality.html#1079" class="Bound"
+      >S</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="Prelude.Equality.html#1081" class="Bound"
+      >x</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >=</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" class="Symbol"
+      >(</a
+      ><a name="1086" href="Prelude.Equality.html#1086" class="Bound"
+      >y</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" class="Symbol"
+      >:</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" href="Relation.Binary.html#1971" class="Function"
+      >Carrier</a
+      ><a name="1097" class="Symbol"
+      >)</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" class="Symbol"
+      >&#8594;</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="Prelude.Equality.html#1081" class="Bound"
+      >x</a
+      ><a name="1102"
+      > </a
+      ><a name="1103" href="Relation.Binary.html#1997" class="Function Operator"
+      >&#8776;</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="Prelude.Equality.html#1086" class="Bound"
+      >y</a
+      ><a name="1106"
+      >
+  </a
+      ><a name="1109" class="Keyword"
+      >where</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" class="Keyword"
+      >open</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="Relation.Binary.html#1908" class="Module"
+      >Setoid</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="Prelude.Equality.html#1079" class="Bound"
+      >S</a
+      ><a name="1128"
+      >
+
+</a
+      ><a name="1130" href="Prelude.Equality.html#1130" class="Function"
+      >equal</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" class="Symbol"
+      >:</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" class="Symbol"
+      >{</a
+      ><a name="1139" href="Prelude.Equality.html#1139" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="Prelude.Equality.html#1142" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" class="Symbol"
+      >:</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1152" class="Symbol"
+      >}</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" class="Symbol"
+      >(</a
+      ><a name="1155" href="Prelude.Equality.html#1155" class="Bound"
+      >S</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >:</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" href="Prelude.Equality.html#1139" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="Prelude.Equality.html#1142" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1171" class="Symbol"
+      >)</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" class="Symbol"
+      >&#8594;</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="Prelude.Equality.html#1178" class="Bound"
+      >x</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="Relation.Binary.html#1971" class="Field"
+      >Setoid.Carrier</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="Prelude.Equality.html#1155" class="Bound"
+      >S</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="Prelude.Equality.html#993" class="Function"
+      >Unique</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" href="Prelude.Equality.html#1155" class="Bound"
+      >S</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="Prelude.Equality.html#1178" class="Bound"
+      >x</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" class="Symbol"
+      >&#8594;</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >&#8704;</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="Prelude.Equality.html#1216" class="Bound"
+      >y</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" href="Prelude.Equality.html#1218" class="Bound"
+      >z</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" class="Symbol"
+      >&#8594;</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="Relation.Binary.html#1997" class="Field Operator"
+      >Setoid._&#8776;_</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" href="Prelude.Equality.html#1155" class="Bound"
+      >S</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" href="Prelude.Equality.html#1216" class="Bound"
+      >y</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="Prelude.Equality.html#1218" class="Bound"
+      >z</a
+      ><a name="1238"
+      >
+</a
+      ><a name="1239" href="Prelude.Equality.html#1130" class="Function"
+      >equal</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="Prelude.Equality.html#1245" class="Bound"
+      >S</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Symbol"
+      >(</a
+      ><a name="1248" href="Prelude.Equality.html#1248" class="Bound"
+      >x</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="Prelude.Equality.html#1252" class="Bound"
+      >u</a
+      ><a name="1253" class="Symbol"
+      >)</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" href="Prelude.Equality.html#1255" class="Bound"
+      >y</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="Prelude.Equality.html#1257" class="Bound"
+      >z</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >=</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Relation.Binary.Core.html#4986" class="Function"
+      >trans</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" class="Symbol"
+      >(</a
+      ><a name="1268" href="Relation.Binary.Core.html#4960" class="Function"
+      >sym</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" class="Symbol"
+      >(</a
+      ><a name="1273" href="Prelude.Equality.html#1252" class="Bound"
+      >u</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="Prelude.Equality.html#1255" class="Bound"
+      >y</a
+      ><a name="1276" class="Symbol"
+      >))</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" class="Symbol"
+      >(</a
+      ><a name="1280" href="Prelude.Equality.html#1252" class="Bound"
+      >u</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="Prelude.Equality.html#1257" class="Bound"
+      >z</a
+      ><a name="1283" class="Symbol"
+      >)</a
+      ><a name="1284"
+      >
+  </a
+      ><a name="1287" class="Keyword"
+      >where</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" class="Keyword"
+      >open</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" href="Relation.Binary.html#1908" class="Module"
+      >Setoid</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" href="Prelude.Equality.html#1245" class="Bound"
+      >S</a
+      ><a name="1306"
+      >
+
+
+</a
+      ><a name="1309" class="Comment"
+      >--------</a
+      ><a name="1317"
+      >
+</a
+      ><a name="1318" class="Comment"
+      >-- creation of a setoid relative to an existing one</a
+      ><a name="1369"
+      >
+
+</a
+      ><a name="1371" href="Prelude.Equality.html#1371" class="Function"
+      >toSetoid</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" class="Symbol"
+      >:</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" class="Symbol"
+      >{</a
+      ><a name="1383" href="Prelude.Equality.html#1383" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" href="Prelude.Equality.html#1386" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="Prelude.Equality.html#1389" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1391"
+      > </a
+      ><a name="1392" class="Symbol"
+      >:</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1399" class="Symbol"
+      >}</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" class="Symbol"
+      >(</a
+      ><a name="1402" href="Prelude.Equality.html#1402" class="Bound"
+      >S</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" class="Symbol"
+      >:</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="Prelude.Equality.html#1383" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" href="Prelude.Equality.html#1386" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1418" class="Symbol"
+      >)</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" class="Symbol"
+      >{</a
+      ><a name="1421" href="Prelude.Equality.html#1421" class="Bound"
+      >X</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" class="Symbol"
+      >:</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" class="PrimitiveType"
+      >Set</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="Prelude.Equality.html#1389" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1431" class="Symbol"
+      >}</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="Symbol"
+      >&#8594;</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" class="Symbol"
+      >(</a
+      ><a name="1436" href="Prelude.Equality.html#1421" class="Bound"
+      >X</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="Symbol"
+      >&#8594;</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" href="Relation.Binary.html#1971" class="Field"
+      >Setoid.Carrier</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="Prelude.Equality.html#1402" class="Bound"
+      >S</a
+      ><a name="1456" class="Symbol"
+      >)</a
+      ><a name="1457"
+      > </a
+      ><a name="1458" class="Symbol"
+      >&#8594;</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="Prelude.Equality.html#1389" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" href="Prelude.Equality.html#1386" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1472"
+      >
+</a
+      ><a name="1473" href="Prelude.Equality.html#1371" class="Function"
+      >toSetoid</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="Prelude.Equality.html#1482" class="Bound"
+      >S</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" class="Symbol"
+      >{</a
+      ><a name="1485" href="Prelude.Equality.html#1485" class="Bound"
+      >X</a
+      ><a name="1486" class="Symbol"
+      >}</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Prelude.Equality.html#1488" class="Bound"
+      >f</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" class="Symbol"
+      >=</a
+      ><a name="1491"
+      >
+  </a
+      ><a name="1494" class="Keyword"
+      >record</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" class="Symbol"
+      >{</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" class="Field"
+      >Carrier</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" class="Symbol"
+      >=</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" href="Prelude.Equality.html#1485" class="Bound"
+      >X</a
+      ><a name="1514"
+      >
+         </a
+      ><a name="1524" class="Symbol"
+      >;</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="1529"
+      >     </a
+      ><a name="1534" class="Symbol"
+      >=</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="Relation.Binary.html#1997" class="Field Operator"
+      >Setoid._&#8776;_</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" href="Prelude.Equality.html#1482" class="Bound"
+      >S</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Function.html#2039" class="Function Operator"
+      >on</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="Prelude.Equality.html#1488" class="Bound"
+      >f</a
+      ><a name="1553"
+      >
+         </a
+      ><a name="1563" class="Symbol"
+      >;</a
+      ><a name="1564"
+      > </a
+      ><a name="1565" class="Field"
+      >isEquivalence</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" class="Symbol"
+      >=</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" class="Keyword"
+      >record</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" class="Symbol"
+      >{</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" class="Field"
+      >refl</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" class="Symbol"
+      >=</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="Relation.Binary.Core.html#4934" class="Function"
+      >Setoid.refl</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="Prelude.Equality.html#1482" class="Bound"
+      >S</a
+      ><a name="1610" class="Symbol"
+      >;</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" class="Field"
+      >sym</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="Symbol"
+      >=</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="Prelude.Equality.html#1482" class="Bound"
+      >S</a
+      ><a name="1630" class="Symbol"
+      >;</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Field"
+      >trans</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" class="Symbol"
+      >=</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="Prelude.Equality.html#1482" class="Bound"
+      >S</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" class="Symbol"
+      >}</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" class="Symbol"
+      >}</a
+      ><a name="1658"
+      >
+
+
+</a
+      ><a name="1661" class="Comment"
+      >--------</a
+      ><a name="1669"
+      >
+</a
+      ><a name="1670" class="Comment"
+      >-- </a
+      ><a name="1673"
+      >
+
+</a
+      ><a name="1675" href="Prelude.Equality.html#1675" class="Function"
+      >ProductSetoid</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" class="Symbol"
+      >:</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >{</a
+      ><a name="1692" href="Prelude.Equality.html#1692" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="Prelude.Equality.html#1695" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="Prelude.Equality.html#1698" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" href="Prelude.Equality.html#1701" class="Bound"
+      >&#8467;&#8323;</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" class="Symbol"
+      >:</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1711" class="Symbol"
+      >}</a
+      ><a name="1712"
+      > </a
+      ><a name="1713" class="Symbol"
+      >&#8594;</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="Prelude.Equality.html#1692" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Prelude.Equality.html#1695" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" class="Symbol"
+      >&#8594;</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Prelude.Equality.html#1698" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="Prelude.Equality.html#1701" class="Bound"
+      >&#8467;&#8323;</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >&#8594;</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" class="Symbol"
+      >(</a
+      ><a name="1753" href="Prelude.Equality.html#1692" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="1755"
+      > </a
+      ><a name="1756" href="Agda.Primitive.html#655" class="Primitive Operator"
+      >&#8852;</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" href="Prelude.Equality.html#1698" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1760" class="Symbol"
+      >)</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" class="Symbol"
+      >(</a
+      ><a name="1763" href="Prelude.Equality.html#1695" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" href="Agda.Primitive.html#655" class="Primitive Operator"
+      >&#8852;</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="Prelude.Equality.html#1701" class="Bound"
+      >&#8467;&#8323;</a
+      ><a name="1770" class="Symbol"
+      >)</a
+      ><a name="1771"
+      >
+</a
+      ><a name="1772" href="Prelude.Equality.html#1675" class="Function"
+      >ProductSetoid</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" class="Symbol"
+      >=</a
+      ><a name="1791"
+      >
+  </a
+      ><a name="1794" class="Keyword"
+      >record</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" class="Symbol"
+      >{</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Field"
+      >Carrier</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" class="Symbol"
+      >=</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="Relation.Binary.html#1971" class="Field"
+      >Setoid.Carrier</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="Relation.Binary.html#1971" class="Field"
+      >Setoid.Carrier</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="1848"
+      >
+         </a
+      ><a name="1858" class="Symbol"
+      >;</a
+      ><a name="1859"
+      > </a
+      ><a name="1860" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="1863"
+      > </a
+      ><a name="1864" class="Symbol"
+      >=</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" class="Symbol"
+      >&#955;</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" class="Symbol"
+      >{</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" class="Symbol"
+      >(</a
+      ><a name="1871" href="Prelude.Equality.html#1871" class="Bound"
+      >x</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" href="Prelude.Equality.html#1875" class="Bound"
+      >y</a
+      ><a name="1876" class="Symbol"
+      >)</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" class="Symbol"
+      >(</a
+      ><a name="1879" href="Prelude.Equality.html#1879" class="Bound"
+      >x'</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="Prelude.Equality.html#1884" class="Bound"
+      >y'</a
+      ><a name="1886" class="Symbol"
+      >)</a
+      ><a name="1887"
+      > </a
+      ><a name="1888" class="Symbol"
+      >&#8594;</a
+      ><a name="1889"
+      > </a
+      ><a name="1890" href="Relation.Binary.html#1997" class="Field Operator"
+      >Setoid._&#8776;_</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="Prelude.Equality.html#1871" class="Bound"
+      >x</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" href="Prelude.Equality.html#1879" class="Bound"
+      >x'</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="Relation.Binary.html#1997" class="Field Operator"
+      >Setoid._&#8776;_</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="Prelude.Equality.html#1875" class="Bound"
+      >y</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="Prelude.Equality.html#1884" class="Bound"
+      >y'</a
+      ><a name="1927"
+      > </a
+      ><a name="1928" class="Symbol"
+      >}</a
+      ><a name="1929"
+      >
+         </a
+      ><a name="1939" class="Symbol"
+      >;</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Field"
+      >isEquivalence</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" class="Symbol"
+      >=</a
+      ><a name="1956"
+      >
+             </a
+      ><a name="1970" class="Keyword"
+      >record</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >{</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" class="Field"
+      >refl</a
+      ><a name="1983"
+      >  </a
+      ><a name="1985" class="Symbol"
+      >=</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" href="Relation.Binary.Core.html#4934" class="Function"
+      >Setoid.refl</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2002"
+      > </a
+      ><a name="2003" href="Relation.Binary.Core.html#4934" class="Function"
+      >Setoid.refl</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="2016"
+      >
+                    </a
+      ><a name="2037" class="Symbol"
+      >;</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Field"
+      >sym</a
+      ><a name="2042"
+      >   </a
+      ><a name="2045" class="Symbol"
+      >=</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="2062"
+      > </a
+      ><a name="2063" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="2075"
+      >
+                    </a
+      ><a name="2096" class="Symbol"
+      >;</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" class="Field"
+      >trans</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" class="Symbol"
+      >=</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" class="Symbol"
+      >&#955;</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" class="Symbol"
+      >{</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" class="Symbol"
+      >(</a
+      ><a name="2111" href="Prelude.Equality.html#2111" class="Bound"
+      >eqS</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2116"
+      > </a
+      ><a name="2117" href="Prelude.Equality.html#2117" class="Bound"
+      >eqT</a
+      ><a name="2120" class="Symbol"
+      >)</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" class="Symbol"
+      >(</a
+      ><a name="2123" href="Prelude.Equality.html#2123" class="Bound"
+      >eqS'</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="Prelude.Equality.html#2130" class="Bound"
+      >eqT'</a
+      ><a name="2134" class="Symbol"
+      >)</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" class="Symbol"
+      >&#8594;</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Prelude.Equality.html#1786" class="Bound"
+      >S</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Prelude.Equality.html#2111" class="Bound"
+      >eqS</a
+      ><a name="2156"
+      > </a
+      ><a name="2157" href="Prelude.Equality.html#2123" class="Bound"
+      >eqS'</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" href="Prelude.Equality.html#1788" class="Bound"
+      >T</a
+      ><a name="2178"
+      > </a
+      ><a name="2179" href="Prelude.Equality.html#2117" class="Bound"
+      >eqT</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" href="Prelude.Equality.html#2130" class="Bound"
+      >eqT'</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >}</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" class="Symbol"
+      >}</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >}</a
+      ><a name="2193"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

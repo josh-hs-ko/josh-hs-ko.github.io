@@ -1,0 +1,4153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Ornament.RefinementSemantics</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Definition of an optimised predicate for an ornament as the parallel composition of the ornament and the singleton ornament.</a
+      ><a name="128"
+      >
+</a
+      ><a name="129" class="Comment"
+      >-- This construction gives a functor from `Orn` to `FRef` which produces more representation-efficient promotion predicates.</a
+      ><a name="253"
+      >
+
+</a
+      ><a name="255" class="Keyword"
+      >module</a
+      ><a name="261"
+      > </a
+      ><a name="262" href="Ornament.RefinementSemantics.html#1" class="Module"
+      >Ornament.RefinementSemantics</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Keyword"
+      >where</a
+      ><a name="296"
+      >
+
+</a
+      ><a name="298" class="Keyword"
+      >open</a
+      ><a name="302"
+      > </a
+      ><a name="303" class="Keyword"
+      >import</a
+      ><a name="309"
+      > </a
+      ><a name="310" href="Prelude.Equality.html#1" class="Module"
+      >Prelude.Equality</a
+      ><a name="326"
+      >
+</a
+      ><a name="327" class="Keyword"
+      >open</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Keyword"
+      >import</a
+      ><a name="338"
+      > </a
+      ><a name="339" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="355"
+      >
+</a
+      ><a name="356" class="Keyword"
+      >open</a
+      ><a name="360"
+      > </a
+      ><a name="361" class="Keyword"
+      >import</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="396"
+      >
+</a
+      ><a name="397" class="Keyword"
+      >open</a
+      ><a name="401"
+      > </a
+      ><a name="402" class="Keyword"
+      >import</a
+      ><a name="408"
+      > </a
+      ><a name="409" href="Prelude.Category.Slice.html#1" class="Module"
+      >Prelude.Category.Slice</a
+      ><a name="431"
+      >
+</a
+      ><a name="432" class="Keyword"
+      >open</a
+      ><a name="436"
+      > </a
+      ><a name="437" class="Keyword"
+      >import</a
+      ><a name="443"
+      > </a
+      ><a name="444" href="Prelude.Category.Span.html#1" class="Module"
+      >Prelude.Category.Span</a
+      ><a name="465"
+      >
+</a
+      ><a name="466" class="Keyword"
+      >open</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Keyword"
+      >import</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="Prelude.Category.Pullback.html#1" class="Module"
+      >Prelude.Category.Pullback</a
+      ><a name="503"
+      >
+</a
+      ><a name="504" class="Keyword"
+      >open</a
+      ><a name="508"
+      > </a
+      ><a name="509" class="Keyword"
+      >import</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="532"
+      >
+</a
+      ><a name="533" class="Keyword"
+      >open</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Keyword"
+      >import</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="565"
+      > </a
+      ><a name="566" class="Keyword"
+      >hiding</a
+      ><a name="572"
+      > </a
+      ><a name="573" class="Symbol"
+      >(</a
+      ><a name="574" href="Prelude.Function.Fam.html#4185" class="Function"
+      >compIso</a
+      ><a name="581" class="Symbol"
+      >)</a
+      ><a name="582"
+      >
+</a
+      ><a name="583" class="Keyword"
+      >open</a
+      ><a name="587"
+      > </a
+      ><a name="588" class="Keyword"
+      >import</a
+      ><a name="594"
+      > </a
+      ><a name="595" href="Prelude.Function.Isomorphism.html#1" class="Module"
+      >Prelude.Function.Isomorphism</a
+      ><a name="623"
+      >
+</a
+      ><a name="624" class="Keyword"
+      >open</a
+      ><a name="628"
+      > </a
+      ><a name="629" class="Keyword"
+      >import</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="651"
+      >
+</a
+      ><a name="652" class="Keyword"
+      >open</a
+      ><a name="656"
+      > </a
+      ><a name="657" class="Keyword"
+      >import</a
+      ><a name="663"
+      > </a
+      ><a name="664" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="684"
+      >
+</a
+      ><a name="685" class="Keyword"
+      >open</a
+      ><a name="689"
+      > </a
+      ><a name="690" class="Keyword"
+      >import</a
+      ><a name="696"
+      > </a
+      ><a name="697" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="707"
+      >
+</a
+      ><a name="708" class="Keyword"
+      >open</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Keyword"
+      >import</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="Refinement.Category.html#1" class="Module"
+      >Refinement.Category</a
+      ><a name="739"
+      >
+</a
+      ><a name="740" class="Keyword"
+      >open</a
+      ><a name="744"
+      > </a
+      ><a name="745" class="Keyword"
+      >import</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="763"
+      >
+</a
+      ><a name="764" class="Keyword"
+      >open</a
+      ><a name="768"
+      > </a
+      ><a name="769" class="Keyword"
+      >import</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="784"
+      >
+</a
+      ><a name="785" class="Keyword"
+      >open</a
+      ><a name="789"
+      > </a
+      ><a name="790" class="Keyword"
+      >import</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="Ornament.Category.html#1" class="Module"
+      >Ornament.Category</a
+      ><a name="814"
+      >
+</a
+      ><a name="815" class="Keyword"
+      >open</a
+      ><a name="819"
+      > </a
+      ><a name="820" class="Keyword"
+      >import</a
+      ><a name="826"
+      > </a
+      ><a name="827" href="Ornament.SequentialComposition.html#1" class="Module"
+      >Ornament.SequentialComposition</a
+      ><a name="857"
+      >
+</a
+      ><a name="858" class="Keyword"
+      >open</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="Keyword"
+      >import</a
+      ><a name="869"
+      > </a
+      ><a name="870" href="Ornament.ParallelComposition.html#1" class="Module"
+      >Ornament.ParallelComposition</a
+      ><a name="898"
+      >
+</a
+      ><a name="899" class="Keyword"
+      >open</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Keyword"
+      >import</a
+      ><a name="910"
+      > </a
+      ><a name="911" href="Ornament.ParallelComposition.Pullback.html#1" class="Module"
+      >Ornament.ParallelComposition.Pullback</a
+      ><a name="948"
+      >
+
+</a
+      ><a name="950" class="Keyword"
+      >open</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="Keyword"
+      >import</a
+      ><a name="961"
+      > </a
+      ><a name="962" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Keyword"
+      >using</a
+      ><a name="976"
+      > </a
+      ><a name="977" class="Symbol"
+      >(</a
+      ><a name="978" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="980" class="Symbol"
+      >;</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="985" class="Symbol"
+      >)</a
+      ><a name="986"
+      >
+</a
+      ><a name="987" class="Keyword"
+      >open</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Keyword"
+      >import</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" class="Keyword"
+      >using</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >(</a
+      ><a name="1019" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1020" class="Symbol"
+      >;</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="1030" class="Symbol"
+      >;</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1037" class="Symbol"
+      >;</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1044" class="Symbol"
+      >;</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1049" class="Symbol"
+      >;</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="1054" class="Symbol"
+      >;</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="Data.Product.html#1691" class="Function Operator"
+      >&lt;_,_&gt;</a
+      ><a name="1061" class="Symbol"
+      >)</a
+      ><a name="1062"
+      > </a
+      ><a name="1063" class="Keyword"
+      >renaming</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" class="Symbol"
+      >(</a
+      ><a name="1073" href="Data.Product.html#1872" class="Function"
+      >map</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" class="Symbol"
+      >to</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="Data.Product.html#1872" class="Function"
+      >_**_</a
+      ><a name="1084" class="Symbol"
+      >)</a
+      ><a name="1085"
+      >
+</a
+      ><a name="1086" class="Keyword"
+      >open</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" class="Keyword"
+      >import</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Keyword"
+      >using</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" class="Symbol"
+      >(</a
+      ><a name="1121" class="Keyword"
+      >module</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="1134" class="Symbol"
+      >)</a
+      ><a name="1135"
+      >
+</a
+      ><a name="1136" class="Keyword"
+      >open</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" class="Keyword"
+      >import</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Keyword"
+      >using</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" class="Symbol"
+      >(</a
+      ><a name="1193" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1196" class="Symbol"
+      >;</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1202" class="Symbol"
+      >;</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="1209" class="Symbol"
+      >;</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="1215" class="Symbol"
+      >;</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="1222" class="Symbol"
+      >;</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1227" class="Symbol"
+      >;</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" class="Keyword"
+      >module</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="Relation.Binary.PropositionalEquality.html#227" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="1247" class="Symbol"
+      >)</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" class="Keyword"
+      >renaming</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" class="Symbol"
+      >(</a
+      ><a name="1259" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >setoid</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" class="Symbol"
+      >to</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="1277" class="Symbol"
+      >)</a
+      ><a name="1278"
+      >
+</a
+      ><a name="1279" class="Keyword"
+      >open</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" class="Keyword"
+      >import</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" class="Keyword"
+      >using</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >(</a
+      ><a name="1336" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="1339" class="Symbol"
+      >;</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="1347" class="Symbol"
+      >;</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="1366" class="Symbol"
+      >)</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Keyword"
+      >renaming</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >(</a
+      ><a name="1378" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >refl</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="Symbol"
+      >to</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="1391" class="Symbol"
+      >;</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >cong</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" class="Symbol"
+      >to</a
+      ><a name="1400"
+      > </a
+      ><a name="1401" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="1406" class="Symbol"
+      >;</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >trans</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" class="Symbol"
+      >to</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="1423" class="Symbol"
+      >)</a
+      ><a name="1424"
+      >
+
+</a
+      ><a name="1426" class="Keyword"
+      >open</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" href="Prelude.Category.html#1740" class="Module"
+      >Functor</a
+      ><a name="1438"
+      >
+
+</a
+      ><a name="1440" class="Keyword"
+      >module</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="Ornament.RefinementSemantics.html#1447" class="Module"
+      >OptimisedPredicate</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" class="Symbol"
+      >{</a
+      ><a name="1467" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="Ornament.RefinementSemantics.html#1469" class="Bound"
+      >J</a
+      ><a name="1470" class="Symbol"
+      >}</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" class="Symbol"
+      >{</a
+      ><a name="1473" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >:</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="Ornament.RefinementSemantics.html#1469" class="Bound"
+      >J</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >&#8594;</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="1482" class="Symbol"
+      >}</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" class="Symbol"
+      >{</a
+      ><a name="1485" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="Ornament.RefinementSemantics.html#1487" class="Bound"
+      >E</a
+      ><a name="1488" class="Symbol"
+      >}</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" class="Symbol"
+      >(</a
+      ><a name="1491" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" class="Symbol"
+      >:</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="Ornament.RefinementSemantics.html#1487" class="Bound"
+      >E</a
+      ><a name="1504" class="Symbol"
+      >)</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" class="Keyword"
+      >where</a
+      ><a name="1511"
+      >
+
+  </a
+      ><a name="1515" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" class="Symbol"
+      >:</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" class="Symbol"
+      >(</a
+      ><a name="1529" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1538" class="Symbol"
+      >)</a
+      ><a name="1539"
+      >
+  </a
+      ><a name="1542" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" class="Symbol"
+      >=</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="1553"
+      > </a
+      ><a name="1554" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1571"
+      >
+
+  </a
+      ><a name="1575" href="Ornament.RefinementSemantics.html#1575" class="Function"
+      >OptPO</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" class="Symbol"
+      >:</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="Prelude.InverseImage.html#2253" class="Function"
+      >&#960;&#8321;</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" href="Ornament.RefinementSemantics.html#1487" class="Bound"
+      >E</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="1597"
+      >
+  </a
+      ><a name="1600" href="Ornament.RefinementSemantics.html#1575" class="Function"
+      >OptPO</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >=</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" href="Ornament.ParallelComposition.html#3093" class="Function"
+      >diffOrn-l</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="1619"
+      > </a
+      ><a name="1620" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1633"
+      >
+
+  </a
+      ><a name="1637" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" class="Symbol"
+      >:</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" class="Symbol"
+      >&#8704;</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" class="Symbol"
+      >{</a
+      ><a name="1647" href="Ornament.RefinementSemantics.html#1647" class="Bound"
+      >i</a
+      ><a name="1648" class="Symbol"
+      >}</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" class="Symbol"
+      >&#8594;</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="Ornament.RefinementSemantics.html#1647" class="Bound"
+      >i</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" class="Symbol"
+      >&#8594;</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="Ornament.RefinementSemantics.html#1647" class="Bound"
+      >i</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" class="Symbol"
+      >&#8594;</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" class="PrimitiveType"
+      >Set</a
+      ><a name="1672"
+      >
+  </a
+      ><a name="1675" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Ornament.RefinementSemantics.html#1680" class="Bound"
+      >j</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="Ornament.RefinementSemantics.html#1682" class="Bound"
+      >x</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" class="Symbol"
+      >=</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" class="Symbol"
+      >(</a
+      ><a name="1695" href="Ornament.RefinementSemantics.html#1680" class="Bound"
+      >j</a
+      ><a name="1696"
+      > </a
+      ><a name="1697" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1698"
+      > </a
+      ><a name="1699" class="Symbol"
+      >(</a
+      ><a name="1700" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" class="Symbol"
+      >(_</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Ornament.RefinementSemantics.html#1682" class="Bound"
+      >x</a
+      ><a name="1709" class="Symbol"
+      >)))</a
+      ><a name="1712"
+      >
+
+  </a
+      ><a name="1716" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="1717"
+      > </a
+      ><a name="1718" class="Symbol"
+      >:</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="1725"
+      > </a
+      ><a name="1726" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >(</a
+      ><a name="1731" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1732"
+      > </a
+      ><a name="1733" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" class="Symbol"
+      >(</a
+      ><a name="1736" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1739" class="Symbol"
+      >))</a
+      ><a name="1741"
+      >
+  </a
+      ><a name="1744" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" class="Symbol"
+      >=</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" class="Symbol"
+      >(</a
+      ><a name="1756" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" class="Symbol"
+      >(</a
+      ><a name="1766" href="Prelude.Function.Fam.html#3810" class="Function"
+      >FamF</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1776" class="Symbol"
+      >))</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >(</a
+      ><a name="1780" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" class="Symbol"
+      >_</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" class="Symbol"
+      >(_</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="1794" class="Symbol"
+      >))</a
+      ><a name="1796"
+      >
+
+  </a
+      ><a name="1800" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" class="Symbol"
+      >:</a
+      ><a name="1803"
+      > </a
+      ><a name="1804" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" class="Symbol"
+      >(</a
+      ><a name="1815" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" class="Symbol"
+      >(</a
+      ><a name="1820" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1823" class="Symbol"
+      >))</a
+      ><a name="1825"
+      >
+  </a
+      ><a name="1828" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" class="Symbol"
+      >=</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1838"
+      > </a
+      ><a name="1839" class="Symbol"
+      >(</a
+      ><a name="1840" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" class="Symbol"
+      >(</a
+      ><a name="1850" href="Prelude.Function.Fam.html#3810" class="Function"
+      >FamF</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1860" class="Symbol"
+      >))</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" class="Symbol"
+      >(</a
+      ><a name="1864" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" class="Symbol"
+      >_</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" class="Symbol"
+      >(_</a
+      ><a name="1874"
+      > </a
+      ><a name="1875" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1878"
+      > </a
+      ><a name="1879" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1886"
+      > </a
+      ><a name="1887" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1890" class="Symbol"
+      >))</a
+      ><a name="1892"
+      >
+
+  </a
+      ><a name="1896" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" class="Symbol"
+      >:</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="1914"
+      > </a
+      ><a name="1915" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="1922"
+      >
+  </a
+      ><a name="1925" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="1934"
+      > </a
+      ><a name="1935" class="Symbol"
+      >=</a
+      ><a name="1936"
+      > </a
+      ><a name="1937" href="Prelude.Category.Span.html#682" class="InductiveConstructor"
+      >span</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >(</a
+      ><a name="1945" href="Prelude.Category.Slice.html#722" class="InductiveConstructor"
+      >sliceMorphism</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="1967" class="Symbol"
+      >)</a
+      ><a name="1968"
+      >
+                     </a
+      ><a name="1990" class="Symbol"
+      >(</a
+      ><a name="1991" href="Prelude.Category.Slice.html#722" class="InductiveConstructor"
+      >sliceMorphism</a
+      ><a name="2004"
+      > </a
+      ><a name="2005" href="Data.Product.html#1691" class="Function Operator"
+      >&lt;</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="Data.Product.html#1691" class="Function Operator"
+      >,</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="Ornament.html#10088" class="Function"
+      >singleton</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" href="Data.Product.html#1691" class="Function Operator"
+      >&gt;</a
+      ><a name="2053"
+      >
+                                    </a
+      ><a name="2090" class="Symbol"
+      >(&#955;</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" class="Symbol"
+      >{</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" class="Symbol"
+      >(</a
+      ><a name="2096" href="Ornament.RefinementSemantics.html#2096" class="Bound"
+      >j</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="Ornament.RefinementSemantics.html#2100" class="Bound"
+      >y</a
+      ><a name="2101" class="Symbol"
+      >)</a
+      ><a name="2102"
+      > </a
+      ><a name="2103" class="Symbol"
+      >&#8594;</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" class="Symbol"
+      >(</a
+      ><a name="2122" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" class="Symbol"
+      >(</a
+      ><a name="2130" href="Ornament.html#11016" class="Function"
+      >forget-singOrn</a
+      ><a name="2144"
+      > </a
+      ><a name="2145" class="Symbol"
+      >(</a
+      ><a name="2146" href="Ornament.html#10088" class="Function"
+      >singleton</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" class="Symbol"
+      >(</a
+      ><a name="2157" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" href="Ornament.RefinementSemantics.html#2100" class="Bound"
+      >y</a
+      ><a name="2167" class="Symbol"
+      >))))</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" class="Symbol"
+      >}))</a
+      ><a name="2175"
+      >
+
+  </a
+      ><a name="2179" href="Ornament.RefinementSemantics.html#2179" class="Function"
+      >&#956;E-med</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >:</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >(</a
+      ><a name="2189" href="Ornament.RefinementSemantics.html#2189" class="Bound"
+      >p</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" class="Symbol"
+      >:</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2203"
+      > </a
+      ><a name="2204" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="2205"
+      > </a
+      ><a name="2206" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="2207" class="Symbol"
+      >)</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" class="Symbol"
+      >&#8594;</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" href="Prelude.Category.Span.html#768" class="Record"
+      >SpanMorphism</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" class="Symbol"
+      >(</a
+      ><a name="2225" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" class="Symbol"
+      >(</a
+      ><a name="2244" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" class="Symbol"
+      >(</a
+      ><a name="2249" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="2252" class="Symbol"
+      >)))</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="2257"
+      > </a
+      ><a name="2258" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="2259"
+      > </a
+      ><a name="2260" href="Ornament.RefinementSemantics.html#2189" class="Bound"
+      >p</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="2271"
+      >
+  </a
+      ><a name="2274" href="Ornament.RefinementSemantics.html#2179" class="Function"
+      >&#956;E-med</a
+      ><a name="2280"
+      > </a
+      ><a name="2281" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" class="Symbol"
+      >=</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" href="Prelude.Category.Span.html#911" class="InductiveConstructor"
+      >spanMorphism</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >(</a
+      ><a name="2299" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2307" class="Symbol"
+      >)</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="2314"
+      >
+               </a
+      ><a name="2330" class="Symbol"
+      >(&#955;</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" href="Ornament.RefinementSemantics.html#2333" class="Bound"
+      >t</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" class="Symbol"
+      >&#8594;</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" class="Keyword"
+      >let</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" href="Ornament.RefinementSemantics.html#2341" class="Bound"
+      >eq</a
+      ><a name="2343"
+      >  </a
+      ><a name="2345" class="Symbol"
+      >=</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >(</a
+      ><a name="2354" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" class="Symbol"
+      >(</a
+      ><a name="2378" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="2384"
+      > </a
+      ><a name="2385" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2386" class="Symbol"
+      >)</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Ornament.RefinementSemantics.html#2333" class="Bound"
+      >t</a
+      ><a name="2389" class="Symbol"
+      >)</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >(</a
+      ><a name="2392" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" class="Symbol"
+      >(</a
+      ><a name="2397" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" class="Symbol"
+      >(</a
+      ><a name="2421" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2429" class="Symbol"
+      >)</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" href="Ornament.RefinementSemantics.html#2333" class="Bound"
+      >t</a
+      ><a name="2432" class="Symbol"
+      >))</a
+      ><a name="2434"
+      >
+                          </a
+      ><a name="2461" href="Ornament.RefinementSemantics.html#2461" class="Bound"
+      >eq'</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" class="Symbol"
+      >=</a
+      ><a name="2466"
+      > </a
+      ><a name="2467" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="2477"
+      > </a
+      ><a name="2478" class="Symbol"
+      >(</a
+      ><a name="2479" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2483"
+      > </a
+      ><a name="2484" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" href="Ornament.RefinementSemantics.html#2341" class="Bound"
+      >eq</a
+      ><a name="2492" class="Symbol"
+      >)</a
+      ><a name="2493"
+      >
+                                  </a
+      ><a name="2528" class="Symbol"
+      >(</a
+      ><a name="2529" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" class="Symbol"
+      >(</a
+      ><a name="2537" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" class="Symbol"
+      >(</a
+      ><a name="2550" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="Ornament.RefinementSemantics.html#2341" class="Bound"
+      >eq</a
+      ><a name="2559" class="Symbol"
+      >))</a
+      ><a name="2561"
+      >
+                                          </a
+      ><a name="2604" class="Symbol"
+      >(</a
+      ><a name="2605" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" class="Symbol"
+      >(</a
+      ><a name="2613" href="Ornament.html#11016" class="Function"
+      >forget-singOrn</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" class="Symbol"
+      >(</a
+      ><a name="2629" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" class="Symbol"
+      >(</a
+      ><a name="2636" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" class="Symbol"
+      >(</a
+      ><a name="2653" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2661" class="Symbol"
+      >)</a
+      ><a name="2662"
+      > </a
+      ><a name="2663" href="Ornament.RefinementSemantics.html#2333" class="Bound"
+      >t</a
+      ><a name="2664" class="Symbol"
+      >)))))</a
+      ><a name="2669"
+      >
+                      </a
+      ><a name="2692" class="Keyword"
+      >in</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" href="Ornament.RefinementSemantics.html#2461" class="Bound"
+      >eq'</a
+      ><a name="2709"
+      >
+                                   </a
+      ><a name="2745" class="Symbol"
+      >(</a
+      ><a name="2746" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="2752"
+      > </a
+      ><a name="2753" class="Symbol"
+      >(</a
+      ><a name="2754" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="Symbol"
+      >(</a
+      ><a name="2762" href="Prelude.Equality.html#1130" class="Function"
+      >equal</a
+      ><a name="2767"
+      > </a
+      ><a name="2768" class="Symbol"
+      >(</a
+      ><a name="2769" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" class="Symbol"
+      >_)</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" class="Symbol"
+      >(</a
+      ><a name="2782" href="Ornament.html#10088" class="Function"
+      >singleton</a
+      ><a name="2791"
+      > </a
+      ><a name="2792" class="Symbol"
+      >_</a
+      ><a name="2793"
+      > </a
+      ><a name="2794" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2795"
+      > </a
+      ><a name="2796" href="Ornament.html#10254" class="Function"
+      >singleton-unique</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" class="Symbol"
+      >_)</a
+      ><a name="2815"
+      > </a
+      ><a name="2816" class="Symbol"
+      >_</a
+      ><a name="2817"
+      > </a
+      ><a name="2818" class="Symbol"
+      >_))</a
+      ><a name="2821"
+      >
+                                           </a
+      ><a name="2865" class="Symbol"
+      >(</a
+      ><a name="2866" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="2883"
+      > </a
+      ><a name="2884" class="Symbol"
+      >(</a
+      ><a name="2885" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2900" class="Symbol"
+      >)</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" class="Symbol"
+      >(</a
+      ><a name="2903" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2906"
+      > </a
+      ><a name="2907" href="Ornament.RefinementSemantics.html#2461" class="Bound"
+      >eq'</a
+      ><a name="2910" class="Symbol"
+      >)</a
+      ><a name="2911"
+      > </a
+      ><a name="2912" class="Symbol"
+      >(</a
+      ><a name="2913" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" class="Symbol"
+      >(</a
+      ><a name="2920" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" class="Symbol"
+      >(</a
+      ><a name="2937" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" href="Ornament.RefinementSemantics.html#2281" class="Bound"
+      >p</a
+      ><a name="2945" class="Symbol"
+      >)</a
+      ><a name="2946"
+      > </a
+      ><a name="2947" href="Ornament.RefinementSemantics.html#2333" class="Bound"
+      >t</a
+      ><a name="2948" class="Symbol"
+      >)))))</a
+      ><a name="2953"
+      >
+
+  </a
+      ><a name="2957" href="Ornament.RefinementSemantics.html#2957" class="Function"
+      >&#956;E-med-unique</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" class="Symbol"
+      >:</a
+      ><a name="2972"
+      > </a
+      ><a name="2973" class="Symbol"
+      >(</a
+      ><a name="2974" href="Ornament.RefinementSemantics.html#2974" class="Bound"
+      >p</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" class="Symbol"
+      >:</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="Prelude.Category.Span.html#566" class="Record"
+      >Span</a
+      ><a name="2982"
+      > </a
+      ><a name="2983" class="Symbol"
+      >(</a
+      ><a name="2984" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="2997"
+      > </a
+      ><a name="2998" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" class="Symbol"
+      >(</a
+      ><a name="3003" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" class="Symbol"
+      >(</a
+      ><a name="3008" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3011" class="Symbol"
+      >)))</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3016"
+      > </a
+      ><a name="3017" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3018" class="Symbol"
+      >)</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" class="Symbol"
+      >&#8594;</a
+      ><a name="3021"
+      >
+                  </a
+      ><a name="3040" href="Prelude.Equality.html#993" class="Function"
+      >Unique</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" class="Symbol"
+      >(</a
+      ><a name="3048" href="Prelude.Category.html#876" class="Field"
+      >Category.Morphism</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" class="Symbol"
+      >(</a
+      ><a name="3067" href="Prelude.Category.Span.html#1063" class="Function"
+      >SpanCategory</a
+      ><a name="3079"
+      > </a
+      ><a name="3080" class="Symbol"
+      >(</a
+      ><a name="3081" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="3094"
+      > </a
+      ><a name="3095" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3098"
+      > </a
+      ><a name="3099" class="Symbol"
+      >(</a
+      ><a name="3100" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="3101"
+      > </a
+      ><a name="3102" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="3103"
+      > </a
+      ><a name="3104" class="Symbol"
+      >(</a
+      ><a name="3105" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3106"
+      > </a
+      ><a name="3107" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3108" class="Symbol"
+      >)))</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3115" class="Symbol"
+      >)</a
+      ><a name="3116"
+      > </a
+      ><a name="3117" href="Ornament.RefinementSemantics.html#2974" class="Bound"
+      >p</a
+      ><a name="3118"
+      > </a
+      ><a name="3119" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="3128" class="Symbol"
+      >)</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" class="Symbol"
+      >(</a
+      ><a name="3131" href="Ornament.RefinementSemantics.html#2179" class="Function"
+      >&#956;E-med</a
+      ><a name="3137"
+      > </a
+      ><a name="3138" href="Ornament.RefinementSemantics.html#2974" class="Bound"
+      >p</a
+      ><a name="3139" class="Symbol"
+      >)</a
+      ><a name="3140"
+      >
+  </a
+      ><a name="3143" href="Ornament.RefinementSemantics.html#2957" class="Function"
+      >&#956;E-med-unique</a
+      ><a name="3156"
+      > </a
+      ><a name="3157" href="Ornament.RefinementSemantics.html#3157" class="Bound"
+      >p</a
+      ><a name="3158"
+      > </a
+      ><a name="3159" href="Ornament.RefinementSemantics.html#3159" class="Bound"
+      >med'</a
+      ><a name="3163"
+      > </a
+      ><a name="3164" class="Symbol"
+      >=</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" href="Prelude.Function.html#998" class="Function"
+      >fsym</a
+      ><a name="3170"
+      > </a
+      ><a name="3171" class="Symbol"
+      >(</a
+      ><a name="3172" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" href="Ornament.RefinementSemantics.html#3159" class="Bound"
+      >med'</a
+      ><a name="3200" class="Symbol"
+      >)</a
+      ><a name="3201"
+      >
+
+  </a
+      ><a name="3205" href="Ornament.RefinementSemantics.html#3205" class="Function"
+      >&#956;E-pullback</a
+      ><a name="3216"
+      > </a
+      ><a name="3217" class="Symbol"
+      >:</a
+      ><a name="3218"
+      > </a
+      ><a name="3219" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3233"
+      > </a
+      ><a name="3234" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="3245"
+      >
+  </a
+      ><a name="3248" href="Ornament.RefinementSemantics.html#3205" class="Function"
+      >&#956;E-pullback</a
+      ><a name="3259"
+      >  </a
+      ><a name="3261" href="Ornament.RefinementSemantics.html#3261" class="Bound"
+      >p</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" class="Symbol"
+      >=</a
+      ><a name="3264"
+      > </a
+      ><a name="3265" href="Ornament.RefinementSemantics.html#2179" class="Function"
+      >&#956;E-med</a
+      ><a name="3271"
+      > </a
+      ><a name="3272" href="Ornament.RefinementSemantics.html#3261" class="Bound"
+      >p</a
+      ><a name="3273"
+      > </a
+      ><a name="3274" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" href="Ornament.RefinementSemantics.html#2957" class="Function"
+      >&#956;E-med-unique</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" href="Ornament.RefinementSemantics.html#3261" class="Bound"
+      >p</a
+      ><a name="3291"
+      >
+
+  </a
+      ><a name="3295" href="Ornament.RefinementSemantics.html#3295" class="Function"
+      >OptP-square</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" class="Symbol"
+      >:</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="3315"
+      > </a
+      ><a name="3316" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3323"
+      >
+  </a
+      ><a name="3326" href="Ornament.RefinementSemantics.html#3295" class="Function"
+      >OptP-square</a
+      ><a name="3337"
+      > </a
+      ><a name="3338" class="Symbol"
+      >=</a
+      ><a name="3339"
+      > </a
+      ><a name="3340" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >(</a
+      ><a name="3348" href="Prelude.Category.Span.html#4013" class="Function"
+      >SpanMap</a
+      ><a name="3355"
+      > </a
+      ><a name="3356" class="Symbol"
+      >(</a
+      ><a name="3357" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3365"
+      > </a
+      ><a name="3366" href="Prelude.Function.Fam.html#3810" class="Function"
+      >FamF</a
+      ><a name="3370" class="Symbol"
+      >))</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" class="Symbol"
+      >(</a
+      ><a name="3374" href="Ornament.ParallelComposition.Pullback.html#37416" class="Function"
+      >&#8855;-Fam-square</a
+      ><a name="3386"
+      > </a
+      ><a name="3387" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="3388"
+      > </a
+      ><a name="3389" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3390"
+      > </a
+      ><a name="3391" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3398"
+      > </a
+      ><a name="3399" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3400"
+      > </a
+      ><a name="3401" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3402" class="Symbol"
+      >)</a
+      ><a name="3403"
+      >
+
+  </a
+      ><a name="3407" href="Ornament.RefinementSemantics.html#3407" class="Function"
+      >OptP-pullback</a
+      ><a name="3420"
+      > </a
+      ><a name="3421" class="Symbol"
+      >:</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="3431"
+      > </a
+      ><a name="3432" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3435"
+      > </a
+      ><a name="3436" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3437"
+      > </a
+      ><a name="3438" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3439"
+      > </a
+      ><a name="3440" href="Ornament.RefinementSemantics.html#3295" class="Function"
+      >OptP-square</a
+      ><a name="3451"
+      >
+  </a
+      ><a name="3454" href="Ornament.RefinementSemantics.html#3407" class="Function"
+      >OptP-pullback</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" class="Symbol"
+      >=</a
+      ><a name="3469"
+      > </a
+      ><a name="3470" href="Prelude.Function.Fam.html#18175" class="Function"
+      >FamF-preserves-pullback</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" class="Symbol"
+      >(</a
+      ><a name="3495" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3501"
+      > </a
+      ><a name="3502" class="Symbol"
+      >(</a
+      ><a name="3503" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3511"
+      > </a
+      ><a name="3512" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3515" class="Symbol"
+      >)</a
+      ><a name="3516"
+      > </a
+      ><a name="3517" class="Symbol"
+      >(</a
+      ><a name="3518" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="3523"
+      > </a
+      ><a name="3524" class="Symbol"
+      >_</a
+      ><a name="3525"
+      > </a
+      ><a name="3526" class="Symbol"
+      >(_</a
+      ><a name="3528"
+      > </a
+      ><a name="3529" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3530"
+      > </a
+      ><a name="3531" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="3532" class="Symbol"
+      >)))</a
+      ><a name="3535"
+      >
+                                          </a
+      ><a name="3578" class="Symbol"
+      >(</a
+      ><a name="3579" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3585"
+      > </a
+      ><a name="3586" class="Symbol"
+      >(</a
+      ><a name="3587" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3595"
+      > </a
+      ><a name="3596" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3599" class="Symbol"
+      >)</a
+      ><a name="3600"
+      > </a
+      ><a name="3601" class="Symbol"
+      >(</a
+      ><a name="3602" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" class="Symbol"
+      >_</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" class="Symbol"
+      >(_</a
+      ><a name="3612"
+      > </a
+      ><a name="3613" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3614"
+      > </a
+      ><a name="3615" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3616"
+      > </a
+      ><a name="3617" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3624"
+      > </a
+      ><a name="3625" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3628" class="Symbol"
+      >)))</a
+      ><a name="3631"
+      >
+                                          </a
+      ><a name="3674" class="Symbol"
+      >_</a
+      ><a name="3675"
+      >
+                                          </a
+      ><a name="3718" class="Symbol"
+      >(</a
+      ><a name="3719" href="Ornament.ParallelComposition.Pullback.html#44707" class="Function"
+      >&#8855;-is-Fam-pullback</a
+      ><a name="3736"
+      > </a
+      ><a name="3737" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="3738"
+      > </a
+      ><a name="3739" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3740"
+      > </a
+      ><a name="3741" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3748"
+      > </a
+      ><a name="3749" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3750"
+      > </a
+      ><a name="3751" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3752" class="Symbol"
+      >)</a
+      ><a name="3753"
+      >
+
+  </a
+      ><a name="3757" href="Ornament.RefinementSemantics.html#3757" class="Function"
+      >wholeIso</a
+      ><a name="3765"
+      > </a
+      ><a name="3766" class="Symbol"
+      >:</a
+      ><a name="3767"
+      > </a
+      ><a name="3768" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3775"
+      > </a
+      ><a name="3776" class="Symbol"
+      >(</a
+      ><a name="3777" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="3778"
+      > </a
+      ><a name="3779" class="Symbol"
+      >(</a
+      ><a name="3780" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="3781"
+      > </a
+      ><a name="3782" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="3783"
+      > </a
+      ><a name="3784" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3789" class="Symbol"
+      >)</a
+      ><a name="3790"
+      > </a
+      ><a name="3791" class="Symbol"
+      >(</a
+      ><a name="3792" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3793"
+      > </a
+      ><a name="3794" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="3799" class="Symbol"
+      >))</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" class="Symbol"
+      >(</a
+      ><a name="3803" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="3804"
+      > </a
+      ><a name="3805" href="Ornament.RefinementSemantics.html#1469" class="Bound"
+      >J</a
+      ><a name="3806"
+      > </a
+      ><a name="3807" class="Symbol"
+      >(</a
+      ><a name="3808" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3809"
+      > </a
+      ><a name="3810" href="Ornament.RefinementSemantics.html#1487" class="Bound"
+      >E</a
+      ><a name="3811" class="Symbol"
+      >))</a
+      ><a name="3813"
+      >
+  </a
+      ><a name="3816" href="Ornament.RefinementSemantics.html#3757" class="Function"
+      >wholeIso</a
+      ><a name="3824"
+      > </a
+      ><a name="3825" class="Symbol"
+      >=</a
+      ><a name="3826"
+      > </a
+      ><a name="3827" href="Prelude.Category.Pullback.html#2306" class="Function"
+      >pullback-iso</a
+      ><a name="3839"
+      > </a
+      ><a name="3840" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3843"
+      > </a
+      ><a name="3844" href="Ornament.RefinementSemantics.html#1716" class="Function"
+      >l</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" href="Ornament.RefinementSemantics.html#1800" class="Function"
+      >r</a
+      ><a name="3847"
+      > </a
+      ><a name="3848" href="Ornament.RefinementSemantics.html#3295" class="Function"
+      >OptP-square</a
+      ><a name="3859"
+      > </a
+      ><a name="3860" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="3869"
+      > </a
+      ><a name="3870" href="Ornament.RefinementSemantics.html#3407" class="Function"
+      >OptP-pullback</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" href="Ornament.RefinementSemantics.html#3205" class="Function"
+      >&#956;E-pullback</a
+      ><a name="3895"
+      >
+
+  </a
+      ><a name="3899" href="Ornament.RefinementSemantics.html#3899" class="Function"
+      >indexIso</a
+      ><a name="3907"
+      > </a
+      ><a name="3908" class="Symbol"
+      >:</a
+      ><a name="3909"
+      > </a
+      ><a name="3910" class="Symbol"
+      >&#8704;</a
+      ><a name="3911"
+      > </a
+      ><a name="3912" href="Ornament.RefinementSemantics.html#3912" class="Bound"
+      >j</a
+      ><a name="3913"
+      > </a
+      ><a name="3914" class="Symbol"
+      >&#8594;</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="3919"
+      > </a
+      ><a name="3920" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" class="Symbol"
+      >(</a
+      ><a name="3925" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3926"
+      > </a
+      ><a name="3927" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3928"
+      > </a
+      ><a name="3929" class="Symbol"
+      >(</a
+      ><a name="3930" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="3931"
+      > </a
+      ><a name="3932" href="Ornament.RefinementSemantics.html#3912" class="Bound"
+      >j</a
+      ><a name="3933" class="Symbol"
+      >))</a
+      ><a name="3935"
+      > </a
+      ><a name="3936" class="Symbol"
+      >(</a
+      ><a name="3937" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="3939"
+      > </a
+      ><a name="3940" href="Ornament.RefinementSemantics.html#3940" class="Bound"
+      >jix</a
+      ><a name="3943"
+      > </a
+      ><a name="3944" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="3945"
+      > </a
+      ><a name="3946" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="3947"
+      > </a
+      ><a name="3948" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="3949"
+      > </a
+      ><a name="3950" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3955"
+      > </a
+      ><a name="3956" class="Symbol"
+      >{</a
+      ><a name="3957" class="Argument"
+      >A</a
+      ><a name="3958"
+      > </a
+      ><a name="3959" class="Symbol"
+      >=</a
+      ><a name="3960"
+      > </a
+      ><a name="3961" href="Ornament.RefinementSemantics.html#1467" class="Bound"
+      >I</a
+      ><a name="3962" class="Symbol"
+      >}</a
+      ><a name="3963"
+      > </a
+      ><a name="3964" class="Symbol"
+      >{</a
+      ><a name="3965" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3966"
+      > </a
+      ><a name="3967" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="3968" class="Symbol"
+      >}</a
+      ><a name="3969"
+      > </a
+      ><a name="3970" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="3971"
+      > </a
+      ><a name="3972" href="Prelude.InverseImage.html#2253" class="Function"
+      >&#960;&#8321;</a
+      ><a name="3974"
+      > </a
+      ><a name="3975" href="Ornament.RefinementSemantics.html#3940" class="Bound"
+      >jix</a
+      ><a name="3978"
+      > </a
+      ><a name="3979" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3980"
+      > </a
+      ><a name="3981" href="Ornament.RefinementSemantics.html#3912" class="Bound"
+      >j</a
+      ><a name="3982" class="Symbol"
+      >)</a
+      ><a name="3983"
+      >
+  </a
+      ><a name="3986" href="Ornament.RefinementSemantics.html#3899" class="Function"
+      >indexIso</a
+      ><a name="3994"
+      > </a
+      ><a name="3995" href="Ornament.RefinementSemantics.html#3995" class="Bound"
+      >j</a
+      ><a name="3996"
+      > </a
+      ><a name="3997" class="Symbol"
+      >=</a
+      ><a name="3998"
+      >
+    </a
+      ><a name="4003" class="Keyword"
+      >record</a
+      ><a name="4009"
+      > </a
+      ><a name="4010" class="Symbol"
+      >{</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" class="Field"
+      >to</a
+      ><a name="4014"
+      >   </a
+      ><a name="4017" class="Symbol"
+      >=</a
+      ><a name="4018"
+      > </a
+      ><a name="4019" class="Symbol"
+      >&#955;</a
+      ><a name="4020"
+      > </a
+      ><a name="4021" href="Ornament.RefinementSemantics.html#4021" class="Bound"
+      >x</a
+      ><a name="4022"
+      > </a
+      ><a name="4023" class="Symbol"
+      >&#8594;</a
+      ><a name="4024"
+      > </a
+      ><a name="4025" class="Symbol"
+      >(</a
+      ><a name="4026" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4028"
+      > </a
+      ><a name="4029" href="Ornament.RefinementSemantics.html#3995" class="Bound"
+      >j</a
+      ><a name="4030"
+      > </a
+      ><a name="4031" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4032"
+      > </a
+      ><a name="4033" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4035"
+      > </a
+      ><a name="4036" class="Symbol"
+      >(</a
+      ><a name="4037" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="4038"
+      > </a
+      ><a name="4039" href="Ornament.RefinementSemantics.html#3995" class="Bound"
+      >j</a
+      ><a name="4040"
+      > </a
+      ><a name="4041" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4042"
+      > </a
+      ><a name="4043" href="Ornament.RefinementSemantics.html#4021" class="Bound"
+      >x</a
+      ><a name="4044" class="Symbol"
+      >))</a
+      ><a name="4046"
+      > </a
+      ><a name="4047" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4048"
+      > </a
+      ><a name="4049" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4053"
+      >
+           </a
+      ><a name="4065" class="Symbol"
+      >;</a
+      ><a name="4066"
+      > </a
+      ><a name="4067" class="Field"
+      >from</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" class="Symbol"
+      >=</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" class="Symbol"
+      >&#955;</a
+      ><a name="4075"
+      > </a
+      ><a name="4076" class="Symbol"
+      >{</a
+      ><a name="4077"
+      > </a
+      ><a name="4078" class="Symbol"
+      >((</a
+      ><a name="4080" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4082"
+      > </a
+      ><a name="4083" class="DottedPattern Symbol"
+      >.</a
+      ><a name="4084" href="Ornament.RefinementSemantics.html#3995" class="DottedPattern Bound"
+      >j</a
+      ><a name="4085"
+      > </a
+      ><a name="4086" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4087"
+      > </a
+      ><a name="4088" href="Ornament.RefinementSemantics.html#4088" class="Bound"
+      >ix</a
+      ><a name="4090" class="Symbol"
+      >)</a
+      ><a name="4091"
+      > </a
+      ><a name="4092" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4093"
+      > </a
+      ><a name="4094" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4098" class="Symbol"
+      >)</a
+      ><a name="4099"
+      > </a
+      ><a name="4100" class="Symbol"
+      >&#8594;</a
+      ><a name="4101"
+      > </a
+      ><a name="4102" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="4107"
+      > </a
+      ><a name="4108" class="Symbol"
+      >(</a
+      ><a name="4109" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4110"
+      > </a
+      ><a name="4111" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="4112" class="Symbol"
+      >)</a
+      ><a name="4113"
+      > </a
+      ><a name="4114" class="Symbol"
+      >(</a
+      ><a name="4115" href="Prelude.InverseImage.html#1132" class="Function"
+      >to&#8801;</a
+      ><a name="4118"
+      > </a
+      ><a name="4119" href="Ornament.RefinementSemantics.html#4088" class="Bound"
+      >ix</a
+      ><a name="4121" class="Symbol"
+      >)</a
+      ><a name="4122"
+      > </a
+      ><a name="4123" class="Symbol"
+      >(</a
+      ><a name="4124" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4129"
+      > </a
+      ><a name="4130" class="Symbol"
+      >(</a
+      ><a name="4131" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="4134"
+      > </a
+      ><a name="4135" href="Ornament.RefinementSemantics.html#4088" class="Bound"
+      >ix</a
+      ><a name="4137" class="Symbol"
+      >))</a
+      ><a name="4139"
+      > </a
+      ><a name="4140" class="Symbol"
+      >}</a
+      ><a name="4141"
+      >
+           </a
+      ><a name="4153" class="Symbol"
+      >;</a
+      ><a name="4154"
+      > </a
+      ><a name="4155" class="Field"
+      >to-from-inverse</a
+      ><a name="4170"
+      > </a
+      ><a name="4171" class="Symbol"
+      >=</a
+      ><a name="4172"
+      >
+               </a
+      ><a name="4188" class="Symbol"
+      >&#955;</a
+      ><a name="4189"
+      > </a
+      ><a name="4190" class="Symbol"
+      >{</a
+      ><a name="4191"
+      > </a
+      ><a name="4192" class="Symbol"
+      >((</a
+      ><a name="4194" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4196"
+      > </a
+      ><a name="4197" class="DottedPattern Symbol"
+      >.</a
+      ><a name="4198" href="Ornament.RefinementSemantics.html#3995" class="DottedPattern Bound"
+      >j</a
+      ><a name="4199"
+      > </a
+      ><a name="4200" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4201"
+      > </a
+      ><a name="4202" href="Ornament.RefinementSemantics.html#4202" class="Bound"
+      >ix</a
+      ><a name="4204" class="Symbol"
+      >)</a
+      ><a name="4205"
+      > </a
+      ><a name="4206" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4207"
+      > </a
+      ><a name="4208" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4212" class="Symbol"
+      >)</a
+      ><a name="4213"
+      > </a
+      ><a name="4214" class="Symbol"
+      >&#8594;</a
+      ><a name="4215"
+      >
+                   </a
+      ><a name="4235" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4239"
+      > </a
+      ><a name="4240" class="Symbol"
+      >(&#955;</a
+      ><a name="4242"
+      > </a
+      ><a name="4243" href="Ornament.RefinementSemantics.html#4243" class="Bound"
+      >ix'</a
+      ><a name="4246"
+      > </a
+      ><a name="4247" class="Symbol"
+      >&#8594;</a
+      ><a name="4248"
+      > </a
+      ><a name="4249" class="Symbol"
+      >(</a
+      ><a name="4250" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4252"
+      > </a
+      ><a name="4253" href="Ornament.RefinementSemantics.html#3995" class="Bound"
+      >j</a
+      ><a name="4254"
+      > </a
+      ><a name="4255" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4256"
+      > </a
+      ><a name="4257" href="Ornament.RefinementSemantics.html#4243" class="Bound"
+      >ix'</a
+      ><a name="4260" class="Symbol"
+      >)</a
+      ><a name="4261"
+      > </a
+      ><a name="4262" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4263"
+      > </a
+      ><a name="4264" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4268" class="Symbol"
+      >)</a
+      ><a name="4269"
+      >
+                     </a
+      ><a name="4291" class="Symbol"
+      >(</a
+      ><a name="4292" href="Prelude.InverseImage.html#1575" class="Function"
+      >elim-&#8315;&#185;</a
+      ><a name="4299"
+      > </a
+      ><a name="4300" class="Symbol"
+      >(&#955;</a
+      ><a name="4302"
+      > </a
+      ><a name="4303" class="Symbol"
+      >{</a
+      ><a name="4304" href="Ornament.RefinementSemantics.html#4304" class="Bound"
+      >i</a
+      ><a name="4305" class="Symbol"
+      >}</a
+      ><a name="4306"
+      > </a
+      ><a name="4307" href="Ornament.RefinementSemantics.html#4307" class="Bound"
+      >ix'</a
+      ><a name="4310"
+      > </a
+      ><a name="4311" class="Symbol"
+      >&#8594;</a
+      ><a name="4312"
+      > </a
+      ><a name="4313" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4315"
+      > </a
+      ><a name="4316" class="Symbol"
+      >(</a
+      ><a name="4317" href="Ornament.RefinementSemantics.html#4304" class="Bound"
+      >i</a
+      ><a name="4318"
+      > </a
+      ><a name="4319" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4320"
+      > </a
+      ><a name="4321" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="4326"
+      > </a
+      ><a name="4327" class="Symbol"
+      >(</a
+      ><a name="4328" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4329"
+      > </a
+      ><a name="4330" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="4331" class="Symbol"
+      >)</a
+      ><a name="4332"
+      > </a
+      ><a name="4333" class="Symbol"
+      >(</a
+      ><a name="4334" href="Prelude.InverseImage.html#1132" class="Function"
+      >to&#8801;</a
+      ><a name="4337"
+      > </a
+      ><a name="4338" href="Ornament.RefinementSemantics.html#4307" class="Bound"
+      >ix'</a
+      ><a name="4341" class="Symbol"
+      >)</a
+      ><a name="4342"
+      > </a
+      ><a name="4343" class="Symbol"
+      >(</a
+      ><a name="4344" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4349"
+      > </a
+      ><a name="4350" class="Symbol"
+      >(</a
+      ><a name="4351" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="4354"
+      > </a
+      ><a name="4355" href="Ornament.RefinementSemantics.html#4307" class="Bound"
+      >ix'</a
+      ><a name="4358" class="Symbol"
+      >)))</a
+      ><a name="4361"
+      > </a
+      ><a name="4362" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="4363"
+      > </a
+      ><a name="4364" href="Ornament.RefinementSemantics.html#4307" class="Bound"
+      >ix'</a
+      ><a name="4367" class="Symbol"
+      >)</a
+      ><a name="4368"
+      > </a
+      ><a name="4369" class="Symbol"
+      >(&#955;</a
+      ><a name="4371"
+      > </a
+      ><a name="4372" href="Ornament.RefinementSemantics.html#4372" class="Bound"
+      >ix'</a
+      ><a name="4375"
+      > </a
+      ><a name="4376" class="Symbol"
+      >&#8594;</a
+      ><a name="4377"
+      > </a
+      ><a name="4378" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4382" class="Symbol"
+      >)</a
+      ><a name="4383"
+      > </a
+      ><a name="4384" href="Ornament.RefinementSemantics.html#4202" class="Bound"
+      >ix</a
+      ><a name="4386" class="Symbol"
+      >)</a
+      ><a name="4387"
+      > </a
+      ><a name="4388" class="Symbol"
+      >}</a
+      ><a name="4389"
+      >
+           </a
+      ><a name="4401" class="Symbol"
+      >;</a
+      ><a name="4402"
+      > </a
+      ><a name="4403" class="Field"
+      >from-to-inverse</a
+      ><a name="4418"
+      > </a
+      ><a name="4419" class="Symbol"
+      >=</a
+      ><a name="4420"
+      > </a
+      ><a name="4421" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="4426"
+      > </a
+      ><a name="4427" class="Symbol"
+      >}</a
+      ><a name="4428"
+      >
+
+  </a
+      ><a name="4432" href="Ornament.RefinementSemantics.html#4432" class="Function"
+      >componentIso</a
+      ><a name="4444"
+      > </a
+      ><a name="4445" class="Symbol"
+      >:</a
+      ><a name="4446"
+      > </a
+      ><a name="4447" class="Symbol"
+      >&#8704;</a
+      ><a name="4448"
+      > </a
+      ><a name="4449" class="Symbol"
+      >{</a
+      ><a name="4450" href="Ornament.RefinementSemantics.html#4450" class="Bound"
+      >i</a
+      ><a name="4451" class="Symbol"
+      >}</a
+      ><a name="4452"
+      > </a
+      ><a name="4453" class="Symbol"
+      >(</a
+      ><a name="4454" href="Ornament.RefinementSemantics.html#4454" class="Bound"
+      >j</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" class="Symbol"
+      >:</a
+      ><a name="4457"
+      > </a
+      ><a name="4458" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="4459"
+      > </a
+      ><a name="4460" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="4462"
+      > </a
+      ><a name="4463" href="Ornament.RefinementSemantics.html#4450" class="Bound"
+      >i</a
+      ><a name="4464" class="Symbol"
+      >)</a
+      ><a name="4465"
+      > </a
+      ><a name="4466" class="Symbol"
+      >&#8594;</a
+      ><a name="4467"
+      > </a
+      ><a name="4468" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="4471"
+      > </a
+      ><a name="4472" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="4475"
+      > </a
+      ><a name="4476" class="Symbol"
+      >(</a
+      ><a name="4477" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4478"
+      > </a
+      ><a name="4479" href="Ornament.RefinementSemantics.html#1487" class="Bound"
+      >E</a
+      ><a name="4480"
+      > </a
+      ><a name="4481" class="Symbol"
+      >(</a
+      ><a name="4482" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="4485"
+      > </a
+      ><a name="4486" href="Ornament.RefinementSemantics.html#4454" class="Bound"
+      >j</a
+      ><a name="4487" class="Symbol"
+      >))</a
+      ><a name="4489"
+      > </a
+      ><a name="4490" class="Symbol"
+      >(</a
+      ><a name="4491" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="4492"
+      > </a
+      ><a name="4493" class="Symbol"
+      >(</a
+      ><a name="4494" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4495"
+      > </a
+      ><a name="4496" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="4497"
+      > </a
+      ><a name="4498" href="Ornament.RefinementSemantics.html#4450" class="Bound"
+      >i</a
+      ><a name="4499" class="Symbol"
+      >)</a
+      ><a name="4500"
+      > </a
+      ><a name="4501" class="Symbol"
+      >(</a
+      ><a name="4502" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="4506"
+      > </a
+      ><a name="4507" href="Ornament.RefinementSemantics.html#4454" class="Bound"
+      >j</a
+      ><a name="4508" class="Symbol"
+      >))</a
+      ><a name="4510"
+      >
+  </a
+      ><a name="4513" href="Ornament.RefinementSemantics.html#4432" class="Function"
+      >componentIso</a
+      ><a name="4525"
+      > </a
+      ><a name="4526" class="Symbol"
+      >(</a
+      ><a name="4527" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="4529"
+      > </a
+      ><a name="4530" href="Ornament.RefinementSemantics.html#4530" class="Bound"
+      >j</a
+      ><a name="4531" class="Symbol"
+      >)</a
+      ><a name="4532"
+      > </a
+      ><a name="4533" class="Symbol"
+      >=</a
+      ><a name="4534"
+      >
+    </a
+      ><a name="4539" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="4549"
+      > </a
+      ><a name="4550" class="Symbol"
+      >(</a
+      ><a name="4551" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="4560"
+      > </a
+      ><a name="4561" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="4564" class="Symbol"
+      >)</a
+      ><a name="4565"
+      >
+      </a
+      ><a name="4572" class="Symbol"
+      >(</a
+      ><a name="4573" href="Prelude.Function.Isomorphism.html#1589" class="Function"
+      >compIso</a
+      ><a name="4580"
+      > </a
+      ><a name="4581" href="Ornament.RefinementSemantics.html#3757" class="Function"
+      >wholeIso</a
+      ><a name="4589"
+      > </a
+      ><a name="4590" href="Prelude.InverseImage.html#2253" class="Function"
+      >&#960;&#8321;</a
+      ><a name="4592"
+      > </a
+      ><a name="4593" class="Symbol"
+      >(</a
+      ><a name="4594" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="4600"
+      > </a
+      ><a name="4601" class="Symbol"
+      >(</a
+      ><a name="4602" href="Ornament.ParallelComposition.html#3093" class="Function"
+      >diffOrn-l</a
+      ><a name="4611"
+      > </a
+      ><a name="4612" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="4613"
+      > </a
+      ><a name="4614" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="4615"
+      > </a
+      ><a name="4616" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="4623"
+      > </a
+      ><a name="4624" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="4625"
+      > </a
+      ><a name="4626" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="4627" class="Symbol"
+      >))</a
+      ><a name="4629"
+      > </a
+      ><a name="4630" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="4635"
+      >
+               </a
+      ><a name="4651" class="Symbol"
+      >(</a
+      ><a name="4652" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4653"
+      > </a
+      ><a name="4654" href="Ornament.RefinementSemantics.html#1485" class="Bound"
+      >D</a
+      ><a name="4655"
+      > </a
+      ><a name="4656" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="4657"
+      > </a
+      ><a name="4658" href="Ornament.RefinementSemantics.html#1473" class="Bound"
+      >e</a
+      ><a name="4659" class="Symbol"
+      >)</a
+      ><a name="4660"
+      > </a
+      ><a name="4661" class="Symbol"
+      >(&#955;</a
+      ><a name="4663"
+      > </a
+      ><a name="4664" class="Symbol"
+      >{</a
+      ><a name="4665" href="Ornament.RefinementSemantics.html#4665" class="Bound"
+      >j'</a
+      ><a name="4667" class="Symbol"
+      >}</a
+      ><a name="4668"
+      > </a
+      ><a name="4669" class="Symbol"
+      >&#8594;</a
+      ><a name="4670"
+      > </a
+      ><a name="4671" href="Ornament.RefinementSemantics.html#3899" class="Function"
+      >indexIso</a
+      ><a name="4679"
+      > </a
+      ><a name="4680" href="Ornament.RefinementSemantics.html#4665" class="Bound"
+      >j'</a
+      ><a name="4682" class="Symbol"
+      >)</a
+      ><a name="4683"
+      > </a
+      ><a name="4684" class="Symbol"
+      >(</a
+      ><a name="4685" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="4691"
+      > </a
+      ><a name="4692" href="Ornament.RefinementSemantics.html#1491" class="Bound"
+      >O</a
+      ><a name="4693" class="Symbol"
+      >)</a
+      ><a name="4694"
+      >
+               </a
+      ><a name="4710" class="Symbol"
+      >(&#955;</a
+      ><a name="4712"
+      > </a
+      ><a name="4713" class="Symbol"
+      >{</a
+      ><a name="4714" href="Ornament.RefinementSemantics.html#4714" class="Bound"
+      >j'</a
+      ><a name="4716" class="Symbol"
+      >}</a
+      ><a name="4717"
+      > </a
+      ><a name="4718" href="Ornament.RefinementSemantics.html#4718" class="Bound"
+      >y</a
+      ><a name="4719"
+      > </a
+      ><a name="4720" class="Symbol"
+      >&#8594;</a
+      ><a name="4721"
+      >
+                  </a
+      ><a name="4740" href="Prelude.InverseImage.html#2401" class="Function"
+      >decouple</a
+      ><a name="4748"
+      > </a
+      ><a name="4749" class="Symbol"
+      >(</a
+      ><a name="4750" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4754"
+      > </a
+      ><a name="4755" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4760"
+      > </a
+      ><a name="4761" class="Symbol"
+      >(</a
+      ><a name="4762" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="4785"
+      > </a
+      ><a name="4786" class="Symbol"
+      >(</a
+      ><a name="4787" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4792"
+      > </a
+      ><a name="4793" class="Symbol"
+      >(</a
+      ><a name="4794" href="Ornament.RefinementSemantics.html#3407" class="Function"
+      >OptP-pullback</a
+      ><a name="4807"
+      > </a
+      ><a name="4808" href="Ornament.RefinementSemantics.html#1896" class="Function"
+      >&#956;E-square</a
+      ><a name="4817" class="Symbol"
+      >))</a
+      ><a name="4819"
+      > </a
+      ><a name="4820" class="Symbol"
+      >(</a
+      ><a name="4821" href="Ornament.RefinementSemantics.html#4714" class="Bound"
+      >j'</a
+      ><a name="4823"
+      > </a
+      ><a name="4824" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4825"
+      > </a
+      ><a name="4826" href="Ornament.RefinementSemantics.html#4718" class="Bound"
+      >y</a
+      ><a name="4827" class="Symbol"
+      >)))</a
+      ><a name="4830"
+      > </a
+      ><a name="4831" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4835" class="Symbol"
+      >)</a
+      ><a name="4836"
+      >
+               </a
+      ><a name="4852" href="Ornament.RefinementSemantics.html#4530" class="Bound"
+      >j</a
+      ><a name="4853" class="Symbol"
+      >)</a
+      ><a name="4854"
+      >
+
+</a
+      ><a name="4856" class="Keyword"
+      >open</a
+      ><a name="4860"
+      > </a
+      ><a name="4861" href="Ornament.RefinementSemantics.html#1447" class="Module"
+      >OptimisedPredicate</a
+      ><a name="4879"
+      > </a
+      ><a name="4880" class="Keyword"
+      >public</a
+      ><a name="4886"
+      > </a
+      ><a name="4887" class="Keyword"
+      >using</a
+      ><a name="4892"
+      > </a
+      ><a name="4893" class="Symbol"
+      >(</a
+      ><a name="4894" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="4899" class="Symbol"
+      >;</a
+      ><a name="4900"
+      > </a
+      ><a name="4901" href="Ornament.RefinementSemantics.html#1575" class="Function"
+      >OptPO</a
+      ><a name="4906" class="Symbol"
+      >;</a
+      ><a name="4907"
+      > </a
+      ><a name="4908" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="4912" class="Symbol"
+      >)</a
+      ><a name="4913"
+      >
+
+</a
+      ><a name="4915" href="Ornament.RefinementSemantics.html#4915" class="Function"
+      >OptPRD</a
+      ><a name="4921"
+      > </a
+      ><a name="4922" class="Symbol"
+      >:</a
+      ><a name="4923"
+      > </a
+      ><a name="4924" class="Symbol"
+      >&#8704;</a
+      ><a name="4925"
+      > </a
+      ><a name="4926" class="Symbol"
+      >{</a
+      ><a name="4927" href="Ornament.RefinementSemantics.html#4927" class="Bound"
+      >I</a
+      ><a name="4928"
+      > </a
+      ><a name="4929" href="Ornament.RefinementSemantics.html#4929" class="Bound"
+      >J</a
+      ><a name="4930" class="Symbol"
+      >}</a
+      ><a name="4931"
+      > </a
+      ><a name="4932" class="Symbol"
+      >{</a
+      ><a name="4933" href="Ornament.RefinementSemantics.html#4933" class="Bound"
+      >e</a
+      ><a name="4934"
+      > </a
+      ><a name="4935" class="Symbol"
+      >:</a
+      ><a name="4936"
+      > </a
+      ><a name="4937" href="Ornament.RefinementSemantics.html#4929" class="Bound"
+      >J</a
+      ><a name="4938"
+      > </a
+      ><a name="4939" class="Symbol"
+      >&#8594;</a
+      ><a name="4940"
+      > </a
+      ><a name="4941" href="Ornament.RefinementSemantics.html#4927" class="Bound"
+      >I</a
+      ><a name="4942" class="Symbol"
+      >}</a
+      ><a name="4943"
+      > </a
+      ><a name="4944" class="Symbol"
+      >{</a
+      ><a name="4945" href="Ornament.RefinementSemantics.html#4945" class="Bound"
+      >D</a
+      ><a name="4946"
+      > </a
+      ><a name="4947" href="Ornament.RefinementSemantics.html#4947" class="Bound"
+      >E</a
+      ><a name="4948" class="Symbol"
+      >}</a
+      ><a name="4949"
+      > </a
+      ><a name="4950" class="Symbol"
+      >&#8594;</a
+      ><a name="4951"
+      > </a
+      ><a name="4952" href="Ornament.html#2911" class="Datatype"
+      >ROrn</a
+      ><a name="4956"
+      > </a
+      ><a name="4957" href="Ornament.RefinementSemantics.html#4933" class="Bound"
+      >e</a
+      ><a name="4958"
+      > </a
+      ><a name="4959" href="Ornament.RefinementSemantics.html#4945" class="Bound"
+      >D</a
+      ><a name="4960"
+      > </a
+      ><a name="4961" href="Ornament.RefinementSemantics.html#4947" class="Bound"
+      >E</a
+      ><a name="4962"
+      > </a
+      ><a name="4963" class="Symbol"
+      >&#8594;</a
+      ><a name="4964"
+      > </a
+      ><a name="4965" class="Symbol"
+      >&#8704;</a
+      ><a name="4966"
+      > </a
+      ><a name="4967" class="Symbol"
+      >{</a
+      ><a name="4968" href="Ornament.RefinementSemantics.html#4968" class="Bound"
+      >X</a
+      ><a name="4969" class="Symbol"
+      >}</a
+      ><a name="4970"
+      > </a
+      ><a name="4971" class="Symbol"
+      >&#8594;</a
+      ><a name="4972"
+      > </a
+      ><a name="4973" href="Description.html#1087" class="Function Operator"
+      >&#10214;</a
+      ><a name="4974"
+      > </a
+      ><a name="4975" href="Ornament.RefinementSemantics.html#4945" class="Bound"
+      >D</a
+      ><a name="4976"
+      > </a
+      ><a name="4977" href="Description.html#1087" class="Function Operator"
+      >&#10215;</a
+      ><a name="4978"
+      > </a
+      ><a name="4979" href="Ornament.RefinementSemantics.html#4968" class="Bound"
+      >X</a
+      ><a name="4980"
+      > </a
+      ><a name="4981" class="Symbol"
+      >&#8594;</a
+      ><a name="4982"
+      > </a
+      ><a name="4983" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="4988"
+      > </a
+      ><a name="4989" class="Symbol"
+      >(</a
+      ><a name="4990" href="Ornament.RefinementSemantics.html#4933" class="Bound"
+      >e</a
+      ><a name="4991"
+      > </a
+      ><a name="4992" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="4993"
+      > </a
+      ><a name="4994" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4999" class="Symbol"
+      >)</a
+      ><a name="5000"
+      >
+</a
+      ><a name="5001" href="Ornament.RefinementSemantics.html#4915" class="Function"
+      >OptPRD</a
+      ><a name="5007"
+      > </a
+      ><a name="5008" class="Symbol"
+      >{</a
+      ><a name="5009" class="Argument"
+      >D</a
+      ><a name="5010"
+      > </a
+      ><a name="5011" class="Symbol"
+      >=</a
+      ><a name="5012"
+      > </a
+      ><a name="5013" href="Ornament.RefinementSemantics.html#5013" class="Bound"
+      >D</a
+      ><a name="5014" class="Symbol"
+      >}</a
+      ><a name="5015"
+      > </a
+      ><a name="5016" href="Ornament.RefinementSemantics.html#5016" class="Bound"
+      >O</a
+      ><a name="5017"
+      > </a
+      ><a name="5018" href="Ornament.RefinementSemantics.html#5018" class="Bound"
+      >xs</a
+      ><a name="5020"
+      > </a
+      ><a name="5021" class="Symbol"
+      >=</a
+      ><a name="5022"
+      > </a
+      ><a name="5023" href="Ornament.html#8057" class="Function"
+      >toRDesc</a
+      ><a name="5030"
+      > </a
+      ><a name="5031" class="Symbol"
+      >(</a
+      ><a name="5032" href="Ornament.ParallelComposition.html#684" class="Function"
+      >pcROrn</a
+      ><a name="5038"
+      > </a
+      ><a name="5039" href="Ornament.RefinementSemantics.html#5016" class="Bound"
+      >O</a
+      ><a name="5040"
+      > </a
+      ><a name="5041" class="Symbol"
+      >(</a
+      ><a name="5042" href="Ornament.html#8579" class="Function"
+      >toROrn</a
+      ><a name="5048"
+      > </a
+      ><a name="5049" class="Symbol"
+      >(</a
+      ><a name="5050" href="Ornament.html#9134" class="Function"
+      >erode</a
+      ><a name="5055"
+      > </a
+      ><a name="5056" href="Ornament.RefinementSemantics.html#5013" class="Bound"
+      >D</a
+      ><a name="5057"
+      > </a
+      ><a name="5058" href="Ornament.RefinementSemantics.html#5018" class="Bound"
+      >xs</a
+      ><a name="5060" class="Symbol"
+      >)))</a
+      ><a name="5063"
+      >
+
+</a
+      ><a name="5065" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="5070"
+      > </a
+      ><a name="5071" class="Symbol"
+      >:</a
+      ><a name="5072"
+      > </a
+      ><a name="5073" class="Symbol"
+      >&#8704;</a
+      ><a name="5074"
+      > </a
+      ><a name="5075" class="Symbol"
+      >{</a
+      ><a name="5076" href="Ornament.RefinementSemantics.html#5076" class="Bound"
+      >I</a
+      ><a name="5077"
+      > </a
+      ><a name="5078" href="Ornament.RefinementSemantics.html#5078" class="Bound"
+      >J</a
+      ><a name="5079" class="Symbol"
+      >}</a
+      ><a name="5080"
+      > </a
+      ><a name="5081" class="Symbol"
+      >{</a
+      ><a name="5082" href="Ornament.RefinementSemantics.html#5082" class="Bound"
+      >e</a
+      ><a name="5083"
+      > </a
+      ><a name="5084" class="Symbol"
+      >:</a
+      ><a name="5085"
+      > </a
+      ><a name="5086" href="Ornament.RefinementSemantics.html#5078" class="Bound"
+      >J</a
+      ><a name="5087"
+      > </a
+      ><a name="5088" class="Symbol"
+      >&#8594;</a
+      ><a name="5089"
+      > </a
+      ><a name="5090" href="Ornament.RefinementSemantics.html#5076" class="Bound"
+      >I</a
+      ><a name="5091" class="Symbol"
+      >}</a
+      ><a name="5092"
+      > </a
+      ><a name="5093" class="Symbol"
+      >{</a
+      ><a name="5094" href="Ornament.RefinementSemantics.html#5094" class="Bound"
+      >D</a
+      ><a name="5095"
+      > </a
+      ><a name="5096" href="Ornament.RefinementSemantics.html#5096" class="Bound"
+      >E</a
+      ><a name="5097" class="Symbol"
+      >}</a
+      ><a name="5098"
+      > </a
+      ><a name="5099" class="Symbol"
+      >(</a
+      ><a name="5100" href="Ornament.RefinementSemantics.html#5100" class="Bound"
+      >O</a
+      ><a name="5101"
+      > </a
+      ><a name="5102" class="Symbol"
+      >:</a
+      ><a name="5103"
+      > </a
+      ><a name="5104" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="5107"
+      > </a
+      ><a name="5108" href="Ornament.RefinementSemantics.html#5082" class="Bound"
+      >e</a
+      ><a name="5109"
+      > </a
+      ><a name="5110" href="Ornament.RefinementSemantics.html#5094" class="Bound"
+      >D</a
+      ><a name="5111"
+      > </a
+      ><a name="5112" href="Ornament.RefinementSemantics.html#5096" class="Bound"
+      >E</a
+      ><a name="5113" class="Symbol"
+      >)</a
+      ><a name="5114"
+      > </a
+      ><a name="5115" class="Symbol"
+      >&#8594;</a
+      ><a name="5116"
+      > </a
+      ><a name="5117" href="Refinement.html#5133" class="Record"
+      >FRefinement</a
+      ><a name="5128"
+      > </a
+      ><a name="5129" href="Ornament.RefinementSemantics.html#5082" class="Bound"
+      >e</a
+      ><a name="5130"
+      > </a
+      ><a name="5131" class="Symbol"
+      >(</a
+      ><a name="5132" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5133"
+      > </a
+      ><a name="5134" href="Ornament.RefinementSemantics.html#5094" class="Bound"
+      >D</a
+      ><a name="5135" class="Symbol"
+      >)</a
+      ><a name="5136"
+      > </a
+      ><a name="5137" class="Symbol"
+      >(</a
+      ><a name="5138" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5139"
+      > </a
+      ><a name="5140" href="Ornament.RefinementSemantics.html#5096" class="Bound"
+      >E</a
+      ><a name="5141" class="Symbol"
+      >)</a
+      ><a name="5142"
+      >
+</a
+      ><a name="5143" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="5148"
+      > </a
+      ><a name="5149" href="Ornament.RefinementSemantics.html#5149" class="Bound"
+      >O</a
+      ><a name="5150"
+      > </a
+      ><a name="5151" class="Symbol"
+      >=</a
+      ><a name="5152"
+      > </a
+      ><a name="5153" href="Refinement.html#5224" class="InductiveConstructor"
+      >wrap</a
+      ><a name="5157"
+      > </a
+      ><a name="5158" class="Symbol"
+      >&#955;</a
+      ><a name="5159"
+      > </a
+      ><a name="5160" href="Ornament.RefinementSemantics.html#5160" class="Bound"
+      >j</a
+      ><a name="5161"
+      > </a
+      ><a name="5162" class="Symbol"
+      >&#8594;</a
+      ><a name="5163"
+      > </a
+      ><a name="5164" class="Keyword"
+      >record</a
+      ><a name="5170"
+      > </a
+      ><a name="5171" class="Symbol"
+      >{</a
+      ><a name="5172"
+      > </a
+      ><a name="5173" class="Field"
+      >P</a
+      ><a name="5174"
+      > </a
+      ><a name="5175" class="Symbol"
+      >=</a
+      ><a name="5176"
+      > </a
+      ><a name="5177" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="5181"
+      > </a
+      ><a name="5182" href="Ornament.RefinementSemantics.html#5149" class="Bound"
+      >O</a
+      ><a name="5183"
+      > </a
+      ><a name="5184" href="Ornament.RefinementSemantics.html#5160" class="Bound"
+      >j</a
+      ><a name="5185"
+      >
+                            </a
+      ><a name="5214" class="Symbol"
+      >;</a
+      ><a name="5215"
+      > </a
+      ><a name="5216" class="Field"
+      >i</a
+      ><a name="5217"
+      > </a
+      ><a name="5218" class="Symbol"
+      >=</a
+      ><a name="5219"
+      > </a
+      ><a name="5220" href="Ornament.RefinementSemantics.html#4432" class="Function"
+      >OptimisedPredicate.componentIso</a
+      ><a name="5251"
+      > </a
+      ><a name="5252" href="Ornament.RefinementSemantics.html#5149" class="Bound"
+      >O</a
+      ><a name="5253"
+      > </a
+      ><a name="5254" href="Ornament.RefinementSemantics.html#5160" class="Bound"
+      >j</a
+      ><a name="5255"
+      > </a
+      ><a name="5256" class="Symbol"
+      >}</a
+      ><a name="5257"
+      >
+
+</a
+      ><a name="5259" href="Ornament.RefinementSemantics.html#5259" class="Function"
+      >RSem</a
+      ><a name="5263"
+      > </a
+      ><a name="5264" class="Symbol"
+      >:</a
+      ><a name="5265"
+      > </a
+      ><a name="5266" href="Prelude.Category.html#1740" class="Record"
+      >Functor</a
+      ><a name="5273"
+      > </a
+      ><a name="5274" href="Ornament.Category.html#874" class="Function"
+      >&#332;rn</a
+      ><a name="5277"
+      > </a
+      ><a name="5278" href="Refinement.Category.html#591" class="Function"
+      >FRef</a
+      ><a name="5282"
+      >
+</a
+      ><a name="5283" href="Ornament.RefinementSemantics.html#5259" class="Function"
+      >RSem</a
+      ><a name="5287"
+      > </a
+      ><a name="5288" class="Symbol"
+      >=</a
+      ><a name="5289"
+      > </a
+      ><a name="5290" class="Keyword"
+      >record</a
+      ><a name="5296"
+      > </a
+      ><a name="5297" class="Symbol"
+      >{</a
+      ><a name="5298"
+      > </a
+      ><a name="5299" class="Field"
+      >object</a
+      ><a name="5305"
+      >   </a
+      ><a name="5308" class="Symbol"
+      >=</a
+      ><a name="5309"
+      > </a
+      ><a name="5310" class="Symbol"
+      >&#955;</a
+      ><a name="5311"
+      > </a
+      ><a name="5312" class="Symbol"
+      >{</a
+      ><a name="5313"
+      > </a
+      ><a name="5314" class="Symbol"
+      >(</a
+      ><a name="5315" href="Ornament.RefinementSemantics.html#5315" class="Bound"
+      >I</a
+      ><a name="5316"
+      > </a
+      ><a name="5317" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5318"
+      > </a
+      ><a name="5319" href="Ornament.RefinementSemantics.html#5319" class="Bound"
+      >D</a
+      ><a name="5320" class="Symbol"
+      >)</a
+      ><a name="5321"
+      > </a
+      ><a name="5322" class="Symbol"
+      >&#8594;</a
+      ><a name="5323"
+      > </a
+      ><a name="5324" href="Ornament.RefinementSemantics.html#5315" class="Bound"
+      >I</a
+      ><a name="5325"
+      > </a
+      ><a name="5326" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5327"
+      > </a
+      ><a name="5328" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5329"
+      > </a
+      ><a name="5330" href="Ornament.RefinementSemantics.html#5319" class="Bound"
+      >D</a
+      ><a name="5331"
+      > </a
+      ><a name="5332" class="Symbol"
+      >}</a
+      ><a name="5333"
+      >
+              </a
+      ><a name="5348" class="Symbol"
+      >;</a
+      ><a name="5349"
+      > </a
+      ><a name="5350" class="Field"
+      >morphism</a
+      ><a name="5358"
+      > </a
+      ><a name="5359" class="Symbol"
+      >=</a
+      ><a name="5360"
+      > </a
+      ><a name="5361" class="Symbol"
+      >&#955;</a
+      ><a name="5362"
+      > </a
+      ><a name="5363" class="Symbol"
+      >{</a
+      ><a name="5364"
+      > </a
+      ><a name="5365" class="Symbol"
+      >{</a
+      ><a name="5366" href="Ornament.RefinementSemantics.html#5366" class="Bound"
+      >J</a
+      ><a name="5367"
+      > </a
+      ><a name="5368" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5369"
+      > </a
+      ><a name="5370" href="Ornament.RefinementSemantics.html#5370" class="Bound"
+      >E</a
+      ><a name="5371" class="Symbol"
+      >}</a
+      ><a name="5372"
+      > </a
+      ><a name="5373" class="Symbol"
+      >{</a
+      ><a name="5374" href="Ornament.RefinementSemantics.html#5374" class="Bound"
+      >I</a
+      ><a name="5375"
+      > </a
+      ><a name="5376" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5377"
+      > </a
+      ><a name="5378" href="Ornament.RefinementSemantics.html#5378" class="Bound"
+      >D</a
+      ><a name="5379" class="Symbol"
+      >}</a
+      ><a name="5380"
+      > </a
+      ><a name="5381" class="Symbol"
+      >(</a
+      ><a name="5382" href="Ornament.RefinementSemantics.html#5382" class="Bound"
+      >e</a
+      ><a name="5383"
+      > </a
+      ><a name="5384" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5385"
+      > </a
+      ><a name="5386" href="Ornament.RefinementSemantics.html#5386" class="Bound"
+      >O</a
+      ><a name="5387" class="Symbol"
+      >)</a
+      ><a name="5388"
+      > </a
+      ><a name="5389" class="Symbol"
+      >&#8594;</a
+      ><a name="5390"
+      > </a
+      ><a name="5391" href="Ornament.RefinementSemantics.html#5382" class="Bound"
+      >e</a
+      ><a name="5392"
+      > </a
+      ><a name="5393" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5394"
+      > </a
+      ><a name="5395" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="5400"
+      > </a
+      ><a name="5401" href="Ornament.RefinementSemantics.html#5386" class="Bound"
+      >O</a
+      ><a name="5402"
+      > </a
+      ><a name="5403" class="Symbol"
+      >}</a
+      ><a name="5404"
+      >
+              </a
+      ><a name="5419" class="Symbol"
+      >;</a
+      ><a name="5420"
+      > </a
+      ><a name="5421" class="Field"
+      >&#8776;-respecting</a
+      ><a name="5433"
+      >    </a
+      ><a name="5437" class="Symbol"
+      >=</a
+      ><a name="5438"
+      > </a
+      ><a name="5439" class="Symbol"
+      >&#955;</a
+      ><a name="5440"
+      > </a
+      ><a name="5441" class="Symbol"
+      >{</a
+      ><a name="5442" href="Ornament.RefinementSemantics.html#5442" class="Bound"
+      >X</a
+      ><a name="5443" class="Symbol"
+      >}</a
+      ><a name="5444"
+      > </a
+      ><a name="5445" class="Symbol"
+      >{</a
+      ><a name="5446" href="Ornament.RefinementSemantics.html#5446" class="Bound"
+      >Y</a
+      ><a name="5447" class="Symbol"
+      >}</a
+      ><a name="5448"
+      > </a
+      ><a name="5449" class="Symbol"
+      >{</a
+      ><a name="5450" href="Ornament.RefinementSemantics.html#5450" class="Bound"
+      >f</a
+      ><a name="5451" class="Symbol"
+      >}</a
+      ><a name="5452"
+      > </a
+      ><a name="5453" class="Symbol"
+      >{</a
+      ><a name="5454" href="Ornament.RefinementSemantics.html#5454" class="Bound"
+      >g</a
+      ><a name="5455" class="Symbol"
+      >}</a
+      ><a name="5456"
+      > </a
+      ><a name="5457" class="Symbol"
+      >&#8594;</a
+      ><a name="5458"
+      > </a
+      ><a name="5459" href="Prelude.Category.html#2202" class="Field"
+      >&#8776;-respecting</a
+      ><a name="5471"
+      > </a
+      ><a name="5472" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="5475"
+      > </a
+      ><a name="5476" class="Symbol"
+      >{</a
+      ><a name="5477" href="Ornament.RefinementSemantics.html#5442" class="Bound"
+      >X</a
+      ><a name="5478" class="Symbol"
+      >}</a
+      ><a name="5479"
+      > </a
+      ><a name="5480" class="Symbol"
+      >{</a
+      ><a name="5481" href="Ornament.RefinementSemantics.html#5446" class="Bound"
+      >Y</a
+      ><a name="5482" class="Symbol"
+      >}</a
+      ><a name="5483"
+      > </a
+      ><a name="5484" class="Symbol"
+      >{</a
+      ><a name="5485" href="Ornament.RefinementSemantics.html#5450" class="Bound"
+      >f</a
+      ><a name="5486" class="Symbol"
+      >}</a
+      ><a name="5487"
+      > </a
+      ><a name="5488" class="Symbol"
+      >{</a
+      ><a name="5489" href="Ornament.RefinementSemantics.html#5454" class="Bound"
+      >g</a
+      ><a name="5490" class="Symbol"
+      >}</a
+      ><a name="5491"
+      >
+              </a
+      ><a name="5506" class="Symbol"
+      >;</a
+      ><a name="5507"
+      > </a
+      ><a name="5508" class="Field"
+      >id-preserving</a
+      ><a name="5521"
+      >   </a
+      ><a name="5524" class="Symbol"
+      >=</a
+      ><a name="5525"
+      > </a
+      ><a name="5526" href="Prelude.Category.html#2285" class="Field"
+      >id-preserving</a
+      ><a name="5539"
+      > </a
+      ><a name="5540" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="5543"
+      >
+              </a
+      ><a name="5558" class="Symbol"
+      >;</a
+      ><a name="5559"
+      > </a
+      ><a name="5560" class="Field"
+      >comp-preserving</a
+      ><a name="5575"
+      > </a
+      ><a name="5576" class="Symbol"
+      >=</a
+      ><a name="5577"
+      > </a
+      ><a name="5578" href="Prelude.Category.html#2341" class="Field"
+      >comp-preserving</a
+      ><a name="5593"
+      > </a
+      ><a name="5594" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="5597"
+      > </a
+      ><a name="5598" class="Symbol"
+      >}</a
+      ><a name="5599"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

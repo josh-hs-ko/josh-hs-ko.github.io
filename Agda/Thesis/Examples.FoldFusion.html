@@ -1,0 +1,3737 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Examples.FoldFusion</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Fold fusion theorems for algebraic ornamentation.</a
+      ><a name="53"
+      >
+
+</a
+      ><a name="55" class="Keyword"
+      >open</a
+      ><a name="59"
+      > </a
+      ><a name="60" class="Keyword"
+      >import</a
+      ><a name="66"
+      > </a
+      ><a name="67" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="78"
+      >
+</a
+      ><a name="79" class="Keyword"
+      >open</a
+      ><a name="83"
+      > </a
+      ><a name="84" class="Keyword"
+      >import</a
+      ><a name="90"
+      > </a
+      ><a name="91" href="Relation.html#1" class="Module"
+      >Relation</a
+      ><a name="99"
+      >
+
+</a
+      ><a name="101" class="Keyword"
+      >module</a
+      ><a name="107"
+      > </a
+      ><a name="108" href="Examples.FoldFusion.html#1" class="Module"
+      >Examples.FoldFusion</a
+      ><a name="127"
+      > </a
+      ><a name="128" class="Symbol"
+      >{</a
+      ><a name="129" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="130"
+      > </a
+      ><a name="131" class="Symbol"
+      >:</a
+      ><a name="132"
+      > </a
+      ><a name="133" class="PrimitiveType"
+      >Set</a
+      ><a name="136" class="Symbol"
+      >}</a
+      ><a name="137"
+      > </a
+      ><a name="138" class="Symbol"
+      >(</a
+      ><a name="139" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Symbol"
+      >:</a
+      ><a name="142"
+      > </a
+      ><a name="143" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="147"
+      > </a
+      ><a name="148" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="149" class="Symbol"
+      >)</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Symbol"
+      >{</a
+      ><a name="152" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="153"
+      > </a
+      ><a name="154" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="155"
+      > </a
+      ><a name="156" class="Symbol"
+      >:</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Symbol"
+      >&#8594;</a
+      ><a name="161"
+      > </a
+      ><a name="162" class="PrimitiveType"
+      >Set</a
+      ><a name="165" class="Symbol"
+      >}</a
+      ><a name="166"
+      > </a
+      ><a name="167" class="Symbol"
+      >(</a
+      ><a name="168" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="169"
+      > </a
+      ><a name="170" class="Symbol"
+      >:</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="173"
+      > </a
+      ><a name="174" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="175"
+      > </a
+      ><a name="176" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="177" class="Symbol"
+      >)</a
+      ><a name="178"
+      > </a
+      ><a name="179" class="Symbol"
+      >(</a
+      ><a name="180" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >:</a
+      ><a name="183"
+      > </a
+      ><a name="184" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="185"
+      > </a
+      ><a name="186" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="187"
+      > </a
+      ><a name="188" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="189"
+      > </a
+      ><a name="190" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="191"
+      > </a
+      ><a name="192" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="193" class="Symbol"
+      >)</a
+      ><a name="194"
+      > </a
+      ><a name="195" class="Symbol"
+      >(</a
+      ><a name="196" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Symbol"
+      >:</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="203"
+      > </a
+      ><a name="204" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="207"
+      > </a
+      ><a name="208" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="209" class="Symbol"
+      >)</a
+      ><a name="210"
+      > </a
+      ><a name="211" class="Keyword"
+      >where</a
+      ><a name="216"
+      >
+
+</a
+      ><a name="218" class="Keyword"
+      >open</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Keyword"
+      >import</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="246"
+      >
+</a
+      ><a name="247" class="Keyword"
+      >import</a
+      ><a name="253"
+      > </a
+      ><a name="254" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="282"
+      > </a
+      ><a name="283" class="Symbol"
+      >as</a
+      ><a name="285"
+      > </a
+      ><a name="286" class="Module"
+      >Isomorphism</a
+      ><a name="297" class="Symbol"
+      >;</a
+      ><a name="298"
+      > </a
+      ><a name="299" class="Keyword"
+      >open</a
+      ><a name="303"
+      > </a
+      ><a name="304" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Isomorphism</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="319"
+      >
+</a
+      ><a name="320" class="Keyword"
+      >open</a
+      ><a name="324"
+      > </a
+      ><a name="325" class="Keyword"
+      >import</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="352"
+      >
+</a
+      ><a name="353" class="Keyword"
+      >open</a
+      ><a name="357"
+      > </a
+      ><a name="358" class="Keyword"
+      >import</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="373"
+      >
+</a
+      ><a name="374" class="Keyword"
+      >open</a
+      ><a name="378"
+      > </a
+      ><a name="379" class="Keyword"
+      >import</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Ornament.Algebraic.html#1" class="Module"
+      >Ornament.Algebraic</a
+      ><a name="404"
+      >
+</a
+      ><a name="405" class="Keyword"
+      >open</a
+      ><a name="409"
+      > </a
+      ><a name="410" class="Keyword"
+      >import</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="427"
+      >
+</a
+      ><a name="428" class="Keyword"
+      >open</a
+      ><a name="432"
+      > </a
+      ><a name="433" class="Keyword"
+      >import</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="Relation.Fold.html#1" class="Module"
+      >Relation.Fold</a
+      ><a name="453"
+      >
+
+</a
+      ><a name="455" class="Keyword"
+      >open</a
+      ><a name="459"
+      > </a
+      ><a name="460" class="Keyword"
+      >import</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="475"
+      > </a
+      ><a name="476" class="Keyword"
+      >using</a
+      ><a name="481"
+      > </a
+      ><a name="482" class="Symbol"
+      >(</a
+      ><a name="483" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="485" class="Symbol"
+      >)</a
+      ><a name="486"
+      >
+</a
+      ><a name="487" class="Keyword"
+      >open</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Keyword"
+      >import</a
+      ><a name="498"
+      > </a
+      ><a name="499" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="511"
+      > </a
+      ><a name="512" class="Keyword"
+      >using</a
+      ><a name="517"
+      > </a
+      ><a name="518" class="Symbol"
+      >(</a
+      ><a name="519" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="520" class="Symbol"
+      >;</a
+      ><a name="521"
+      > </a
+      ><a name="522" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="530" class="Symbol"
+      >;</a
+      ><a name="531"
+      > </a
+      ><a name="532" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="535" class="Symbol"
+      >;</a
+      ><a name="536"
+      > </a
+      ><a name="537" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="542" class="Symbol"
+      >;</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="549" class="Symbol"
+      >;</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="554" class="Symbol"
+      >)</a
+      ><a name="555"
+      >
+</a
+      ><a name="556" class="Keyword"
+      >open</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="Keyword"
+      >import</a
+      ><a name="567"
+      > </a
+      ><a name="568" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="605"
+      > </a
+      ><a name="606" class="Keyword"
+      >using</a
+      ><a name="611"
+      > </a
+      ><a name="612" class="Symbol"
+      >(</a
+      ><a name="613" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="616" class="Symbol"
+      >;</a
+      ><a name="617"
+      > </a
+      ><a name="618" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="622" class="Symbol"
+      >)</a
+      ><a name="623"
+      >
+
+</a
+      ><a name="625" href="Examples.FoldFusion.html#625" class="Function"
+      >upg-&#8838;</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >:</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="Refinement.html#7243" class="Record"
+      >Upgrade</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >({</a
+      ><a name="643" href="Examples.FoldFusion.html#643" class="Bound"
+      >i</a
+      ><a name="644"
+      > </a
+      ><a name="645" class="Symbol"
+      >:</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="648" class="Symbol"
+      >}</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >&#8594;</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="655"
+      > </a
+      ><a name="656" href="Examples.FoldFusion.html#643" class="Bound"
+      >i</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Symbol"
+      >&#8594;</a
+      ><a name="659"
+      > </a
+      ><a name="660" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="661"
+      > </a
+      ><a name="662" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="663"
+      > </a
+      ><a name="664" href="Examples.FoldFusion.html#643" class="Bound"
+      >i</a
+      ><a name="665" class="Symbol"
+      >)</a
+      ><a name="666"
+      > </a
+      ><a name="667" class="Symbol"
+      >({</a
+      ><a name="669" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="670"
+      > </a
+      ><a name="671" class="Symbol"
+      >:</a
+      ><a name="672"
+      > </a
+      ><a name="673" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="674" class="Symbol"
+      >}</a
+      ><a name="675"
+      > </a
+      ><a name="676" class="Symbol"
+      >{</a
+      ><a name="677" href="Examples.FoldFusion.html#677" class="Bound"
+      >x</a
+      ><a name="678"
+      > </a
+      ><a name="679" class="Symbol"
+      >:</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="682"
+      > </a
+      ><a name="683" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="684" class="Symbol"
+      >}</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >&#8594;</a
+      ><a name="687"
+      >  </a
+      ><a name="689" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >(</a
+      ><a name="707" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="Examples.FoldFusion.html#677" class="Bound"
+      >x</a
+      ><a name="712" class="Symbol"
+      >)</a
+      ><a name="713"
+      > </a
+      ><a name="714" class="Symbol"
+      >&#8594;</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >{</a
+      ><a name="717" href="Examples.FoldFusion.html#717" class="Bound"
+      >y</a
+      ><a name="718"
+      > </a
+      ><a name="719" class="Symbol"
+      >:</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="722"
+      > </a
+      ><a name="723" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="724" class="Symbol"
+      >}</a
+      ><a name="725"
+      > </a
+      ><a name="726" class="Symbol"
+      >&#8594;</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >(</a
+      ><a name="729" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="730"
+      > </a
+      ><a name="731" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="733" class="Symbol"
+      >)</a
+      ><a name="734"
+      > </a
+      ><a name="735" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="Examples.FoldFusion.html#677" class="Bound"
+      >x</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="Examples.FoldFusion.html#717" class="Bound"
+      >y</a
+      ><a name="740"
+      > </a
+      ><a name="741" class="Symbol"
+      >&#8594;</a
+      ><a name="742"
+      > </a
+      ><a name="743" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="746"
+      > </a
+      ><a name="747" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="753"
+      > </a
+      ><a name="754" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="755"
+      > </a
+      ><a name="756" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="757"
+      > </a
+      ><a name="758" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="759"
+      > </a
+      ><a name="760" class="Symbol"
+      >(</a
+      ><a name="761" href="Examples.FoldFusion.html#669" class="Bound"
+      >i</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="764"
+      > </a
+      ><a name="765" href="Examples.FoldFusion.html#717" class="Bound"
+      >y</a
+      ><a name="766" class="Symbol"
+      >))</a
+      ><a name="768"
+      >
+</a
+      ><a name="769" href="Examples.FoldFusion.html#625" class="Function"
+      >upg-&#8838;</a
+      ><a name="774"
+      > </a
+      ><a name="775" class="Symbol"
+      >=</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="Keyword"
+      >let</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="Examples.FoldFusion.html#781" class="Bound"
+      >refS</a
+      ><a name="785"
+      > </a
+      ><a name="786" class="Symbol"
+      >:</a
+      ><a name="787"
+      > </a
+      ><a name="788" class="Symbol"
+      >(</a
+      ><a name="789" href="Examples.FoldFusion.html#789" class="Bound"
+      >i</a
+      ><a name="790"
+      > </a
+      ><a name="791" class="Symbol"
+      >:</a
+      ><a name="792"
+      > </a
+      ><a name="793" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="794" class="Symbol"
+      >)</a
+      ><a name="795"
+      > </a
+      ><a name="796" class="Symbol"
+      >(</a
+      ><a name="797" href="Examples.FoldFusion.html#797" class="Bound"
+      >x</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >:</a
+      ><a name="800"
+      > </a
+      ><a name="801" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="Examples.FoldFusion.html#789" class="Bound"
+      >i</a
+      ><a name="804" class="Symbol"
+      >)</a
+      ><a name="805"
+      > </a
+      ><a name="806" class="Symbol"
+      >&#8594;</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="Refinement.html#865" class="Record"
+      >Refinement</a
+      ><a name="818"
+      > </a
+      ><a name="819" class="Symbol"
+      >(</a
+      ><a name="820" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="821"
+      > </a
+      ><a name="822" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="Examples.FoldFusion.html#789" class="Bound"
+      >i</a
+      ><a name="825" class="Symbol"
+      >)</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Symbol"
+      >(</a
+      ><a name="828" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="829"
+      > </a
+      ><a name="830" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="842"
+      > </a
+      ><a name="843" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >(</a
+      ><a name="846" href="Examples.FoldFusion.html#789" class="Bound"
+      >i</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="849"
+      > </a
+      ><a name="850" href="Examples.FoldFusion.html#797" class="Bound"
+      >x</a
+      ><a name="851" class="Symbol"
+      >))</a
+      ><a name="853"
+      >
+            </a
+      ><a name="866" href="Examples.FoldFusion.html#781" class="Bound"
+      >refS</a
+      ><a name="870"
+      > </a
+      ><a name="871" href="Examples.FoldFusion.html#871" class="Bound"
+      >i</a
+      ><a name="872"
+      > </a
+      ><a name="873" href="Examples.FoldFusion.html#873" class="Bound"
+      >x</a
+      ><a name="874"
+      > </a
+      ><a name="875" class="Symbol"
+      >=</a
+      ><a name="876"
+      > </a
+      ><a name="877" href="Refinement.html#5241" class="Field"
+      >FRefinement.comp</a
+      ><a name="893"
+      > </a
+      ><a name="894" class="Symbol"
+      >(</a
+      ><a name="895" href="Refinement.html#6905" class="Function"
+      >toFRefinement</a
+      ><a name="908"
+      > </a
+      ><a name="909" class="Symbol"
+      >(</a
+      ><a name="910" href="Ornament.Algebraic.html#4625" class="Function"
+      >algOrn-FSwap</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="926" class="Symbol"
+      >))</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >(</a
+      ><a name="930" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="932"
+      > </a
+      ><a name="933" class="Symbol"
+      >(</a
+      ><a name="934" href="Examples.FoldFusion.html#871" class="Bound"
+      >i</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="937"
+      > </a
+      ><a name="938" href="Examples.FoldFusion.html#873" class="Bound"
+      >x</a
+      ><a name="939" class="Symbol"
+      >))</a
+      ><a name="941"
+      >
+            </a
+      ><a name="954" href="Examples.FoldFusion.html#954" class="Bound"
+      >refT</a
+      ><a name="958"
+      > </a
+      ><a name="959" class="Symbol"
+      >:</a
+      ><a name="960"
+      > </a
+      ><a name="961" class="Symbol"
+      >(</a
+      ><a name="962" href="Examples.FoldFusion.html#962" class="Bound"
+      >i</a
+      ><a name="963"
+      > </a
+      ><a name="964" class="Symbol"
+      >:</a
+      ><a name="965"
+      > </a
+      ><a name="966" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="967" class="Symbol"
+      >)</a
+      ><a name="968"
+      > </a
+      ><a name="969" class="Symbol"
+      >(</a
+      ><a name="970" href="Examples.FoldFusion.html#970" class="Bound"
+      >y</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >:</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="Examples.FoldFusion.html#962" class="Bound"
+      >i</a
+      ><a name="977" class="Symbol"
+      >)</a
+      ><a name="978"
+      > </a
+      ><a name="979" class="Symbol"
+      >&#8594;</a
+      ><a name="980"
+      > </a
+      ><a name="981" href="Refinement.html#865" class="Record"
+      >Refinement</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >(</a
+      ><a name="993" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="Examples.FoldFusion.html#962" class="Bound"
+      >i</a
+      ><a name="998" class="Symbol"
+      >)</a
+      ><a name="999"
+      > </a
+      ><a name="1000" class="Symbol"
+      >(</a
+      ><a name="1001" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1004"
+      > </a
+      ><a name="1005" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >(</a
+      ><a name="1019" href="Examples.FoldFusion.html#962" class="Bound"
+      >i</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" href="Examples.FoldFusion.html#970" class="Bound"
+      >y</a
+      ><a name="1024" class="Symbol"
+      >))</a
+      ><a name="1026"
+      >
+            </a
+      ><a name="1039" href="Examples.FoldFusion.html#954" class="Bound"
+      >refT</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" href="Examples.FoldFusion.html#1044" class="Bound"
+      >i</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="Examples.FoldFusion.html#1046" class="Bound"
+      >y</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" class="Symbol"
+      >=</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" href="Refinement.html#5241" class="Field"
+      >FRefinement.comp</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" class="Symbol"
+      >(</a
+      ><a name="1068" href="Refinement.html#6905" class="Function"
+      >toFRefinement</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" class="Symbol"
+      >(</a
+      ><a name="1083" href="Ornament.Algebraic.html#4625" class="Function"
+      >algOrn-FSwap</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1099" class="Symbol"
+      >))</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >(</a
+      ><a name="1103" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" class="Symbol"
+      >(</a
+      ><a name="1107" href="Examples.FoldFusion.html#1044" class="Bound"
+      >i</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" href="Examples.FoldFusion.html#1046" class="Bound"
+      >y</a
+      ><a name="1112" class="Symbol"
+      >))</a
+      ><a name="1114"
+      >
+        </a
+      ><a name="1123" class="Keyword"
+      >in</a
+      ><a name="1125"
+      >  </a
+      ><a name="1127" href="Refinement.html#9343" class="Function"
+      >&#8704;[[</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Refinement.html#9343" class="Function"
+      >&#8712;</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="1136"
+      > </a
+      ><a name="1137" href="Refinement.html#9343" class="Function"
+      >]]</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="Refinement.html#8542" class="Function"
+      >&#8704;&#8314;[[</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Examples.FoldFusion.html#1145" class="Bound"
+      >x</a
+      ><a name="1146"
+      > </a
+      ><a name="1147" href="Refinement.html#8542" class="Function"
+      >&#8712;</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" href="Refinement.html#8542" class="Function"
+      >]]</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" class="Symbol"
+      >(</a
+      ><a name="1157" href="Examples.FoldFusion.html#781" class="Bound"
+      >refS</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="Examples.FoldFusion.html#1145" class="Bound"
+      >x</a
+      ><a name="1165"
+      > </a
+      ><a name="1166" href="Refinement.html#7666" class="Function Operator"
+      >&#8640;</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >(</a
+      ><a name="1169" href="Refinement.html#8542" class="Function"
+      >&#8704;&#8314;[[</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" href="Examples.FoldFusion.html#1174" class="Bound"
+      >y</a
+      ><a name="1175"
+      > </a
+      ><a name="1176" href="Refinement.html#8542" class="Function"
+      >&#8712;</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="Refinement.html#8542" class="Function"
+      >]]</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" href="Refinement.html#8177" class="Function"
+      >&#8704;&#8314;[</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" class="Symbol"
+      >_</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" href="Refinement.html#8177" class="Function"
+      >&#8712;</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="Symbol"
+      >(</a
+      ><a name="1194" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="1198" class="Symbol"
+      >)</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="Examples.FoldFusion.html#1145" class="Bound"
+      >x</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="Examples.FoldFusion.html#1174" class="Bound"
+      >y</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" href="Refinement.html#8177" class="Function"
+      >]</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" href="Refinement.html#7381" class="Function"
+      >toUpgrade</a
+      ><a name="1217"
+      > </a
+      ><a name="1218" class="Symbol"
+      >(</a
+      ><a name="1219" href="Examples.FoldFusion.html#954" class="Bound"
+      >refT</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="Examples.FoldFusion.html#1131" class="Bound"
+      >i</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="Examples.FoldFusion.html#1174" class="Bound"
+      >y</a
+      ><a name="1227" class="Symbol"
+      >)))</a
+      ><a name="1230"
+      >
+
+</a
+      ><a name="1232" href="Examples.FoldFusion.html#1232" class="Function"
+      >FusionCondition-&#8838;</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" class="Symbol"
+      >:</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" class="PrimitiveType"
+      >Set</a
+      ><a name="1255"
+      >
+</a
+      ><a name="1256" href="Examples.FoldFusion.html#1232" class="Function"
+      >FusionCondition-&#8838;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" class="Symbol"
+      >=</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1293"
+      >
+
+</a
+      ><a name="1295" href="Examples.FoldFusion.html#1295" class="Function"
+      >fusion-&#8838;</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" class="Symbol"
+      >:</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="Examples.FoldFusion.html#1232" class="Function"
+      >FusionCondition-&#8838;</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" class="Symbol"
+      >&#8594;</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" class="Symbol"
+      >{</a
+      ><a name="1327" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1328"
+      > </a
+      ><a name="1329" class="Symbol"
+      >:</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="1332" class="Symbol"
+      >}</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="Symbol"
+      >{</a
+      ><a name="1335" href="Examples.FoldFusion.html#1335" class="Bound"
+      >x</a
+      ><a name="1336"
+      > </a
+      ><a name="1337" class="Symbol"
+      >:</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1342" class="Symbol"
+      >}</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="Symbol"
+      >(</a
+      ><a name="1345" href="Examples.FoldFusion.html#1345" class="Bound"
+      >d</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="Symbol"
+      >:</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1354" class="Symbol"
+      >)</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" class="Symbol"
+      >&#8594;</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="Relation.Fold.html#707" class="Function"
+      >foldR'</a
+      ><a name="1364"
+      > </a
+      ><a name="1365" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1368"
+      > </a
+      ><a name="1369" href="Examples.FoldFusion.html#1345" class="Bound"
+      >d</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" href="Examples.FoldFusion.html#1335" class="Bound"
+      >x</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >&#8594;</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >{</a
+      ><a name="1376" href="Examples.FoldFusion.html#1376" class="Bound"
+      >y</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" class="Symbol"
+      >:</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1383" class="Symbol"
+      >}</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" class="Symbol"
+      >&#8594;</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" class="Symbol"
+      >(</a
+      ><a name="1388" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="1392" class="Symbol"
+      >)</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" href="Examples.FoldFusion.html#1335" class="Bound"
+      >x</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="Examples.FoldFusion.html#1376" class="Bound"
+      >y</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >&#8594;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" href="Relation.Fold.html#707" class="Function"
+      >foldR'</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" href="Examples.FoldFusion.html#1327" class="Bound"
+      >i</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="Examples.FoldFusion.html#1345" class="Bound"
+      >d</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" href="Examples.FoldFusion.html#1376" class="Bound"
+      >y</a
+      ><a name="1416"
+      >
+</a
+      ><a name="1417" href="Examples.FoldFusion.html#1295" class="Function"
+      >fusion-&#8838;</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="Examples.FoldFusion.html#1426" class="Bound"
+      >cond</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >{</a
+      ><a name="1432" href="Examples.FoldFusion.html#1432" class="Bound"
+      >i</a
+      ><a name="1433" class="Symbol"
+      >}</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" class="Symbol"
+      >{</a
+      ><a name="1436" href="Examples.FoldFusion.html#1436" class="Bound"
+      >x</a
+      ><a name="1437" class="Symbol"
+      >}</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="Examples.FoldFusion.html#1439" class="Bound"
+      >d</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="Examples.FoldFusion.html#1441" class="Bound"
+      >ss</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" class="Symbol"
+      >{</a
+      ><a name="1445" href="Examples.FoldFusion.html#1445" class="Bound"
+      >y</a
+      ><a name="1446" class="Symbol"
+      >}</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="Examples.FoldFusion.html#1448" class="Bound"
+      >r</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" class="Symbol"
+      >=</a
+      ><a name="1451"
+      > </a
+      ><a name="1452" href="Relation.html#10476" class="Function"
+      >modus-ponens-&#8838;</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" class="Symbol"
+      >(</a
+      ><a name="1468" href="Relation.Fold.html#8840" class="Function"
+      >foldR-fusion-&#8838;</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="Examples.FoldFusion.html#1426" class="Bound"
+      >cond</a
+      ><a name="1495" class="Symbol"
+      >)</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" href="Examples.FoldFusion.html#1432" class="Bound"
+      >i</a
+      ><a name="1498"
+      > </a
+      ><a name="1499" href="Examples.FoldFusion.html#1439" class="Bound"
+      >d</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" href="Examples.FoldFusion.html#1445" class="Bound"
+      >y</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" class="Symbol"
+      >(</a
+      ><a name="1504" href="Examples.FoldFusion.html#1436" class="Bound"
+      >x</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" href="Examples.FoldFusion.html#1441" class="Bound"
+      >ss</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" href="Examples.FoldFusion.html#1448" class="Bound"
+      >r</a
+      ><a name="1514" class="Symbol"
+      >)</a
+      ><a name="1515"
+      >
+
+</a
+      ><a name="1517" href="Examples.FoldFusion.html#1517" class="Function"
+      >algOrn-fusion-&#8838;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" class="Symbol"
+      >:</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="Examples.FoldFusion.html#1232" class="Function"
+      >FusionCondition-&#8838;</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >&#8594;</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >{</a
+      ><a name="1556" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" class="Symbol"
+      >:</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="1561" class="Symbol"
+      >}</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" class="Symbol"
+      >{</a
+      ><a name="1564" href="Examples.FoldFusion.html#1564" class="Bound"
+      >x</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" class="Symbol"
+      >:</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1571" class="Symbol"
+      >}</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" class="Symbol"
+      >&#8594;</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1589"
+      > </a
+      ><a name="1590" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" class="Symbol"
+      >(</a
+      ><a name="1593" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="Examples.FoldFusion.html#1564" class="Bound"
+      >x</a
+      ><a name="1598" class="Symbol"
+      >)</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" class="Symbol"
+      >&#8594;</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" class="Symbol"
+      >{</a
+      ><a name="1603" href="Examples.FoldFusion.html#1603" class="Bound"
+      >y</a
+      ><a name="1604"
+      > </a
+      ><a name="1605" class="Symbol"
+      >:</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1610" class="Symbol"
+      >}</a
+      ><a name="1611"
+      > </a
+      ><a name="1612" class="Symbol"
+      >&#8594;</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" class="Symbol"
+      >(</a
+      ><a name="1615" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="1619" class="Symbol"
+      >)</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Examples.FoldFusion.html#1564" class="Bound"
+      >x</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="Examples.FoldFusion.html#1603" class="Bound"
+      >y</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" class="Symbol"
+      >&#8594;</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" class="Symbol"
+      >(</a
+      ><a name="1647" href="Examples.FoldFusion.html#1556" class="Bound"
+      >i</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Examples.FoldFusion.html#1603" class="Bound"
+      >y</a
+      ><a name="1652" class="Symbol"
+      >)</a
+      ><a name="1653"
+      >
+</a
+      ><a name="1654" href="Examples.FoldFusion.html#1517" class="Function"
+      >algOrn-fusion-&#8838;</a
+      ><a name="1669"
+      > </a
+      ><a name="1670" href="Examples.FoldFusion.html#1670" class="Bound"
+      >cond</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" class="Symbol"
+      >=</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="Refinement.html#7324" class="Field"
+      >Upgrade.u</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" href="Examples.FoldFusion.html#625" class="Function"
+      >upg-&#8838;</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" class="Symbol"
+      >(</a
+      ><a name="1697" href="Examples.FoldFusion.html#1295" class="Function"
+      >fusion-&#8838;</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="Examples.FoldFusion.html#1670" class="Bound"
+      >cond</a
+      ><a name="1710" class="Symbol"
+      >)</a
+      ><a name="1711"
+      >
+
+</a
+      ><a name="1713" href="Examples.FoldFusion.html#1713" class="Function"
+      >algOrn-fusion-&#8838;-coherence</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" class="Symbol"
+      >:</a
+      ><a name="1740"
+      >
+  </a
+      ><a name="1743" class="Symbol"
+      >(</a
+      ><a name="1744" href="Examples.FoldFusion.html#1744" class="Bound"
+      >cond</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" class="Symbol"
+      >:</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="Examples.FoldFusion.html#1232" class="Function"
+      >FusionCondition-&#8838;</a
+      ><a name="1768" class="Symbol"
+      >)</a
+      ><a name="1769"
+      > </a
+      ><a name="1770" class="Symbol"
+      >{</a
+      ><a name="1771" href="Examples.FoldFusion.html#1771" class="Bound"
+      >i</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" class="Symbol"
+      >:</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="1776" class="Symbol"
+      >}</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" class="Symbol"
+      >{</a
+      ><a name="1779" href="Examples.FoldFusion.html#1779" class="Bound"
+      >x</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >:</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="Examples.FoldFusion.html#1771" class="Bound"
+      >i</a
+      ><a name="1786" class="Symbol"
+      >}</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" class="Symbol"
+      >(</a
+      ><a name="1789" href="Examples.FoldFusion.html#1789" class="Bound"
+      >d</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" class="Symbol"
+      >:</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1803"
+      > </a
+      ><a name="1804" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1805"
+      > </a
+      ><a name="1806" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" class="Symbol"
+      >(</a
+      ><a name="1811" href="Examples.FoldFusion.html#1771" class="Bound"
+      >i</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" href="Examples.FoldFusion.html#1779" class="Bound"
+      >x</a
+      ><a name="1816" class="Symbol"
+      >))</a
+      ><a name="1818"
+      > </a
+      ><a name="1819" class="Symbol"
+      >{</a
+      ><a name="1820" href="Examples.FoldFusion.html#1820" class="Bound"
+      >y</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" class="Symbol"
+      >:</a
+      ><a name="1823"
+      > </a
+      ><a name="1824" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="Examples.FoldFusion.html#1771" class="Bound"
+      >i</a
+      ><a name="1827" class="Symbol"
+      >}</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" class="Symbol"
+      >(</a
+      ><a name="1830" href="Examples.FoldFusion.html#1830" class="Bound"
+      >r</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" class="Symbol"
+      >:</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" class="Symbol"
+      >(</a
+      ><a name="1835" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="1839" class="Symbol"
+      >)</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="Examples.FoldFusion.html#1771" class="Bound"
+      >i</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" href="Examples.FoldFusion.html#1779" class="Bound"
+      >x</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" href="Examples.FoldFusion.html#1820" class="Bound"
+      >y</a
+      ><a name="1846" class="Symbol"
+      >)</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" class="Symbol"
+      >&#8594;</a
+      ><a name="1849"
+      >
+  </a
+      ><a name="1852" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1869"
+      > </a
+      ><a name="1870" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" class="Symbol"
+      >(</a
+      ><a name="1875" href="Examples.FoldFusion.html#1517" class="Function"
+      >algOrn-fusion-&#8838;</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="Examples.FoldFusion.html#1744" class="Bound"
+      >cond</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="Examples.FoldFusion.html#1789" class="Bound"
+      >d</a
+      ><a name="1897"
+      > </a
+      ><a name="1898" href="Examples.FoldFusion.html#1830" class="Bound"
+      >r</a
+      ><a name="1899" class="Symbol"
+      >)</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="1920"
+      > </a
+      ><a name="1921" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="Examples.FoldFusion.html#1789" class="Bound"
+      >d</a
+      ><a name="1926"
+      >
+</a
+      ><a name="1927" href="Examples.FoldFusion.html#1713" class="Function"
+      >algOrn-fusion-&#8838;-coherence</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" href="Examples.FoldFusion.html#1953" class="Bound"
+      >cond</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="Examples.FoldFusion.html#1958" class="Bound"
+      >d</a
+      ><a name="1959"
+      > </a
+      ><a name="1960" href="Examples.FoldFusion.html#1960" class="Bound"
+      >r</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >=</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="Refinement.html#7346" class="Field"
+      >Upgrade.c</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="Examples.FoldFusion.html#625" class="Function"
+      >upg-&#8838;</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1982"
+      > </a
+      ><a name="1983" class="Symbol"
+      >(</a
+      ><a name="1984" href="Examples.FoldFusion.html#1295" class="Function"
+      >fusion-&#8838;</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" href="Examples.FoldFusion.html#1953" class="Bound"
+      >cond</a
+      ><a name="1997" class="Symbol"
+      >)</a
+      ><a name="1998"
+      > </a
+      ><a name="1999" class="Symbol"
+      >(</a
+      ><a name="2000" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="2006"
+      > </a
+      ><a name="2007" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" href="Examples.FoldFusion.html#1958" class="Bound"
+      >d</a
+      ><a name="2023" class="Symbol"
+      >)</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" href="Examples.FoldFusion.html#1958" class="Bound"
+      >d</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" href="Examples.FoldFusion.html#1960" class="Bound"
+      >r</a
+      ><a name="2033"
+      >
+
+</a
+      ><a name="2035" href="Examples.FoldFusion.html#2035" class="Function"
+      >upg-&#8839;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" class="Symbol"
+      >:</a
+      ><a name="2042"
+      > </a
+      ><a name="2043" href="Refinement.html#7243" class="Record"
+      >Upgrade</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" class="Symbol"
+      >({</a
+      ><a name="2053" href="Examples.FoldFusion.html#2053" class="Bound"
+      >i</a
+      ><a name="2054"
+      > </a
+      ><a name="2055" class="Symbol"
+      >:</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2058" class="Symbol"
+      >}</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" class="Symbol"
+      >&#8594;</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" href="Examples.FoldFusion.html#2053" class="Bound"
+      >i</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" class="Symbol"
+      >&#8594;</a
+      ><a name="2069"
+      > </a
+      ><a name="2070" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2071"
+      > </a
+      ><a name="2072" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="Examples.FoldFusion.html#2053" class="Bound"
+      >i</a
+      ><a name="2075" class="Symbol"
+      >)</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="Symbol"
+      >({</a
+      ><a name="2079" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" class="Symbol"
+      >:</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2084" class="Symbol"
+      >}</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" class="Symbol"
+      >{</a
+      ><a name="2087" href="Examples.FoldFusion.html#2087" class="Bound"
+      >y</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" class="Symbol"
+      >:</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2094" class="Symbol"
+      >}</a
+      ><a name="2095"
+      > </a
+      ><a name="2096" class="Symbol"
+      >&#8594;</a
+      ><a name="2097"
+      > </a
+      ><a name="2098" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2112"
+      > </a
+      ><a name="2113" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" class="Symbol"
+      >(</a
+      ><a name="2116" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" href="Examples.FoldFusion.html#2087" class="Bound"
+      >y</a
+      ><a name="2121" class="Symbol"
+      >)</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >&#8594;</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="Examples.FoldFusion.html#2128" class="Bound"
+      >x</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="2131"
+      > </a
+      ><a name="2132" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="2133"
+      > </a
+      ><a name="2134" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2135"
+      > </a
+      ><a name="2136" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" class="Symbol"
+      >(</a
+      ><a name="2139" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2151"
+      > </a
+      ><a name="2152" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" class="Symbol"
+      >(</a
+      ><a name="2157" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="Examples.FoldFusion.html#2128" class="Bound"
+      >x</a
+      ><a name="2162" class="Symbol"
+      >)</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" class="Symbol"
+      >(</a
+      ><a name="2167" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2168"
+      > </a
+      ><a name="2169" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="2171" class="Symbol"
+      >)</a
+      ><a name="2172"
+      > </a
+      ><a name="2173" href="Examples.FoldFusion.html#2079" class="Bound"
+      >i</a
+      ><a name="2174"
+      > </a
+      ><a name="2175" href="Examples.FoldFusion.html#2128" class="Bound"
+      >x</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" href="Examples.FoldFusion.html#2087" class="Bound"
+      >y</a
+      ><a name="2178" class="Symbol"
+      >))</a
+      ><a name="2180"
+      >
+</a
+      ><a name="2181" href="Examples.FoldFusion.html#2035" class="Function"
+      >upg-&#8839;</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" class="Symbol"
+      >=</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" class="Keyword"
+      >let</a
+      ><a name="2192"
+      > </a
+      ><a name="2193" href="Examples.FoldFusion.html#2193" class="Bound"
+      >refS</a
+      ><a name="2197"
+      > </a
+      ><a name="2198" class="Symbol"
+      >:</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" class="Symbol"
+      >(</a
+      ><a name="2201" href="Examples.FoldFusion.html#2201" class="Bound"
+      >i</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" class="Symbol"
+      >:</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2206" class="Symbol"
+      >)</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" class="Symbol"
+      >(</a
+      ><a name="2209" href="Examples.FoldFusion.html#2209" class="Bound"
+      >x</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" class="Symbol"
+      >:</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Examples.FoldFusion.html#2201" class="Bound"
+      >i</a
+      ><a name="2216" class="Symbol"
+      >)</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" class="Symbol"
+      >&#8594;</a
+      ><a name="2219"
+      > </a
+      ><a name="2220" href="Refinement.html#865" class="Record"
+      >Refinement</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" class="Symbol"
+      >(</a
+      ><a name="2232" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" href="Examples.FoldFusion.html#2201" class="Bound"
+      >i</a
+      ><a name="2237" class="Symbol"
+      >)</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" class="Symbol"
+      >(</a
+      ><a name="2240" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2252"
+      > </a
+      ><a name="2253" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2256"
+      > </a
+      ><a name="2257" class="Symbol"
+      >(</a
+      ><a name="2258" href="Examples.FoldFusion.html#2201" class="Bound"
+      >i</a
+      ><a name="2259"
+      > </a
+      ><a name="2260" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="Examples.FoldFusion.html#2209" class="Bound"
+      >x</a
+      ><a name="2263" class="Symbol"
+      >))</a
+      ><a name="2265"
+      >
+            </a
+      ><a name="2278" href="Examples.FoldFusion.html#2193" class="Bound"
+      >refS</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" href="Examples.FoldFusion.html#2283" class="Bound"
+      >i</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" href="Examples.FoldFusion.html#2285" class="Bound"
+      >x</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" class="Symbol"
+      >=</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" href="Refinement.html#5241" class="Field"
+      >FRefinement.comp</a
+      ><a name="2305"
+      > </a
+      ><a name="2306" class="Symbol"
+      >(</a
+      ><a name="2307" href="Refinement.html#6905" class="Function"
+      >toFRefinement</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" class="Symbol"
+      >(</a
+      ><a name="2322" href="Ornament.Algebraic.html#4625" class="Function"
+      >algOrn-FSwap</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2338" class="Symbol"
+      >))</a
+      ><a name="2340"
+      > </a
+      ><a name="2341" class="Symbol"
+      >(</a
+      ><a name="2342" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" class="Symbol"
+      >(</a
+      ><a name="2346" href="Examples.FoldFusion.html#2283" class="Bound"
+      >i</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="Examples.FoldFusion.html#2285" class="Bound"
+      >x</a
+      ><a name="2351" class="Symbol"
+      >))</a
+      ><a name="2353"
+      >
+            </a
+      ><a name="2366" href="Examples.FoldFusion.html#2366" class="Bound"
+      >refT</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" class="Symbol"
+      >:</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" class="Symbol"
+      >(</a
+      ><a name="2374" href="Examples.FoldFusion.html#2374" class="Bound"
+      >i</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" class="Symbol"
+      >:</a
+      ><a name="2377"
+      > </a
+      ><a name="2378" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2379" class="Symbol"
+      >)</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" class="Symbol"
+      >(</a
+      ><a name="2382" href="Examples.FoldFusion.html#2382" class="Bound"
+      >y</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" class="Symbol"
+      >:</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Examples.FoldFusion.html#2374" class="Bound"
+      >i</a
+      ><a name="2389" class="Symbol"
+      >)</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >&#8594;</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="Refinement.html#865" class="Record"
+      >Refinement</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" class="Symbol"
+      >(</a
+      ><a name="2405" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" href="Examples.FoldFusion.html#2374" class="Bound"
+      >i</a
+      ><a name="2410" class="Symbol"
+      >)</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" class="Symbol"
+      >(</a
+      ><a name="2413" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" class="Symbol"
+      >(</a
+      ><a name="2431" href="Examples.FoldFusion.html#2374" class="Bound"
+      >i</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2434"
+      > </a
+      ><a name="2435" href="Examples.FoldFusion.html#2382" class="Bound"
+      >y</a
+      ><a name="2436" class="Symbol"
+      >))</a
+      ><a name="2438"
+      >
+            </a
+      ><a name="2451" href="Examples.FoldFusion.html#2366" class="Bound"
+      >refT</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" href="Examples.FoldFusion.html#2456" class="Bound"
+      >i</a
+      ><a name="2457"
+      > </a
+      ><a name="2458" href="Examples.FoldFusion.html#2458" class="Bound"
+      >y</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" class="Symbol"
+      >=</a
+      ><a name="2461"
+      > </a
+      ><a name="2462" href="Refinement.html#5241" class="Field"
+      >FRefinement.comp</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" class="Symbol"
+      >(</a
+      ><a name="2480" href="Refinement.html#6905" class="Function"
+      >toFRefinement</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" class="Symbol"
+      >(</a
+      ><a name="2495" href="Ornament.Algebraic.html#4625" class="Function"
+      >algOrn-FSwap</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2511" class="Symbol"
+      >))</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" class="Symbol"
+      >(</a
+      ><a name="2515" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="2517"
+      > </a
+      ><a name="2518" class="Symbol"
+      >(</a
+      ><a name="2519" href="Examples.FoldFusion.html#2456" class="Bound"
+      >i</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" href="Examples.FoldFusion.html#2458" class="Bound"
+      >y</a
+      ><a name="2524" class="Symbol"
+      >))</a
+      ><a name="2526"
+      >
+        </a
+      ><a name="2535" class="Keyword"
+      >in</a
+      ><a name="2537"
+      >  </a
+      ><a name="2539" href="Refinement.html#9343" class="Function"
+      >&#8704;[[</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2544"
+      > </a
+      ><a name="2545" href="Refinement.html#9343" class="Function"
+      >&#8712;</a
+      ><a name="2546"
+      > </a
+      ><a name="2547" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" href="Refinement.html#9343" class="Function"
+      >]]</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="Refinement.html#8542" class="Function"
+      >&#8704;&#8314;[[</a
+      ><a name="2556"
+      > </a
+      ><a name="2557" href="Examples.FoldFusion.html#2557" class="Bound"
+      >y</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" href="Refinement.html#8542" class="Function"
+      >&#8712;</a
+      ><a name="2560"
+      > </a
+      ><a name="2561" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" href="Refinement.html#8542" class="Function"
+      >]]</a
+      ><a name="2567"
+      > </a
+      ><a name="2568" class="Symbol"
+      >(</a
+      ><a name="2569" href="Examples.FoldFusion.html#2366" class="Bound"
+      >refT</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="Examples.FoldFusion.html#2557" class="Bound"
+      >y</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" href="Refinement.html#7666" class="Function Operator"
+      >&#8640;</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >(</a
+      ><a name="2581" href="Refinement.html#10919" class="Function"
+      >&#931;&#8314;[</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="Examples.FoldFusion.html#2585" class="Bound"
+      >x</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="Refinement.html#10919" class="Function"
+      >&#8712;</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="Refinement.html#10919" class="Function"
+      >]</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" class="Symbol"
+      >(</a
+      ><a name="2596" href="Refinement.html#7381" class="Function"
+      >toUpgrade</a
+      ><a name="2605"
+      > </a
+      ><a name="2606" class="Symbol"
+      >(</a
+      ><a name="2607" href="Examples.FoldFusion.html#2193" class="Bound"
+      >refS</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" href="Examples.FoldFusion.html#2585" class="Bound"
+      >x</a
+      ><a name="2615" class="Symbol"
+      >)</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" href="Refinement.html#11317" class="Function Operator"
+      >&#215;&#8314;</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" class="Symbol"
+      >(</a
+      ><a name="2621" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="2625" class="Symbol"
+      >)</a
+      ><a name="2626"
+      > </a
+      ><a name="2627" href="Examples.FoldFusion.html#2543" class="Bound"
+      >i</a
+      ><a name="2628"
+      > </a
+      ><a name="2629" href="Examples.FoldFusion.html#2585" class="Bound"
+      >x</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" href="Examples.FoldFusion.html#2557" class="Bound"
+      >y</a
+      ><a name="2632" class="Symbol"
+      >)))</a
+      ><a name="2635"
+      >
+
+</a
+      ><a name="2637" href="Examples.FoldFusion.html#2637" class="Function"
+      >FusionCondition-&#8839;</a
+      ><a name="2654"
+      > </a
+      ><a name="2655" class="Symbol"
+      >:</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" class="PrimitiveType"
+      >Set</a
+      ><a name="2660"
+      >
+</a
+      ><a name="2661" href="Examples.FoldFusion.html#2637" class="Function"
+      >FusionCondition-&#8839;</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" class="Symbol"
+      >=</a
+      ><a name="2680"
+      > </a
+      ><a name="2681" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="Relation.html#11258" class="Function Operator"
+      >&#8839;</a
+      ><a name="2688"
+      > </a
+      ><a name="2689" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2692"
+      > </a
+      ><a name="2693" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2696"
+      > </a
+      ><a name="2697" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2698"
+      >
+
+</a
+      ><a name="2700" href="Examples.FoldFusion.html#2700" class="Function"
+      >fusion-&#8839;</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" class="Symbol"
+      >:</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" href="Examples.FoldFusion.html#2637" class="Function"
+      >FusionCondition-&#8839;</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" class="Symbol"
+      >&#8594;</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" class="Symbol"
+      >{</a
+      ><a name="2732" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" class="Symbol"
+      >:</a
+      ><a name="2735"
+      > </a
+      ><a name="2736" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2737" class="Symbol"
+      >}</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" class="Symbol"
+      >{</a
+      ><a name="2740" href="Examples.FoldFusion.html#2740" class="Bound"
+      >y</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" class="Symbol"
+      >:</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="2745"
+      > </a
+      ><a name="2746" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2747" class="Symbol"
+      >}</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" class="Symbol"
+      >(</a
+      ><a name="2750" href="Examples.FoldFusion.html#2750" class="Bound"
+      >d</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" class="Symbol"
+      >:</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2759" class="Symbol"
+      >)</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="Symbol"
+      >&#8594;</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="Relation.Fold.html#707" class="Function"
+      >foldR'</a
+      ><a name="2769"
+      > </a
+      ><a name="2770" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2771"
+      > </a
+      ><a name="2772" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" href="Examples.FoldFusion.html#2750" class="Bound"
+      >d</a
+      ><a name="2775"
+      > </a
+      ><a name="2776" href="Examples.FoldFusion.html#2740" class="Bound"
+      >y</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" class="Symbol"
+      >&#8594;</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" href="Examples.FoldFusion.html#2783" class="Bound"
+      >x</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" class="Symbol"
+      >(</a
+      ><a name="2794" href="Relation.Fold.html#707" class="Function"
+      >foldR'</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2804"
+      > </a
+      ><a name="2805" href="Examples.FoldFusion.html#2750" class="Bound"
+      >d</a
+      ><a name="2806"
+      > </a
+      ><a name="2807" href="Examples.FoldFusion.html#2783" class="Bound"
+      >x</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" class="Symbol"
+      >(</a
+      ><a name="2812" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="2816" class="Symbol"
+      >)</a
+      ><a name="2817"
+      > </a
+      ><a name="2818" href="Examples.FoldFusion.html#2732" class="Bound"
+      >i</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" href="Examples.FoldFusion.html#2783" class="Bound"
+      >x</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" href="Examples.FoldFusion.html#2740" class="Bound"
+      >y</a
+      ><a name="2823" class="Symbol"
+      >)</a
+      ><a name="2824"
+      >
+</a
+      ><a name="2825" href="Examples.FoldFusion.html#2700" class="Function"
+      >fusion-&#8839;</a
+      ><a name="2833"
+      > </a
+      ><a name="2834" href="Examples.FoldFusion.html#2834" class="Bound"
+      >cond</a
+      ><a name="2838"
+      > </a
+      ><a name="2839" class="Symbol"
+      >{</a
+      ><a name="2840" href="Examples.FoldFusion.html#2840" class="Bound"
+      >i</a
+      ><a name="2841" class="Symbol"
+      >}</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >{</a
+      ><a name="2844" href="Examples.FoldFusion.html#2844" class="Bound"
+      >y</a
+      ><a name="2845" class="Symbol"
+      >}</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="Examples.FoldFusion.html#2847" class="Bound"
+      >d</a
+      ><a name="2848"
+      > </a
+      ><a name="2849" href="Examples.FoldFusion.html#2849" class="Bound"
+      >ts</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >=</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="Relation.html#10476" class="Function"
+      >modus-ponens-&#8838;</a
+      ><a name="2868"
+      > </a
+      ><a name="2869" class="Symbol"
+      >(</a
+      ><a name="2870" href="Relation.Fold.html#7855" class="Function"
+      >foldR-fusion-&#8839;</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="2888"
+      > </a
+      ><a name="2889" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="Examples.FoldFusion.html#2834" class="Bound"
+      >cond</a
+      ><a name="2897" class="Symbol"
+      >)</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" href="Examples.FoldFusion.html#2840" class="Bound"
+      >i</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" href="Examples.FoldFusion.html#2847" class="Bound"
+      >d</a
+      ><a name="2902"
+      > </a
+      ><a name="2903" href="Examples.FoldFusion.html#2844" class="Bound"
+      >y</a
+      ><a name="2904"
+      > </a
+      ><a name="2905" href="Examples.FoldFusion.html#2849" class="Bound"
+      >ts</a
+      ><a name="2907"
+      >
+
+</a
+      ><a name="2909" href="Examples.FoldFusion.html#2909" class="Function"
+      >algOrn-fusion-&#8839;</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" class="Symbol"
+      >:</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="Examples.FoldFusion.html#2637" class="Function"
+      >FusionCondition-&#8839;</a
+      ><a name="2944"
+      > </a
+      ><a name="2945" class="Symbol"
+      >&#8594;</a
+      ><a name="2946"
+      > </a
+      ><a name="2947" class="Symbol"
+      >{</a
+      ><a name="2948" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" class="Symbol"
+      >:</a
+      ><a name="2951"
+      > </a
+      ><a name="2952" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="2953" class="Symbol"
+      >}</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" class="Symbol"
+      >{</a
+      ><a name="2956" href="Examples.FoldFusion.html#2956" class="Bound"
+      >y</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" class="Symbol"
+      >:</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="2963" class="Symbol"
+      >}</a
+      ><a name="2964"
+      > </a
+      ><a name="2965" class="Symbol"
+      >&#8594;</a
+      ><a name="2966"
+      > </a
+      ><a name="2967" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >(</a
+      ><a name="2985" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2988"
+      > </a
+      ><a name="2989" href="Examples.FoldFusion.html#2956" class="Bound"
+      >y</a
+      ><a name="2990" class="Symbol"
+      >)</a
+      ><a name="2991"
+      > </a
+      ><a name="2992" class="Symbol"
+      >&#8594;</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" href="Examples.FoldFusion.html#2997" class="Bound"
+      >x</a
+      ><a name="2998"
+      > </a
+      ><a name="2999" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="3000"
+      > </a
+      ><a name="3001" href="Examples.FoldFusion.html#152" class="Bound"
+      >X</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="3004"
+      > </a
+      ><a name="3005" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="3006"
+      > </a
+      ><a name="3007" class="Symbol"
+      >(</a
+      ><a name="3008" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="3018"
+      > </a
+      ><a name="3019" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="3020"
+      > </a
+      ><a name="3021" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="3022"
+      > </a
+      ><a name="3023" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" class="Symbol"
+      >(</a
+      ><a name="3026" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" href="Examples.FoldFusion.html#2997" class="Bound"
+      >x</a
+      ><a name="3031" class="Symbol"
+      >)</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="3034"
+      > </a
+      ><a name="3035" class="Symbol"
+      >(</a
+      ><a name="3036" href="Examples.FoldFusion.html#168" class="Bound"
+      >R</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="3040" class="Symbol"
+      >)</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" href="Examples.FoldFusion.html#2948" class="Bound"
+      >i</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" href="Examples.FoldFusion.html#2997" class="Bound"
+      >x</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" href="Examples.FoldFusion.html#2956" class="Bound"
+      >y</a
+      ><a name="3047" class="Symbol"
+      >)</a
+      ><a name="3048"
+      >
+</a
+      ><a name="3049" href="Examples.FoldFusion.html#2909" class="Function"
+      >algOrn-fusion-&#8839;</a
+      ><a name="3064"
+      > </a
+      ><a name="3065" href="Examples.FoldFusion.html#3065" class="Bound"
+      >cond</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" class="Symbol"
+      >=</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="Refinement.html#7324" class="Field"
+      >Upgrade.u</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" href="Examples.FoldFusion.html#2035" class="Function"
+      >upg-&#8839;</a
+      ><a name="3087"
+      > </a
+      ><a name="3088" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" class="Symbol"
+      >(</a
+      ><a name="3092" href="Examples.FoldFusion.html#2700" class="Function"
+      >fusion-&#8839;</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="Examples.FoldFusion.html#3065" class="Bound"
+      >cond</a
+      ><a name="3105" class="Symbol"
+      >)</a
+      ><a name="3106"
+      >
+
+</a
+      ><a name="3108" href="Examples.FoldFusion.html#3108" class="Function"
+      >algOrn-fusion-&#8839;-coherence</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" class="Symbol"
+      >:</a
+      ><a name="3135"
+      >
+  </a
+      ><a name="3138" class="Symbol"
+      >(</a
+      ><a name="3139" href="Examples.FoldFusion.html#3139" class="Bound"
+      >cond</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" class="Symbol"
+      >:</a
+      ><a name="3145"
+      > </a
+      ><a name="3146" href="Examples.FoldFusion.html#2637" class="Function"
+      >FusionCondition-&#8839;</a
+      ><a name="3163" class="Symbol"
+      >)</a
+      ><a name="3164"
+      > </a
+      ><a name="3165" class="Symbol"
+      >{</a
+      ><a name="3166" href="Examples.FoldFusion.html#3166" class="Bound"
+      >i</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" class="Symbol"
+      >:</a
+      ><a name="3169"
+      > </a
+      ><a name="3170" href="Examples.FoldFusion.html#129" class="Bound"
+      >I</a
+      ><a name="3171" class="Symbol"
+      >}</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" class="Symbol"
+      >{</a
+      ><a name="3174" href="Examples.FoldFusion.html#3174" class="Bound"
+      >y</a
+      ><a name="3175"
+      > </a
+      ><a name="3176" class="Symbol"
+      >:</a
+      ><a name="3177"
+      > </a
+      ><a name="3178" href="Examples.FoldFusion.html#154" class="Bound"
+      >Y</a
+      ><a name="3179"
+      > </a
+      ><a name="3180" href="Examples.FoldFusion.html#3166" class="Bound"
+      >i</a
+      ><a name="3181" class="Symbol"
+      >}</a
+      ><a name="3182"
+      > </a
+      ><a name="3183" class="Symbol"
+      >(</a
+      ><a name="3184" href="Examples.FoldFusion.html#3184" class="Bound"
+      >d</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" class="Symbol"
+      >:</a
+      ><a name="3187"
+      > </a
+      ><a name="3188" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="3191"
+      > </a
+      ><a name="3192" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="3198"
+      > </a
+      ><a name="3199" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="3200"
+      > </a
+      ><a name="3201" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="3202"
+      > </a
+      ><a name="3203" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="3204"
+      > </a
+      ><a name="3205" class="Symbol"
+      >(</a
+      ><a name="3206" href="Examples.FoldFusion.html#3166" class="Bound"
+      >i</a
+      ><a name="3207"
+      > </a
+      ><a name="3208" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" href="Examples.FoldFusion.html#3174" class="Bound"
+      >y</a
+      ><a name="3211" class="Symbol"
+      >))</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" class="Symbol"
+      >&#8594;</a
+      ><a name="3215"
+      >
+  </a
+      ><a name="3218" class="Keyword"
+      >let</a
+      ><a name="3221"
+      > </a
+      ><a name="3222" class="Symbol"
+      >(</a
+      ><a name="3223" href="Examples.FoldFusion.html#3223" class="Bound"
+      >x</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3226"
+      > </a
+      ><a name="3227" href="Examples.FoldFusion.html#3227" class="Bound"
+      >d'</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="Examples.FoldFusion.html#3232" class="Bound"
+      >r</a
+      ><a name="3233" class="Symbol"
+      >)</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" class="Symbol"
+      >=</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" href="Examples.FoldFusion.html#2909" class="Function"
+      >algOrn-fusion-&#8839;</a
+      ><a name="3252"
+      > </a
+      ><a name="3253" href="Examples.FoldFusion.html#3139" class="Bound"
+      >cond</a
+      ><a name="3257"
+      > </a
+      ><a name="3258" href="Examples.FoldFusion.html#3184" class="Bound"
+      >d</a
+      ><a name="3259"
+      > </a
+      ><a name="3260" class="Keyword"
+      >in</a
+      ><a name="3262"
+      > </a
+      ><a name="3263" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3271"
+      > </a
+      ><a name="3272" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="3278"
+      > </a
+      ><a name="3279" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" href="Examples.FoldFusion.html#180" class="Bound"
+      >S</a
+      ><a name="3282"
+      > </a
+      ><a name="3283" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3284"
+      > </a
+      ><a name="3285" href="Examples.FoldFusion.html#3227" class="Bound"
+      >d'</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="3296"
+      > </a
+      ><a name="3297" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3298"
+      > </a
+      ><a name="3299" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="3305"
+      > </a
+      ><a name="3306" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="3307"
+      > </a
+      ><a name="3308" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="3309"
+      > </a
+      ><a name="3310" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3311"
+      > </a
+      ><a name="3312" href="Examples.FoldFusion.html#3184" class="Bound"
+      >d</a
+      ><a name="3313"
+      >
+</a
+      ><a name="3314" href="Examples.FoldFusion.html#3108" class="Function"
+      >algOrn-fusion-&#8839;-coherence</a
+      ><a name="3339"
+      > </a
+      ><a name="3340" href="Examples.FoldFusion.html#3340" class="Bound"
+      >cond</a
+      ><a name="3344"
+      > </a
+      ><a name="3345" href="Examples.FoldFusion.html#3345" class="Bound"
+      >d</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" class="Symbol"
+      >=</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="Refinement.html#7346" class="Field"
+      >Upgrade.c</a
+      ><a name="3358"
+      > </a
+      ><a name="3359" href="Examples.FoldFusion.html#2035" class="Function"
+      >upg-&#8839;</a
+      ><a name="3364"
+      > </a
+      ><a name="3365" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" class="Symbol"
+      >(</a
+      ><a name="3369" href="Examples.FoldFusion.html#2700" class="Function"
+      >fusion-&#8839;</a
+      ><a name="3377"
+      > </a
+      ><a name="3378" href="Examples.FoldFusion.html#3340" class="Bound"
+      >cond</a
+      ><a name="3382" class="Symbol"
+      >)</a
+      ><a name="3383"
+      > </a
+      ><a name="3384" class="Symbol"
+      >(</a
+      ><a name="3385" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="3400"
+      > </a
+      ><a name="3401" href="Examples.FoldFusion.html#139" class="Bound"
+      >D</a
+      ><a name="3402"
+      > </a
+      ><a name="3403" href="Examples.FoldFusion.html#196" class="Bound"
+      >T</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3406"
+      > </a
+      ><a name="3407" href="Examples.FoldFusion.html#3345" class="Bound"
+      >d</a
+      ><a name="3408" class="Symbol"
+      >)</a
+      ><a name="3409"
+      > </a
+      ><a name="3410" href="Examples.FoldFusion.html#3345" class="Bound"
+      >d</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3416"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

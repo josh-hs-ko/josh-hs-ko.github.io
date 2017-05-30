@@ -210,7 +210,8 @@ publicationList =
                    ]
       , links    = [ ("PDF", Just "revised version", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
                    , ("PDF", Just "Oxford", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
-                   , ("Agda code", Nothing, "https://github.com/josh-hs-ko/Thesis")
+                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
+                   , ("Agda code", Just "browsable HTML", "Agda/Thesis/Everything.html")
                    ]
       , info     = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                    , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
@@ -244,7 +245,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Agda code", Nothing, "https://github.com/josh-hs-ko/Thesis")
+                   , ("Supplementary material", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/pcOrn")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -263,6 +264,7 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
+                   , ("Supplementary material", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/OAOAOO")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)

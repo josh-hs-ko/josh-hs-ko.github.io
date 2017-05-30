@@ -1,0 +1,770 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Examples.List</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Cons-lists as an ornamentation of natural numbers.</a
+      ><a name="54"
+      >
+
+</a
+      ><a name="56" class="Keyword"
+      >module</a
+      ><a name="62"
+      > </a
+      ><a name="63" href="Examples.List.html#1" class="Module"
+      >Examples.List</a
+      ><a name="76"
+      > </a
+      ><a name="77" class="Keyword"
+      >where</a
+      ><a name="82"
+      >
+
+</a
+      ><a name="84" class="Keyword"
+      >open</a
+      ><a name="88"
+      > </a
+      ><a name="89" class="Keyword"
+      >import</a
+      ><a name="95"
+      > </a
+      ><a name="96" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="112"
+      >
+</a
+      ><a name="113" class="Keyword"
+      >open</a
+      ><a name="117"
+      > </a
+      ><a name="118" class="Keyword"
+      >import</a
+      ><a name="124"
+      > </a
+      ><a name="125" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="145"
+      >
+</a
+      ><a name="146" class="Keyword"
+      >open</a
+      ><a name="150"
+      > </a
+      ><a name="151" class="Keyword"
+      >import</a
+      ><a name="157"
+      > </a
+      ><a name="158" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="169"
+      >
+</a
+      ><a name="170" class="Keyword"
+      >open</a
+      ><a name="174"
+      > </a
+      ><a name="175" class="Keyword"
+      >import</a
+      ><a name="181"
+      > </a
+      ><a name="182" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="190"
+      > </a
+      ><a name="191" class="Keyword"
+      >hiding</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Symbol"
+      >(</a
+      ><a name="199" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="201" class="Symbol"
+      >;</a
+      ><a name="202"
+      > </a
+      ><a name="203" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="206" class="Symbol"
+      >)</a
+      ><a name="207"
+      >
+</a
+      ><a name="208" class="Keyword"
+      >open</a
+      ><a name="212"
+      > </a
+      ><a name="213" class="Keyword"
+      >import</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="Examples.Nat.html#1" class="Module"
+      >Examples.Nat</a
+      ><a name="232"
+      >
+
+</a
+      ><a name="234" class="Keyword"
+      >open</a
+      ><a name="238"
+      > </a
+      ><a name="239" class="Keyword"
+      >import</a
+      ><a name="245"
+      > </a
+      ><a name="246" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="255"
+      > </a
+      ><a name="256" class="Keyword"
+      >using</a
+      ><a name="261"
+      > </a
+      ><a name="262" class="Symbol"
+      >(</a
+      ><a name="263" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="264" class="Symbol"
+      >;</a
+      ><a name="265"
+      > </a
+      ><a name="266" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="268" class="Symbol"
+      >)</a
+      ><a name="269"
+      >
+</a
+      ><a name="270" class="Keyword"
+      >open</a
+      ><a name="274"
+      > </a
+      ><a name="275" class="Keyword"
+      >import</a
+      ><a name="281"
+      > </a
+      ><a name="282" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Keyword"
+      >using</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Symbol"
+      >(</a
+      ><a name="302" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="303" class="Symbol"
+      >;</a
+      ><a name="304"
+      > </a
+      ><a name="305" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="313" class="Symbol"
+      >;</a
+      ><a name="314"
+      > </a
+      ><a name="315" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="318" class="Symbol"
+      >)</a
+      ><a name="319"
+      >
+
+
+</a
+      ><a name="322" class="Comment"
+      >--------</a
+      ><a name="330"
+      >
+</a
+      ><a name="331" class="Comment"
+      >-- lists</a
+      ><a name="339"
+      >
+
+</a
+      ><a name="341" href="Examples.List.html#341" class="Function"
+      >ListOD</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Symbol"
+      >:</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="PrimitiveType"
+      >Set</a
+      ><a name="353"
+      > </a
+      ><a name="354" class="Symbol"
+      >&#8594;</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="Ornament.html#7625" class="Record"
+      >OrnDesc</a
+      ><a name="363"
+      > </a
+      ><a name="364" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Examples.Nat.html#464" class="Function"
+      >NatD</a
+      ><a name="372"
+      >
+</a
+      ><a name="373" href="Examples.List.html#341" class="Function"
+      >ListOD</a
+      ><a name="379"
+      > </a
+      ><a name="380" href="Examples.List.html#380" class="Bound"
+      >A</a
+      ><a name="381"
+      > </a
+      ><a name="382" class="Symbol"
+      >=</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Ornament.html#7705" class="InductiveConstructor"
+      >wrap</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >&#955;</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Examples.List.html#391" class="Bound"
+      >_</a
+      ><a name="392"
+      > </a
+      ><a name="393" class="Symbol"
+      >&#8594;</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="Ornament.html#7359" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="396"
+      > </a
+      ><a name="397" href="Examples.Nat.html#407" class="Datatype"
+      >ListTag</a
+      ><a name="404"
+      > </a
+      ><a name="405" class="Symbol"
+      >&#955;</a
+      ><a name="406"
+      > </a
+      ><a name="407" class="Symbol"
+      >{</a
+      ><a name="408"
+      > </a
+      ><a name="409" href="Examples.Nat.html#429" class="InductiveConstructor"
+      >`nil</a
+      ><a name="413"
+      >   </a
+      ><a name="416" class="Symbol"
+      >&#8594;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="Ornament.html#7290" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="419"
+      > </a
+      ><a name="420" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="422"
+      >
+                                  </a
+      ><a name="457" class="Symbol"
+      >;</a
+      ><a name="458"
+      > </a
+      ><a name="459" href="Examples.Nat.html#447" class="InductiveConstructor"
+      >`cons</a
+      ><a name="464"
+      >  </a
+      ><a name="466" class="Symbol"
+      >&#8594;</a
+      ><a name="467"
+      > </a
+      ><a name="468" href="Ornament.html#7453" class="InductiveConstructor"
+      >&#916;[</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Symbol"
+      >_</a
+      ><a name="472"
+      > </a
+      ><a name="473" href="Ornament.html#7453" class="InductiveConstructor"
+      >&#8712;</a
+      ><a name="474"
+      > </a
+      ><a name="475" href="Examples.List.html#380" class="Bound"
+      >A</a
+      ><a name="476"
+      > </a
+      ><a name="477" href="Ornament.html#7453" class="InductiveConstructor"
+      >]</a
+      ><a name="478"
+      > </a
+      ><a name="479" href="Ornament.html#7290" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="480"
+      > </a
+      ><a name="481" class="Symbol"
+      >(</a
+      ><a name="482" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="487"
+      > </a
+      ><a name="488" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="489"
+      > </a
+      ><a name="490" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="492" class="Symbol"
+      >)</a
+      ><a name="493"
+      > </a
+      ><a name="494" class="Symbol"
+      >}</a
+      ><a name="495"
+      >
+
+</a
+      ><a name="497" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="501"
+      > </a
+      ><a name="502" class="Symbol"
+      >:</a
+      ><a name="503"
+      > </a
+      ><a name="504" class="PrimitiveType"
+      >Set</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="Symbol"
+      >&#8594;</a
+      ><a name="509"
+      > </a
+      ><a name="510" class="PrimitiveType"
+      >Set</a
+      ><a name="513"
+      >
+</a
+      ><a name="514" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="518"
+      > </a
+      ><a name="519" href="Examples.List.html#519" class="Bound"
+      >A</a
+      ><a name="520"
+      > </a
+      ><a name="521" class="Symbol"
+      >=</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="524"
+      > </a
+      ><a name="525" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="526"
+      > </a
+      ><a name="527" href="Examples.List.html#341" class="Function"
+      >ListOD</a
+      ><a name="533"
+      > </a
+      ><a name="534" href="Examples.List.html#519" class="Bound"
+      >A</a
+      ><a name="535"
+      > </a
+      ><a name="536" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="540"
+      >
+
+</a
+      ><a name="542" class="Keyword"
+      >pattern</a
+      ><a name="549"
+      > </a
+      ><a name="550" href="Examples.List.html#550" class="InductiveConstructor"
+      >[]</a
+      ><a name="552"
+      >       </a
+      ><a name="559" class="Symbol"
+      >=</a
+      ><a name="560"
+      > </a
+      ><a name="561" href="Description.html#1369" class="InductiveConstructor"
+      >con</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Symbol"
+      >(</a
+      ><a name="566" href="Examples.Nat.html#429" class="InductiveConstructor"
+      >`nil</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="572"
+      > </a
+      ><a name="573" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="575" class="Symbol"
+      >)</a
+      ><a name="576"
+      >
+</a
+      ><a name="577" class="Keyword"
+      >pattern</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="Examples.List.html#585" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="Examples.List.html#609" class="Bound"
+      >x</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="Examples.List.html#613" class="Bound"
+      >xs</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >=</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="Description.html#1369" class="InductiveConstructor"
+      >con</a
+      ><a name="599"
+      > </a
+      ><a name="600" class="Symbol"
+      >(</a
+      ><a name="601" href="Examples.Nat.html#447" class="InductiveConstructor"
+      >`cons</a
+      ><a name="606"
+      > </a
+      ><a name="607" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="Examples.List.html#609" class="Bound"
+      >x</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="Examples.List.html#613" class="Bound"
+      >xs</a
+      ><a name="615"
+      > </a
+      ><a name="616" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="617"
+      > </a
+      ><a name="618" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="620" class="Symbol"
+      >)</a
+      ><a name="621"
+      >
+
+</a
+      ><a name="623" class="Keyword"
+      >infixr</a
+      ><a name="629"
+      > </a
+      ><a name="630" class="Number"
+      >5</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="Examples.List.html#585" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="635"
+      >
+
+</a
+      ><a name="637" href="Examples.List.html#637" class="Function"
+      >length</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >:</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >{</a
+      ><a name="647" href="Examples.List.html#647" class="Bound"
+      >A</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >:</a
+      ><a name="650"
+      > </a
+      ><a name="651" class="PrimitiveType"
+      >Set</a
+      ><a name="654" class="Symbol"
+      >}</a
+      ><a name="655"
+      > </a
+      ><a name="656" class="Symbol"
+      >&#8594;</a
+      ><a name="657"
+      > </a
+      ><a name="658" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="662"
+      > </a
+      ><a name="663" href="Examples.List.html#647" class="Bound"
+      >A</a
+      ><a name="664"
+      > </a
+      ><a name="665" class="Symbol"
+      >&#8594;</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Examples.Nat.html#580" class="Function"
+      >Nat</a
+      ><a name="670"
+      >
+</a
+      ><a name="671" href="Examples.List.html#637" class="Function"
+      >length</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >{</a
+      ><a name="679" href="Examples.List.html#679" class="Bound"
+      >A</a
+      ><a name="680" class="Symbol"
+      >}</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >=</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Examples.List.html#341" class="Function"
+      >ListOD</a
+      ><a name="699"
+      > </a
+      ><a name="700" href="Examples.List.html#679" class="Bound"
+      >A</a
+      ><a name="701"
+      > </a
+      ><a name="702" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="703"
+      >
+
+</a
+      ><a name="705" href="Examples.List.html#705" class="Function Operator"
+      >_++_</a
+      ><a name="709"
+      > </a
+      ><a name="710" class="Symbol"
+      >:</a
+      ><a name="711"
+      > </a
+      ><a name="712" class="Symbol"
+      >{</a
+      ><a name="713" href="Examples.List.html#713" class="Bound"
+      >A</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="Symbol"
+      >:</a
+      ><a name="716"
+      > </a
+      ><a name="717" class="PrimitiveType"
+      >Set</a
+      ><a name="720" class="Symbol"
+      >}</a
+      ><a name="721"
+      > </a
+      ><a name="722" class="Symbol"
+      >&#8594;</a
+      ><a name="723"
+      > </a
+      ><a name="724" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="Examples.List.html#713" class="Bound"
+      >A</a
+      ><a name="730"
+      > </a
+      ><a name="731" class="Symbol"
+      >&#8594;</a
+      ><a name="732"
+      > </a
+      ><a name="733" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="737"
+      > </a
+      ><a name="738" href="Examples.List.html#713" class="Bound"
+      >A</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="Symbol"
+      >&#8594;</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="Examples.List.html#497" class="Function"
+      >List</a
+      ><a name="746"
+      > </a
+      ><a name="747" href="Examples.List.html#713" class="Bound"
+      >A</a
+      ><a name="748"
+      >
+</a
+      ><a name="749" href="Description.html#1369" class="InductiveConstructor"
+      >con</a
+      ><a name="752"
+      > </a
+      ><a name="753" class="Symbol"
+      >(</a
+      ><a name="754" href="Examples.Nat.html#429" class="InductiveConstructor"
+      >`nil</a
+      ><a name="758"
+      >  </a
+      ><a name="760" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="761"
+      >          </a
+      ><a name="771" class="Symbol"
+      >_)</a
+      ><a name="773"
+      > </a
+      ><a name="774" href="Examples.List.html#705" class="Function Operator"
+      >++</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="Examples.List.html#777" class="Bound"
+      >ys</a
+      ><a name="779"
+      > </a
+      ><a name="780" class="Symbol"
+      >=</a
+      ><a name="781"
+      > </a
+      ><a name="782" href="Examples.List.html#777" class="Bound"
+      >ys</a
+      ><a name="784"
+      >
+</a
+      ><a name="785" href="Description.html#1369" class="InductiveConstructor"
+      >con</a
+      ><a name="788"
+      > </a
+      ><a name="789" class="Symbol"
+      >(</a
+      ><a name="790" href="Examples.Nat.html#447" class="InductiveConstructor"
+      >`cons</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="797"
+      > </a
+      ><a name="798" href="Examples.List.html#798" class="Bound"
+      >x</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="Examples.List.html#802" class="Bound"
+      >xs</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="806"
+      > </a
+      ><a name="807" class="Symbol"
+      >_)</a
+      ><a name="809"
+      > </a
+      ><a name="810" href="Examples.List.html#705" class="Function Operator"
+      >++</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="Examples.List.html#813" class="Bound"
+      >ys</a
+      ><a name="815"
+      > </a
+      ><a name="816" class="Symbol"
+      >=</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="Examples.List.html#798" class="Bound"
+      >x</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="Examples.List.html#585" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="821"
+      > </a
+      ><a name="822" class="Symbol"
+      >(</a
+      ><a name="823" href="Examples.List.html#802" class="Bound"
+      >xs</a
+      ><a name="825"
+      > </a
+      ><a name="826" href="Examples.List.html#705" class="Function Operator"
+      >++</a
+      ><a name="828"
+      > </a
+      ><a name="829" href="Examples.List.html#813" class="Bound"
+      >ys</a
+      ><a name="831" class="Symbol"
+      >)</a
+      ><a name="832"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

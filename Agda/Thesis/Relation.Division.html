@@ -1,0 +1,887 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Relation.Division</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Definition of right-division of componentwise relations.</a
+      ><a name="60"
+      >
+
+</a
+      ><a name="62" class="Keyword"
+      >module</a
+      ><a name="68"
+      > </a
+      ><a name="69" href="Relation.Division.html#1" class="Module"
+      >Relation.Division</a
+      ><a name="86"
+      > </a
+      ><a name="87" class="Keyword"
+      >where</a
+      ><a name="92"
+      >
+
+</a
+      ><a name="94" class="Keyword"
+      >open</a
+      ><a name="98"
+      > </a
+      ><a name="99" class="Keyword"
+      >import</a
+      ><a name="105"
+      > </a
+      ><a name="106" href="Relation.html#1" class="Module"
+      >Relation</a
+      ><a name="114"
+      >
+
+</a
+      ><a name="116" class="Keyword"
+      >open</a
+      ><a name="120"
+      > </a
+      ><a name="121" class="Keyword"
+      >import</a
+      ><a name="127"
+      > </a
+      ><a name="128" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="140"
+      > </a
+      ><a name="141" class="Keyword"
+      >using</a
+      ><a name="146"
+      > </a
+      ><a name="147" class="Symbol"
+      >(</a
+      ><a name="148" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="149" class="Symbol"
+      >;</a
+      ><a name="150"
+      > </a
+      ><a name="151" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="159" class="Symbol"
+      >;</a
+      ><a name="160"
+      > </a
+      ><a name="161" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="164" class="Symbol"
+      >)</a
+      ><a name="165"
+      >
+
+</a
+      ><a name="167" class="Keyword"
+      >infixr</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Number"
+      >5</a
+      ><a name="175"
+      > </a
+      ><a name="176" href="Relation.Division.html#181" class="Function Operator"
+      >_/_</a
+      ><a name="179"
+      >
+
+</a
+      ><a name="181" href="Relation.Division.html#181" class="Function Operator"
+      >_/_</a
+      ><a name="184"
+      > </a
+      ><a name="185" class="Symbol"
+      >:</a
+      ><a name="186"
+      > </a
+      ><a name="187" class="Symbol"
+      >{</a
+      ><a name="188" href="Relation.Division.html#188" class="Bound"
+      >I</a
+      ><a name="189"
+      > </a
+      ><a name="190" class="Symbol"
+      >:</a
+      ><a name="191"
+      > </a
+      ><a name="192" class="PrimitiveType"
+      >Set</a
+      ><a name="195" class="Symbol"
+      >}</a
+      ><a name="196"
+      > </a
+      ><a name="197" class="Symbol"
+      >{</a
+      ><a name="198" href="Relation.Division.html#198" class="Bound"
+      >X</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Relation.Division.html#200" class="Bound"
+      >Y</a
+      ><a name="201"
+      > </a
+      ><a name="202" href="Relation.Division.html#202" class="Bound"
+      >Z</a
+      ><a name="203"
+      > </a
+      ><a name="204" class="Symbol"
+      >:</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Relation.Division.html#188" class="Bound"
+      >I</a
+      ><a name="207"
+      > </a
+      ><a name="208" class="Symbol"
+      >&#8594;</a
+      ><a name="209"
+      > </a
+      ><a name="210" class="PrimitiveType"
+      >Set</a
+      ><a name="213" class="Symbol"
+      >}</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Symbol"
+      >&#8594;</a
+      ><a name="216"
+      > </a
+      ><a name="217" class="Symbol"
+      >(</a
+      ><a name="218" href="Relation.Division.html#198" class="Bound"
+      >X</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="Relation.Division.html#200" class="Bound"
+      >Y</a
+      ><a name="223" class="Symbol"
+      >)</a
+      ><a name="224"
+      > </a
+      ><a name="225" class="Symbol"
+      >&#8594;</a
+      ><a name="226"
+      > </a
+      ><a name="227" class="Symbol"
+      >(</a
+      ><a name="228" href="Relation.Division.html#198" class="Bound"
+      >X</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="231"
+      > </a
+      ><a name="232" href="Relation.Division.html#202" class="Bound"
+      >Z</a
+      ><a name="233" class="Symbol"
+      >)</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Symbol"
+      >&#8594;</a
+      ><a name="236"
+      > </a
+      ><a name="237" href="Relation.Division.html#202" class="Bound"
+      >Z</a
+      ><a name="238"
+      > </a
+      ><a name="239" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="240"
+      > </a
+      ><a name="241" href="Relation.Division.html#200" class="Bound"
+      >Y</a
+      ><a name="242"
+      >
+</a
+      ><a name="243" href="Relation.html#9814" class="InductiveConstructor"
+      >wrap</a
+      ><a name="247"
+      > </a
+      ><a name="248" href="Relation.Division.html#248" class="Bound"
+      >R</a
+      ><a name="249"
+      > </a
+      ><a name="250" href="Relation.Division.html#181" class="Function Operator"
+      >/</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="Relation.html#9814" class="InductiveConstructor"
+      >wrap</a
+      ><a name="256"
+      > </a
+      ><a name="257" href="Relation.Division.html#257" class="Bound"
+      >S</a
+      ><a name="258"
+      > </a
+      ><a name="259" class="Symbol"
+      >=</a
+      ><a name="260"
+      > </a
+      ><a name="261" href="Relation.html#9814" class="InductiveConstructor"
+      >wrap</a
+      ><a name="265"
+      > </a
+      ><a name="266" class="Symbol"
+      >&#955;</a
+      ><a name="267"
+      > </a
+      ><a name="268" href="Relation.Division.html#268" class="Bound"
+      >i</a
+      ><a name="269"
+      > </a
+      ><a name="270" href="Relation.Division.html#270" class="Bound"
+      >z</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="Relation.Division.html#272" class="Bound"
+      >y</a
+      ><a name="273"
+      > </a
+      ><a name="274" class="Symbol"
+      >&#8594;</a
+      ><a name="275"
+      > </a
+      ><a name="276" class="Symbol"
+      >(&#8704;</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="Relation.Division.html#279" class="Bound"
+      >x</a
+      ><a name="280"
+      > </a
+      ><a name="281" class="Symbol"
+      >&#8594;</a
+      ><a name="282"
+      > </a
+      ><a name="283" href="Relation.Division.html#257" class="Bound"
+      >S</a
+      ><a name="284"
+      > </a
+      ><a name="285" href="Relation.Division.html#268" class="Bound"
+      >i</a
+      ><a name="286"
+      > </a
+      ><a name="287" href="Relation.Division.html#279" class="Bound"
+      >x</a
+      ><a name="288"
+      > </a
+      ><a name="289" href="Relation.Division.html#270" class="Bound"
+      >z</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Symbol"
+      >&#8594;</a
+      ><a name="292"
+      > </a
+      ><a name="293" href="Relation.Division.html#248" class="Bound"
+      >R</a
+      ><a name="294"
+      > </a
+      ><a name="295" href="Relation.Division.html#268" class="Bound"
+      >i</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Relation.Division.html#279" class="Bound"
+      >x</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="Relation.Division.html#272" class="Bound"
+      >y</a
+      ><a name="300" class="Symbol"
+      >)</a
+      ><a name="301"
+      >
+
+</a
+      ><a name="303" href="Relation.Division.html#303" class="Function"
+      >/-universal-&#8658;</a
+      ><a name="316"
+      > </a
+      ><a name="317" class="Symbol"
+      >:</a
+      ><a name="318"
+      > </a
+      ><a name="319" class="Symbol"
+      >{</a
+      ><a name="320" href="Relation.Division.html#320" class="Bound"
+      >I</a
+      ><a name="321"
+      > </a
+      ><a name="322" class="Symbol"
+      >:</a
+      ><a name="323"
+      > </a
+      ><a name="324" class="PrimitiveType"
+      >Set</a
+      ><a name="327" class="Symbol"
+      >}</a
+      ><a name="328"
+      > </a
+      ><a name="329" class="Symbol"
+      >{</a
+      ><a name="330" href="Relation.Division.html#330" class="Bound"
+      >X</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="Relation.Division.html#332" class="Bound"
+      >Y</a
+      ><a name="333"
+      > </a
+      ><a name="334" href="Relation.Division.html#334" class="Bound"
+      >Z</a
+      ><a name="335"
+      > </a
+      ><a name="336" class="Symbol"
+      >:</a
+      ><a name="337"
+      > </a
+      ><a name="338" href="Relation.Division.html#320" class="Bound"
+      >I</a
+      ><a name="339"
+      > </a
+      ><a name="340" class="Symbol"
+      >&#8594;</a
+      ><a name="341"
+      > </a
+      ><a name="342" class="PrimitiveType"
+      >Set</a
+      ><a name="345" class="Symbol"
+      >}</a
+      ><a name="346"
+      > </a
+      ><a name="347" class="Symbol"
+      >{</a
+      ><a name="348" href="Relation.Division.html#348" class="Bound"
+      >T</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="Symbol"
+      >:</a
+      ><a name="351"
+      > </a
+      ><a name="352" href="Relation.Division.html#334" class="Bound"
+      >Z</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="Relation.Division.html#332" class="Bound"
+      >Y</a
+      ><a name="357" class="Symbol"
+      >}</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >{</a
+      ><a name="360" href="Relation.Division.html#360" class="Bound"
+      >R</a
+      ><a name="361"
+      > </a
+      ><a name="362" class="Symbol"
+      >:</a
+      ><a name="363"
+      > </a
+      ><a name="364" href="Relation.Division.html#330" class="Bound"
+      >X</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Relation.Division.html#332" class="Bound"
+      >Y</a
+      ><a name="369" class="Symbol"
+      >}</a
+      ><a name="370"
+      > </a
+      ><a name="371" class="Symbol"
+      >{</a
+      ><a name="372" href="Relation.Division.html#372" class="Bound"
+      >S</a
+      ><a name="373"
+      > </a
+      ><a name="374" class="Symbol"
+      >:</a
+      ><a name="375"
+      > </a
+      ><a name="376" href="Relation.Division.html#330" class="Bound"
+      >X</a
+      ><a name="377"
+      > </a
+      ><a name="378" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="379"
+      > </a
+      ><a name="380" href="Relation.Division.html#334" class="Bound"
+      >Z</a
+      ><a name="381" class="Symbol"
+      >}</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >&#8594;</a
+      ><a name="384"
+      > </a
+      ><a name="385" href="Relation.Division.html#348" class="Bound"
+      >T</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="388"
+      > </a
+      ><a name="389" href="Relation.Division.html#360" class="Bound"
+      >R</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Relation.Division.html#181" class="Function Operator"
+      >/</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Relation.Division.html#372" class="Bound"
+      >S</a
+      ><a name="394"
+      > </a
+      ><a name="395" class="Symbol"
+      >&#8594;</a
+      ><a name="396"
+      > </a
+      ><a name="397" href="Relation.Division.html#348" class="Bound"
+      >T</a
+      ><a name="398"
+      > </a
+      ><a name="399" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="400"
+      > </a
+      ><a name="401" href="Relation.Division.html#372" class="Bound"
+      >S</a
+      ><a name="402"
+      > </a
+      ><a name="403" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="404"
+      > </a
+      ><a name="405" href="Relation.Division.html#360" class="Bound"
+      >R</a
+      ><a name="406"
+      >
+</a
+      ><a name="407" href="Relation.Division.html#303" class="Function"
+      >/-universal-&#8658;</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="Relation.Division.html#421" class="Bound"
+      >T&#8838;R/S</a
+      ><a name="426"
+      > </a
+      ><a name="427" class="Symbol"
+      >=</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="Relation.html#10424" class="InductiveConstructor"
+      >wrap</a
+      ><a name="433"
+      > </a
+      ><a name="434" class="Symbol"
+      >&#955;</a
+      ><a name="435"
+      > </a
+      ><a name="436" href="Relation.Division.html#436" class="Bound"
+      >i</a
+      ><a name="437"
+      > </a
+      ><a name="438" class="Symbol"
+      >&#8594;</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="Relation.html#2378" class="InductiveConstructor"
+      >wrap</a
+      ><a name="444"
+      > </a
+      ><a name="445" class="Symbol"
+      >&#955;</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Symbol"
+      >{</a
+      ><a name="448"
+      > </a
+      ><a name="449" href="Relation.Division.html#449" class="Bound"
+      >x</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="Relation.Division.html#451" class="Bound"
+      >y</a
+      ><a name="452"
+      > </a
+      ><a name="453" class="Symbol"
+      >(</a
+      ><a name="454" href="Relation.Division.html#454" class="Bound"
+      >z</a
+      ><a name="455"
+      > </a
+      ><a name="456" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="457"
+      > </a
+      ><a name="458" href="Relation.Division.html#458" class="Bound"
+      >s</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="Relation.Division.html#462" class="Bound"
+      >t</a
+      ><a name="463" class="Symbol"
+      >)</a
+      ><a name="464"
+      > </a
+      ><a name="465" class="Symbol"
+      >&#8594;</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="Relation.html#10476" class="Function"
+      >modus-ponens-&#8838;</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="Relation.Division.html#421" class="Bound"
+      >T&#8838;R/S</a
+      ><a name="487"
+      > </a
+      ><a name="488" href="Relation.Division.html#436" class="Bound"
+      >i</a
+      ><a name="489"
+      > </a
+      ><a name="490" href="Relation.Division.html#454" class="Bound"
+      >z</a
+      ><a name="491"
+      > </a
+      ><a name="492" href="Relation.Division.html#451" class="Bound"
+      >y</a
+      ><a name="493"
+      > </a
+      ><a name="494" href="Relation.Division.html#462" class="Bound"
+      >t</a
+      ><a name="495"
+      > </a
+      ><a name="496" href="Relation.Division.html#449" class="Bound"
+      >x</a
+      ><a name="497"
+      > </a
+      ><a name="498" href="Relation.Division.html#458" class="Bound"
+      >s</a
+      ><a name="499"
+      > </a
+      ><a name="500" class="Symbol"
+      >}</a
+      ><a name="501"
+      >
+
+</a
+      ><a name="503" href="Relation.Division.html#503" class="Function"
+      >/-universal-&#8656;</a
+      ><a name="516"
+      > </a
+      ><a name="517" class="Symbol"
+      >:</a
+      ><a name="518"
+      > </a
+      ><a name="519" class="Symbol"
+      >{</a
+      ><a name="520" href="Relation.Division.html#520" class="Bound"
+      >I</a
+      ><a name="521"
+      > </a
+      ><a name="522" class="Symbol"
+      >:</a
+      ><a name="523"
+      > </a
+      ><a name="524" class="PrimitiveType"
+      >Set</a
+      ><a name="527" class="Symbol"
+      >}</a
+      ><a name="528"
+      > </a
+      ><a name="529" class="Symbol"
+      >{</a
+      ><a name="530" href="Relation.Division.html#530" class="Bound"
+      >X</a
+      ><a name="531"
+      > </a
+      ><a name="532" href="Relation.Division.html#532" class="Bound"
+      >Y</a
+      ><a name="533"
+      > </a
+      ><a name="534" href="Relation.Division.html#534" class="Bound"
+      >Z</a
+      ><a name="535"
+      > </a
+      ><a name="536" class="Symbol"
+      >:</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="Relation.Division.html#520" class="Bound"
+      >I</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >&#8594;</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="PrimitiveType"
+      >Set</a
+      ><a name="545" class="Symbol"
+      >}</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >{</a
+      ><a name="548" href="Relation.Division.html#548" class="Bound"
+      >T</a
+      ><a name="549"
+      > </a
+      ><a name="550" class="Symbol"
+      >:</a
+      ><a name="551"
+      > </a
+      ><a name="552" href="Relation.Division.html#534" class="Bound"
+      >Z</a
+      ><a name="553"
+      > </a
+      ><a name="554" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="Relation.Division.html#532" class="Bound"
+      >Y</a
+      ><a name="557" class="Symbol"
+      >}</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >{</a
+      ><a name="560" href="Relation.Division.html#560" class="Bound"
+      >R</a
+      ><a name="561"
+      > </a
+      ><a name="562" class="Symbol"
+      >:</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="Relation.Division.html#530" class="Bound"
+      >X</a
+      ><a name="565"
+      > </a
+      ><a name="566" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="567"
+      > </a
+      ><a name="568" href="Relation.Division.html#532" class="Bound"
+      >Y</a
+      ><a name="569" class="Symbol"
+      >}</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="Symbol"
+      >{</a
+      ><a name="572" href="Relation.Division.html#572" class="Bound"
+      >S</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >:</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="Relation.Division.html#530" class="Bound"
+      >X</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="579"
+      > </a
+      ><a name="580" href="Relation.Division.html#534" class="Bound"
+      >Z</a
+      ><a name="581" class="Symbol"
+      >}</a
+      ><a name="582"
+      > </a
+      ><a name="583" class="Symbol"
+      >&#8594;</a
+      ><a name="584"
+      > </a
+      ><a name="585" href="Relation.Division.html#548" class="Bound"
+      >T</a
+      ><a name="586"
+      > </a
+      ><a name="587" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="Relation.Division.html#572" class="Bound"
+      >S</a
+      ><a name="590"
+      > </a
+      ><a name="591" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="Relation.Division.html#560" class="Bound"
+      >R</a
+      ><a name="594"
+      > </a
+      ><a name="595" class="Symbol"
+      >&#8594;</a
+      ><a name="596"
+      > </a
+      ><a name="597" href="Relation.Division.html#548" class="Bound"
+      >T</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="600"
+      > </a
+      ><a name="601" href="Relation.Division.html#560" class="Bound"
+      >R</a
+      ><a name="602"
+      > </a
+      ><a name="603" href="Relation.Division.html#181" class="Function Operator"
+      >/</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="Relation.Division.html#572" class="Bound"
+      >S</a
+      ><a name="606"
+      >
+</a
+      ><a name="607" href="Relation.Division.html#503" class="Function"
+      >/-universal-&#8656;</a
+      ><a name="620"
+      > </a
+      ><a name="621" href="Relation.Division.html#621" class="Bound"
+      >T&#8226;S&#8838;R</a
+      ><a name="626"
+      > </a
+      ><a name="627" class="Symbol"
+      >=</a
+      ><a name="628"
+      > </a
+      ><a name="629" href="Relation.html#10424" class="InductiveConstructor"
+      >wrap</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Symbol"
+      >&#955;</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="Relation.Division.html#636" class="Bound"
+      >i</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Symbol"
+      >&#8594;</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="Relation.html#2378" class="InductiveConstructor"
+      >wrap</a
+      ><a name="644"
+      > </a
+      ><a name="645" class="Symbol"
+      >&#955;</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="Relation.Division.html#647" class="Bound"
+      >z</a
+      ><a name="648"
+      > </a
+      ><a name="649" href="Relation.Division.html#649" class="Bound"
+      >y</a
+      ><a name="650"
+      > </a
+      ><a name="651" href="Relation.Division.html#651" class="Bound"
+      >t</a
+      ><a name="652"
+      > </a
+      ><a name="653" href="Relation.Division.html#653" class="Bound"
+      >x</a
+      ><a name="654"
+      > </a
+      ><a name="655" href="Relation.Division.html#655" class="Bound"
+      >s</a
+      ><a name="656"
+      > </a
+      ><a name="657" class="Symbol"
+      >&#8594;</a
+      ><a name="658"
+      > </a
+      ><a name="659" href="Relation.html#10476" class="Function"
+      >modus-ponens-&#8838;</a
+      ><a name="673"
+      > </a
+      ><a name="674" href="Relation.Division.html#621" class="Bound"
+      >T&#8226;S&#8838;R</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="Relation.Division.html#636" class="Bound"
+      >i</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="Relation.Division.html#653" class="Bound"
+      >x</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="Relation.Division.html#649" class="Bound"
+      >y</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >(</a
+      ><a name="687" href="Relation.Division.html#647" class="Bound"
+      >z</a
+      ><a name="688"
+      > </a
+      ><a name="689" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Relation.Division.html#655" class="Bound"
+      >s</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="694"
+      > </a
+      ><a name="695" href="Relation.Division.html#651" class="Bound"
+      >t</a
+      ><a name="696" class="Symbol"
+      >)</a
+      ><a name="697"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

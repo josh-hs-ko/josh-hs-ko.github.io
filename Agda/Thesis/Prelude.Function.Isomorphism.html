@@ -1,0 +1,4428 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Prelude.Function.Isomorphism</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Various ways to construct isomorphisms in `Fun`.</a
+      ><a name="52"
+      >
+
+</a
+      ><a name="54" class="Keyword"
+      >module</a
+      ><a name="60"
+      > </a
+      ><a name="61" href="Prelude.Function.Isomorphism.html#1" class="Module"
+      >Prelude.Function.Isomorphism</a
+      ><a name="89"
+      > </a
+      ><a name="90" class="Keyword"
+      >where</a
+      ><a name="95"
+      >
+
+</a
+      ><a name="97" class="Keyword"
+      >open</a
+      ><a name="101"
+      > </a
+      ><a name="102" class="Keyword"
+      >import</a
+      ><a name="108"
+      > </a
+      ><a name="109" href="Prelude.Equality.html#1" class="Module"
+      >Prelude.Equality</a
+      ><a name="125"
+      >
+</a
+      ><a name="126" class="Keyword"
+      >open</a
+      ><a name="130"
+      > </a
+      ><a name="131" class="Keyword"
+      >import</a
+      ><a name="137"
+      > </a
+      ><a name="138" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="154"
+      >
+</a
+      ><a name="155" class="Keyword"
+      >open</a
+      ><a name="159"
+      > </a
+      ><a name="160" class="Keyword"
+      >import</a
+      ><a name="166"
+      > </a
+      ><a name="167" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="183"
+      >
+</a
+      ><a name="184" class="Keyword"
+      >open</a
+      ><a name="188"
+      > </a
+      ><a name="189" class="Keyword"
+      >import</a
+      ><a name="195"
+      > </a
+      ><a name="196" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="211"
+      >
+</a
+      ><a name="212" class="Keyword"
+      >import</a
+      ><a name="218"
+      > </a
+      ><a name="219" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="247"
+      > </a
+      ><a name="248" class="Symbol"
+      >as</a
+      ><a name="250"
+      > </a
+      ><a name="251" class="Module"
+      >Isomorphism</a
+      ><a name="262" class="Symbol"
+      >;</a
+      ><a name="263"
+      > </a
+      ><a name="264" class="Keyword"
+      >open</a
+      ><a name="268"
+      > </a
+      ><a name="269" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Isomorphism</a
+      ><a name="280"
+      > </a
+      ><a name="281" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="284"
+      >
+</a
+      ><a name="285" class="Keyword"
+      >open</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Keyword"
+      >import</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="317"
+      >
+
+</a
+      ><a name="319" class="Keyword"
+      >open</a
+      ><a name="323"
+      > </a
+      ><a name="324" class="Keyword"
+      >import</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="336"
+      >
+</a
+      ><a name="337" class="Keyword"
+      >open</a
+      ><a name="341"
+      > </a
+      ><a name="342" class="Keyword"
+      >import</a
+      ><a name="348"
+      > </a
+      ><a name="349" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="357"
+      > </a
+      ><a name="358" class="Keyword"
+      >using</a
+      ><a name="363"
+      > </a
+      ><a name="364" class="Symbol"
+      >(</a
+      ><a name="365" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="367" class="Symbol"
+      >;</a
+      ><a name="368"
+      > </a
+      ><a name="369" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="372" class="Symbol"
+      >)</a
+      ><a name="373"
+      >
+</a
+      ><a name="374" class="Keyword"
+      >open</a
+      ><a name="378"
+      > </a
+      ><a name="379" class="Keyword"
+      >import</a
+      ><a name="385"
+      > </a
+      ><a name="386" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Keyword"
+      >using</a
+      ><a name="401"
+      > </a
+      ><a name="402" class="Symbol"
+      >(</a
+      ><a name="403" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="404" class="Symbol"
+      >;</a
+      ><a name="405"
+      > </a
+      ><a name="406" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="408" class="Symbol"
+      >)</a
+      ><a name="409"
+      >
+</a
+      ><a name="410" class="Keyword"
+      >open</a
+      ><a name="414"
+      > </a
+      ><a name="415" class="Keyword"
+      >import</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="434"
+      > </a
+      ><a name="435" class="Keyword"
+      >using</a
+      ><a name="440"
+      > </a
+      ><a name="441" class="Symbol"
+      >(</a
+      ><a name="442" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="443" class="Symbol"
+      >;</a
+      ><a name="444"
+      > </a
+      ><a name="445" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="453" class="Symbol"
+      >;</a
+      ><a name="454"
+      > </a
+      ><a name="455" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="458" class="Symbol"
+      >;</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="465" class="Symbol"
+      >;</a
+      ><a name="466"
+      > </a
+      ><a name="467" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="472" class="Symbol"
+      >)</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Keyword"
+      >renaming</a
+      ><a name="482"
+      > </a
+      ><a name="483" class="Symbol"
+      >(</a
+      ><a name="484" href="Data.Product.html#1872" class="Function"
+      >map</a
+      ><a name="487"
+      > </a
+      ><a name="488" class="Symbol"
+      >to</a
+      ><a name="490"
+      > </a
+      ><a name="491" href="Data.Product.html#1872" class="Function"
+      >_**_</a
+      ><a name="495" class="Symbol"
+      >)</a
+      ><a name="496"
+      >
+</a
+      ><a name="497" class="Keyword"
+      >import</a
+      ><a name="503"
+      > </a
+      ><a name="504" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >Relation.Binary.EqReasoning</a
+      ><a name="531"
+      > </a
+      ><a name="532" class="Symbol"
+      >as</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Module"
+      >EqReasoning</a
+      ><a name="546"
+      >
+</a
+      ><a name="547" class="Keyword"
+      >open</a
+      ><a name="551"
+      > </a
+      ><a name="552" class="Keyword"
+      >import</a
+      ><a name="558"
+      > </a
+      ><a name="559" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="596"
+      > </a
+      ><a name="597" class="Keyword"
+      >using</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >(</a
+      ><a name="604" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="607" class="Symbol"
+      >;</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="613" class="Symbol"
+      >;</a
+      ><a name="614"
+      > </a
+      ><a name="615" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="620" class="Symbol"
+      >;</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="626" class="Symbol"
+      >;</a
+      ><a name="627"
+      > </a
+      ><a name="628" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >cong&#8322;</a
+      ><a name="633" class="Symbol"
+      >;</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="638" class="Symbol"
+      >;</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="645" class="Symbol"
+      >;</a
+      ><a name="646"
+      > </a
+      ><a name="647" class="Keyword"
+      >module</a
+      ><a name="653"
+      > </a
+      ><a name="654" href="Relation.Binary.PropositionalEquality.html#227" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="665" class="Symbol"
+      >)</a
+      ><a name="666"
+      >
+</a
+      ><a name="667" class="Keyword"
+      >open</a
+      ><a name="671"
+      > </a
+      ><a name="672" class="Keyword"
+      >import</a
+      ><a name="678"
+      > </a
+      ><a name="679" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="716"
+      > </a
+      ><a name="717" class="Keyword"
+      >using</a
+      ><a name="722"
+      > </a
+      ><a name="723" class="Symbol"
+      >(</a
+      ><a name="724" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="727" class="Symbol"
+      >;</a
+      ><a name="728"
+      > </a
+      ><a name="729" href="Relation.Binary.HeterogeneousEquality.Core.html#709" class="Function"
+      >&#8773;-to-&#8801;</a
+      ><a name="735" class="Symbol"
+      >;</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="743" class="Symbol"
+      >;</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="762" class="Symbol"
+      >)</a
+      ><a name="763"
+      >
+                                                  </a
+      ><a name="814" class="Keyword"
+      >renaming</a
+      ><a name="822"
+      > </a
+      ><a name="823" class="Symbol"
+      >(</a
+      ><a name="824" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >refl</a
+      ><a name="828"
+      > </a
+      ><a name="829" class="Symbol"
+      >to</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="837" class="Symbol"
+      >;</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >cong</a
+      ><a name="843"
+      > </a
+      ><a name="844" class="Symbol"
+      >to</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="852" class="Symbol"
+      >;</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="Relation.Binary.HeterogeneousEquality.html#1292" class="Function"
+      >sym</a
+      ><a name="857"
+      > </a
+      ><a name="858" class="Symbol"
+      >to</a
+      ><a name="860"
+      > </a
+      ><a name="861" href="Relation.Binary.HeterogeneousEquality.html#1292" class="Function"
+      >hsym</a
+      ><a name="865" class="Symbol"
+      >;</a
+      ><a name="866"
+      > </a
+      ><a name="867" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >trans</a
+      ><a name="872"
+      > </a
+      ><a name="873" class="Symbol"
+      >to</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="882" class="Symbol"
+      >)</a
+      ><a name="883"
+      >
+
+
+</a
+      ><a name="886" class="Comment"
+      >--------</a
+      ><a name="894"
+      >
+</a
+      ><a name="895" class="Comment"
+      >-- isomorphisms in Fun</a
+      ><a name="917"
+      >
+
+</a
+      ><a name="919" href="Prelude.Function.Isomorphism.html#919" class="Function"
+      >mkIso</a
+      ><a name="924"
+      > </a
+      ><a name="925" class="Symbol"
+      >:</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >&#8704;</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >{</a
+      ><a name="930" href="Prelude.Function.Isomorphism.html#930" class="Bound"
+      >A</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="Prelude.Function.Isomorphism.html#932" class="Bound"
+      >B</a
+      ><a name="933" class="Symbol"
+      >}</a
+      ><a name="934"
+      > </a
+      ><a name="935" class="Symbol"
+      >&#8594;</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >(</a
+      ><a name="938" href="Prelude.Function.Isomorphism.html#938" class="Bound"
+      >f</a
+      ><a name="939"
+      > </a
+      ><a name="940" class="Symbol"
+      >:</a
+      ><a name="941"
+      > </a
+      ><a name="942" href="Prelude.Function.Isomorphism.html#930" class="Bound"
+      >A</a
+      ><a name="943"
+      > </a
+      ><a name="944" class="Symbol"
+      >&#8594;</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="Prelude.Function.Isomorphism.html#932" class="Bound"
+      >B</a
+      ><a name="947" class="Symbol"
+      >)</a
+      ><a name="948"
+      > </a
+      ><a name="949" class="Symbol"
+      >&#8594;</a
+      ><a name="950"
+      > </a
+      ><a name="951" class="Symbol"
+      >(&#8704;</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="Prelude.Function.Isomorphism.html#954" class="Bound"
+      >x</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="Prelude.Function.Isomorphism.html#956" class="Bound"
+      >x'</a
+      ><a name="958"
+      > </a
+      ><a name="959" class="Symbol"
+      >&#8594;</a
+      ><a name="960"
+      > </a
+      ><a name="961" href="Prelude.Function.Isomorphism.html#938" class="Bound"
+      >f</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="Prelude.Function.Isomorphism.html#954" class="Bound"
+      >x</a
+      ><a name="964"
+      > </a
+      ><a name="965" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="966"
+      > </a
+      ><a name="967" href="Prelude.Function.Isomorphism.html#938" class="Bound"
+      >f</a
+      ><a name="968"
+      > </a
+      ><a name="969" href="Prelude.Function.Isomorphism.html#956" class="Bound"
+      >x'</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >&#8594;</a
+      ><a name="973"
+      > </a
+      ><a name="974" href="Prelude.Function.Isomorphism.html#954" class="Bound"
+      >x</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="977"
+      > </a
+      ><a name="978" href="Prelude.Function.Isomorphism.html#956" class="Bound"
+      >x'</a
+      ><a name="980" class="Symbol"
+      >)</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Symbol"
+      >&#8594;</a
+      ><a name="983"
+      > </a
+      ><a name="984" class="Symbol"
+      >(</a
+      ><a name="985" href="Prelude.Function.Isomorphism.html#985" class="Bound"
+      >g</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >:</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >(</a
+      ><a name="990" href="Prelude.Function.Isomorphism.html#990" class="Bound"
+      >y</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >:</a
+      ><a name="993"
+      > </a
+      ><a name="994" href="Prelude.Function.Isomorphism.html#932" class="Bound"
+      >B</a
+      ><a name="995" class="Symbol"
+      >)</a
+      ><a name="996"
+      > </a
+      ><a name="997" class="Symbol"
+      >&#8594;</a
+      ><a name="998"
+      > </a
+      ><a name="999" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" href="Prelude.Function.Isomorphism.html#1002" class="Bound"
+      >x</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Prelude.Function.Isomorphism.html#930" class="Bound"
+      >A</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="1009"
+      > </a
+      ><a name="1010" href="Prelude.Function.Isomorphism.html#938" class="Bound"
+      >f</a
+      ><a name="1011"
+      > </a
+      ><a name="1012" href="Prelude.Function.Isomorphism.html#1002" class="Bound"
+      >x</a
+      ><a name="1013"
+      > </a
+      ><a name="1014" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1015"
+      > </a
+      ><a name="1016" href="Prelude.Function.Isomorphism.html#990" class="Bound"
+      >y</a
+      ><a name="1017" class="Symbol"
+      >)</a
+      ><a name="1018"
+      > </a
+      ><a name="1019" class="Symbol"
+      >&#8594;</a
+      ><a name="1020"
+      > </a
+      ><a name="1021" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="Prelude.Function.Isomorphism.html#930" class="Bound"
+      >A</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="Prelude.Function.Isomorphism.html#932" class="Bound"
+      >B</a
+      ><a name="1028"
+      >
+</a
+      ><a name="1029" href="Prelude.Function.Isomorphism.html#919" class="Function"
+      >mkIso</a
+      ><a name="1034"
+      > </a
+      ><a name="1035" href="Prelude.Function.Isomorphism.html#1035" class="Bound"
+      >f</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" href="Prelude.Function.Isomorphism.html#1037" class="Bound"
+      >f-inj</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" href="Prelude.Function.Isomorphism.html#1043" class="Bound"
+      >g</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" class="Symbol"
+      >=</a
+      ><a name="1046"
+      >
+  </a
+      ><a name="1049" class="Keyword"
+      >record</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" class="Symbol"
+      >{</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Field"
+      >to</a
+      ><a name="1060"
+      >   </a
+      ><a name="1063" class="Symbol"
+      >=</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" href="Prelude.Function.Isomorphism.html#1035" class="Bound"
+      >f</a
+      ><a name="1066"
+      >
+         </a
+      ><a name="1076" class="Symbol"
+      >;</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="Field"
+      >from</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" class="Symbol"
+      >=</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1090"
+      > </a
+      ><a name="1091" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1092"
+      > </a
+      ><a name="1093" href="Prelude.Function.Isomorphism.html#1043" class="Bound"
+      >g</a
+      ><a name="1094"
+      >
+         </a
+      ><a name="1104" class="Symbol"
+      >;</a
+      ><a name="1105"
+      > </a
+      ><a name="1106" class="Field"
+      >to-from-inverse</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" class="Symbol"
+      >=</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" class="Symbol"
+      >&#955;</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="Prelude.Function.Isomorphism.html#1126" class="Bound"
+      >y</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" class="Symbol"
+      >&#8594;</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" class="Symbol"
+      >(</a
+      ><a name="1137" href="Prelude.Function.Isomorphism.html#1043" class="Bound"
+      >g</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" href="Prelude.Function.Isomorphism.html#1126" class="Bound"
+      >y</a
+      ><a name="1140" class="Symbol"
+      >)</a
+      ><a name="1141"
+      >
+         </a
+      ><a name="1151" class="Symbol"
+      >;</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" class="Field"
+      >from-to-inverse</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" class="Symbol"
+      >=</a
+      ><a name="1170"
+      > </a
+      ><a name="1171" class="Symbol"
+      >&#955;</a
+      ><a name="1172"
+      > </a
+      ><a name="1173" href="Prelude.Function.Isomorphism.html#1173" class="Bound"
+      >x</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" class="Symbol"
+      >&#8594;</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="Prelude.Function.Isomorphism.html#1037" class="Bound"
+      >f-inj</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" class="Symbol"
+      >(</a
+      ><a name="1184" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" class="Symbol"
+      >(</a
+      ><a name="1191" href="Prelude.Function.Isomorphism.html#1043" class="Bound"
+      >g</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="Symbol"
+      >(</a
+      ><a name="1194" href="Prelude.Function.Isomorphism.html#1035" class="Bound"
+      >f</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="Prelude.Function.Isomorphism.html#1173" class="Bound"
+      >x</a
+      ><a name="1197" class="Symbol"
+      >)))</a
+      ><a name="1200"
+      > </a
+      ><a name="1201" href="Prelude.Function.Isomorphism.html#1173" class="Bound"
+      >x</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Symbol"
+      >(</a
+      ><a name="1204" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" class="Symbol"
+      >(</a
+      ><a name="1211" href="Prelude.Function.Isomorphism.html#1043" class="Bound"
+      >g</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" class="Symbol"
+      >(</a
+      ><a name="1214" href="Prelude.Function.Isomorphism.html#1035" class="Bound"
+      >f</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="Prelude.Function.Isomorphism.html#1173" class="Bound"
+      >x</a
+      ><a name="1217" class="Symbol"
+      >)))</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" class="Symbol"
+      >}</a
+      ><a name="1222"
+      >
+
+</a
+      ><a name="1224" href="Prelude.Function.Isomorphism.html#1224" class="Function"
+      >mkIso'</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" class="Symbol"
+      >:</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" class="Symbol"
+      >&#8704;</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >{</a
+      ><a name="1236" href="Prelude.Function.Isomorphism.html#1236" class="Bound"
+      >A</a
+      ><a name="1237"
+      > </a
+      ><a name="1238" href="Prelude.Function.Isomorphism.html#1238" class="Bound"
+      >B</a
+      ><a name="1239" class="Symbol"
+      >}</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" class="Symbol"
+      >&#8594;</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="Symbol"
+      >(</a
+      ><a name="1244" href="Prelude.Function.Isomorphism.html#1244" class="Bound"
+      >f</a
+      ><a name="1245"
+      > </a
+      ><a name="1246" class="Symbol"
+      >:</a
+      ><a name="1247"
+      > </a
+      ><a name="1248" href="Prelude.Function.Isomorphism.html#1236" class="Bound"
+      >A</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" class="Symbol"
+      >&#8594;</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="Prelude.Function.Isomorphism.html#1238" class="Bound"
+      >B</a
+      ><a name="1253" class="Symbol"
+      >)</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" class="Symbol"
+      >(</a
+      ><a name="1256" href="Prelude.Function.Isomorphism.html#1256" class="Bound"
+      >g</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" class="Symbol"
+      >:</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" class="Symbol"
+      >(</a
+      ><a name="1261" href="Prelude.Function.Isomorphism.html#1261" class="Bound"
+      >b</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >:</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" href="Prelude.Function.Isomorphism.html#1238" class="Bound"
+      >B</a
+      ><a name="1266" class="Symbol"
+      >)</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" class="Symbol"
+      >&#8594;</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" href="Prelude.Function.Isomorphism.html#1244" class="Bound"
+      >f</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="Prelude.Function.Isomorphism.html#1261" class="Bound"
+      >b</a
+      ><a name="1276" class="Symbol"
+      >)</a
+      ><a name="1277"
+      > </a
+      ><a name="1278" class="Symbol"
+      >&#8594;</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" class="Symbol"
+      >(&#8704;</a
+      ><a name="1282"
+      > </a
+      ><a name="1283" class="Symbol"
+      >{</a
+      ><a name="1284" href="Prelude.Function.Isomorphism.html#1284" class="Bound"
+      >b</a
+      ><a name="1285" class="Symbol"
+      >}</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" class="Symbol"
+      >(</a
+      ><a name="1288" href="Prelude.Function.Isomorphism.html#1288" class="Bound"
+      >a</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" class="Symbol"
+      >:</a
+      ><a name="1291"
+      > </a
+      ><a name="1292" href="Prelude.Function.Isomorphism.html#1244" class="Bound"
+      >f</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="Prelude.Function.Isomorphism.html#1284" class="Bound"
+      >b</a
+      ><a name="1298" class="Symbol"
+      >)</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" class="Symbol"
+      >&#8594;</a
+      ><a name="1301"
+      > </a
+      ><a name="1302" href="Prelude.Function.Isomorphism.html#1256" class="Bound"
+      >g</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" href="Prelude.Function.Isomorphism.html#1284" class="Bound"
+      >b</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1307"
+      > </a
+      ><a name="1308" href="Prelude.Function.Isomorphism.html#1288" class="Bound"
+      >a</a
+      ><a name="1309" class="Symbol"
+      >)</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >&#8594;</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Prelude.Function.Isomorphism.html#1236" class="Bound"
+      >A</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Prelude.Function.Isomorphism.html#1238" class="Bound"
+      >B</a
+      ><a name="1320"
+      >
+</a
+      ><a name="1321" href="Prelude.Function.Isomorphism.html#1224" class="Function"
+      >mkIso'</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="Prelude.Function.Isomorphism.html#1328" class="Bound"
+      >f</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="Prelude.Function.Isomorphism.html#1330" class="Bound"
+      >g</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" href="Prelude.Function.Isomorphism.html#1332" class="Bound"
+      >un</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" class="Symbol"
+      >=</a
+      ><a name="1336"
+      >
+  </a
+      ><a name="1339" class="Keyword"
+      >record</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" class="Symbol"
+      >{</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" class="Field"
+      >to</a
+      ><a name="1350"
+      >   </a
+      ><a name="1353" class="Symbol"
+      >=</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="Prelude.Function.Isomorphism.html#1328" class="Bound"
+      >f</a
+      ><a name="1356"
+      >
+         </a
+      ><a name="1366" class="Symbol"
+      >;</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Field"
+      >from</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >=</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1380"
+      > </a
+      ><a name="1381" href="Prelude.Function.Isomorphism.html#1330" class="Bound"
+      >g</a
+      ><a name="1382"
+      >
+         </a
+      ><a name="1392" class="Symbol"
+      >;</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" class="Field"
+      >to-from-inverse</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" class="Symbol"
+      >=</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" href="Prelude.Function.Isomorphism.html#1488" class="Function"
+      >see-below</a
+      ><a name="1421"
+      >
+         </a
+      ><a name="1431" class="Symbol"
+      >;</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="Field"
+      >from-to-inverse</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" class="Symbol"
+      >=</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" class="Symbol"
+      >&#955;</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" href="Prelude.Function.Isomorphism.html#1453" class="Bound"
+      >j</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" class="Symbol"
+      >&#8594;</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="1461"
+      > </a
+      ><a name="1462" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" class="Symbol"
+      >(</a
+      ><a name="1467" href="Prelude.Function.Isomorphism.html#1332" class="Bound"
+      >un</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" class="Symbol"
+      >(</a
+      ><a name="1471" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" href="Prelude.Function.Isomorphism.html#1453" class="Bound"
+      >j</a
+      ><a name="1475" class="Symbol"
+      >))</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" class="Symbol"
+      >}</a
+      ><a name="1479"
+      >
+  </a
+      ><a name="1482" class="Keyword"
+      >where</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Prelude.Function.Isomorphism.html#1488" class="Function"
+      >see-below</a
+      ><a name="1497"
+      > </a
+      ><a name="1498" class="Symbol"
+      >:</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" class="Symbol"
+      >&#8704;</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" href="Prelude.Function.Isomorphism.html#1502" class="Bound"
+      >b</a
+      ><a name="1503"
+      > </a
+      ><a name="1504" class="Symbol"
+      >&#8594;</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" href="Prelude.Function.Isomorphism.html#1328" class="Bound"
+      >f</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" class="Symbol"
+      >(</a
+      ><a name="1509" href="Prelude.InverseImage.html#892" class="Function"
+      >und</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" class="Symbol"
+      >(</a
+      ><a name="1514" href="Prelude.Function.Isomorphism.html#1330" class="Bound"
+      >g</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" href="Prelude.Function.Isomorphism.html#1502" class="Bound"
+      >b</a
+      ><a name="1517" class="Symbol"
+      >))</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" href="Prelude.Function.Isomorphism.html#1502" class="Bound"
+      >b</a
+      ><a name="1523"
+      >
+        </a
+      ><a name="1532" href="Prelude.Function.Isomorphism.html#1488" class="Function"
+      >see-below</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" href="Prelude.Function.Isomorphism.html#1542" class="Bound"
+      >b</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Keyword"
+      >with</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Prelude.Function.Isomorphism.html#1330" class="Bound"
+      >g</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" href="Prelude.Function.Isomorphism.html#1542" class="Bound"
+      >b</a
+      ><a name="1552"
+      >
+        </a
+      ><a name="1561" href="Prelude.Function.Isomorphism.html#1488" class="Function"
+      >see-below</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" class="DottedPattern Symbol"
+      >._</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >|</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" href="Prelude.Function.Isomorphism.html#1579" class="Bound"
+      >a</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" class="Symbol"
+      >=</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1587"
+      >
+
+</a
+      ><a name="1589" href="Prelude.Function.Isomorphism.html#1589" class="Function"
+      >compIso</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" class="Symbol"
+      >:</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" class="Symbol"
+      >{</a
+      ><a name="1600" href="Prelude.Function.Isomorphism.html#1600" class="Bound"
+      >I</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" href="Prelude.Function.Isomorphism.html#1602" class="Bound"
+      >J</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" class="Symbol"
+      >:</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="PrimitiveType"
+      >Set</a
+      ><a name="1609" class="Symbol"
+      >}</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" class="Symbol"
+      >{</a
+      ><a name="1612" href="Prelude.Function.Isomorphism.html#1612" class="Bound"
+      >X</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" class="Symbol"
+      >:</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" href="Prelude.Function.Isomorphism.html#1600" class="Bound"
+      >I</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" class="Symbol"
+      >&#8594;</a
+      ><a name="1619"
+      > </a
+      ><a name="1620" class="PrimitiveType"
+      >Set</a
+      ><a name="1623" class="Symbol"
+      >}</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" class="Symbol"
+      >{</a
+      ><a name="1626" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >:</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Prelude.Function.Isomorphism.html#1602" class="Bound"
+      >J</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >&#8594;</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" class="PrimitiveType"
+      >Set</a
+      ><a name="1637" class="Symbol"
+      >}</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" class="Symbol"
+      >(</a
+      ><a name="1640" href="Prelude.Function.Isomorphism.html#1640" class="Bound"
+      >iso</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" class="Symbol"
+      >:</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" class="Symbol"
+      >(</a
+      ><a name="1651" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="Prelude.Function.Isomorphism.html#1600" class="Bound"
+      >I</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="Prelude.Function.Isomorphism.html#1612" class="Bound"
+      >X</a
+      ><a name="1656" class="Symbol"
+      >)</a
+      ><a name="1657"
+      > </a
+      ><a name="1658" class="Symbol"
+      >(</a
+      ><a name="1659" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Prelude.Function.Isomorphism.html#1602" class="Bound"
+      >J</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="1664" class="Symbol"
+      >))</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" class="Symbol"
+      >&#8594;</a
+      ><a name="1668"
+      >
+          </a
+      ><a name="1679" class="Symbol"
+      >(</a
+      ><a name="1680" href="Prelude.Function.Isomorphism.html#1680" class="Bound"
+      >e</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" class="Symbol"
+      >:</a
+      ><a name="1683"
+      > </a
+      ><a name="1684" href="Prelude.Function.Isomorphism.html#1600" class="Bound"
+      >I</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" class="Symbol"
+      >&#8594;</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="Prelude.Function.Isomorphism.html#1602" class="Bound"
+      >J</a
+      ><a name="1689" class="Symbol"
+      >)</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >(</a
+      ><a name="1692" href="Prelude.Function.Isomorphism.html#1692" class="Bound"
+      >u</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" class="Symbol"
+      >:</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" class="Symbol"
+      >&#8704;</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" class="Symbol"
+      >{</a
+      ><a name="1699" href="Prelude.Function.Isomorphism.html#1699" class="Bound"
+      >i</a
+      ><a name="1700" class="Symbol"
+      >}</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" class="Symbol"
+      >&#8594;</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="Prelude.Function.Isomorphism.html#1612" class="Bound"
+      >X</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="Prelude.Function.Isomorphism.html#1699" class="Bound"
+      >i</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" class="Symbol"
+      >&#8594;</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >(</a
+      ><a name="1713" href="Prelude.Function.Isomorphism.html#1680" class="Bound"
+      >e</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" href="Prelude.Function.Isomorphism.html#1699" class="Bound"
+      >i</a
+      ><a name="1716" class="Symbol"
+      >))</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" class="Symbol"
+      >&#8594;</a
+      ><a name="1720"
+      > </a
+      ><a name="1721" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="Prelude.Function.Isomorphism.html#1640" class="Bound"
+      >iso</a
+      ><a name="1731"
+      > </a
+      ><a name="1732" href="Prelude.Function.html#812" class="Function Operator"
+      >&#8784;</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" class="Symbol"
+      >(</a
+      ><a name="1735" href="Prelude.Function.Isomorphism.html#1680" class="Bound"
+      >e</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="Prelude.Function.Isomorphism.html#1692" class="Bound"
+      >u</a
+      ><a name="1741" class="Symbol"
+      >)</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >&#8594;</a
+      ><a name="1744"
+      >
+          </a
+      ><a name="1755" class="Symbol"
+      >(</a
+      ><a name="1756" href="Prelude.Function.Isomorphism.html#1756" class="Bound"
+      >Z</a
+      ><a name="1757"
+      > </a
+      ><a name="1758" class="Symbol"
+      >:</a
+      ><a name="1759"
+      > </a
+      ><a name="1760" href="Prelude.Function.Isomorphism.html#1602" class="Bound"
+      >J</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" class="Symbol"
+      >&#8594;</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" class="PrimitiveType"
+      >Set</a
+      ><a name="1767" class="Symbol"
+      >)</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" class="Symbol"
+      >(</a
+      ><a name="1770" href="Prelude.Function.Isomorphism.html#1770" class="Bound"
+      >ziso</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" class="Symbol"
+      >:</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" class="Symbol"
+      >&#8704;</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >{</a
+      ><a name="1780" href="Prelude.Function.Isomorphism.html#1780" class="Bound"
+      >j</a
+      ><a name="1781" class="Symbol"
+      >}</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" class="Symbol"
+      >&#8594;</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >(</a
+      ><a name="1790" href="Prelude.Function.Isomorphism.html#1756" class="Bound"
+      >Z</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="Prelude.Function.Isomorphism.html#1780" class="Bound"
+      >j</a
+      ><a name="1793" class="Symbol"
+      >)</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" class="Symbol"
+      >(</a
+      ><a name="1796" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="1798"
+      > </a
+      ><a name="1799" href="Prelude.Function.Isomorphism.html#1799" class="Bound"
+      >i</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="Prelude.Function.Isomorphism.html#1600" class="Bound"
+      >I</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="Prelude.Function.Isomorphism.html#1680" class="Bound"
+      >e</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" href="Prelude.Function.Isomorphism.html#1799" class="Bound"
+      >i</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="Prelude.Function.Isomorphism.html#1780" class="Bound"
+      >j</a
+      ><a name="1814" class="Symbol"
+      >))</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="Symbol"
+      >&#8594;</a
+      ><a name="1818"
+      >
+          </a
+      ><a name="1829" class="Symbol"
+      >(</a
+      ><a name="1830" href="Prelude.Function.Isomorphism.html#1830" class="Bound"
+      >g</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" class="Symbol"
+      >:</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" class="Symbol"
+      >&#8704;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" class="Symbol"
+      >{</a
+      ><a name="1837" href="Prelude.Function.Isomorphism.html#1837" class="Bound"
+      >j</a
+      ><a name="1838" class="Symbol"
+      >}</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" class="Symbol"
+      >&#8594;</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" class="Symbol"
+      >(</a
+      ><a name="1843" href="Prelude.Function.Isomorphism.html#1843" class="Bound"
+      >y</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" class="Symbol"
+      >:</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="Prelude.Function.Isomorphism.html#1837" class="Bound"
+      >j</a
+      ><a name="1850" class="Symbol"
+      >)</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" class="Symbol"
+      >&#8594;</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="Prelude.Function.Isomorphism.html#1756" class="Bound"
+      >Z</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="Prelude.Function.Isomorphism.html#1837" class="Bound"
+      >j</a
+      ><a name="1857" class="Symbol"
+      >)</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" class="Symbol"
+      >(</a
+      ><a name="1860" href="Prelude.Function.Isomorphism.html#1860" class="Bound"
+      >fgeq</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >:</a
+      ><a name="1866"
+      > </a
+      ><a name="1867" class="Symbol"
+      >&#8704;</a
+      ><a name="1868"
+      > </a
+      ><a name="1869" class="Symbol"
+      >{</a
+      ><a name="1870" href="Prelude.Function.Isomorphism.html#1870" class="Bound"
+      >j</a
+      ><a name="1871" class="Symbol"
+      >}</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" class="Symbol"
+      >(</a
+      ><a name="1874" href="Prelude.Function.Isomorphism.html#1874" class="Bound"
+      >y</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >:</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="1879"
+      > </a
+      ><a name="1880" href="Prelude.Function.Isomorphism.html#1870" class="Bound"
+      >j</a
+      ><a name="1881" class="Symbol"
+      >)</a
+      ><a name="1882"
+      > </a
+      ><a name="1883" class="Symbol"
+      >&#8594;</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" class="Symbol"
+      >(</a
+      ><a name="1892" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" href="Prelude.Function.Isomorphism.html#1640" class="Bound"
+      >iso</a
+      ><a name="1904"
+      > </a
+      ><a name="1905" class="Symbol"
+      >(</a
+      ><a name="1906" href="Prelude.Function.Isomorphism.html#1870" class="Bound"
+      >j</a
+      ><a name="1907"
+      > </a
+      ><a name="1908" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="Prelude.Function.Isomorphism.html#1874" class="Bound"
+      >y</a
+      ><a name="1911" class="Symbol"
+      >))</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" class="Symbol"
+      >(</a
+      ><a name="1923" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="1929"
+      > </a
+      ><a name="1930" href="Prelude.Function.Isomorphism.html#1770" class="Bound"
+      >ziso</a
+      ><a name="1934"
+      > </a
+      ><a name="1935" class="Symbol"
+      >(</a
+      ><a name="1936" href="Prelude.Function.Isomorphism.html#1830" class="Bound"
+      >g</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="Prelude.Function.Isomorphism.html#1874" class="Bound"
+      >y</a
+      ><a name="1939" class="Symbol"
+      >)))</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" class="Symbol"
+      >&#8594;</a
+      ><a name="1944"
+      >
+          </a
+      ><a name="1955" class="Symbol"
+      >&#8704;</a
+      ><a name="1956"
+      > </a
+      ><a name="1957" href="Prelude.Function.Isomorphism.html#1957" class="Bound"
+      >j</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" class="Symbol"
+      >&#8594;</a
+      ><a name="1960"
+      > </a
+      ><a name="1961" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1964"
+      > </a
+      ><a name="1965" class="Symbol"
+      >(</a
+      ><a name="1966" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" class="Symbol"
+      >(</a
+      ><a name="1969" href="Prelude.Function.Isomorphism.html#1756" class="Bound"
+      >Z</a
+      ><a name="1970"
+      > </a
+      ><a name="1971" href="Prelude.Function.Isomorphism.html#1957" class="Bound"
+      >j</a
+      ><a name="1972" class="Symbol"
+      >)</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" class="Symbol"
+      >(</a
+      ><a name="1975" href="Prelude.Function.Isomorphism.html#1612" class="Bound"
+      >X</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1978"
+      > </a
+      ><a name="1979" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="Prelude.Function.Isomorphism.html#1770" class="Bound"
+      >ziso</a
+      ><a name="1998" class="Symbol"
+      >))</a
+      ><a name="2000"
+      > </a
+      ><a name="2001" class="Symbol"
+      >(</a
+      ><a name="2002" href="Prelude.Function.Isomorphism.html#1626" class="Bound"
+      >Y</a
+      ><a name="2003"
+      > </a
+      ><a name="2004" href="Prelude.Function.Isomorphism.html#1957" class="Bound"
+      >j</a
+      ><a name="2005" class="Symbol"
+      >)</a
+      ><a name="2006"
+      >
+</a
+      ><a name="2007" href="Prelude.Function.Isomorphism.html#1589" class="Function"
+      >compIso</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >{</a
+      ><a name="2016" href="Prelude.Function.Isomorphism.html#2016" class="Bound"
+      >I</a
+      ><a name="2017" class="Symbol"
+      >}</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >{</a
+      ><a name="2020" href="Prelude.Function.Isomorphism.html#2020" class="Bound"
+      >J</a
+      ><a name="2021" class="Symbol"
+      >}</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="Symbol"
+      >{</a
+      ><a name="2024" href="Prelude.Function.Isomorphism.html#2024" class="Bound"
+      >X</a
+      ><a name="2025" class="Symbol"
+      >}</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" class="Symbol"
+      >{</a
+      ><a name="2028" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2029" class="Symbol"
+      >}</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" href="Prelude.Function.Isomorphism.html#2039" class="Bound"
+      >toeq</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="Prelude.Function.Isomorphism.html#2044" class="Bound"
+      >Z</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2050"
+      > </a
+      ><a name="2051" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="Prelude.Function.Isomorphism.html#2053" class="Bound"
+      >fgeq</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" class="Symbol"
+      >=</a
+      ><a name="2061"
+      >
+  </a
+      ><a name="2064" class="Keyword"
+      >record</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >{</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" class="Field"
+      >to</a
+      ><a name="2075"
+      >   </a
+      ><a name="2078" class="Symbol"
+      >=</a
+      ><a name="2079"
+      > </a
+      ><a name="2080" class="Symbol"
+      >&#955;</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" class="Symbol"
+      >{(</a
+      ><a name="2084" href="Prelude.Function.Isomorphism.html#2084" class="Bound"
+      >z</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" href="Prelude.Function.Isomorphism.html#2088" class="Bound"
+      >x</a
+      ><a name="2089" class="Symbol"
+      >)</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" class="Symbol"
+      >&#8594;</a
+      ><a name="2092"
+      > </a
+      ><a name="2093" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" class="Symbol"
+      >(</a
+      ><a name="2102" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" class="Symbol"
+      >(</a
+      ><a name="2109" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2115"
+      > </a
+      ><a name="2116" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" href="Prelude.Function.Isomorphism.html#2084" class="Bound"
+      >z</a
+      ><a name="2122" class="Symbol"
+      >))</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" class="Symbol"
+      >(</a
+      ><a name="2126" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="Prelude.Function.Isomorphism.html#2088" class="Bound"
+      >x</a
+      ><a name="2129" class="Symbol"
+      >)}</a
+      ><a name="2131"
+      >
+         </a
+      ><a name="2141" class="Symbol"
+      >;</a
+      ><a name="2142"
+      > </a
+      ><a name="2143" class="Field"
+      >from</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" class="Symbol"
+      >=</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" class="Symbol"
+      >&#955;</a
+      ><a name="2151"
+      > </a
+      ><a name="2152" href="Prelude.Function.Isomorphism.html#2152" class="Bound"
+      >y</a
+      ><a name="2153"
+      > </a
+      ><a name="2154" class="Symbol"
+      >&#8594;</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="Prelude.Function.Isomorphism.html#2152" class="Bound"
+      >y</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" href="Prelude.Function.Isomorphism.html#2024" class="Bound"
+      >X</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" class="Symbol"
+      >(</a
+      ><a name="2171" href="Prelude.Function.Isomorphism.html#2053" class="Bound"
+      >fgeq</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="Prelude.Function.Isomorphism.html#2152" class="Bound"
+      >y</a
+      ><a name="2177" class="Symbol"
+      >)</a
+      ><a name="2178"
+      > </a
+      ><a name="2179" class="Symbol"
+      >(</a
+      ><a name="2180" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >(</a
+      ><a name="2187" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="2195"
+      > </a
+      ><a name="2196" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="2199"
+      > </a
+      ><a name="2200" class="Symbol"
+      >(</a
+      ><a name="2201" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="Prelude.Function.Isomorphism.html#2152" class="Bound"
+      >y</a
+      ><a name="2206" class="Symbol"
+      >)))</a
+      ><a name="2209"
+      >
+         </a
+      ><a name="2219" class="Symbol"
+      >;</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" class="Field"
+      >to-from-inverse</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >=</a
+      ><a name="2238"
+      >
+             </a
+      ><a name="2252" class="Symbol"
+      >&#955;</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" class="Symbol"
+      >&#8594;</a
+      ><a name="2257"
+      > </a
+      ><a name="2258" href="Relation.Binary.HeterogeneousEquality.Core.html#709" class="Function"
+      >&#8773;-to-&#8801;</a
+      ><a name="2264"
+      > </a
+      ><a name="2265" class="Symbol"
+      >(</a
+      ><a name="2266" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" class="Symbol"
+      >(</a
+      ><a name="2274" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="2291"
+      > </a
+      ><a name="2292" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2293"
+      > </a
+      ><a name="2294" class="Symbol"
+      >(</a
+      ><a name="2295" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" class="Symbol"
+      >(</a
+      ><a name="2302" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" class="Symbol"
+      >(</a
+      ><a name="2315" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2318" class="Symbol"
+      >)))</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" class="Symbol"
+      >_)</a
+      ><a name="2324"
+      >
+                                  </a
+      ><a name="2359" class="Symbol"
+      >(</a
+      ><a name="2360" href="Prelude.Equality.html#611" class="Function"
+      >elim-&#8801;</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" class="Symbol"
+      >(&#955;</a
+      ><a name="2369"
+      > </a
+      ><a name="2370" href="Prelude.Function.Isomorphism.html#2370" class="Bound"
+      >eq</a
+      ><a name="2372"
+      > </a
+      ><a name="2373" class="Symbol"
+      >&#8594;</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" class="Symbol"
+      >(</a
+      ><a name="2378" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="Prelude.Function.Isomorphism.html#2024" class="Bound"
+      >X</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="Prelude.Function.Isomorphism.html#2370" class="Bound"
+      >eq</a
+      ><a name="2388"
+      > </a
+      ><a name="2389" class="Symbol"
+      >(</a
+      ><a name="2390" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" class="Symbol"
+      >(</a
+      ><a name="2397" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="2409"
+      > </a
+      ><a name="2410" class="Symbol"
+      >(</a
+      ><a name="2411" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2416" class="Symbol"
+      >))))</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2424" class="Symbol"
+      >)</a
+      ><a name="2425"
+      >
+                                          </a
+      ><a name="2468" class="Symbol"
+      >(</a
+      ><a name="2469" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" class="Symbol"
+      >(</a
+      ><a name="2482" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2488"
+      > </a
+      ><a name="2489" class="Symbol"
+      >(</a
+      ><a name="2490" href="Prelude.Function.Isomorphism.html#5601" class="Function"
+      >inv</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" class="Symbol"
+      >(</a
+      ><a name="2495" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="2496"
+      > </a
+      ><a name="2497" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2500" class="Symbol"
+      >))))</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" class="Symbol"
+      >(</a
+      ><a name="2506" href="Prelude.Function.Isomorphism.html#2053" class="Bound"
+      >fgeq</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" href="Prelude.Function.Isomorphism.html#2254" class="Bound"
+      >y</a
+      ><a name="2512" class="Symbol"
+      >)))</a
+      ><a name="2515"
+      >
+         </a
+      ><a name="2525" class="Symbol"
+      >;</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" class="Field"
+      >from-to-inverse</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" class="Symbol"
+      >=</a
+      ><a name="2544"
+      >
+             </a
+      ><a name="2558" class="Symbol"
+      >&#955;</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" class="Symbol"
+      >{</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" class="Symbol"
+      >(</a
+      ><a name="2563" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="2568" class="Symbol"
+      >)</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" class="Symbol"
+      >&#8594;</a
+      ><a name="2571"
+      >
+                 </a
+      ><a name="2589" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="2599"
+      >
+                   </a
+      ><a name="2619" class="Symbol"
+      >(</a
+      ><a name="2620" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="2625"
+      >
+                      </a
+      ><a name="2648" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" class="Symbol"
+      >(</a
+      ><a name="2651" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2658"
+      > </a
+      ><a name="2659" class="Symbol"
+      >(</a
+      ><a name="2660" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2665"
+      > </a
+      ><a name="2666" class="Symbol"
+      >(</a
+      ><a name="2667" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="2680" class="Symbol"
+      >))</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" class="Symbol"
+      >(</a
+      ><a name="2684" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2685"
+      > </a
+      ><a name="2686" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="2687" class="Symbol"
+      >))</a
+      ><a name="2689"
+      >
+                        </a
+      ><a name="2714" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2716"
+      > </a
+      ><a name="2717" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" class="Symbol"
+      >(</a
+      ><a name="2722" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2746"
+      > </a
+      ><a name="2747" class="Symbol"
+      >_)</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2751"
+      >
+                      </a
+      ><a name="2774" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2787"
+      > </a
+      ><a name="2788" class="Symbol"
+      >(</a
+      ><a name="2789" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2795"
+      > </a
+      ><a name="2796" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >(</a
+      ><a name="2802" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2803"
+      > </a
+      ><a name="2804" class="Symbol"
+      >(</a
+      ><a name="2805" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" class="Symbol"
+      >(</a
+      ><a name="2814" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" class="Symbol"
+      >(</a
+      ><a name="2821" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2827"
+      > </a
+      ><a name="2828" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="2834" class="Symbol"
+      >))</a
+      ><a name="2836"
+      > </a
+      ><a name="2837" class="Symbol"
+      >(</a
+      ><a name="2838" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="2841" class="Symbol"
+      >))))</a
+      ><a name="2845"
+      >
+                        </a
+      ><a name="2870" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2872"
+      > </a
+      ><a name="2873" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2877"
+      > </a
+      ><a name="2878" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2879"
+      >
+                      </a
+      ><a name="2902" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" class="Symbol"
+      >(</a
+      ><a name="2917" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" class="Symbol"
+      >(</a
+      ><a name="2924" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" class="Symbol"
+      >(</a
+      ><a name="2937" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="2938"
+      > </a
+      ><a name="2939" class="Symbol"
+      >(</a
+      ><a name="2940" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" class="Symbol"
+      >(</a
+      ><a name="2949" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2954"
+      > </a
+      ><a name="2955" class="Symbol"
+      >(</a
+      ><a name="2956" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="2962"
+      > </a
+      ><a name="2963" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="2969" class="Symbol"
+      >))</a
+      ><a name="2971"
+      > </a
+      ><a name="2972" class="Symbol"
+      >(</a
+      ><a name="2973" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="2974"
+      > </a
+      ><a name="2975" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="2976" class="Symbol"
+      >))))</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2982"
+      >
+                                     </a
+      ><a name="3020" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" class="Symbol"
+      >(</a
+      ><a name="3027" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" class="Symbol"
+      >(</a
+      ><a name="3040" href="Prelude.Function.Isomorphism.html#2051" class="Bound"
+      >g</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" class="Symbol"
+      >(</a
+      ><a name="3043" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="3048"
+      > </a
+      ><a name="3049" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" class="Symbol"
+      >(</a
+      ><a name="3052" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" class="Symbol"
+      >(</a
+      ><a name="3059" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3072" class="Symbol"
+      >))</a
+      ><a name="3074"
+      > </a
+      ><a name="3075" class="Symbol"
+      >(</a
+      ><a name="3076" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3077"
+      > </a
+      ><a name="3078" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3079" class="Symbol"
+      >)))))</a
+      ><a name="3084"
+      >
+                        </a
+      ><a name="3109" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" class="Symbol"
+      >(</a
+      ><a name="3113" class="Keyword"
+      >let</a
+      ><a name="3116"
+      > </a
+      ><a name="3117" href="Prelude.Function.Isomorphism.html#3117" class="Bound"
+      >eq</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" class="Symbol"
+      >=</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="3125"
+      > </a
+      ><a name="3126" class="Symbol"
+      >(</a
+      ><a name="3127" href="Prelude.Function.Isomorphism.html#2053" class="Bound"
+      >fgeq</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" class="Symbol"
+      >(</a
+      ><a name="3133" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="3138"
+      > </a
+      ><a name="3139" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="3140"
+      > </a
+      ><a name="3141" class="Symbol"
+      >(</a
+      ><a name="3142" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3147"
+      > </a
+      ><a name="3148" class="Symbol"
+      >(</a
+      ><a name="3149" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3162" class="Symbol"
+      >))</a
+      ><a name="3164"
+      > </a
+      ><a name="3165" class="Symbol"
+      >(</a
+      ><a name="3166" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3169" class="Symbol"
+      >)))</a
+      ><a name="3172"
+      >
+                            </a
+      ><a name="3201" class="Keyword"
+      >in</a
+      ><a name="3203"
+      >  </a
+      ><a name="3205" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" class="Symbol"
+      >(</a
+      ><a name="3211" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3219"
+      > </a
+      ><a name="3220" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3224" class="Symbol"
+      >)</a
+      ><a name="3225"
+      > </a
+      ><a name="3226" class="Symbol"
+      >(</a
+      ><a name="3227" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="3237"
+      > </a
+      ><a name="3238" href="Prelude.Function.Isomorphism.html#3117" class="Bound"
+      >eq</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" class="Symbol"
+      >(</a
+      ><a name="3242" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="3260"
+      > </a
+      ><a name="3261" class="Symbol"
+      >(</a
+      ><a name="3262" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3266"
+      > </a
+      ><a name="3267" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="3268"
+      > </a
+      ><a name="3269" href="Prelude.Function.Isomorphism.html#3117" class="Bound"
+      >eq</a
+      ><a name="3271" class="Symbol"
+      >)</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3277" class="Symbol"
+      >)))</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3282"
+      >
+                      </a
+      ><a name="3305" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3313"
+      > </a
+      ><a name="3314" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3318"
+      > </a
+      ><a name="3319" class="Symbol"
+      >(</a
+      ><a name="3320" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" class="Symbol"
+      >(</a
+      ><a name="3327" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3335"
+      > </a
+      ><a name="3336" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="3339"
+      > </a
+      ><a name="3340" class="Symbol"
+      >(_</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3344"
+      > </a
+      ><a name="3345" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="3350"
+      > </a
+      ><a name="3351" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" class="Symbol"
+      >(</a
+      ><a name="3354" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3359"
+      > </a
+      ><a name="3360" class="Symbol"
+      >(</a
+      ><a name="3361" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3374" class="Symbol"
+      >))</a
+      ><a name="3376"
+      > </a
+      ><a name="3377" class="Symbol"
+      >(</a
+      ><a name="3378" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3379"
+      > </a
+      ><a name="3380" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3381" class="Symbol"
+      >)))</a
+      ><a name="3384"
+      > </a
+      ><a name="3385" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3386"
+      >
+                                     </a
+      ><a name="3424" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3428"
+      > </a
+      ><a name="3429" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" class="Symbol"
+      >(</a
+      ><a name="3436" href="Prelude.Function.Isomorphism.html#5601" class="Function"
+      >inv</a
+      ><a name="3439"
+      > </a
+      ><a name="3440" class="Symbol"
+      >(</a
+      ><a name="3441" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="3442"
+      > </a
+      ><a name="3443" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3444"
+      > </a
+      ><a name="3445" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="3450"
+      > </a
+      ><a name="3451" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="3452"
+      > </a
+      ><a name="3453" class="Symbol"
+      >(</a
+      ><a name="3454" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3459"
+      > </a
+      ><a name="3460" class="Symbol"
+      >(</a
+      ><a name="3461" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3467"
+      > </a
+      ><a name="3468" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3472"
+      > </a
+      ><a name="3473" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3474" class="Symbol"
+      >))</a
+      ><a name="3476"
+      > </a
+      ><a name="3477" class="Symbol"
+      >(</a
+      ><a name="3478" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3479"
+      > </a
+      ><a name="3480" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3481" class="Symbol"
+      >))))</a
+      ><a name="3485"
+      >
+                        </a
+      ><a name="3510" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3512"
+      > </a
+      ><a name="3513" class="Symbol"
+      >(</a
+      ><a name="3514" class="Keyword"
+      >let</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="Prelude.Function.Isomorphism.html#3518" class="Bound"
+      >eq</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" class="Symbol"
+      >=</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3527"
+      > </a
+      ><a name="3528" class="Symbol"
+      >(</a
+      ><a name="3529" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="3536"
+      > </a
+      ><a name="3537" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3545"
+      > </a
+      ><a name="3546" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="3549" class="Symbol"
+      >)</a
+      ><a name="3550"
+      >
+                                       </a
+      ><a name="3590" class="Symbol"
+      >(</a
+      ><a name="3591" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="3601"
+      > </a
+      ><a name="3602" class="Symbol"
+      >(</a
+      ><a name="3603" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="3606"
+      > </a
+      ><a name="3607" class="Symbol"
+      >(</a
+      ><a name="3608" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3613"
+      > </a
+      ><a name="3614" class="Symbol"
+      >(</a
+      ><a name="3615" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3621"
+      > </a
+      ><a name="3622" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3626"
+      > </a
+      ><a name="3627" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3628" class="Symbol"
+      >)))</a
+      ><a name="3631"
+      > </a
+      ><a name="3632" class="Symbol"
+      >(</a
+      ><a name="3633" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="3650"
+      > </a
+      ><a name="3651" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="3652"
+      > </a
+      ><a name="3653" class="Symbol"
+      >(</a
+      ><a name="3654" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" class="Symbol"
+      >(</a
+      ><a name="3661" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3674" class="Symbol"
+      >))</a
+      ><a name="3676"
+      > </a
+      ><a name="3677" class="Symbol"
+      >(</a
+      ><a name="3678" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3679"
+      > </a
+      ><a name="3680" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3681" class="Symbol"
+      >)))</a
+      ><a name="3684"
+      >
+                            </a
+      ><a name="3713" class="Keyword"
+      >in</a
+      ><a name="3715"
+      > </a
+      ><a name="3716" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3720"
+      > </a
+      ><a name="3721" class="Symbol"
+      >(</a
+      ><a name="3722" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3730"
+      > </a
+      ><a name="3731" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3735" class="Symbol"
+      >)</a
+      ><a name="3736"
+      > </a
+      ><a name="3737" class="Symbol"
+      >(</a
+      ><a name="3738" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="3748"
+      > </a
+      ><a name="3749" href="Prelude.Function.Isomorphism.html#3518" class="Bound"
+      >eq</a
+      ><a name="3751"
+      > </a
+      ><a name="3752" class="Symbol"
+      >(</a
+      ><a name="3753" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" class="Symbol"
+      >(</a
+      ><a name="3773" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3777"
+      > </a
+      ><a name="3778" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="3779"
+      > </a
+      ><a name="3780" href="Prelude.Function.Isomorphism.html#3518" class="Bound"
+      >eq</a
+      ><a name="3782" class="Symbol"
+      >)</a
+      ><a name="3783"
+      > </a
+      ><a name="3784" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3788" class="Symbol"
+      >)))</a
+      ><a name="3791"
+      > </a
+      ><a name="3792" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3793"
+      >
+                      </a
+      ><a name="3816" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3824"
+      > </a
+      ><a name="3825" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3829"
+      > </a
+      ><a name="3830" class="Symbol"
+      >(</a
+      ><a name="3831" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3836"
+      > </a
+      ><a name="3837" class="Symbol"
+      >(</a
+      ><a name="3838" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="3846"
+      > </a
+      ><a name="3847" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="3850"
+      > </a
+      ><a name="3851" class="Symbol"
+      >(</a
+      ><a name="3852" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" class="Symbol"
+      >(</a
+      ><a name="3855" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3860"
+      > </a
+      ><a name="3861" class="Symbol"
+      >(</a
+      ><a name="3862" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3868"
+      > </a
+      ><a name="3869" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3873"
+      > </a
+      ><a name="3874" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3875" class="Symbol"
+      >))</a
+      ><a name="3877"
+      > </a
+      ><a name="3878" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3879"
+      > </a
+      ><a name="3880" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3881"
+      > </a
+      ><a name="3882" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3883" class="Symbol"
+      >))</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3887"
+      >
+                                     </a
+      ><a name="3925" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="3930"
+      > </a
+      ><a name="3931" class="Symbol"
+      >(</a
+      ><a name="3932" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3936"
+      > </a
+      ><a name="3937" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3942"
+      > </a
+      ><a name="3943" class="Symbol"
+      >(</a
+      ><a name="3944" href="Prelude.Function.Isomorphism.html#5601" class="Function"
+      >inv</a
+      ><a name="3947"
+      > </a
+      ><a name="3948" class="Symbol"
+      >(</a
+      ><a name="3949" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="3950"
+      > </a
+      ><a name="3951" class="Symbol"
+      >(</a
+      ><a name="3952" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3957"
+      > </a
+      ><a name="3958" class="Symbol"
+      >(</a
+      ><a name="3959" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3965"
+      > </a
+      ><a name="3966" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="3970"
+      > </a
+      ><a name="3971" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="3972" class="Symbol"
+      >))</a
+      ><a name="3974"
+      > </a
+      ><a name="3975" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3976"
+      > </a
+      ><a name="3977" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="3978"
+      > </a
+      ><a name="3979" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="3980" class="Symbol"
+      >)))</a
+      ><a name="3983"
+      > </a
+      ><a name="3984" class="Symbol"
+      >(</a
+      ><a name="3985" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3990"
+      > </a
+      ><a name="3991" class="Symbol"
+      >(</a
+      ><a name="3992" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="3998"
+      > </a
+      ><a name="3999" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4003"
+      > </a
+      ><a name="4004" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4005" class="Symbol"
+      >)))</a
+      ><a name="4008"
+      >
+                        </a
+      ><a name="4033" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="4035"
+      > </a
+      ><a name="4036" class="Symbol"
+      >(</a
+      ><a name="4037" class="Keyword"
+      >let</a
+      ><a name="4040"
+      > </a
+      ><a name="4041" href="Prelude.Function.Isomorphism.html#4041" class="Bound"
+      >eq</a
+      ><a name="4043"
+      > </a
+      ><a name="4044" class="Symbol"
+      >=</a
+      ><a name="4045"
+      > </a
+      ><a name="4046" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4050"
+      > </a
+      ><a name="4051" class="Symbol"
+      >(</a
+      ><a name="4052" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4057"
+      > </a
+      ><a name="4058" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="4059"
+      > </a
+      ><a name="4060" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4068"
+      > </a
+      ><a name="4069" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="4072" class="Symbol"
+      >)</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" class="Symbol"
+      >(</a
+      ><a name="4075" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="4078"
+      > </a
+      ><a name="4079" class="Symbol"
+      >(</a
+      ><a name="4080" href="Prelude.Function.Isomorphism.html#2039" class="Bound"
+      >toeq</a
+      ><a name="4084"
+      > </a
+      ><a name="4085" class="Symbol"
+      >(</a
+      ><a name="4086" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4091"
+      > </a
+      ><a name="4092" class="Symbol"
+      >(</a
+      ><a name="4093" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4099"
+      > </a
+      ><a name="4100" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4104"
+      > </a
+      ><a name="4105" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4106" class="Symbol"
+      >)</a
+      ><a name="4107"
+      > </a
+      ><a name="4108" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4109"
+      > </a
+      ><a name="4110" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="4111" class="Symbol"
+      >)))</a
+      ><a name="4114"
+      >
+                            </a
+      ><a name="4143" class="Keyword"
+      >in</a
+      ><a name="4145"
+      >  </a
+      ><a name="4147" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4151"
+      > </a
+      ><a name="4152" class="Symbol"
+      >(</a
+      ><a name="4153" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4161"
+      > </a
+      ><a name="4162" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4166" class="Symbol"
+      >)</a
+      ><a name="4167"
+      > </a
+      ><a name="4168" class="Symbol"
+      >(</a
+      ><a name="4169" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="4179"
+      > </a
+      ><a name="4180" href="Prelude.Function.Isomorphism.html#4041" class="Bound"
+      >eq</a
+      ><a name="4182"
+      > </a
+      ><a name="4183" class="Symbol"
+      >(</a
+      ><a name="4184" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="4202"
+      > </a
+      ><a name="4203" class="Symbol"
+      >(</a
+      ><a name="4204" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4208"
+      > </a
+      ><a name="4209" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="4210"
+      > </a
+      ><a name="4211" href="Prelude.Function.Isomorphism.html#4041" class="Bound"
+      >eq</a
+      ><a name="4213" class="Symbol"
+      >)</a
+      ><a name="4214"
+      > </a
+      ><a name="4215" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4219" class="Symbol"
+      >)))</a
+      ><a name="4222"
+      > </a
+      ><a name="4223" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="4224"
+      >
+                      </a
+      ><a name="4247" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4255"
+      > </a
+      ><a name="4256" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4260"
+      > </a
+      ><a name="4261" class="Symbol"
+      >(</a
+      ><a name="4262" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4267"
+      > </a
+      ><a name="4268" class="Symbol"
+      >(</a
+      ><a name="4269" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4277"
+      > </a
+      ><a name="4278" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="4281"
+      > </a
+      ><a name="4282" class="Symbol"
+      >(</a
+      ><a name="4283" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4289"
+      > </a
+      ><a name="4290" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="4293"
+      > </a
+      ><a name="4294" class="Symbol"
+      >(</a
+      ><a name="4295" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4300"
+      > </a
+      ><a name="4301" class="Symbol"
+      >(</a
+      ><a name="4302" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4308"
+      > </a
+      ><a name="4309" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4313"
+      > </a
+      ><a name="4314" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4315" class="Symbol"
+      >)</a
+      ><a name="4316"
+      > </a
+      ><a name="4317" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4318"
+      > </a
+      ><a name="4319" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="4320" class="Symbol"
+      >)))</a
+      ><a name="4323"
+      > </a
+      ><a name="4324" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4325"
+      >
+                                     </a
+      ><a name="4363" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="4368"
+      > </a
+      ><a name="4369" class="Symbol"
+      >(</a
+      ><a name="4370" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4374"
+      > </a
+      ><a name="4375" class="Symbol"
+      >(</a
+      ><a name="4376" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="4377"
+      > </a
+      ><a name="4378" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="4379"
+      > </a
+      ><a name="4380" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4385" class="Symbol"
+      >)</a
+      ><a name="4386"
+      > </a
+      ><a name="4387" class="Symbol"
+      >(</a
+      ><a name="4388" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="4407"
+      > </a
+      ><a name="4408" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="4411"
+      > </a
+      ><a name="4412" class="Symbol"
+      >(</a
+      ><a name="4413" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4418"
+      > </a
+      ><a name="4419" class="Symbol"
+      >(</a
+      ><a name="4420" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4426"
+      > </a
+      ><a name="4427" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4431"
+      > </a
+      ><a name="4432" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4433" class="Symbol"
+      >)</a
+      ><a name="4434"
+      > </a
+      ><a name="4435" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4436"
+      > </a
+      ><a name="4437" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="4438" class="Symbol"
+      >)))</a
+      ><a name="4441"
+      > </a
+      ><a name="4442" class="Symbol"
+      >(</a
+      ><a name="4443" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4448"
+      > </a
+      ><a name="4449" class="Symbol"
+      >(</a
+      ><a name="4450" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4456"
+      > </a
+      ><a name="4457" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4461"
+      > </a
+      ><a name="4462" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4463" class="Symbol"
+      >)))</a
+      ><a name="4466"
+      >
+                        </a
+      ><a name="4491" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="4493"
+      > </a
+      ><a name="4494" class="Symbol"
+      >(</a
+      ><a name="4495" class="Keyword"
+      >let</a
+      ><a name="4498"
+      > </a
+      ><a name="4499" href="Prelude.Function.Isomorphism.html#4499" class="Bound"
+      >eq</a
+      ><a name="4501"
+      > </a
+      ><a name="4502" class="Symbol"
+      >=</a
+      ><a name="4503"
+      > </a
+      ><a name="4504" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4508"
+      > </a
+      ><a name="4509" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4514"
+      > </a
+      ><a name="4515" class="Symbol"
+      >(</a
+      ><a name="4516" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="4535"
+      > </a
+      ><a name="4536" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="4539"
+      > </a
+      ><a name="4540" class="Symbol"
+      >(</a
+      ><a name="4541" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4546"
+      > </a
+      ><a name="4547" class="Symbol"
+      >(</a
+      ><a name="4548" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4554"
+      > </a
+      ><a name="4555" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4559"
+      > </a
+      ><a name="4560" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4561" class="Symbol"
+      >)</a
+      ><a name="4562"
+      > </a
+      ><a name="4563" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4564"
+      > </a
+      ><a name="4565" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="4566" class="Symbol"
+      >))</a
+      ><a name="4568"
+      >
+                            </a
+      ><a name="4597" class="Keyword"
+      >in</a
+      ><a name="4599"
+      >  </a
+      ><a name="4601" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4605"
+      > </a
+      ><a name="4606" class="Symbol"
+      >(</a
+      ><a name="4607" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4615"
+      > </a
+      ><a name="4616" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4620" class="Symbol"
+      >)</a
+      ><a name="4621"
+      > </a
+      ><a name="4622" class="Symbol"
+      >(</a
+      ><a name="4623" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="4633"
+      > </a
+      ><a name="4634" href="Prelude.Function.Isomorphism.html#4499" class="Bound"
+      >eq</a
+      ><a name="4636"
+      > </a
+      ><a name="4637" class="Symbol"
+      >(</a
+      ><a name="4638" href="Prelude.Equality.html#794" class="Function"
+      >proof-irrelevance'</a
+      ><a name="4656"
+      > </a
+      ><a name="4657" class="Symbol"
+      >(</a
+      ><a name="4658" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4662"
+      > </a
+      ><a name="4663" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="4664"
+      > </a
+      ><a name="4665" href="Prelude.Function.Isomorphism.html#4499" class="Bound"
+      >eq</a
+      ><a name="4667" class="Symbol"
+      >)</a
+      ><a name="4668"
+      > </a
+      ><a name="4669" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4673" class="Symbol"
+      >)))</a
+      ><a name="4676"
+      > </a
+      ><a name="4677" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="4678"
+      >
+                      </a
+      ><a name="4701" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4709"
+      > </a
+      ><a name="4710" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4714"
+      > </a
+      ><a name="4715" class="Symbol"
+      >(</a
+      ><a name="4716" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4721"
+      > </a
+      ><a name="4722" class="Symbol"
+      >(</a
+      ><a name="4723" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4729"
+      > </a
+      ><a name="4730" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4734"
+      > </a
+      ><a name="4735" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4736" class="Symbol"
+      >)</a
+      ><a name="4737"
+      > </a
+      ><a name="4738" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4739"
+      > </a
+      ><a name="4740" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4745"
+      > </a
+      ><a name="4746" class="Symbol"
+      >(</a
+      ><a name="4747" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4753"
+      > </a
+      ><a name="4754" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4758"
+      > </a
+      ><a name="4759" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4760" class="Symbol"
+      >))</a
+      ><a name="4762"
+      >
+                        </a
+      ><a name="4787" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="4789"
+      > </a
+      ><a name="4790" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="4794"
+      > </a
+      ><a name="4795" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="4796"
+      >
+                      </a
+      ><a name="4819" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="4827"
+      > </a
+      ><a name="4828" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4832"
+      > </a
+      ><a name="4833" class="Symbol"
+      >(</a
+      ><a name="4834" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="4840"
+      > </a
+      ><a name="4841" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4845"
+      > </a
+      ><a name="4846" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4847" class="Symbol"
+      >)</a
+      ><a name="4848"
+      >
+                        </a
+      ><a name="4873" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="4875"
+      > </a
+      ><a name="4876" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="4895"
+      > </a
+      ><a name="4896" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="4900"
+      > </a
+      ><a name="4901" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4902"
+      > </a
+      ><a name="4903" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="4904"
+      >
+                      </a
+      ><a name="4927" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="4928"
+      >
+                    </a
+      ><a name="4949" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="4950" class="Symbol"
+      >)</a
+      ><a name="4951"
+      >
+                   </a
+      ><a name="4971" class="Symbol"
+      >(</a
+      ><a name="4972" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="4978"
+      >
+                      </a
+      ><a name="5001" class="Symbol"
+      >(</a
+      ><a name="5002" href="Relation.Binary.HeterogeneousEquality.html#1883" class="Function"
+      >&#8801;-subst-removable</a
+      ><a name="5019"
+      > </a
+      ><a name="5020" href="Prelude.Function.Isomorphism.html#2024" class="Bound"
+      >X</a
+      ><a name="5021"
+      > </a
+      ><a name="5022" class="Symbol"
+      >(</a
+      ><a name="5023" href="Prelude.Function.Isomorphism.html#2053" class="Bound"
+      >fgeq</a
+      ><a name="5027"
+      > </a
+      ><a name="5028" class="Symbol"
+      >(</a
+      ><a name="5029" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="5034"
+      > </a
+      ><a name="5035" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="5036"
+      > </a
+      ><a name="5037" class="Symbol"
+      >(</a
+      ><a name="5038" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5043"
+      > </a
+      ><a name="5044" class="Symbol"
+      >(</a
+      ><a name="5045" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5051"
+      > </a
+      ><a name="5052" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="5056"
+      > </a
+      ><a name="5057" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="5058" class="Symbol"
+      >))</a
+      ><a name="5060"
+      > </a
+      ><a name="5061" class="Symbol"
+      >(</a
+      ><a name="5062" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="5063"
+      > </a
+      ><a name="5064" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5065" class="Symbol"
+      >)))</a
+      ><a name="5068"
+      >
+                                           </a
+      ><a name="5112" class="Symbol"
+      >(</a
+      ><a name="5113" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5118"
+      > </a
+      ><a name="5119" class="Symbol"
+      >(</a
+      ><a name="5120" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="5128"
+      > </a
+      ><a name="5129" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5132"
+      > </a
+      ><a name="5133" class="Symbol"
+      >(</a
+      ><a name="5134" href="Prelude.Function.Isomorphism.html#2058" class="Bound"
+      >j</a
+      ><a name="5135"
+      > </a
+      ><a name="5136" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5137"
+      > </a
+      ><a name="5138" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="5143"
+      > </a
+      ><a name="5144" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="5145"
+      > </a
+      ><a name="5146" class="Symbol"
+      >(</a
+      ><a name="5147" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5152"
+      > </a
+      ><a name="5153" class="Symbol"
+      >(</a
+      ><a name="5154" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5160"
+      > </a
+      ><a name="5161" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="5165"
+      > </a
+      ><a name="5166" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="5167" class="Symbol"
+      >))</a
+      ><a name="5169"
+      > </a
+      ><a name="5170" class="Symbol"
+      >(</a
+      ><a name="5171" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="5172"
+      > </a
+      ><a name="5173" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5174" class="Symbol"
+      >)))))</a
+      ><a name="5179"
+      >
+                      </a
+      ><a name="5202" class="Symbol"
+      >(</a
+      ><a name="5203" href="Prelude.Equality.html#611" class="Function"
+      >elim-&#8801;</a
+      ><a name="5209"
+      > </a
+      ><a name="5210" class="Symbol"
+      >(&#955;</a
+      ><a name="5212"
+      > </a
+      ><a name="5213" class="Symbol"
+      >{</a
+      ><a name="5214" href="Prelude.Function.Isomorphism.html#5214" class="Bound"
+      >j'</a
+      ><a name="5216" class="Symbol"
+      >}</a
+      ><a name="5217"
+      > </a
+      ><a name="5218" href="Prelude.Function.Isomorphism.html#5218" class="Bound"
+      >eq</a
+      ><a name="5220"
+      > </a
+      ><a name="5221" class="Symbol"
+      >&#8594;</a
+      ><a name="5222"
+      > </a
+      ><a name="5223" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5228"
+      > </a
+      ><a name="5229" class="Symbol"
+      >(</a
+      ><a name="5230" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="5238"
+      > </a
+      ><a name="5239" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5242"
+      > </a
+      ><a name="5243" class="Symbol"
+      >(</a
+      ><a name="5244" href="Prelude.Function.Isomorphism.html#5214" class="Bound"
+      >j'</a
+      ><a name="5246"
+      > </a
+      ><a name="5247" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5248"
+      > </a
+      ><a name="5249" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="5254"
+      > </a
+      ><a name="5255" href="Prelude.Function.Isomorphism.html#2028" class="Bound"
+      >Y</a
+      ><a name="5256"
+      > </a
+      ><a name="5257" href="Prelude.Function.Isomorphism.html#5218" class="Bound"
+      >eq</a
+      ><a name="5259"
+      > </a
+      ><a name="5260" class="Symbol"
+      >(</a
+      ><a name="5261" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="5262"
+      > </a
+      ><a name="5263" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5264" class="Symbol"
+      >)))</a
+      ><a name="5267"
+      > </a
+      ><a name="5268" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="5269"
+      > </a
+      ><a name="5270" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5271" class="Symbol"
+      >)</a
+      ><a name="5272"
+      >
+                              </a
+      ><a name="5303" class="Symbol"
+      >(</a
+      ><a name="5304" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="5309"
+      > </a
+      ><a name="5310" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5315"
+      > </a
+      ><a name="5316" class="Symbol"
+      >(</a
+      ><a name="5317" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="5323"
+      > </a
+      ><a name="5324" class="Symbol"
+      >(</a
+      ><a name="5325" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="5330"
+      > </a
+      ><a name="5331" class="Symbol"
+      >(</a
+      ><a name="5332" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="5335"
+      > </a
+      ><a name="5336" class="Symbol"
+      >(</a
+      ><a name="5337" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="5341"
+      > </a
+      ><a name="5342" class="Symbol"
+      >(</a
+      ><a name="5343" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="5351"
+      > </a
+      ><a name="5352" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5355" class="Symbol"
+      >)</a
+      ><a name="5356"
+      > </a
+      ><a name="5357" class="Symbol"
+      >(</a
+      ><a name="5358" href="Prelude.Function.Isomorphism.html#2039" class="Bound"
+      >toeq</a
+      ><a name="5362"
+      > </a
+      ><a name="5363" class="Symbol"
+      >(</a
+      ><a name="5364" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5369"
+      > </a
+      ><a name="5370" class="Symbol"
+      >(</a
+      ><a name="5371" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5377"
+      > </a
+      ><a name="5378" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="5382"
+      > </a
+      ><a name="5383" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="5384" class="Symbol"
+      >)</a
+      ><a name="5385"
+      > </a
+      ><a name="5386" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5387"
+      > </a
+      ><a name="5388" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5389" class="Symbol"
+      >))))</a
+      ><a name="5393"
+      >
+                                                          </a
+      ><a name="5452" class="Symbol"
+      >(</a
+      ><a name="5453" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="5472"
+      > </a
+      ><a name="5473" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5476"
+      > </a
+      ><a name="5477" class="Symbol"
+      >(</a
+      ><a name="5478" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5483"
+      > </a
+      ><a name="5484" class="Symbol"
+      >(</a
+      ><a name="5485" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5491"
+      > </a
+      ><a name="5492" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="5496"
+      > </a
+      ><a name="5497" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="5498" class="Symbol"
+      >)</a
+      ><a name="5499"
+      > </a
+      ><a name="5500" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5501"
+      > </a
+      ><a name="5502" href="Prelude.Function.Isomorphism.html#2567" class="Bound"
+      >x</a
+      ><a name="5503" class="Symbol"
+      >)))))</a
+      ><a name="5508"
+      >
+                              </a
+      ><a name="5539" class="Symbol"
+      >(</a
+      ><a name="5540" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5545"
+      > </a
+      ><a name="5546" class="Symbol"
+      >(</a
+      ><a name="5547" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5553"
+      > </a
+      ><a name="5554" href="Prelude.Function.Isomorphism.html#2046" class="Bound"
+      >ziso</a
+      ><a name="5558"
+      > </a
+      ><a name="5559" href="Prelude.Function.Isomorphism.html#2563" class="Bound"
+      >z</a
+      ><a name="5560" class="Symbol"
+      >))))}</a
+      ><a name="5565"
+      > </a
+      ><a name="5566" class="Symbol"
+      >}</a
+      ><a name="5567"
+      >
+  </a
+      ><a name="5570" class="Keyword"
+      >where</a
+      ><a name="5575"
+      > </a
+      ><a name="5576" class="Keyword"
+      >open</a
+      ><a name="5580"
+      > </a
+      ><a name="5581" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="5592"
+      >
+        </a
+      ><a name="5601" href="Prelude.Function.Isomorphism.html#5601" class="Function"
+      >inv</a
+      ><a name="5604"
+      > </a
+      ><a name="5605" class="Symbol"
+      >:</a
+      ><a name="5606"
+      > </a
+      ><a name="5607" class="Symbol"
+      >(</a
+      ><a name="5608" href="Prelude.Function.Isomorphism.html#2035" class="Bound"
+      >e</a
+      ><a name="5609"
+      > </a
+      ><a name="5610" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="5612"
+      > </a
+      ><a name="5613" href="Prelude.Function.Isomorphism.html#2037" class="Bound"
+      >u</a
+      ><a name="5614" class="Symbol"
+      >)</a
+      ><a name="5615"
+      > </a
+      ><a name="5616" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="5617"
+      > </a
+      ><a name="5618" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="5626"
+      > </a
+      ><a name="5627" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5630"
+      > </a
+      ><a name="5631" href="Prelude.Function.html#812" class="Function Operator"
+      >&#8784;</a
+      ><a name="5632"
+      > </a
+      ><a name="5633" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="5635"
+      >
+        </a
+      ><a name="5644" href="Prelude.Function.Isomorphism.html#5601" class="Function"
+      >inv</a
+      ><a name="5647"
+      > </a
+      ><a name="5648" class="Symbol"
+      >=</a
+      ><a name="5649"
+      > </a
+      ><a name="5650" href="Prelude.Function.html#1099" class="Function"
+      >ftrans</a
+      ><a name="5656"
+      > </a
+      ><a name="5657" class="Symbol"
+      >(</a
+      ><a name="5658" href="Prelude.Function.html#1547" class="Function"
+      >fcong-r</a
+      ><a name="5665"
+      > </a
+      ><a name="5666" class="Symbol"
+      >(</a
+      ><a name="5667" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="5675"
+      > </a
+      ><a name="5676" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5679" class="Symbol"
+      >)</a
+      ><a name="5680"
+      > </a
+      ><a name="5681" class="Symbol"
+      >(</a
+      ><a name="5682" href="Prelude.Function.html#998" class="Function"
+      >fsym</a
+      ><a name="5686"
+      > </a
+      ><a name="5687" href="Prelude.Function.Isomorphism.html#2039" class="Bound"
+      >toeq</a
+      ><a name="5691" class="Symbol"
+      >))</a
+      ><a name="5693"
+      > </a
+      ><a name="5694" class="Symbol"
+      >(</a
+      ><a name="5695" href="Prelude.Category.Isomorphism.html#760" class="Field"
+      >Iso.to-from-inverse</a
+      ><a name="5714"
+      > </a
+      ><a name="5715" href="Prelude.Function.Isomorphism.html#2031" class="Bound"
+      >iso</a
+      ><a name="5718" class="Symbol"
+      >)</a
+      ><a name="5719"
+      >
+
+</a
+      ><a name="5721" class="Comment"
+      >{-
+
+compIso : {I J : Set} {X : I &#8594; Set} {Y : J &#8594; Set} (iso : Iso (&#931; I X) (&#931; J Y)) &#8594;
+          (e : I &#8594; J) (u : &#8704; {i} &#8594; X i &#8594; Y (e i)) &#8594; Iso.to iso &#8784; (e ** u) &#8594;
+          &#8704; j &#8594; Iso (&#931; (e &#8315;&#185; j) (X &#8728; und)) (Y j)
+compIso {I} {J} {X} {Y} iso e u eq j =
+  record { to = to; from = from; to-from-inverse = to-from-inverse; from-to-inverse = from-to-inverse }
+  where
+    to : &#8704; {j} &#8594; &#931; (e &#8315;&#185; j) (X &#8728; und) &#8594; Y j
+    to (ok i , x) = u x
+    from : &#8704; {j} &#8594; Y j &#8594; &#931; (e &#8315;&#185; j) (X &#8728; und)
+    from {j} y = subst (&#955; j' &#8594; &#931; (e &#8315;&#185; j') (X &#8728; und))
+                       (cong proj&#8321; (trans (sym (eq (Iso.from iso (j , y)))) (Iso.to-from-inverse iso (j , y))))
+                       (ok _ , proj&#8322; (Iso.from iso (j , y)))
+    to-from-inverse : &#8704; {j} &#8594; (y : Y j) &#8594; to (from y) &#8801; y
+    to-from-inverse {j} y =
+      &#8773;-to-&#8801;
+        (elim-&#8801; (&#955; eq' &#8594; to (subst (&#955; j' &#8594; &#931; (e &#8315;&#185; j') (X &#8728; und)) eq' (ok (proj&#8321; (Iso.from iso (j , y))) , proj&#8322; (Iso.from iso (j , y)))) &#8773; y)
+                (hcong proj&#8322; (&#8801;-to-&#8773; (trans (sym (eq (Iso.from iso (j , y)))) (Iso.to-from-inverse iso (j , y)))))
+                (cong proj&#8321; (trans (sym (eq (Iso.from iso (j , y)))) (Iso.to-from-inverse iso (j , y)))))
+    from-to-inverse : &#8704; {j} &#8594; (x : &#931; (e &#8315;&#185; j) (X &#8728; und)) &#8594; from (to x) &#8801; x
+    from-to-inverse (ok i , x) =
+      &#8773;-to-&#8801;
+        (elim-&#8801; (&#955; eq' &#8594; subst (&#955; j' &#8594; &#931; (e &#8315;&#185; j') (X &#8728; und)) eq' (ok (proj&#8321; (Iso.from iso (e i , u x))) , proj&#8322; (Iso.from iso (e i , u x)))
+                           &#8773; (ok i , x &#8712; &#931; (e &#8315;&#185; e i) (X &#8728; und)))
+                (subst (&#955; y' &#8594; (ok (proj&#8321; y') , proj&#8322; y' &#8712; &#931; (e &#8315;&#185; e (proj&#8321; y')) (X &#8728; und))
+                                 &#8773; (ok i , x &#8712; &#931; (e &#8315;&#185; e i) (X &#8728; und)))
+                       (trans (sym (Iso.from-to-inverse iso (i , x))) (cong (Iso.from iso) (eq (i , x))))
+                       hrefl)
+                (cong proj&#8321; (trans (sym (eq (Iso.from iso (e i , u x)))) (Iso.to-from-inverse iso (e i , u x)))))
+
+-}</a
+      ><a name="7630"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

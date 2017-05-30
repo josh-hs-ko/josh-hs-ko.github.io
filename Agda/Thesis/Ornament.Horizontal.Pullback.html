@@ -1,0 +1,5851 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Ornament.Horizontal.Pullback</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- `Shape : Functor &#7710;&#7714;Trans Fam` and `Erase : Functor &#332;rn &#7710;&#7714;Trans` reflect pullbacks.</a
+      ><a name="86"
+      >
+</a
+      ><a name="87" class="Comment"
+      >-- This file can take a long time to typecheck.</a
+      ><a name="134"
+      >
+
+</a
+      ><a name="136" class="Keyword"
+      >module</a
+      ><a name="142"
+      > </a
+      ><a name="143" href="Ornament.Horizontal.Pullback.html#1" class="Module"
+      >Ornament.Horizontal.Pullback</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Keyword"
+      >where</a
+      ><a name="177"
+      >
+
+</a
+      ><a name="179" class="Keyword"
+      >open</a
+      ><a name="183"
+      > </a
+      ><a name="184" class="Keyword"
+      >import</a
+      ><a name="190"
+      > </a
+      ><a name="191" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="207"
+      >
+</a
+      ><a name="208" class="Keyword"
+      >open</a
+      ><a name="212"
+      > </a
+      ><a name="213" class="Keyword"
+      >import</a
+      ><a name="219"
+      > </a
+      ><a name="220" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="236"
+      >
+</a
+      ><a name="237" class="Keyword"
+      >open</a
+      ><a name="241"
+      > </a
+      ><a name="242" class="Keyword"
+      >import</a
+      ><a name="248"
+      > </a
+      ><a name="249" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="269"
+      >
+</a
+      ><a name="270" class="Keyword"
+      >open</a
+      ><a name="274"
+      > </a
+      ><a name="275" class="Keyword"
+      >import</a
+      ><a name="281"
+      > </a
+      ><a name="282" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="302"
+      >
+</a
+      ><a name="303" class="Keyword"
+      >open</a
+      ><a name="307"
+      > </a
+      ><a name="308" class="Keyword"
+      >import</a
+      ><a name="314"
+      > </a
+      ><a name="315" href="Prelude.Category.Slice.html#1" class="Module"
+      >Prelude.Category.Slice</a
+      ><a name="337"
+      >
+</a
+      ><a name="338" class="Keyword"
+      >open</a
+      ><a name="342"
+      > </a
+      ><a name="343" class="Keyword"
+      >import</a
+      ><a name="349"
+      > </a
+      ><a name="350" href="Prelude.Category.Span.html#1" class="Module"
+      >Prelude.Category.Span</a
+      ><a name="371"
+      >
+</a
+      ><a name="372" class="Keyword"
+      >open</a
+      ><a name="376"
+      > </a
+      ><a name="377" class="Keyword"
+      >import</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Prelude.Category.Pullback.html#1" class="Module"
+      >Prelude.Category.Pullback</a
+      ><a name="409"
+      >
+</a
+      ><a name="410" class="Keyword"
+      >open</a
+      ><a name="414"
+      > </a
+      ><a name="415" class="Keyword"
+      >import</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="433"
+      >
+</a
+      ><a name="434" class="Keyword"
+      >open</a
+      ><a name="438"
+      > </a
+      ><a name="439" class="Keyword"
+      >import</a
+      ><a name="445"
+      > </a
+      ><a name="446" href="Description.Horizontal.html#1" class="Module"
+      >Description.Horizontal</a
+      ><a name="468"
+      >
+</a
+      ><a name="469" class="Keyword"
+      >open</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Keyword"
+      >import</a
+      ><a name="480"
+      > </a
+      ><a name="481" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="489"
+      >
+</a
+      ><a name="490" class="Keyword"
+      >open</a
+      ><a name="494"
+      > </a
+      ><a name="495" class="Keyword"
+      >import</a
+      ><a name="501"
+      > </a
+      ><a name="502" href="Ornament.SequentialComposition.html#1" class="Module"
+      >Ornament.SequentialComposition</a
+      ><a name="532"
+      >
+</a
+      ><a name="533" class="Keyword"
+      >open</a
+      ><a name="537"
+      > </a
+      ><a name="538" class="Keyword"
+      >import</a
+      ><a name="544"
+      > </a
+      ><a name="545" href="Ornament.Equivalence.html#1" class="Module"
+      >Ornament.Equivalence</a
+      ><a name="565"
+      >
+</a
+      ><a name="566" class="Keyword"
+      >open</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="Keyword"
+      >import</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="Ornament.Category.html#1" class="Module"
+      >Ornament.Category</a
+      ><a name="595"
+      >
+</a
+      ><a name="596" class="Keyword"
+      >open</a
+      ><a name="600"
+      > </a
+      ><a name="601" class="Keyword"
+      >import</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Ornament.Horizontal.html#1" class="Module"
+      >Ornament.Horizontal</a
+      ><a name="627"
+      >
+</a
+      ><a name="628" class="Keyword"
+      >open</a
+      ><a name="632"
+      > </a
+      ><a name="633" class="Keyword"
+      >import</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="Ornament.Horizontal.Category.html#1" class="Module"
+      >Ornament.Horizontal.Category</a
+      ><a name="668"
+      >
+
+</a
+      ><a name="670" class="Keyword"
+      >open</a
+      ><a name="674"
+      > </a
+      ><a name="675" class="Keyword"
+      >import</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="690"
+      > </a
+      ><a name="691" class="Keyword"
+      >using</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >(</a
+      ><a name="698" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="701" class="Symbol"
+      >)</a
+      ><a name="702"
+      >
+</a
+      ><a name="703" class="Keyword"
+      >open</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Keyword"
+      >import</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Keyword"
+      >using</a
+      ><a name="733"
+      > </a
+      ><a name="734" class="Symbol"
+      >(</a
+      ><a name="735" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="736" class="Symbol"
+      >;</a
+      ><a name="737"
+      > </a
+      ><a name="738" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="746" class="Symbol"
+      >;</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="751" class="Symbol"
+      >;</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="758" class="Symbol"
+      >;</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="765" class="Symbol"
+      >)</a
+      ><a name="766"
+      >
+</a
+      ><a name="767" class="Keyword"
+      >open</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Keyword"
+      >import</a
+      ><a name="778"
+      > </a
+      ><a name="779" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="788"
+      > </a
+      ><a name="789" class="Keyword"
+      >using</a
+      ><a name="794"
+      > </a
+      ><a name="795" class="Symbol"
+      >(</a
+      ><a name="796" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="800" class="Symbol"
+      >;</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="Data.List.Base.html#5519" class="InductiveConstructor"
+      >[]</a
+      ><a name="804" class="Symbol"
+      >;</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="809" class="Symbol"
+      >;</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="Data.List.Base.html#1207" class="Function"
+      >map</a
+      ><a name="814" class="Symbol"
+      >)</a
+      ><a name="815"
+      >
+</a
+      ><a name="816" class="Keyword"
+      >open</a
+      ><a name="820"
+      > </a
+      ><a name="821" class="Keyword"
+      >import</a
+      ><a name="827"
+      > </a
+      ><a name="828" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Keyword"
+      >using</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >(</a
+      ><a name="873" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="876" class="Symbol"
+      >;</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="882" class="Symbol"
+      >;</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="888" class="Symbol"
+      >;</a
+      ><a name="889"
+      > </a
+      ><a name="890" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="895" class="Symbol"
+      >;</a
+      ><a name="896"
+      > </a
+      ><a name="897" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="900" class="Symbol"
+      >)</a
+      ><a name="901"
+      >
+</a
+      ><a name="902" class="Keyword"
+      >open</a
+      ><a name="906"
+      > </a
+      ><a name="907" class="Keyword"
+      >import</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Keyword"
+      >using</a
+      ><a name="957"
+      > </a
+      ><a name="958" class="Symbol"
+      >(</a
+      ><a name="959" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="962" class="Symbol"
+      >;</a
+      ><a name="963"
+      > </a
+      ><a name="964" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="970" class="Symbol"
+      >)</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Keyword"
+      >renaming</a
+      ><a name="980"
+      > </a
+      ><a name="981" class="Symbol"
+      >(</a
+      ><a name="982" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >refl</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >to</a
+      ><a name="989"
+      > </a
+      ><a name="990" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="995" class="Symbol"
+      >;</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >trans</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" class="Symbol"
+      >to</a
+      ><a name="1005"
+      > </a
+      ><a name="1006" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="1012" class="Symbol"
+      >)</a
+      ><a name="1013"
+      >
+
+</a
+      ><a name="1015" class="Keyword"
+      >open</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" href="Prelude.Category.html#1740" class="Module"
+      >Functor</a
+      ><a name="1027"
+      >
+
+
+</a
+      ><a name="1030" href="Ornament.Horizontal.Pullback.html#1030" class="Function"
+      >coherence-reconstruction</a
+      ><a name="1054"
+      > </a
+      ><a name="1055" class="Symbol"
+      >:</a
+      ><a name="1056"
+      >
+  </a
+      ><a name="1059" class="Symbol"
+      >{</a
+      ><a name="1060" href="Ornament.Horizontal.Pullback.html#1060" class="Bound"
+      >I</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >:</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" class="PrimitiveType"
+      >Set</a
+      ><a name="1067" class="Symbol"
+      >}</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" class="Symbol"
+      >(</a
+      ><a name="1070" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >:</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="Ornament.Horizontal.Pullback.html#1060" class="Bound"
+      >I</a
+      ><a name="1087" class="Symbol"
+      >)</a
+      ><a name="1088"
+      > </a
+      ><a name="1089" class="Symbol"
+      >(</a
+      ><a name="1090" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="Symbol"
+      >:</a
+      ><a name="1093"
+      > </a
+      ><a name="1094" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1106"
+      > </a
+      ><a name="1107" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1108" class="Symbol"
+      >)</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" class="Symbol"
+      >(</a
+      ><a name="1111" href="Ornament.Horizontal.Pullback.html#1111" class="Bound"
+      >ps</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Symbol"
+      >:</a
+      ><a name="1115"
+      > </a
+      ><a name="1116" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1134" class="Symbol"
+      >)</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" class="Symbol"
+      >(</a
+      ><a name="1137" href="Ornament.Horizontal.Pullback.html#1137" class="Bound"
+      >s'</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" class="Symbol"
+      >:</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1152"
+      > </a
+      ><a name="1153" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1156" class="Symbol"
+      >)</a
+      ><a name="1157"
+      > </a
+      ><a name="1158" class="Symbol"
+      >(</a
+      ><a name="1159" href="Ornament.Horizontal.Pullback.html#1159" class="Bound"
+      >m</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" class="Symbol"
+      >:</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" href="Prelude.Category.Pullback.html#1164" class="Function"
+      >SquareMorphism</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" href="Ornament.Horizontal.Pullback.html#1137" class="Bound"
+      >s'</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1190" class="Symbol"
+      >)</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" class="Symbol"
+      >&#8594;</a
+      ><a name="1193"
+      >
+  </a
+      ><a name="1196" class="Keyword"
+      >let</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="Ornament.Horizontal.Pullback.html#1200" class="Bound"
+      >J</a
+      ><a name="1201"
+      >  </a
+      ><a name="1203" class="Symbol"
+      >=</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="1212"
+      >  </a
+      ><a name="1214" href="Ornament.Horizontal.Pullback.html#1070" class="Bound"
+      >f</a
+      ><a name="1215"
+      >
+      </a
+      ><a name="1222" href="Ornament.Horizontal.Pullback.html#1222" class="Bound"
+      >K</a
+      ><a name="1223"
+      >  </a
+      ><a name="1225" class="Symbol"
+      >=</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="1234"
+      >  </a
+      ><a name="1236" href="Ornament.Horizontal.Pullback.html#1072" class="Bound"
+      >g</a
+      ><a name="1237"
+      >
+      </a
+      ><a name="1244" href="Ornament.Horizontal.Pullback.html#1244" class="Bound"
+      >L</a
+      ><a name="1245"
+      >  </a
+      ><a name="1247" class="Symbol"
+      >=</a
+      ><a name="1248"
+      > </a
+      ><a name="1249" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1259"
+      >
+      </a
+      ><a name="1266" href="Ornament.Horizontal.Pullback.html#1266" class="Bound"
+      >l</a
+      ><a name="1267"
+      >  </a
+      ><a name="1269" class="Symbol"
+      >=</a
+      ><a name="1270"
+      > </a
+      ><a name="1271" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" class="Symbol"
+      >(</a
+      ><a name="1288" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1296" class="Symbol"
+      >)</a
+      ><a name="1297"
+      >
+      </a
+      ><a name="1304" href="Ornament.Horizontal.Pullback.html#1304" class="Bound"
+      >r</a
+      ><a name="1305"
+      >  </a
+      ><a name="1307" class="Symbol"
+      >=</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >(</a
+      ><a name="1326" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" href="Ornament.Horizontal.Pullback.html#1090" class="Bound"
+      >s</a
+      ><a name="1334" class="Symbol"
+      >)</a
+      ><a name="1335"
+      >
+      </a
+      ><a name="1342" href="Ornament.Horizontal.Pullback.html#1342" class="Bound"
+      >L'</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" class="Symbol"
+      >=</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="Ornament.Horizontal.Pullback.html#1137" class="Bound"
+      >s'</a
+      ><a name="1358"
+      >
+      </a
+      ><a name="1365" href="Ornament.Horizontal.Pullback.html#1365" class="Bound"
+      >l'</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Symbol"
+      >=</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" class="Symbol"
+      >(</a
+      ><a name="1387" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" href="Ornament.Horizontal.Pullback.html#1137" class="Bound"
+      >s'</a
+      ><a name="1396" class="Symbol"
+      >)</a
+      ><a name="1397"
+      >
+      </a
+      ><a name="1404" href="Ornament.Horizontal.Pullback.html#1404" class="Bound"
+      >r'</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" class="Symbol"
+      >=</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="1424"
+      > </a
+      ><a name="1425" class="Symbol"
+      >(</a
+      ><a name="1426" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" href="Ornament.Horizontal.Pullback.html#1137" class="Bound"
+      >s'</a
+      ><a name="1435" class="Symbol"
+      >)</a
+      ><a name="1436"
+      >
+      </a
+      ><a name="1443" href="Ornament.Horizontal.Pullback.html#1443" class="Bound"
+      >f</a
+      ><a name="1444"
+      >  </a
+      ><a name="1446" class="Symbol"
+      >=</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" href="Ornament.Horizontal.Pullback.html#1159" class="Bound"
+      >m</a
+      ><a name="1466"
+      >
+  </a
+      ><a name="1469" class="Keyword"
+      >in</a
+      ><a name="1471"
+      >  </a
+      ><a name="1473" class="Symbol"
+      >{</a
+      ><a name="1474" href="Ornament.Horizontal.Pullback.html#1474" class="Bound"
+      >xs'</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" class="Symbol"
+      >:</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" href="Ornament.Horizontal.Pullback.html#1342" class="Bound"
+      >L'</a
+      ><a name="1487" class="Symbol"
+      >}</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" class="Symbol"
+      >{</a
+      ><a name="1490" href="Ornament.Horizontal.Pullback.html#1490" class="Bound"
+      >xs</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" class="Symbol"
+      >:</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" href="Ornament.Horizontal.Pullback.html#1244" class="Bound"
+      >L</a
+      ><a name="1501" class="Symbol"
+      >}</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" class="Symbol"
+      >{</a
+      ><a name="1504" href="Ornament.Horizontal.Pullback.html#1504" class="Bound"
+      >ys</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" class="Symbol"
+      >:</a
+      ><a name="1508"
+      > </a
+      ><a name="1509" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="Ornament.Horizontal.Pullback.html#1200" class="Bound"
+      >J</a
+      ><a name="1515" class="Symbol"
+      >}</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" class="Symbol"
+      >{</a
+      ><a name="1518" href="Ornament.Horizontal.Pullback.html#1518" class="Bound"
+      >zs</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" class="Symbol"
+      >:</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" href="Ornament.Horizontal.Pullback.html#1222" class="Bound"
+      >K</a
+      ><a name="1529" class="Symbol"
+      >}</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" class="Symbol"
+      >&#8594;</a
+      ><a name="1532"
+      > </a
+      ><a name="1533" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" href="Ornament.Horizontal.Pullback.html#1266" class="Bound"
+      >l</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="Ornament.Horizontal.Pullback.html#1490" class="Bound"
+      >xs</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="Ornament.Horizontal.Pullback.html#1504" class="Bound"
+      >ys</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >&#8594;</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" href="Ornament.Horizontal.Pullback.html#1304" class="Bound"
+      >r</a
+      ><a name="1548"
+      > </a
+      ><a name="1549" href="Ornament.Horizontal.Pullback.html#1490" class="Bound"
+      >xs</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="Ornament.Horizontal.Pullback.html#1518" class="Bound"
+      >zs</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" class="Symbol"
+      >&#8594;</a
+      ><a name="1556"
+      > </a
+      ><a name="1557" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" href="Ornament.Horizontal.Pullback.html#1365" class="Bound"
+      >l'</a
+      ><a name="1561"
+      > </a
+      ><a name="1562" href="Ornament.Horizontal.Pullback.html#1474" class="Bound"
+      >xs'</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="Ornament.Horizontal.Pullback.html#1504" class="Bound"
+      >ys</a
+      ><a name="1568"
+      > </a
+      ><a name="1569" class="Symbol"
+      >&#8594;</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="1572"
+      > </a
+      ><a name="1573" href="Ornament.Horizontal.Pullback.html#1404" class="Bound"
+      >r'</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" href="Ornament.Horizontal.Pullback.html#1474" class="Bound"
+      >xs'</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="Ornament.Horizontal.Pullback.html#1518" class="Bound"
+      >zs</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" class="Symbol"
+      >&#8594;</a
+      ><a name="1584"
+      > </a
+      ><a name="1585" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="Ornament.Horizontal.Pullback.html#1443" class="Bound"
+      >f</a
+      ><a name="1588"
+      > </a
+      ><a name="1589" href="Ornament.Horizontal.Pullback.html#1474" class="Bound"
+      >xs'</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" href="Ornament.Horizontal.Pullback.html#1490" class="Bound"
+      >xs</a
+      ><a name="1595"
+      >
+</a
+      ><a name="1596" href="Ornament.Horizontal.Pullback.html#1030" class="Function"
+      >coherence-reconstruction</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" href="Ornament.Horizontal.Pullback.html#1621" class="Bound"
+      >f</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Ornament.Horizontal.Pullback.html#1623" class="Bound"
+      >g</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="Ornament.Horizontal.Pullback.html#1625" class="Bound"
+      >s</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" href="Ornament.Horizontal.Pullback.html#1627" class="Bound"
+      >ps</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Ornament.Horizontal.Pullback.html#1630" class="Bound"
+      >s'</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" href="Ornament.Horizontal.Pullback.html#1633" class="Bound"
+      >m</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="1637"
+      >        </a
+      ><a name="1645" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="1647"
+      >         </a
+      ><a name="1656" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="1658"
+      >         </a
+      ><a name="1667" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="1669"
+      >         </a
+      ><a name="1678" class="Symbol"
+      >=</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Ornament.html#1153" class="InductiveConstructor"
+      >[]</a
+      ><a name="1682"
+      >
+</a
+      ><a name="1683" href="Ornament.Horizontal.Pullback.html#1030" class="Function"
+      >coherence-reconstruction</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Ornament.Horizontal.Pullback.html#1708" class="Bound"
+      >f</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="Ornament.Horizontal.Pullback.html#1710" class="Bound"
+      >g</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" href="Ornament.Horizontal.Pullback.html#1712" class="Bound"
+      >s</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="Ornament.Horizontal.Pullback.html#1714" class="Bound"
+      >ps</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" href="Ornament.Horizontal.Pullback.html#1717" class="Bound"
+      >s'</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="Ornament.Horizontal.Pullback.html#1720" class="Bound"
+      >m</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" class="Symbol"
+      >(</a
+      ><a name="1723" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" class="Symbol"
+      >{</a
+      ><a name="1728" href="Ornament.Horizontal.Pullback.html#1728" class="Bound"
+      >l</a
+      ><a name="1729" class="Symbol"
+      >}</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" href="Ornament.Horizontal.Pullback.html#1731" class="Bound"
+      >q&#8320;</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" href="Ornament.Horizontal.Pullback.html#1734" class="Bound"
+      >es&#8320;</a
+      ><a name="1737" class="Symbol"
+      >)(</a
+      ><a name="1739" href="Ornament.Horizontal.Pullback.html#1739" class="Bound"
+      >q&#8321;</a
+      ><a name="1741"
+      > </a
+      ><a name="1742" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="Ornament.Horizontal.Pullback.html#1744" class="Bound"
+      >es&#8321;</a
+      ><a name="1747" class="Symbol"
+      >)</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" class="Symbol"
+      >(</a
+      ><a name="1750" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" class="Symbol"
+      >{</a
+      ><a name="1755" href="Ornament.Horizontal.Pullback.html#1755" class="Bound"
+      >l'</a
+      ><a name="1757" class="Symbol"
+      >}</a
+      ><a name="1758"
+      > </a
+      ><a name="1759" href="Ornament.Horizontal.Pullback.html#1759" class="Bound"
+      >q&#8322;</a
+      ><a name="1761"
+      > </a
+      ><a name="1762" href="Ornament.Horizontal.Pullback.html#1762" class="Bound"
+      >es&#8322;</a
+      ><a name="1765" class="Symbol"
+      >)</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" class="Symbol"
+      >(</a
+      ><a name="1768" href="Ornament.Horizontal.Pullback.html#1768" class="Bound"
+      >q&#8323;</a
+      ><a name="1770"
+      > </a
+      ><a name="1771" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="Ornament.Horizontal.Pullback.html#1773" class="Bound"
+      >es&#8323;</a
+      ><a name="1776" class="Symbol"
+      >)</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" class="Symbol"
+      >=</a
+      ><a name="1779"
+      >
+  </a
+      ><a name="1782" href="Prelude.InverseImage.html#4951" class="Function"
+      >decouple'</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" class="Symbol"
+      >(</a
+      ><a name="1793" href="Prelude.Category.Slice.html#561" class="Field"
+      >Slice.s</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="Ornament.Horizontal.Pullback.html#1708" class="Bound"
+      >f</a
+      ><a name="1802" class="Symbol"
+      >)</a
+      ><a name="1803"
+      > </a
+      ><a name="1804" class="Symbol"
+      >(</a
+      ><a name="1805" href="Prelude.Category.Slice.html#561" class="Field"
+      >Slice.s</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="Ornament.Horizontal.Pullback.html#1710" class="Bound"
+      >g</a
+      ><a name="1814" class="Symbol"
+      >)</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" href="Ornament.Horizontal.Pullback.html#1712" class="Bound"
+      >s</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" href="Ornament.Horizontal.Pullback.html#1714" class="Bound"
+      >ps</a
+      ><a name="1820"
+      > </a
+      ><a name="1821" class="Symbol"
+      >(</a
+      ><a name="1822" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" class="Symbol"
+      >(</a
+      ><a name="1829" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="1852"
+      > </a
+      ><a name="1853" href="Ornament.Horizontal.Pullback.html#1720" class="Bound"
+      >m</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" href="Ornament.Horizontal.Pullback.html#1755" class="Bound"
+      >l'</a
+      ><a name="1857" class="Symbol"
+      >)</a
+      ><a name="1858"
+      > </a
+      ><a name="1859" class="Symbol"
+      >(</a
+      ><a name="1860" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" href="Ornament.Horizontal.Pullback.html#1759" class="Bound"
+      >q&#8322;</a
+      ><a name="1868"
+      > </a
+      ><a name="1869" class="Symbol"
+      >(</a
+      ><a name="1870" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1873"
+      > </a
+      ><a name="1874" href="Ornament.Horizontal.Pullback.html#1731" class="Bound"
+      >q&#8320;</a
+      ><a name="1876" class="Symbol"
+      >)))</a
+      ><a name="1879"
+      >
+                                         </a
+      ><a name="1921" class="Symbol"
+      >(</a
+      ><a name="1922" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="1927"
+      > </a
+      ><a name="1928" class="Symbol"
+      >(</a
+      ><a name="1929" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" href="Ornament.Horizontal.Pullback.html#1720" class="Bound"
+      >m</a
+      ><a name="1954"
+      > </a
+      ><a name="1955" href="Ornament.Horizontal.Pullback.html#1755" class="Bound"
+      >l'</a
+      ><a name="1957" class="Symbol"
+      >)</a
+      ><a name="1958"
+      > </a
+      ><a name="1959" class="Symbol"
+      >(</a
+      ><a name="1960" href="Relation.Binary.PropositionalEquality.Core.html#632" class="Function"
+      >trans</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="Ornament.Horizontal.Pullback.html#1768" class="Bound"
+      >q&#8323;</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >(</a
+      ><a name="1970" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" href="Ornament.Horizontal.Pullback.html#1739" class="Bound"
+      >q&#8321;</a
+      ><a name="1976" class="Symbol"
+      >)))</a
+      ><a name="1979"
+      >
+    </a
+      ><a name="1984" href="Ornament.html#1171" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="1985"
+      > </a
+      ><a name="1986" href="Ornament.Horizontal.Pullback.html#1030" class="Function"
+      >coherence-reconstruction</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="Ornament.Horizontal.Pullback.html#1708" class="Bound"
+      >f</a
+      ><a name="2012"
+      > </a
+      ><a name="2013" href="Ornament.Horizontal.Pullback.html#1710" class="Bound"
+      >g</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" href="Ornament.Horizontal.Pullback.html#1712" class="Bound"
+      >s</a
+      ><a name="2016"
+      > </a
+      ><a name="2017" href="Ornament.Horizontal.Pullback.html#1714" class="Bound"
+      >ps</a
+      ><a name="2019"
+      > </a
+      ><a name="2020" href="Ornament.Horizontal.Pullback.html#1717" class="Bound"
+      >s'</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="Ornament.Horizontal.Pullback.html#1720" class="Bound"
+      >m</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" href="Ornament.Horizontal.Pullback.html#1734" class="Bound"
+      >es&#8320;</a
+      ><a name="2028"
+      > </a
+      ><a name="2029" href="Ornament.Horizontal.Pullback.html#1744" class="Bound"
+      >es&#8321;</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Ornament.Horizontal.Pullback.html#1762" class="Bound"
+      >es&#8322;</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="Ornament.Horizontal.Pullback.html#1773" class="Bound"
+      >es&#8323;</a
+      ><a name="2040"
+      >
+
+</a
+      ><a name="2042" href="Ornament.Horizontal.Pullback.html#2042" class="Function"
+      >coherence-reconstruction'</a
+      ><a name="2067"
+      > </a
+      ><a name="2068" class="Symbol"
+      >:</a
+      ><a name="2069"
+      >
+  </a
+      ><a name="2072" class="Symbol"
+      >{</a
+      ><a name="2073" href="Ornament.Horizontal.Pullback.html#2073" class="Bound"
+      >I</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" class="Symbol"
+      >:</a
+      ><a name="2076"
+      > </a
+      ><a name="2077" class="PrimitiveType"
+      >Set</a
+      ><a name="2080" class="Symbol"
+      >}</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" class="Symbol"
+      >(</a
+      ><a name="2083" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" class="Symbol"
+      >:</a
+      ><a name="2088"
+      > </a
+      ><a name="2089" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" href="Ornament.Horizontal.Pullback.html#2073" class="Bound"
+      >I</a
+      ><a name="2100" class="Symbol"
+      >)</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" class="Symbol"
+      >(</a
+      ><a name="2103" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" class="Symbol"
+      >:</a
+      ><a name="2106"
+      > </a
+      ><a name="2107" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2117"
+      > </a
+      ><a name="2118" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2121" class="Symbol"
+      >)</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" class="Symbol"
+      >(</a
+      ><a name="2124" href="Ornament.Horizontal.Pullback.html#2124" class="Bound"
+      >ps</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" class="Symbol"
+      >:</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="2137"
+      > </a
+      ><a name="2138" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2147" class="Symbol"
+      >)</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="Symbol"
+      >(</a
+      ><a name="2150" href="Ornament.Horizontal.Pullback.html#2150" class="Bound"
+      >s'</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" class="Symbol"
+      >:</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2169" class="Symbol"
+      >)</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >(</a
+      ><a name="2172" href="Ornament.Horizontal.Pullback.html#2172" class="Bound"
+      >m</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" class="Symbol"
+      >:</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="Prelude.Category.Pullback.html#1164" class="Function"
+      >SquareMorphism</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" href="Ornament.Horizontal.Pullback.html#2150" class="Bound"
+      >s'</a
+      ><a name="2201"
+      > </a
+      ><a name="2202" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2203" class="Symbol"
+      >)</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" class="Symbol"
+      >&#8594;</a
+      ><a name="2206"
+      >
+  </a
+      ><a name="2209" class="Keyword"
+      >let</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" href="Ornament.Horizontal.Pullback.html#2213" class="Bound"
+      >J</a
+      ><a name="2214"
+      >  </a
+      ><a name="2216" class="Symbol"
+      >=</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="2225"
+      >  </a
+      ><a name="2227" href="Ornament.Horizontal.Pullback.html#2083" class="Bound"
+      >f</a
+      ><a name="2228"
+      >
+      </a
+      ><a name="2235" href="Ornament.Horizontal.Pullback.html#2235" class="Bound"
+      >K</a
+      ><a name="2236"
+      >  </a
+      ><a name="2238" class="Symbol"
+      >=</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="2247"
+      >  </a
+      ><a name="2249" href="Ornament.Horizontal.Pullback.html#2085" class="Bound"
+      >g</a
+      ><a name="2250"
+      >
+      </a
+      ><a name="2257" href="Ornament.Horizontal.Pullback.html#2257" class="Bound"
+      >L</a
+      ><a name="2258"
+      >  </a
+      ><a name="2260" class="Symbol"
+      >=</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="2270"
+      > </a
+      ><a name="2271" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2272"
+      >
+      </a
+      ><a name="2279" href="Ornament.Horizontal.Pullback.html#2279" class="Bound"
+      >l</a
+      ><a name="2280"
+      >  </a
+      ><a name="2282" class="Symbol"
+      >=</a
+      ><a name="2283"
+      > </a
+      ><a name="2284" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2299"
+      > </a
+      ><a name="2300" class="Symbol"
+      >(</a
+      ><a name="2301" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2309" class="Symbol"
+      >)</a
+      ><a name="2310"
+      >
+      </a
+      ><a name="2317" href="Ornament.Horizontal.Pullback.html#2317" class="Bound"
+      >r</a
+      ><a name="2318"
+      >  </a
+      ><a name="2320" class="Symbol"
+      >=</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2337"
+      > </a
+      ><a name="2338" class="Symbol"
+      >(</a
+      ><a name="2339" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="Ornament.Horizontal.Pullback.html#2103" class="Bound"
+      >s</a
+      ><a name="2347" class="Symbol"
+      >)</a
+      ><a name="2348"
+      >
+      </a
+      ><a name="2355" href="Ornament.Horizontal.Pullback.html#2355" class="Bound"
+      >L'</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" class="Symbol"
+      >=</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="2368"
+      > </a
+      ><a name="2369" href="Ornament.Horizontal.Pullback.html#2150" class="Bound"
+      >s'</a
+      ><a name="2371"
+      >
+      </a
+      ><a name="2378" href="Ornament.Horizontal.Pullback.html#2378" class="Bound"
+      >l'</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" class="Symbol"
+      >=</a
+      ><a name="2382"
+      > </a
+      ><a name="2383" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" class="Symbol"
+      >(</a
+      ><a name="2400" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="2406"
+      > </a
+      ><a name="2407" href="Ornament.Horizontal.Pullback.html#2150" class="Bound"
+      >s'</a
+      ><a name="2409" class="Symbol"
+      >)</a
+      ><a name="2410"
+      >
+      </a
+      ><a name="2417" href="Ornament.Horizontal.Pullback.html#2417" class="Bound"
+      >r'</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" class="Symbol"
+      >=</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" class="Symbol"
+      >(</a
+      ><a name="2439" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="Ornament.Horizontal.Pullback.html#2150" class="Bound"
+      >s'</a
+      ><a name="2448" class="Symbol"
+      >)</a
+      ><a name="2449"
+      >
+      </a
+      ><a name="2456" href="Ornament.Horizontal.Pullback.html#2456" class="Bound"
+      >f</a
+      ><a name="2457"
+      >  </a
+      ><a name="2459" class="Symbol"
+      >=</a
+      ><a name="2460"
+      > </a
+      ><a name="2461" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="2477"
+      > </a
+      ><a name="2478" href="Ornament.Horizontal.Pullback.html#2172" class="Bound"
+      >m</a
+      ><a name="2479"
+      >
+  </a
+      ><a name="2482" class="Keyword"
+      >in</a
+      ><a name="2484"
+      >  </a
+      ><a name="2486" class="Symbol"
+      >{</a
+      ><a name="2487" href="Ornament.Horizontal.Pullback.html#2487" class="Bound"
+      >xs'</a
+      ><a name="2490"
+      > </a
+      ><a name="2491" class="Symbol"
+      >:</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="Ornament.Horizontal.Pullback.html#2355" class="Bound"
+      >L'</a
+      ><a name="2500" class="Symbol"
+      >}</a
+      ><a name="2501"
+      > </a
+      ><a name="2502" class="Symbol"
+      >{</a
+      ><a name="2503" href="Ornament.Horizontal.Pullback.html#2503" class="Bound"
+      >xs</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" class="Symbol"
+      >:</a
+      ><a name="2507"
+      > </a
+      ><a name="2508" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" href="Ornament.Horizontal.Pullback.html#2257" class="Bound"
+      >L</a
+      ><a name="2514" class="Symbol"
+      >}</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" class="Symbol"
+      >{</a
+      ><a name="2517" href="Ornament.Horizontal.Pullback.html#2517" class="Bound"
+      >ys</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="Ornament.Horizontal.Pullback.html#2520" class="Bound"
+      >ys'</a
+      ><a name="2523"
+      > </a
+      ><a name="2524" class="Symbol"
+      >:</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" href="Ornament.Horizontal.Pullback.html#2213" class="Bound"
+      >J</a
+      ><a name="2532" class="Symbol"
+      >}</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >{</a
+      ><a name="2535" href="Ornament.Horizontal.Pullback.html#2535" class="Bound"
+      >zs</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" href="Ornament.Horizontal.Pullback.html#2538" class="Bound"
+      >zs'</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" class="Symbol"
+      >:</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" href="Ornament.Horizontal.Pullback.html#2235" class="Bound"
+      >K</a
+      ><a name="2550" class="Symbol"
+      >}</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" class="Symbol"
+      >&#8594;</a
+      ><a name="2553"
+      >
+      </a
+      ><a name="2560" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="Ornament.Horizontal.Pullback.html#2279" class="Bound"
+      >l</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="Ornament.Horizontal.Pullback.html#2503" class="Bound"
+      >xs</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="Ornament.Horizontal.Pullback.html#2517" class="Bound"
+      >ys</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" class="Symbol"
+      >&#8594;</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="2573"
+      > </a
+      ><a name="2574" href="Ornament.Horizontal.Pullback.html#2317" class="Bound"
+      >r</a
+      ><a name="2575"
+      > </a
+      ><a name="2576" href="Ornament.Horizontal.Pullback.html#2503" class="Bound"
+      >xs</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" href="Ornament.Horizontal.Pullback.html#2535" class="Bound"
+      >zs</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" class="Symbol"
+      >&#8594;</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" href="Ornament.Horizontal.Pullback.html#2378" class="Bound"
+      >l'</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="Ornament.Horizontal.Pullback.html#2487" class="Bound"
+      >xs'</a
+      ><a name="2592"
+      > </a
+      ><a name="2593" href="Ornament.Horizontal.Pullback.html#2520" class="Bound"
+      >ys'</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" class="Symbol"
+      >&#8594;</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" href="Ornament.Horizontal.Pullback.html#2417" class="Bound"
+      >r'</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="Ornament.Horizontal.Pullback.html#2487" class="Bound"
+      >xs'</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" href="Ornament.Horizontal.Pullback.html#2538" class="Bound"
+      >zs'</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" class="Symbol"
+      >&#8594;</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" href="Ornament.Horizontal.Pullback.html#2517" class="Bound"
+      >ys</a
+      ><a name="2616"
+      > </a
+      ><a name="2617" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="Ornament.Horizontal.Pullback.html#2520" class="Bound"
+      >ys'</a
+      ><a name="2622"
+      > </a
+      ><a name="2623" class="Symbol"
+      >&#8594;</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" href="Ornament.Horizontal.Pullback.html#2535" class="Bound"
+      >zs</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2629"
+      > </a
+      ><a name="2630" href="Ornament.Horizontal.Pullback.html#2538" class="Bound"
+      >zs'</a
+      ><a name="2633"
+      > </a
+      ><a name="2634" class="Symbol"
+      >&#8594;</a
+      ><a name="2635"
+      > </a
+      ><a name="2636" href="Ornament.html#1095" class="Datatype"
+      >&#278;</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" href="Ornament.Horizontal.Pullback.html#2456" class="Bound"
+      >f</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" href="Ornament.Horizontal.Pullback.html#2487" class="Bound"
+      >xs'</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" href="Ornament.Horizontal.Pullback.html#2503" class="Bound"
+      >xs</a
+      ><a name="2646"
+      >
+</a
+      ><a name="2647" href="Ornament.Horizontal.Pullback.html#2042" class="Function"
+      >coherence-reconstruction'</a
+      ><a name="2672"
+      > </a
+      ><a name="2673" href="Ornament.Horizontal.Pullback.html#2673" class="Bound"
+      >f</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="Ornament.Horizontal.Pullback.html#2675" class="Bound"
+      >g</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="Ornament.Horizontal.Pullback.html#2677" class="Bound"
+      >s</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" href="Ornament.Horizontal.Pullback.html#2679" class="Bound"
+      >ps</a
+      ><a name="2681"
+      > </a
+      ><a name="2682" href="Ornament.Horizontal.Pullback.html#2682" class="Bound"
+      >s'</a
+      ><a name="2684"
+      > </a
+      ><a name="2685" href="Ornament.Horizontal.Pullback.html#2685" class="Bound"
+      >m</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" href="Ornament.Horizontal.Pullback.html#2687" class="Bound"
+      >es&#8320;</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" href="Ornament.Horizontal.Pullback.html#2691" class="Bound"
+      >es&#8321;</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" href="Ornament.Horizontal.Pullback.html#2695" class="Bound"
+      >es&#8322;</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" href="Ornament.Horizontal.Pullback.html#2699" class="Bound"
+      >es&#8323;</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2707"
+      > </a
+      ><a name="2708" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" class="Symbol"
+      >=</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" href="Ornament.Horizontal.Pullback.html#1030" class="Function"
+      >coherence-reconstruction</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" href="Ornament.Horizontal.Pullback.html#2673" class="Bound"
+      >f</a
+      ><a name="2741"
+      > </a
+      ><a name="2742" href="Ornament.Horizontal.Pullback.html#2675" class="Bound"
+      >g</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" href="Ornament.Horizontal.Pullback.html#2677" class="Bound"
+      >s</a
+      ><a name="2745"
+      > </a
+      ><a name="2746" href="Ornament.Horizontal.Pullback.html#2679" class="Bound"
+      >ps</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" href="Ornament.Horizontal.Pullback.html#2682" class="Bound"
+      >s'</a
+      ><a name="2751"
+      > </a
+      ><a name="2752" href="Ornament.Horizontal.Pullback.html#2685" class="Bound"
+      >m</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="Ornament.Horizontal.Pullback.html#2687" class="Bound"
+      >es&#8320;</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="Ornament.Horizontal.Pullback.html#2691" class="Bound"
+      >es&#8321;</a
+      ><a name="2761"
+      > </a
+      ><a name="2762" href="Ornament.Horizontal.Pullback.html#2695" class="Bound"
+      >es&#8322;</a
+      ><a name="2765"
+      > </a
+      ><a name="2766" href="Ornament.Horizontal.Pullback.html#2699" class="Bound"
+      >es&#8323;</a
+      ><a name="2769"
+      >
+
+</a
+      ><a name="2771" href="Ornament.Horizontal.Pullback.html#2771" class="Function"
+      >next-lemma</a
+      ><a name="2781"
+      > </a
+      ><a name="2782" class="Symbol"
+      >:</a
+      ><a name="2783"
+      > </a
+      ><a name="2784" class="Symbol"
+      >{</a
+      ><a name="2785" href="Ornament.Horizontal.Pullback.html#2785" class="Bound"
+      >I</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" class="Symbol"
+      >:</a
+      ><a name="2788"
+      > </a
+      ><a name="2789" class="PrimitiveType"
+      >Set</a
+      ><a name="2792" class="Symbol"
+      >}</a
+      ><a name="2793"
+      > </a
+      ><a name="2794" class="Symbol"
+      >{</a
+      ><a name="2795" href="Ornament.Horizontal.Pullback.html#2795" class="Bound"
+      >D</a
+      ><a name="2796"
+      > </a
+      ><a name="2797" href="Ornament.Horizontal.Pullback.html#2797" class="Bound"
+      >D'</a
+      ><a name="2799"
+      > </a
+      ><a name="2800" class="Symbol"
+      >:</a
+      ><a name="2801"
+      > </a
+      ><a name="2802" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="Ornament.Horizontal.Pullback.html#2785" class="Bound"
+      >I</a
+      ><a name="2809" class="Symbol"
+      >}</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" class="Symbol"
+      >&#8594;</a
+      ><a name="2812"
+      > </a
+      ><a name="2813" href="Ornament.Horizontal.Pullback.html#2795" class="Bound"
+      >D</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2816"
+      > </a
+      ><a name="2817" href="Ornament.Horizontal.Pullback.html#2797" class="Bound"
+      >D'</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" class="Symbol"
+      >&#8594;</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" class="Symbol"
+      >{</a
+      ><a name="2823" href="Ornament.Horizontal.Pullback.html#2823" class="Bound"
+      >h</a
+      ><a name="2824"
+      > </a
+      ><a name="2825" class="Symbol"
+      >:</a
+      ><a name="2826"
+      > </a
+      ><a name="2827" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="Ornament.Horizontal.Pullback.html#2795" class="Bound"
+      >D</a
+      ><a name="2830" class="Symbol"
+      >}</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" class="Symbol"
+      >{</a
+      ><a name="2833" href="Ornament.Horizontal.Pullback.html#2833" class="Bound"
+      >h'</a
+      ><a name="2835"
+      > </a
+      ><a name="2836" class="Symbol"
+      >:</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="Ornament.Horizontal.Pullback.html#2797" class="Bound"
+      >D'</a
+      ><a name="2842" class="Symbol"
+      >}</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" class="Symbol"
+      >&#8594;</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" href="Ornament.Horizontal.Pullback.html#2823" class="Bound"
+      >h</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="2849"
+      > </a
+      ><a name="2850" href="Ornament.Horizontal.Pullback.html#2833" class="Bound"
+      >h'</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" class="Symbol"
+      >&#8594;</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="2859"
+      > </a
+      ><a name="2860" href="Ornament.Horizontal.Pullback.html#2795" class="Bound"
+      >D</a
+      ><a name="2861"
+      > </a
+      ><a name="2862" href="Ornament.Horizontal.Pullback.html#2823" class="Bound"
+      >h</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="2870"
+      > </a
+      ><a name="2871" href="Ornament.Horizontal.Pullback.html#2797" class="Bound"
+      >D'</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" href="Ornament.Horizontal.Pullback.html#2833" class="Bound"
+      >h'</a
+      ><a name="2876"
+      >
+</a
+      ><a name="2877" href="Ornament.Horizontal.Pullback.html#2771" class="Function"
+      >next-lemma</a
+      ><a name="2887"
+      > </a
+      ><a name="2888" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2892"
+      > </a
+      ><a name="2893" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" class="Symbol"
+      >=</a
+      ><a name="2900"
+      > </a
+      ><a name="2901" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2905"
+      >
+
+</a
+      ><a name="2907" class="Keyword"
+      >module</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="Ornament.Horizontal.Pullback.html#2914" class="Module"
+      >ShapeReflectsPullback</a
+      ><a name="2935"
+      >
+  </a
+      ><a name="2938" class="Symbol"
+      >{</a
+      ><a name="2939" href="Ornament.Horizontal.Pullback.html#2939" class="Bound"
+      >I</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >:</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" class="PrimitiveType"
+      >Set</a
+      ><a name="2946" class="Symbol"
+      >}</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" class="Symbol"
+      >{</a
+      ><a name="2949" href="Ornament.Horizontal.Pullback.html#2949" class="Bound"
+      >D</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >:</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="Ornament.Horizontal.Pullback.html#2939" class="Bound"
+      >I</a
+      ><a name="2959" class="Symbol"
+      >}</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" class="Symbol"
+      >(</a
+      ><a name="2962" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="2965"
+      > </a
+      ><a name="2966" class="Symbol"
+      >:</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="Ornament.Horizontal.Category.html#1223" class="Function"
+      >&#7710;&#7714;Trans</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" class="Symbol"
+      >(</a
+      ><a name="2983" href="Ornament.Horizontal.Pullback.html#2939" class="Bound"
+      >I</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" href="Ornament.Horizontal.Pullback.html#2949" class="Bound"
+      >D</a
+      ><a name="2988" class="Symbol"
+      >))</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" class="Symbol"
+      >(</a
+      ><a name="2992" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" class="Symbol"
+      >:</a
+      ><a name="2995"
+      > </a
+      ><a name="2996" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" href="Ornament.Horizontal.Category.html#1223" class="Function"
+      >&#7710;&#7714;Trans</a
+      ><a name="3010"
+      > </a
+      ><a name="3011" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3014" class="Symbol"
+      >)</a
+      ><a name="3015"
+      >
+  </a
+      ><a name="3018" class="Symbol"
+      >(</a
+      ><a name="3019" href="Ornament.Horizontal.Pullback.html#3019" class="Bound"
+      >p</a
+      ><a name="3020"
+      > </a
+      ><a name="3021" class="Symbol"
+      >:</a
+      ><a name="3022"
+      > </a
+      ><a name="3023" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" class="Symbol"
+      >(</a
+      ><a name="3037" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" class="Symbol"
+      >(</a
+      ><a name="3045" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3053"
+      > </a
+      ><a name="3054" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3059" class="Symbol"
+      >)</a
+      ><a name="3060"
+      > </a
+      ><a name="3061" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3062" class="Symbol"
+      >)</a
+      ><a name="3063"
+      > </a
+      ><a name="3064" class="Symbol"
+      >(</a
+      ><a name="3065" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" class="Symbol"
+      >(</a
+      ><a name="3073" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3087" class="Symbol"
+      >)</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3090" class="Symbol"
+      >)</a
+      ><a name="3091"
+      > </a
+      ><a name="3092" class="Symbol"
+      >(</a
+      ><a name="3093" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3099"
+      > </a
+      ><a name="3100" class="Symbol"
+      >(</a
+      ><a name="3101" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3116" class="Symbol"
+      >)</a
+      ><a name="3117"
+      > </a
+      ><a name="3118" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="3119" class="Symbol"
+      >))</a
+      ><a name="3121"
+      >
+  </a
+      ><a name="3124" class="Symbol"
+      >(</a
+      ><a name="3125" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3127"
+      > </a
+      ><a name="3128" class="Symbol"
+      >:</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="3136"
+      > </a
+      ><a name="3137" href="Ornament.Horizontal.Category.html#1223" class="Function"
+      >&#7710;&#7714;Trans</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3146"
+      > </a
+      ><a name="3147" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3148" class="Symbol"
+      >)</a
+      ><a name="3149"
+      > </a
+      ><a name="3150" class="Keyword"
+      >where</a
+      ><a name="3155"
+      >
+
+  </a
+      ><a name="3159" href="Ornament.Horizontal.Pullback.html#3159" class="Function"
+      >L</a
+      ><a name="3160"
+      > </a
+      ><a name="3161" class="Symbol"
+      >:</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" class="PrimitiveType"
+      >Set</a
+      ><a name="3166"
+      >
+  </a
+      ><a name="3169" href="Ornament.Horizontal.Pullback.html#3159" class="Function"
+      >L</a
+      ><a name="3170"
+      > </a
+      ><a name="3171" class="Symbol"
+      >=</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3178"
+      > </a
+      ><a name="3179" class="Symbol"
+      >(</a
+      ><a name="3180" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="3188"
+      > </a
+      ><a name="3189" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="3190" class="Symbol"
+      >)</a
+      ><a name="3191"
+      >
+
+  </a
+      ><a name="3195" href="Ornament.Horizontal.Pullback.html#3195" class="Function"
+      >G</a
+      ><a name="3196"
+      > </a
+      ><a name="3197" class="Symbol"
+      >:</a
+      ><a name="3198"
+      > </a
+      ><a name="3199" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="3203"
+      > </a
+      ><a name="3204" href="Ornament.Horizontal.Pullback.html#3159" class="Function"
+      >L</a
+      ><a name="3205"
+      >
+  </a
+      ><a name="3208" href="Ornament.Horizontal.Pullback.html#3195" class="Function"
+      >G</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" class="Symbol"
+      >=</a
+      ><a name="3211"
+      > </a
+      ><a name="3212" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3217"
+      > </a
+      ><a name="3218" class="Symbol"
+      >(</a
+      ><a name="3219" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="3229" class="Symbol"
+      >)</a
+      ><a name="3230"
+      >
+
+  </a
+      ><a name="3234" href="Ornament.Horizontal.Pullback.html#3234" class="Function"
+      >L'</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" class="Symbol"
+      >:</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" class="PrimitiveType"
+      >Set</a
+      ><a name="3242"
+      >
+  </a
+      ><a name="3245" href="Ornament.Horizontal.Pullback.html#3234" class="Function"
+      >L'</a
+      ><a name="3247"
+      > </a
+      ><a name="3248" class="Symbol"
+      >=</a
+      ><a name="3249"
+      > </a
+      ><a name="3250" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3255"
+      > </a
+      ><a name="3256" class="Symbol"
+      >(</a
+      ><a name="3257" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3268" class="Symbol"
+      >)</a
+      ><a name="3269"
+      >
+
+  </a
+      ><a name="3273" href="Ornament.Horizontal.Pullback.html#3273" class="Function"
+      >G'</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >:</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="3282"
+      > </a
+      ><a name="3283" href="Ornament.Horizontal.Pullback.html#3234" class="Function"
+      >L'</a
+      ><a name="3285"
+      >
+  </a
+      ><a name="3288" href="Ornament.Horizontal.Pullback.html#3273" class="Function"
+      >G'</a
+      ><a name="3290"
+      > </a
+      ><a name="3291" class="Symbol"
+      >=</a
+      ><a name="3292"
+      > </a
+      ><a name="3293" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3298"
+      > </a
+      ><a name="3299" class="Symbol"
+      >(</a
+      ><a name="3300" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3311" class="Symbol"
+      >)</a
+      ><a name="3312"
+      >
+
+  </a
+      ><a name="3316" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="3323"
+      > </a
+      ><a name="3324" class="Symbol"
+      >:</a
+      ><a name="3325"
+      > </a
+      ><a name="3326" href="Prelude.Category.Pullback.html#1164" class="Function"
+      >SquareMorphism</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3344"
+      > </a
+      ><a name="3345" class="Symbol"
+      >(</a
+      ><a name="3346" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" class="Symbol"
+      >(</a
+      ><a name="3354" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3362"
+      > </a
+      ><a name="3363" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3368" class="Symbol"
+      >)</a
+      ><a name="3369"
+      > </a
+      ><a name="3370" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3371" class="Symbol"
+      >)</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" class="Symbol"
+      >(</a
+      ><a name="3374" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3380"
+      > </a
+      ><a name="3381" class="Symbol"
+      >(</a
+      ><a name="3382" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3390"
+      > </a
+      ><a name="3391" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3396" class="Symbol"
+      >)</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3399" class="Symbol"
+      >)</a
+      ><a name="3400"
+      >
+              </a
+      ><a name="3415" class="Symbol"
+      >(</a
+      ><a name="3416" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" class="Symbol"
+      >(</a
+      ><a name="3424" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="3433"
+      > </a
+      ><a name="3434" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3439" class="Symbol"
+      >)</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3443" class="Symbol"
+      >)</a
+      ><a name="3444"
+      > </a
+      ><a name="3445" class="Symbol"
+      >(</a
+      ><a name="3446" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3452"
+      > </a
+      ><a name="3453" class="Symbol"
+      >(</a
+      ><a name="3454" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="3463"
+      > </a
+      ><a name="3464" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3469" class="Symbol"
+      >)</a
+      ><a name="3470"
+      > </a
+      ><a name="3471" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="3472" class="Symbol"
+      >)</a
+      ><a name="3473"
+      >
+  </a
+      ><a name="3476" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="3483"
+      > </a
+      ><a name="3484" class="Symbol"
+      >=</a
+      ><a name="3485"
+      > </a
+      ><a name="3486" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3491"
+      > </a
+      ><a name="3492" class="Symbol"
+      >(</a
+      ><a name="3493" href="Ornament.Horizontal.Pullback.html#3019" class="Bound"
+      >p</a
+      ><a name="3494"
+      > </a
+      ><a name="3495" class="Symbol"
+      >(</a
+      ><a name="3496" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3502"
+      > </a
+      ><a name="3503" class="Symbol"
+      >(</a
+      ><a name="3504" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="3513"
+      > </a
+      ><a name="3514" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3519" class="Symbol"
+      >)</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3523" class="Symbol"
+      >))</a
+      ><a name="3525"
+      >
+
+  </a
+      ><a name="3529" href="Ornament.Horizontal.Pullback.html#3529" class="Function"
+      >med</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" class="Symbol"
+      >:</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" href="Prelude.Category.Pullback.html#1164" class="Function"
+      >SquareMorphism</a
+      ><a name="3549"
+      > </a
+      ><a name="3550" href="Ornament.Horizontal.Category.html#1223" class="Function"
+      >&#7710;&#7714;Trans</a
+      ><a name="3557"
+      > </a
+      ><a name="3558" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3559"
+      > </a
+      ><a name="3560" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3561"
+      > </a
+      ><a name="3562" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="3564"
+      > </a
+      ><a name="3565" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="3566"
+      >
+  </a
+      ><a name="3569" href="Ornament.Horizontal.Pullback.html#3529" class="Function"
+      >med</a
+      ><a name="3572"
+      > </a
+      ><a name="3573" class="Symbol"
+      >=</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" href="Prelude.Category.Span.html#911" class="InductiveConstructor"
+      >spanMorphism</a
+      ><a name="3587"
+      >
+          </a
+      ><a name="3598" class="Symbol"
+      >(</a
+      ><a name="3599" href="Prelude.Category.Slice.html#722" class="InductiveConstructor"
+      >sliceMorphism</a
+      ><a name="3612"
+      >
+             </a
+      ><a name="3626" class="Symbol"
+      >(</a
+      ><a name="3627" href="Prelude.Function.Fam.html#1972" class="Field"
+      >FamMorphism.e</a
+      ><a name="3640"
+      > </a
+      ><a name="3641" class="Symbol"
+      >(</a
+      ><a name="3642" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="3658"
+      > </a
+      ><a name="3659" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="3666" class="Symbol"
+      >)</a
+      ><a name="3667"
+      > </a
+      ><a name="3668" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3669"
+      >
+              </a
+      ><a name="3684" href="Ornament.Horizontal.Category.html#1143" class="InductiveConstructor"
+      >wrap</a
+      ><a name="3688"
+      > </a
+      ><a name="3689" class="Symbol"
+      >&#955;</a
+      ><a name="3690"
+      > </a
+      ><a name="3691" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="3692"
+      > </a
+      ><a name="3693" class="Symbol"
+      >&#8594;</a
+      ><a name="3694"
+      > </a
+      ><a name="3695" href="Prelude.Function.Fam.html#2000" class="Field"
+      >FamMorphism.u</a
+      ><a name="3708"
+      > </a
+      ><a name="3709" class="Symbol"
+      >(</a
+      ><a name="3710" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="3726"
+      > </a
+      ><a name="3727" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="3734" class="Symbol"
+      >)</a
+      ><a name="3735"
+      > </a
+      ><a name="3736" href="Ornament.Horizontal.html#1016" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3737"
+      >
+                         </a
+      ><a name="3763" class="Symbol"
+      >&#955;</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" class="Symbol"
+      >&#8594;</a
+      ><a name="3768"
+      > </a
+      ><a name="3769" href="Ornament.Horizontal.Pullback.html#2042" class="Function"
+      >coherence-reconstruction'</a
+      ><a name="3794"
+      >
+                                 </a
+      ><a name="3828" class="Symbol"
+      >(</a
+      ><a name="3829" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3835"
+      > </a
+      ><a name="3836" class="Symbol"
+      >(</a
+      ><a name="3837" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3845"
+      > </a
+      ><a name="3846" class="Symbol"
+      >(</a
+      ><a name="3847" href="Prelude.Function.Fam.html#3572" class="Function"
+      >FamI</a
+      ><a name="3851"
+      > </a
+      ><a name="3852" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="3853"
+      > </a
+      ><a name="3854" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3859" class="Symbol"
+      >))</a
+      ><a name="3861"
+      > </a
+      ><a name="3862" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="3863" class="Symbol"
+      >)</a
+      ><a name="3864"
+      >
+                                 </a
+      ><a name="3898" class="Symbol"
+      >(</a
+      ><a name="3899" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3905"
+      > </a
+      ><a name="3906" class="Symbol"
+      >(</a
+      ><a name="3907" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3915"
+      > </a
+      ><a name="3916" class="Symbol"
+      >(</a
+      ><a name="3917" href="Prelude.Function.Fam.html#3572" class="Function"
+      >FamI</a
+      ><a name="3921"
+      > </a
+      ><a name="3922" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="3929" class="Symbol"
+      >))</a
+      ><a name="3931"
+      > </a
+      ><a name="3932" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="3933" class="Symbol"
+      >)</a
+      ><a name="3934"
+      >
+                                 </a
+      ><a name="3968" class="Symbol"
+      >(</a
+      ><a name="3969" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" class="Symbol"
+      >(</a
+      ><a name="3977" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="3986"
+      > </a
+      ><a name="3987" class="Symbol"
+      >(</a
+      ><a name="3988" href="Prelude.Function.Fam.html#3572" class="Function"
+      >FamI</a
+      ><a name="3992"
+      > </a
+      ><a name="3993" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="3994"
+      > </a
+      ><a name="3995" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="4000" class="Symbol"
+      >))</a
+      ><a name="4002"
+      > </a
+      ><a name="4003" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="4004" class="Symbol"
+      >)</a
+      ><a name="4005"
+      >
+                                 </a
+      ><a name="4039" class="Symbol"
+      >(</a
+      ><a name="4040" href="Prelude.Function.Fam.html#18363" class="Function"
+      >FamI-preserves-pullback</a
+      ><a name="4063"
+      > </a
+      ><a name="4064" class="Symbol"
+      >(</a
+      ><a name="4065" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4071"
+      > </a
+      ><a name="4072" class="Symbol"
+      >(</a
+      ><a name="4073" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="4081"
+      > </a
+      ><a name="4082" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="4087" class="Symbol"
+      >)</a
+      ><a name="4088"
+      > </a
+      ><a name="4089" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="4090" class="Symbol"
+      >)</a
+      ><a name="4091"
+      > </a
+      ><a name="4092" class="Symbol"
+      >(</a
+      ><a name="4093" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4099"
+      > </a
+      ><a name="4100" class="Symbol"
+      >(</a
+      ><a name="4101" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="4109"
+      > </a
+      ><a name="4110" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="4115" class="Symbol"
+      >)</a
+      ><a name="4116"
+      > </a
+      ><a name="4117" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="4118" class="Symbol"
+      >)</a
+      ><a name="4119"
+      > </a
+      ><a name="4120" class="Symbol"
+      >(</a
+      ><a name="4121" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4127"
+      > </a
+      ><a name="4128" class="Symbol"
+      >(</a
+      ><a name="4129" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="4138"
+      > </a
+      ><a name="4139" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="4144" class="Symbol"
+      >)</a
+      ><a name="4145"
+      > </a
+      ><a name="4146" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="4147" class="Symbol"
+      >)</a
+      ><a name="4148"
+      > </a
+      ><a name="4149" href="Ornament.Horizontal.Pullback.html#3019" class="Bound"
+      >p</a
+      ><a name="4150" class="Symbol"
+      >)</a
+      ><a name="4151"
+      >
+                                 </a
+      ><a name="4185" class="Symbol"
+      >(</a
+      ><a name="4186" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4192"
+      > </a
+      ><a name="4193" class="Symbol"
+      >(</a
+      ><a name="4194" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="4203"
+      > </a
+      ><a name="4204" class="Symbol"
+      >(</a
+      ><a name="4205" href="Prelude.Function.Fam.html#3572" class="Function"
+      >FamI</a
+      ><a name="4209"
+      > </a
+      ><a name="4210" href="Prelude.Category.html#2823" class="Function Operator"
+      >&#8902;</a
+      ><a name="4211"
+      > </a
+      ><a name="4212" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="4217" class="Symbol"
+      >))</a
+      ><a name="4219"
+      > </a
+      ><a name="4220" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="4222" class="Symbol"
+      >)</a
+      ><a name="4223"
+      >
+                                 </a
+      ><a name="4257" class="Symbol"
+      >(</a
+      ><a name="4258" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="4266"
+      > </a
+      ><a name="4267" class="Symbol"
+      >(</a
+      ><a name="4268" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="4277"
+      > </a
+      ><a name="4278" href="Prelude.Function.Fam.html#3572" class="Function"
+      >FamI</a
+      ><a name="4282" class="Symbol"
+      >)</a
+      ><a name="4283"
+      > </a
+      ><a name="4284" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="4291" class="Symbol"
+      >)</a
+      ><a name="4292"
+      >
+                                 </a
+      ><a name="4326" class="Symbol"
+      >(</a
+      ><a name="4327" href="Ornament.Horizontal.html#1050" class="Field"
+      >&#7714;Trans.c</a
+      ><a name="4335"
+      > </a
+      ><a name="4336" class="Symbol"
+      >(</a
+      ><a name="4337" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="4349"
+      > </a
+      ><a name="4350" class="Symbol"
+      >(</a
+      ><a name="4351" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4356"
+      > </a
+      ><a name="4357" class="Symbol"
+      >(</a
+      ><a name="4358" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="4373"
+      > </a
+      ><a name="4374" class="Symbol"
+      >(</a
+      ><a name="4375" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="4381"
+      > </a
+      ><a name="4382" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="4383" class="Symbol"
+      >)))</a
+      ><a name="4386"
+      > </a
+      ><a name="4387" class="Symbol"
+      >(</a
+      ><a name="4388" href="Prelude.Function.Fam.html#1972" class="Field"
+      >FamMorphism.e</a
+      ><a name="4401"
+      > </a
+      ><a name="4402" class="Symbol"
+      >(</a
+      ><a name="4403" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="4419"
+      > </a
+      ><a name="4420" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="4427" class="Symbol"
+      >)</a
+      ><a name="4428"
+      > </a
+      ><a name="4429" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="4430" class="Symbol"
+      >))</a
+      ><a name="4432"
+      >
+                                    </a
+      ><a name="4469" class="Symbol"
+      >(</a
+      ><a name="4470" href="Prelude.Function.Fam.html#2000" class="Field"
+      >FamMorphism.u</a
+      ><a name="4483"
+      > </a
+      ><a name="4484" class="Symbol"
+      >(</a
+      ><a name="4485" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="4501"
+      > </a
+      ><a name="4502" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="4509" class="Symbol"
+      >)</a
+      ><a name="4510"
+      > </a
+      ><a name="4511" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="4512" class="Symbol"
+      >))</a
+      ><a name="4514"
+      >
+                                 </a
+      ><a name="4548" class="Symbol"
+      >(</a
+      ><a name="4549" href="Ornament.Horizontal.html#1050" class="Field"
+      >&#7714;Trans.c</a
+      ><a name="4557"
+      > </a
+      ><a name="4558" class="Symbol"
+      >(</a
+      ><a name="4559" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="4571"
+      > </a
+      ><a name="4572" class="Symbol"
+      >(</a
+      ><a name="4573" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4578"
+      > </a
+      ><a name="4579" class="Symbol"
+      >(</a
+      ><a name="4580" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="4595"
+      > </a
+      ><a name="4596" class="Symbol"
+      >(</a
+      ><a name="4597" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="4603"
+      > </a
+      ><a name="4604" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="4605" class="Symbol"
+      >)))</a
+      ><a name="4608"
+      > </a
+      ><a name="4609" class="Symbol"
+      >(</a
+      ><a name="4610" href="Prelude.Function.Fam.html#1972" class="Field"
+      >FamMorphism.e</a
+      ><a name="4623"
+      > </a
+      ><a name="4624" class="Symbol"
+      >(</a
+      ><a name="4625" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="4641"
+      > </a
+      ><a name="4642" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="4649" class="Symbol"
+      >)</a
+      ><a name="4650"
+      > </a
+      ><a name="4651" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="4652" class="Symbol"
+      >))</a
+      ><a name="4654"
+      >
+                                    </a
+      ><a name="4691" class="Symbol"
+      >(</a
+      ><a name="4692" href="Prelude.Function.Fam.html#2000" class="Field"
+      >FamMorphism.u</a
+      ><a name="4705"
+      > </a
+      ><a name="4706" class="Symbol"
+      >(</a
+      ><a name="4707" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="4723"
+      > </a
+      ><a name="4724" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="4731" class="Symbol"
+      >)</a
+      ><a name="4732"
+      > </a
+      ><a name="4733" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="4734" class="Symbol"
+      >))</a
+      ><a name="4736"
+      >
+                                 </a
+      ><a name="4770" class="Symbol"
+      >(</a
+      ><a name="4771" href="Ornament.Horizontal.html#1050" class="Field"
+      >&#7714;Trans.c</a
+      ><a name="4779"
+      > </a
+      ><a name="4780" class="Symbol"
+      >(</a
+      ><a name="4781" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="4793"
+      > </a
+      ><a name="4794" class="Symbol"
+      >(</a
+      ><a name="4795" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4800"
+      > </a
+      ><a name="4801" class="Symbol"
+      >(</a
+      ><a name="4802" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="4817"
+      > </a
+      ><a name="4818" class="Symbol"
+      >(</a
+      ><a name="4819" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="4825"
+      > </a
+      ><a name="4826" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="4828" class="Symbol"
+      >)))</a
+      ><a name="4831"
+      > </a
+      ><a name="4832" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="4833" class="Symbol"
+      >)</a
+      ><a name="4834"
+      > </a
+      ><a name="4835" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="4836" class="Symbol"
+      >)</a
+      ><a name="4837"
+      >
+                                 </a
+      ><a name="4871" class="Symbol"
+      >(</a
+      ><a name="4872" href="Ornament.Horizontal.html#1050" class="Field"
+      >&#7714;Trans.c</a
+      ><a name="4880"
+      > </a
+      ><a name="4881" class="Symbol"
+      >(</a
+      ><a name="4882" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="4894"
+      > </a
+      ><a name="4895" class="Symbol"
+      >(</a
+      ><a name="4896" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4901"
+      > </a
+      ><a name="4902" class="Symbol"
+      >(</a
+      ><a name="4903" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="4918"
+      > </a
+      ><a name="4919" class="Symbol"
+      >(</a
+      ><a name="4920" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="4926"
+      > </a
+      ><a name="4927" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="4929" class="Symbol"
+      >)))</a
+      ><a name="4932"
+      > </a
+      ><a name="4933" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="4934" class="Symbol"
+      >)</a
+      ><a name="4935"
+      > </a
+      ><a name="4936" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="4937" class="Symbol"
+      >)</a
+      ><a name="4938"
+      >
+                                 </a
+      ><a name="4972" class="Symbol"
+      >(</a
+      ><a name="4973" href="Ornament.Horizontal.Pullback.html#2771" class="Function"
+      >next-lemma</a
+      ><a name="4983"
+      > </a
+      ><a name="4984" class="Symbol"
+      >(</a
+      ><a name="4985" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="4989"
+      > </a
+      ><a name="4990" class="Symbol"
+      >(</a
+      ><a name="4991" href="Description.html#1223" class="Field"
+      >Desc.comp</a
+      ><a name="5000"
+      > </a
+      ><a name="5001" class="Symbol"
+      >(</a
+      ><a name="5002" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5007"
+      > </a
+      ><a name="5008" class="Symbol"
+      >(</a
+      ><a name="5009" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="5016"
+      > </a
+      ><a name="5017" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="5018" class="Symbol"
+      >)))</a
+      ><a name="5021"
+      > </a
+      ><a name="5022" class="Symbol"
+      >(</a
+      ><a name="5023" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="5038"
+      > </a
+      ><a name="5039" class="Symbol"
+      >(</a
+      ><a name="5040" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="5063"
+      > </a
+      ><a name="5064" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5071" class="Symbol"
+      >)</a
+      ><a name="5072"
+      > </a
+      ><a name="5073" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="5074" class="Symbol"
+      >))</a
+      ><a name="5076"
+      >
+                                             </a
+      ><a name="5122" class="Symbol"
+      >(</a
+      ><a name="5123" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="5138"
+      > </a
+      ><a name="5139" class="Symbol"
+      >(</a
+      ><a name="5140" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="5163"
+      > </a
+      ><a name="5164" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5171" class="Symbol"
+      >)</a
+      ><a name="5172"
+      > </a
+      ><a name="5173" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="5174"
+      > </a
+      ><a name="5175" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="5176"
+      > </a
+      ><a name="5177" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="5182" class="Symbol"
+      >))</a
+      ><a name="5184"
+      >
+                                 </a
+      ><a name="5218" class="Symbol"
+      >(</a
+      ><a name="5219" href="Ornament.Horizontal.Pullback.html#2771" class="Function"
+      >next-lemma</a
+      ><a name="5229"
+      > </a
+      ><a name="5230" class="Symbol"
+      >(</a
+      ><a name="5231" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="5235"
+      > </a
+      ><a name="5236" class="Symbol"
+      >(</a
+      ><a name="5237" href="Description.html#1223" class="Field"
+      >Desc.comp</a
+      ><a name="5246"
+      > </a
+      ><a name="5247" class="Symbol"
+      >(</a
+      ><a name="5248" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5253"
+      > </a
+      ><a name="5254" class="Symbol"
+      >(</a
+      ><a name="5255" href="Prelude.Category.Slice.html#546" class="Field"
+      >Slice.T</a
+      ><a name="5262"
+      > </a
+      ><a name="5263" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="5264" class="Symbol"
+      >)))</a
+      ><a name="5267"
+      > </a
+      ><a name="5268" class="Symbol"
+      >(</a
+      ><a name="5269" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="5284"
+      > </a
+      ><a name="5285" class="Symbol"
+      >(</a
+      ><a name="5286" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="5309"
+      > </a
+      ><a name="5310" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5317" class="Symbol"
+      >)</a
+      ><a name="5318"
+      > </a
+      ><a name="5319" href="Ornament.Horizontal.Pullback.html#3691" class="Bound"
+      >l</a
+      ><a name="5320" class="Symbol"
+      >))</a
+      ><a name="5322"
+      >
+                                             </a
+      ><a name="5368" class="Symbol"
+      >(</a
+      ><a name="5369" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="5384"
+      > </a
+      ><a name="5385" class="Symbol"
+      >(</a
+      ><a name="5386" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="5409"
+      > </a
+      ><a name="5410" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5417" class="Symbol"
+      >)</a
+      ><a name="5418"
+      > </a
+      ><a name="5419" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="5420"
+      > </a
+      ><a name="5421" href="Ornament.Horizontal.Pullback.html#3765" class="Bound"
+      >h</a
+      ><a name="5422"
+      > </a
+      ><a name="5423" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="5428" class="Symbol"
+      >)))</a
+      ><a name="5431"
+      >
+             </a
+      ><a name="5445" class="Symbol"
+      >(</a
+      ><a name="5446" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="5461"
+      > </a
+      ><a name="5462" class="Symbol"
+      >(</a
+      ><a name="5463" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="5485"
+      > </a
+      ><a name="5486" class="Symbol"
+      >(</a
+      ><a name="5487" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="5501"
+      > </a
+      ><a name="5502" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5509" class="Symbol"
+      >))</a
+      ><a name="5511"
+      > </a
+      ><a name="5512" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5513"
+      >
+              </a
+      ><a name="5528" class="Symbol"
+      >&#955;</a
+      ><a name="5529"
+      > </a
+      ><a name="5530" href="Ornament.Horizontal.Pullback.html#5530" class="Bound"
+      >l</a
+      ><a name="5531"
+      > </a
+      ><a name="5532" href="Ornament.Horizontal.Pullback.html#5532" class="Bound"
+      >h</a
+      ><a name="5533"
+      > </a
+      ><a name="5534" class="Symbol"
+      >&#8594;</a
+      ><a name="5535"
+      > </a
+      ><a name="5536" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="5551"
+      > </a
+      ><a name="5552" class="Symbol"
+      >(</a
+      ><a name="5553" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="5575"
+      > </a
+      ><a name="5576" class="Symbol"
+      >(</a
+      ><a name="5577" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="5591"
+      > </a
+      ><a name="5592" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5599" class="Symbol"
+      >))</a
+      ><a name="5601"
+      > </a
+      ><a name="5602" href="Ornament.Horizontal.Pullback.html#5532" class="Bound"
+      >h</a
+      ><a name="5603"
+      > </a
+      ><a name="5604" href="Ornament.Horizontal.Pullback.html#5532" class="Bound"
+      >h</a
+      ><a name="5605"
+      > </a
+      ><a name="5606" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="5611" class="Symbol"
+      >))</a
+      ><a name="5613"
+      >
+          </a
+      ><a name="5624" class="Symbol"
+      >(</a
+      ><a name="5625" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="5640"
+      > </a
+      ><a name="5641" class="Symbol"
+      >(</a
+      ><a name="5642" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="5665"
+      > </a
+      ><a name="5666" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5673" class="Symbol"
+      >)</a
+      ><a name="5674"
+      > </a
+      ><a name="5675" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5676"
+      > </a
+      ><a name="5677" class="Symbol"
+      >&#955;</a
+      ><a name="5678"
+      > </a
+      ><a name="5679" href="Ornament.Horizontal.Pullback.html#5679" class="Bound"
+      >l</a
+      ><a name="5680"
+      > </a
+      ><a name="5681" href="Ornament.Horizontal.Pullback.html#5681" class="Bound"
+      >h</a
+      ><a name="5682"
+      > </a
+      ><a name="5683" class="Symbol"
+      >&#8594;</a
+      ><a name="5684"
+      > </a
+      ><a name="5685" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="5700"
+      > </a
+      ><a name="5701" class="Symbol"
+      >(</a
+      ><a name="5702" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="5725"
+      > </a
+      ><a name="5726" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5733" class="Symbol"
+      >)</a
+      ><a name="5734"
+      > </a
+      ><a name="5735" href="Ornament.Horizontal.Pullback.html#5681" class="Bound"
+      >h</a
+      ><a name="5736"
+      > </a
+      ><a name="5737" href="Ornament.Horizontal.Pullback.html#5681" class="Bound"
+      >h</a
+      ><a name="5738"
+      > </a
+      ><a name="5739" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="5744" class="Symbol"
+      >)</a
+      ><a name="5745"
+      >
+          </a
+      ><a name="5756" class="Symbol"
+      >(</a
+      ><a name="5757" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="5772"
+      > </a
+      ><a name="5773" class="Symbol"
+      >(</a
+      ><a name="5774" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="5797"
+      > </a
+      ><a name="5798" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5805" class="Symbol"
+      >)</a
+      ><a name="5806"
+      > </a
+      ><a name="5807" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5808"
+      > </a
+      ><a name="5809" class="Symbol"
+      >&#955;</a
+      ><a name="5810"
+      > </a
+      ><a name="5811" href="Ornament.Horizontal.Pullback.html#5811" class="Bound"
+      >l</a
+      ><a name="5812"
+      > </a
+      ><a name="5813" href="Ornament.Horizontal.Pullback.html#5813" class="Bound"
+      >h</a
+      ><a name="5814"
+      > </a
+      ><a name="5815" class="Symbol"
+      >&#8594;</a
+      ><a name="5816"
+      > </a
+      ><a name="5817" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="5832"
+      > </a
+      ><a name="5833" class="Symbol"
+      >(</a
+      ><a name="5834" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="5857"
+      > </a
+      ><a name="5858" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="5865" class="Symbol"
+      >)</a
+      ><a name="5866"
+      > </a
+      ><a name="5867" href="Ornament.Horizontal.Pullback.html#5813" class="Bound"
+      >h</a
+      ><a name="5868"
+      > </a
+      ><a name="5869" href="Ornament.Horizontal.Pullback.html#5813" class="Bound"
+      >h</a
+      ><a name="5870"
+      > </a
+      ><a name="5871" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="5876" class="Symbol"
+      >)</a
+      ><a name="5877"
+      >
+
+  </a
+      ><a name="5881" class="Keyword"
+      >module</a
+      ><a name="5887"
+      > </a
+      ><a name="5888" href="Ornament.Horizontal.Pullback.html#5888" class="Module"
+      >Uniqueness</a
+      ><a name="5898"
+      > </a
+      ><a name="5899" class="Symbol"
+      >(</a
+      ><a name="5900" href="Ornament.Horizontal.Pullback.html#5900" class="Bound"
+      >med'</a
+      ><a name="5904"
+      > </a
+      ><a name="5905" class="Symbol"
+      >:</a
+      ><a name="5906"
+      > </a
+      ><a name="5907" href="Prelude.Category.Pullback.html#1164" class="Function"
+      >SquareMorphism</a
+      ><a name="5921"
+      > </a
+      ><a name="5922" href="Ornament.Horizontal.Category.html#1223" class="Function"
+      >&#7710;&#7714;Trans</a
+      ><a name="5929"
+      > </a
+      ><a name="5930" href="Ornament.Horizontal.Pullback.html#2962" class="Bound"
+      >f</a
+      ><a name="5931"
+      > </a
+      ><a name="5932" href="Ornament.Horizontal.Pullback.html#2964" class="Bound"
+      >g</a
+      ><a name="5933"
+      > </a
+      ><a name="5934" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="5936"
+      > </a
+      ><a name="5937" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="5938" class="Symbol"
+      >)</a
+      ><a name="5939"
+      > </a
+      ><a name="5940" class="Keyword"
+      >where</a
+      ><a name="5945"
+      >
+
+    </a
+      ><a name="5951" href="Ornament.Horizontal.Pullback.html#5951" class="Function"
+      >Fam-med-equals-med'</a
+      ><a name="5970"
+      > </a
+      ><a name="5971" class="Symbol"
+      >:</a
+      ><a name="5972"
+      > </a
+      ><a name="5973" href="Prelude.Function.Fam.html#2052" class="Record"
+      >FamMorphismEq</a
+      ><a name="5986"
+      > </a
+      ><a name="5987" class="Symbol"
+      >(</a
+      ><a name="5988" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="5996"
+      > </a
+      ><a name="5997" class="Symbol"
+      >(</a
+      ><a name="5998" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="6004"
+      > </a
+      ><a name="6005" class="Symbol"
+      >(</a
+      ><a name="6006" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="6015"
+      > </a
+      ><a name="6016" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6021" class="Symbol"
+      >)</a
+      ><a name="6022"
+      > </a
+      ><a name="6023" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="6025" class="Symbol"
+      >))</a
+      ><a name="6027"
+      > </a
+      ><a name="6028" class="Symbol"
+      >(</a
+      ><a name="6029" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="6037"
+      > </a
+      ><a name="6038" class="Symbol"
+      >(</a
+      ><a name="6039" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="6045"
+      > </a
+      ><a name="6046" class="Symbol"
+      >(</a
+      ><a name="6047" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="6056"
+      > </a
+      ><a name="6057" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6062" class="Symbol"
+      >)</a
+      ><a name="6063"
+      > </a
+      ><a name="6064" href="Ornament.Horizontal.Pullback.html#2992" class="Bound"
+      >s</a
+      ><a name="6065" class="Symbol"
+      >))</a
+      ><a name="6067"
+      >
+                            </a
+      ><a name="6096" class="Symbol"
+      >(</a
+      ><a name="6097" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6113"
+      > </a
+      ><a name="6114" href="Ornament.Horizontal.Pullback.html#3316" class="Function"
+      >Fam-med</a
+      ><a name="6121" class="Symbol"
+      >)</a
+      ><a name="6122"
+      > </a
+      ><a name="6123" class="Symbol"
+      >(</a
+      ><a name="6124" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6140"
+      > </a
+      ><a name="6141" class="Symbol"
+      >(</a
+      ><a name="6142" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="6150"
+      > </a
+      ><a name="6151" class="Symbol"
+      >(</a
+      ><a name="6152" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="6161"
+      > </a
+      ><a name="6162" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6167" class="Symbol"
+      >)</a
+      ><a name="6168"
+      > </a
+      ><a name="6169" href="Ornament.Horizontal.Pullback.html#5900" class="Bound"
+      >med'</a
+      ><a name="6173" class="Symbol"
+      >))</a
+      ><a name="6175"
+      >
+    </a
+      ><a name="6180" href="Ornament.Horizontal.Pullback.html#5951" class="Function"
+      >Fam-med-equals-med'</a
+      ><a name="6199"
+      > </a
+      ><a name="6200" class="Symbol"
+      >=</a
+      ><a name="6201"
+      > </a
+      ><a name="6202" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="6207"
+      > </a
+      ><a name="6208" class="Symbol"
+      >(</a
+      ><a name="6209" href="Ornament.Horizontal.Pullback.html#3019" class="Bound"
+      >p</a
+      ><a name="6210"
+      > </a
+      ><a name="6211" class="Symbol"
+      >(</a
+      ><a name="6212" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="6218"
+      > </a
+      ><a name="6219" class="Symbol"
+      >(</a
+      ><a name="6220" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="6229"
+      > </a
+      ><a name="6230" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6235" class="Symbol"
+      >)</a
+      ><a name="6236"
+      > </a
+      ><a name="6237" href="Ornament.Horizontal.Pullback.html#3125" class="Bound"
+      >s'</a
+      ><a name="6239" class="Symbol"
+      >))</a
+      ><a name="6241"
+      > </a
+      ><a name="6242" class="Symbol"
+      >(</a
+      ><a name="6243" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="6251"
+      > </a
+      ><a name="6252" class="Symbol"
+      >(</a
+      ><a name="6253" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="6262"
+      > </a
+      ><a name="6263" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6268" class="Symbol"
+      >)</a
+      ><a name="6269"
+      > </a
+      ><a name="6270" href="Ornament.Horizontal.Pullback.html#5900" class="Bound"
+      >med'</a
+      ><a name="6274" class="Symbol"
+      >)</a
+      ><a name="6275"
+      >
+
+    </a
+      ><a name="6281" href="Ornament.Horizontal.Pullback.html#6281" class="Function"
+      >index-unique</a
+      ><a name="6293"
+      > </a
+      ><a name="6294" class="Symbol"
+      >:</a
+      ><a name="6295"
+      > </a
+      ><a name="6296" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="6301"
+      > </a
+      ><a name="6302" class="Symbol"
+      >(</a
+      ><a name="6303" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6319"
+      > </a
+      ><a name="6320" href="Ornament.Horizontal.Pullback.html#3529" class="Function"
+      >med</a
+      ><a name="6323" class="Symbol"
+      >)</a
+      ><a name="6324"
+      > </a
+      ><a name="6325" href="Prelude.Function.html#812" class="Function Operator"
+      >&#8784;</a
+      ><a name="6326"
+      > </a
+      ><a name="6327" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="6332"
+      > </a
+      ><a name="6333" class="Symbol"
+      >(</a
+      ><a name="6334" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6350"
+      > </a
+      ><a name="6351" href="Ornament.Horizontal.Pullback.html#5900" class="Bound"
+      >med'</a
+      ><a name="6355" class="Symbol"
+      >)</a
+      ><a name="6356"
+      >
+    </a
+      ><a name="6361" href="Ornament.Horizontal.Pullback.html#6281" class="Function"
+      >index-unique</a
+      ><a name="6373"
+      > </a
+      ><a name="6374" class="Symbol"
+      >=</a
+      ><a name="6375"
+      > </a
+      ><a name="6376" href="Prelude.Function.Fam.html#2155" class="Field"
+      >FamMorphismEq.e</a
+      ><a name="6391"
+      > </a
+      ><a name="6392" href="Ornament.Horizontal.Pullback.html#5951" class="Function"
+      >Fam-med-equals-med'</a
+      ><a name="6411"
+      >
+
+    </a
+      ><a name="6417" href="Ornament.Horizontal.Pullback.html#6417" class="Function"
+      >F&#7714;Trans-unique</a
+      ><a name="6431"
+      > </a
+      ><a name="6432" class="Symbol"
+      >:</a
+      ><a name="6433"
+      > </a
+      ><a name="6434" class="Symbol"
+      >(</a
+      ><a name="6435" href="Ornament.Horizontal.Pullback.html#6435" class="Bound"
+      >l</a
+      ><a name="6436"
+      > </a
+      ><a name="6437" class="Symbol"
+      >:</a
+      ><a name="6438"
+      > </a
+      ><a name="6439" href="Ornament.Horizontal.Pullback.html#3234" class="Function"
+      >L'</a
+      ><a name="6441" class="Symbol"
+      >)</a
+      ><a name="6442"
+      > </a
+      ><a name="6443" class="Symbol"
+      >(</a
+      ><a name="6444" href="Ornament.Horizontal.Pullback.html#6444" class="Bound"
+      >h</a
+      ><a name="6445"
+      > </a
+      ><a name="6446" class="Symbol"
+      >:</a
+      ><a name="6447"
+      > </a
+      ><a name="6448" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="6449"
+      > </a
+      ><a name="6450" class="Symbol"
+      >(</a
+      ><a name="6451" href="Description.html#1223" class="Field"
+      >Desc.comp</a
+      ><a name="6460"
+      > </a
+      ><a name="6461" href="Ornament.Horizontal.Pullback.html#3273" class="Function"
+      >G'</a
+      ><a name="6463"
+      > </a
+      ><a name="6464" href="Ornament.Horizontal.Pullback.html#6435" class="Bound"
+      >l</a
+      ><a name="6465" class="Symbol"
+      >))</a
+      ><a name="6467"
+      > </a
+      ><a name="6468" class="Symbol"
+      >&#8594;</a
+      ><a name="6469"
+      > </a
+      ><a name="6470" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="6478"
+      > </a
+      ><a name="6479" class="Symbol"
+      >(</a
+      ><a name="6480" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="6492"
+      > </a
+      ><a name="6493" class="Symbol"
+      >(</a
+      ><a name="6494" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="6499"
+      > </a
+      ><a name="6500" class="Symbol"
+      >(</a
+      ><a name="6501" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6517"
+      > </a
+      ><a name="6518" href="Ornament.Horizontal.Pullback.html#3529" class="Function"
+      >med</a
+      ><a name="6521"
+      > </a
+      ><a name="6522" class="Symbol"
+      >))</a
+      ><a name="6524"
+      > </a
+      ><a name="6525" href="Ornament.Horizontal.Pullback.html#6435" class="Bound"
+      >l</a
+      ><a name="6526" class="Symbol"
+      >)</a
+      ><a name="6527"
+      > </a
+      ><a name="6528" href="Ornament.Horizontal.Pullback.html#6444" class="Bound"
+      >h</a
+      ><a name="6529"
+      > </a
+      ><a name="6530" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="6531"
+      >
+                                                         </a
+      ><a name="6589" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="6597"
+      > </a
+      ><a name="6598" class="Symbol"
+      >(</a
+      ><a name="6599" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="6611"
+      > </a
+      ><a name="6612" class="Symbol"
+      >(</a
+      ><a name="6613" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="6618"
+      > </a
+      ><a name="6619" class="Symbol"
+      >(</a
+      ><a name="6620" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="6636"
+      > </a
+      ><a name="6637" href="Ornament.Horizontal.Pullback.html#5900" class="Bound"
+      >med'</a
+      ><a name="6641" class="Symbol"
+      >))</a
+      ><a name="6643"
+      > </a
+      ><a name="6644" href="Ornament.Horizontal.Pullback.html#6435" class="Bound"
+      >l</a
+      ><a name="6645" class="Symbol"
+      >)</a
+      ><a name="6646"
+      > </a
+      ><a name="6647" href="Ornament.Horizontal.Pullback.html#6444" class="Bound"
+      >h</a
+      ><a name="6648"
+      >
+    </a
+      ><a name="6653" href="Ornament.Horizontal.Pullback.html#6417" class="Function"
+      >F&#7714;Trans-unique</a
+      ><a name="6667"
+      > </a
+      ><a name="6668" href="Ornament.Horizontal.Pullback.html#6668" class="Bound"
+      >l</a
+      ><a name="6669"
+      > </a
+      ><a name="6670" href="Ornament.Horizontal.Pullback.html#6670" class="Bound"
+      >h</a
+      ><a name="6671"
+      > </a
+      ><a name="6672" class="Symbol"
+      >=</a
+      ><a name="6673"
+      > </a
+      ><a name="6674" href="Prelude.Function.Fam.html#2197" class="Field"
+      >FamMorphismEq.u</a
+      ><a name="6689"
+      > </a
+      ><a name="6690" href="Ornament.Horizontal.Pullback.html#5951" class="Function"
+      >Fam-med-equals-med'</a
+      ><a name="6709"
+      > </a
+      ><a name="6710" href="Ornament.Horizontal.Pullback.html#6670" class="Bound"
+      >h</a
+      ><a name="6711"
+      > </a
+      ><a name="6712" href="Ornament.Horizontal.Pullback.html#6670" class="Bound"
+      >h</a
+      ><a name="6713"
+      > </a
+      ><a name="6714" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="6719"
+      >
+
+</a
+      ><a name="6721" href="Ornament.Horizontal.Pullback.html#6721" class="Function"
+      >Shape-reflects-pullback</a
+      ><a name="6744"
+      > </a
+      ><a name="6745" class="Symbol"
+      >:</a
+      ><a name="6746"
+      > </a
+      ><a name="6747" href="Prelude.Category.Pullback.html#3848" class="Function"
+      >Pullback-reflecting</a
+      ><a name="6766"
+      > </a
+      ><a name="6767" href="Ornament.Horizontal.Category.html#2999" class="Function"
+      >Shape</a
+      ><a name="6772"
+      >
+</a
+      ><a name="6773" href="Ornament.Horizontal.Pullback.html#6721" class="Function"
+      >Shape-reflects-pullback</a
+      ><a name="6796"
+      > </a
+      ><a name="6797" href="Ornament.Horizontal.Pullback.html#6797" class="Bound"
+      >f</a
+      ><a name="6798"
+      > </a
+      ><a name="6799" href="Ornament.Horizontal.Pullback.html#6799" class="Bound"
+      >g</a
+      ><a name="6800"
+      > </a
+      ><a name="6801" href="Ornament.Horizontal.Pullback.html#6801" class="Bound"
+      >s</a
+      ><a name="6802"
+      > </a
+      ><a name="6803" href="Ornament.Horizontal.Pullback.html#6803" class="Bound"
+      >p</a
+      ><a name="6804"
+      > </a
+      ><a name="6805" href="Ornament.Horizontal.Pullback.html#6805" class="Bound"
+      >s'</a
+      ><a name="6807"
+      > </a
+      ><a name="6808" class="Symbol"
+      >=</a
+      ><a name="6809"
+      >
+  </a
+      ><a name="6812" href="Ornament.Horizontal.Pullback.html#3529" class="Function"
+      >ShapeReflectsPullback.med</a
+      ><a name="6837"
+      > </a
+      ><a name="6838" href="Ornament.Horizontal.Pullback.html#6797" class="Bound"
+      >f</a
+      ><a name="6839"
+      > </a
+      ><a name="6840" href="Ornament.Horizontal.Pullback.html#6799" class="Bound"
+      >g</a
+      ><a name="6841"
+      > </a
+      ><a name="6842" href="Ornament.Horizontal.Pullback.html#6801" class="Bound"
+      >s</a
+      ><a name="6843"
+      > </a
+      ><a name="6844" href="Ornament.Horizontal.Pullback.html#6803" class="Bound"
+      >p</a
+      ><a name="6845"
+      > </a
+      ><a name="6846" href="Ornament.Horizontal.Pullback.html#6805" class="Bound"
+      >s'</a
+      ><a name="6848"
+      > </a
+      ><a name="6849" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6850"
+      >
+  </a
+      ><a name="6853" class="Symbol"
+      >&#955;</a
+      ><a name="6854"
+      > </a
+      ><a name="6855" href="Ornament.Horizontal.Pullback.html#6855" class="Bound"
+      >med'</a
+      ><a name="6859"
+      > </a
+      ><a name="6860" class="Symbol"
+      >&#8594;</a
+      ><a name="6861"
+      > </a
+      ><a name="6862" href="Ornament.Horizontal.Pullback.html#6281" class="Function"
+      >ShapeReflectsPullback.Uniqueness.index-unique</a
+      ><a name="6907"
+      > </a
+      ><a name="6908" href="Ornament.Horizontal.Pullback.html#6797" class="Bound"
+      >f</a
+      ><a name="6909"
+      > </a
+      ><a name="6910" href="Ornament.Horizontal.Pullback.html#6799" class="Bound"
+      >g</a
+      ><a name="6911"
+      > </a
+      ><a name="6912" href="Ornament.Horizontal.Pullback.html#6801" class="Bound"
+      >s</a
+      ><a name="6913"
+      > </a
+      ><a name="6914" href="Ornament.Horizontal.Pullback.html#6803" class="Bound"
+      >p</a
+      ><a name="6915"
+      > </a
+      ><a name="6916" href="Ornament.Horizontal.Pullback.html#6805" class="Bound"
+      >s'</a
+      ><a name="6918"
+      > </a
+      ><a name="6919" href="Ornament.Horizontal.Pullback.html#6855" class="Bound"
+      >med'</a
+      ><a name="6923"
+      > </a
+      ><a name="6924" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6925"
+      > </a
+      ><a name="6926" href="Ornament.Horizontal.Pullback.html#6417" class="Function"
+      >ShapeReflectsPullback.Uniqueness.F&#7714;Trans-unique</a
+      ><a name="6973"
+      > </a
+      ><a name="6974" href="Ornament.Horizontal.Pullback.html#6797" class="Bound"
+      >f</a
+      ><a name="6975"
+      > </a
+      ><a name="6976" href="Ornament.Horizontal.Pullback.html#6799" class="Bound"
+      >g</a
+      ><a name="6977"
+      > </a
+      ><a name="6978" href="Ornament.Horizontal.Pullback.html#6801" class="Bound"
+      >s</a
+      ><a name="6979"
+      > </a
+      ><a name="6980" href="Ornament.Horizontal.Pullback.html#6803" class="Bound"
+      >p</a
+      ><a name="6981"
+      > </a
+      ><a name="6982" href="Ornament.Horizontal.Pullback.html#6805" class="Bound"
+      >s'</a
+      ><a name="6984"
+      > </a
+      ><a name="6985" href="Ornament.Horizontal.Pullback.html#6855" class="Bound"
+      >med'</a
+      ><a name="6989"
+      >
+
+</a
+      ><a name="6991" href="Ornament.Horizontal.Pullback.html#6991" class="Function"
+      >Erase-reflects-pullback</a
+      ><a name="7014"
+      > </a
+      ><a name="7015" class="Symbol"
+      >:</a
+      ><a name="7016"
+      > </a
+      ><a name="7017" href="Prelude.Category.Pullback.html#3848" class="Function"
+      >Pullback-reflecting</a
+      ><a name="7036"
+      > </a
+      ><a name="7037" href="Ornament.Horizontal.Category.html#3356" class="Function"
+      >Erase</a
+      ><a name="7042"
+      >
+</a
+      ><a name="7043" href="Ornament.Horizontal.Pullback.html#6991" class="Function"
+      >Erase-reflects-pullback</a
+      ><a name="7066"
+      > </a
+      ><a name="7067" href="Ornament.Horizontal.Pullback.html#7067" class="Bound"
+      >f</a
+      ><a name="7068"
+      > </a
+      ><a name="7069" href="Ornament.Horizontal.Pullback.html#7069" class="Bound"
+      >g</a
+      ><a name="7070"
+      > </a
+      ><a name="7071" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="7072"
+      > </a
+      ><a name="7073" href="Ornament.Horizontal.Pullback.html#7073" class="Bound"
+      >ps</a
+      ><a name="7075"
+      > </a
+      ><a name="7076" href="Ornament.Horizontal.Pullback.html#7076" class="Bound"
+      >s'</a
+      ><a name="7078"
+      > </a
+      ><a name="7079" class="Symbol"
+      >=</a
+      ><a name="7080"
+      >
+  </a
+      ><a name="7083" class="Keyword"
+      >let</a
+      ><a name="7086"
+      > </a
+      ><a name="7087" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7088"
+      > </a
+      ><a name="7089" class="Symbol"
+      >=</a
+      ><a name="7090"
+      > </a
+      ><a name="7091" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="7096"
+      > </a
+      ><a name="7097" class="Symbol"
+      >(</a
+      ><a name="7098" href="Ornament.Horizontal.Pullback.html#7073" class="Bound"
+      >ps</a
+      ><a name="7100"
+      > </a
+      ><a name="7101" class="Symbol"
+      >(</a
+      ><a name="7102" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="7108"
+      > </a
+      ><a name="7109" class="Symbol"
+      >(</a
+      ><a name="7110" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="7119"
+      > </a
+      ><a name="7120" href="Ornament.Horizontal.Category.html#3356" class="Function"
+      >Erase</a
+      ><a name="7125" class="Symbol"
+      >)</a
+      ><a name="7126"
+      > </a
+      ><a name="7127" href="Ornament.Horizontal.Pullback.html#7076" class="Bound"
+      >s'</a
+      ><a name="7129" class="Symbol"
+      >))</a
+      ><a name="7131"
+      >
+  </a
+      ><a name="7134" class="Keyword"
+      >in</a
+      ><a name="7136"
+      >  </a
+      ><a name="7138" href="Prelude.Category.Span.html#911" class="InductiveConstructor"
+      >spanMorphism</a
+      ><a name="7150"
+      > </a
+      ><a name="7151" class="Symbol"
+      >(</a
+      ><a name="7152" href="Prelude.Category.Slice.html#722" class="InductiveConstructor"
+      >sliceMorphism</a
+      ><a name="7165"
+      > </a
+      ><a name="7166" class="Symbol"
+      >(</a
+      ><a name="7167" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="7172"
+      > </a
+      ><a name="7173" class="Symbol"
+      >(</a
+      ><a name="7174" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7190"
+      > </a
+      ><a name="7191" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7192" class="Symbol"
+      >)</a
+      ><a name="7193"
+      > </a
+      ><a name="7194" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7195"
+      > </a
+      ><a name="7196" href="Ornament.html#6148" class="InductiveConstructor"
+      >wrap</a
+      ><a name="7200"
+      > </a
+      ><a name="7201" class="Symbol"
+      >&#955;</a
+      ><a name="7202"
+      > </a
+      ><a name="7203" class="Symbol"
+      >{</a
+      ><a name="7204"
+      > </a
+      ><a name="7205" class="Symbol"
+      >{</a
+      ><a name="7206" class="DottedPattern Symbol"
+      >._</a
+      ><a name="7208" class="Symbol"
+      >}</a
+      ><a name="7209"
+      > </a
+      ><a name="7210" class="Symbol"
+      >(</a
+      ><a name="7211" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7213"
+      > </a
+      ><a name="7214" href="Ornament.Horizontal.Pullback.html#7214" class="Bound"
+      >l</a
+      ><a name="7215" class="Symbol"
+      >)</a
+      ><a name="7216"
+      > </a
+      ><a name="7217" class="Symbol"
+      >&#8594;</a
+      ><a name="7218"
+      > </a
+      ><a name="7219" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="7224"
+      > </a
+      ><a name="7225" class="Symbol"
+      >(</a
+      ><a name="7226" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="7238"
+      > </a
+      ><a name="7239" class="Symbol"
+      >(</a
+      ><a name="7240" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="7245"
+      > </a
+      ><a name="7246" class="Symbol"
+      >(</a
+      ><a name="7247" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7263"
+      > </a
+      ><a name="7264" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7265" class="Symbol"
+      >))</a
+      ><a name="7267"
+      > </a
+      ><a name="7268" href="Ornament.Horizontal.Pullback.html#7214" class="Bound"
+      >l</a
+      ><a name="7269" class="Symbol"
+      >)</a
+      ><a name="7270"
+      > </a
+      ><a name="7271" class="Symbol"
+      >})</a
+      ><a name="7273"
+      >
+                                  </a
+      ><a name="7308" class="Symbol"
+      >(</a
+      ><a name="7309" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="7314"
+      > </a
+      ><a name="7315" class="Symbol"
+      >(</a
+      ><a name="7316" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="7338"
+      > </a
+      ><a name="7339" class="Symbol"
+      >(</a
+      ><a name="7340" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="7354"
+      > </a
+      ><a name="7355" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7356" class="Symbol"
+      >))</a
+      ><a name="7358"
+      > </a
+      ><a name="7359" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7360"
+      >
+                                   </a
+      ><a name="7396" class="Symbol"
+      >&#955;</a
+      ><a name="7397"
+      > </a
+      ><a name="7398" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="7399"
+      > </a
+      ><a name="7400" href="Ornament.Horizontal.Pullback.html#7400" class="Bound"
+      >hs</a
+      ><a name="7402"
+      > </a
+      ><a name="7403" class="Symbol"
+      >&#8594;</a
+      ><a name="7404"
+      > </a
+      ><a name="7405" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="7411"
+      > </a
+      ><a name="7412" class="Symbol"
+      >(</a
+      ><a name="7413" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="7419"
+      > </a
+      ><a name="7420" class="Symbol"
+      >(</a
+      ><a name="7421" href="Ornament.SequentialComposition.html#1916" class="Function"
+      >erase-&#7776;-scROrn</a
+      ><a name="7435"
+      > </a
+      ><a name="7436" class="Symbol"
+      >(</a
+      ><a name="7437" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="7445"
+      > </a
+      ><a name="7446" class="Symbol"
+      >(</a
+      ><a name="7447" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="7452"
+      > </a
+      ><a name="7453" class="Symbol"
+      >(</a
+      ><a name="7454" href="Prelude.Category.Slice.html#561" class="Field"
+      >Slice.s</a
+      ><a name="7461"
+      > </a
+      ><a name="7462" class="Symbol"
+      >(</a
+      ><a name="7463" href="Prelude.Category.Span.html#717" class="Field"
+      >Span.M</a
+      ><a name="7469"
+      > </a
+      ><a name="7470" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="7471" class="Symbol"
+      >)))</a
+      ><a name="7474"
+      > </a
+      ><a name="7475" class="Symbol"
+      >(</a
+      ><a name="7476" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7478"
+      > </a
+      ><a name="7479" class="Symbol"
+      >(</a
+      ><a name="7480" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="7485"
+      > </a
+      ><a name="7486" class="Symbol"
+      >(</a
+      ><a name="7487" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7503"
+      > </a
+      ><a name="7504" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7505" class="Symbol"
+      >)</a
+      ><a name="7506"
+      > </a
+      ><a name="7507" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="7508" class="Symbol"
+      >)))</a
+      ><a name="7511"
+      >
+                                                                           </a
+      ><a name="7587" class="Symbol"
+      >(</a
+      ><a name="7588" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="7593"
+      > </a
+      ><a name="7594" class="Symbol"
+      >(</a
+      ><a name="7595" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="7607"
+      > </a
+      ><a name="7608" class="Symbol"
+      >(</a
+      ><a name="7609" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="7614"
+      > </a
+      ><a name="7615" class="Symbol"
+      >(</a
+      ><a name="7616" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7632"
+      > </a
+      ><a name="7633" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7634" class="Symbol"
+      >))</a
+      ><a name="7636"
+      > </a
+      ><a name="7637" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="7638" class="Symbol"
+      >))</a
+      ><a name="7640"
+      > </a
+      ><a name="7641" href="Ornament.Horizontal.Pullback.html#7400" class="Bound"
+      >hs</a
+      ><a name="7643" class="Symbol"
+      >))</a
+      ><a name="7645"
+      >
+                                                   </a
+      ><a name="7697" class="Symbol"
+      >(</a
+      ><a name="7698" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="7704"
+      > </a
+      ><a name="7705" class="Symbol"
+      >(</a
+      ><a name="7706" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="7712"
+      > </a
+      ><a name="7713" class="Symbol"
+      >(</a
+      ><a name="7714" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="7718"
+      > </a
+      ><a name="7719" class="Symbol"
+      >(</a
+      ><a name="7720" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="7727"
+      > </a
+      ><a name="7728" class="Symbol"
+      >(</a
+      ><a name="7729" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="7737"
+      > </a
+      ><a name="7738" class="Symbol"
+      >(</a
+      ><a name="7739" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="7744"
+      > </a
+      ><a name="7745" class="Symbol"
+      >(</a
+      ><a name="7746" href="Prelude.Category.Slice.html#561" class="Field"
+      >Slice.s</a
+      ><a name="7753"
+      > </a
+      ><a name="7754" class="Symbol"
+      >(</a
+      ><a name="7755" href="Prelude.Category.Span.html#717" class="Field"
+      >Span.M</a
+      ><a name="7761"
+      > </a
+      ><a name="7762" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="7763" class="Symbol"
+      >)))</a
+      ><a name="7766"
+      > </a
+      ><a name="7767" class="Symbol"
+      >(</a
+      ><a name="7768" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7770"
+      > </a
+      ><a name="7771" class="Symbol"
+      >(</a
+      ><a name="7772" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="7777"
+      > </a
+      ><a name="7778" class="Symbol"
+      >(</a
+      ><a name="7779" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7795"
+      > </a
+      ><a name="7796" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7797" class="Symbol"
+      >)</a
+      ><a name="7798"
+      > </a
+      ><a name="7799" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="7800" class="Symbol"
+      >))))</a
+      ><a name="7804"
+      >
+                                                                         </a
+      ><a name="7878" class="Symbol"
+      >(</a
+      ><a name="7879" href="Ornament.Horizontal.html#4303" class="Function"
+      >erase-&#7776;-&#7714;ROrn</a
+      ><a name="7892"
+      > </a
+      ><a name="7893" class="Symbol"
+      >(</a
+      ><a name="7894" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="7906"
+      > </a
+      ><a name="7907" class="Symbol"
+      >(</a
+      ><a name="7908" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="7913"
+      > </a
+      ><a name="7914" class="Symbol"
+      >(</a
+      ><a name="7915" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="7931"
+      > </a
+      ><a name="7932" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="7933" class="Symbol"
+      >))</a
+      ><a name="7935"
+      > </a
+      ><a name="7936" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="7937" class="Symbol"
+      >)</a
+      ><a name="7938"
+      > </a
+      ><a name="7939" href="Ornament.Horizontal.Pullback.html#7400" class="Bound"
+      >hs</a
+      ><a name="7941" class="Symbol"
+      >)))</a
+      ><a name="7944"
+      >
+                                                           </a
+      ><a name="8004" class="Symbol"
+      >(</a
+      ><a name="8005" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8010"
+      > </a
+      ><a name="8011" class="Symbol"
+      >(</a
+      ><a name="8012" href="Prelude.Category.Slice.html#798" class="Field"
+      >SliceMorphism.triangle</a
+      ><a name="8034"
+      > </a
+      ><a name="8035" class="Symbol"
+      >(</a
+      ><a name="8036" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="8050"
+      > </a
+      ><a name="8051" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8052" class="Symbol"
+      >))</a
+      ><a name="8054"
+      > </a
+      ><a name="8055" href="Ornament.Horizontal.Pullback.html#7398" class="Bound"
+      >j</a
+      ><a name="8056"
+      > </a
+      ><a name="8057" href="Ornament.Horizontal.Pullback.html#7400" class="Bound"
+      >hs</a
+      ><a name="8059" class="Symbol"
+      >))))</a
+      ><a name="8063"
+      >
+                   </a
+      ><a name="8083" class="Symbol"
+      >(</a
+      ><a name="8084" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8089"
+      > </a
+      ><a name="8090" class="Symbol"
+      >(</a
+      ><a name="8091" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="8114"
+      > </a
+      ><a name="8115" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8116" class="Symbol"
+      >)</a
+      ><a name="8117"
+      > </a
+      ><a name="8118" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="8119"
+      >
+                    </a
+      ><a name="8140" class="Symbol"
+      >&#955;</a
+      ><a name="8141"
+      > </a
+      ><a name="8142" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8143"
+      > </a
+      ><a name="8144" href="Ornament.Horizontal.Pullback.html#8144" class="Bound"
+      >hs</a
+      ><a name="8146"
+      > </a
+      ><a name="8147" class="Symbol"
+      >&#8594;</a
+      ><a name="8148"
+      > </a
+      ><a name="8149" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="8155"
+      > </a
+      ><a name="8156" class="Symbol"
+      >(</a
+      ><a name="8157" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="8163"
+      > </a
+      ><a name="8164" class="Symbol"
+      >(</a
+      ><a name="8165" href="Ornament.SequentialComposition.html#1916" class="Function"
+      >erase-&#7776;-scROrn</a
+      ><a name="8179"
+      > </a
+      ><a name="8180" class="Symbol"
+      >(</a
+      ><a name="8181" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="8189"
+      > </a
+      ><a name="8190" class="Symbol"
+      >(</a
+      ><a name="8191" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8196"
+      > </a
+      ><a name="8197" class="Symbol"
+      >(</a
+      ><a name="8198" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="8213"
+      > </a
+      ><a name="8214" class="Symbol"
+      >(</a
+      ><a name="8215" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="8221"
+      > </a
+      ><a name="8222" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="8223" class="Symbol"
+      >)))</a
+      ><a name="8226"
+      > </a
+      ><a name="8227" class="Symbol"
+      >(</a
+      ><a name="8228" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="8230"
+      > </a
+      ><a name="8231" class="Symbol"
+      >(</a
+      ><a name="8232" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8237"
+      > </a
+      ><a name="8238" class="Symbol"
+      >(</a
+      ><a name="8239" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="8255"
+      > </a
+      ><a name="8256" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8257" class="Symbol"
+      >)</a
+      ><a name="8258"
+      > </a
+      ><a name="8259" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8260" class="Symbol"
+      >)))</a
+      ><a name="8263"
+      >
+                                                            </a
+      ><a name="8324" class="Symbol"
+      >(</a
+      ><a name="8325" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="8330"
+      > </a
+      ><a name="8331" class="Symbol"
+      >(</a
+      ><a name="8332" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="8344"
+      > </a
+      ><a name="8345" class="Symbol"
+      >(</a
+      ><a name="8346" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8351"
+      > </a
+      ><a name="8352" class="Symbol"
+      >(</a
+      ><a name="8353" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="8369"
+      > </a
+      ><a name="8370" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8371" class="Symbol"
+      >))</a
+      ><a name="8373"
+      > </a
+      ><a name="8374" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8375" class="Symbol"
+      >))</a
+      ><a name="8377"
+      > </a
+      ><a name="8378" href="Ornament.Horizontal.Pullback.html#8144" class="Bound"
+      >hs</a
+      ><a name="8380" class="Symbol"
+      >))</a
+      ><a name="8382"
+      >
+                                    </a
+      ><a name="8419" class="Symbol"
+      >(</a
+      ><a name="8420" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="8426"
+      > </a
+      ><a name="8427" class="Symbol"
+      >(</a
+      ><a name="8428" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="8434"
+      > </a
+      ><a name="8435" class="Symbol"
+      >(</a
+      ><a name="8436" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="8440"
+      > </a
+      ><a name="8441" class="Symbol"
+      >(</a
+      ><a name="8442" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="8449"
+      > </a
+      ><a name="8450" class="Symbol"
+      >(</a
+      ><a name="8451" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="8459"
+      > </a
+      ><a name="8460" class="Symbol"
+      >(</a
+      ><a name="8461" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8466"
+      > </a
+      ><a name="8467" class="Symbol"
+      >(</a
+      ><a name="8468" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="8483"
+      > </a
+      ><a name="8484" class="Symbol"
+      >(</a
+      ><a name="8485" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="8491"
+      > </a
+      ><a name="8492" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="8493" class="Symbol"
+      >)))</a
+      ><a name="8496"
+      > </a
+      ><a name="8497" class="Symbol"
+      >(</a
+      ><a name="8498" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="8500"
+      > </a
+      ><a name="8501" class="Symbol"
+      >(</a
+      ><a name="8502" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8507"
+      > </a
+      ><a name="8508" class="Symbol"
+      >(</a
+      ><a name="8509" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="8525"
+      > </a
+      ><a name="8526" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8527" class="Symbol"
+      >)</a
+      ><a name="8528"
+      > </a
+      ><a name="8529" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8530" class="Symbol"
+      >))))</a
+      ><a name="8534"
+      >
+                                                          </a
+      ><a name="8593" class="Symbol"
+      >(</a
+      ><a name="8594" href="Ornament.Horizontal.html#4303" class="Function"
+      >erase-&#7776;-&#7714;ROrn</a
+      ><a name="8607"
+      > </a
+      ><a name="8608" class="Symbol"
+      >(</a
+      ><a name="8609" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="8621"
+      > </a
+      ><a name="8622" class="Symbol"
+      >(</a
+      ><a name="8623" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8628"
+      > </a
+      ><a name="8629" class="Symbol"
+      >(</a
+      ><a name="8630" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="8646"
+      > </a
+      ><a name="8647" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8648" class="Symbol"
+      >))</a
+      ><a name="8650"
+      > </a
+      ><a name="8651" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8652" class="Symbol"
+      >)</a
+      ><a name="8653"
+      > </a
+      ><a name="8654" href="Ornament.Horizontal.Pullback.html#8144" class="Bound"
+      >hs</a
+      ><a name="8656" class="Symbol"
+      >)))</a
+      ><a name="8659"
+      >
+                                            </a
+      ><a name="8704" class="Symbol"
+      >(</a
+      ><a name="8705" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8710"
+      > </a
+      ><a name="8711" class="Symbol"
+      >(</a
+      ><a name="8712" href="Prelude.Category.Span.html#984" class="Field"
+      >SpanMorphism.triangle-l</a
+      ><a name="8735"
+      > </a
+      ><a name="8736" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8737" class="Symbol"
+      >)</a
+      ><a name="8738"
+      > </a
+      ><a name="8739" href="Ornament.Horizontal.Pullback.html#8142" class="Bound"
+      >j</a
+      ><a name="8740"
+      > </a
+      ><a name="8741" href="Ornament.Horizontal.Pullback.html#8144" class="Bound"
+      >hs</a
+      ><a name="8743" class="Symbol"
+      >)))</a
+      ><a name="8746"
+      >
+                   </a
+      ><a name="8766" class="Symbol"
+      >(</a
+      ><a name="8767" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8772"
+      > </a
+      ><a name="8773" class="Symbol"
+      >(</a
+      ><a name="8774" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="8797"
+      > </a
+      ><a name="8798" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8799" class="Symbol"
+      >)</a
+      ><a name="8800"
+      > </a
+      ><a name="8801" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="8802"
+      >
+                    </a
+      ><a name="8823" class="Symbol"
+      >&#955;</a
+      ><a name="8824"
+      > </a
+      ><a name="8825" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="8826"
+      > </a
+      ><a name="8827" href="Ornament.Horizontal.Pullback.html#8827" class="Bound"
+      >hs</a
+      ><a name="8829"
+      > </a
+      ><a name="8830" class="Symbol"
+      >&#8594;</a
+      ><a name="8831"
+      > </a
+      ><a name="8832" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="8838"
+      > </a
+      ><a name="8839" class="Symbol"
+      >(</a
+      ><a name="8840" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="8846"
+      > </a
+      ><a name="8847" class="Symbol"
+      >(</a
+      ><a name="8848" href="Ornament.SequentialComposition.html#1916" class="Function"
+      >erase-&#7776;-scROrn</a
+      ><a name="8862"
+      > </a
+      ><a name="8863" class="Symbol"
+      >(</a
+      ><a name="8864" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="8872"
+      > </a
+      ><a name="8873" class="Symbol"
+      >(</a
+      ><a name="8874" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="8879"
+      > </a
+      ><a name="8880" class="Symbol"
+      >(</a
+      ><a name="8881" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="8896"
+      > </a
+      ><a name="8897" class="Symbol"
+      >(</a
+      ><a name="8898" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="8904"
+      > </a
+      ><a name="8905" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="8906" class="Symbol"
+      >)))</a
+      ><a name="8909"
+      > </a
+      ><a name="8910" class="Symbol"
+      >(</a
+      ><a name="8911" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="8913"
+      > </a
+      ><a name="8914" class="Symbol"
+      >(</a
+      ><a name="8915" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="8920"
+      > </a
+      ><a name="8921" class="Symbol"
+      >(</a
+      ><a name="8922" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="8938"
+      > </a
+      ><a name="8939" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="8940" class="Symbol"
+      >)</a
+      ><a name="8941"
+      > </a
+      ><a name="8942" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="8943" class="Symbol"
+      >)))</a
+      ><a name="8946"
+      >
+                                                            </a
+      ><a name="9007" class="Symbol"
+      >(</a
+      ><a name="9008" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="9013"
+      > </a
+      ><a name="9014" class="Symbol"
+      >(</a
+      ><a name="9015" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="9027"
+      > </a
+      ><a name="9028" class="Symbol"
+      >(</a
+      ><a name="9029" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9034"
+      > </a
+      ><a name="9035" class="Symbol"
+      >(</a
+      ><a name="9036" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="9052"
+      > </a
+      ><a name="9053" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="9054" class="Symbol"
+      >))</a
+      ><a name="9056"
+      > </a
+      ><a name="9057" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="9058" class="Symbol"
+      >))</a
+      ><a name="9060"
+      > </a
+      ><a name="9061" href="Ornament.Horizontal.Pullback.html#8827" class="Bound"
+      >hs</a
+      ><a name="9063" class="Symbol"
+      >))</a
+      ><a name="9065"
+      >
+                                    </a
+      ><a name="9102" class="Symbol"
+      >(</a
+      ><a name="9103" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="9109"
+      > </a
+      ><a name="9110" class="Symbol"
+      >(</a
+      ><a name="9111" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="9117"
+      > </a
+      ><a name="9118" class="Symbol"
+      >(</a
+      ><a name="9119" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="9123"
+      > </a
+      ><a name="9124" class="Symbol"
+      >(</a
+      ><a name="9125" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="9132"
+      > </a
+      ><a name="9133" class="Symbol"
+      >(</a
+      ><a name="9134" href="Ornament.html#6165" class="Field"
+      >Orn.comp</a
+      ><a name="9142"
+      > </a
+      ><a name="9143" class="Symbol"
+      >(</a
+      ><a name="9144" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9149"
+      > </a
+      ><a name="9150" class="Symbol"
+      >(</a
+      ><a name="9151" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="9166"
+      > </a
+      ><a name="9167" class="Symbol"
+      >(</a
+      ><a name="9168" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="9174"
+      > </a
+      ><a name="9175" href="Ornament.Horizontal.Pullback.html#7071" class="Bound"
+      >s</a
+      ><a name="9176" class="Symbol"
+      >)))</a
+      ><a name="9179"
+      > </a
+      ><a name="9180" class="Symbol"
+      >(</a
+      ><a name="9181" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="9183"
+      > </a
+      ><a name="9184" class="Symbol"
+      >(</a
+      ><a name="9185" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="9190"
+      > </a
+      ><a name="9191" class="Symbol"
+      >(</a
+      ><a name="9192" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="9208"
+      > </a
+      ><a name="9209" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="9210" class="Symbol"
+      >)</a
+      ><a name="9211"
+      > </a
+      ><a name="9212" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="9213" class="Symbol"
+      >))))</a
+      ><a name="9217"
+      >
+                                                          </a
+      ><a name="9276" class="Symbol"
+      >(</a
+      ><a name="9277" href="Ornament.Horizontal.html#4303" class="Function"
+      >erase-&#7776;-&#7714;ROrn</a
+      ><a name="9290"
+      > </a
+      ><a name="9291" class="Symbol"
+      >(</a
+      ><a name="9292" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="9304"
+      > </a
+      ><a name="9305" class="Symbol"
+      >(</a
+      ><a name="9306" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9311"
+      > </a
+      ><a name="9312" class="Symbol"
+      >(</a
+      ><a name="9313" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="9329"
+      > </a
+      ><a name="9330" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="9331" class="Symbol"
+      >))</a
+      ><a name="9333"
+      > </a
+      ><a name="9334" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="9335" class="Symbol"
+      >)</a
+      ><a name="9336"
+      > </a
+      ><a name="9337" href="Ornament.Horizontal.Pullback.html#8827" class="Bound"
+      >hs</a
+      ><a name="9339" class="Symbol"
+      >)))</a
+      ><a name="9342"
+      >
+                                            </a
+      ><a name="9387" class="Symbol"
+      >(</a
+      ><a name="9388" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9393"
+      > </a
+      ><a name="9394" class="Symbol"
+      >(</a
+      ><a name="9395" href="Prelude.Category.Span.html#1025" class="Field"
+      >SpanMorphism.triangle-r</a
+      ><a name="9418"
+      > </a
+      ><a name="9419" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="9420" class="Symbol"
+      >)</a
+      ><a name="9421"
+      > </a
+      ><a name="9422" href="Ornament.Horizontal.Pullback.html#8825" class="Bound"
+      >j</a
+      ><a name="9423"
+      > </a
+      ><a name="9424" href="Ornament.Horizontal.Pullback.html#8827" class="Bound"
+      >hs</a
+      ><a name="9426" class="Symbol"
+      >)))</a
+      ><a name="9429"
+      > </a
+      ><a name="9430" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="9431"
+      >
+      </a
+      ><a name="9438" class="Symbol"
+      >&#955;</a
+      ><a name="9439"
+      > </a
+      ><a name="9440" href="Ornament.Horizontal.Pullback.html#9440" class="Bound"
+      >m'</a
+      ><a name="9442"
+      > </a
+      ><a name="9443" class="Symbol"
+      >&#8594;</a
+      ><a name="9444"
+      > </a
+      ><a name="9445" class="Keyword"
+      >let</a
+      ><a name="9448"
+      > </a
+      ><a name="9449" href="Ornament.Horizontal.Pullback.html#9449" class="Bound"
+      >meq</a
+      ><a name="9452"
+      > </a
+      ><a name="9453" class="Symbol"
+      >=</a
+      ><a name="9454"
+      > </a
+      ><a name="9455" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9460"
+      > </a
+      ><a name="9461" class="Symbol"
+      >(</a
+      ><a name="9462" href="Ornament.Horizontal.Pullback.html#7073" class="Bound"
+      >ps</a
+      ><a name="9464"
+      > </a
+      ><a name="9465" class="Symbol"
+      >(</a
+      ><a name="9466" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="9472"
+      > </a
+      ><a name="9473" class="Symbol"
+      >(</a
+      ><a name="9474" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="9483"
+      > </a
+      ><a name="9484" href="Ornament.Horizontal.Category.html#3356" class="Function"
+      >Erase</a
+      ><a name="9489" class="Symbol"
+      >)</a
+      ><a name="9490"
+      > </a
+      ><a name="9491" href="Ornament.Horizontal.Pullback.html#7076" class="Bound"
+      >s'</a
+      ><a name="9493" class="Symbol"
+      >))</a
+      ><a name="9495"
+      > </a
+      ><a name="9496" class="Symbol"
+      >(</a
+      ><a name="9497" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="9505"
+      > </a
+      ><a name="9506" class="Symbol"
+      >(</a
+      ><a name="9507" href="Prelude.Category.Pullback.html#1806" class="Function"
+      >SquareMap</a
+      ><a name="9516"
+      > </a
+      ><a name="9517" href="Ornament.Horizontal.Category.html#3356" class="Function"
+      >Erase</a
+      ><a name="9522" class="Symbol"
+      >)</a
+      ><a name="9523"
+      > </a
+      ><a name="9524" href="Ornament.Horizontal.Pullback.html#9440" class="Bound"
+      >m'</a
+      ><a name="9526" class="Symbol"
+      >)</a
+      ><a name="9527"
+      >
+             </a
+      ><a name="9541" class="Keyword"
+      >in</a
+      ><a name="9543"
+      >  </a
+      ><a name="9545" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="9550"
+      > </a
+      ><a name="9551" href="Ornament.Horizontal.Pullback.html#9449" class="Bound"
+      >meq</a
+      ><a name="9554"
+      > </a
+      ><a name="9555" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="9556"
+      > </a
+      ><a name="9557" class="Symbol"
+      >&#955;</a
+      ><a name="9558"
+      > </a
+      ><a name="9559" href="Ornament.Horizontal.Pullback.html#9559" class="Bound"
+      >j</a
+      ><a name="9560"
+      > </a
+      ><a name="9561" href="Ornament.Horizontal.Pullback.html#9561" class="Bound"
+      >hs</a
+      ><a name="9563"
+      > </a
+      ><a name="9564" class="Symbol"
+      >&#8594;</a
+      ><a name="9565"
+      > </a
+      ><a name="9566" href="Relation.Binary.HeterogeneousEquality.html#1367" class="Function"
+      >htrans</a
+      ><a name="9572"
+      > </a
+      ><a name="9573" class="Symbol"
+      >(</a
+      ><a name="9574" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="9580"
+      > </a
+      ><a name="9581" class="Symbol"
+      >(</a
+      ><a name="9582" href="Ornament.Horizontal.html#4303" class="Function"
+      >erase-&#7776;-&#7714;ROrn</a
+      ><a name="9595"
+      > </a
+      ><a name="9596" class="Symbol"
+      >(</a
+      ><a name="9597" href="Ornament.Horizontal.Category.html#1160" class="Field"
+      >F&#7714;Trans.comp</a
+      ><a name="9609"
+      > </a
+      ><a name="9610" class="Symbol"
+      >(</a
+      ><a name="9611" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9616"
+      > </a
+      ><a name="9617" class="Symbol"
+      >(</a
+      ><a name="9618" href="Prelude.Category.Pullback.html#1529" class="Function"
+      >SquareMorphism-m</a
+      ><a name="9634"
+      > </a
+      ><a name="9635" href="Ornament.Horizontal.Pullback.html#7087" class="Bound"
+      >m</a
+      ><a name="9636" class="Symbol"
+      >))</a
+      ><a name="9638"
+      > </a
+      ><a name="9639" href="Ornament.Horizontal.Pullback.html#9559" class="Bound"
+      >j</a
+      ><a name="9640" class="Symbol"
+      >)</a
+      ><a name="9641"
+      > </a
+      ><a name="9642" href="Ornament.Horizontal.Pullback.html#9561" class="Bound"
+      >hs</a
+      ><a name="9644" class="Symbol"
+      >))</a
+      ><a name="9646"
+      > </a
+      ><a name="9647" class="Symbol"
+      >(</a
+      ><a name="9648" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="9653"
+      > </a
+      ><a name="9654" href="Ornament.Horizontal.Pullback.html#9449" class="Bound"
+      >meq</a
+      ><a name="9657"
+      > </a
+      ><a name="9658" href="Ornament.Horizontal.Pullback.html#9559" class="Bound"
+      >j</a
+      ><a name="9659"
+      > </a
+      ><a name="9660" href="Ornament.Horizontal.Pullback.html#9561" class="Bound"
+      >hs</a
+      ><a name="9662" class="Symbol"
+      >)</a
+      ><a name="9663"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

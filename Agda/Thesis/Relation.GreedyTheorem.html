@@ -1,0 +1,5093 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Relation.GreedyTheorem</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- A variant of the Greedy Theorem and its embedding into inductive families.</a
+      ><a name="78"
+      >
+
+</a
+      ><a name="80" class="Keyword"
+      >open</a
+      ><a name="84"
+      > </a
+      ><a name="85" class="Keyword"
+      >import</a
+      ><a name="91"
+      > </a
+      ><a name="92" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="103"
+      >
+</a
+      ><a name="104" class="Keyword"
+      >open</a
+      ><a name="108"
+      > </a
+      ><a name="109" class="Keyword"
+      >import</a
+      ><a name="115"
+      > </a
+      ><a name="116" href="Relation.html#1" class="Module"
+      >Relation</a
+      ><a name="124"
+      >
+</a
+      ><a name="125" class="Keyword"
+      >open</a
+      ><a name="129"
+      > </a
+      ><a name="130" class="Keyword"
+      >import</a
+      ><a name="136"
+      > </a
+      ><a name="137" href="Relation.Fold.html#1" class="Module"
+      >Relation.Fold</a
+      ><a name="150"
+      >
+</a
+      ><a name="151" class="Keyword"
+      >open</a
+      ><a name="155"
+      > </a
+      ><a name="156" class="Keyword"
+      >import</a
+      ><a name="162"
+      > </a
+      ><a name="163" href="Relation.Meet.html#1" class="Module"
+      >Relation.Meet</a
+      ><a name="176"
+      >
+
+</a
+      ><a name="178" class="Keyword"
+      >module</a
+      ><a name="184"
+      > </a
+      ><a name="185" href="Relation.GreedyTheorem.html#1" class="Module"
+      >Relation.GreedyTheorem</a
+      ><a name="207"
+      >
+  </a
+      ><a name="210" class="Symbol"
+      >{</a
+      ><a name="211" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="212"
+      > </a
+      ><a name="213" class="Symbol"
+      >:</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="PrimitiveType"
+      >Set</a
+      ><a name="218" class="Symbol"
+      >}</a
+      ><a name="219"
+      > </a
+      ><a name="220" class="Symbol"
+      >(</a
+      ><a name="221" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="222"
+      > </a
+      ><a name="223" class="Symbol"
+      >:</a
+      ><a name="224"
+      > </a
+      ><a name="225" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="229"
+      > </a
+      ><a name="230" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="231" class="Symbol"
+      >)</a
+      ><a name="232"
+      > </a
+      ><a name="233" class="Symbol"
+      >{</a
+      ><a name="234" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="235"
+      > </a
+      ><a name="236" class="Symbol"
+      >:</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="239"
+      > </a
+      ><a name="240" class="Symbol"
+      >&#8594;</a
+      ><a name="241"
+      > </a
+      ><a name="242" class="PrimitiveType"
+      >Set</a
+      ><a name="245" class="Symbol"
+      >}</a
+      ><a name="246"
+      > </a
+      ><a name="247" class="Symbol"
+      >(</a
+      ><a name="248" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="249"
+      > </a
+      ><a name="250" class="Symbol"
+      >:</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="253"
+      > </a
+      ><a name="254" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="255"
+      > </a
+      ><a name="256" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="257"
+      > </a
+      ><a name="258" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="259"
+      > </a
+      ><a name="260" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="261" class="Symbol"
+      >)</a
+      ><a name="262"
+      > </a
+      ><a name="263" class="Symbol"
+      >(</a
+      ><a name="264" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="265"
+      > </a
+      ><a name="266" class="Symbol"
+      >:</a
+      ><a name="267"
+      > </a
+      ><a name="268" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="269"
+      > </a
+      ><a name="270" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="271"
+      > </a
+      ><a name="272" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="273"
+      > </a
+      ><a name="274" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="275"
+      > </a
+      ><a name="276" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="277" class="Symbol"
+      >)</a
+      ><a name="278"
+      >
+  </a
+      ><a name="281" class="Symbol"
+      >(</a
+      ><a name="282" href="Relation.GreedyTheorem.html#282" class="Bound"
+      >R-transitive</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >:</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="298"
+      > </a
+      ><a name="299" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="300"
+      > </a
+      ><a name="301" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="302"
+      > </a
+      ><a name="303" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="304"
+      > </a
+      ><a name="305" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="306" class="Symbol"
+      >)</a
+      ><a name="307"
+      > </a
+      ><a name="308" class="Symbol"
+      >(</a
+      ><a name="309" href="Relation.GreedyTheorem.html#309" class="Bound"
+      >monotonicity</a
+      ><a name="321"
+      > </a
+      ><a name="322" class="Symbol"
+      >:</a
+      ><a name="323"
+      > </a
+      ><a name="324" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="325"
+      > </a
+      ><a name="326" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="327"
+      > </a
+      ><a name="328" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="329"
+      > </a
+      ><a name="330" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="331"
+      > </a
+      ><a name="332" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="333"
+      > </a
+      ><a name="334" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="335"
+      > </a
+      ><a name="336" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="337"
+      > </a
+      ><a name="338" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="339"
+      > </a
+      ><a name="340" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="343" class="Symbol"
+      >)</a
+      ><a name="344"
+      >
+  </a
+      ><a name="347" class="Symbol"
+      >(</a
+      ><a name="348" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="349"
+      > </a
+      ><a name="350" class="Symbol"
+      >:</a
+      ><a name="351"
+      > </a
+      ><a name="352" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="353"
+      > </a
+      ><a name="354" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="357"
+      > </a
+      ><a name="358" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="359"
+      > </a
+      ><a name="360" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="361"
+      > </a
+      ><a name="362" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="363"
+      > </a
+      ><a name="364" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="365" class="Symbol"
+      >)</a
+      ><a name="366"
+      > </a
+      ><a name="367" class="Symbol"
+      >(</a
+      ><a name="368" href="Relation.GreedyTheorem.html#368" class="Bound"
+      >greedy-condition</a
+      ><a name="384"
+      > </a
+      ><a name="385" class="Symbol"
+      >:</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="388"
+      > </a
+      ><a name="389" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="390"
+      > </a
+      ><a name="391" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="394"
+      > </a
+      ><a name="395" class="Symbol"
+      >(</a
+      ><a name="396" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="401"
+      > </a
+      ><a name="402" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="403"
+      > </a
+      ><a name="404" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="405" class="Symbol"
+      >)</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="408"
+      > </a
+      ><a name="409" class="Symbol"
+      >(</a
+      ><a name="410" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="411"
+      > </a
+      ><a name="412" href="Relation.Meet.html#678" class="Function Operator"
+      >&#8745;</a
+      ><a name="413"
+      > </a
+      ><a name="414" class="Symbol"
+      >(</a
+      ><a name="415" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="418"
+      > </a
+      ><a name="419" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="420"
+      > </a
+      ><a name="421" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="422" class="Symbol"
+      >))</a
+      ><a name="424"
+      > </a
+      ><a name="425" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="426"
+      > </a
+      ><a name="427" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="430"
+      > </a
+      ><a name="431" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="432"
+      > </a
+      ><a name="433" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="434"
+      > </a
+      ><a name="435" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="436"
+      > </a
+      ><a name="437" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="438"
+      > </a
+      ><a name="439" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="440"
+      > </a
+      ><a name="441" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="442"
+      > </a
+      ><a name="443" class="Symbol"
+      >(</a
+      ><a name="444" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="449"
+      > </a
+      ><a name="450" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="451"
+      > </a
+      ><a name="452" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="453" class="Symbol"
+      >))</a
+      ><a name="455"
+      > </a
+      ><a name="456" class="Keyword"
+      >where</a
+      ><a name="461"
+      >
+
+</a
+      ><a name="463" class="Keyword"
+      >open</a
+      ><a name="467"
+      > </a
+      ><a name="468" class="Keyword"
+      >import</a
+      ><a name="474"
+      > </a
+      ><a name="475" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="495"
+      >
+</a
+      ><a name="496" class="Keyword"
+      >open</a
+      ><a name="500"
+      > </a
+      ><a name="501" class="Keyword"
+      >import</a
+      ><a name="507"
+      > </a
+      ><a name="508" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="536"
+      >
+</a
+      ><a name="537" class="Keyword"
+      >open</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Keyword"
+      >import</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="565"
+      >
+</a
+      ><a name="566" class="Keyword"
+      >open</a
+      ><a name="570"
+      > </a
+      ><a name="571" class="Keyword"
+      >import</a
+      ><a name="577"
+      > </a
+      ><a name="578" href="Relation.Hylomorphism.html#1" class="Module"
+      >Relation.Hylomorphism</a
+      ><a name="599"
+      >
+</a
+      ><a name="600" class="Keyword"
+      >open</a
+      ><a name="604"
+      > </a
+      ><a name="605" class="Keyword"
+      >import</a
+      ><a name="611"
+      > </a
+      ><a name="612" href="Relation.Minimum.html#1" class="Module"
+      >Relation.Minimum</a
+      ><a name="628"
+      >
+</a
+      ><a name="629" class="Keyword"
+      >open</a
+      ><a name="633"
+      > </a
+      ><a name="634" class="Keyword"
+      >import</a
+      ><a name="640"
+      > </a
+      ><a name="641" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="649"
+      >
+</a
+      ><a name="650" class="Keyword"
+      >open</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Keyword"
+      >import</a
+      ><a name="661"
+      > </a
+      ><a name="662" href="Ornament.Algebraic.html#1" class="Module"
+      >Ornament.Algebraic</a
+      ><a name="680"
+      >
+</a
+      ><a name="681" class="Keyword"
+      >open</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Keyword"
+      >import</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="703"
+      >
+</a
+      ><a name="704" class="Keyword"
+      >open</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Keyword"
+      >import</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="Relation.CompChain.html#1" class="Module"
+      >Relation.CompChain</a
+      ><a name="734"
+      >
+
+</a
+      ><a name="736" class="Keyword"
+      >open</a
+      ><a name="740"
+      > </a
+      ><a name="741" class="Keyword"
+      >import</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Keyword"
+      >using</a
+      ><a name="762"
+      > </a
+      ><a name="763" class="Symbol"
+      >(</a
+      ><a name="764" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="766" class="Symbol"
+      >)</a
+      ><a name="767"
+      >
+</a
+      ><a name="768" class="Keyword"
+      >open</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Keyword"
+      >import</a
+      ><a name="779"
+      > </a
+      ><a name="780" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Keyword"
+      >using</a
+      ><a name="798"
+      > </a
+      ><a name="799" class="Symbol"
+      >(</a
+      ><a name="800" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="801" class="Symbol"
+      >;</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="811" class="Symbol"
+      >;</a
+      ><a name="812"
+      > </a
+      ><a name="813" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="816" class="Symbol"
+      >;</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="823" class="Symbol"
+      >;</a
+      ><a name="824"
+      > </a
+      ><a name="825" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="830" class="Symbol"
+      >)</a
+      ><a name="831"
+      >
+</a
+      ><a name="832" class="Keyword"
+      >open</a
+      ><a name="836"
+      > </a
+      ><a name="837" class="Keyword"
+      >import</a
+      ><a name="843"
+      > </a
+      ><a name="844" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="859"
+      > </a
+      ><a name="860" class="Keyword"
+      >using</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >(</a
+      ><a name="867" class="Keyword"
+      >module</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="880" class="Symbol"
+      >)</a
+      ><a name="881"
+      >
+</a
+      ><a name="882" class="Keyword"
+      >import</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >Relation.Binary.PreorderReasoning</a
+      ><a name="922"
+      > </a
+      ><a name="923" class="Symbol"
+      >as</a
+      ><a name="925"
+      > </a
+      ><a name="926" class="Module"
+      >PreorderReasoning</a
+      ><a name="943"
+      >
+</a
+      ><a name="944" class="Keyword"
+      >import</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >Relation.Binary.EqReasoning</a
+      ><a name="978"
+      > </a
+      ><a name="979" class="Symbol"
+      >as</a
+      ><a name="981"
+      > </a
+      ><a name="982" class="Module"
+      >EqReasoning</a
+      ><a name="993"
+      >
+
+
+</a
+      ><a name="996" class="Keyword"
+      >private</a
+      ><a name="1003"
+      >
+
+  </a
+      ><a name="1007" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Symbol"
+      >:</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="1012"
+      > </a
+      ><a name="1013" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1018"
+      >
+  </a
+      ><a name="1021" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1022"
+      > </a
+      ><a name="1023" class="Symbol"
+      >=</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="1030"
+      > </a
+      ><a name="1031" class="Symbol"
+      >{</a
+      ><a name="1032" class="Argument"
+      >D</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" class="Symbol"
+      >=</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1037" class="Symbol"
+      >}</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1052"
+      >
+  
+  </a
+      ><a name="1058" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Symbol"
+      >:</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" href="Relation.html#9757" class="Record Operator"
+      >&#8605;</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1067"
+      > </a
+      ><a name="1068" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1069"
+      >
+  </a
+      ><a name="1072" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >=</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1084"
+      > </a
+      ><a name="1085" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1086"
+      >
+  
+  </a
+      ><a name="1092" href="Relation.GreedyTheorem.html#1092" class="Function"
+      >first-obligation</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" class="Symbol"
+      >:</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1120"
+      > </a
+      ><a name="1121" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" class="Symbol"
+      >(</a
+      ><a name="1133" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1134"
+      > </a
+      ><a name="1135" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1136" class="Symbol"
+      >)</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1141"
+      >
+  </a
+      ><a name="1144" href="Relation.GreedyTheorem.html#1092" class="Function"
+      >first-obligation</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" class="Symbol"
+      >=</a
+      ><a name="1162"
+      >
+    </a
+      ><a name="1167" href="Relation.Binary.PreorderReasoning.html#1154" class="Function Operator"
+      >begin</a
+      ><a name="1172"
+      >
+      </a
+      ><a name="1179" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" class="Symbol"
+      >(</a
+      ><a name="1188" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1198" class="Symbol"
+      >)</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >(</a
+      ><a name="1212" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1215" class="Symbol"
+      >)</a
+      ><a name="1216"
+      >
+        </a
+      ><a name="1225" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="Relation.html#12189" class="Function"
+      >&#8226;-monotonic-l</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1243"
+      > </a
+      ><a name="1244" class="Symbol"
+      >(</a
+      ><a name="1245" href="Relation.html#12321" class="Function"
+      >&#8226;-monotonic-r</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >(</a
+      ><a name="1260" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" class="Symbol"
+      >(</a
+      ><a name="1270" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1273" class="Symbol"
+      >))</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" class="Symbol"
+      >(</a
+      ><a name="1277" href="Relation.html#21915" class="Function"
+      >&#7768;-monotonic</a
+      ><a name="1288"
+      > </a
+      ><a name="1289" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" class="Symbol"
+      >(</a
+      ><a name="1292" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" class="Symbol"
+      >(</a
+      ><a name="1299" href="Relation.Minimum.html#2409" class="Function"
+      >min-universal-&#8658;</a
+      ><a name="1314"
+      > </a
+      ><a name="1315" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="1321" class="Symbol"
+      >))))</a
+      ><a name="1325"
+      > </a
+      ><a name="1326" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="1327"
+      >
+      </a
+      ><a name="1334" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" class="Symbol"
+      >(</a
+      ><a name="1356" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1359" class="Symbol"
+      >)</a
+      ><a name="1360"
+      >
+        </a
+      ><a name="1369" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="Relation.CompChain.html#1089" class="Function"
+      >&#8838;-chain-l</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" class="Symbol"
+      >(</a
+      ><a name="1383" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="1386"
+      > </a
+      ><a name="1387" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="1394" class="Symbol"
+      >)</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >(</a
+      ><a name="1397" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" class="Symbol"
+      >(</a
+      ><a name="1404" href="Relation.Minimum.html#2409" class="Function"
+      >min-universal-&#8658;</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="1426" class="Symbol"
+      >))</a
+      ><a name="1428"
+      > </a
+      ><a name="1429" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="1430"
+      >
+      </a
+      ><a name="1437" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1452"
+      >
+        </a
+      ><a name="1461" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="1463"
+      > </a
+      ><a name="1464" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" class="Symbol"
+      >(</a
+      ><a name="1471" href="Relation.Hylomorphism.html#811" class="Function"
+      >hylo-fixed-point</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1491"
+      > </a
+      ><a name="1492" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1493" class="Symbol"
+      >)</a
+      ><a name="1494"
+      > </a
+      ><a name="1495" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="1496"
+      >
+      </a
+      ><a name="1503" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1504"
+      >
+    </a
+      ><a name="1509" href="Relation.Binary.PreorderReasoning.html#1519" class="Function Operator"
+      >&#9633;</a
+      ><a name="1510"
+      >
+    </a
+      ><a name="1515" class="Keyword"
+      >where</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" class="Keyword"
+      >open</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreorderReasoning</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" class="Symbol"
+      >(</a
+      ><a name="1545" href="Relation.html#10893" class="Function"
+      >&#8838;-Preorder</a
+      ><a name="1555"
+      > </a
+      ><a name="1556" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" class="Symbol"
+      >(</a
+      ><a name="1559" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1562" class="Symbol"
+      >))</a
+      ><a name="1564"
+      > </a
+      ><a name="1565" class="Keyword"
+      >renaming</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >(</a
+      ><a name="1575"
+      >_&#8764;&#10216;_&#10217;_ </a
+      ><a name="1582" class="Symbol"
+      >to</a
+      ><a name="1584"
+      > _&#8838;&#10216;_&#10217;_</a
+      ><a name="1591" class="Symbol"
+      >;</a
+      ><a name="1592"
+      > _&#8718; </a
+      ><a name="1596" class="Symbol"
+      >to</a
+      ><a name="1598"
+      > _&#9633;</a
+      ><a name="1601" class="Symbol"
+      >)</a
+      ><a name="1602"
+      >
+
+  </a
+      ><a name="1606" href="Relation.GreedyTheorem.html#1606" class="Function"
+      >second-obligation</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" class="Symbol"
+      >:</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" class="Symbol"
+      >(</a
+      ><a name="1627" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1628"
+      > </a
+      ><a name="1629" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1630"
+      > </a
+      ><a name="1631" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1632"
+      > </a
+      ><a name="1633" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1642"
+      > </a
+      ><a name="1643" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" class="Symbol"
+      >(</a
+      ><a name="1649" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1652" class="Symbol"
+      >))</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="1664"
+      >
+  </a
+      ><a name="1667" href="Relation.GreedyTheorem.html#1606" class="Function"
+      >second-obligation</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" class="Symbol"
+      >=</a
+      ><a name="1686"
+      >
+    </a
+      ><a name="1691" href="Relation.Binary.PreorderReasoning.html#1154" class="Function Operator"
+      >begin</a
+      ><a name="1696"
+      >
+      </a
+      ><a name="1703" class="Symbol"
+      >(</a
+      ><a name="1704" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1715"
+      > </a
+      ><a name="1716" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" class="Symbol"
+      >(</a
+      ><a name="1726" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1727"
+      > </a
+      ><a name="1728" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1729" class="Symbol"
+      >))</a
+      ><a name="1731"
+      > </a
+      ><a name="1732" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1737"
+      >
+        </a
+      ><a name="1746" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1754"
+      > </a
+      ><a name="1755" class="Symbol"
+      >(</a
+      ><a name="1756" href="Relation.CompChain.html#5594" class="Function"
+      >chain-normalise</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" class="Symbol"
+      >((</a
+      ><a name="1774" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >[</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >]</a
+      ><a name="1779"
+      > </a
+      ><a name="1780" href="Relation.CompChain.html#4707" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >[</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >]</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" href="Relation.CompChain.html#4707" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >[</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="Symbol"
+      >(</a
+      ><a name="1806" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1807"
+      > </a
+      ><a name="1808" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1809" class="Symbol"
+      >)</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >]</a
+      ><a name="1812" class="Symbol"
+      >)</a
+      ><a name="1813"
+      > </a
+      ><a name="1814" href="Relation.CompChain.html#4707" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >[</a
+      ><a name="1817"
+      > </a
+      ><a name="1818" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" href="Relation.CompChain.html#4667" class="InductiveConstructor Operator"
+      >]</a
+      ><a name="1823" class="Symbol"
+      >))</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="1827"
+      >
+      </a
+      ><a name="1834" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="1843"
+      > </a
+      ><a name="1844" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1849"
+      > </a
+      ><a name="1850" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1854"
+      > </a
+      ><a name="1855" class="Symbol"
+      >(</a
+      ><a name="1856" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1859" class="Symbol"
+      >)</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1866"
+      >
+        </a
+      ><a name="1875" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" href="Relation.html#12189" class="Function"
+      >&#8226;-monotonic-l</a
+      ><a name="1891"
+      > </a
+      ><a name="1892" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" class="Symbol"
+      >(</a
+      ><a name="1895" href="Relation.html#12321" class="Function"
+      >&#8226;-monotonic-r</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" class="Symbol"
+      >(</a
+      ><a name="1910" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="1918"
+      > </a
+      ><a name="1919" class="Symbol"
+      >(</a
+      ><a name="1920" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1921"
+      > </a
+      ><a name="1922" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1923" class="Symbol"
+      >)</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1930" class="Symbol"
+      >)</a
+      ><a name="1931"
+      > </a
+      ><a name="1932" class="Symbol"
+      >(</a
+      ><a name="1933" href="Relation.html#21915" class="Function"
+      >&#7768;-monotonic</a
+      ><a name="1944"
+      > </a
+      ><a name="1945" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" class="Symbol"
+      >(</a
+      ><a name="1948" href="Relation.Minimum.html#2884" class="Function"
+      >min-monotonic</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >(</a
+      ><a name="1970" href="Relation.Fold.html#3267" class="Function"
+      >foldR-&#945;-lemma</a
+      ><a name="1983"
+      > </a
+      ><a name="1984" class="Symbol"
+      >(</a
+      ><a name="1985" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="1990"
+      > </a
+      ><a name="1991" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="1994" class="Symbol"
+      >)))))</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="2001"
+      >
+      </a
+      ><a name="2008" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2009"
+      > </a
+      ><a name="2010" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2011"
+      > </a
+      ><a name="2012" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" class="Symbol"
+      >(</a
+      ><a name="2017" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2025"
+      > </a
+      ><a name="2026" class="Symbol"
+      >(</a
+      ><a name="2027" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2036" class="Symbol"
+      >))</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2044"
+      > </a
+      ><a name="2045" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" class="Symbol"
+      >(</a
+      ><a name="2051" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2054" class="Symbol"
+      >)</a
+      ><a name="2055"
+      > </a
+      ><a name="2056" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2061"
+      >
+        </a
+      ><a name="2070" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" href="Relation.CompChain.html#1089" class="Function"
+      >&#8838;-chain-l</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" class="Symbol"
+      >(</a
+      ><a name="2084" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2085"
+      > </a
+      ><a name="2086" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2091"
+      > </a
+      ><a name="2092" class="Symbol"
+      >(</a
+      ><a name="2093" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2101"
+      > </a
+      ><a name="2102" class="Symbol"
+      >(</a
+      ><a name="2103" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="2108"
+      > </a
+      ><a name="2109" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2112" class="Symbol"
+      >))</a
+      ><a name="2114"
+      > </a
+      ><a name="2115" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2116" class="Symbol"
+      >)</a
+      ><a name="2117"
+      >
+             </a
+      ><a name="2131" class="Symbol"
+      >(</a
+      ><a name="2132" href="Relation.Binary.PreorderReasoning.html#1154" class="Function Operator"
+      >begin&#8242;</a
+      ><a name="2138"
+      >
+                </a
+      ><a name="2155" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2158"
+      > </a
+      ><a name="2159" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2160"
+      > </a
+      ><a name="2161" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" class="Symbol"
+      >(</a
+      ><a name="2165" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2168" class="Symbol"
+      >)</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2175"
+      >
+                  </a
+      ><a name="2194" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2196"
+      > </a
+      ><a name="2197" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" class="Symbol"
+      >(</a
+      ><a name="2204" href="Relation.html#13434" class="Function"
+      >&#186;-preserves-comp</a
+      ><a name="2220"
+      > </a
+      ><a name="2221" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2222"
+      > </a
+      ><a name="2223" class="Symbol"
+      >((</a
+      ><a name="2225" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2228"
+      > </a
+      ><a name="2229" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2230"
+      > </a
+      ><a name="2231" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" class="Symbol"
+      >(</a
+      ><a name="2235" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2238" class="Symbol"
+      >))</a
+      ><a name="2240" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2241" class="Symbol"
+      >))</a
+      ><a name="2243"
+      > </a
+      ><a name="2244" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="2246"
+      >
+                </a
+      ><a name="2263" class="Symbol"
+      >(</a
+      ><a name="2264" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2267"
+      > </a
+      ><a name="2268" class="Symbol"
+      >(</a
+      ><a name="2269" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2272"
+      > </a
+      ><a name="2273" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2274"
+      > </a
+      ><a name="2275" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" class="Symbol"
+      >(</a
+      ><a name="2279" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2280"
+      > </a
+      ><a name="2281" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2282" class="Symbol"
+      >))</a
+      ><a name="2284" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2285" class="Symbol"
+      >)</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2288"
+      >
+                  </a
+      ><a name="2307" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" class="Symbol"
+      >(</a
+      ><a name="2323" href="Relation.CompChain.html#1306" class="Function"
+      >&#8838;-chain-r</a
+      ><a name="2332"
+      > </a
+      ><a name="2333" class="Symbol"
+      >(</a
+      ><a name="2334" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2337" class="Symbol"
+      >)</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" class="Symbol"
+      >(</a
+      ><a name="2340" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2345"
+      > </a
+      ><a name="2346" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" class="Symbol"
+      >(</a
+      ><a name="2353" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2354"
+      > </a
+      ><a name="2355" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2356" class="Symbol"
+      >)</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2359" class="Symbol"
+      >)</a
+      ><a name="2360"
+      > </a
+      ><a name="2361" class="Symbol"
+      >(</a
+      ><a name="2362" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" class="Symbol"
+      >(</a
+      ><a name="2369" href="Relation.Hylomorphism.html#811" class="Function"
+      >hylo-fixed-point</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2391" class="Symbol"
+      >)))</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="2397"
+      >
+                </a
+      ><a name="2414" class="Symbol"
+      >(</a
+      ><a name="2415" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2418"
+      > </a
+      ><a name="2419" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2432"
+      > </a
+      ><a name="2433" class="Symbol"
+      >(</a
+      ><a name="2434" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2442"
+      > </a
+      ><a name="2443" class="Symbol"
+      >(</a
+      ><a name="2444" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2447" class="Symbol"
+      >))</a
+      ><a name="2449" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2450" class="Symbol"
+      >)</a
+      ><a name="2451"
+      > </a
+      ><a name="2452" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2453"
+      >
+                  </a
+      ><a name="2472" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2486"
+      > </a
+      ><a name="2487" class="Symbol"
+      >(</a
+      ><a name="2488" href="Relation.CompChain.html#1089" class="Function"
+      >&#8838;-chain-l</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" class="Symbol"
+      >(</a
+      ><a name="2499" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2502"
+      > </a
+      ><a name="2503" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2508"
+      > </a
+      ><a name="2509" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2510" class="Symbol"
+      >)</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="Symbol"
+      >(</a
+      ><a name="2513" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" class="Symbol"
+      >(</a
+      ><a name="2520" href="Relation.html#13434" class="Function"
+      >&#186;-preserves-comp</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >(</a
+      ><a name="2538" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2541"
+      > </a
+      ><a name="2542" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2546"
+      > </a
+      ><a name="2547" class="Symbol"
+      >(</a
+      ><a name="2548" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2551" class="Symbol"
+      >))</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2555" class="Symbol"
+      >)))</a
+      ><a name="2558"
+      > </a
+      ><a name="2559" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="2561"
+      >
+                </a
+      ><a name="2578" class="Symbol"
+      >(</a
+      ><a name="2579" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2586"
+      > </a
+      ><a name="2587" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" class="Symbol"
+      >(</a
+      ><a name="2592" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2595"
+      > </a
+      ><a name="2596" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2597"
+      > </a
+      ><a name="2598" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" class="Symbol"
+      >(</a
+      ><a name="2602" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2603"
+      > </a
+      ><a name="2604" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2605" class="Symbol"
+      >)</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2610" class="Symbol"
+      >)</a
+      ><a name="2611" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2612" class="Symbol"
+      >)</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2615"
+      >
+                  </a
+      ><a name="2634" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="Symbol"
+      >(</a
+      ><a name="2650" href="Relation.CompChain.html#1089" class="Function"
+      >&#8838;-chain-l</a
+      ><a name="2659"
+      > </a
+      ><a name="2660" class="Symbol"
+      >(</a
+      ><a name="2661" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2662"
+      > </a
+      ><a name="2663" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2664"
+      > </a
+      ><a name="2665" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2666"
+      > </a
+      ><a name="2667" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2668"
+      > </a
+      ><a name="2669" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2672" class="Symbol"
+      >)</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" class="Symbol"
+      >(</a
+      ><a name="2675" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2686"
+      > </a
+      ><a name="2687" class="Symbol"
+      >(</a
+      ><a name="2688" href="Relation.html#12321" class="Function"
+      >&#8226;-monotonic-r</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2703"
+      > </a
+      ><a name="2704" class="Symbol"
+      >(</a
+      ><a name="2705" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2710"
+      > </a
+      ><a name="2711" class="Symbol"
+      >(</a
+      ><a name="2712" href="Relation.Minimum.html#3329" class="Function"
+      >min-context</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" class="Symbol"
+      >(</a
+      ><a name="2727" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2730" class="Symbol"
+      >))))))</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="2739"
+      >
+                </a
+      ><a name="2756" class="Symbol"
+      >(</a
+      ><a name="2757" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2758"
+      > </a
+      ><a name="2759" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2764"
+      > </a
+      ><a name="2765" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" class="Symbol"
+      >(</a
+      ><a name="2770" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="2773"
+      > </a
+      ><a name="2774" class="Symbol"
+      >(</a
+      ><a name="2775" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" href="Relation.Meet.html#678" class="Function Operator"
+      >&#8745;</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" class="Symbol"
+      >(</a
+      ><a name="2780" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2781"
+      > </a
+      ><a name="2782" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2783"
+      > </a
+      ><a name="2784" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2785"
+      > </a
+      ><a name="2786" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2787" class="Symbol"
+      >))</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="2792"
+      > </a
+      ><a name="2793" class="Symbol"
+      >(</a
+      ><a name="2794" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2795"
+      > </a
+      ><a name="2796" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2797" class="Symbol"
+      >)</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2802" class="Symbol"
+      >)</a
+      ><a name="2803" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2804" class="Symbol"
+      >)</a
+      ><a name="2805"
+      > </a
+      ><a name="2806" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2807"
+      >
+                  </a
+      ><a name="2826" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" class="Symbol"
+      >(</a
+      ><a name="2842" href="Relation.CompChain.html#1089" class="Function"
+      >&#8838;-chain-l</a
+      ><a name="2851"
+      > </a
+      ><a name="2852" class="Symbol"
+      >(</a
+      ><a name="2853" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2854"
+      > </a
+      ><a name="2855" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="2856"
+      > </a
+      ><a name="2857" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="2864" class="Symbol"
+      >)</a
+      ><a name="2865"
+      > </a
+      ><a name="2866" class="Symbol"
+      >(</a
+      ><a name="2867" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" class="Symbol"
+      >(</a
+      ><a name="2880" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2885"
+      > </a
+      ><a name="2886" class="Symbol"
+      >(</a
+      ><a name="2887" href="Relation.Minimum.html#2409" class="Function"
+      >min-universal-&#8658;</a
+      ><a name="2902"
+      > </a
+      ><a name="2903" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="2909" class="Symbol"
+      >))))</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="2916"
+      >
+                </a
+      ><a name="2933" class="Symbol"
+      >(</a
+      ><a name="2934" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="2941"
+      > </a
+      ><a name="2942" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" class="Symbol"
+      >(</a
+      ><a name="2947" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="2948"
+      > </a
+      ><a name="2949" href="Relation.Meet.html#678" class="Function Operator"
+      >&#8745;</a
+      ><a name="2950"
+      > </a
+      ><a name="2951" class="Symbol"
+      >(</a
+      ><a name="2952" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2953"
+      > </a
+      ><a name="2954" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="2959" class="Symbol"
+      >))</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2963" class="Symbol"
+      >)</a
+      ><a name="2964"
+      > </a
+      ><a name="2965" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="2966"
+      >
+                  </a
+      ><a name="2985" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="2999"
+      > </a
+      ><a name="3000" class="Symbol"
+      >(</a
+      ><a name="3001" href="Relation.CompChain.html#1783" class="Function"
+      >&#8838;-chain</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" class="Symbol"
+      >(</a
+      ><a name="3010" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3013" class="Symbol"
+      >)</a
+      ><a name="3014"
+      > </a
+      ><a name="3015" class="Symbol"
+      >(</a
+      ><a name="3016" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3023" class="Symbol"
+      >)</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" class="Symbol"
+      >(</a
+      ><a name="3026" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" class="Symbol"
+      >(</a
+      ><a name="3031" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3036"
+      > </a
+      ><a name="3037" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3038"
+      > </a
+      ><a name="3039" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3040" class="Symbol"
+      >)</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3043" class="Symbol"
+      >)</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" class="Symbol"
+      >(</a
+      ><a name="3046" href="Relation.html#21915" class="Function"
+      >&#7768;-monotonic</a
+      ><a name="3057"
+      > </a
+      ><a name="3058" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" class="Symbol"
+      >(</a
+      ><a name="3061" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" class="Symbol"
+      >(</a
+      ><a name="3068" href="Relation.Fold.html#3267" class="Function"
+      >foldR-&#945;-lemma</a
+      ><a name="3081"
+      > </a
+      ><a name="3082" class="Symbol"
+      >(</a
+      ><a name="3083" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3088"
+      > </a
+      ><a name="3089" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3090"
+      > </a
+      ><a name="3091" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3092" class="Symbol"
+      >)))))</a
+      ><a name="3097"
+      > </a
+      ><a name="3098" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="3100"
+      >
+                </a
+      ><a name="3117" class="Symbol"
+      >(</a
+      ><a name="3118" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3123"
+      > </a
+      ><a name="3124" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3125"
+      > </a
+      ><a name="3126" class="Symbol"
+      >(</a
+      ><a name="3127" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3132"
+      > </a
+      ><a name="3133" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3134"
+      > </a
+      ><a name="3135" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3136" class="Symbol"
+      >)</a
+      ><a name="3137"
+      > </a
+      ><a name="3138" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3139"
+      > </a
+      ><a name="3140" class="Symbol"
+      >(</a
+      ><a name="3141" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="3142"
+      > </a
+      ><a name="3143" href="Relation.Meet.html#678" class="Function Operator"
+      >&#8745;</a
+      ><a name="3144"
+      > </a
+      ><a name="3145" class="Symbol"
+      >(</a
+      ><a name="3146" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3147"
+      > </a
+      ><a name="3148" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3149"
+      > </a
+      ><a name="3150" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3151"
+      > </a
+      ><a name="3152" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3153" class="Symbol"
+      >))</a
+      ><a name="3155"
+      > </a
+      ><a name="3156" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3157" class="Symbol"
+      >)</a
+      ><a name="3158"
+      > </a
+      ><a name="3159" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3160"
+      >
+                  </a
+      ><a name="3179" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" href="Relation.html#11884" class="Function"
+      >&#186;-monotonic</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="Relation.GreedyTheorem.html#368" class="Bound"
+      >greedy-condition</a
+      ><a name="3210"
+      > </a
+      ><a name="3211" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="3213"
+      >
+                </a
+      ><a name="3230" class="Symbol"
+      >(</a
+      ><a name="3231" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3232"
+      > </a
+      ><a name="3233" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3240"
+      > </a
+      ><a name="3241" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3242"
+      > </a
+      ><a name="3243" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3244"
+      > </a
+      ><a name="3245" class="Symbol"
+      >(</a
+      ><a name="3246" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3255" class="Symbol"
+      >))</a
+      ><a name="3257"
+      > </a
+      ><a name="3258" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3259"
+      >
+                  </a
+      ><a name="3278" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3286"
+      > </a
+      ><a name="3287" class="Symbol"
+      >(</a
+      ><a name="3288" href="Relation.CompChain.html#4287" class="Function"
+      >&#186;-chain</a
+      ><a name="3295"
+      > </a
+      ><a name="3296" class="Symbol"
+      >(</a
+      ><a name="3297" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3298"
+      > </a
+      ><a name="3299" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3300"
+      > </a
+      ><a name="3301" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="3302"
+      > </a
+      ><a name="3303" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3304"
+      > </a
+      ><a name="3305" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="3306"
+      > </a
+      ><a name="3307" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3308"
+      > </a
+      ><a name="3309" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" class="Symbol"
+      >(</a
+      ><a name="3312" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3317"
+      > </a
+      ><a name="3318" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3319"
+      > </a
+      ><a name="3320" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3321" class="Symbol"
+      >)</a
+      ><a name="3322"
+      > </a
+      ><a name="3323" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3324" class="Symbol"
+      >))</a
+      ><a name="3326"
+      > </a
+      ><a name="3327" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="3329"
+      >
+                </a
+      ><a name="3346" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3347"
+      > </a
+      ><a name="3348" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3349"
+      > </a
+      ><a name="3350" class="Symbol"
+      >(</a
+      ><a name="3351" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3356"
+      > </a
+      ><a name="3357" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3358"
+      > </a
+      ><a name="3359" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3360" class="Symbol"
+      >)</a
+      ><a name="3361"
+      > </a
+      ><a name="3362" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3363"
+      > </a
+      ><a name="3364" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3365"
+      > </a
+      ><a name="3366" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3367"
+      > </a
+      ><a name="3368" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3369"
+      > </a
+      ><a name="3370" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3371"
+      > </a
+      ><a name="3372" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3373"
+      >
+                  </a
+      ><a name="3392" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="3394"
+      > </a
+      ><a name="3395" href="Relation.CompChain.html#1306" class="Function"
+      >&#8838;-chain-r</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" class="Symbol"
+      >((</a
+      ><a name="3407" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3408"
+      > </a
+      ><a name="3409" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3410"
+      > </a
+      ><a name="3411" class="Symbol"
+      >(</a
+      ><a name="3412" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3417"
+      > </a
+      ><a name="3418" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3419"
+      > </a
+      ><a name="3420" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3421" class="Symbol"
+      >)</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3424" class="Symbol"
+      >)</a
+      ><a name="3425"
+      > </a
+      ><a name="3426" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3427" class="Symbol"
+      >)</a
+      ><a name="3428"
+      > </a
+      ><a name="3429" class="Symbol"
+      >(</a
+      ><a name="3430" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3431"
+      > </a
+      ><a name="3432" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3433"
+      > </a
+      ><a name="3434" class="Symbol"
+      >(</a
+      ><a name="3435" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3440"
+      > </a
+      ><a name="3441" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3442" class="Symbol"
+      >)</a
+      ><a name="3443"
+      > </a
+      ><a name="3444" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3445" class="Symbol"
+      >)</a
+      ><a name="3446"
+      > </a
+      ><a name="3447" class="Symbol"
+      >(</a
+      ><a name="3448" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3453"
+      > </a
+      ><a name="3454" class="Symbol"
+      >(</a
+      ><a name="3455" href="Relation.html#22475" class="Function"
+      >&#7768;-preserves-conv</a
+      ><a name="3471"
+      > </a
+      ><a name="3472" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3473"
+      > </a
+      ><a name="3474" class="Symbol"
+      >(</a
+      ><a name="3475" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3480"
+      > </a
+      ><a name="3481" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3482"
+      > </a
+      ><a name="3483" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3484" class="Symbol"
+      >)))</a
+      ><a name="3487"
+      > </a
+      ><a name="3488" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;&#8242;</a
+      ><a name="3490"
+      >
+                </a
+      ><a name="3507" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3508"
+      > </a
+      ><a name="3509" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3510"
+      > </a
+      ><a name="3511" class="Symbol"
+      >(</a
+      ><a name="3512" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3517"
+      > </a
+      ><a name="3518" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3519" class="Symbol"
+      >)</a
+      ><a name="3520"
+      > </a
+      ><a name="3521" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3522"
+      > </a
+      ><a name="3523" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3524"
+      > </a
+      ><a name="3525" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3526"
+      > </a
+      ><a name="3527" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3528"
+      > </a
+      ><a name="3529" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3530"
+      >
+              </a
+      ><a name="3545" href="Relation.Binary.PreorderReasoning.html#1519" class="Function Operator"
+      >&#9633;&#8242;</a
+      ><a name="3547" class="Symbol"
+      >)</a
+      ><a name="3548"
+      > </a
+      ><a name="3549" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="3550"
+      >
+      </a
+      ><a name="3557" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3558"
+      > </a
+      ><a name="3559" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3560"
+      > </a
+      ><a name="3561" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3562"
+      > </a
+      ><a name="3563" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3564"
+      > </a
+      ><a name="3565" class="Symbol"
+      >(</a
+      ><a name="3566" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3569"
+      > </a
+      ><a name="3570" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3571"
+      > </a
+      ><a name="3572" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3574"
+      > </a
+      ><a name="3575" class="Symbol"
+      >(</a
+      ><a name="3576" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3581"
+      > </a
+      ><a name="3582" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3583"
+      > </a
+      ><a name="3584" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3585" class="Symbol"
+      >))</a
+      ><a name="3587"
+      > </a
+      ><a name="3588" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3589"
+      > </a
+      ><a name="3590" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3593"
+      > </a
+      ><a name="3594" class="Symbol"
+      >(</a
+      ><a name="3595" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3600"
+      > </a
+      ><a name="3601" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3602" class="Symbol"
+      >)</a
+      ><a name="3603"
+      > </a
+      ><a name="3604" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3605"
+      > </a
+      ><a name="3606" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3607"
+      > </a
+      ><a name="3608" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3609"
+      > </a
+      ><a name="3610" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3611"
+      > </a
+      ><a name="3612" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3613"
+      >
+        </a
+      ><a name="3622" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="3624"
+      > </a
+      ><a name="3625" href="Relation.CompChain.html#1783" class="Function"
+      >&#8838;-chain</a
+      ><a name="3632"
+      > </a
+      ><a name="3633" class="Symbol"
+      >(</a
+      ><a name="3634" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3635"
+      > </a
+      ><a name="3636" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3637" class="Symbol"
+      >)</a
+      ><a name="3638"
+      > </a
+      ><a name="3639" class="Symbol"
+      >(</a
+      ><a name="3640" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3641"
+      > </a
+      ><a name="3642" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3643"
+      > </a
+      ><a name="3644" class="Symbol"
+      >(</a
+      ><a name="3645" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3648"
+      > </a
+      ><a name="3649" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3650"
+      > </a
+      ><a name="3651" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3653"
+      > </a
+      ><a name="3654" class="Symbol"
+      >(</a
+      ><a name="3655" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3660"
+      > </a
+      ><a name="3661" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3662"
+      > </a
+      ><a name="3663" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3664" class="Symbol"
+      >))</a
+      ><a name="3666"
+      > </a
+      ><a name="3667" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="3668"
+      > </a
+      ><a name="3669" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3670"
+      > </a
+      ><a name="3671" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3672"
+      > </a
+      ><a name="3673" class="Symbol"
+      >(</a
+      ><a name="3674" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3679"
+      > </a
+      ><a name="3680" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3681" class="Symbol"
+      >)</a
+      ><a name="3682"
+      > </a
+      ><a name="3683" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3684" class="Symbol"
+      >)</a
+      ><a name="3685"
+      > </a
+      ><a name="3686" class="Symbol"
+      >(</a
+      ><a name="3687" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3688"
+      > </a
+      ><a name="3689" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3690"
+      > </a
+      ><a name="3691" class="Symbol"
+      >(</a
+      ><a name="3692" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3695"
+      > </a
+      ><a name="3696" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3697"
+      > </a
+      ><a name="3698" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3700"
+      > </a
+      ><a name="3701" class="Symbol"
+      >(</a
+      ><a name="3702" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3707"
+      > </a
+      ><a name="3708" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3711" class="Symbol"
+      >)</a
+      ><a name="3712"
+      > </a
+      ><a name="3713" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3714"
+      > </a
+      ><a name="3715" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3720"
+      > </a
+      ><a name="3721" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3722" class="Symbol"
+      >)</a
+      ><a name="3723"
+      > </a
+      ><a name="3724" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3725" class="Symbol"
+      >)</a
+      ><a name="3726"
+      >
+             </a
+      ><a name="3740" class="Symbol"
+      >(</a
+      ><a name="3741" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3746"
+      > </a
+      ><a name="3747" class="Symbol"
+      >(</a
+      ><a name="3748" href="Relation.html#22221" class="Function"
+      >&#7768;-preserves-comp</a
+      ><a name="3764"
+      > </a
+      ><a name="3765" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3766"
+      > </a
+      ><a name="3767" class="Symbol"
+      >(</a
+      ><a name="3768" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3771"
+      > </a
+      ><a name="3772" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3773"
+      > </a
+      ><a name="3774" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3776"
+      > </a
+      ><a name="3777" class="Symbol"
+      >(</a
+      ><a name="3778" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3783"
+      > </a
+      ><a name="3784" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3785"
+      > </a
+      ><a name="3786" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3787" class="Symbol"
+      >))</a
+      ><a name="3789"
+      > </a
+      ><a name="3790" class="Symbol"
+      >(</a
+      ><a name="3791" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3796"
+      > </a
+      ><a name="3797" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3798" class="Symbol"
+      >)))</a
+      ><a name="3801"
+      > </a
+      ><a name="3802" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="3803"
+      >
+      </a
+      ><a name="3810" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3811"
+      > </a
+      ><a name="3812" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3813"
+      > </a
+      ><a name="3814" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3815"
+      > </a
+      ><a name="3816" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3817"
+      > </a
+      ><a name="3818" class="Symbol"
+      >(</a
+      ><a name="3819" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3822"
+      > </a
+      ><a name="3823" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3824"
+      > </a
+      ><a name="3825" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3827"
+      > </a
+      ><a name="3828" class="Symbol"
+      >(</a
+      ><a name="3829" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3834"
+      > </a
+      ><a name="3835" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3836"
+      > </a
+      ><a name="3837" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3838" class="Symbol"
+      >)</a
+      ><a name="3839"
+      > </a
+      ><a name="3840" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3841"
+      > </a
+      ><a name="3842" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3847"
+      > </a
+      ><a name="3848" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3849" class="Symbol"
+      >)</a
+      ><a name="3850"
+      > </a
+      ><a name="3851" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3852"
+      > </a
+      ><a name="3853" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3854"
+      > </a
+      ><a name="3855" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3856"
+      > </a
+      ><a name="3857" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3858"
+      > </a
+      ><a name="3859" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3860"
+      >
+        </a
+      ><a name="3869" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="3871"
+      > </a
+      ><a name="3872" href="Relation.CompChain.html#1783" class="Function"
+      >&#8838;-chain</a
+      ><a name="3879"
+      > </a
+      ><a name="3880" class="Symbol"
+      >(</a
+      ><a name="3881" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3882"
+      > </a
+      ><a name="3883" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3884" class="Symbol"
+      >)</a
+      ><a name="3885"
+      > </a
+      ><a name="3886" class="Symbol"
+      >(</a
+      ><a name="3887" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3888"
+      > </a
+      ><a name="3889" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3890"
+      > </a
+      ><a name="3891" class="Symbol"
+      >(</a
+      ><a name="3892" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="3895"
+      > </a
+      ><a name="3896" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="3900"
+      > </a
+      ><a name="3901" class="Symbol"
+      >(</a
+      ><a name="3902" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3907"
+      > </a
+      ><a name="3908" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3909"
+      > </a
+      ><a name="3910" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="3911" class="Symbol"
+      >)</a
+      ><a name="3912"
+      > </a
+      ><a name="3913" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3914"
+      > </a
+      ><a name="3915" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="3920"
+      > </a
+      ><a name="3921" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="3922" class="Symbol"
+      >)</a
+      ><a name="3923"
+      > </a
+      ><a name="3924" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3925" class="Symbol"
+      >)</a
+      ><a name="3926"
+      > </a
+      ><a name="3927" class="Symbol"
+      >(</a
+      ><a name="3928" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3929"
+      > </a
+      ><a name="3930" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3931"
+      > </a
+      ><a name="3932" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="3933"
+      > </a
+      ><a name="3934" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="3935" class="Symbol"
+      >)</a
+      ><a name="3936"
+      > </a
+      ><a name="3937" class="Symbol"
+      >(</a
+      ><a name="3938" href="Relation.html#21915" class="Function"
+      >&#7768;-monotonic</a
+      ><a name="3949"
+      > </a
+      ><a name="3950" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="3951"
+      > </a
+      ><a name="3952" class="Symbol"
+      >(</a
+      ><a name="3953" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="3958"
+      > </a
+      ><a name="3959" class="Symbol"
+      >(</a
+      ><a name="3960" href="Relation.Minimum.html#2409" class="Function"
+      >min-universal-&#8658;</a
+      ><a name="3975"
+      > </a
+      ><a name="3976" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="3982" class="Symbol"
+      >)))</a
+      ><a name="3985"
+      > </a
+      ><a name="3986" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="3987"
+      >
+      </a
+      ><a name="3994" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="3995"
+      > </a
+      ><a name="3996" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="3997"
+      > </a
+      ><a name="3998" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="3999"
+      > </a
+      ><a name="4000" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4001"
+      > </a
+      ><a name="4002" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4003"
+      > </a
+      ><a name="4004" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4005"
+      > </a
+      ><a name="4006" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4007"
+      > </a
+      ><a name="4008" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4009"
+      > </a
+      ><a name="4010" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4011"
+      > </a
+      ><a name="4012" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4013"
+      >
+        </a
+      ><a name="4022" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="4024"
+      > </a
+      ><a name="4025" href="Relation.CompChain.html#1306" class="Function"
+      >&#8838;-chain-r</a
+      ><a name="4034"
+      > </a
+      ><a name="4035" class="Symbol"
+      >(</a
+      ><a name="4036" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4037"
+      > </a
+      ><a name="4038" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="4039"
+      > </a
+      ><a name="4040" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="4041"
+      > </a
+      ><a name="4042" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4043"
+      > </a
+      ><a name="4044" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4045"
+      > </a
+      ><a name="4046" href="Relation.CompChain.html#515" class="InductiveConstructor Operator"
+      >&#9642;</a
+      ><a name="4047"
+      > </a
+      ><a name="4048" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4049"
+      > </a
+      ><a name="4050" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4051"
+      > </a
+      ><a name="4052" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="4053" class="Symbol"
+      >)</a
+      ><a name="4054"
+      > </a
+      ><a name="4055" class="Symbol"
+      >(</a
+      ><a name="4056" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4057"
+      > </a
+      ><a name="4058" href="Relation.CompChain.html#475" class="InductiveConstructor Operator"
+      >&#9671;</a
+      ><a name="4059" class="Symbol"
+      >)</a
+      ><a name="4060"
+      > </a
+      ><a name="4061" href="Relation.GreedyTheorem.html#309" class="Bound"
+      >monotonicity</a
+      ><a name="4073"
+      > </a
+      ><a name="4074" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="4075"
+      >
+      </a
+      ><a name="4082" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4083"
+      > </a
+      ><a name="4084" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4085"
+      > </a
+      ><a name="4086" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4087"
+      >
+        </a
+      ><a name="4096" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="4098"
+      > </a
+      ><a name="4099" href="Relation.GreedyTheorem.html#282" class="Bound"
+      >R-transitive</a
+      ><a name="4111"
+      > </a
+      ><a name="4112" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="4113"
+      >
+      </a
+      ><a name="4120" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4121"
+      >
+    </a
+      ><a name="4126" href="Relation.Binary.PreorderReasoning.html#1519" class="Function Operator"
+      >&#9633;</a
+      ><a name="4127"
+      >
+    </a
+      ><a name="4132" class="Keyword"
+      >where</a
+      ><a name="4137"
+      > </a
+      ><a name="4138" class="Keyword"
+      >open</a
+      ><a name="4142"
+      > </a
+      ><a name="4143" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreorderReasoning</a
+      ><a name="4160"
+      > </a
+      ><a name="4161" class="Symbol"
+      >(</a
+      ><a name="4162" href="Relation.html#10893" class="Function"
+      >&#8838;-Preorder</a
+      ><a name="4172"
+      > </a
+      ><a name="4173" class="Symbol"
+      >(</a
+      ><a name="4174" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4175"
+      > </a
+      ><a name="4176" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4177" class="Symbol"
+      >)</a
+      ><a name="4178"
+      > </a
+      ><a name="4179" class="Symbol"
+      >(</a
+      ><a name="4180" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4181"
+      > </a
+      ><a name="4182" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4183" class="Symbol"
+      >))</a
+      ><a name="4185"
+      >   </a
+      ><a name="4188" class="Keyword"
+      >renaming</a
+      ><a name="4196"
+      > </a
+      ><a name="4197" class="Symbol"
+      >(</a
+      ><a name="4198"
+      >_&#8764;&#10216;_&#10217;_ </a
+      ><a name="4205" class="Symbol"
+      >to</a
+      ><a name="4207"
+      > _&#8838;&#10216;_&#10217;_</a
+      ><a name="4214" class="Symbol"
+      >;</a
+      ><a name="4215"
+      > _&#8718; </a
+      ><a name="4219" class="Symbol"
+      >to</a
+      ><a name="4221"
+      > _&#9633;</a
+      ><a name="4224" class="Symbol"
+      >)</a
+      ><a name="4225"
+      >
+          </a
+      ><a name="4236" class="Keyword"
+      >open</a
+      ><a name="4240"
+      > </a
+      ><a name="4241" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreorderReasoning</a
+      ><a name="4258"
+      > </a
+      ><a name="4259" class="Symbol"
+      >(</a
+      ><a name="4260" href="Relation.html#10893" class="Function"
+      >&#8838;-Preorder</a
+      ><a name="4270"
+      > </a
+      ><a name="4271" class="Symbol"
+      >(</a
+      ><a name="4272" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4273"
+      > </a
+      ><a name="4274" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4275" class="Symbol"
+      >)</a
+      ><a name="4276"
+      > </a
+      ><a name="4277" class="Symbol"
+      >(</a
+      ><a name="4278" href="Description.html#1243" class="Function"
+      >&#7710;</a
+      ><a name="4279"
+      > </a
+      ><a name="4280" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4281"
+      > </a
+      ><a name="4282" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="4283" class="Symbol"
+      >))</a
+      ><a name="4285"
+      > </a
+      ><a name="4286" class="Keyword"
+      >renaming</a
+      ><a name="4294"
+      > </a
+      ><a name="4295" class="Symbol"
+      >(</a
+      ><a name="4296"
+      >begin_ </a
+      ><a name="4303" class="Symbol"
+      >to</a
+      ><a name="4305"
+      > begin&#8242;_</a
+      ><a name="4313" class="Symbol"
+      >;</a
+      ><a name="4314"
+      > _&#8764;&#10216;_&#10217;_ </a
+      ><a name="4322" class="Symbol"
+      >to</a
+      ><a name="4324"
+      > _&#8838;&#10216;_&#10217;&#8242;_</a
+      ><a name="4332" class="Symbol"
+      >;</a
+      ><a name="4333"
+      > _&#8718; </a
+      ><a name="4337" class="Symbol"
+      >to</a
+      ><a name="4339"
+      > _&#9633;&#8242;</a
+      ><a name="4343" class="Symbol"
+      >)</a
+      ><a name="4344"
+      >
+
+  </a
+      ><a name="4348" href="Relation.GreedyTheorem.html#4348" class="Function"
+      >M-prefix-point</a
+      ><a name="4362"
+      > </a
+      ><a name="4363" class="Symbol"
+      >:</a
+      ><a name="4364"
+      > </a
+      ><a name="4365" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4366"
+      > </a
+      ><a name="4367" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4368"
+      > </a
+      ><a name="4369" href="Relation.html#21803" class="Function"
+      >&#7768;</a
+      ><a name="4370"
+      > </a
+      ><a name="4371" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4372"
+      > </a
+      ><a name="4373" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="4374"
+      > </a
+      ><a name="4375" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4376"
+      > </a
+      ><a name="4377" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4380"
+      > </a
+      ><a name="4381" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4382"
+      > </a
+      ><a name="4383" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4385"
+      > </a
+      ><a name="4386" class="Symbol"
+      >(</a
+      ><a name="4387" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4388"
+      > </a
+      ><a name="4389" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4390" class="Symbol"
+      >)</a
+      ><a name="4391"
+      > </a
+      ><a name="4392" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="4393"
+      > </a
+      ><a name="4394" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="4395"
+      >
+  </a
+      ><a name="4398" href="Relation.GreedyTheorem.html#4348" class="Function"
+      >M-prefix-point</a
+      ><a name="4412"
+      > </a
+      ><a name="4413" class="Symbol"
+      >=</a
+      ><a name="4414"
+      > </a
+      ><a name="4415" href="Relation.Minimum.html#2674" class="Function"
+      >min-universal-&#8656;</a
+      ><a name="4430"
+      > </a
+      ><a name="4431" href="Relation.GreedyTheorem.html#1092" class="Function"
+      >first-obligation</a
+      ><a name="4447"
+      > </a
+      ><a name="4448" href="Relation.GreedyTheorem.html#1606" class="Function"
+      >second-obligation</a
+      ><a name="4465"
+      >
+
+</a
+      ><a name="4467" href="Relation.GreedyTheorem.html#4467" class="Function"
+      >greedy-theorem</a
+      ><a name="4481"
+      > </a
+      ><a name="4482" class="Symbol"
+      >:</a
+      ><a name="4483"
+      > </a
+      ><a name="4484" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4489"
+      > </a
+      ><a name="4490" class="Symbol"
+      >((</a
+      ><a name="4492" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4495"
+      > </a
+      ><a name="4496" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4497"
+      > </a
+      ><a name="4498" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4500"
+      > </a
+      ><a name="4501" class="Symbol"
+      >(</a
+      ><a name="4502" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4503"
+      > </a
+      ><a name="4504" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4505" class="Symbol"
+      >))</a
+      ><a name="4507" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4508" class="Symbol"
+      >)</a
+      ><a name="4509"
+      > </a
+      ><a name="4510" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4511"
+      > </a
+      ><a name="4512" href="Relation.html#10354" class="Record Operator"
+      >&#8838;</a
+      ><a name="4513"
+      > </a
+      ><a name="4514" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4517"
+      > </a
+      ><a name="4518" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4519"
+      > </a
+      ><a name="4520" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4522"
+      > </a
+      ><a name="4523" class="Symbol"
+      >(</a
+      ><a name="4524" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4529"
+      > </a
+      ><a name="4530" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4531"
+      > </a
+      ><a name="4532" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4533" class="Symbol"
+      >)</a
+      ><a name="4534"
+      >
+</a
+      ><a name="4535" href="Relation.GreedyTheorem.html#4467" class="Function"
+      >greedy-theorem</a
+      ><a name="4549"
+      > </a
+      ><a name="4550" class="Symbol"
+      >=</a
+      ><a name="4551"
+      >
+  </a
+      ><a name="4554" href="Relation.Binary.PreorderReasoning.html#1154" class="Function Operator"
+      >begin</a
+      ><a name="4559"
+      >
+    </a
+      ><a name="4564" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4569"
+      > </a
+      ><a name="4570" class="Symbol"
+      >((</a
+      ><a name="4572" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4575"
+      > </a
+      ><a name="4576" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4577"
+      > </a
+      ><a name="4578" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4580"
+      > </a
+      ><a name="4581" class="Symbol"
+      >(</a
+      ><a name="4582" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4583"
+      > </a
+      ><a name="4584" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4585" class="Symbol"
+      >))</a
+      ><a name="4587" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4588" class="Symbol"
+      >)</a
+      ><a name="4589"
+      > </a
+      ><a name="4590" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4591"
+      >
+      </a
+      ><a name="4598" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="4600"
+      > </a
+      ><a name="4601" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="4606"
+      > </a
+      ><a name="4607" class="Symbol"
+      >(</a
+      ><a name="4608" href="Relation.Fold.html#3267" class="Function"
+      >foldR-&#945;-lemma</a
+      ><a name="4621"
+      > </a
+      ><a name="4622" class="Symbol"
+      >(</a
+      ><a name="4623" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4628"
+      > </a
+      ><a name="4629" class="Symbol"
+      >((</a
+      ><a name="4631" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4634"
+      > </a
+      ><a name="4635" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4636"
+      > </a
+      ><a name="4637" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4639"
+      > </a
+      ><a name="4640" class="Symbol"
+      >(</a
+      ><a name="4641" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4642"
+      > </a
+      ><a name="4643" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4644" class="Symbol"
+      >))</a
+      ><a name="4646" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4647" class="Symbol"
+      >)</a
+      ><a name="4648"
+      > </a
+      ><a name="4649" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4650" class="Symbol"
+      >))</a
+      ><a name="4652"
+      > </a
+      ><a name="4653" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="4654"
+      >
+    </a
+      ><a name="4659" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4664"
+      > </a
+      ><a name="4665" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4666"
+      > </a
+      ><a name="4667" href="Relation.html#10233" class="Function Operator"
+      >&#8226;</a
+      ><a name="4668"
+      > </a
+      ><a name="4669" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4674"
+      > </a
+      ><a name="4675" class="Symbol"
+      >((</a
+      ><a name="4677" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4680"
+      > </a
+      ><a name="4681" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4682"
+      > </a
+      ><a name="4683" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4685"
+      > </a
+      ><a name="4686" class="Symbol"
+      >(</a
+      ><a name="4687" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4688"
+      > </a
+      ><a name="4689" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4690" class="Symbol"
+      >))</a
+      ><a name="4692" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4693" class="Symbol"
+      >)</a
+      ><a name="4694"
+      > </a
+      ><a name="4695" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4696"
+      >
+      </a
+      ><a name="4703" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="4705"
+      > </a
+      ><a name="4706" href="Relation.Hylomorphism.html#1726" class="Function"
+      >hylo-least</a
+      ><a name="4716"
+      > </a
+      ><a name="4717" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4718"
+      > </a
+      ><a name="4719" href="Relation.html#10068" class="Function"
+      >&#945;</a
+      ><a name="4720"
+      > </a
+      ><a name="4721" class="Symbol"
+      >((</a
+      ><a name="4723" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4726"
+      > </a
+      ><a name="4727" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="4728"
+      > </a
+      ><a name="4729" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4731"
+      > </a
+      ><a name="4732" class="Symbol"
+      >(</a
+      ><a name="4733" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4734"
+      > </a
+      ><a name="4735" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4736" class="Symbol"
+      >))</a
+      ><a name="4738" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4739" class="Symbol"
+      >)</a
+      ><a name="4740"
+      > </a
+      ><a name="4741" href="Relation.GreedyTheorem.html#1058" class="Function"
+      >M</a
+      ><a name="4742"
+      > </a
+      ><a name="4743" href="Relation.GreedyTheorem.html#4348" class="Function"
+      >M-prefix-point</a
+      ><a name="4757"
+      > </a
+      ><a name="4758" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="4759"
+      >
+    </a
+      ><a name="4764" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4767"
+      > </a
+      ><a name="4768" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4769"
+      > </a
+      ><a name="4770" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4772"
+      > </a
+      ><a name="4773" href="Relation.GreedyTheorem.html#1007" class="Function"
+      >H</a
+      ><a name="4774"
+      >
+      </a
+      ><a name="4781" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8838;&#10216;</a
+      ><a name="4783"
+      > </a
+      ><a name="4784" href="Relation.Minimum.html#2884" class="Function"
+      >min-monotonic</a
+      ><a name="4797"
+      > </a
+      ><a name="4798" href="Relation.html#10664" class="Function"
+      >&#8838;-refl</a
+      ><a name="4804"
+      > </a
+      ><a name="4805" class="Symbol"
+      >(</a
+      ><a name="4806" href="Relation.Fold.html#3267" class="Function"
+      >foldR-&#945;-lemma</a
+      ><a name="4819"
+      > </a
+      ><a name="4820" class="Symbol"
+      >(</a
+      ><a name="4821" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4826"
+      > </a
+      ><a name="4827" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4828"
+      > </a
+      ><a name="4829" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4830" class="Symbol"
+      >))</a
+      ><a name="4832"
+      > </a
+      ><a name="4833" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="4834"
+      >
+    </a
+      ><a name="4839" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="4842"
+      > </a
+      ><a name="4843" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="4844"
+      > </a
+      ><a name="4845" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="4847"
+      > </a
+      ><a name="4848" class="Symbol"
+      >(</a
+      ><a name="4849" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="4854"
+      > </a
+      ><a name="4855" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="4856"
+      > </a
+      ><a name="4857" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="4858" class="Symbol"
+      >)</a
+      ><a name="4859"
+      >
+  </a
+      ><a name="4862" href="Relation.Binary.PreorderReasoning.html#1519" class="Function Operator"
+      >&#9633;</a
+      ><a name="4863"
+      >
+  </a
+      ><a name="4866" class="Keyword"
+      >where</a
+      ><a name="4871"
+      > </a
+      ><a name="4872" class="Keyword"
+      >open</a
+      ><a name="4876"
+      > </a
+      ><a name="4877" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreorderReasoning</a
+      ><a name="4894"
+      > </a
+      ><a name="4895" class="Symbol"
+      >(</a
+      ><a name="4896" href="Relation.html#10893" class="Function"
+      >&#8838;-Preorder</a
+      ><a name="4906"
+      > </a
+      ><a name="4907" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="4908"
+      > </a
+      ><a name="4909" class="Symbol"
+      >(</a
+      ><a name="4910" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4911"
+      > </a
+      ><a name="4912" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4913" class="Symbol"
+      >))</a
+      ><a name="4915"
+      > </a
+      ><a name="4916" class="Keyword"
+      >renaming</a
+      ><a name="4924"
+      > </a
+      ><a name="4925" class="Symbol"
+      >(</a
+      ><a name="4926"
+      >_&#8764;&#10216;_&#10217;_ </a
+      ><a name="4933" class="Symbol"
+      >to</a
+      ><a name="4935"
+      > _&#8838;&#10216;_&#10217;_</a
+      ><a name="4942" class="Symbol"
+      >;</a
+      ><a name="4943"
+      > _&#8718; </a
+      ><a name="4947" class="Symbol"
+      >to</a
+      ><a name="4949"
+      > _&#9633;</a
+      ><a name="4952" class="Symbol"
+      >)</a
+      ><a name="4953"
+      >
+
+</a
+      ><a name="4955" href="Relation.GreedyTheorem.html#4955" class="Function"
+      >GreedySolutionOD</a
+      ><a name="4971"
+      > </a
+      ><a name="4972" class="Symbol"
+      >:</a
+      ><a name="4973"
+      > </a
+      ><a name="4974" href="Ornament.html#7625" class="Record"
+      >OrnDesc</a
+      ><a name="4981"
+      > </a
+      ><a name="4982" class="Symbol"
+      >(</a
+      ><a name="4983" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="4984"
+      > </a
+      ><a name="4985" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="4986"
+      > </a
+      ><a name="4987" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="4988" class="Symbol"
+      >)</a
+      ><a name="4989"
+      > </a
+      ><a name="4990" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4995"
+      > </a
+      ><a name="4996" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="4997"
+      >
+</a
+      ><a name="4998" href="Relation.GreedyTheorem.html#4955" class="Function"
+      >GreedySolutionOD</a
+      ><a name="5014"
+      > </a
+      ><a name="5015" class="Symbol"
+      >=</a
+      ><a name="5016"
+      > </a
+      ><a name="5017" href="Ornament.Algebraic.html#1362" class="Function"
+      >algOrn</a
+      ><a name="5023"
+      > </a
+      ><a name="5024" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="5025"
+      > </a
+      ><a name="5026" class="Symbol"
+      >((</a
+      ><a name="5028" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="5031"
+      > </a
+      ><a name="5032" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="5033"
+      > </a
+      ><a name="5034" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="5036"
+      > </a
+      ><a name="5037" class="Symbol"
+      >(</a
+      ><a name="5038" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="5039"
+      > </a
+      ><a name="5040" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="5041" class="Symbol"
+      >))</a
+      ><a name="5043" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="5044" class="Symbol"
+      >)</a
+      ><a name="5045"
+      >
+
+</a
+      ><a name="5047" href="Relation.GreedyTheorem.html#5047" class="Function"
+      >GreedySolution</a
+      ><a name="5061"
+      > </a
+      ><a name="5062" class="Symbol"
+      >:</a
+      ><a name="5063"
+      > </a
+      ><a name="5064" class="Symbol"
+      >(</a
+      ><a name="5065" href="Relation.GreedyTheorem.html#5065" class="Bound"
+      >i</a
+      ><a name="5066"
+      > </a
+      ><a name="5067" class="Symbol"
+      >:</a
+      ><a name="5068"
+      > </a
+      ><a name="5069" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="5070" class="Symbol"
+      >)</a
+      ><a name="5071"
+      > </a
+      ><a name="5072" class="Symbol"
+      >&#8594;</a
+      ><a name="5073"
+      > </a
+      ><a name="5074" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="5075"
+      > </a
+      ><a name="5076" href="Relation.GreedyTheorem.html#5065" class="Bound"
+      >i</a
+      ><a name="5077"
+      > </a
+      ><a name="5078" class="Symbol"
+      >&#8594;</a
+      ><a name="5079"
+      > </a
+      ><a name="5080" class="PrimitiveType"
+      >Set</a
+      ><a name="5083"
+      >
+</a
+      ><a name="5084" href="Relation.GreedyTheorem.html#5047" class="Function"
+      >GreedySolution</a
+      ><a name="5098"
+      > </a
+      ><a name="5099" href="Relation.GreedyTheorem.html#5099" class="Bound"
+      >i</a
+      ><a name="5100"
+      > </a
+      ><a name="5101" href="Relation.GreedyTheorem.html#5101" class="Bound"
+      >x</a
+      ><a name="5102"
+      > </a
+      ><a name="5103" class="Symbol"
+      >=</a
+      ><a name="5104"
+      > </a
+      ><a name="5105" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5106"
+      > </a
+      ><a name="5107" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="5108"
+      > </a
+      ><a name="5109" href="Relation.GreedyTheorem.html#4955" class="Function"
+      >GreedySolutionOD</a
+      ><a name="5125"
+      > </a
+      ><a name="5126" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="5127"
+      > </a
+      ><a name="5128" class="Symbol"
+      >(</a
+      ><a name="5129" href="Relation.GreedyTheorem.html#5099" class="Bound"
+      >i</a
+      ><a name="5130"
+      > </a
+      ><a name="5131" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5132"
+      > </a
+      ><a name="5133" href="Relation.GreedyTheorem.html#5101" class="Bound"
+      >x</a
+      ><a name="5134" class="Symbol"
+      >)</a
+      ><a name="5135"
+      >
+
+</a
+      ><a name="5137" href="Relation.GreedyTheorem.html#5137" class="Function"
+      >optimisation-proof</a
+      ><a name="5155"
+      > </a
+      ><a name="5156" class="Symbol"
+      >:</a
+      ><a name="5157"
+      > </a
+      ><a name="5158" class="Symbol"
+      >(</a
+      ><a name="5159" href="Relation.GreedyTheorem.html#5159" class="Bound"
+      >i</a
+      ><a name="5160"
+      > </a
+      ><a name="5161" class="Symbol"
+      >:</a
+      ><a name="5162"
+      > </a
+      ><a name="5163" href="Relation.GreedyTheorem.html#211" class="Bound"
+      >I</a
+      ><a name="5164" class="Symbol"
+      >)</a
+      ><a name="5165"
+      > </a
+      ><a name="5166" class="Symbol"
+      >(</a
+      ><a name="5167" href="Relation.GreedyTheorem.html#5167" class="Bound"
+      >x</a
+      ><a name="5168"
+      > </a
+      ><a name="5169" class="Symbol"
+      >:</a
+      ><a name="5170"
+      > </a
+      ><a name="5171" href="Relation.GreedyTheorem.html#234" class="Bound"
+      >X</a
+      ><a name="5172"
+      > </a
+      ><a name="5173" href="Relation.GreedyTheorem.html#5159" class="Bound"
+      >i</a
+      ><a name="5174" class="Symbol"
+      >)</a
+      ><a name="5175"
+      > </a
+      ><a name="5176" class="Symbol"
+      >(</a
+      ><a name="5177" href="Relation.GreedyTheorem.html#5177" class="Bound"
+      >sol</a
+      ><a name="5180"
+      > </a
+      ><a name="5181" class="Symbol"
+      >:</a
+      ><a name="5182"
+      > </a
+      ><a name="5183" href="Relation.GreedyTheorem.html#5047" class="Function"
+      >GreedySolution</a
+      ><a name="5197"
+      > </a
+      ><a name="5198" href="Relation.GreedyTheorem.html#5159" class="Bound"
+      >i</a
+      ><a name="5199"
+      > </a
+      ><a name="5200" href="Relation.GreedyTheorem.html#5167" class="Bound"
+      >x</a
+      ><a name="5201" class="Symbol"
+      >)</a
+      ><a name="5202"
+      > </a
+      ><a name="5203" class="Symbol"
+      >&#8594;</a
+      ><a name="5204"
+      > </a
+      ><a name="5205" class="Symbol"
+      >((</a
+      ><a name="5207" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="5210"
+      > </a
+      ><a name="5211" href="Relation.GreedyTheorem.html#248" class="Bound"
+      >R</a
+      ><a name="5212"
+      > </a
+      ><a name="5213" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="5215"
+      > </a
+      ><a name="5216" class="Symbol"
+      >(</a
+      ><a name="5217" href="Relation.Fold.html#1334" class="Function"
+      >foldR</a
+      ><a name="5222"
+      > </a
+      ><a name="5223" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="5224"
+      > </a
+      ><a name="5225" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="5226" class="Symbol"
+      >))</a
+      ><a name="5228"
+      > </a
+      ><a name="5229" href="Relation.html#9856" class="Function Operator"
+      >!!</a
+      ><a name="5231" class="Symbol"
+      >)</a
+      ><a name="5232"
+      > </a
+      ><a name="5233" href="Relation.GreedyTheorem.html#5159" class="Bound"
+      >i</a
+      ><a name="5234"
+      > </a
+      ><a name="5235" href="Relation.GreedyTheorem.html#5167" class="Bound"
+      >x</a
+      ><a name="5236"
+      > </a
+      ><a name="5237" class="Symbol"
+      >(</a
+      ><a name="5238" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="5244"
+      > </a
+      ><a name="5245" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="5246"
+      > </a
+      ><a name="5247" href="Relation.GreedyTheorem.html#4955" class="Function"
+      >GreedySolutionOD</a
+      ><a name="5263"
+      > </a
+      ><a name="5264" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="5265"
+      > </a
+      ><a name="5266" href="Relation.GreedyTheorem.html#5177" class="Bound"
+      >sol</a
+      ><a name="5269" class="Symbol"
+      >)</a
+      ><a name="5270"
+      >
+</a
+      ><a name="5271" href="Relation.GreedyTheorem.html#5137" class="Function"
+      >optimisation-proof</a
+      ><a name="5289"
+      > </a
+      ><a name="5290" href="Relation.GreedyTheorem.html#5290" class="Bound"
+      >i</a
+      ><a name="5291"
+      > </a
+      ><a name="5292" href="Relation.GreedyTheorem.html#5292" class="Bound"
+      >x</a
+      ><a name="5293"
+      > </a
+      ><a name="5294" href="Relation.GreedyTheorem.html#5294" class="Bound"
+      >sol</a
+      ><a name="5297"
+      > </a
+      ><a name="5298" class="Symbol"
+      >=</a
+      ><a name="5299"
+      >
+  </a
+      ><a name="5302" href="Relation.html#10476" class="Function"
+      >modus-ponens-&#8838;</a
+      ><a name="5316"
+      > </a
+      ><a name="5317" href="Relation.GreedyTheorem.html#4467" class="Function"
+      >greedy-theorem</a
+      ><a name="5331"
+      > </a
+      ><a name="5332" href="Relation.GreedyTheorem.html#5290" class="Bound"
+      >i</a
+      ><a name="5333"
+      > </a
+      ><a name="5334" href="Relation.GreedyTheorem.html#5292" class="Bound"
+      >x</a
+      ><a name="5335"
+      > </a
+      ><a name="5336" class="Symbol"
+      >(</a
+      ><a name="5337" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="5343"
+      > </a
+      ><a name="5344" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="5345"
+      > </a
+      ><a name="5346" href="Relation.GreedyTheorem.html#4955" class="Function"
+      >GreedySolutionOD</a
+      ><a name="5362"
+      > </a
+      ><a name="5363" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="5364"
+      > </a
+      ><a name="5365" href="Relation.GreedyTheorem.html#5294" class="Bound"
+      >sol</a
+      ><a name="5368" class="Symbol"
+      >)</a
+      ><a name="5369"
+      >
+    </a
+      ><a name="5374" class="Symbol"
+      >(</a
+      ><a name="5375" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="5380"
+      > </a
+      ><a name="5381" class="Symbol"
+      >(</a
+      ><a name="5382" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="5388"
+      > </a
+      ><a name="5389" class="Symbol"
+      >(</a
+      ><a name="5390" href="Refinement.html#929" class="Field"
+      >Refinement.i</a
+      ><a name="5402"
+      > </a
+      ><a name="5403" class="Symbol"
+      >(</a
+      ><a name="5404" href="Refinement.html#5241" class="Field"
+      >FRefinement.comp</a
+      ><a name="5420"
+      > </a
+      ><a name="5421" class="Symbol"
+      >(</a
+      ><a name="5422" href="Refinement.html#6905" class="Function"
+      >toFRefinement</a
+      ><a name="5435"
+      > </a
+      ><a name="5436" class="Symbol"
+      >(</a
+      ><a name="5437" href="Ornament.Algebraic.html#4625" class="Function"
+      >algOrn-FSwap</a
+      ><a name="5449"
+      > </a
+      ><a name="5450" href="Relation.GreedyTheorem.html#221" class="Bound"
+      >D</a
+      ><a name="5451"
+      > </a
+      ><a name="5452" class="Symbol"
+      >((</a
+      ><a name="5454" href="Relation.Minimum.html#2283" class="Function Operator"
+      >min</a
+      ><a name="5457"
+      > </a
+      ><a name="5458" href="Relation.GreedyTheorem.html#348" class="Bound"
+      >Q</a
+      ><a name="5459"
+      > </a
+      ><a name="5460" href="Relation.Minimum.html#2283" class="Function Operator"
+      >&#8226;&#923;</a
+      ><a name="5462"
+      > </a
+      ><a name="5463" class="Symbol"
+      >(</a
+      ><a name="5464" href="Relation.GreedyTheorem.html#264" class="Bound"
+      >S</a
+      ><a name="5465"
+      > </a
+      ><a name="5466" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="5467" class="Symbol"
+      >))</a
+      ><a name="5469" href="Relation.html#10138" class="Function Operator"
+      >&#186;</a
+      ><a name="5470" class="Symbol"
+      >)))</a
+      ><a name="5473"
+      > </a
+      ><a name="5474" class="Symbol"
+      >(</a
+      ><a name="5475" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5477"
+      > </a
+      ><a name="5478" class="Symbol"
+      >(_</a
+      ><a name="5480"
+      > </a
+      ><a name="5481" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5482"
+      > </a
+      ><a name="5483" href="Relation.GreedyTheorem.html#5292" class="Bound"
+      >x</a
+      ><a name="5484" class="Symbol"
+      >))))</a
+      ><a name="5488"
+      > </a
+      ><a name="5489" href="Relation.GreedyTheorem.html#5294" class="Bound"
+      >sol</a
+      ><a name="5492" class="Symbol"
+      >))</a
+      ><a name="5494"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

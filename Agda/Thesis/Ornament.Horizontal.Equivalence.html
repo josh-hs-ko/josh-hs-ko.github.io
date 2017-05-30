@@ -1,0 +1,3144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Ornament.Horizontal.Equivalence</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Ornamental equivalences about horizontal ornaments.</a
+      ><a name="55"
+      >
+
+</a
+      ><a name="57" class="Keyword"
+      >module</a
+      ><a name="63"
+      > </a
+      ><a name="64" href="Ornament.Horizontal.Equivalence.html#1" class="Module"
+      >Ornament.Horizontal.Equivalence</a
+      ><a name="95"
+      > </a
+      ><a name="96" class="Keyword"
+      >where</a
+      ><a name="101"
+      >
+
+</a
+      ><a name="103" class="Keyword"
+      >open</a
+      ><a name="107"
+      > </a
+      ><a name="108" class="Keyword"
+      >import</a
+      ><a name="114"
+      > </a
+      ><a name="115" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="143"
+      >
+</a
+      ><a name="144" class="Keyword"
+      >open</a
+      ><a name="148"
+      > </a
+      ><a name="149" class="Keyword"
+      >import</a
+      ><a name="155"
+      > </a
+      ><a name="156" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="172"
+      >
+</a
+      ><a name="173" class="Keyword"
+      >open</a
+      ><a name="177"
+      > </a
+      ><a name="178" class="Keyword"
+      >import</a
+      ><a name="184"
+      > </a
+      ><a name="185" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="205"
+      >
+</a
+      ><a name="206" class="Keyword"
+      >open</a
+      ><a name="210"
+      > </a
+      ><a name="211" class="Keyword"
+      >import</a
+      ><a name="217"
+      > </a
+      ><a name="218" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="229"
+      >
+</a
+      ><a name="230" class="Keyword"
+      >open</a
+      ><a name="234"
+      > </a
+      ><a name="235" class="Keyword"
+      >import</a
+      ><a name="241"
+      > </a
+      ><a name="242" href="Description.Horizontal.html#1" class="Module"
+      >Description.Horizontal</a
+      ><a name="264"
+      >
+</a
+      ><a name="265" class="Keyword"
+      >open</a
+      ><a name="269"
+      > </a
+      ><a name="270" class="Keyword"
+      >import</a
+      ><a name="276"
+      > </a
+      ><a name="277" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="285"
+      >
+</a
+      ><a name="286" class="Keyword"
+      >open</a
+      ><a name="290"
+      > </a
+      ><a name="291" class="Keyword"
+      >import</a
+      ><a name="297"
+      > </a
+      ><a name="298" href="Ornament.SequentialComposition.html#1" class="Module"
+      >Ornament.SequentialComposition</a
+      ><a name="328"
+      >
+</a
+      ><a name="329" class="Keyword"
+      >open</a
+      ><a name="333"
+      > </a
+      ><a name="334" class="Keyword"
+      >import</a
+      ><a name="340"
+      > </a
+      ><a name="341" href="Ornament.Horizontal.html#1" class="Module"
+      >Ornament.Horizontal</a
+      ><a name="360"
+      >
+</a
+      ><a name="361" class="Keyword"
+      >open</a
+      ><a name="365"
+      > </a
+      ><a name="366" class="Keyword"
+      >import</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="Ornament.Equivalence.html#1" class="Module"
+      >Ornament.Equivalence</a
+      ><a name="393"
+      >
+
+</a
+      ><a name="395" class="Keyword"
+      >open</a
+      ><a name="399"
+      > </a
+      ><a name="400" class="Keyword"
+      >import</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="415"
+      > </a
+      ><a name="416" class="Keyword"
+      >using</a
+      ><a name="421"
+      > </a
+      ><a name="422" class="Symbol"
+      >(</a
+      ><a name="423" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="428" class="Symbol"
+      >)</a
+      ><a name="429"
+      >
+</a
+      ><a name="430" class="Keyword"
+      >open</a
+      ><a name="434"
+      > </a
+      ><a name="435" class="Keyword"
+      >import</a
+      ><a name="441"
+      > </a
+      ><a name="442" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="451"
+      > </a
+      ><a name="452" class="Keyword"
+      >using</a
+      ><a name="457"
+      > </a
+      ><a name="458" class="Symbol"
+      >(</a
+      ><a name="459" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="460" class="Symbol"
+      >;</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="464" class="Symbol"
+      >)</a
+      ><a name="465"
+      >
+</a
+      ><a name="466" class="Keyword"
+      >open</a
+      ><a name="470"
+      > </a
+      ><a name="471" class="Keyword"
+      >import</a
+      ><a name="477"
+      > </a
+      ><a name="478" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="490"
+      > </a
+      ><a name="491" class="Keyword"
+      >using</a
+      ><a name="496"
+      > </a
+      ><a name="497" class="Symbol"
+      >(</a
+      ><a name="498" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="499" class="Symbol"
+      >;</a
+      ><a name="500"
+      > </a
+      ><a name="501" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="509" class="Symbol"
+      >;</a
+      ><a name="510"
+      > </a
+      ><a name="511" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="514" class="Symbol"
+      >;</a
+      ><a name="515"
+      > </a
+      ><a name="516" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="521" class="Symbol"
+      >;</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="528" class="Symbol"
+      >)</a
+      ><a name="529"
+      >
+</a
+      ><a name="530" class="Keyword"
+      >open</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Keyword"
+      >import</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="579"
+      > </a
+      ><a name="580" class="Keyword"
+      >using</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Symbol"
+      >(</a
+      ><a name="587" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="590" class="Symbol"
+      >;</a
+      ><a name="591"
+      > </a
+      ><a name="592" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="596" class="Symbol"
+      >;</a
+      ><a name="597"
+      > </a
+      ><a name="598" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="601" class="Symbol"
+      >;</a
+      ><a name="602"
+      > </a
+      ><a name="603" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="607" class="Symbol"
+      >;</a
+      ><a name="608"
+      > </a
+      ><a name="609" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >cong&#8322;</a
+      ><a name="614" class="Symbol"
+      >;</a
+      ><a name="615"
+      > </a
+      ><a name="616" class="Keyword"
+      >module</a
+      ><a name="622"
+      > </a
+      ><a name="623" href="Relation.Binary.PropositionalEquality.html#227" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="634" class="Symbol"
+      >)</a
+      ><a name="635"
+      >
+</a
+      ><a name="636" class="Keyword"
+      >open</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Keyword"
+      >import</a
+      ><a name="647"
+      > </a
+      ><a name="648" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Keyword"
+      >using</a
+      ><a name="691"
+      > </a
+      ><a name="692" class="Symbol"
+      >(</a
+      ><a name="693" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="696" class="Symbol"
+      >;</a
+      ><a name="697"
+      > </a
+      ><a name="698" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="704" class="Symbol"
+      >;</a
+      ><a name="705"
+      > </a
+      ><a name="706" href="Relation.Binary.HeterogeneousEquality.Core.html#709" class="Function"
+      >&#8773;-to-&#8801;</a
+      ><a name="712" class="Symbol"
+      >)</a
+      ><a name="713"
+      >
+
+
+</a
+      ><a name="716" href="Ornament.Horizontal.Equivalence.html#716" class="Function"
+      >&#7714;ROrn-id</a
+      ><a name="724"
+      > </a
+      ><a name="725" class="Symbol"
+      >:</a
+      ><a name="726"
+      > </a
+      ><a name="727" class="Symbol"
+      >{</a
+      ><a name="728" href="Ornament.Horizontal.Equivalence.html#728" class="Bound"
+      >I</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="Symbol"
+      >:</a
+      ><a name="731"
+      > </a
+      ><a name="732" class="PrimitiveType"
+      >Set</a
+      ><a name="735" class="Symbol"
+      >}</a
+      ><a name="736"
+      > </a
+      ><a name="737" class="Symbol"
+      >(</a
+      ><a name="738" href="Ornament.Horizontal.Equivalence.html#738" class="Bound"
+      >D</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="Symbol"
+      >:</a
+      ><a name="741"
+      > </a
+      ><a name="742" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="Ornament.Horizontal.Equivalence.html#728" class="Bound"
+      >I</a
+      ><a name="749" class="Symbol"
+      >)</a
+      ><a name="750"
+      > </a
+      ><a name="751" class="Symbol"
+      >&#8594;</a
+      ><a name="752"
+      > </a
+      ><a name="753" href="Ornament.Equivalence.html#927" class="Function"
+      >ROrnEq</a
+      ><a name="759"
+      > </a
+      ><a name="760" class="Symbol"
+      >(</a
+      ><a name="761" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="766"
+      > </a
+      ><a name="767" class="Symbol"
+      >(</a
+      ><a name="768" href="Ornament.Horizontal.html#1100" class="Function"
+      >&#7714;Trans-id</a
+      ><a name="777"
+      > </a
+      ><a name="778" class="Symbol"
+      >{</a
+      ><a name="779" href="Ornament.Horizontal.Equivalence.html#728" class="Bound"
+      >I</a
+      ><a name="780" class="Symbol"
+      >}</a
+      ><a name="781"
+      > </a
+      ><a name="782" class="Symbol"
+      >{</a
+      ><a name="783" href="Ornament.Horizontal.Equivalence.html#738" class="Bound"
+      >D</a
+      ><a name="784" class="Symbol"
+      >}))</a
+      ><a name="787"
+      > </a
+      ><a name="788" class="Symbol"
+      >(</a
+      ><a name="789" href="Ornament.html#3436" class="Function"
+      >idROrn</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="Ornament.Horizontal.Equivalence.html#738" class="Bound"
+      >D</a
+      ><a name="797" class="Symbol"
+      >)</a
+      ><a name="798"
+      >
+</a
+      ><a name="799" href="Ornament.Horizontal.Equivalence.html#716" class="Function"
+      >&#7714;ROrn-id</a
+      ><a name="807"
+      > </a
+      ><a name="808" class="Symbol"
+      >{</a
+      ><a name="809" href="Ornament.Horizontal.Equivalence.html#809" class="Bound"
+      >I</a
+      ><a name="810" class="Symbol"
+      >}</a
+      ><a name="811"
+      > </a
+      ><a name="812" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="813"
+      > </a
+      ><a name="814" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="816"
+      > </a
+      ><a name="817" class="Symbol"
+      >=</a
+      ><a name="818"
+      >
+  </a
+      ><a name="821" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >(</a
+      ><a name="829" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="834"
+      >
+            </a
+      ><a name="847" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="854"
+      > </a
+      ><a name="855" class="Symbol"
+      >(</a
+      ><a name="856" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="861"
+      > </a
+      ><a name="862" class="Symbol"
+      >(</a
+      ><a name="863" href="Ornament.Horizontal.html#1100" class="Function"
+      >&#7714;Trans-id</a
+      ><a name="872"
+      > </a
+      ><a name="873" class="Symbol"
+      >{</a
+      ><a name="874" href="Ornament.Horizontal.Equivalence.html#809" class="Bound"
+      >I</a
+      ><a name="875" class="Symbol"
+      >}</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >{</a
+      ><a name="878" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="879" class="Symbol"
+      >}))</a
+      ><a name="882"
+      > </a
+      ><a name="883" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="885"
+      >
+              </a
+      ><a name="900" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="902"
+      > </a
+      ><a name="903" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="915"
+      > </a
+      ><a name="916" class="Symbol"
+      >(</a
+      ><a name="917" href="Ornament.Horizontal.html#1100" class="Function"
+      >&#7714;Trans-id</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >{</a
+      ><a name="928" href="Ornament.Horizontal.Equivalence.html#809" class="Bound"
+      >I</a
+      ><a name="929" class="Symbol"
+      >}</a
+      ><a name="930"
+      > </a
+      ><a name="931" class="Symbol"
+      >{</a
+      ><a name="932" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="933" class="Symbol"
+      >})</a
+      ><a name="935"
+      > </a
+      ><a name="936" class="Symbol"
+      >(</a
+      ><a name="937" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="944" class="Symbol"
+      >)</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="950"
+      >
+            </a
+      ><a name="963" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="973"
+      > </a
+      ><a name="974" class="Symbol"
+      >(</a
+      ><a name="975" href="Ornament.Horizontal.html#1100" class="Function"
+      >&#7714;Trans-id</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >{</a
+      ><a name="986" href="Ornament.Horizontal.Equivalence.html#809" class="Bound"
+      >I</a
+      ><a name="987" class="Symbol"
+      >}</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >{</a
+      ><a name="990" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="991" class="Symbol"
+      >})</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >(</a
+      ><a name="995" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1002" class="Symbol"
+      >)</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1006"
+      >
+              </a
+      ><a name="1021" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1030"
+      >
+            </a
+      ><a name="1043" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1049"
+      > </a
+      ><a name="1050" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1051"
+      > </a
+      ><a name="1052" class="Symbol"
+      >(</a
+      ><a name="1053" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1058"
+      > </a
+      ><a name="1059" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1060" class="Symbol"
+      >)</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="Symbol"
+      >(</a
+      ><a name="1063" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >(</a
+      ><a name="1075" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1082" class="Symbol"
+      >)</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1086" class="Symbol"
+      >)</a
+      ><a name="1087"
+      >
+              </a
+      ><a name="1102" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1104"
+      > </a
+      ><a name="1105" href="Prelude.Category.Isomorphism.html#723" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" class="Symbol"
+      >(</a
+      ><a name="1126" href="Description.Horizontal.html#1759" class="Function"
+      >&#7714;-iso</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1133"
+      > </a
+      ><a name="1134" class="Symbol"
+      >(</a
+      ><a name="1135" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1142" class="Symbol"
+      >))</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1149"
+      >
+            </a
+      ><a name="1162" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1164"
+      >
+              </a
+      ><a name="1179" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1181"
+      > </a
+      ><a name="1182" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1185"
+      > </a
+      ><a name="1186" class="Symbol"
+      >(</a
+      ><a name="1187" href="Description.html#4734" class="Function"
+      >&#7714;-map-preserves-id</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1207"
+      > </a
+      ><a name="1208" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1210" class="Symbol"
+      >)</a
+      ><a name="1211"
+      > </a
+      ><a name="1212" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1213"
+      >
+            </a
+      ><a name="1226" href="Description.html#4575" class="Function"
+      >&#7714;-map</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1238"
+      >
+              </a
+      ><a name="1253" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1259"
+      > </a
+      ><a name="1260" class="Symbol"
+      >(</a
+      ><a name="1261" href="Ornament.html#5800" class="Function"
+      >erase'-idROrn</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1276"
+      > </a
+      ><a name="1277" class="Symbol"
+      >(</a
+      ><a name="1278" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1285" class="Symbol"
+      >)</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1289" class="Symbol"
+      >)</a
+      ><a name="1290"
+      > </a
+      ><a name="1291" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1292"
+      >
+            </a
+      ><a name="1305" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" class="Symbol"
+      >(</a
+      ><a name="1314" href="Ornament.html#3436" class="Function"
+      >idROrn</a
+      ><a name="1320"
+      > </a
+      ><a name="1321" href="Ornament.Horizontal.Equivalence.html#812" class="Bound"
+      >D</a
+      ><a name="1322" class="Symbol"
+      >)</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="Ornament.Horizontal.Equivalence.html#814" class="Bound"
+      >hs</a
+      ><a name="1326"
+      >
+          </a
+      ><a name="1337" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="1338" class="Symbol"
+      >)</a
+      ><a name="1339"
+      >
+  </a
+      ><a name="1342" class="Keyword"
+      >where</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" class="Keyword"
+      >open</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="1364"
+      >
+
+</a
+      ><a name="1366" href="Ornament.Horizontal.Equivalence.html#1366" class="Function"
+      >&#7714;ROrn-comp</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" class="Symbol"
+      >:</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" class="Symbol"
+      >{</a
+      ><a name="1380" href="Ornament.Horizontal.Equivalence.html#1380" class="Bound"
+      >I</a
+      ><a name="1381"
+      > </a
+      ><a name="1382" href="Ornament.Horizontal.Equivalence.html#1382" class="Bound"
+      >J</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="Ornament.Horizontal.Equivalence.html#1384" class="Bound"
+      >K</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" class="Symbol"
+      >:</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="PrimitiveType"
+      >Set</a
+      ><a name="1391" class="Symbol"
+      >}</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" class="Symbol"
+      >{</a
+      ><a name="1394" href="Ornament.Horizontal.Equivalence.html#1394" class="Bound"
+      >e</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >:</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="Ornament.Horizontal.Equivalence.html#1382" class="Bound"
+      >J</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >&#8594;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" href="Ornament.Horizontal.Equivalence.html#1380" class="Bound"
+      >I</a
+      ><a name="1403" class="Symbol"
+      >}</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >{</a
+      ><a name="1406" href="Ornament.Horizontal.Equivalence.html#1406" class="Bound"
+      >f</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >:</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="Ornament.Horizontal.Equivalence.html#1384" class="Bound"
+      >K</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" class="Symbol"
+      >&#8594;</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" href="Ornament.Horizontal.Equivalence.html#1382" class="Bound"
+      >J</a
+      ><a name="1415" class="Symbol"
+      >}</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" class="Symbol"
+      >{</a
+      ><a name="1418" href="Ornament.Horizontal.Equivalence.html#1418" class="Bound"
+      >D</a
+      ><a name="1419"
+      > </a
+      ><a name="1420" class="Symbol"
+      >:</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" href="Ornament.Horizontal.Equivalence.html#1380" class="Bound"
+      >I</a
+      ><a name="1429" class="Symbol"
+      >}</a
+      ><a name="1430"
+      > </a
+      ><a name="1431" class="Symbol"
+      >{</a
+      ><a name="1432" href="Ornament.Horizontal.Equivalence.html#1432" class="Bound"
+      >E</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" class="Symbol"
+      >:</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="Ornament.Horizontal.Equivalence.html#1382" class="Bound"
+      >J</a
+      ><a name="1443" class="Symbol"
+      >}</a
+      ><a name="1444"
+      > </a
+      ><a name="1445" class="Symbol"
+      >{</a
+      ><a name="1446" href="Ornament.Horizontal.Equivalence.html#1446" class="Bound"
+      >F</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" class="Symbol"
+      >:</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="Ornament.Horizontal.Equivalence.html#1384" class="Bound"
+      >K</a
+      ><a name="1457" class="Symbol"
+      >}</a
+      ><a name="1458"
+      >
+             </a
+      ><a name="1472" class="Symbol"
+      >(</a
+      ><a name="1473" href="Ornament.Horizontal.Equivalence.html#1473" class="Bound"
+      >t</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" class="Symbol"
+      >:</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" href="Ornament.Horizontal.Equivalence.html#1394" class="Bound"
+      >e</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" href="Ornament.Horizontal.Equivalence.html#1418" class="Bound"
+      >D</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Ornament.Horizontal.Equivalence.html#1432" class="Bound"
+      >E</a
+      ><a name="1489" class="Symbol"
+      >)</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" class="Symbol"
+      >(</a
+      ><a name="1492" href="Ornament.Horizontal.Equivalence.html#1492" class="Bound"
+      >u</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" class="Symbol"
+      >:</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="Ornament.Horizontal.Equivalence.html#1406" class="Bound"
+      >f</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" href="Ornament.Horizontal.Equivalence.html#1432" class="Bound"
+      >E</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" href="Ornament.Horizontal.Equivalence.html#1446" class="Bound"
+      >F</a
+      ><a name="1508" class="Symbol"
+      >)</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" class="Symbol"
+      >&#8594;</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" href="Ornament.Equivalence.html#927" class="Function"
+      >ROrnEq</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" class="Symbol"
+      >(</a
+      ><a name="1520" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="Symbol"
+      >(</a
+      ><a name="1527" href="Ornament.Horizontal.Equivalence.html#1473" class="Bound"
+      >t</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="Ornament.Horizontal.html#1183" class="Function Operator"
+      >&#8865;</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="Ornament.Horizontal.Equivalence.html#1492" class="Bound"
+      >u</a
+      ><a name="1532" class="Symbol"
+      >))</a
+      ><a name="1534"
+      > </a
+      ><a name="1535" class="Symbol"
+      >(</a
+      ><a name="1536" href="Ornament.SequentialComposition.html#696" class="Function"
+      >scROrn</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >(</a
+      ><a name="1544" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="Ornament.Horizontal.Equivalence.html#1473" class="Bound"
+      >t</a
+      ><a name="1551" class="Symbol"
+      >)</a
+      ><a name="1552"
+      > </a
+      ><a name="1553" class="Symbol"
+      >(</a
+      ><a name="1554" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" href="Ornament.Horizontal.Equivalence.html#1492" class="Bound"
+      >u</a
+      ><a name="1561" class="Symbol"
+      >))</a
+      ><a name="1563"
+      >
+</a
+      ><a name="1564" href="Ornament.Horizontal.Equivalence.html#1366" class="Function"
+      >&#7714;ROrn-comp</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" class="Symbol"
+      >{</a
+      ><a name="1576" class="Argument"
+      >e</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" class="Symbol"
+      >=</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="Ornament.Horizontal.Equivalence.html#1580" class="Bound"
+      >e</a
+      ><a name="1581" class="Symbol"
+      >}</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" class="Symbol"
+      >{</a
+      ><a name="1584" href="Ornament.Horizontal.Equivalence.html#1584" class="Bound"
+      >f</a
+      ><a name="1585" class="Symbol"
+      >}</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" class="Symbol"
+      >{</a
+      ><a name="1588" href="Ornament.Horizontal.Equivalence.html#1588" class="Bound"
+      >D</a
+      ><a name="1589" class="Symbol"
+      >}</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" class="Symbol"
+      >{</a
+      ><a name="1592" href="Ornament.Horizontal.Equivalence.html#1592" class="Bound"
+      >E</a
+      ><a name="1593" class="Symbol"
+      >}</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" class="Symbol"
+      >{</a
+      ><a name="1596" href="Ornament.Horizontal.Equivalence.html#1596" class="Bound"
+      >F</a
+      ><a name="1597" class="Symbol"
+      >}</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >=</a
+      ><a name="1607"
+      >
+  </a
+      ><a name="1610" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >(</a
+      ><a name="1618" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="1623"
+      >
+            </a
+      ><a name="1636" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" class="Symbol"
+      >(</a
+      ><a name="1645" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" class="Symbol"
+      >(</a
+      ><a name="1652" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="Ornament.Horizontal.html#1183" class="Function Operator"
+      >&#8865;</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1657" class="Symbol"
+      >))</a
+      ><a name="1659"
+      > </a
+      ><a name="1660" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1662"
+      >
+              </a
+      ><a name="1677" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" class="Symbol"
+      >(</a
+      ><a name="1694" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="Ornament.Horizontal.html#1183" class="Function Operator"
+      >&#8865;</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1699" class="Symbol"
+      >)</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" class="Symbol"
+      >(</a
+      ><a name="1702" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1709" class="Symbol"
+      >)</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1715"
+      >
+            </a
+      ><a name="1728" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" class="Symbol"
+      >(</a
+      ><a name="1740" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1741"
+      > </a
+      ><a name="1742" href="Ornament.Horizontal.html#1183" class="Function Operator"
+      >&#8865;</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1745" class="Symbol"
+      >)</a
+      ><a name="1746"
+      > </a
+      ><a name="1747" class="Symbol"
+      >(</a
+      ><a name="1748" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1755" class="Symbol"
+      >)</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1759"
+      >
+              </a
+      ><a name="1774" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="Ornament.Horizontal.html#2467" class="Function"
+      >&#7714;Trans-app-comp</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1799"
+      > </a
+      ><a name="1800" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1801"
+      >
+            </a
+      ><a name="1814" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" class="Symbol"
+      >(</a
+      ><a name="1828" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1835" class="Symbol"
+      >)</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >(</a
+      ><a name="1838" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="1848"
+      > </a
+      ><a name="1849" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1850"
+      > </a
+      ><a name="1851" class="Symbol"
+      >(</a
+      ><a name="1852" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1859" class="Symbol"
+      >)</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1863" class="Symbol"
+      >)</a
+      ><a name="1864"
+      >
+              </a
+      ><a name="1879" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="1885"
+      > </a
+      ><a name="1886" class="Symbol"
+      >(</a
+      ><a name="1887" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="1899"
+      > </a
+      ><a name="1900" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1901"
+      > </a
+      ><a name="1902" class="Symbol"
+      >(</a
+      ><a name="1903" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1910" class="Symbol"
+      >)</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" class="Symbol"
+      >(</a
+      ><a name="1913" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" class="Symbol"
+      >(</a
+      ><a name="1927" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1932"
+      > </a
+      ><a name="1933" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1934" class="Symbol"
+      >)</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1938" class="Symbol"
+      >))</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="1942"
+      >
+            </a
+      ><a name="1955" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="1962"
+      > </a
+      ><a name="1963" class="Symbol"
+      >(</a
+      ><a name="1964" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="1971" class="Symbol"
+      >)</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" class="Symbol"
+      >(</a
+      ><a name="1974" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" class="Symbol"
+      >(</a
+      ><a name="1988" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="1995" class="Symbol"
+      >)</a
+      ><a name="1996"
+      > </a
+      ><a name="1997" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="1999" class="Symbol"
+      >)</a
+      ><a name="2000"
+      >
+              </a
+      ><a name="2015" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2017"
+      > </a
+      ><a name="2018" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" class="Symbol"
+      >(</a
+      ><a name="2023" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2027"
+      > </a
+      ><a name="2028" class="Symbol"
+      >(</a
+      ><a name="2029" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" class="Symbol"
+      >(</a
+      ><a name="2038" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="2045" class="Symbol"
+      >))</a
+      ><a name="2047"
+      > </a
+      ><a name="2048" class="Symbol"
+      >(</a
+      ><a name="2049" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" class="Symbol"
+      >(</a
+      ><a name="2065" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2072" class="Symbol"
+      >)</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="2076" class="Symbol"
+      >))</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2080"
+      >
+            </a
+      ><a name="2093" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" class="Symbol"
+      >(</a
+      ><a name="2102" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="2109" class="Symbol"
+      >)</a
+      ><a name="2110"
+      > </a
+      ><a name="2111" class="Symbol"
+      >(</a
+      ><a name="2112" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Symbol"
+      >(</a
+      ><a name="2121" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="2128" class="Symbol"
+      >)</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="2132" class="Symbol"
+      >)</a
+      ><a name="2133"
+      >
+              </a
+      ><a name="2148" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2154"
+      > </a
+      ><a name="2155" class="Symbol"
+      >(</a
+      ><a name="2156" href="Ornament.SequentialComposition.html#1916" class="Function"
+      >erase-&#7776;-scROrn</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >(</a
+      ><a name="2172" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="2179" class="Symbol"
+      >)</a
+      ><a name="2180"
+      > </a
+      ><a name="2181" class="Symbol"
+      >(</a
+      ><a name="2182" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="2189" class="Symbol"
+      >)</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="2193" class="Symbol"
+      >)</a
+      ><a name="2194"
+      > </a
+      ><a name="2195" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2196"
+      >
+            </a
+      ><a name="2209" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" class="Symbol"
+      >(</a
+      ><a name="2218" href="Ornament.SequentialComposition.html#696" class="Function"
+      >scROrn</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" class="Symbol"
+      >(</a
+      ><a name="2226" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="Ornament.Horizontal.Equivalence.html#1599" class="Bound"
+      >t</a
+      ><a name="2233" class="Symbol"
+      >)</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" class="Symbol"
+      >(</a
+      ><a name="2236" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="Ornament.Horizontal.Equivalence.html#1601" class="Bound"
+      >u</a
+      ><a name="2243" class="Symbol"
+      >))</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="Ornament.Horizontal.Equivalence.html#1603" class="Bound"
+      >hs</a
+      ><a name="2248"
+      >
+          </a
+      ><a name="2259" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="2260" class="Symbol"
+      >)</a
+      ><a name="2261"
+      >
+  </a
+      ><a name="2264" class="Keyword"
+      >where</a
+      ><a name="2269"
+      > </a
+      ><a name="2270" class="Keyword"
+      >open</a
+      ><a name="2274"
+      > </a
+      ><a name="2275" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="2286"
+      >
+
+</a
+      ><a name="2288" href="Ornament.Horizontal.Equivalence.html#2288" class="Function"
+      >&#7714;ROrn-&#8784;</a
+      ><a name="2295"
+      > </a
+      ><a name="2296" class="Symbol"
+      >:</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" class="Symbol"
+      >{</a
+      ><a name="2299" href="Ornament.Horizontal.Equivalence.html#2299" class="Bound"
+      >I</a
+      ><a name="2300"
+      > </a
+      ><a name="2301" href="Ornament.Horizontal.Equivalence.html#2301" class="Bound"
+      >J</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" class="Symbol"
+      >:</a
+      ><a name="2304"
+      > </a
+      ><a name="2305" class="PrimitiveType"
+      >Set</a
+      ><a name="2308" class="Symbol"
+      >}</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" class="Symbol"
+      >{</a
+      ><a name="2311" href="Ornament.Horizontal.Equivalence.html#2311" class="Bound"
+      >e</a
+      ><a name="2312"
+      > </a
+      ><a name="2313" href="Ornament.Horizontal.Equivalence.html#2313" class="Bound"
+      >e'</a
+      ><a name="2315"
+      > </a
+      ><a name="2316" class="Symbol"
+      >:</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" href="Ornament.Horizontal.Equivalence.html#2301" class="Bound"
+      >J</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" class="Symbol"
+      >&#8594;</a
+      ><a name="2321"
+      > </a
+      ><a name="2322" href="Ornament.Horizontal.Equivalence.html#2299" class="Bound"
+      >I</a
+      ><a name="2323" class="Symbol"
+      >}</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" class="Symbol"
+      >{</a
+      ><a name="2326" href="Ornament.Horizontal.Equivalence.html#2326" class="Bound"
+      >D</a
+      ><a name="2327"
+      > </a
+      ><a name="2328" class="Symbol"
+      >:</a
+      ><a name="2329"
+      > </a
+      ><a name="2330" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="Ornament.Horizontal.Equivalence.html#2299" class="Bound"
+      >I</a
+      ><a name="2337" class="Symbol"
+      >}</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" class="Symbol"
+      >{</a
+      ><a name="2340" href="Ornament.Horizontal.Equivalence.html#2340" class="Bound"
+      >E</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" class="Symbol"
+      >:</a
+      ><a name="2343"
+      > </a
+      ><a name="2344" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="Ornament.Horizontal.Equivalence.html#2301" class="Bound"
+      >J</a
+      ><a name="2351" class="Symbol"
+      >}</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >(</a
+      ><a name="2354" href="Ornament.Horizontal.Equivalence.html#2354" class="Bound"
+      >t</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" class="Symbol"
+      >:</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="2364"
+      > </a
+      ><a name="2365" href="Ornament.Horizontal.Equivalence.html#2311" class="Bound"
+      >e</a
+      ><a name="2366"
+      > </a
+      ><a name="2367" href="Ornament.Horizontal.Equivalence.html#2326" class="Bound"
+      >D</a
+      ><a name="2368"
+      > </a
+      ><a name="2369" href="Ornament.Horizontal.Equivalence.html#2340" class="Bound"
+      >E</a
+      ><a name="2370" class="Symbol"
+      >)</a
+      ><a name="2371"
+      > </a
+      ><a name="2372" class="Symbol"
+      >(</a
+      ><a name="2373" href="Ornament.Horizontal.Equivalence.html#2373" class="Bound"
+      >u</a
+      ><a name="2374"
+      > </a
+      ><a name="2375" class="Symbol"
+      >:</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="Ornament.Horizontal.Equivalence.html#2313" class="Bound"
+      >e'</a
+      ><a name="2386"
+      > </a
+      ><a name="2387" href="Ornament.Horizontal.Equivalence.html#2326" class="Bound"
+      >D</a
+      ><a name="2388"
+      > </a
+      ><a name="2389" href="Ornament.Horizontal.Equivalence.html#2340" class="Bound"
+      >E</a
+      ><a name="2390" class="Symbol"
+      >)</a
+      ><a name="2391"
+      > </a
+      ><a name="2392" class="Symbol"
+      >&#8594;</a
+      ><a name="2393"
+      >
+          </a
+      ><a name="2404" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="Ornament.Horizontal.Equivalence.html#2354" class="Bound"
+      >t</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="Prelude.Function.html#812" class="Function Operator"
+      >&#8784;</a
+      ><a name="2416"
+      > </a
+      ><a name="2417" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="2425"
+      > </a
+      ><a name="2426" href="Ornament.Horizontal.Equivalence.html#2373" class="Bound"
+      >u</a
+      ><a name="2427"
+      > </a
+      ><a name="2428" class="Symbol"
+      >&#8594;</a
+      ><a name="2429"
+      > </a
+      ><a name="2430" href="Ornament.Equivalence.html#927" class="Function"
+      >ROrnEq</a
+      ><a name="2436"
+      > </a
+      ><a name="2437" class="Symbol"
+      >(</a
+      ><a name="2438" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" href="Ornament.Horizontal.Equivalence.html#2354" class="Bound"
+      >t</a
+      ><a name="2445" class="Symbol"
+      >)</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" class="Symbol"
+      >(</a
+      ><a name="2448" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2453"
+      > </a
+      ><a name="2454" href="Ornament.Horizontal.Equivalence.html#2373" class="Bound"
+      >u</a
+      ><a name="2455" class="Symbol"
+      >)</a
+      ><a name="2456"
+      >
+</a
+      ><a name="2457" href="Ornament.Horizontal.Equivalence.html#2288" class="Function"
+      >&#7714;ROrn-&#8784;</a
+      ><a name="2464"
+      > </a
+      ><a name="2465" class="Symbol"
+      >{</a
+      ><a name="2466" class="Argument"
+      >D</a
+      ><a name="2467"
+      > </a
+      ><a name="2468" class="Symbol"
+      >=</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" href="Ornament.Horizontal.Equivalence.html#2470" class="Bound"
+      >D</a
+      ><a name="2471" class="Symbol"
+      >}</a
+      ><a name="2472"
+      > </a
+      ><a name="2473" class="Symbol"
+      >{</a
+      ><a name="2474" href="Ornament.Horizontal.Equivalence.html#2474" class="Bound"
+      >E</a
+      ><a name="2475" class="Symbol"
+      >}</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="Ornament.Horizontal.Equivalence.html#2477" class="Bound"
+      >t</a
+      ><a name="2478"
+      > </a
+      ><a name="2479" href="Ornament.Horizontal.Equivalence.html#2479" class="Bound"
+      >u</a
+      ><a name="2480"
+      > </a
+      ><a name="2481" href="Ornament.Horizontal.Equivalence.html#2481" class="Bound"
+      >t&#8784;u</a
+      ><a name="2484"
+      > </a
+      ><a name="2485" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" class="Symbol"
+      >=</a
+      ><a name="2489"
+      >
+  </a
+      ><a name="2492" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" class="Symbol"
+      >(</a
+      ><a name="2500" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="2505"
+      >
+            </a
+      ><a name="2518" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" class="Symbol"
+      >(</a
+      ><a name="2527" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="Ornament.Horizontal.Equivalence.html#2477" class="Bound"
+      >t</a
+      ><a name="2534" class="Symbol"
+      >)</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2538"
+      >
+              </a
+      ><a name="2553" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="Ornament.Horizontal.Equivalence.html#2477" class="Bound"
+      >t</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" class="Symbol"
+      >(</a
+      ><a name="2572" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2577"
+      > </a
+      ><a name="2578" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2579" class="Symbol"
+      >)</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2585"
+      >
+            </a
+      ><a name="2598" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="Ornament.Horizontal.Equivalence.html#2477" class="Bound"
+      >t</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" class="Symbol"
+      >(</a
+      ><a name="2612" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2619" class="Symbol"
+      >)</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2623"
+      >
+              </a
+      ><a name="2638" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2645"
+      > </a
+      ><a name="2646" class="Symbol"
+      >(</a
+      ><a name="2647" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" href="Ornament.Horizontal.Equivalence.html#2470" class="Bound"
+      >D</a
+      ><a name="2655"
+      > </a
+      ><a name="2656" class="Symbol"
+      >(</a
+      ><a name="2657" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2662"
+      > </a
+      ><a name="2663" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="2664" class="Symbol"
+      >))</a
+      ><a name="2666"
+      > </a
+      ><a name="2667" class="Symbol"
+      >(</a
+      ><a name="2668" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >cong&#8322;</a
+      ><a name="2673"
+      > </a
+      ><a name="2674" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2677"
+      > </a
+      ><a name="2678" class="Symbol"
+      >(</a
+      ><a name="2679" href="Ornament.Horizontal.Equivalence.html#2481" class="Bound"
+      >t&#8784;u</a
+      ><a name="2682"
+      > </a
+      ><a name="2683" class="Symbol"
+      >(</a
+      ><a name="2684" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" class="Symbol"
+      >(</a
+      ><a name="2691" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="2699"
+      > </a
+      ><a name="2700" href="Ornament.Horizontal.Equivalence.html#2474" class="Bound"
+      >E</a
+      ><a name="2701"
+      > </a
+      ><a name="2702" class="Symbol"
+      >(</a
+      ><a name="2703" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="2710" class="Symbol"
+      >)</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2714" class="Symbol"
+      >)))</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2722" class="Symbol"
+      >)</a
+      ><a name="2723"
+      > </a
+      ><a name="2724" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2725"
+      >
+            </a
+      ><a name="2738" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" href="Ornament.Horizontal.Equivalence.html#2479" class="Bound"
+      >u</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" class="Symbol"
+      >(</a
+      ><a name="2752" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2759" class="Symbol"
+      >)</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2763"
+      >
+              </a
+      ><a name="2778" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="2780"
+      > </a
+      ><a name="2781" href="Relation.Binary.PropositionalEquality.Core.html#565" class="Function"
+      >sym</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >(</a
+      ><a name="2786" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" href="Ornament.Horizontal.Equivalence.html#2479" class="Bound"
+      >u</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >(</a
+      ><a name="2802" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2809" class="Symbol"
+      >)</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2813" class="Symbol"
+      >)</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="2816"
+      >
+            </a
+      ><a name="2829" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="2836"
+      > </a
+      ><a name="2837" class="Symbol"
+      >(</a
+      ><a name="2838" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" href="Ornament.Horizontal.Equivalence.html#2479" class="Bound"
+      >u</a
+      ><a name="2845" class="Symbol"
+      >)</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="Ornament.Horizontal.Equivalence.html#2485" class="Bound"
+      >hs</a
+      ><a name="2849"
+      >
+          </a
+      ><a name="2860" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="2861" class="Symbol"
+      >)</a
+      ><a name="2862"
+      >
+  </a
+      ><a name="2865" class="Keyword"
+      >where</a
+      ><a name="2870"
+      > </a
+      ><a name="2871" class="Keyword"
+      >open</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="2887"
+      >
+
+</a
+      ><a name="2889" href="Ornament.Horizontal.Equivalence.html#2889" class="Function"
+      >&#7714;ROrn-&#8773;</a
+      ><a name="2896"
+      > </a
+      ><a name="2897" class="Symbol"
+      >:</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" class="Symbol"
+      >{</a
+      ><a name="2900" href="Ornament.Horizontal.Equivalence.html#2900" class="Bound"
+      >I</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" href="Ornament.Horizontal.Equivalence.html#2902" class="Bound"
+      >J</a
+      ><a name="2903"
+      > </a
+      ><a name="2904" class="Symbol"
+      >:</a
+      ><a name="2905"
+      > </a
+      ><a name="2906" class="PrimitiveType"
+      >Set</a
+      ><a name="2909" class="Symbol"
+      >}</a
+      ><a name="2910"
+      > </a
+      ><a name="2911" class="Symbol"
+      >{</a
+      ><a name="2912" href="Ornament.Horizontal.Equivalence.html#2912" class="Bound"
+      >e</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" href="Ornament.Horizontal.Equivalence.html#2914" class="Bound"
+      >e'</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" class="Symbol"
+      >:</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="Ornament.Horizontal.Equivalence.html#2902" class="Bound"
+      >J</a
+      ><a name="2920"
+      > </a
+      ><a name="2921" class="Symbol"
+      >&#8594;</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" href="Ornament.Horizontal.Equivalence.html#2900" class="Bound"
+      >I</a
+      ><a name="2924" class="Symbol"
+      >}</a
+      ><a name="2925"
+      > </a
+      ><a name="2926" class="Symbol"
+      >{</a
+      ><a name="2927" href="Ornament.Horizontal.Equivalence.html#2927" class="Bound"
+      >D</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" href="Ornament.Horizontal.Equivalence.html#2929" class="Bound"
+      >D'</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" class="Symbol"
+      >:</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" href="Ornament.Horizontal.Equivalence.html#2900" class="Bound"
+      >I</a
+      ><a name="2941" class="Symbol"
+      >}</a
+      ><a name="2942"
+      > </a
+      ><a name="2943" class="Symbol"
+      >{</a
+      ><a name="2944" href="Ornament.Horizontal.Equivalence.html#2944" class="Bound"
+      >E</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" class="Symbol"
+      >:</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2953"
+      > </a
+      ><a name="2954" href="Ornament.Horizontal.Equivalence.html#2902" class="Bound"
+      >J</a
+      ><a name="2955" class="Symbol"
+      >}</a
+      ><a name="2956"
+      > </a
+      ><a name="2957" class="Symbol"
+      >(</a
+      ><a name="2958" href="Ornament.Horizontal.Equivalence.html#2958" class="Bound"
+      >t</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" class="Symbol"
+      >:</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" href="Ornament.Horizontal.Equivalence.html#2912" class="Bound"
+      >e</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" href="Ornament.Horizontal.Equivalence.html#2927" class="Bound"
+      >D</a
+      ><a name="2972"
+      > </a
+      ><a name="2973" href="Ornament.Horizontal.Equivalence.html#2944" class="Bound"
+      >E</a
+      ><a name="2974" class="Symbol"
+      >)</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" class="Symbol"
+      >(</a
+      ><a name="2977" href="Ornament.Horizontal.Equivalence.html#2977" class="Bound"
+      >u</a
+      ><a name="2978"
+      > </a
+      ><a name="2979" class="Symbol"
+      >:</a
+      ><a name="2980"
+      > </a
+      ><a name="2981" href="Ornament.Horizontal.html#931" class="Record"
+      >&#7714;Trans</a
+      ><a name="2987"
+      > </a
+      ><a name="2988" href="Ornament.Horizontal.Equivalence.html#2914" class="Bound"
+      >e'</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" href="Ornament.Horizontal.Equivalence.html#2929" class="Bound"
+      >D'</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" href="Ornament.Horizontal.Equivalence.html#2944" class="Bound"
+      >E</a
+      ><a name="2995" class="Symbol"
+      >)</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" class="Symbol"
+      >&#8594;</a
+      ><a name="2998"
+      >
+          </a
+      ><a name="3009" href="Ornament.Horizontal.Equivalence.html#2927" class="Bound"
+      >D</a
+      ><a name="3010"
+      > </a
+      ><a name="3011" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3012"
+      > </a
+      ><a name="3013" href="Ornament.Horizontal.Equivalence.html#2929" class="Bound"
+      >D'</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" class="Symbol"
+      >&#8594;</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" class="Symbol"
+      >((</a
+      ><a name="3020" href="Ornament.Horizontal.Equivalence.html#3020" class="Bound"
+      >h</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" class="Symbol"
+      >:</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" href="Ornament.Horizontal.Equivalence.html#2944" class="Bound"
+      >E</a
+      ><a name="3027" class="Symbol"
+      >)</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" class="Symbol"
+      >&#8594;</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="3039"
+      > </a
+      ><a name="3040" href="Ornament.Horizontal.Equivalence.html#2958" class="Bound"
+      >t</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" href="Ornament.Horizontal.Equivalence.html#3020" class="Bound"
+      >h</a
+      ><a name="3043"
+      > </a
+      ><a name="3044" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" href="Ornament.Horizontal.html#1032" class="Field"
+      >&#7714;Trans.s</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" href="Ornament.Horizontal.Equivalence.html#2977" class="Bound"
+      >u</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" href="Ornament.Horizontal.Equivalence.html#3020" class="Bound"
+      >h</a
+      ><a name="3058" class="Symbol"
+      >)</a
+      ><a name="3059"
+      > </a
+      ><a name="3060" class="Symbol"
+      >&#8594;</a
+      ><a name="3061"
+      > </a
+      ><a name="3062" href="Ornament.Equivalence.html#927" class="Function"
+      >ROrnEq</a
+      ><a name="3068"
+      > </a
+      ><a name="3069" class="Symbol"
+      >(</a
+      ><a name="3070" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="Ornament.Horizontal.Equivalence.html#2958" class="Bound"
+      >t</a
+      ><a name="3077" class="Symbol"
+      >)</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Symbol"
+      >(</a
+      ><a name="3080" href="Ornament.Horizontal.html#3212" class="Function"
+      >&#7714;ROrn</a
+      ><a name="3085"
+      > </a
+      ><a name="3086" href="Ornament.Horizontal.Equivalence.html#2977" class="Bound"
+      >u</a
+      ><a name="3087" class="Symbol"
+      >)</a
+      ><a name="3088"
+      >
+</a
+      ><a name="3089" href="Ornament.Horizontal.Equivalence.html#2889" class="Function"
+      >&#7714;ROrn-&#8773;</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" href="Ornament.Horizontal.Equivalence.html#3097" class="Bound"
+      >t</a
+      ><a name="3098"
+      > </a
+      ><a name="3099" href="Ornament.Horizontal.Equivalence.html#3099" class="Bound"
+      >u</a
+      ><a name="3100"
+      > </a
+      ><a name="3101" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3105"
+      > </a
+      ><a name="3106" href="Ornament.Horizontal.Equivalence.html#3106" class="Bound"
+      >t&#8773;u</a
+      ><a name="3109"
+      > </a
+      ><a name="3110" class="Symbol"
+      >=</a
+      ><a name="3111"
+      > </a
+      ><a name="3112" href="Ornament.Horizontal.Equivalence.html#2288" class="Function"
+      >&#7714;ROrn-&#8784;</a
+      ><a name="3119"
+      > </a
+      ><a name="3120" href="Ornament.Horizontal.Equivalence.html#3097" class="Bound"
+      >t</a
+      ><a name="3121"
+      > </a
+      ><a name="3122" href="Ornament.Horizontal.Equivalence.html#3099" class="Bound"
+      >u</a
+      ><a name="3123"
+      > </a
+      ><a name="3124" class="Symbol"
+      >(&#955;</a
+      ><a name="3126"
+      > </a
+      ><a name="3127" href="Ornament.Horizontal.Equivalence.html#3127" class="Bound"
+      >hs</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" class="Symbol"
+      >&#8594;</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" href="Relation.Binary.HeterogeneousEquality.Core.html#709" class="Function"
+      >&#8773;-to-&#8801;</a
+      ><a name="3138"
+      > </a
+      ><a name="3139" class="Symbol"
+      >(</a
+      ><a name="3140" href="Ornament.Horizontal.Equivalence.html#3106" class="Bound"
+      >t&#8773;u</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" href="Ornament.Horizontal.Equivalence.html#3127" class="Bound"
+      >hs</a
+      ><a name="3146" class="Symbol"
+      >))</a
+      ><a name="3148"
+      >
+
+</a
+      ><a name="3150" href="Ornament.Horizontal.Equivalence.html#3150" class="Function"
+      >ROrnEq-normal</a
+      ><a name="3163"
+      > </a
+      ><a name="3164" class="Symbol"
+      >:</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" class="Symbol"
+      >{</a
+      ><a name="3167" href="Ornament.Horizontal.Equivalence.html#3167" class="Bound"
+      >I</a
+      ><a name="3168"
+      > </a
+      ><a name="3169" href="Ornament.Horizontal.Equivalence.html#3169" class="Bound"
+      >J</a
+      ><a name="3170"
+      > </a
+      ><a name="3171" class="Symbol"
+      >:</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" class="PrimitiveType"
+      >Set</a
+      ><a name="3176" class="Symbol"
+      >}</a
+      ><a name="3177"
+      > </a
+      ><a name="3178" class="Symbol"
+      >{</a
+      ><a name="3179" href="Ornament.Horizontal.Equivalence.html#3179" class="Bound"
+      >e</a
+      ><a name="3180"
+      > </a
+      ><a name="3181" class="Symbol"
+      >:</a
+      ><a name="3182"
+      > </a
+      ><a name="3183" href="Ornament.Horizontal.Equivalence.html#3169" class="Bound"
+      >J</a
+      ><a name="3184"
+      > </a
+      ><a name="3185" class="Symbol"
+      >&#8594;</a
+      ><a name="3186"
+      > </a
+      ><a name="3187" href="Ornament.Horizontal.Equivalence.html#3167" class="Bound"
+      >I</a
+      ><a name="3188" class="Symbol"
+      >}</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" class="Symbol"
+      >{</a
+      ><a name="3191" href="Ornament.Horizontal.Equivalence.html#3191" class="Bound"
+      >D</a
+      ><a name="3192"
+      > </a
+      ><a name="3193" class="Symbol"
+      >:</a
+      ><a name="3194"
+      > </a
+      ><a name="3195" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="3200"
+      > </a
+      ><a name="3201" href="Ornament.Horizontal.Equivalence.html#3167" class="Bound"
+      >I</a
+      ><a name="3202" class="Symbol"
+      >}</a
+      ><a name="3203"
+      > </a
+      ><a name="3204" class="Symbol"
+      >{</a
+      ><a name="3205" href="Ornament.Horizontal.Equivalence.html#3205" class="Bound"
+      >E</a
+      ><a name="3206"
+      > </a
+      ><a name="3207" class="Symbol"
+      >:</a
+      ><a name="3208"
+      > </a
+      ><a name="3209" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="3214"
+      > </a
+      ><a name="3215" href="Ornament.Horizontal.Equivalence.html#3169" class="Bound"
+      >J</a
+      ><a name="3216" class="Symbol"
+      >}</a
+      ><a name="3217"
+      > </a
+      ><a name="3218" class="Symbol"
+      >(</a
+      ><a name="3219" href="Ornament.Horizontal.Equivalence.html#3219" class="Bound"
+      >O</a
+      ><a name="3220"
+      > </a
+      ><a name="3221" class="Symbol"
+      >:</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" href="Ornament.html#2911" class="Datatype"
+      >ROrn</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="Ornament.Horizontal.Equivalence.html#3179" class="Bound"
+      >e</a
+      ><a name="3229"
+      > </a
+      ><a name="3230" href="Ornament.Horizontal.Equivalence.html#3191" class="Bound"
+      >D</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="Ornament.Horizontal.Equivalence.html#3205" class="Bound"
+      >E</a
+      ><a name="3233" class="Symbol"
+      >)</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" class="Symbol"
+      >&#8594;</a
+      ><a name="3236"
+      > </a
+      ><a name="3237" href="Ornament.Equivalence.html#927" class="Function"
+      >ROrnEq</a
+      ><a name="3243"
+      > </a
+      ><a name="3244" class="Symbol"
+      >(</a
+      ><a name="3245" href="Ornament.Horizontal.html#5863" class="Function"
+      >normROrn</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="Ornament.Horizontal.Equivalence.html#3219" class="Bound"
+      >O</a
+      ><a name="3255" class="Symbol"
+      >)</a
+      ><a name="3256"
+      > </a
+      ><a name="3257" href="Ornament.Horizontal.Equivalence.html#3219" class="Bound"
+      >O</a
+      ><a name="3258"
+      >
+</a
+      ><a name="3259" href="Ornament.Horizontal.Equivalence.html#3150" class="Function"
+      >ROrnEq-normal</a
+      ><a name="3272"
+      > </a
+      ><a name="3273" class="Symbol"
+      >{</a
+      ><a name="3274" class="Argument"
+      >D</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >=</a
+      ><a name="3277"
+      > </a
+      ><a name="3278" href="Ornament.Horizontal.Equivalence.html#3278" class="Bound"
+      >D</a
+      ><a name="3279" class="Symbol"
+      >}</a
+      ><a name="3280"
+      > </a
+      ><a name="3281" class="Symbol"
+      >{</a
+      ><a name="3282" href="Ornament.Horizontal.Equivalence.html#3282" class="Bound"
+      >E</a
+      ><a name="3283" class="Symbol"
+      >}</a
+      ><a name="3284"
+      > </a
+      ><a name="3285" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3286"
+      > </a
+      ><a name="3287" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3289"
+      > </a
+      ><a name="3290" class="Symbol"
+      >=</a
+      ><a name="3291"
+      >
+  </a
+      ><a name="3294" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="3300"
+      > </a
+      ><a name="3301" class="Symbol"
+      >(</a
+      ><a name="3302" href="Relation.Binary.PropositionalEquality.html#5807" class="Function Operator"
+      >begin</a
+      ><a name="3307"
+      >
+            </a
+      ><a name="3320" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="3327"
+      > </a
+      ><a name="3328" class="Symbol"
+      >(</a
+      ><a name="3329" href="Ornament.Horizontal.html#5863" class="Function"
+      >normROrn</a
+      ><a name="3337"
+      > </a
+      ><a name="3338" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3339" class="Symbol"
+      >)</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3343"
+      >
+              </a
+      ><a name="3358" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3360"
+      > </a
+      ><a name="3361" href="Ornament.Horizontal.html#3889" class="Function"
+      >erase'-&#7714;ROrn</a
+      ><a name="3373"
+      > </a
+      ><a name="3374" class="Symbol"
+      >(</a
+      ><a name="3375" href="Ornament.Horizontal.html#5227" class="Function"
+      >&#7714;Trans-normal</a
+      ><a name="3388"
+      > </a
+      ><a name="3389" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3390" class="Symbol"
+      >)</a
+      ><a name="3391"
+      > </a
+      ><a name="3392" class="Symbol"
+      >(</a
+      ><a name="3393" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="3398"
+      > </a
+      ><a name="3399" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="3400" class="Symbol"
+      >)</a
+      ><a name="3401"
+      > </a
+      ><a name="3402" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3404"
+      > </a
+      ><a name="3405" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3406"
+      >
+            </a
+      ><a name="3419" href="Ornament.Horizontal.html#2214" class="Function"
+      >&#7714;Trans-app</a
+      ><a name="3429"
+      > </a
+      ><a name="3430" class="Symbol"
+      >(</a
+      ><a name="3431" href="Ornament.Horizontal.html#5227" class="Function"
+      >&#7714;Trans-normal</a
+      ><a name="3444"
+      > </a
+      ><a name="3445" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3446" class="Symbol"
+      >)</a
+      ><a name="3447"
+      > </a
+      ><a name="3448" class="Symbol"
+      >(</a
+      ><a name="3449" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="3454"
+      > </a
+      ><a name="3455" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="3456" class="Symbol"
+      >)</a
+      ><a name="3457"
+      > </a
+      ><a name="3458" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3460"
+      >
+              </a
+      ><a name="3475" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#8801;&#10216;</a
+      ><a name="3477"
+      > </a
+      ><a name="3478" href="Ornament.Horizontal.html#5387" class="Function"
+      >&#7714;Trans-app-normal</a
+      ><a name="3495"
+      > </a
+      ><a name="3496" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3497"
+      > </a
+      ><a name="3498" class="Symbol"
+      >(</a
+      ><a name="3499" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="3504"
+      > </a
+      ><a name="3505" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="3506" class="Symbol"
+      >)</a
+      ><a name="3507"
+      > </a
+      ><a name="3508" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3510"
+      > </a
+      ><a name="3511" href="Relation.Binary.PropositionalEquality.html#5924" class="Function Operator"
+      >&#10217;</a
+      ><a name="3512"
+      >
+            </a
+      ><a name="3525" href="Ornament.html#4343" class="Function"
+      >erase-&#7776;</a
+      ><a name="3532"
+      > </a
+      ><a name="3533" href="Ornament.Horizontal.Equivalence.html#3285" class="Bound"
+      >O</a
+      ><a name="3534"
+      > </a
+      ><a name="3535" href="Ornament.Horizontal.Equivalence.html#3287" class="Bound"
+      >hs</a
+      ><a name="3537"
+      >
+          </a
+      ><a name="3548" href="Relation.Binary.PropositionalEquality.html#6105" class="Function Operator"
+      >&#8718;</a
+      ><a name="3549" class="Symbol"
+      >)</a
+      ><a name="3550"
+      >
+  </a
+      ><a name="3553" class="Keyword"
+      >where</a
+      ><a name="3558"
+      > </a
+      ><a name="3559" class="Keyword"
+      >open</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="Relation.Binary.PropositionalEquality.html#5706" class="Module"
+      >&#8801;-Reasoning</a
+      ><a name="3575"
+      >
+
+</a
+      ><a name="3577" href="Ornament.Horizontal.Equivalence.html#3577" class="Function"
+      >OrnEq-normal</a
+      ><a name="3589"
+      > </a
+      ><a name="3590" class="Symbol"
+      >:</a
+      ><a name="3591"
+      > </a
+      ><a name="3592" class="Symbol"
+      >{</a
+      ><a name="3593" href="Ornament.Horizontal.Equivalence.html#3593" class="Bound"
+      >I</a
+      ><a name="3594"
+      > </a
+      ><a name="3595" href="Ornament.Horizontal.Equivalence.html#3595" class="Bound"
+      >J</a
+      ><a name="3596"
+      > </a
+      ><a name="3597" class="Symbol"
+      >:</a
+      ><a name="3598"
+      > </a
+      ><a name="3599" class="PrimitiveType"
+      >Set</a
+      ><a name="3602" class="Symbol"
+      >}</a
+      ><a name="3603"
+      > </a
+      ><a name="3604" class="Symbol"
+      >{</a
+      ><a name="3605" href="Ornament.Horizontal.Equivalence.html#3605" class="Bound"
+      >e</a
+      ><a name="3606"
+      > </a
+      ><a name="3607" class="Symbol"
+      >:</a
+      ><a name="3608"
+      > </a
+      ><a name="3609" href="Ornament.Horizontal.Equivalence.html#3595" class="Bound"
+      >J</a
+      ><a name="3610"
+      > </a
+      ><a name="3611" class="Symbol"
+      >&#8594;</a
+      ><a name="3612"
+      > </a
+      ><a name="3613" href="Ornament.Horizontal.Equivalence.html#3593" class="Bound"
+      >I</a
+      ><a name="3614" class="Symbol"
+      >}</a
+      ><a name="3615"
+      > </a
+      ><a name="3616" class="Symbol"
+      >{</a
+      ><a name="3617" href="Ornament.Horizontal.Equivalence.html#3617" class="Bound"
+      >D</a
+      ><a name="3618"
+      > </a
+      ><a name="3619" class="Symbol"
+      >:</a
+      ><a name="3620"
+      > </a
+      ><a name="3621" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="3625"
+      > </a
+      ><a name="3626" href="Ornament.Horizontal.Equivalence.html#3593" class="Bound"
+      >I</a
+      ><a name="3627" class="Symbol"
+      >}</a
+      ><a name="3628"
+      > </a
+      ><a name="3629" class="Symbol"
+      >{</a
+      ><a name="3630" href="Ornament.Horizontal.Equivalence.html#3630" class="Bound"
+      >E</a
+      ><a name="3631"
+      > </a
+      ><a name="3632" class="Symbol"
+      >:</a
+      ><a name="3633"
+      > </a
+      ><a name="3634" href="Description.html#1164" class="Record"
+      >Desc</a
+      ><a name="3638"
+      > </a
+      ><a name="3639" href="Ornament.Horizontal.Equivalence.html#3595" class="Bound"
+      >J</a
+      ><a name="3640" class="Symbol"
+      >}</a
+      ><a name="3641"
+      > </a
+      ><a name="3642" class="Symbol"
+      >(</a
+      ><a name="3643" href="Ornament.Horizontal.Equivalence.html#3643" class="Bound"
+      >O</a
+      ><a name="3644"
+      > </a
+      ><a name="3645" class="Symbol"
+      >:</a
+      ><a name="3646"
+      > </a
+      ><a name="3647" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="3650"
+      > </a
+      ><a name="3651" href="Ornament.Horizontal.Equivalence.html#3605" class="Bound"
+      >e</a
+      ><a name="3652"
+      > </a
+      ><a name="3653" href="Ornament.Horizontal.Equivalence.html#3617" class="Bound"
+      >D</a
+      ><a name="3654"
+      > </a
+      ><a name="3655" href="Ornament.Horizontal.Equivalence.html#3630" class="Bound"
+      >E</a
+      ><a name="3656" class="Symbol"
+      >)</a
+      ><a name="3657"
+      > </a
+      ><a name="3658" class="Symbol"
+      >&#8594;</a
+      ><a name="3659"
+      > </a
+      ><a name="3660" href="Ornament.Equivalence.html#1643" class="Function"
+      >OrnEq</a
+      ><a name="3665"
+      > </a
+      ><a name="3666" class="Symbol"
+      >(</a
+      ><a name="3667" href="Ornament.Horizontal.html#5990" class="Function"
+      >normOrn</a
+      ><a name="3674"
+      > </a
+      ><a name="3675" href="Ornament.Horizontal.Equivalence.html#3643" class="Bound"
+      >O</a
+      ><a name="3676" class="Symbol"
+      >)</a
+      ><a name="3677"
+      > </a
+      ><a name="3678" href="Ornament.Horizontal.Equivalence.html#3643" class="Bound"
+      >O</a
+      ><a name="3679"
+      >
+</a
+      ><a name="3680" href="Ornament.Horizontal.Equivalence.html#3577" class="Function"
+      >OrnEq-normal</a
+      ><a name="3692"
+      > </a
+      ><a name="3693" class="Symbol"
+      >(</a
+      ><a name="3694" href="Ornament.html#6148" class="InductiveConstructor"
+      >wrap</a
+      ><a name="3698"
+      > </a
+      ><a name="3699" href="Ornament.Horizontal.Equivalence.html#3699" class="Bound"
+      >O</a
+      ><a name="3700" class="Symbol"
+      >)</a
+      ><a name="3701"
+      > </a
+      ><a name="3702" class="Symbol"
+      >=</a
+      ><a name="3703"
+      > </a
+      ><a name="3704" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="3709"
+      > </a
+      ><a name="3710" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3711"
+      > </a
+      ><a name="3712" class="Symbol"
+      >&#955;</a
+      ><a name="3713"
+      > </a
+      ><a name="3714" href="Ornament.Horizontal.Equivalence.html#3714" class="Bound"
+      >j</a
+      ><a name="3715"
+      > </a
+      ><a name="3716" class="Symbol"
+      >&#8594;</a
+      ><a name="3717"
+      > </a
+      ><a name="3718" href="Ornament.Horizontal.Equivalence.html#3150" class="Function"
+      >ROrnEq-normal</a
+      ><a name="3731"
+      > </a
+      ><a name="3732" class="Symbol"
+      >(</a
+      ><a name="3733" href="Ornament.Horizontal.Equivalence.html#3699" class="Bound"
+      >O</a
+      ><a name="3734"
+      > </a
+      ><a name="3735" class="Symbol"
+      >(</a
+      ><a name="3736" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="3738"
+      > </a
+      ><a name="3739" href="Ornament.Horizontal.Equivalence.html#3714" class="Bound"
+      >j</a
+      ><a name="3740" class="Symbol"
+      >))</a
+      ><a name="3742"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

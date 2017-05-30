@@ -1,0 +1,2065 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Prelude.Preorder</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Converse of preorders, setoids derived from preorders, implication as a preorder, and indirect reasoning combinators.</a
+      ><a name="121"
+      >
+
+</a
+      ><a name="123" class="Keyword"
+      >module</a
+      ><a name="129"
+      > </a
+      ><a name="130" href="Prelude.Preorder.html#1" class="Module"
+      >Prelude.Preorder</a
+      ><a name="146"
+      > </a
+      ><a name="147" class="Keyword"
+      >where</a
+      ><a name="152"
+      >
+
+</a
+      ><a name="154" class="Keyword"
+      >open</a
+      ><a name="158"
+      > </a
+      ><a name="159" class="Keyword"
+      >import</a
+      ><a name="165"
+      > </a
+      ><a name="166" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Keyword"
+      >using</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="Symbol"
+      >(</a
+      ><a name="189" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="197" class="Symbol"
+      >;</a
+      ><a name="198"
+      > </a
+      ><a name="199" class="Keyword"
+      >module</a
+      ><a name="205"
+      > </a
+      ><a name="206" href="Relation.Binary.html#233" class="Module"
+      >Preorder</a
+      ><a name="214" class="Symbol"
+      >;</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="222" class="Symbol"
+      >;</a
+      ><a name="223"
+      > </a
+      ><a name="224" class="Keyword"
+      >module</a
+      ><a name="230"
+      > </a
+      ><a name="231" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="237" class="Symbol"
+      >;</a
+      ><a name="238"
+      > </a
+      ><a name="239" class="Keyword"
+      >module</a
+      ><a name="245"
+      > </a
+      ><a name="246" href="Relation.Binary.html#470" class="Module"
+      >IsEquivalence</a
+      ><a name="259" class="Symbol"
+      >)</a
+      ><a name="260"
+      >
+
+</a
+      ><a name="262" class="Keyword"
+      >open</a
+      ><a name="266"
+      > </a
+      ><a name="267" class="Keyword"
+      >import</a
+      ><a name="273"
+      > </a
+      ><a name="274" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="279"
+      >
+</a
+      ><a name="280" class="Keyword"
+      >open</a
+      ><a name="284"
+      > </a
+      ><a name="285" class="Keyword"
+      >import</a
+      ><a name="291"
+      > </a
+      ><a name="292" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Keyword"
+      >using</a
+      ><a name="306"
+      > </a
+      ><a name="307" class="Symbol"
+      >(</a
+      ><a name="308" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="310" class="Symbol"
+      >;</a
+      ><a name="311"
+      > </a
+      ><a name="312" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="315" class="Symbol"
+      >;</a
+      ><a name="316"
+      > </a
+      ><a name="317" href="Function.html#1480" class="Function"
+      >flip</a
+      ><a name="321" class="Symbol"
+      >)</a
+      ><a name="322"
+      >
+</a
+      ><a name="323" class="Keyword"
+      >open</a
+      ><a name="327"
+      > </a
+      ><a name="328" class="Keyword"
+      >import</a
+      ><a name="334"
+      > </a
+      ><a name="335" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="347"
+      > </a
+      ><a name="348" class="Keyword"
+      >using</a
+      ><a name="353"
+      > </a
+      ><a name="354" class="Symbol"
+      >(</a
+      ><a name="355" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="356" class="Symbol"
+      >;</a
+      ><a name="357"
+      > </a
+      ><a name="358" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="366" class="Symbol"
+      >;</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="371" class="Symbol"
+      >;</a
+      ><a name="372"
+      > </a
+      ><a name="373" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="378" class="Symbol"
+      >;</a
+      ><a name="379"
+      > </a
+      ><a name="380" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="385" class="Symbol"
+      >;</a
+      ><a name="386"
+      > </a
+      ><a name="387" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="390" class="Symbol"
+      >;</a
+      ><a name="391"
+      > </a
+      ><a name="392" href="Data.Product.html#2324" class="Function"
+      >swap</a
+      ><a name="396" class="Symbol"
+      >)</a
+      ><a name="397"
+      >
+</a
+      ><a name="398" class="Keyword"
+      >open</a
+      ><a name="402"
+      > </a
+      ><a name="403" class="Keyword"
+      >import</a
+      ><a name="409"
+      > </a
+      ><a name="410" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="447"
+      > </a
+      ><a name="448" class="Keyword"
+      >using</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >(</a
+      ><a name="455" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="458" class="Symbol"
+      >;</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="464" class="Symbol"
+      >)</a
+      ><a name="465"
+      > </a
+      ><a name="466" class="Keyword"
+      >renaming</a
+      ><a name="474"
+      > </a
+      ><a name="475" class="Symbol"
+      >(</a
+      ><a name="476" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >setoid</a
+      ><a name="482"
+      > </a
+      ><a name="483" class="Symbol"
+      >to</a
+      ><a name="485"
+      > </a
+      ><a name="486" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="494" class="Symbol"
+      >)</a
+      ><a name="495"
+      >
+
+
+</a
+      ><a name="498" href="Prelude.Preorder.html#498" class="Function"
+      >ConversePreorder</a
+      ><a name="514"
+      > </a
+      ><a name="515" class="Symbol"
+      >:</a
+      ><a name="516"
+      > </a
+      ><a name="517" class="Symbol"
+      >{</a
+      ><a name="518" href="Prelude.Preorder.html#518" class="Bound"
+      >c</a
+      ><a name="519"
+      > </a
+      ><a name="520" href="Prelude.Preorder.html#520" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="522"
+      > </a
+      ><a name="523" href="Prelude.Preorder.html#523" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="525"
+      > </a
+      ><a name="526" class="Symbol"
+      >:</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="533" class="Symbol"
+      >}</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Symbol"
+      >&#8594;</a
+      ><a name="536"
+      > </a
+      ><a name="537" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="545"
+      > </a
+      ><a name="546" href="Prelude.Preorder.html#518" class="Bound"
+      >c</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="Prelude.Preorder.html#520" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="Prelude.Preorder.html#523" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="553"
+      > </a
+      ><a name="554" class="Symbol"
+      >&#8594;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="564"
+      > </a
+      ><a name="565" href="Prelude.Preorder.html#518" class="Bound"
+      >c</a
+      ><a name="566"
+      > </a
+      ><a name="567" href="Prelude.Preorder.html#520" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="569"
+      > </a
+      ><a name="570" href="Prelude.Preorder.html#523" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="572"
+      >
+</a
+      ><a name="573" href="Prelude.Preorder.html#498" class="Function"
+      >ConversePreorder</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="598"
+      > </a
+      ><a name="599" class="Symbol"
+      >=</a
+      ><a name="600"
+      >
+  </a
+      ><a name="603" class="Keyword"
+      >record</a
+      ><a name="609"
+      > </a
+      ><a name="610" class="Symbol"
+      >{</a
+      ><a name="611"
+      > </a
+      ><a name="612" class="Field"
+      >Carrier</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >=</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="Relation.Binary.html#1549" class="Field"
+      >Preorder.Carrier</a
+      ><a name="638"
+      > </a
+      ><a name="639" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="647"
+      >
+         </a
+      ><a name="657" class="Symbol"
+      >;</a
+      ><a name="658"
+      > </a
+      ><a name="659" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >=</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="Relation.Binary.html#1572" class="Field Operator"
+      >Preorder._&#8776;_</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="686"
+      >
+         </a
+      ><a name="696" class="Symbol"
+      >;</a
+      ><a name="697"
+      > </a
+      ><a name="698" class="Field Operator"
+      >_&#8764;_</a
+      ><a name="701"
+      > </a
+      ><a name="702" class="Symbol"
+      >=</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="Function.html#1480" class="Function"
+      >flip</a
+      ><a name="708"
+      > </a
+      ><a name="709" class="Symbol"
+      >(</a
+      ><a name="710" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="722"
+      > </a
+      ><a name="723" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="731" class="Symbol"
+      >)</a
+      ><a name="732"
+      >
+         </a
+      ><a name="742" class="Symbol"
+      >;</a
+      ><a name="743"
+      > </a
+      ><a name="744" class="Field"
+      >isPreorder</a
+      ><a name="754"
+      > </a
+      ><a name="755" class="Symbol"
+      >=</a
+      ><a name="756"
+      >
+             </a
+      ><a name="770" class="Keyword"
+      >record</a
+      ><a name="776"
+      > </a
+      ><a name="777" class="Symbol"
+      >{</a
+      ><a name="778"
+      > </a
+      ><a name="779" class="Field"
+      >isEquivalence</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Symbol"
+      >=</a
+      ><a name="794"
+      > </a
+      ><a name="795" href="Relation.Binary.html#1054" class="Function"
+      >Preorder.isEquivalence</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="826"
+      >
+                    </a
+      ><a name="847" class="Symbol"
+      >;</a
+      ><a name="848"
+      > </a
+      ><a name="849" class="Field"
+      >reflexive</a
+      ><a name="858"
+      > </a
+      ><a name="859" class="Symbol"
+      >=</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >&#955;</a
+      ><a name="862"
+      > </a
+      ><a name="863" href="Prelude.Preorder.html#863" class="Bound"
+      >eq</a
+      ><a name="865"
+      > </a
+      ><a name="866" class="Symbol"
+      >&#8594;</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="Relation.Binary.html#1160" class="Function"
+      >Preorder.reflexive</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="895"
+      > </a
+      ><a name="896" class="Symbol"
+      >(</a
+      ><a name="897" href="Relation.Binary.Core.html#4960" class="Field"
+      >IsEquivalence.sym</a
+      ><a name="914"
+      > </a
+      ><a name="915" class="Symbol"
+      >(</a
+      ><a name="916" href="Relation.Binary.html#1054" class="Function"
+      >Preorder.isEquivalence</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="947" class="Symbol"
+      >)</a
+      ><a name="948"
+      > </a
+      ><a name="949" href="Prelude.Preorder.html#863" class="Bound"
+      >eq</a
+      ><a name="951" class="Symbol"
+      >)</a
+      ><a name="952"
+      >
+                    </a
+      ><a name="973" class="Symbol"
+      >;</a
+      ><a name="974"
+      > </a
+      ><a name="975" class="Field"
+      >trans</a
+      ><a name="980"
+      >     </a
+      ><a name="985" class="Symbol"
+      >=</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="Function.html#1480" class="Function"
+      >flip</a
+      ><a name="991"
+      > </a
+      ><a name="992" class="Symbol"
+      >(</a
+      ><a name="993" href="Relation.Binary.html#1190" class="Function"
+      >Preorder.trans</a
+      ><a name="1007"
+      > </a
+      ><a name="1008" href="Prelude.Preorder.html#590" class="Bound"
+      >preorder</a
+      ><a name="1016" class="Symbol"
+      >)</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" class="Symbol"
+      >}</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" class="Symbol"
+      >}</a
+      ><a name="1021"
+      >
+
+</a
+      ><a name="1023" href="Prelude.Preorder.html#1023" class="Function"
+      >PreorderSetoid</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" class="Symbol"
+      >:</a
+      ><a name="1039"
+      > </a
+      ><a name="1040" class="Symbol"
+      >{</a
+      ><a name="1041" href="Prelude.Preorder.html#1041" class="Bound"
+      >c</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" href="Prelude.Preorder.html#1043" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" href="Prelude.Preorder.html#1046" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >:</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1056" class="Symbol"
+      >}</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" class="Symbol"
+      >&#8594;</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Symbol"
+      >(</a
+      ><a name="1061" href="Prelude.Preorder.html#1061" class="Bound"
+      >preorder</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" class="Symbol"
+      >:</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="Prelude.Preorder.html#1041" class="Bound"
+      >c</a
+      ><a name="1082"
+      > </a
+      ><a name="1083" href="Prelude.Preorder.html#1043" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" href="Prelude.Preorder.html#1046" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1088" class="Symbol"
+      >)</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Symbol"
+      >&#8594;</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" href="Prelude.Preorder.html#1041" class="Bound"
+      >c</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="Prelude.Preorder.html#1046" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1103"
+      >
+</a
+      ><a name="1104" href="Prelude.Preorder.html#1023" class="Function"
+      >PreorderSetoid</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" class="Symbol"
+      >=</a
+      ><a name="1129"
+      >
+  </a
+      ><a name="1132" class="Keyword"
+      >record</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Symbol"
+      >{</a
+      ><a name="1140"
+      > </a
+      ><a name="1141" class="Field"
+      >Carrier</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" class="Symbol"
+      >=</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" href="Relation.Binary.html#1549" class="Field"
+      >Preorder.Carrier</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1176"
+      >
+         </a
+      ><a name="1186" class="Symbol"
+      >;</a
+      ><a name="1187"
+      > </a
+      ><a name="1188" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" class="Symbol"
+      >=</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >&#955;</a
+      ><a name="1195"
+      > </a
+      ><a name="1196" href="Prelude.Preorder.html#1196" class="Bound"
+      >x</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="Prelude.Preorder.html#1198" class="Bound"
+      >y</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" class="Symbol"
+      >&#8594;</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="Prelude.Preorder.html#1196" class="Bound"
+      >x</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="Prelude.Preorder.html#1198" class="Bound"
+      >y</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" href="Prelude.Preorder.html#1198" class="Bound"
+      >y</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" href="Prelude.Preorder.html#1196" class="Bound"
+      >x</a
+      ><a name="1255"
+      >
+         </a
+      ><a name="1265" class="Symbol"
+      >;</a
+      ><a name="1266"
+      > </a
+      ><a name="1267" class="Field"
+      >isEquivalence</a
+      ><a name="1280"
+      > </a
+      ><a name="1281" class="Symbol"
+      >=</a
+      ><a name="1282"
+      >
+             </a
+      ><a name="1296" class="Keyword"
+      >record</a
+      ><a name="1302"
+      > </a
+      ><a name="1303" class="Symbol"
+      >{</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Field"
+      >refl</a
+      ><a name="1309"
+      >  </a
+      ><a name="1311" class="Symbol"
+      >=</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="Relation.Binary.html#1267" class="Function"
+      >Preorder.refl</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Relation.Binary.html#1267" class="Function"
+      >Preorder.refl</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1360"
+      >
+                    </a
+      ><a name="1381" class="Symbol"
+      >;</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" class="Field"
+      >sym</a
+      ><a name="1386"
+      >   </a
+      ><a name="1389" class="Symbol"
+      >=</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="Data.Product.html#2324" class="Function"
+      >swap</a
+      ><a name="1395"
+      >
+                    </a
+      ><a name="1416" class="Symbol"
+      >;</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" class="Field"
+      >trans</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" class="Symbol"
+      >=</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" class="Symbol"
+      >&#955;</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" class="Symbol"
+      >{</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >(</a
+      ><a name="1431" href="Prelude.Preorder.html#1431" class="Bound"
+      >i&#8764;j</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" href="Prelude.Preorder.html#1437" class="Bound"
+      >j&#8764;i</a
+      ><a name="1440" class="Symbol"
+      >)</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" class="Symbol"
+      >(</a
+      ><a name="1443" href="Prelude.Preorder.html#1443" class="Bound"
+      >j&#8764;k</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" href="Prelude.Preorder.html#1449" class="Bound"
+      >k&#8764;j</a
+      ><a name="1452" class="Symbol"
+      >)</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" class="Symbol"
+      >&#8594;</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" href="Relation.Binary.html#1190" class="Function"
+      >Preorder.trans</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" href="Prelude.Preorder.html#1431" class="Bound"
+      >i&#8764;j</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" href="Prelude.Preorder.html#1443" class="Bound"
+      >j&#8764;k</a
+      ><a name="1487"
+      > </a
+      ><a name="1488" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1489"
+      > </a
+      ><a name="1490" href="Relation.Binary.html#1190" class="Function"
+      >Preorder.trans</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" href="Prelude.Preorder.html#1119" class="Bound"
+      >preorder</a
+      ><a name="1513"
+      > </a
+      ><a name="1514" href="Prelude.Preorder.html#1449" class="Bound"
+      >k&#8764;j</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" href="Prelude.Preorder.html#1437" class="Bound"
+      >j&#8764;i</a
+      ><a name="1521"
+      > </a
+      ><a name="1522" class="Symbol"
+      >}</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" class="Symbol"
+      >}</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" class="Symbol"
+      >}</a
+      ><a name="1527"
+      >
+
+</a
+      ><a name="1529" href="Prelude.Preorder.html#1529" class="Function"
+      >indirect-reasoning</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" class="Symbol"
+      >:</a
+      ><a name="1549"
+      >
+  </a
+      ><a name="1552" class="Symbol"
+      >{</a
+      ><a name="1553" href="Prelude.Preorder.html#1553" class="Bound"
+      >c</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" href="Prelude.Preorder.html#1555" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1557"
+      > </a
+      ><a name="1558" href="Prelude.Preorder.html#1558" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" class="Symbol"
+      >:</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1568" class="Symbol"
+      >}</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" class="Symbol"
+      >&#8594;</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >(</a
+      ><a name="1573" href="Prelude.Preorder.html#1573" class="Bound"
+      >preorder</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" class="Symbol"
+      >:</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" href="Prelude.Preorder.html#1553" class="Bound"
+      >c</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="Prelude.Preorder.html#1555" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" href="Prelude.Preorder.html#1558" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="1600" class="Symbol"
+      >)</a
+      ><a name="1601"
+      > </a
+      ><a name="1602" class="Symbol"
+      >&#8594;</a
+      ><a name="1603"
+      >
+  </a
+      ><a name="1606" class="Symbol"
+      >&#8704;</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" class="Symbol"
+      >{</a
+      ><a name="1609" href="Prelude.Preorder.html#1609" class="Bound"
+      >x</a
+      ><a name="1610"
+      > </a
+      ><a name="1611" href="Prelude.Preorder.html#1611" class="Bound"
+      >y</a
+      ><a name="1612" class="Symbol"
+      >}</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" class="Symbol"
+      >&#8594;</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="Symbol"
+      >(&#8704;</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" href="Prelude.Preorder.html#1619" class="Bound"
+      >z</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" class="Symbol"
+      >&#8594;</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" href="Prelude.Preorder.html#1573" class="Bound"
+      >preorder</a
+      ><a name="1644"
+      > </a
+      ><a name="1645" href="Prelude.Preorder.html#1619" class="Bound"
+      >z</a
+      ><a name="1646"
+      > </a
+      ><a name="1647" href="Prelude.Preorder.html#1609" class="Bound"
+      >x</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" class="Symbol"
+      >&#8594;</a
+      ><a name="1650"
+      > </a
+      ><a name="1651" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="1663"
+      > </a
+      ><a name="1664" href="Prelude.Preorder.html#1573" class="Bound"
+      >preorder</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" href="Prelude.Preorder.html#1619" class="Bound"
+      >z</a
+      ><a name="1674"
+      > </a
+      ><a name="1675" href="Prelude.Preorder.html#1611" class="Bound"
+      >y</a
+      ><a name="1676" class="Symbol"
+      >)</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" class="Symbol"
+      >&#8594;</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" href="Prelude.Preorder.html#1573" class="Bound"
+      >preorder</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="Prelude.Preorder.html#1609" class="Bound"
+      >x</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="Prelude.Preorder.html#1611" class="Bound"
+      >y</a
+      ><a name="1705"
+      >
+</a
+      ><a name="1706" href="Prelude.Preorder.html#1529" class="Function"
+      >indirect-reasoning</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Prelude.Preorder.html#1725" class="Bound"
+      >preorder</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" class="Symbol"
+      >{</a
+      ><a name="1735" href="Prelude.Preorder.html#1735" class="Bound"
+      >x</a
+      ><a name="1736" class="Symbol"
+      >}</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" href="Prelude.Preorder.html#1738" class="Bound"
+      >imp</a
+      ><a name="1741"
+      > </a
+      ><a name="1742" class="Symbol"
+      >=</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" href="Prelude.Preorder.html#1738" class="Bound"
+      >imp</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" href="Prelude.Preorder.html#1735" class="Bound"
+      >x</a
+      ><a name="1749"
+      > </a
+      ><a name="1750" class="Symbol"
+      >(</a
+      ><a name="1751" href="Relation.Binary.html#1267" class="Function"
+      >Preorder.refl</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" href="Prelude.Preorder.html#1725" class="Bound"
+      >preorder</a
+      ><a name="1773" class="Symbol"
+      >)</a
+      ><a name="1774"
+      >
+
+</a
+      ><a name="1776" href="Prelude.Preorder.html#1776" class="Function"
+      >&#8658;-Preorder</a
+      ><a name="1786"
+      > </a
+      ><a name="1787" class="Symbol"
+      >:</a
+      ><a name="1788"
+      > </a
+      ><a name="1789" class="Symbol"
+      >{</a
+      ><a name="1790" href="Prelude.Preorder.html#1790" class="Bound"
+      >&#8467;</a
+      ><a name="1791"
+      > </a
+      ><a name="1792" class="Symbol"
+      >:</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1799" class="Symbol"
+      >}</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" class="Symbol"
+      >&#8594;</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" class="Symbol"
+      >(</a
+      ><a name="1813" href="Agda.Primitive.html#625" class="Primitive"
+      >suc</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" href="Prelude.Preorder.html#1790" class="Bound"
+      >&#8467;</a
+      ><a name="1818" class="Symbol"
+      >)</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >(</a
+      ><a name="1821" href="Agda.Primitive.html#625" class="Primitive"
+      >suc</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Prelude.Preorder.html#1790" class="Bound"
+      >&#8467;</a
+      ><a name="1826" class="Symbol"
+      >)</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" href="Prelude.Preorder.html#1790" class="Bound"
+      >&#8467;</a
+      ><a name="1829"
+      >
+</a
+      ><a name="1830" href="Prelude.Preorder.html#1776" class="Function"
+      >&#8658;-Preorder</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" class="Symbol"
+      >{</a
+      ><a name="1842" href="Prelude.Preorder.html#1842" class="Bound"
+      >&#8467;</a
+      ><a name="1843" class="Symbol"
+      >}</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" class="Symbol"
+      >=</a
+      ><a name="1846"
+      >
+  </a
+      ><a name="1849" class="Keyword"
+      >record</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" class="Symbol"
+      >{</a
+      ><a name="1857"
+      > </a
+      ><a name="1858" class="Field"
+      >Carrier</a
+      ><a name="1865"
+      > </a
+      ><a name="1866" class="Symbol"
+      >=</a
+      ><a name="1867"
+      > </a
+      ><a name="1868" class="PrimitiveType"
+      >Set</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="Prelude.Preorder.html#1842" class="Bound"
+      >&#8467;</a
+      ><a name="1873"
+      >
+         </a
+      ><a name="1883" class="Symbol"
+      >;</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="1888"
+      > </a
+      ><a name="1889" class="Symbol"
+      >=</a
+      ><a name="1890"
+      > </a
+      ><a name="1891" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1894"
+      >
+         </a
+      ><a name="1904" class="Symbol"
+      >;</a
+      ><a name="1905"
+      > </a
+      ><a name="1906" class="Field Operator"
+      >_&#8764;_</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" class="Symbol"
+      >=</a
+      ><a name="1911"
+      > </a
+      ><a name="1912" class="Symbol"
+      >&#955;</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" href="Prelude.Preorder.html#1914" class="Bound"
+      >A</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="Prelude.Preorder.html#1916" class="Bound"
+      >B</a
+      ><a name="1917"
+      > </a
+      ><a name="1918" class="Symbol"
+      >&#8594;</a
+      ><a name="1919"
+      > </a
+      ><a name="1920" class="Symbol"
+      >(</a
+      ><a name="1921" href="Prelude.Preorder.html#1914" class="Bound"
+      >A</a
+      ><a name="1922"
+      > </a
+      ><a name="1923" class="Symbol"
+      >&#8594;</a
+      ><a name="1924"
+      > </a
+      ><a name="1925" href="Prelude.Preorder.html#1916" class="Bound"
+      >B</a
+      ><a name="1926" class="Symbol"
+      >)</a
+      ><a name="1927"
+      >
+         </a
+      ><a name="1937" class="Symbol"
+      >;</a
+      ><a name="1938"
+      > </a
+      ><a name="1939" class="Field"
+      >isPreorder</a
+      ><a name="1949"
+      > </a
+      ><a name="1950" class="Symbol"
+      >=</a
+      ><a name="1951"
+      >
+             </a
+      ><a name="1965" class="Keyword"
+      >record</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >{</a
+      ><a name="1973"
+      > </a
+      ><a name="1974" class="Field"
+      >isEquivalence</a
+      ><a name="1987"
+      > </a
+      ><a name="1988" class="Symbol"
+      >=</a
+      ><a name="1989"
+      > </a
+      ><a name="1990" href="Relation.Binary.html#2031" class="Field"
+      >Setoid.isEquivalence</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" class="Symbol"
+      >(</a
+      ><a name="2012" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" class="Symbol"
+      >_)</a
+      ><a name="2023"
+      >
+                    </a
+      ><a name="2044" class="Symbol"
+      >;</a
+      ><a name="2045"
+      > </a
+      ><a name="2046" class="Field"
+      >reflexive</a
+      ><a name="2055"
+      >     </a
+      ><a name="2060" class="Symbol"
+      >=</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" class="Symbol"
+      >&#955;</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" class="Symbol"
+      >{</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" class="Symbol"
+      >{</a
+      ><a name="2067" class="DottedPattern Symbol"
+      >._</a
+      ><a name="2069" class="Symbol"
+      >}</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" class="Symbol"
+      >&#8594;</a
+      ><a name="2077"
+      > </a
+      ><a name="2078" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" class="Symbol"
+      >}</a
+      ><a name="2082"
+      >
+                    </a
+      ><a name="2103" class="Symbol"
+      >;</a
+      ><a name="2104"
+      > </a
+      ><a name="2105" class="Field"
+      >trans</a
+      ><a name="2110"
+      >         </a
+      ><a name="2119" class="Symbol"
+      >=</a
+      ><a name="2120"
+      > </a
+      ><a name="2121" class="Symbol"
+      >&#955;</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" href="Prelude.Preorder.html#2123" class="Bound"
+      >f</a
+      ><a name="2124"
+      > </a
+      ><a name="2125" href="Prelude.Preorder.html#2125" class="Bound"
+      >g</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" class="Symbol"
+      >&#8594;</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" href="Prelude.Preorder.html#2125" class="Bound"
+      >g</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" href="Prelude.Preorder.html#2123" class="Bound"
+      >f</a
+      ><a name="2134"
+      > </a
+      ><a name="2135" class="Symbol"
+      >}</a
+      ><a name="2136"
+      > </a
+      ><a name="2137" class="Symbol"
+      >}</a
+      ><a name="2138"
+      >
+
+</a
+      ><a name="2140" href="Prelude.Preorder.html#2140" class="Function Operator"
+      >_&#8656;_</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" class="Symbol"
+      >:</a
+      ><a name="2145"
+      > </a
+      ><a name="2146" class="Symbol"
+      >{</a
+      ><a name="2147" href="Prelude.Preorder.html#2147" class="Bound"
+      >&#8467;</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="Symbol"
+      >:</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2156" class="Symbol"
+      >}</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" class="Symbol"
+      >&#8594;</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" class="PrimitiveType"
+      >Set</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" href="Prelude.Preorder.html#2147" class="Bound"
+      >&#8467;</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" class="Symbol"
+      >&#8594;</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" class="PrimitiveType"
+      >Set</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" href="Prelude.Preorder.html#2147" class="Bound"
+      >&#8467;</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" class="Symbol"
+      >&#8594;</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" class="PrimitiveType"
+      >Set</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="Prelude.Preorder.html#2147" class="Bound"
+      >&#8467;</a
+      ><a name="2181"
+      >
+</a
+      ><a name="2182" href="Prelude.Preorder.html#2182" class="Bound"
+      >A</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="Prelude.Preorder.html#2140" class="Function Operator"
+      >&#8656;</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" href="Prelude.Preorder.html#2186" class="Bound"
+      >B</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Symbol"
+      >=</a
+      ><a name="2189"
+      > </a
+      ><a name="2190" href="Prelude.Preorder.html#2186" class="Bound"
+      >B</a
+      ><a name="2191"
+      > </a
+      ><a name="2192" class="Symbol"
+      >&#8594;</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" href="Prelude.Preorder.html#2182" class="Bound"
+      >A</a
+      ><a name="2195"
+      >
+
+</a
+      ><a name="2197" href="Prelude.Preorder.html#2197" class="Function"
+      >&#8656;-Preorder</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" class="Symbol"
+      >:</a
+      ><a name="2209"
+      > </a
+      ><a name="2210" class="Symbol"
+      >{</a
+      ><a name="2211" href="Prelude.Preorder.html#2211" class="Bound"
+      >&#8467;</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" class="Symbol"
+      >:</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2220" class="Symbol"
+      >}</a
+      ><a name="2221"
+      > </a
+      ><a name="2222" class="Symbol"
+      >&#8594;</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="2232"
+      > </a
+      ><a name="2233" class="Symbol"
+      >(</a
+      ><a name="2234" href="Agda.Primitive.html#625" class="Primitive"
+      >suc</a
+      ><a name="2237"
+      > </a
+      ><a name="2238" href="Prelude.Preorder.html#2211" class="Bound"
+      >&#8467;</a
+      ><a name="2239" class="Symbol"
+      >)</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" class="Symbol"
+      >(</a
+      ><a name="2242" href="Agda.Primitive.html#625" class="Primitive"
+      >suc</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="Prelude.Preorder.html#2211" class="Bound"
+      >&#8467;</a
+      ><a name="2247" class="Symbol"
+      >)</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="Prelude.Preorder.html#2211" class="Bound"
+      >&#8467;</a
+      ><a name="2250"
+      >
+</a
+      ><a name="2251" href="Prelude.Preorder.html#2197" class="Function"
+      >&#8656;-Preorder</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" class="Symbol"
+      >{</a
+      ><a name="2263" href="Prelude.Preorder.html#2263" class="Bound"
+      >&#8467;</a
+      ><a name="2264" class="Symbol"
+      >}</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" class="Symbol"
+      >=</a
+      ><a name="2267"
+      > </a
+      ><a name="2268" href="Prelude.Preorder.html#498" class="Function"
+      >ConversePreorder</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" class="Symbol"
+      >(</a
+      ><a name="2286" href="Prelude.Preorder.html#1776" class="Function"
+      >&#8658;-Preorder</a
+      ><a name="2296"
+      > </a
+      ><a name="2297" class="Symbol"
+      >{</a
+      ><a name="2298" href="Prelude.Preorder.html#2263" class="Bound"
+      >&#8467;</a
+      ><a name="2299" class="Symbol"
+      >})</a
+      ><a name="2301"
+      >
+
+</a
+      ><a name="2303" href="Prelude.Preorder.html#2303" class="Function Operator"
+      >_&#8660;_</a
+      ><a name="2306"
+      > </a
+      ><a name="2307" class="Symbol"
+      >:</a
+      ><a name="2308"
+      > </a
+      ><a name="2309" class="Symbol"
+      >{</a
+      ><a name="2310" href="Prelude.Preorder.html#2310" class="Bound"
+      >&#8467;</a
+      ><a name="2311"
+      > </a
+      ><a name="2312" class="Symbol"
+      >:</a
+      ><a name="2313"
+      > </a
+      ><a name="2314" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2319" class="Symbol"
+      >}</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" class="Symbol"
+      >&#8594;</a
+      ><a name="2322"
+      > </a
+      ><a name="2323" class="PrimitiveType"
+      >Set</a
+      ><a name="2326"
+      > </a
+      ><a name="2327" href="Prelude.Preorder.html#2310" class="Bound"
+      >&#8467;</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" class="Symbol"
+      >&#8594;</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" class="PrimitiveType"
+      >Set</a
+      ><a name="2334"
+      > </a
+      ><a name="2335" href="Prelude.Preorder.html#2310" class="Bound"
+      >&#8467;</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" class="Symbol"
+      >&#8594;</a
+      ><a name="2338"
+      > </a
+      ><a name="2339" class="PrimitiveType"
+      >Set</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" href="Prelude.Preorder.html#2310" class="Bound"
+      >&#8467;</a
+      ><a name="2344"
+      >
+</a
+      ><a name="2345" href="Prelude.Preorder.html#2345" class="Bound"
+      >A</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" href="Prelude.Preorder.html#2303" class="Function Operator"
+      >&#8660;</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="Prelude.Preorder.html#2349" class="Bound"
+      >B</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" class="Symbol"
+      >=</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >(</a
+      ><a name="2354" href="Prelude.Preorder.html#2345" class="Bound"
+      >A</a
+      ><a name="2355"
+      > </a
+      ><a name="2356" class="Symbol"
+      >&#8594;</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="Prelude.Preorder.html#2349" class="Bound"
+      >B</a
+      ><a name="2359" class="Symbol"
+      >)</a
+      ><a name="2360"
+      > </a
+      ><a name="2361" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" class="Symbol"
+      >(</a
+      ><a name="2364" href="Prelude.Preorder.html#2349" class="Bound"
+      >B</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" class="Symbol"
+      >&#8594;</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="Prelude.Preorder.html#2345" class="Bound"
+      >A</a
+      ><a name="2369" class="Symbol"
+      >)</a
+      ><a name="2370"
+      >
+
+</a
+      ><a name="2372" href="Prelude.Preorder.html#2372" class="Function"
+      >&#8660;-Setoid</a
+      ><a name="2380"
+      > </a
+      ><a name="2381" class="Symbol"
+      >:</a
+      ><a name="2382"
+      > </a
+      ><a name="2383" class="Symbol"
+      >{</a
+      ><a name="2384" href="Prelude.Preorder.html#2384" class="Bound"
+      >&#8467;</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" class="Symbol"
+      >:</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2393" class="Symbol"
+      >}</a
+      ><a name="2394"
+      > </a
+      ><a name="2395" class="Symbol"
+      >&#8594;</a
+      ><a name="2396"
+      > </a
+      ><a name="2397" href="Relation.Binary.html#1908" class="Record"
+      >Setoid</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" class="Symbol"
+      >(</a
+      ><a name="2405" href="Agda.Primitive.html#625" class="Primitive"
+      >suc</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" href="Prelude.Preorder.html#2384" class="Bound"
+      >&#8467;</a
+      ><a name="2410" class="Symbol"
+      >)</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="Prelude.Preorder.html#2384" class="Bound"
+      >&#8467;</a
+      ><a name="2413"
+      >
+</a
+      ><a name="2414" href="Prelude.Preorder.html#2372" class="Function"
+      >&#8660;-Setoid</a
+      ><a name="2422"
+      > </a
+      ><a name="2423" class="Symbol"
+      >{</a
+      ><a name="2424" href="Prelude.Preorder.html#2424" class="Bound"
+      >&#8467;</a
+      ><a name="2425" class="Symbol"
+      >}</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" class="Symbol"
+      >=</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" href="Prelude.Preorder.html#1023" class="Function"
+      >PreorderSetoid</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >(</a
+      ><a name="2445" href="Prelude.Preorder.html#1776" class="Function"
+      >&#8658;-Preorder</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" class="Symbol"
+      >{</a
+      ><a name="2457" href="Prelude.Preorder.html#2424" class="Bound"
+      >&#8467;</a
+      ><a name="2458" class="Symbol"
+      >})</a
+      ><a name="2460"
+      >
+
+</a
+      ><a name="2462" href="Prelude.Preorder.html#2462" class="Function"
+      >indirect-reasoning-&#8660;</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" class="Symbol"
+      >:</a
+      ><a name="2484"
+      >
+  </a
+      ><a name="2487" class="Symbol"
+      >{</a
+      ><a name="2488" href="Prelude.Preorder.html#2488" class="Bound"
+      >c</a
+      ><a name="2489"
+      > </a
+      ><a name="2490" href="Prelude.Preorder.html#2490" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" href="Prelude.Preorder.html#2493" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" class="Symbol"
+      >:</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="2503" class="Symbol"
+      >}</a
+      ><a name="2504"
+      > </a
+      ><a name="2505" class="Symbol"
+      >&#8594;</a
+      ><a name="2506"
+      > </a
+      ><a name="2507" class="Symbol"
+      >(</a
+      ><a name="2508" href="Prelude.Preorder.html#2508" class="Bound"
+      >preorder</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" class="Symbol"
+      >:</a
+      ><a name="2518"
+      > </a
+      ><a name="2519" href="Relation.Binary.html#1470" class="Record"
+      >Preorder</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="Prelude.Preorder.html#2488" class="Bound"
+      >c</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" href="Prelude.Preorder.html#2490" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="Prelude.Preorder.html#2493" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="2535" class="Symbol"
+      >)</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" class="Symbol"
+      >&#8594;</a
+      ><a name="2538"
+      >
+  </a
+      ><a name="2541" class="Symbol"
+      >&#8704;</a
+      ><a name="2542"
+      > </a
+      ><a name="2543" class="Symbol"
+      >{</a
+      ><a name="2544" href="Prelude.Preorder.html#2544" class="Bound"
+      >x</a
+      ><a name="2545"
+      > </a
+      ><a name="2546" href="Prelude.Preorder.html#2546" class="Bound"
+      >y</a
+      ><a name="2547" class="Symbol"
+      >}</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" class="Symbol"
+      >&#8594;</a
+      ><a name="2550"
+      > </a
+      ><a name="2551" class="Symbol"
+      >(&#8704;</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="Prelude.Preorder.html#2554" class="Bound"
+      >z</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" class="Symbol"
+      >&#8594;</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" href="Prelude.Preorder.html#2508" class="Bound"
+      >preorder</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" href="Prelude.Preorder.html#2554" class="Bound"
+      >z</a
+      ><a name="2581"
+      > </a
+      ><a name="2582" href="Prelude.Preorder.html#2544" class="Bound"
+      >x</a
+      ><a name="2583"
+      > </a
+      ><a name="2584" href="Prelude.Preorder.html#2303" class="Function Operator"
+      >&#8660;</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" href="Relation.Binary.html#1633" class="Field Operator"
+      >Preorder._&#8764;_</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" href="Prelude.Preorder.html#2508" class="Bound"
+      >preorder</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" href="Prelude.Preorder.html#2554" class="Bound"
+      >z</a
+      ><a name="2609"
+      > </a
+      ><a name="2610" href="Prelude.Preorder.html#2546" class="Bound"
+      >y</a
+      ><a name="2611" class="Symbol"
+      >)</a
+      ><a name="2612"
+      > </a
+      ><a name="2613" class="Symbol"
+      >&#8594;</a
+      ><a name="2614"
+      > </a
+      ><a name="2615" href="Relation.Binary.html#1997" class="Field Operator"
+      >Setoid._&#8776;_</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" class="Symbol"
+      >(</a
+      ><a name="2627" href="Prelude.Preorder.html#1023" class="Function"
+      >PreorderSetoid</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" href="Prelude.Preorder.html#2508" class="Bound"
+      >preorder</a
+      ><a name="2650" class="Symbol"
+      >)</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" href="Prelude.Preorder.html#2544" class="Bound"
+      >x</a
+      ><a name="2653"
+      > </a
+      ><a name="2654" href="Prelude.Preorder.html#2546" class="Bound"
+      >y</a
+      ><a name="2655"
+      >
+</a
+      ><a name="2656" href="Prelude.Preorder.html#2462" class="Function"
+      >indirect-reasoning-&#8660;</a
+      ><a name="2676"
+      > </a
+      ><a name="2677" href="Prelude.Preorder.html#2677" class="Bound"
+      >preorder</a
+      ><a name="2685"
+      > </a
+      ><a name="2686" class="Symbol"
+      >{</a
+      ><a name="2687" href="Prelude.Preorder.html#2687" class="Bound"
+      >x</a
+      ><a name="2688" class="Symbol"
+      >}</a
+      ><a name="2689"
+      > </a
+      ><a name="2690" class="Symbol"
+      >{</a
+      ><a name="2691" href="Prelude.Preorder.html#2691" class="Bound"
+      >y</a
+      ><a name="2692" class="Symbol"
+      >}</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" href="Prelude.Preorder.html#2694" class="Bound"
+      >bi-imp</a
+      ><a name="2700"
+      > </a
+      ><a name="2701" class="Symbol"
+      >=</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" href="Prelude.Preorder.html#1529" class="Function"
+      >indirect-reasoning</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" href="Prelude.Preorder.html#2677" class="Bound"
+      >preorder</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" class="Symbol"
+      >(</a
+      ><a name="2732" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2737"
+      > </a
+      ><a name="2738" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2739"
+      > </a
+      ><a name="2740" href="Prelude.Preorder.html#2694" class="Bound"
+      >bi-imp</a
+      ><a name="2746" class="Symbol"
+      >)</a
+      ><a name="2747"
+      > </a
+      ><a name="2748" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2749"
+      > </a
+      ><a name="2750" href="Prelude.Preorder.html#1529" class="Function"
+      >indirect-reasoning</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" href="Prelude.Preorder.html#2677" class="Bound"
+      >preorder</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" class="Symbol"
+      >(</a
+      ><a name="2779" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="Prelude.Preorder.html#2694" class="Bound"
+      >bi-imp</a
+      ><a name="2793" class="Symbol"
+      >)</a
+      ><a name="2794"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

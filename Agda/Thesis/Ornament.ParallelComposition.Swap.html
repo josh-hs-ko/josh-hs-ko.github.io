@@ -1,0 +1,5471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Ornament.ParallelComposition.Swap</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- The optimised predicate for the parallel composition of two ornaments can be swapped</a
+      ><a name="88"
+      >
+</a
+      ><a name="89" class="Comment"
+      >-- for the pointwise conjunction of the optimised predicates for the two component ornaments.</a
+      ><a name="182"
+      >
+</a
+      ><a name="183" class="Comment"
+      >-- This file can take a long time to typecheck and may require a larger stack size.</a
+      ><a name="266"
+      >
+
+</a
+      ><a name="268" class="Keyword"
+      >open</a
+      ><a name="272"
+      > </a
+      ><a name="273" class="Keyword"
+      >import</a
+      ><a name="279"
+      > </a
+      ><a name="280" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="288"
+      >
+
+</a
+      ><a name="290" class="Keyword"
+      >module</a
+      ><a name="296"
+      > </a
+      ><a name="297" href="Ornament.ParallelComposition.Swap.html#1" class="Module"
+      >Ornament.ParallelComposition.Swap</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >{</a
+      ><a name="332" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="333"
+      > </a
+      ><a name="334" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="335"
+      > </a
+      ><a name="336" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="337" class="Symbol"
+      >}</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >{</a
+      ><a name="340" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="341"
+      > </a
+      ><a name="342" class="Symbol"
+      >:</a
+      ><a name="343"
+      > </a
+      ><a name="344" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="345"
+      > </a
+      ><a name="346" class="Symbol"
+      >&#8594;</a
+      ><a name="347"
+      > </a
+      ><a name="348" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="349" class="Symbol"
+      >}</a
+      ><a name="350"
+      > </a
+      ><a name="351" class="Symbol"
+      >{</a
+      ><a name="352" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="353"
+      > </a
+      ><a name="354" class="Symbol"
+      >:</a
+      ><a name="355"
+      > </a
+      ><a name="356" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="357"
+      > </a
+      ><a name="358" class="Symbol"
+      >&#8594;</a
+      ><a name="359"
+      > </a
+      ><a name="360" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="361" class="Symbol"
+      >}</a
+      ><a name="362"
+      > </a
+      ><a name="363" class="Symbol"
+      >{</a
+      ><a name="364" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Ornament.ParallelComposition.Swap.html#366" class="Bound"
+      >E</a
+      ><a name="367"
+      > </a
+      ><a name="368" href="Ornament.ParallelComposition.Swap.html#368" class="Bound"
+      >F</a
+      ><a name="369" class="Symbol"
+      >}</a
+      ><a name="370"
+      > </a
+      ><a name="371" class="Symbol"
+      >(</a
+      ><a name="372" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="373"
+      > </a
+      ><a name="374" class="Symbol"
+      >:</a
+      ><a name="375"
+      > </a
+      ><a name="376" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="379"
+      > </a
+      ><a name="380" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="381"
+      > </a
+      ><a name="382" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Ornament.ParallelComposition.Swap.html#366" class="Bound"
+      >E</a
+      ><a name="385" class="Symbol"
+      >)</a
+      ><a name="386"
+      > </a
+      ><a name="387" class="Symbol"
+      >(</a
+      ><a name="388" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="389"
+      > </a
+      ><a name="390" class="Symbol"
+      >:</a
+      ><a name="391"
+      > </a
+      ><a name="392" href="Ornament.html#6067" class="Record"
+      >Orn</a
+      ><a name="395"
+      > </a
+      ><a name="396" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="397"
+      > </a
+      ><a name="398" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="399"
+      > </a
+      ><a name="400" href="Ornament.ParallelComposition.Swap.html#368" class="Bound"
+      >F</a
+      ><a name="401" class="Symbol"
+      >)</a
+      ><a name="402"
+      > </a
+      ><a name="403" class="Keyword"
+      >where</a
+      ><a name="408"
+      >
+
+</a
+      ><a name="410" class="Keyword"
+      >open</a
+      ><a name="414"
+      > </a
+      ><a name="415" class="Keyword"
+      >import</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="Prelude.Equality.html#1" class="Module"
+      >Prelude.Equality</a
+      ><a name="438"
+      >
+</a
+      ><a name="439" class="Keyword"
+      >open</a
+      ><a name="443"
+      > </a
+      ><a name="444" class="Keyword"
+      >import</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="467"
+      >
+</a
+      ><a name="468" class="Keyword"
+      >open</a
+      ><a name="472"
+      > </a
+      ><a name="473" class="Keyword"
+      >import</a
+      ><a name="479"
+      > </a
+      ><a name="480" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="500"
+      >
+</a
+      ><a name="501" class="Keyword"
+      >open</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="Keyword"
+      >import</a
+      ><a name="512"
+      > </a
+      ><a name="513" href="Prelude.Function.Isomorphism.html#1" class="Module"
+      >Prelude.Function.Isomorphism</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Keyword"
+      >hiding</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="Symbol"
+      >(</a
+      ><a name="550" href="Prelude.Function.Isomorphism.html#1589" class="Function"
+      >compIso</a
+      ><a name="557" class="Symbol"
+      >)</a
+      ><a name="558"
+      >
+</a
+      ><a name="559" class="Keyword"
+      >open</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Keyword"
+      >import</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="586"
+      >
+</a
+      ><a name="587" class="Keyword"
+      >open</a
+      ><a name="591"
+      > </a
+      ><a name="592" class="Keyword"
+      >import</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="615"
+      >
+</a
+      ><a name="616" class="Keyword"
+      >open</a
+      ><a name="620"
+      > </a
+      ><a name="621" class="Keyword"
+      >import</a
+      ><a name="627"
+      > </a
+      ><a name="628" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="656"
+      >
+</a
+      ><a name="657" class="Keyword"
+      >open</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Keyword"
+      >import</a
+      ><a name="668"
+      > </a
+      ><a name="669" href="Prelude.Category.Slice.html#1" class="Module"
+      >Prelude.Category.Slice</a
+      ><a name="691"
+      >
+</a
+      ><a name="692" class="Keyword"
+      >open</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Keyword"
+      >import</a
+      ><a name="703"
+      > </a
+      ><a name="704" href="Prelude.Category.Slice.Functor.html#1" class="Module"
+      >Prelude.Category.Slice.Functor</a
+      ><a name="734"
+      >
+</a
+      ><a name="735" class="Keyword"
+      >open</a
+      ><a name="739"
+      > </a
+      ><a name="740" class="Keyword"
+      >import</a
+      ><a name="746"
+      > </a
+      ><a name="747" href="Prelude.Category.Span.html#1" class="Module"
+      >Prelude.Category.Span</a
+      ><a name="768"
+      >
+</a
+      ><a name="769" class="Keyword"
+      >open</a
+      ><a name="773"
+      > </a
+      ><a name="774" class="Keyword"
+      >import</a
+      ><a name="780"
+      > </a
+      ><a name="781" href="Prelude.Category.Pullback.html#1" class="Module"
+      >Prelude.Category.Pullback</a
+      ><a name="806"
+      >
+</a
+      ><a name="807" class="Keyword"
+      >open</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Keyword"
+      >import</a
+      ><a name="818"
+      > </a
+      ><a name="819" href="Prelude.Category.Pullback.Midpoint.html#1" class="Module"
+      >Prelude.Category.Pullback.Midpoint</a
+      ><a name="853"
+      >
+</a
+      ><a name="854" class="Keyword"
+      >open</a
+      ><a name="858"
+      > </a
+      ><a name="859" class="Keyword"
+      >import</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="886"
+      >
+</a
+      ><a name="887" class="Keyword"
+      >open</a
+      ><a name="891"
+      > </a
+      ><a name="892" class="Keyword"
+      >import</a
+      ><a name="898"
+      > </a
+      ><a name="899" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="909"
+      >
+</a
+      ><a name="910" class="Keyword"
+      >open</a
+      ><a name="914"
+      > </a
+      ><a name="915" class="Keyword"
+      >import</a
+      ><a name="921"
+      > </a
+      ><a name="922" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="933"
+      >
+</a
+      ><a name="934" class="Keyword"
+      >open</a
+      ><a name="938"
+      > </a
+      ><a name="939" class="Keyword"
+      >import</a
+      ><a name="945"
+      > </a
+      ><a name="946" href="Ornament.Category.html#1" class="Module"
+      >Ornament.Category</a
+      ><a name="963"
+      >
+</a
+      ><a name="964" class="Keyword"
+      >open</a
+      ><a name="968"
+      > </a
+      ><a name="969" class="Keyword"
+      >import</a
+      ><a name="975"
+      > </a
+      ><a name="976" href="Ornament.ParallelComposition.html#1" class="Module"
+      >Ornament.ParallelComposition</a
+      ><a name="1004"
+      >
+</a
+      ><a name="1005" class="Keyword"
+      >open</a
+      ><a name="1009"
+      > </a
+      ><a name="1010" class="Keyword"
+      >import</a
+      ><a name="1016"
+      > </a
+      ><a name="1017" href="Ornament.ParallelComposition.Pullback.html#1" class="Module"
+      >Ornament.ParallelComposition.Pullback</a
+      ><a name="1054"
+      >
+</a
+      ><a name="1055" class="Keyword"
+      >open</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Keyword"
+      >import</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="Ornament.RefinementSemantics.html#1" class="Module"
+      >Ornament.RefinementSemantics</a
+      ><a name="1095"
+      >
+
+</a
+      ><a name="1097" class="Keyword"
+      >open</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Keyword"
+      >import</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" class="Keyword"
+      >using</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" class="Symbol"
+      >(</a
+      ><a name="1125" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1127" class="Symbol"
+      >;</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="1132" class="Symbol"
+      >)</a
+      ><a name="1133"
+      >
+</a
+      ><a name="1134" class="Keyword"
+      >open</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" class="Keyword"
+      >import</a
+      ><a name="1145"
+      > </a
+      ><a name="1146" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" class="Keyword"
+      >using</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" class="Symbol"
+      >(</a
+      ><a name="1166" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1167" class="Symbol"
+      >;</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="1177" class="Symbol"
+      >;</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1182" class="Symbol"
+      >;</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1189" class="Symbol"
+      >;</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1196" class="Symbol"
+      >;</a
+      ><a name="1197"
+      > </a
+      ><a name="1198" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="1201" class="Symbol"
+      >;</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="Data.Product.html#1691" class="Function Operator"
+      >&lt;_,_&gt;</a
+      ><a name="1208" class="Symbol"
+      >;</a
+      ><a name="1209"
+      > </a
+      ><a name="1210" href="Data.Product.html#2846" class="Function"
+      >uncurry</a
+      ><a name="1217" class="Symbol"
+      >)</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Keyword"
+      >renaming</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" class="Symbol"
+      >(</a
+      ><a name="1229" href="Data.Product.html#1872" class="Function"
+      >map</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" class="Symbol"
+      >to</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="Data.Product.html#1872" class="Function"
+      >_**_</a
+      ><a name="1240" class="Symbol"
+      >)</a
+      ><a name="1241"
+      >
+</a
+      ><a name="1242" class="Keyword"
+      >open</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" class="Keyword"
+      >import</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="1269"
+      > </a
+      ><a name="1270" class="Keyword"
+      >using</a
+      ><a name="1275"
+      > </a
+      ><a name="1276" class="Symbol"
+      >(</a
+      ><a name="1277" class="Keyword"
+      >module</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="1290" class="Symbol"
+      >)</a
+      ><a name="1291"
+      >
+</a
+      ><a name="1292" class="Keyword"
+      >open</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="Keyword"
+      >import</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Keyword"
+      >using</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" class="Symbol"
+      >(</a
+      ><a name="1349" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1352" class="Symbol"
+      >;</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1358" class="Symbol"
+      >;</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="1365" class="Symbol"
+      >;</a
+      ><a name="1366"
+      > </a
+      ><a name="1367" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="1371" class="Symbol"
+      >;</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" href="Relation.Binary.PropositionalEquality.html#1274" class="Function"
+      >cong&#8322;</a
+      ><a name="1378" class="Symbol"
+      >)</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" class="Keyword"
+      >renaming</a
+      ><a name="1388"
+      > </a
+      ><a name="1389" class="Symbol"
+      >(</a
+      ><a name="1390" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >setoid</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" class="Symbol"
+      >to</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="1408" class="Symbol"
+      >)</a
+      ><a name="1409"
+      >
+</a
+      ><a name="1410" class="Keyword"
+      >open</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Keyword"
+      >import</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" class="Keyword"
+      >using</a
+      ><a name="1465"
+      > </a
+      ><a name="1466" class="Symbol"
+      >(</a
+      ><a name="1467" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="1470" class="Symbol"
+      >;</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="1478" class="Symbol"
+      >)</a
+      ><a name="1479"
+      > </a
+      ><a name="1480" class="Keyword"
+      >renaming</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" class="Symbol"
+      >(</a
+      ><a name="1490" href="Relation.Binary.HeterogeneousEquality.html#2601" class="Function"
+      >proof-irrelevance</a
+      ><a name="1507"
+      > </a
+      ><a name="1508" class="Symbol"
+      >to</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" href="Relation.Binary.HeterogeneousEquality.html#2601" class="Function"
+      >hproof-irrelevance</a
+      ><a name="1529" class="Symbol"
+      >)</a
+      ><a name="1530"
+      >
+
+</a
+      ><a name="1532" class="Keyword"
+      >open</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" href="Prelude.Category.html#1740" class="Module"
+      >Functor</a
+      ><a name="1544"
+      >
+
+
+</a
+      ><a name="1547" class="Keyword"
+      >private</a
+      ><a name="1554"
+      >
+
+  </a
+      ><a name="1558" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" class="Symbol"
+      >:</a
+      ><a name="1561"
+      > </a
+      ><a name="1562" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >(</a
+      ><a name="1573" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1579"
+      > </a
+      ><a name="1580" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" class="Symbol"
+      >(</a
+      ><a name="1585" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1586"
+      > </a
+      ><a name="1587" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="1588"
+      > </a
+      ><a name="1589" class="Symbol"
+      >(</a
+      ><a name="1590" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1593" class="Symbol"
+      >)</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1606"
+      > </a
+      ><a name="1607" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1608"
+      > </a
+      ><a name="1609" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1610" class="Symbol"
+      >))</a
+      ><a name="1612"
+      >
+  </a
+      ><a name="1615" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >=</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1625"
+      > </a
+      ><a name="1626" class="Symbol"
+      >(</a
+      ><a name="1627" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1639" class="Symbol"
+      >)</a
+      ><a name="1640"
+      > </a
+      ><a name="1641" class="Symbol"
+      >(</a
+      ><a name="1642" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="1647"
+      > </a
+      ><a name="1648" class="Symbol"
+      >_</a
+      ><a name="1649"
+      > </a
+      ><a name="1650" class="Symbol"
+      >(_</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="Ornament.ParallelComposition.html#4626" class="Function"
+      >diffOrn-r</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1680" class="Symbol"
+      >))</a
+      ><a name="1682"
+      >
+
+  </a
+      ><a name="1686" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" class="Symbol"
+      >:</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" href="Prelude.Category.Slice.html#395" class="Record"
+      >Slice</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" class="Symbol"
+      >(</a
+      ><a name="1701" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >(</a
+      ><a name="1713" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1714"
+      > </a
+      ><a name="1715" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" class="Symbol"
+      >(</a
+      ><a name="1718" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1721" class="Symbol"
+      >)</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Ornament.html#8297" class="Function Operator"
+      >&#8970;</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Ornament.html#8297" class="Function Operator"
+      >&#8971;</a
+      ><a name="1738" class="Symbol"
+      >))</a
+      ><a name="1740"
+      >
+  </a
+      ><a name="1743" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="1744"
+      > </a
+      ><a name="1745" class="Symbol"
+      >=</a
+      ><a name="1746"
+      > </a
+      ><a name="1747" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" class="Symbol"
+      >(</a
+      ><a name="1755" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1763"
+      > </a
+      ><a name="1764" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1767" class="Symbol"
+      >)</a
+      ><a name="1768"
+      > </a
+      ><a name="1769" class="Symbol"
+      >(</a
+      ><a name="1770" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" class="Symbol"
+      >_</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" class="Symbol"
+      >(_</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="Ornament.ParallelComposition.html#4626" class="Function"
+      >diffOrn-r</a
+      ><a name="1792"
+      > </a
+      ><a name="1793" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="1794"
+      > </a
+      ><a name="1795" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="1796"
+      > </a
+      ><a name="1797" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="1808" class="Symbol"
+      >))</a
+      ><a name="1810"
+      >
+
+  </a
+      ><a name="1814" href="Ornament.ParallelComposition.Swap.html#1814" class="Function"
+      >O&#8855;P-square</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" class="Symbol"
+      >:</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="1837"
+      > </a
+      ><a name="1838" class="Symbol"
+      >(</a
+      ><a name="1839" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1845"
+      > </a
+      ><a name="1846" class="Symbol"
+      >(</a
+      ><a name="1847" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1855"
+      > </a
+      ><a name="1856" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1859" class="Symbol"
+      >)</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" class="Symbol"
+      >(</a
+      ><a name="1862" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="1871"
+      > </a
+      ><a name="1872" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="1873" class="Symbol"
+      >))</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >(</a
+      ><a name="1877" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" class="Symbol"
+      >(</a
+      ><a name="1885" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1897" class="Symbol"
+      >)</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" class="Symbol"
+      >(</a
+      ><a name="1900" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="1909"
+      > </a
+      ><a name="1910" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="1911" class="Symbol"
+      >))</a
+      ><a name="1913"
+      >
+  </a
+      ><a name="1916" href="Ornament.ParallelComposition.Swap.html#1814" class="Function"
+      >O&#8855;P-square</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" class="Symbol"
+      >=</a
+      ><a name="1928"
+      > </a
+      ><a name="1929" href="Ornament.ParallelComposition.Pullback.html#37416" class="Function"
+      >&#8855;-Fam-square</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="1945"
+      >
+
+  </a
+      ><a name="1949" href="Ornament.ParallelComposition.Swap.html#1949" class="Function"
+      >O&#8855;P-terminal</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >:</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="1972"
+      > </a
+      ><a name="1973" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="1976"
+      > </a
+      ><a name="1977" class="Symbol"
+      >(</a
+      ><a name="1978" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >(</a
+      ><a name="1986" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="1994"
+      > </a
+      ><a name="1995" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="1998" class="Symbol"
+      >)</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" class="Symbol"
+      >(</a
+      ><a name="2001" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2012" class="Symbol"
+      >))</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >(</a
+      ><a name="2016" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2022"
+      > </a
+      ><a name="2023" class="Symbol"
+      >(</a
+      ><a name="2024" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2036" class="Symbol"
+      >)</a
+      ><a name="2037"
+      > </a
+      ><a name="2038" class="Symbol"
+      >(</a
+      ><a name="2039" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2048"
+      > </a
+      ><a name="2049" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2050" class="Symbol"
+      >))</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" href="Ornament.ParallelComposition.Swap.html#1814" class="Function"
+      >O&#8855;P-square</a
+      ><a name="2063"
+      >
+  </a
+      ><a name="2066" href="Ornament.ParallelComposition.Swap.html#1949" class="Function"
+      >O&#8855;P-terminal</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" class="Symbol"
+      >=</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="Ornament.ParallelComposition.Pullback.html#44707" class="Function"
+      >&#8855;-is-Fam-pullback</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2100"
+      > </a
+      ><a name="2101" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2102"
+      >
+
+  </a
+      ><a name="2106" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="2119"
+      > </a
+      ><a name="2120" class="Symbol"
+      >:</a
+      ><a name="2121"
+      > </a
+      ><a name="2122" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2128"
+      > </a
+      ><a name="2129" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2132"
+      > </a
+      ><a name="2133" class="Symbol"
+      >(</a
+      ><a name="2134" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" class="Symbol"
+      >(</a
+      ><a name="2142" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2154" class="Symbol"
+      >)</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" class="Symbol"
+      >(</a
+      ><a name="2157" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2166"
+      > </a
+      ><a name="2167" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2168" class="Symbol"
+      >))</a
+      ><a name="2170"
+      > </a
+      ><a name="2171" class="Symbol"
+      >(</a
+      ><a name="2172" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2178"
+      > </a
+      ><a name="2179" class="Symbol"
+      >(</a
+      ><a name="2180" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2188"
+      > </a
+      ><a name="2189" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2192" class="Symbol"
+      >)</a
+      ><a name="2193"
+      > </a
+      ><a name="2194" class="Symbol"
+      >(</a
+      ><a name="2195" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2214"
+      > </a
+      ><a name="2215" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2216"
+      > </a
+      ><a name="2217" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2218" class="Symbol"
+      >))</a
+      ><a name="2220"
+      >
+  </a
+      ><a name="2223" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >=</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" href="Ornament.ParallelComposition.Pullback.html#37416" class="Function"
+      >&#8855;-Fam-square</a
+      ><a name="2251"
+      > </a
+      ><a name="2252" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2267"
+      >
+
+  </a
+      ><a name="2271" href="Ornament.ParallelComposition.Swap.html#2271" class="Function"
+      >OptP-O-terminal</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" class="Symbol"
+      >:</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" class="Symbol"
+      >(</a
+      ><a name="2303" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2309"
+      > </a
+      ><a name="2310" class="Symbol"
+      >(</a
+      ><a name="2311" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2319"
+      > </a
+      ><a name="2320" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2323" class="Symbol"
+      >)</a
+      ><a name="2324"
+      > </a
+      ><a name="2325" class="Symbol"
+      >(</a
+      ><a name="2326" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2337" class="Symbol"
+      >))</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" class="Symbol"
+      >(</a
+      ><a name="2341" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2347"
+      > </a
+      ><a name="2348" class="Symbol"
+      >(</a
+      ><a name="2349" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2357"
+      > </a
+      ><a name="2358" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2361" class="Symbol"
+      >)</a
+      ><a name="2362"
+      > </a
+      ><a name="2363" class="Symbol"
+      >(</a
+      ><a name="2364" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2375"
+      > </a
+      ><a name="2376" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2385"
+      > </a
+      ><a name="2386" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2387" class="Symbol"
+      >))</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="2403"
+      >
+  </a
+      ><a name="2406" href="Ornament.ParallelComposition.Swap.html#2271" class="Function"
+      >OptP-O-terminal</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" class="Symbol"
+      >=</a
+      ><a name="2423"
+      > </a
+      ><a name="2424" href="Ornament.ParallelComposition.Pullback.html#44707" class="Function"
+      >&#8855;-is-Fam-pullback</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2453"
+      > </a
+      ><a name="2454" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2457"
+      >
+
+  </a
+      ><a name="2461" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" class="Symbol"
+      >:</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2483"
+      > </a
+      ><a name="2484" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" class="Symbol"
+      >(</a
+      ><a name="2489" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2495"
+      > </a
+      ><a name="2496" class="Symbol"
+      >(</a
+      ><a name="2497" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2509" class="Symbol"
+      >)</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" class="Symbol"
+      >(</a
+      ><a name="2512" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2523" class="Symbol"
+      >))</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" class="Symbol"
+      >(</a
+      ><a name="2527" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >(</a
+      ><a name="2535" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2547" class="Symbol"
+      >)</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" class="Symbol"
+      >(</a
+      ><a name="2550" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2573" class="Symbol"
+      >))</a
+      ><a name="2575"
+      >
+  </a
+      ><a name="2578" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="2591"
+      > </a
+      ><a name="2592" class="Symbol"
+      >=</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="Ornament.ParallelComposition.Pullback.html#37416" class="Function"
+      >&#8855;-Fam-square</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2622"
+      >
+
+  </a
+      ><a name="2626" href="Ornament.ParallelComposition.Swap.html#2626" class="Function"
+      >OptP-P-terminal</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" class="Symbol"
+      >:</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="2652"
+      > </a
+      ><a name="2653" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2656"
+      > </a
+      ><a name="2657" class="Symbol"
+      >(</a
+      ><a name="2658" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2664"
+      > </a
+      ><a name="2665" class="Symbol"
+      >(</a
+      ><a name="2666" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2678" class="Symbol"
+      >)</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" class="Symbol"
+      >(</a
+      ><a name="2681" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2690"
+      > </a
+      ><a name="2691" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2692" class="Symbol"
+      >))</a
+      ><a name="2694"
+      > </a
+      ><a name="2695" class="Symbol"
+      >(</a
+      ><a name="2696" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" class="Symbol"
+      >(</a
+      ><a name="2704" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2712"
+      > </a
+      ><a name="2713" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2716" class="Symbol"
+      >)</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" class="Symbol"
+      >(</a
+      ><a name="2719" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2730"
+      > </a
+      ><a name="2731" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2738"
+      > </a
+      ><a name="2739" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2740"
+      > </a
+      ><a name="2741" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2742" class="Symbol"
+      >))</a
+      ><a name="2744"
+      > </a
+      ><a name="2745" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="2758"
+      >
+  </a
+      ><a name="2761" href="Ornament.ParallelComposition.Swap.html#2626" class="Function"
+      >OptP-P-terminal</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" class="Symbol"
+      >=</a
+      ><a name="2778"
+      > </a
+      ><a name="2779" href="Ornament.ParallelComposition.Pullback.html#44707" class="Function"
+      >&#8855;-is-Fam-pullback</a
+      ><a name="2796"
+      > </a
+      ><a name="2797" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2810"
+      > </a
+      ><a name="2811" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2812"
+      >
+
+  </a
+      ><a name="2816" href="Ornament.ParallelComposition.Swap.html#2816" class="Function"
+      >OptP-O&#8855;P-square</a
+      ><a name="2831"
+      > </a
+      ><a name="2832" class="Symbol"
+      >:</a
+      ><a name="2833"
+      > </a
+      ><a name="2834" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="2840"
+      > </a
+      ><a name="2841" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" class="Symbol"
+      >(</a
+      ><a name="2846" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2852"
+      > </a
+      ><a name="2853" class="Symbol"
+      >(</a
+      ><a name="2854" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2866" class="Symbol"
+      >)</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" class="Symbol"
+      >(</a
+      ><a name="2869" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2878"
+      > </a
+      ><a name="2879" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2882"
+      > </a
+      ><a name="2883" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="2884"
+      > </a
+      ><a name="2885" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2886"
+      > </a
+      ><a name="2887" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2888" class="Symbol"
+      >))</a
+      ><a name="2890"
+      > </a
+      ><a name="2891" class="Symbol"
+      >(</a
+      ><a name="2892" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="2898"
+      > </a
+      ><a name="2899" class="Symbol"
+      >(</a
+      ><a name="2900" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="2912" class="Symbol"
+      >)</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" class="Symbol"
+      >(</a
+      ><a name="2915" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2934"
+      > </a
+      ><a name="2935" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2936"
+      > </a
+      ><a name="2937" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2938" class="Symbol"
+      >))</a
+      ><a name="2940"
+      >
+  </a
+      ><a name="2943" href="Ornament.ParallelComposition.Swap.html#2816" class="Function"
+      >OptP-O&#8855;P-square</a
+      ><a name="2958"
+      > </a
+      ><a name="2959" class="Symbol"
+      >=</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" href="Ornament.ParallelComposition.Pullback.html#37416" class="Function"
+      >&#8855;-Fam-square</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="2977"
+      > </a
+      ><a name="2978" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="2979"
+      > </a
+      ><a name="2980" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="2981"
+      > </a
+      ><a name="2982" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="2993"
+      > </a
+      ><a name="2994" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="2995"
+      > </a
+      ><a name="2996" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="2997"
+      >
+
+  </a
+      ><a name="3001" href="Ornament.ParallelComposition.Swap.html#3001" class="Function"
+      >OptP-O&#8855;P-terminal</a
+      ><a name="3018"
+      > </a
+      ><a name="3019" class="Symbol"
+      >:</a
+      ><a name="3020"
+      > </a
+      ><a name="3021" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" class="Symbol"
+      >(</a
+      ><a name="3035" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" class="Symbol"
+      >(</a
+      ><a name="3043" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3055" class="Symbol"
+      >)</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" class="Symbol"
+      >(</a
+      ><a name="3058" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="3067"
+      > </a
+      ><a name="3068" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3077" class="Symbol"
+      >))</a
+      ><a name="3079"
+      > </a
+      ><a name="3080" class="Symbol"
+      >(</a
+      ><a name="3081" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3087"
+      > </a
+      ><a name="3088" class="Symbol"
+      >(</a
+      ><a name="3089" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3097"
+      > </a
+      ><a name="3098" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3101" class="Symbol"
+      >)</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" class="Symbol"
+      >(</a
+      ><a name="3104" href="Ornament.ParallelComposition.Pullback.html#13757" class="Function"
+      >&#332;rn-slice</a
+      ><a name="3113"
+      > </a
+      ><a name="3114" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3115"
+      > </a
+      ><a name="3116" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3123"
+      > </a
+      ><a name="3124" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="3125"
+      > </a
+      ><a name="3126" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3127" class="Symbol"
+      >))</a
+      ><a name="3129"
+      > </a
+      ><a name="3130" href="Ornament.ParallelComposition.Swap.html#2816" class="Function"
+      >OptP-O&#8855;P-square</a
+      ><a name="3145"
+      >
+  </a
+      ><a name="3148" href="Ornament.ParallelComposition.Swap.html#3001" class="Function"
+      >OptP-O&#8855;P-terminal</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" class="Symbol"
+      >=</a
+      ><a name="3167"
+      > </a
+      ><a name="3168" href="Ornament.ParallelComposition.Pullback.html#44707" class="Function"
+      >&#8855;-is-Fam-pullback</a
+      ><a name="3185"
+      > </a
+      ><a name="3186" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3187"
+      > </a
+      ><a name="3188" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="3189"
+      > </a
+      ><a name="3190" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="3191"
+      > </a
+      ><a name="3192" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3195"
+      > </a
+      ><a name="3196" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3197"
+      > </a
+      ><a name="3198" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3205"
+      > </a
+      ><a name="3206" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="3207"
+      > </a
+      ><a name="3208" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3209"
+      >
+
+  </a
+      ><a name="3213" href="Ornament.ParallelComposition.Swap.html#3213" class="Function"
+      >mp-square</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" class="Symbol"
+      >:</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" href="Prelude.Category.Pullback.html#1006" class="Function"
+      >Square</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3235"
+      > </a
+      ><a name="3236" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="3237"
+      > </a
+      ><a name="3238" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="3239"
+      >
+  </a
+      ><a name="3242" href="Ornament.ParallelComposition.Swap.html#3213" class="Function"
+      >mp-square</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" class="Symbol"
+      >=</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3260"
+      > </a
+      ><a name="3261" class="Symbol"
+      >(</a
+      ><a name="3262" href="Prelude.Category.Span.html#4013" class="Function"
+      >SpanMap</a
+      ><a name="3269"
+      > </a
+      ><a name="3270" class="Symbol"
+      >(</a
+      ><a name="3271" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3279"
+      > </a
+      ><a name="3280" href="Prelude.Category.Slice.html#2376" class="Function"
+      >SliceU</a
+      ><a name="3286" class="Symbol"
+      >))</a
+      ><a name="3288"
+      >
+                </a
+      ><a name="3305" class="Symbol"
+      >(</a
+      ><a name="3306" href="Prelude.Category.Pullback.Midpoint.html#10726" class="Function"
+      >midpoint-square</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" class="Symbol"
+      >(</a
+      ><a name="3323" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="3336"
+      > </a
+      ><a name="3337" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3340"
+      > </a
+      ><a name="3341" class="Symbol"
+      >(</a
+      ><a name="3342" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3348"
+      > </a
+      ><a name="3349" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3352"
+      > </a
+      ><a name="3353" class="Symbol"
+      >(</a
+      ><a name="3354" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="3355"
+      > </a
+      ><a name="3356" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="3359" class="Symbol"
+      >)))</a
+      ><a name="3362"
+      >
+                                 </a
+      ><a name="3396" class="Symbol"
+      >(</a
+      ><a name="3397" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3403"
+      > </a
+      ><a name="3404" class="Symbol"
+      >(</a
+      ><a name="3405" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3413"
+      > </a
+      ><a name="3414" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3417" class="Symbol"
+      >)</a
+      ><a name="3418"
+      > </a
+      ><a name="3419" class="Symbol"
+      >(</a
+      ><a name="3420" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="3425"
+      > </a
+      ><a name="3426" class="Symbol"
+      >_</a
+      ><a name="3427"
+      > </a
+      ><a name="3428" class="Symbol"
+      >(_</a
+      ><a name="3430"
+      > </a
+      ><a name="3431" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3432"
+      > </a
+      ><a name="3433" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="3434" class="Symbol"
+      >)))</a
+      ><a name="3437"
+      >
+                                 </a
+      ><a name="3471" class="Symbol"
+      >(</a
+      ><a name="3472" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3478"
+      > </a
+      ><a name="3479" class="Symbol"
+      >(</a
+      ><a name="3480" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3488"
+      > </a
+      ><a name="3489" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3492" class="Symbol"
+      >)</a
+      ><a name="3493"
+      > </a
+      ><a name="3494" class="Symbol"
+      >(</a
+      ><a name="3495" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="3500"
+      > </a
+      ><a name="3501" class="Symbol"
+      >_</a
+      ><a name="3502"
+      > </a
+      ><a name="3503" class="Symbol"
+      >(_</a
+      ><a name="3505"
+      > </a
+      ><a name="3506" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3507"
+      > </a
+      ><a name="3508" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="3509" class="Symbol"
+      >)))</a
+      ><a name="3512"
+      >
+                                 </a
+      ><a name="3546" class="Symbol"
+      >(</a
+      ><a name="3547" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3553"
+      > </a
+      ><a name="3554" class="Symbol"
+      >(</a
+      ><a name="3555" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="3563"
+      > </a
+      ><a name="3564" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="3567" class="Symbol"
+      >)</a
+      ><a name="3568"
+      > </a
+      ><a name="3569" class="Symbol"
+      >(</a
+      ><a name="3570" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="3575"
+      > </a
+      ><a name="3576" class="Symbol"
+      >_</a
+      ><a name="3577"
+      > </a
+      ><a name="3578" class="Symbol"
+      >(_</a
+      ><a name="3580"
+      > </a
+      ><a name="3581" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3582"
+      > </a
+      ><a name="3583" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="3584"
+      > </a
+      ><a name="3585" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="3592"
+      > </a
+      ><a name="3593" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="3594"
+      > </a
+      ><a name="3595" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="3596" class="Symbol"
+      >)))</a
+      ><a name="3599"
+      >
+                                 </a
+      ><a name="3633" href="Ornament.ParallelComposition.Swap.html#1814" class="Function"
+      >O&#8855;P-square</a
+      ><a name="3643"
+      >      </a
+      ><a name="3649" href="Ornament.ParallelComposition.Swap.html#1949" class="Function"
+      >O&#8855;P-terminal</a
+      ><a name="3661"
+      >
+                                 </a
+      ><a name="3695" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="3708"
+      >   </a
+      ><a name="3711" href="Ornament.ParallelComposition.Swap.html#2271" class="Function"
+      >OptP-O-terminal</a
+      ><a name="3726"
+      >
+                                 </a
+      ><a name="3760" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="3773"
+      >   </a
+      ><a name="3776" href="Ornament.ParallelComposition.Swap.html#2626" class="Function"
+      >OptP-P-terminal</a
+      ><a name="3791"
+      >
+                                 </a
+      ><a name="3825" href="Ornament.ParallelComposition.Swap.html#2816" class="Function"
+      >OptP-O&#8855;P-square</a
+      ><a name="3840"
+      > </a
+      ><a name="3841" href="Ornament.ParallelComposition.Swap.html#3001" class="Function"
+      >OptP-O&#8855;P-terminal</a
+      ><a name="3858" class="Symbol"
+      >)</a
+      ><a name="3859"
+      >
+
+  </a
+      ><a name="3863" href="Ornament.ParallelComposition.Swap.html#3863" class="Function"
+      >p</a
+      ><a name="3864"
+      > </a
+      ><a name="3865" class="Symbol"
+      >:</a
+      ><a name="3866"
+      > </a
+      ><a name="3867" href="Prelude.Category.Pullback.html#2131" class="Function"
+      >Pullback</a
+      ><a name="3875"
+      > </a
+      ><a name="3876" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="3879"
+      > </a
+      ><a name="3880" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="3881"
+      > </a
+      ><a name="3882" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="3883"
+      > </a
+      ><a name="3884" href="Ornament.ParallelComposition.Swap.html#3213" class="Function"
+      >mp-square</a
+      ><a name="3893"
+      >
+  </a
+      ><a name="3896" href="Ornament.ParallelComposition.Swap.html#3863" class="Function"
+      >p</a
+      ><a name="3897"
+      > </a
+      ><a name="3898" class="Symbol"
+      >=</a
+      ><a name="3899"
+      > </a
+      ><a name="3900" href="Prelude.Category.Slice.Functor.html#5251" class="Function"
+      >SliceU-preserves-pullback</a
+      ><a name="3925"
+      > </a
+      ><a name="3926" class="Symbol"
+      >(</a
+      ><a name="3927" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3933"
+      > </a
+      ><a name="3934" href="Prelude.Category.Span.html#3850" class="Function"
+      >SpanUR</a
+      ><a name="3940"
+      > </a
+      ><a name="3941" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="3954" class="Symbol"
+      >)</a
+      ><a name="3955"
+      > </a
+      ><a name="3956" class="Symbol"
+      >(</a
+      ><a name="3957" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="3963"
+      > </a
+      ><a name="3964" href="Prelude.Category.Span.html#3850" class="Function"
+      >SpanUR</a
+      ><a name="3970"
+      > </a
+      ><a name="3971" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="3984" class="Symbol"
+      >)</a
+      ><a name="3985"
+      > </a
+      ><a name="3986" class="Symbol"
+      >_</a
+      ><a name="3987"
+      >
+        </a
+      ><a name="3996" class="Symbol"
+      >(</a
+      ><a name="3997" href="Prelude.Category.Pullback.Midpoint.html#10917" class="Function"
+      >midpoint-pullback</a
+      ><a name="4014"
+      > </a
+      ><a name="4015" class="Symbol"
+      >(</a
+      ><a name="4016" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="4029"
+      > </a
+      ><a name="4030" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="4033"
+      > </a
+      ><a name="4034" class="Symbol"
+      >(</a
+      ><a name="4035" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4041"
+      > </a
+      ><a name="4042" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="4045"
+      > </a
+      ><a name="4046" class="Symbol"
+      >(</a
+      ><a name="4047" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4048"
+      > </a
+      ><a name="4049" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4050"
+      > </a
+      ><a name="4051" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4052" class="Symbol"
+      >)))</a
+      ><a name="4055"
+      >
+                                              </a
+      ><a name="4102" class="Symbol"
+      >(</a
+      ><a name="4103" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4109"
+      > </a
+      ><a name="4110" class="Symbol"
+      >(</a
+      ><a name="4111" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="4119"
+      > </a
+      ><a name="4120" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="4123" class="Symbol"
+      >)</a
+      ><a name="4124"
+      > </a
+      ><a name="4125" class="Symbol"
+      >(</a
+      ><a name="4126" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="4131"
+      > </a
+      ><a name="4132" class="Symbol"
+      >_</a
+      ><a name="4133"
+      > </a
+      ><a name="4134" class="Symbol"
+      >(_</a
+      ><a name="4136"
+      > </a
+      ><a name="4137" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4138"
+      > </a
+      ><a name="4139" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="4140" class="Symbol"
+      >)))</a
+      ><a name="4143"
+      >
+                                              </a
+      ><a name="4190" class="Symbol"
+      >(</a
+      ><a name="4191" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4197"
+      > </a
+      ><a name="4198" class="Symbol"
+      >(</a
+      ><a name="4199" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="4207"
+      > </a
+      ><a name="4208" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="4211" class="Symbol"
+      >)</a
+      ><a name="4212"
+      > </a
+      ><a name="4213" class="Symbol"
+      >(</a
+      ><a name="4214" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="4219"
+      > </a
+      ><a name="4220" class="Symbol"
+      >_</a
+      ><a name="4221"
+      > </a
+      ><a name="4222" class="Symbol"
+      >(_</a
+      ><a name="4224"
+      > </a
+      ><a name="4225" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4226"
+      > </a
+      ><a name="4227" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="4228" class="Symbol"
+      >)))</a
+      ><a name="4231"
+      >
+                                              </a
+      ><a name="4278" class="Symbol"
+      >(</a
+      ><a name="4279" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="4285"
+      > </a
+      ><a name="4286" class="Symbol"
+      >(</a
+      ><a name="4287" href="Prelude.Category.Slice.html#2821" class="Function"
+      >SliceMap</a
+      ><a name="4295"
+      > </a
+      ><a name="4296" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="4299" class="Symbol"
+      >)</a
+      ><a name="4300"
+      > </a
+      ><a name="4301" class="Symbol"
+      >(</a
+      ><a name="4302" href="Prelude.Category.Slice.html#510" class="InductiveConstructor"
+      >slice</a
+      ><a name="4307"
+      > </a
+      ><a name="4308" class="Symbol"
+      >_</a
+      ><a name="4309"
+      > </a
+      ><a name="4310" class="Symbol"
+      >(_</a
+      ><a name="4312"
+      > </a
+      ><a name="4313" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="4314"
+      > </a
+      ><a name="4315" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="4316"
+      > </a
+      ><a name="4317" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="4324"
+      > </a
+      ><a name="4325" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4326"
+      > </a
+      ><a name="4327" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="4328" class="Symbol"
+      >)))</a
+      ><a name="4331"
+      >
+                                              </a
+      ><a name="4378" href="Ornament.ParallelComposition.Swap.html#1814" class="Function"
+      >O&#8855;P-square</a
+      ><a name="4388"
+      >      </a
+      ><a name="4394" href="Ornament.ParallelComposition.Swap.html#1949" class="Function"
+      >O&#8855;P-terminal</a
+      ><a name="4406"
+      >
+                                              </a
+      ><a name="4453" href="Ornament.ParallelComposition.Swap.html#2106" class="Function"
+      >OptP-O-square</a
+      ><a name="4466"
+      >   </a
+      ><a name="4469" href="Ornament.ParallelComposition.Swap.html#2271" class="Function"
+      >OptP-O-terminal</a
+      ><a name="4484"
+      >
+                                              </a
+      ><a name="4531" href="Ornament.ParallelComposition.Swap.html#2461" class="Function"
+      >OptP-P-square</a
+      ><a name="4544"
+      >   </a
+      ><a name="4547" href="Ornament.ParallelComposition.Swap.html#2626" class="Function"
+      >OptP-P-terminal</a
+      ><a name="4562"
+      >
+                                              </a
+      ><a name="4609" href="Ornament.ParallelComposition.Swap.html#2816" class="Function"
+      >OptP-O&#8855;P-square</a
+      ><a name="4624"
+      > </a
+      ><a name="4625" href="Ornament.ParallelComposition.Swap.html#3001" class="Function"
+      >OptP-O&#8855;P-terminal</a
+      ><a name="4642" class="Symbol"
+      >)</a
+      ><a name="4643"
+      >
+
+  </a
+      ><a name="4647" href="Ornament.ParallelComposition.Swap.html#4647" class="Function"
+      >l'</a
+      ><a name="4649"
+      > </a
+      ><a name="4650" class="Symbol"
+      >:</a
+      ><a name="4651"
+      > </a
+      ><a name="4652" href="Prelude.InverseImage.html#1996" class="Function"
+      >pull</a
+      ><a name="4656"
+      > </a
+      ><a name="4657" class="Symbol"
+      >{</a
+      ><a name="4658" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="4659" class="Symbol"
+      >}</a
+      ><a name="4660"
+      > </a
+      ><a name="4661" class="Symbol"
+      >{</a
+      ><a name="4662" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="4663" class="Symbol"
+      >}</a
+      ><a name="4664"
+      > </a
+      ><a name="4665" class="Symbol"
+      >{</a
+      ><a name="4666" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4667" class="Symbol"
+      >}</a
+      ><a name="4668"
+      > </a
+      ><a name="4669" class="Symbol"
+      >{</a
+      ><a name="4670" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="4671" class="Symbol"
+      >}</a
+      ><a name="4672"
+      > </a
+      ><a name="4673" class="Symbol"
+      >{</a
+      ><a name="4674" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="4675" class="Symbol"
+      >}</a
+      ><a name="4676"
+      > </a
+      ><a name="4677" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="4678"
+      > </a
+      ><a name="4679" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4684"
+      > </a
+      ><a name="4685" class="Symbol"
+      >{</a
+      ><a name="4686" class="Argument"
+      >A</a
+      ><a name="4687"
+      > </a
+      ><a name="4688" class="Symbol"
+      >=</a
+      ><a name="4689"
+      > </a
+      ><a name="4690" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4691" class="Symbol"
+      >}</a
+      ><a name="4692"
+      > </a
+      ><a name="4693" class="Symbol"
+      >{</a
+      ><a name="4694" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4695"
+      > </a
+      ><a name="4696" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4697" class="Symbol"
+      >}</a
+      ><a name="4698"
+      > </a
+      ><a name="4699" class="Symbol"
+      >&#8594;</a
+      ><a name="4700"
+      > </a
+      ><a name="4701" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="4702"
+      > </a
+      ><a name="4703" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="4704"
+      > </a
+      ><a name="4705" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4710"
+      > </a
+      ><a name="4711" class="Symbol"
+      >{</a
+      ><a name="4712" class="Argument"
+      >A</a
+      ><a name="4713"
+      > </a
+      ><a name="4714" class="Symbol"
+      >=</a
+      ><a name="4715"
+      > </a
+      ><a name="4716" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4717" class="Symbol"
+      >}</a
+      ><a name="4718"
+      > </a
+      ><a name="4719" class="Symbol"
+      >{</a
+      ><a name="4720" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4721"
+      > </a
+      ><a name="4722" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4723" class="Symbol"
+      >}</a
+      ><a name="4724"
+      >
+  </a
+      ><a name="4727" href="Ornament.ParallelComposition.Swap.html#4647" class="Function"
+      >l'</a
+      ><a name="4729"
+      > </a
+      ><a name="4730" class="Symbol"
+      >=</a
+      ><a name="4731"
+      > </a
+      ><a name="4732" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="4747"
+      >
+         </a
+      ><a name="4757" class="Symbol"
+      >(</a
+      ><a name="4758" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="4772"
+      >
+          </a
+      ><a name="4783" class="Symbol"
+      >(</a
+      ><a name="4784" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4789"
+      > </a
+      ><a name="4790" class="Symbol"
+      >(</a
+      ><a name="4791" href="Prelude.InverseImage.html#2942" class="Function"
+      >&#8904;-is-pullback</a
+      ><a name="4804"
+      > </a
+      ><a name="4805" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="4806"
+      > </a
+      ><a name="4807" class="Symbol"
+      >(</a
+      ><a name="4808" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4813"
+      > </a
+      ><a name="4814" class="Symbol"
+      >{</a
+      ><a name="4815" class="Argument"
+      >A</a
+      ><a name="4816"
+      > </a
+      ><a name="4817" class="Symbol"
+      >=</a
+      ><a name="4818"
+      > </a
+      ><a name="4819" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4820" class="Symbol"
+      >}</a
+      ><a name="4821"
+      > </a
+      ><a name="4822" class="Symbol"
+      >{</a
+      ><a name="4823" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4824"
+      > </a
+      ><a name="4825" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4826" class="Symbol"
+      >})</a
+      ><a name="4828"
+      >
+            </a
+      ><a name="4841" class="Symbol"
+      >(</a
+      ><a name="4842" class="Keyword"
+      >let</a
+      ><a name="4845"
+      > </a
+      ><a name="4846" href="Ornament.ParallelComposition.Swap.html#4846" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="4851"
+      > </a
+      ><a name="4852" class="Symbol"
+      >=</a
+      ><a name="4853"
+      > </a
+      ><a name="4854" href="Prelude.InverseImage.html#2724" class="Function"
+      >&#8904;-square</a
+      ><a name="4862"
+      > </a
+      ><a name="4863" class="Symbol"
+      >(</a
+      ><a name="4864" href="Prelude.InverseImage.html#1996" class="Function"
+      >pull</a
+      ><a name="4868"
+      > </a
+      ><a name="4869" class="Symbol"
+      >{</a
+      ><a name="4870" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="4871" class="Symbol"
+      >}</a
+      ><a name="4872"
+      > </a
+      ><a name="4873" class="Symbol"
+      >{</a
+      ><a name="4874" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="4875" class="Symbol"
+      >}</a
+      ><a name="4876"
+      > </a
+      ><a name="4877" class="Symbol"
+      >{</a
+      ><a name="4878" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4879" class="Symbol"
+      >}</a
+      ><a name="4880"
+      > </a
+      ><a name="4881" class="Symbol"
+      >{</a
+      ><a name="4882" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="4883" class="Symbol"
+      >}</a
+      ><a name="4884"
+      > </a
+      ><a name="4885" class="Symbol"
+      >{</a
+      ><a name="4886" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="4887" class="Symbol"
+      >})</a
+      ><a name="4889"
+      > </a
+      ><a name="4890" class="Symbol"
+      >(</a
+      ><a name="4891" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="4896"
+      > </a
+      ><a name="4897" class="Symbol"
+      >{</a
+      ><a name="4898" class="Argument"
+      >A</a
+      ><a name="4899"
+      > </a
+      ><a name="4900" class="Symbol"
+      >=</a
+      ><a name="4901"
+      > </a
+      ><a name="4902" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="4903" class="Symbol"
+      >}</a
+      ><a name="4904"
+      > </a
+      ><a name="4905" class="Symbol"
+      >{</a
+      ><a name="4906" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="4907"
+      > </a
+      ><a name="4908" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="4909" class="Symbol"
+      >})</a
+      ><a name="4911"
+      >
+                 </a
+      ><a name="4929" href="Ornament.ParallelComposition.Swap.html#4929" class="Bound"
+      >X&#215;Y</a
+      ><a name="4932"
+      >   </a
+      ><a name="4935" class="Symbol"
+      >=</a
+      ><a name="4936"
+      > </a
+      ><a name="4937" href="Prelude.InverseImage.html#2724" class="Function"
+      >&#8904;-square</a
+      ><a name="4945"
+      > </a
+      ><a name="4946" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="4947"
+      > </a
+      ><a name="4948" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="4949"
+      >
+             </a
+      ><a name="4963" class="Keyword"
+      >in</a
+      ><a name="4965"
+      > </a
+      ><a name="4966" href="Prelude.Category.Span.html#682" class="InductiveConstructor"
+      >span</a
+      ><a name="4970"
+      > </a
+      ><a name="4971" class="Symbol"
+      >(</a
+      ><a name="4972" href="Prelude.Category.Span.html#717" class="Field"
+      >Span.M</a
+      ><a name="4978"
+      > </a
+      ><a name="4979" href="Ornament.ParallelComposition.Swap.html#4846" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="4984" class="Symbol"
+      >)</a
+      ><a name="4985"
+      > </a
+      ><a name="4986" class="Symbol"
+      >(</a
+      ><a name="4987" href="Prelude.Category.html#1100" class="Field Operator"
+      >Category._&#183;_</a
+      ><a name="4999"
+      > </a
+      ><a name="5000" class="Symbol"
+      >(</a
+      ><a name="5001" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="5014"
+      > </a
+      ><a name="5015" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="5018"
+      > </a
+      ><a name="5019" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5020" class="Symbol"
+      >)</a
+      ><a name="5021"
+      > </a
+      ><a name="5022" class="Symbol"
+      >(</a
+      ><a name="5023" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="5029"
+      > </a
+      ><a name="5030" href="Ornament.ParallelComposition.Swap.html#4929" class="Bound"
+      >X&#215;Y</a
+      ><a name="5033" class="Symbol"
+      >)</a
+      ><a name="5034"
+      > </a
+      ><a name="5035" class="Symbol"
+      >(</a
+      ><a name="5036" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="5042"
+      > </a
+      ><a name="5043" href="Ornament.ParallelComposition.Swap.html#4846" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5048" class="Symbol"
+      >))</a
+      ><a name="5050"
+      > </a
+      ><a name="5051" class="Symbol"
+      >(</a
+      ><a name="5052" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="5058"
+      > </a
+      ><a name="5059" href="Ornament.ParallelComposition.Swap.html#4846" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5064" class="Symbol"
+      >)))))</a
+      ><a name="5069"
+      >
+
+  </a
+      ><a name="5073" href="Ornament.ParallelComposition.Swap.html#5073" class="Function"
+      >r'</a
+      ><a name="5075"
+      > </a
+      ><a name="5076" class="Symbol"
+      >:</a
+      ><a name="5077"
+      > </a
+      ><a name="5078" href="Prelude.InverseImage.html#1996" class="Function"
+      >pull</a
+      ><a name="5082"
+      > </a
+      ><a name="5083" class="Symbol"
+      >{</a
+      ><a name="5084" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="5085" class="Symbol"
+      >}</a
+      ><a name="5086"
+      > </a
+      ><a name="5087" class="Symbol"
+      >{</a
+      ><a name="5088" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="5089" class="Symbol"
+      >}</a
+      ><a name="5090"
+      > </a
+      ><a name="5091" class="Symbol"
+      >{</a
+      ><a name="5092" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5093" class="Symbol"
+      >}</a
+      ><a name="5094"
+      > </a
+      ><a name="5095" class="Symbol"
+      >{</a
+      ><a name="5096" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="5097" class="Symbol"
+      >}</a
+      ><a name="5098"
+      > </a
+      ><a name="5099" class="Symbol"
+      >{</a
+      ><a name="5100" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5101" class="Symbol"
+      >}</a
+      ><a name="5102"
+      > </a
+      ><a name="5103" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="5104"
+      > </a
+      ><a name="5105" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5110"
+      > </a
+      ><a name="5111" class="Symbol"
+      >{</a
+      ><a name="5112" class="Argument"
+      >A</a
+      ><a name="5113"
+      > </a
+      ><a name="5114" class="Symbol"
+      >=</a
+      ><a name="5115"
+      > </a
+      ><a name="5116" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5117" class="Symbol"
+      >}</a
+      ><a name="5118"
+      > </a
+      ><a name="5119" class="Symbol"
+      >{</a
+      ><a name="5120" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5121"
+      > </a
+      ><a name="5122" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5123" class="Symbol"
+      >}</a
+      ><a name="5124"
+      > </a
+      ><a name="5125" class="Symbol"
+      >&#8594;</a
+      ><a name="5126"
+      > </a
+      ><a name="5127" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5128"
+      > </a
+      ><a name="5129" href="Prelude.InverseImage.html#1855" class="Record Operator"
+      >&#8904;</a
+      ><a name="5130"
+      > </a
+      ><a name="5131" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5136"
+      > </a
+      ><a name="5137" class="Symbol"
+      >{</a
+      ><a name="5138" class="Argument"
+      >A</a
+      ><a name="5139"
+      > </a
+      ><a name="5140" class="Symbol"
+      >=</a
+      ><a name="5141"
+      > </a
+      ><a name="5142" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5143" class="Symbol"
+      >}</a
+      ><a name="5144"
+      > </a
+      ><a name="5145" class="Symbol"
+      >{</a
+      ><a name="5146" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5147"
+      > </a
+      ><a name="5148" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5149" class="Symbol"
+      >}</a
+      ><a name="5150"
+      >
+  </a
+      ><a name="5153" href="Ornament.ParallelComposition.Swap.html#5073" class="Function"
+      >r'</a
+      ><a name="5155"
+      > </a
+      ><a name="5156" class="Symbol"
+      >=</a
+      ><a name="5157"
+      > </a
+      ><a name="5158" href="Prelude.Category.Slice.html#766" class="Field"
+      >SliceMorphism.m</a
+      ><a name="5173"
+      >
+         </a
+      ><a name="5183" class="Symbol"
+      >(</a
+      ><a name="5184" href="Prelude.Category.Span.html#954" class="Field"
+      >SpanMorphism.m</a
+      ><a name="5198"
+      >
+          </a
+      ><a name="5209" class="Symbol"
+      >(</a
+      ><a name="5210" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5215"
+      > </a
+      ><a name="5216" class="Symbol"
+      >(</a
+      ><a name="5217" href="Prelude.InverseImage.html#2942" class="Function"
+      >&#8904;-is-pullback</a
+      ><a name="5230"
+      > </a
+      ><a name="5231" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5232"
+      > </a
+      ><a name="5233" class="Symbol"
+      >(</a
+      ><a name="5234" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5239"
+      > </a
+      ><a name="5240" class="Symbol"
+      >{</a
+      ><a name="5241" class="Argument"
+      >A</a
+      ><a name="5242"
+      > </a
+      ><a name="5243" class="Symbol"
+      >=</a
+      ><a name="5244"
+      > </a
+      ><a name="5245" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5246" class="Symbol"
+      >}</a
+      ><a name="5247"
+      > </a
+      ><a name="5248" class="Symbol"
+      >{</a
+      ><a name="5249" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5250"
+      > </a
+      ><a name="5251" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5252" class="Symbol"
+      >})</a
+      ><a name="5254"
+      >
+            </a
+      ><a name="5267" class="Symbol"
+      >(</a
+      ><a name="5268" class="Keyword"
+      >let</a
+      ><a name="5271"
+      > </a
+      ><a name="5272" href="Ornament.ParallelComposition.Swap.html#5272" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5277"
+      > </a
+      ><a name="5278" class="Symbol"
+      >=</a
+      ><a name="5279"
+      > </a
+      ><a name="5280" href="Prelude.InverseImage.html#2724" class="Function"
+      >&#8904;-square</a
+      ><a name="5288"
+      > </a
+      ><a name="5289" class="Symbol"
+      >(</a
+      ><a name="5290" href="Prelude.InverseImage.html#1996" class="Function"
+      >pull</a
+      ><a name="5294"
+      > </a
+      ><a name="5295" class="Symbol"
+      >{</a
+      ><a name="5296" href="Ornament.ParallelComposition.Swap.html#334" class="Bound"
+      >J</a
+      ><a name="5297" class="Symbol"
+      >}</a
+      ><a name="5298"
+      > </a
+      ><a name="5299" class="Symbol"
+      >{</a
+      ><a name="5300" href="Ornament.ParallelComposition.Swap.html#336" class="Bound"
+      >K</a
+      ><a name="5301" class="Symbol"
+      >}</a
+      ><a name="5302"
+      > </a
+      ><a name="5303" class="Symbol"
+      >{</a
+      ><a name="5304" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5305" class="Symbol"
+      >}</a
+      ><a name="5306"
+      > </a
+      ><a name="5307" class="Symbol"
+      >{</a
+      ><a name="5308" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="5309" class="Symbol"
+      >}</a
+      ><a name="5310"
+      > </a
+      ><a name="5311" class="Symbol"
+      >{</a
+      ><a name="5312" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5313" class="Symbol"
+      >})</a
+      ><a name="5315"
+      > </a
+      ><a name="5316" class="Symbol"
+      >(</a
+      ><a name="5317" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="5322"
+      > </a
+      ><a name="5323" class="Symbol"
+      >{</a
+      ><a name="5324" class="Argument"
+      >A</a
+      ><a name="5325"
+      > </a
+      ><a name="5326" class="Symbol"
+      >=</a
+      ><a name="5327"
+      > </a
+      ><a name="5328" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5329" class="Symbol"
+      >}</a
+      ><a name="5330"
+      > </a
+      ><a name="5331" class="Symbol"
+      >{</a
+      ><a name="5332" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5333"
+      > </a
+      ><a name="5334" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5335" class="Symbol"
+      >})</a
+      ><a name="5337"
+      >
+                 </a
+      ><a name="5355" href="Ornament.ParallelComposition.Swap.html#5355" class="Bound"
+      >X&#215;Y</a
+      ><a name="5358"
+      >   </a
+      ><a name="5361" class="Symbol"
+      >=</a
+      ><a name="5362"
+      > </a
+      ><a name="5363" href="Prelude.InverseImage.html#2724" class="Function"
+      >&#8904;-square</a
+      ><a name="5371"
+      > </a
+      ><a name="5372" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="5373"
+      > </a
+      ><a name="5374" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5375"
+      >
+             </a
+      ><a name="5389" class="Keyword"
+      >in</a
+      ><a name="5391"
+      > </a
+      ><a name="5392" href="Prelude.Category.Span.html#682" class="InductiveConstructor"
+      >span</a
+      ><a name="5396"
+      > </a
+      ><a name="5397" class="Symbol"
+      >(</a
+      ><a name="5398" href="Prelude.Category.Span.html#717" class="Field"
+      >Span.M</a
+      ><a name="5404"
+      > </a
+      ><a name="5405" href="Ornament.ParallelComposition.Swap.html#5272" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5410" class="Symbol"
+      >)</a
+      ><a name="5411"
+      > </a
+      ><a name="5412" class="Symbol"
+      >(</a
+      ><a name="5413" href="Prelude.Category.html#1100" class="Field Operator"
+      >Category._&#183;_</a
+      ><a name="5425"
+      > </a
+      ><a name="5426" class="Symbol"
+      >(</a
+      ><a name="5427" href="Prelude.Category.Slice.html#1619" class="Function"
+      >SliceCategory</a
+      ><a name="5440"
+      > </a
+      ><a name="5441" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="5444"
+      > </a
+      ><a name="5445" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5446" class="Symbol"
+      >)</a
+      ><a name="5447"
+      > </a
+      ><a name="5448" class="Symbol"
+      >(</a
+      ><a name="5449" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="5455"
+      > </a
+      ><a name="5456" href="Ornament.ParallelComposition.Swap.html#5355" class="Bound"
+      >X&#215;Y</a
+      ><a name="5459" class="Symbol"
+      >)</a
+      ><a name="5460"
+      > </a
+      ><a name="5461" class="Symbol"
+      >(</a
+      ><a name="5462" href="Prelude.Category.Span.html#732" class="Field"
+      >Span.l</a
+      ><a name="5468"
+      > </a
+      ><a name="5469" href="Ornament.ParallelComposition.Swap.html#5272" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5474" class="Symbol"
+      >))</a
+      ><a name="5476"
+      > </a
+      ><a name="5477" class="Symbol"
+      >(</a
+      ><a name="5478" href="Prelude.Category.Span.html#748" class="Field"
+      >Span.r</a
+      ><a name="5484"
+      > </a
+      ><a name="5485" href="Ornament.ParallelComposition.Swap.html#5272" class="Bound"
+      >X&#215;Y&#215;Z</a
+      ><a name="5490" class="Symbol"
+      >)))))</a
+      ><a name="5495"
+      >
+
+  </a
+      ><a name="5499" href="Ornament.ParallelComposition.Swap.html#5499" class="Function"
+      >wholeIso</a
+      ><a name="5507"
+      > </a
+      ><a name="5508" class="Symbol"
+      >:</a
+      ><a name="5509"
+      > </a
+      ><a name="5510" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="5513"
+      > </a
+      ><a name="5514" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="5517"
+      > </a
+      ><a name="5518" class="Symbol"
+      >(</a
+      ><a name="5519" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="5525"
+      > </a
+      ><a name="5526" href="Ornament.Category.html#1959" class="Function"
+      >Ind</a
+      ><a name="5529"
+      > </a
+      ><a name="5530" class="Symbol"
+      >(_</a
+      ><a name="5532"
+      > </a
+      ><a name="5533" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5534"
+      > </a
+      ><a name="5535" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="5540"
+      > </a
+      ><a name="5541" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="5542"
+      > </a
+      ><a name="5543" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="5544"
+      > </a
+      ><a name="5545" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="5546"
+      > </a
+      ><a name="5547" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="5548"
+      > </a
+      ><a name="5549" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="5550" class="Symbol"
+      >))</a
+      ><a name="5552"
+      > </a
+      ><a name="5553" class="Symbol"
+      >(</a
+      ><a name="5554" href="Prelude.Category.Pullback.html#1381" class="Function"
+      >Square-T</a
+      ><a name="5562"
+      > </a
+      ><a name="5563" class="Symbol"
+      >(</a
+      ><a name="5564" href="Prelude.Function.Fam.html#17506" class="Function"
+      >Mix-square</a
+      ><a name="5574"
+      > </a
+      ><a name="5575" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="5576"
+      > </a
+      ><a name="5577" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="5578" class="Symbol"
+      >))</a
+      ><a name="5580"
+      >
+  </a
+      ><a name="5583" href="Ornament.ParallelComposition.Swap.html#5499" class="Function"
+      >wholeIso</a
+      ><a name="5591"
+      > </a
+      ><a name="5592" class="Symbol"
+      >=</a
+      ><a name="5593"
+      > </a
+      ><a name="5594" href="Prelude.Category.Pullback.html#2306" class="Function"
+      >pullback-iso</a
+      ><a name="5606"
+      > </a
+      ><a name="5607" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="5610"
+      > </a
+      ><a name="5611" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="5612"
+      > </a
+      ><a name="5613" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="5614"
+      > </a
+      ><a name="5615" href="Ornament.ParallelComposition.Swap.html#3213" class="Function"
+      >mp-square</a
+      ><a name="5624"
+      > </a
+      ><a name="5625" class="Symbol"
+      >(</a
+      ><a name="5626" href="Prelude.Function.Fam.html#17506" class="Function"
+      >Mix-square</a
+      ><a name="5636"
+      > </a
+      ><a name="5637" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="5638"
+      > </a
+      ><a name="5639" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="5640" class="Symbol"
+      >)</a
+      ><a name="5641"
+      > </a
+      ><a name="5642" href="Ornament.ParallelComposition.Swap.html#3863" class="Function"
+      >p</a
+      ><a name="5643"
+      > </a
+      ><a name="5644" class="Symbol"
+      >(</a
+      ><a name="5645" href="Prelude.Function.Fam.html#17624" class="Function"
+      >canonPullback</a
+      ><a name="5658"
+      > </a
+      ><a name="5659" href="Ornament.ParallelComposition.Swap.html#1558" class="Function"
+      >l</a
+      ><a name="5660"
+      > </a
+      ><a name="5661" href="Ornament.ParallelComposition.Swap.html#1686" class="Function"
+      >r</a
+      ><a name="5662" class="Symbol"
+      >)</a
+      ><a name="5663"
+      >
+
+  </a
+      ><a name="5667" href="Ornament.ParallelComposition.Swap.html#5667" class="Function"
+      >canonIso-l</a
+      ><a name="5677"
+      > </a
+      ><a name="5678" class="Symbol"
+      >:</a
+      ><a name="5679"
+      > </a
+      ><a name="5680" class="Symbol"
+      >{</a
+      ><a name="5681" href="Ornament.ParallelComposition.Swap.html#5681" class="Bound"
+      >i</a
+      ><a name="5682"
+      > </a
+      ><a name="5683" class="Symbol"
+      >:</a
+      ><a name="5684"
+      > </a
+      ><a name="5685" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5686" class="Symbol"
+      >}</a
+      ><a name="5687"
+      > </a
+      ><a name="5688" class="Symbol"
+      >(</a
+      ><a name="5689" href="Ornament.ParallelComposition.Swap.html#5689" class="Bound"
+      >j</a
+      ><a name="5690"
+      > </a
+      ><a name="5691" class="Symbol"
+      >:</a
+      ><a name="5692"
+      > </a
+      ><a name="5693" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="5694"
+      > </a
+      ><a name="5695" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="5697"
+      > </a
+      ><a name="5698" href="Ornament.ParallelComposition.Swap.html#5681" class="Bound"
+      >i</a
+      ><a name="5699" class="Symbol"
+      >)</a
+      ><a name="5700"
+      > </a
+      ><a name="5701" class="Symbol"
+      >(</a
+      ><a name="5702" href="Ornament.ParallelComposition.Swap.html#5702" class="Bound"
+      >k</a
+      ><a name="5703"
+      > </a
+      ><a name="5704" class="Symbol"
+      >:</a
+      ><a name="5705"
+      > </a
+      ><a name="5706" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5707"
+      > </a
+      ><a name="5708" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="5710"
+      > </a
+      ><a name="5711" href="Ornament.ParallelComposition.Swap.html#5681" class="Bound"
+      >i</a
+      ><a name="5712" class="Symbol"
+      >)</a
+      ><a name="5713"
+      > </a
+      ><a name="5714" class="Symbol"
+      >(</a
+      ><a name="5715" href="Ornament.ParallelComposition.Swap.html#5715" class="Bound"
+      >x</a
+      ><a name="5716"
+      > </a
+      ><a name="5717" class="Symbol"
+      >:</a
+      ><a name="5718"
+      > </a
+      ><a name="5719" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5720"
+      > </a
+      ><a name="5721" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5722"
+      > </a
+      ><a name="5723" href="Ornament.ParallelComposition.Swap.html#5681" class="Bound"
+      >i</a
+      ><a name="5724" class="Symbol"
+      >)</a
+      ><a name="5725"
+      > </a
+      ><a name="5726" class="Symbol"
+      >&#8594;</a
+      ><a name="5727"
+      > </a
+      ><a name="5728" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="5731"
+      > </a
+      ><a name="5732" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="5735"
+      > </a
+      ><a name="5736" class="Symbol"
+      >(</a
+      ><a name="5737" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5738"
+      > </a
+      ><a name="5739" class="Symbol"
+      >(</a
+      ><a name="5740" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="5745"
+      > </a
+      ><a name="5746" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="5747" class="Symbol"
+      >)</a
+      ><a name="5748"
+      > </a
+      ><a name="5749" class="Symbol"
+      >(</a
+      ><a name="5750" href="Ornament.ParallelComposition.Swap.html#4647" class="Function"
+      >l'</a
+      ><a name="5752"
+      > </a
+      ><a name="5753" class="Symbol"
+      >(</a
+      ><a name="5754" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5756"
+      > </a
+      ><a name="5757" class="Symbol"
+      >(</a
+      ><a name="5758" href="Ornament.ParallelComposition.Swap.html#5689" class="Bound"
+      >j</a
+      ><a name="5759"
+      > </a
+      ><a name="5760" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5761"
+      > </a
+      ><a name="5762" href="Ornament.ParallelComposition.Swap.html#5702" class="Bound"
+      >k</a
+      ><a name="5763" class="Symbol"
+      >)</a
+      ><a name="5764"
+      > </a
+      ><a name="5765" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5766"
+      > </a
+      ><a name="5767" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5769"
+      > </a
+      ><a name="5770" class="Symbol"
+      >(</a
+      ><a name="5771" href="Ornament.ParallelComposition.Swap.html#5681" class="Bound"
+      >i</a
+      ><a name="5772"
+      > </a
+      ><a name="5773" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5774"
+      > </a
+      ><a name="5775" href="Ornament.ParallelComposition.Swap.html#5715" class="Bound"
+      >x</a
+      ><a name="5776" class="Symbol"
+      >))))</a
+      ><a name="5780"
+      > </a
+      ><a name="5781" class="Symbol"
+      >(</a
+      ><a name="5782" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="5786"
+      > </a
+      ><a name="5787" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="5788"
+      > </a
+      ><a name="5789" href="Ornament.ParallelComposition.Swap.html#5689" class="Bound"
+      >j</a
+      ><a name="5790"
+      > </a
+      ><a name="5791" href="Ornament.ParallelComposition.Swap.html#5715" class="Bound"
+      >x</a
+      ><a name="5792" class="Symbol"
+      >)</a
+      ><a name="5793"
+      >
+  </a
+      ><a name="5796" href="Ornament.ParallelComposition.Swap.html#5667" class="Function"
+      >canonIso-l</a
+      ><a name="5806"
+      > </a
+      ><a name="5807" class="Symbol"
+      >(</a
+      ><a name="5808" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5810"
+      > </a
+      ><a name="5811" href="Ornament.ParallelComposition.Swap.html#5811" class="Bound"
+      >j</a
+      ><a name="5812" class="Symbol"
+      >)</a
+      ><a name="5813"
+      > </a
+      ><a name="5814" href="Ornament.ParallelComposition.Swap.html#5814" class="Bound"
+      >k</a
+      ><a name="5815"
+      > </a
+      ><a name="5816" href="Ornament.ParallelComposition.Swap.html#5816" class="Bound"
+      >x</a
+      ><a name="5817"
+      > </a
+      ><a name="5818" class="Symbol"
+      >=</a
+      ><a name="5819"
+      > </a
+      ><a name="5820" href="Relation.Binary.Core.html#4934" class="Function"
+      >Setoid.refl</a
+      ><a name="5831"
+      > </a
+      ><a name="5832" class="Symbol"
+      >(</a
+      ><a name="5833" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="5842"
+      > </a
+      ><a name="5843" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="5846" class="Symbol"
+      >)</a
+      ><a name="5847"
+      >
+
+  </a
+      ><a name="5851" href="Ornament.ParallelComposition.Swap.html#5851" class="Function"
+      >canonIso-r</a
+      ><a name="5861"
+      > </a
+      ><a name="5862" class="Symbol"
+      >:</a
+      ><a name="5863"
+      > </a
+      ><a name="5864" class="Symbol"
+      >{</a
+      ><a name="5865" href="Ornament.ParallelComposition.Swap.html#5865" class="Bound"
+      >i</a
+      ><a name="5866"
+      > </a
+      ><a name="5867" class="Symbol"
+      >:</a
+      ><a name="5868"
+      > </a
+      ><a name="5869" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="5870" class="Symbol"
+      >}</a
+      ><a name="5871"
+      > </a
+      ><a name="5872" class="Symbol"
+      >(</a
+      ><a name="5873" href="Ornament.ParallelComposition.Swap.html#5873" class="Bound"
+      >j</a
+      ><a name="5874"
+      > </a
+      ><a name="5875" class="Symbol"
+      >:</a
+      ><a name="5876"
+      > </a
+      ><a name="5877" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="5878"
+      > </a
+      ><a name="5879" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="5881"
+      > </a
+      ><a name="5882" href="Ornament.ParallelComposition.Swap.html#5865" class="Bound"
+      >i</a
+      ><a name="5883" class="Symbol"
+      >)</a
+      ><a name="5884"
+      > </a
+      ><a name="5885" class="Symbol"
+      >(</a
+      ><a name="5886" href="Ornament.ParallelComposition.Swap.html#5886" class="Bound"
+      >k</a
+      ><a name="5887"
+      > </a
+      ><a name="5888" class="Symbol"
+      >:</a
+      ><a name="5889"
+      > </a
+      ><a name="5890" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="5891"
+      > </a
+      ><a name="5892" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="5894"
+      > </a
+      ><a name="5895" href="Ornament.ParallelComposition.Swap.html#5865" class="Bound"
+      >i</a
+      ><a name="5896" class="Symbol"
+      >)</a
+      ><a name="5897"
+      > </a
+      ><a name="5898" class="Symbol"
+      >(</a
+      ><a name="5899" href="Ornament.ParallelComposition.Swap.html#5899" class="Bound"
+      >x</a
+      ><a name="5900"
+      > </a
+      ><a name="5901" class="Symbol"
+      >:</a
+      ><a name="5902"
+      > </a
+      ><a name="5903" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5904"
+      > </a
+      ><a name="5905" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="5906"
+      > </a
+      ><a name="5907" href="Ornament.ParallelComposition.Swap.html#5865" class="Bound"
+      >i</a
+      ><a name="5908" class="Symbol"
+      >)</a
+      ><a name="5909"
+      > </a
+      ><a name="5910" class="Symbol"
+      >&#8594;</a
+      ><a name="5911"
+      > </a
+      ><a name="5912" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="5915"
+      > </a
+      ><a name="5916" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="5919"
+      > </a
+      ><a name="5920" class="Symbol"
+      >(</a
+      ><a name="5921" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="5922"
+      > </a
+      ><a name="5923" class="Symbol"
+      >(</a
+      ><a name="5924" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="5929"
+      > </a
+      ><a name="5930" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="5931" class="Symbol"
+      >)</a
+      ><a name="5932"
+      > </a
+      ><a name="5933" class="Symbol"
+      >(</a
+      ><a name="5934" href="Ornament.ParallelComposition.Swap.html#5073" class="Function"
+      >r'</a
+      ><a name="5936"
+      > </a
+      ><a name="5937" class="Symbol"
+      >(</a
+      ><a name="5938" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5940"
+      > </a
+      ><a name="5941" class="Symbol"
+      >(</a
+      ><a name="5942" href="Ornament.ParallelComposition.Swap.html#5873" class="Bound"
+      >j</a
+      ><a name="5943"
+      > </a
+      ><a name="5944" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5945"
+      > </a
+      ><a name="5946" href="Ornament.ParallelComposition.Swap.html#5886" class="Bound"
+      >k</a
+      ><a name="5947" class="Symbol"
+      >)</a
+      ><a name="5948"
+      > </a
+      ><a name="5949" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5950"
+      > </a
+      ><a name="5951" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5953"
+      > </a
+      ><a name="5954" class="Symbol"
+      >(</a
+      ><a name="5955" href="Ornament.ParallelComposition.Swap.html#5865" class="Bound"
+      >i</a
+      ><a name="5956"
+      > </a
+      ><a name="5957" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="5958"
+      > </a
+      ><a name="5959" href="Ornament.ParallelComposition.Swap.html#5899" class="Bound"
+      >x</a
+      ><a name="5960" class="Symbol"
+      >))))</a
+      ><a name="5964"
+      > </a
+      ><a name="5965" class="Symbol"
+      >(</a
+      ><a name="5966" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="5970"
+      > </a
+      ><a name="5971" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="5972"
+      > </a
+      ><a name="5973" href="Ornament.ParallelComposition.Swap.html#5886" class="Bound"
+      >k</a
+      ><a name="5974"
+      > </a
+      ><a name="5975" href="Ornament.ParallelComposition.Swap.html#5899" class="Bound"
+      >x</a
+      ><a name="5976" class="Symbol"
+      >)</a
+      ><a name="5977"
+      >
+  </a
+      ><a name="5980" href="Ornament.ParallelComposition.Swap.html#5851" class="Function"
+      >canonIso-r</a
+      ><a name="5990"
+      > </a
+      ><a name="5991" href="Ornament.ParallelComposition.Swap.html#5991" class="Bound"
+      >j</a
+      ><a name="5992"
+      > </a
+      ><a name="5993" class="Symbol"
+      >(</a
+      ><a name="5994" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="5996"
+      > </a
+      ><a name="5997" href="Ornament.ParallelComposition.Swap.html#5997" class="Bound"
+      >k</a
+      ><a name="5998" class="Symbol"
+      >)</a
+      ><a name="5999"
+      > </a
+      ><a name="6000" href="Ornament.ParallelComposition.Swap.html#6000" class="Bound"
+      >x</a
+      ><a name="6001"
+      > </a
+      ><a name="6002" class="Symbol"
+      >=</a
+      ><a name="6003"
+      > </a
+      ><a name="6004" href="Relation.Binary.Core.html#4934" class="Function"
+      >Setoid.refl</a
+      ><a name="6015"
+      > </a
+      ><a name="6016" class="Symbol"
+      >(</a
+      ><a name="6017" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="6026"
+      > </a
+      ><a name="6027" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="6030" class="Symbol"
+      >)</a
+      ><a name="6031"
+      >
+
+  </a
+      ><a name="6035" href="Ornament.ParallelComposition.Swap.html#6035" class="Function"
+      >canonIso</a
+      ><a name="6043"
+      > </a
+      ><a name="6044" class="Symbol"
+      >:</a
+      ><a name="6045"
+      > </a
+      ><a name="6046" class="Symbol"
+      >{</a
+      ><a name="6047" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6048"
+      > </a
+      ><a name="6049" class="Symbol"
+      >:</a
+      ><a name="6050"
+      > </a
+      ><a name="6051" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="6052" class="Symbol"
+      >}</a
+      ><a name="6053"
+      > </a
+      ><a name="6054" class="Symbol"
+      >{</a
+      ><a name="6055" href="Ornament.ParallelComposition.Swap.html#6055" class="Bound"
+      >j</a
+      ><a name="6056"
+      > </a
+      ><a name="6057" class="Symbol"
+      >:</a
+      ><a name="6058"
+      > </a
+      ><a name="6059" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="6060"
+      > </a
+      ><a name="6061" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="6063"
+      > </a
+      ><a name="6064" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6065" class="Symbol"
+      >}</a
+      ><a name="6066"
+      > </a
+      ><a name="6067" class="Symbol"
+      >{</a
+      ><a name="6068" href="Ornament.ParallelComposition.Swap.html#6068" class="Bound"
+      >k</a
+      ><a name="6069"
+      > </a
+      ><a name="6070" class="Symbol"
+      >:</a
+      ><a name="6071"
+      > </a
+      ><a name="6072" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="6073"
+      > </a
+      ><a name="6074" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="6076"
+      > </a
+      ><a name="6077" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6078" class="Symbol"
+      >}</a
+      ><a name="6079"
+      > </a
+      ><a name="6080" class="Symbol"
+      >(</a
+      ><a name="6081" href="Ornament.ParallelComposition.Swap.html#6081" class="Bound"
+      >x</a
+      ><a name="6082"
+      > </a
+      ><a name="6083" class="Symbol"
+      >:</a
+      ><a name="6084"
+      > </a
+      ><a name="6085" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="6086"
+      > </a
+      ><a name="6087" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="6088"
+      > </a
+      ><a name="6089" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6090" class="Symbol"
+      >)</a
+      ><a name="6091"
+      > </a
+      ><a name="6092" class="Symbol"
+      >&#8594;</a
+      ><a name="6093"
+      >
+             </a
+      ><a name="6107" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="6110"
+      > </a
+      ><a name="6111" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="6114"
+      > </a
+      ><a name="6115" class="Symbol"
+      >(</a
+      ><a name="6116" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="6117"
+      > </a
+      ><a name="6118" class="Symbol"
+      >(</a
+      ><a name="6119" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="6120"
+      > </a
+      ><a name="6121" class="Symbol"
+      >(</a
+      ><a name="6122" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="6127"
+      > </a
+      ><a name="6128" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="6129" class="Symbol"
+      >)</a
+      ><a name="6130"
+      > </a
+      ><a name="6131" class="Symbol"
+      >(</a
+      ><a name="6132" href="Ornament.ParallelComposition.Swap.html#4647" class="Function"
+      >l'</a
+      ><a name="6134"
+      > </a
+      ><a name="6135" class="Symbol"
+      >(</a
+      ><a name="6136" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="6138"
+      > </a
+      ><a name="6139" class="Symbol"
+      >(</a
+      ><a name="6140" href="Ornament.ParallelComposition.Swap.html#6055" class="Bound"
+      >j</a
+      ><a name="6141"
+      > </a
+      ><a name="6142" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6143"
+      > </a
+      ><a name="6144" href="Ornament.ParallelComposition.Swap.html#6068" class="Bound"
+      >k</a
+      ><a name="6145" class="Symbol"
+      >)</a
+      ><a name="6146"
+      > </a
+      ><a name="6147" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6148"
+      > </a
+      ><a name="6149" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="6151"
+      > </a
+      ><a name="6152" class="Symbol"
+      >(</a
+      ><a name="6153" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6154"
+      > </a
+      ><a name="6155" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6156"
+      > </a
+      ><a name="6157" href="Ornament.ParallelComposition.Swap.html#6081" class="Bound"
+      >x</a
+      ><a name="6158" class="Symbol"
+      >)))</a
+      ><a name="6161"
+      > </a
+      ><a name="6162" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="6163"
+      > </a
+      ><a name="6164" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="6165"
+      > </a
+      ><a name="6166" class="Symbol"
+      >(</a
+      ><a name="6167" href="Ornament.RefinementSemantics.html#1515" class="Function"
+      >OptPD</a
+      ><a name="6172"
+      > </a
+      ><a name="6173" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="6174" class="Symbol"
+      >)</a
+      ><a name="6175"
+      > </a
+      ><a name="6176" class="Symbol"
+      >(</a
+      ><a name="6177" href="Ornament.ParallelComposition.Swap.html#5073" class="Function"
+      >r'</a
+      ><a name="6179"
+      > </a
+      ><a name="6180" class="Symbol"
+      >(</a
+      ><a name="6181" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="6183"
+      > </a
+      ><a name="6184" class="Symbol"
+      >(</a
+      ><a name="6185" href="Ornament.ParallelComposition.Swap.html#6055" class="Bound"
+      >j</a
+      ><a name="6186"
+      > </a
+      ><a name="6187" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6188"
+      > </a
+      ><a name="6189" href="Ornament.ParallelComposition.Swap.html#6068" class="Bound"
+      >k</a
+      ><a name="6190" class="Symbol"
+      >)</a
+      ><a name="6191"
+      > </a
+      ><a name="6192" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6193"
+      > </a
+      ><a name="6194" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="6196"
+      > </a
+      ><a name="6197" class="Symbol"
+      >(</a
+      ><a name="6198" href="Ornament.ParallelComposition.Swap.html#6047" class="Bound"
+      >i</a
+      ><a name="6199"
+      > </a
+      ><a name="6200" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6201"
+      > </a
+      ><a name="6202" href="Ornament.ParallelComposition.Swap.html#6081" class="Bound"
+      >x</a
+      ><a name="6203" class="Symbol"
+      >))))</a
+      ><a name="6207"
+      >
+                      </a
+      ><a name="6230" class="Symbol"
+      >&#955;</a
+      ><a name="6231"
+      > </a
+      ><a name="6232" class="Symbol"
+      >{</a
+      ><a name="6233"
+      > </a
+      ><a name="6234" class="Symbol"
+      >(</a
+      ><a name="6235" href="Ornament.ParallelComposition.Swap.html#6235" class="Bound"
+      >y</a
+      ><a name="6236"
+      > </a
+      ><a name="6237" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6238"
+      > </a
+      ><a name="6239" href="Ornament.ParallelComposition.Swap.html#6239" class="Bound"
+      >z</a
+      ><a name="6240" class="Symbol"
+      >)</a
+      ><a name="6241"
+      > </a
+      ><a name="6242" class="Symbol"
+      >&#8594;</a
+      ><a name="6243"
+      > </a
+      ><a name="6244" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="6250"
+      > </a
+      ><a name="6251" class="Symbol"
+      >(</a
+      ><a name="6252" href="Ornament.ParallelComposition.html#4626" class="Function"
+      >diffOrn-r</a
+      ><a name="6261"
+      > </a
+      ><a name="6262" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="6263"
+      > </a
+      ><a name="6264" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="6265"
+      > </a
+      ><a name="6266" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="6273"
+      > </a
+      ><a name="6274" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="6275"
+      > </a
+      ><a name="6276" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="6277" class="Symbol"
+      >)</a
+      ><a name="6278"
+      > </a
+      ><a name="6279" href="Ornament.ParallelComposition.Swap.html#6235" class="Bound"
+      >y</a
+      ><a name="6280"
+      > </a
+      ><a name="6281" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="6282"
+      > </a
+      ><a name="6283" href="Ornament.html#6516" class="Function"
+      >forget</a
+      ><a name="6289"
+      > </a
+      ><a name="6290" class="Symbol"
+      >(</a
+      ><a name="6291" href="Ornament.ParallelComposition.html#4626" class="Function"
+      >diffOrn-r</a
+      ><a name="6300"
+      > </a
+      ><a name="6301" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="6302"
+      > </a
+      ><a name="6303" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="6304"
+      > </a
+      ><a name="6305" href="Ornament.html#9334" class="Function"
+      >singOrn</a
+      ><a name="6312"
+      > </a
+      ><a name="6313" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="6314"
+      > </a
+      ><a name="6315" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="6316" class="Symbol"
+      >)</a
+      ><a name="6317"
+      > </a
+      ><a name="6318" href="Ornament.ParallelComposition.Swap.html#6239" class="Bound"
+      >z</a
+      ><a name="6319" class="Symbol"
+      >})</a
+      ><a name="6321"
+      >
+                     </a
+      ><a name="6343" class="Symbol"
+      >(</a
+      ><a name="6344" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="6348"
+      > </a
+      ><a name="6349" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="6350"
+      > </a
+      ><a name="6351" href="Ornament.ParallelComposition.Swap.html#6055" class="Bound"
+      >j</a
+      ><a name="6352"
+      > </a
+      ><a name="6353" href="Ornament.ParallelComposition.Swap.html#6081" class="Bound"
+      >x</a
+      ><a name="6354"
+      > </a
+      ><a name="6355" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="6356"
+      > </a
+      ><a name="6357" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="6361"
+      > </a
+      ><a name="6362" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="6363"
+      > </a
+      ><a name="6364" href="Ornament.ParallelComposition.Swap.html#6068" class="Bound"
+      >k</a
+      ><a name="6365"
+      > </a
+      ><a name="6366" href="Ornament.ParallelComposition.Swap.html#6081" class="Bound"
+      >x</a
+      ><a name="6367" class="Symbol"
+      >)</a
+      ><a name="6368"
+      >
+  </a
+      ><a name="6371" href="Ornament.ParallelComposition.Swap.html#6035" class="Function"
+      >canonIso</a
+      ><a name="6379"
+      > </a
+      ><a name="6380" class="Symbol"
+      >{</a
+      ><a name="6381" href="Ornament.ParallelComposition.Swap.html#6381" class="Bound"
+      >i</a
+      ><a name="6382" class="Symbol"
+      >}</a
+      ><a name="6383"
+      > </a
+      ><a name="6384" class="Symbol"
+      >{</a
+      ><a name="6385" href="Ornament.ParallelComposition.Swap.html#6385" class="Bound"
+      >j</a
+      ><a name="6386" class="Symbol"
+      >}</a
+      ><a name="6387"
+      > </a
+      ><a name="6388" class="Symbol"
+      >{</a
+      ><a name="6389" href="Ornament.ParallelComposition.Swap.html#6389" class="Bound"
+      >k</a
+      ><a name="6390" class="Symbol"
+      >}</a
+      ><a name="6391"
+      > </a
+      ><a name="6392" href="Ornament.ParallelComposition.Swap.html#6392" class="Bound"
+      >x</a
+      ><a name="6393"
+      > </a
+      ><a name="6394" class="Symbol"
+      >=</a
+      ><a name="6395"
+      > </a
+      ><a name="6396" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="6408"
+      > </a
+      ><a name="6409" class="Symbol"
+      >(</a
+      ><a name="6410" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="6419"
+      > </a
+      ><a name="6420" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="6423" class="Symbol"
+      >)</a
+      ><a name="6424"
+      >
+                             </a
+      ><a name="6454" class="Symbol"
+      >(</a
+      ><a name="6455" class="Keyword"
+      >record</a
+      ><a name="6461"
+      > </a
+      ><a name="6462" class="Symbol"
+      >{</a
+      ><a name="6463"
+      > </a
+      ><a name="6464" class="Field"
+      >to</a
+      ><a name="6466"
+      >   </a
+      ><a name="6469" class="Symbol"
+      >=</a
+      ><a name="6470"
+      > </a
+      ><a name="6471" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="6476"
+      >
+                                     </a
+      ><a name="6514" class="Symbol"
+      >;</a
+      ><a name="6515"
+      > </a
+      ><a name="6516" class="Field"
+      >from</a
+      ><a name="6520"
+      > </a
+      ><a name="6521" class="Symbol"
+      >=</a
+      ><a name="6522"
+      > </a
+      ><a name="6523" class="Symbol"
+      >&#955;</a
+      ><a name="6524"
+      > </a
+      ><a name="6525" href="Ornament.ParallelComposition.Swap.html#6525" class="Bound"
+      >yz</a
+      ><a name="6527"
+      > </a
+      ><a name="6528" class="Symbol"
+      >&#8594;</a
+      ><a name="6529"
+      > </a
+      ><a name="6530" href="Ornament.ParallelComposition.Swap.html#6525" class="Bound"
+      >yz</a
+      ><a name="6532"
+      > </a
+      ><a name="6533" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6534"
+      > </a
+      ><a name="6535" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="6541"
+      > </a
+      ><a name="6542" class="Symbol"
+      >(</a
+      ><a name="6543" href="Prelude.Equality.html#1130" class="Function"
+      >equal</a
+      ><a name="6548"
+      > </a
+      ><a name="6549" class="Symbol"
+      >(</a
+      ><a name="6550" href="Relation.Binary.PropositionalEquality.html#1526" class="Function"
+      >&#8801;-Setoid</a
+      ><a name="6558"
+      > </a
+      ><a name="6559" class="Symbol"
+      >_)</a
+      ><a name="6561"
+      > </a
+      ><a name="6562" class="Symbol"
+      >(</a
+      ><a name="6563" href="Ornament.html#10088" class="Function"
+      >singleton</a
+      ><a name="6572"
+      > </a
+      ><a name="6573" href="Ornament.ParallelComposition.Swap.html#6392" class="Bound"
+      >x</a
+      ><a name="6574"
+      > </a
+      ><a name="6575" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6576"
+      > </a
+      ><a name="6577" href="Ornament.html#10254" class="Function"
+      >singleton-unique</a
+      ><a name="6593"
+      > </a
+      ><a name="6594" href="Ornament.ParallelComposition.Swap.html#6392" class="Bound"
+      >x</a
+      ><a name="6595" class="Symbol"
+      >)</a
+      ><a name="6596"
+      > </a
+      ><a name="6597" class="Symbol"
+      >_</a
+      ><a name="6598"
+      > </a
+      ><a name="6599" class="Symbol"
+      >_)</a
+      ><a name="6601"
+      >
+                                     </a
+      ><a name="6639" class="Symbol"
+      >;</a
+      ><a name="6640"
+      > </a
+      ><a name="6641" class="Field"
+      >to-from-inverse</a
+      ><a name="6656"
+      > </a
+      ><a name="6657" class="Symbol"
+      >=</a
+      ><a name="6658"
+      > </a
+      ><a name="6659" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="6664"
+      >
+                                     </a
+      ><a name="6702" class="Symbol"
+      >;</a
+      ><a name="6703"
+      > </a
+      ><a name="6704" class="Field"
+      >from-to-inverse</a
+      ><a name="6719"
+      > </a
+      ><a name="6720" class="Symbol"
+      >=</a
+      ><a name="6721"
+      > </a
+      ><a name="6722" class="Symbol"
+      >&#955;</a
+      ><a name="6723"
+      > </a
+      ><a name="6724" class="Symbol"
+      >{</a
+      ><a name="6725"
+      > </a
+      ><a name="6726" class="Symbol"
+      >((</a
+      ><a name="6728" href="Ornament.ParallelComposition.Swap.html#6728" class="Bound"
+      >y</a
+      ><a name="6729"
+      > </a
+      ><a name="6730" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >Data.Product.,</a
+      ><a name="6744"
+      > </a
+      ><a name="6745" href="Ornament.ParallelComposition.Swap.html#6745" class="Bound"
+      >z</a
+      ><a name="6746" class="Symbol"
+      >)</a
+      ><a name="6747"
+      > </a
+      ><a name="6748" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="6749"
+      > </a
+      ><a name="6750" href="Ornament.ParallelComposition.Swap.html#6750" class="Bound"
+      >eq</a
+      ><a name="6752" class="Symbol"
+      >)</a
+      ><a name="6753"
+      > </a
+      ><a name="6754" class="Symbol"
+      >&#8594;</a
+      ><a name="6755"
+      >
+                                                             </a
+      ><a name="6817" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="6827"
+      > </a
+      ><a name="6828" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="6832"
+      > </a
+      ><a name="6833" class="Symbol"
+      >(</a
+      ><a name="6834" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="6840"
+      > </a
+      ><a name="6841" class="Symbol"
+      >(</a
+      ><a name="6842" href="Relation.Binary.HeterogeneousEquality.html#2601" class="Function"
+      >hproof-irrelevance</a
+      ><a name="6860"
+      > </a
+      ><a name="6861" class="Symbol"
+      >_</a
+      ><a name="6862"
+      > </a
+      ><a name="6863" class="Symbol"
+      >_))</a
+      ><a name="6866"
+      > </a
+      ><a name="6867" class="Symbol"
+      >}</a
+      ><a name="6868"
+      > </a
+      ><a name="6869" class="Symbol"
+      >})</a
+      ><a name="6871"
+      >
+                             </a
+      ><a name="6901" class="Symbol"
+      >(</a
+      ><a name="6902" href="Prelude.Product.html#1641" class="Function"
+      >prodIso</a
+      ><a name="6909"
+      > </a
+      ><a name="6910" class="Symbol"
+      >(</a
+      ><a name="6911" href="Ornament.ParallelComposition.Swap.html#5667" class="Function"
+      >canonIso-l</a
+      ><a name="6921"
+      > </a
+      ><a name="6922" href="Ornament.ParallelComposition.Swap.html#6385" class="Bound"
+      >j</a
+      ><a name="6923"
+      > </a
+      ><a name="6924" href="Ornament.ParallelComposition.Swap.html#6389" class="Bound"
+      >k</a
+      ><a name="6925"
+      > </a
+      ><a name="6926" href="Ornament.ParallelComposition.Swap.html#6392" class="Bound"
+      >x</a
+      ><a name="6927" class="Symbol"
+      >)</a
+      ><a name="6928"
+      > </a
+      ><a name="6929" class="Symbol"
+      >(</a
+      ><a name="6930" href="Ornament.ParallelComposition.Swap.html#5851" class="Function"
+      >canonIso-r</a
+      ><a name="6940"
+      > </a
+      ><a name="6941" href="Ornament.ParallelComposition.Swap.html#6385" class="Bound"
+      >j</a
+      ><a name="6942"
+      > </a
+      ><a name="6943" href="Ornament.ParallelComposition.Swap.html#6389" class="Bound"
+      >k</a
+      ><a name="6944"
+      > </a
+      ><a name="6945" href="Ornament.ParallelComposition.Swap.html#6392" class="Bound"
+      >x</a
+      ><a name="6946" class="Symbol"
+      >))</a
+      ><a name="6948"
+      >
+
+  </a
+      ><a name="6952" href="Ornament.ParallelComposition.Swap.html#6952" class="Function"
+      >splittingIso</a
+      ><a name="6964"
+      > </a
+      ><a name="6965" class="Symbol"
+      >:</a
+      ><a name="6966"
+      > </a
+      ><a name="6967" class="Symbol"
+      >{</a
+      ><a name="6968" href="Ornament.ParallelComposition.Swap.html#6968" class="Bound"
+      >i</a
+      ><a name="6969"
+      > </a
+      ><a name="6970" class="Symbol"
+      >:</a
+      ><a name="6971"
+      > </a
+      ><a name="6972" href="Ornament.ParallelComposition.Swap.html#332" class="Bound"
+      >I</a
+      ><a name="6973" class="Symbol"
+      >}</a
+      ><a name="6974"
+      > </a
+      ><a name="6975" class="Symbol"
+      >{</a
+      ><a name="6976" href="Ornament.ParallelComposition.Swap.html#6976" class="Bound"
+      >j</a
+      ><a name="6977"
+      > </a
+      ><a name="6978" class="Symbol"
+      >:</a
+      ><a name="6979"
+      > </a
+      ><a name="6980" href="Ornament.ParallelComposition.Swap.html#340" class="Bound"
+      >e</a
+      ><a name="6981"
+      > </a
+      ><a name="6982" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="6984"
+      > </a
+      ><a name="6985" href="Ornament.ParallelComposition.Swap.html#6968" class="Bound"
+      >i</a
+      ><a name="6986" class="Symbol"
+      >}</a
+      ><a name="6987"
+      > </a
+      ><a name="6988" class="Symbol"
+      >{</a
+      ><a name="6989" href="Ornament.ParallelComposition.Swap.html#6989" class="Bound"
+      >k</a
+      ><a name="6990"
+      > </a
+      ><a name="6991" class="Symbol"
+      >:</a
+      ><a name="6992"
+      > </a
+      ><a name="6993" href="Ornament.ParallelComposition.Swap.html#352" class="Bound"
+      >f</a
+      ><a name="6994"
+      > </a
+      ><a name="6995" href="Prelude.InverseImage.html#758" class="Datatype Operator"
+      >&#8315;&#185;</a
+      ><a name="6997"
+      > </a
+      ><a name="6998" href="Ornament.ParallelComposition.Swap.html#6968" class="Bound"
+      >i</a
+      ><a name="6999" class="Symbol"
+      >}</a
+      ><a name="7000"
+      > </a
+      ><a name="7001" class="Symbol"
+      >(</a
+      ><a name="7002" href="Ornament.ParallelComposition.Swap.html#7002" class="Bound"
+      >x</a
+      ><a name="7003"
+      > </a
+      ><a name="7004" class="Symbol"
+      >:</a
+      ><a name="7005"
+      > </a
+      ><a name="7006" href="Description.html#1326" class="Datatype"
+      >&#956;</a
+      ><a name="7007"
+      > </a
+      ><a name="7008" href="Ornament.ParallelComposition.Swap.html#364" class="Bound"
+      >D</a
+      ><a name="7009"
+      > </a
+      ><a name="7010" href="Ornament.ParallelComposition.Swap.html#6968" class="Bound"
+      >i</a
+      ><a name="7011" class="Symbol"
+      >)</a
+      ><a name="7012"
+      > </a
+      ><a name="7013" class="Symbol"
+      >&#8594;</a
+      ><a name="7014"
+      > </a
+      ><a name="7015" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="7018"
+      > </a
+      ><a name="7019" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="7022"
+      > </a
+      ><a name="7023" class="Symbol"
+      >(</a
+      ><a name="7024" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="7028"
+      > </a
+      ><a name="7029" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="7030"
+      > </a
+      ><a name="7031" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="7032"
+      > </a
+      ><a name="7033" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="7034"
+      > </a
+      ><a name="7035" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="7036"
+      > </a
+      ><a name="7037" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="7038"
+      > </a
+      ><a name="7039" class="Symbol"
+      >(</a
+      ><a name="7040" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7042"
+      > </a
+      ><a name="7043" class="Symbol"
+      >(</a
+      ><a name="7044" href="Ornament.ParallelComposition.Swap.html#6976" class="Bound"
+      >j</a
+      ><a name="7045"
+      > </a
+      ><a name="7046" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7047"
+      > </a
+      ><a name="7048" href="Ornament.ParallelComposition.Swap.html#6989" class="Bound"
+      >k</a
+      ><a name="7049" class="Symbol"
+      >))</a
+      ><a name="7051"
+      > </a
+      ><a name="7052" href="Ornament.ParallelComposition.Swap.html#7002" class="Bound"
+      >x</a
+      ><a name="7053" class="Symbol"
+      >)</a
+      ><a name="7054"
+      > </a
+      ><a name="7055" class="Symbol"
+      >(</a
+      ><a name="7056" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="7060"
+      > </a
+      ><a name="7061" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="7062"
+      > </a
+      ><a name="7063" href="Ornament.ParallelComposition.Swap.html#6976" class="Bound"
+      >j</a
+      ><a name="7064"
+      > </a
+      ><a name="7065" href="Ornament.ParallelComposition.Swap.html#7002" class="Bound"
+      >x</a
+      ><a name="7066"
+      > </a
+      ><a name="7067" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="7068"
+      > </a
+      ><a name="7069" href="Ornament.RefinementSemantics.html#1637" class="Function"
+      >OptP</a
+      ><a name="7073"
+      > </a
+      ><a name="7074" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="7075"
+      > </a
+      ><a name="7076" href="Ornament.ParallelComposition.Swap.html#6989" class="Bound"
+      >k</a
+      ><a name="7077"
+      > </a
+      ><a name="7078" href="Ornament.ParallelComposition.Swap.html#7002" class="Bound"
+      >x</a
+      ><a name="7079" class="Symbol"
+      >)</a
+      ><a name="7080"
+      >
+  </a
+      ><a name="7083" href="Ornament.ParallelComposition.Swap.html#6952" class="Function"
+      >splittingIso</a
+      ><a name="7095"
+      > </a
+      ><a name="7096" class="Symbol"
+      >{</a
+      ><a name="7097" href="Ornament.ParallelComposition.Swap.html#7097" class="Bound"
+      >i</a
+      ><a name="7098" class="Symbol"
+      >}</a
+      ><a name="7099"
+      > </a
+      ><a name="7100" class="Symbol"
+      >{</a
+      ><a name="7101" href="Ornament.ParallelComposition.Swap.html#7101" class="Bound"
+      >j</a
+      ><a name="7102" class="Symbol"
+      >}</a
+      ><a name="7103"
+      > </a
+      ><a name="7104" class="Symbol"
+      >{</a
+      ><a name="7105" href="Ornament.ParallelComposition.Swap.html#7105" class="Bound"
+      >k</a
+      ><a name="7106" class="Symbol"
+      >}</a
+      ><a name="7107"
+      > </a
+      ><a name="7108" href="Ornament.ParallelComposition.Swap.html#7108" class="Bound"
+      >x</a
+      ><a name="7109"
+      > </a
+      ><a name="7110" class="Symbol"
+      >=</a
+      ><a name="7111"
+      > </a
+      ><a name="7112" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="7124"
+      > </a
+      ><a name="7125" class="Symbol"
+      >(</a
+      ><a name="7126" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="7135"
+      > </a
+      ><a name="7136" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="7139" class="Symbol"
+      >)</a
+      ><a name="7140"
+      > </a
+      ><a name="7141" class="Symbol"
+      >(</a
+      ><a name="7142" href="Prelude.Function.Fam.html#4185" class="Function"
+      >compIso</a
+      ><a name="7149"
+      > </a
+      ><a name="7150" href="Ornament.ParallelComposition.Swap.html#5499" class="Function"
+      >wholeIso</a
+      ><a name="7158"
+      > </a
+      ><a name="7159" class="Symbol"
+      >(</a
+      ><a name="7160" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7162"
+      > </a
+      ><a name="7163" class="Symbol"
+      >(</a
+      ><a name="7164" href="Ornament.ParallelComposition.Swap.html#7101" class="Bound"
+      >j</a
+      ><a name="7165"
+      > </a
+      ><a name="7166" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7167"
+      > </a
+      ><a name="7168" href="Ornament.ParallelComposition.Swap.html#7105" class="Bound"
+      >k</a
+      ><a name="7169" class="Symbol"
+      >)</a
+      ><a name="7170"
+      > </a
+      ><a name="7171" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7172"
+      > </a
+      ><a name="7173" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7175"
+      > </a
+      ><a name="7176" class="Symbol"
+      >(</a
+      ><a name="7177" href="Ornament.ParallelComposition.Swap.html#7097" class="Bound"
+      >i</a
+      ><a name="7178"
+      > </a
+      ><a name="7179" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7180"
+      > </a
+      ><a name="7181" href="Ornament.ParallelComposition.Swap.html#7108" class="Bound"
+      >x</a
+      ><a name="7182" class="Symbol"
+      >)))</a
+      ><a name="7185"
+      > </a
+      ><a name="7186" class="Symbol"
+      >(</a
+      ><a name="7187" href="Ornament.ParallelComposition.Swap.html#6035" class="Function"
+      >canonIso</a
+      ><a name="7195"
+      > </a
+      ><a name="7196" href="Ornament.ParallelComposition.Swap.html#7108" class="Bound"
+      >x</a
+      ><a name="7197" class="Symbol"
+      >)</a
+      ><a name="7198"
+      >
+
+
+</a
+      ><a name="7201" class="Comment"
+      >--------</a
+      ><a name="7209"
+      >
+</a
+      ><a name="7210" class="Comment"
+      >-- predicate swap</a
+      ><a name="7227"
+      >
+
+</a
+      ><a name="7229" href="Ornament.ParallelComposition.Swap.html#7229" class="Function"
+      >&#8855;-FSwap</a
+      ><a name="7236"
+      > </a
+      ><a name="7237" class="Symbol"
+      >:</a
+      ><a name="7238"
+      > </a
+      ><a name="7239" href="Refinement.html#6722" class="Record"
+      >FSwap</a
+      ><a name="7244"
+      > </a
+      ><a name="7245" class="Symbol"
+      >(</a
+      ><a name="7246" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="7251"
+      > </a
+      ><a name="7252" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="7253" class="Symbol"
+      >)</a
+      ><a name="7254"
+      > </a
+      ><a name="7255" class="Symbol"
+      >&#8594;</a
+      ><a name="7256"
+      > </a
+      ><a name="7257" href="Refinement.html#6722" class="Record"
+      >FSwap</a
+      ><a name="7262"
+      > </a
+      ><a name="7263" class="Symbol"
+      >(</a
+      ><a name="7264" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="7269"
+      > </a
+      ><a name="7270" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="7271" class="Symbol"
+      >)</a
+      ><a name="7272"
+      > </a
+      ><a name="7273" class="Symbol"
+      >&#8594;</a
+      ><a name="7274"
+      > </a
+      ><a name="7275" href="Refinement.html#6722" class="Record"
+      >FSwap</a
+      ><a name="7280"
+      > </a
+      ><a name="7281" class="Symbol"
+      >(</a
+      ><a name="7282" href="Ornament.RefinementSemantics.html#5065" class="Function"
+      >RSem'</a
+      ><a name="7287"
+      > </a
+      ><a name="7288" href="Ornament.html#8819" class="Function Operator"
+      >&#8968;</a
+      ><a name="7289"
+      > </a
+      ><a name="7290" href="Ornament.ParallelComposition.Swap.html#372" class="Bound"
+      >O</a
+      ><a name="7291"
+      > </a
+      ><a name="7292" href="Ornament.ParallelComposition.html#1594" class="Function Operator"
+      >&#8855;</a
+      ><a name="7293"
+      > </a
+      ><a name="7294" href="Ornament.ParallelComposition.Swap.html#388" class="Bound"
+      >P</a
+      ><a name="7295"
+      > </a
+      ><a name="7296" href="Ornament.html#8819" class="Function Operator"
+      >&#8969;</a
+      ><a name="7297" class="Symbol"
+      >)</a
+      ><a name="7298"
+      >
+</a
+      ><a name="7299" href="Ornament.ParallelComposition.Swap.html#7229" class="Function"
+      >&#8855;-FSwap</a
+      ><a name="7306"
+      > </a
+      ><a name="7307" class="Symbol"
+      >(</a
+      ><a name="7308" href="Refinement.html#6831" class="InductiveConstructor"
+      >wrap</a
+      ><a name="7312"
+      > </a
+      ><a name="7313" href="Ornament.ParallelComposition.Swap.html#7313" class="Bound"
+      >s</a
+      ><a name="7314" class="Symbol"
+      >)</a
+      ><a name="7315"
+      > </a
+      ><a name="7316" class="Symbol"
+      >(</a
+      ><a name="7317" href="Refinement.html#6831" class="InductiveConstructor"
+      >wrap</a
+      ><a name="7321"
+      > </a
+      ><a name="7322" href="Ornament.ParallelComposition.Swap.html#7322" class="Bound"
+      >t</a
+      ><a name="7323" class="Symbol"
+      >)</a
+      ><a name="7324"
+      > </a
+      ><a name="7325" class="Symbol"
+      >=</a
+      ><a name="7326"
+      >
+  </a
+      ><a name="7329" href="Refinement.html#6831" class="InductiveConstructor"
+      >wrap</a
+      ><a name="7333"
+      > </a
+      ><a name="7334" class="Symbol"
+      >&#955;</a
+      ><a name="7335"
+      > </a
+      ><a name="7336" class="Symbol"
+      >{</a
+      ><a name="7337"
+      > </a
+      ><a name="7338" class="Symbol"
+      >{</a
+      ><a name="7339" class="DottedPattern Symbol"
+      >._</a
+      ><a name="7341" class="Symbol"
+      >}</a
+      ><a name="7342"
+      > </a
+      ><a name="7343" class="Symbol"
+      >(</a
+      ><a name="7344" href="Prelude.InverseImage.html#805" class="InductiveConstructor"
+      >ok</a
+      ><a name="7346"
+      > </a
+      ><a name="7347" class="Symbol"
+      >(</a
+      ><a name="7348" href="Ornament.ParallelComposition.Swap.html#7348" class="Bound"
+      >j</a
+      ><a name="7349"
+      > </a
+      ><a name="7350" href="Prelude.InverseImage.html#1923" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="7351"
+      > </a
+      ><a name="7352" href="Ornament.ParallelComposition.Swap.html#7352" class="Bound"
+      >k</a
+      ><a name="7353" class="Symbol"
+      >))</a
+      ><a name="7355"
+      > </a
+      ><a name="7356" class="Symbol"
+      >&#8594;</a
+      ><a name="7357"
+      >
+           </a
+      ><a name="7369" class="Keyword"
+      >record</a
+      ><a name="7375"
+      > </a
+      ><a name="7376" class="Symbol"
+      >{</a
+      ><a name="7377"
+      > </a
+      ><a name="7378" class="Field"
+      >Q</a
+      ><a name="7379"
+      > </a
+      ><a name="7380" class="Symbol"
+      >=</a
+      ><a name="7381"
+      > </a
+      ><a name="7382" class="Symbol"
+      >&#955;</a
+      ><a name="7383"
+      > </a
+      ><a name="7384" href="Ornament.ParallelComposition.Swap.html#7384" class="Bound"
+      >x</a
+      ><a name="7385"
+      > </a
+      ><a name="7386" class="Symbol"
+      >&#8594;</a
+      ><a name="7387"
+      > </a
+      ><a name="7388" href="Refinement.html#5934" class="Field"
+      >Swap.Q</a
+      ><a name="7394"
+      > </a
+      ><a name="7395" class="Symbol"
+      >(</a
+      ><a name="7396" href="Ornament.ParallelComposition.Swap.html#7313" class="Bound"
+      >s</a
+      ><a name="7397"
+      > </a
+      ><a name="7398" href="Ornament.ParallelComposition.Swap.html#7348" class="Bound"
+      >j</a
+      ><a name="7399" class="Symbol"
+      >)</a
+      ><a name="7400"
+      > </a
+      ><a name="7401" href="Ornament.ParallelComposition.Swap.html#7384" class="Bound"
+      >x</a
+      ><a name="7402"
+      > </a
+      ><a name="7403" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="7404"
+      > </a
+      ><a name="7405" href="Refinement.html#5934" class="Field"
+      >Swap.Q</a
+      ><a name="7411"
+      > </a
+      ><a name="7412" class="Symbol"
+      >(</a
+      ><a name="7413" href="Ornament.ParallelComposition.Swap.html#7322" class="Bound"
+      >t</a
+      ><a name="7414"
+      > </a
+      ><a name="7415" href="Ornament.ParallelComposition.Swap.html#7352" class="Bound"
+      >k</a
+      ><a name="7416" class="Symbol"
+      >)</a
+      ><a name="7417"
+      > </a
+      ><a name="7418" href="Ornament.ParallelComposition.Swap.html#7384" class="Bound"
+      >x</a
+      ><a name="7419"
+      >
+                  </a
+      ><a name="7438" class="Symbol"
+      >;</a
+      ><a name="7439"
+      > </a
+      ><a name="7440" class="Field"
+      >s</a
+      ><a name="7441"
+      > </a
+      ><a name="7442" class="Symbol"
+      >=</a
+      ><a name="7443"
+      > </a
+      ><a name="7444" class="Symbol"
+      >&#955;</a
+      ><a name="7445"
+      > </a
+      ><a name="7446" href="Ornament.ParallelComposition.Swap.html#7446" class="Bound"
+      >x</a
+      ><a name="7447"
+      > </a
+      ><a name="7448" class="Symbol"
+      >&#8594;</a
+      ><a name="7449"
+      > </a
+      ><a name="7450" href="Relation.Binary.Core.html#4986" class="Function"
+      >Setoid.trans</a
+      ><a name="7462"
+      > </a
+      ><a name="7463" class="Symbol"
+      >(</a
+      ><a name="7464" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="7473"
+      > </a
+      ><a name="7474" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="7477" class="Symbol"
+      >)</a
+      ><a name="7478"
+      > </a
+      ><a name="7479" class="Symbol"
+      >(</a
+      ><a name="7480" href="Ornament.ParallelComposition.Swap.html#6952" class="Function"
+      >splittingIso</a
+      ><a name="7492"
+      > </a
+      ><a name="7493" href="Ornament.ParallelComposition.Swap.html#7446" class="Bound"
+      >x</a
+      ><a name="7494" class="Symbol"
+      >)</a
+      ><a name="7495"
+      > </a
+      ><a name="7496" class="Symbol"
+      >(</a
+      ><a name="7497" href="Prelude.Product.html#1641" class="Function"
+      >prodIso</a
+      ><a name="7504"
+      > </a
+      ><a name="7505" class="Symbol"
+      >(</a
+      ><a name="7506" href="Refinement.html#5950" class="Field"
+      >Swap.s</a
+      ><a name="7512"
+      > </a
+      ><a name="7513" class="Symbol"
+      >(</a
+      ><a name="7514" href="Ornament.ParallelComposition.Swap.html#7313" class="Bound"
+      >s</a
+      ><a name="7515"
+      > </a
+      ><a name="7516" href="Ornament.ParallelComposition.Swap.html#7348" class="Bound"
+      >j</a
+      ><a name="7517" class="Symbol"
+      >)</a
+      ><a name="7518"
+      > </a
+      ><a name="7519" href="Ornament.ParallelComposition.Swap.html#7446" class="Bound"
+      >x</a
+      ><a name="7520" class="Symbol"
+      >)</a
+      ><a name="7521"
+      > </a
+      ><a name="7522" class="Symbol"
+      >(</a
+      ><a name="7523" href="Refinement.html#5950" class="Field"
+      >Swap.s</a
+      ><a name="7529"
+      > </a
+      ><a name="7530" class="Symbol"
+      >(</a
+      ><a name="7531" href="Ornament.ParallelComposition.Swap.html#7322" class="Bound"
+      >t</a
+      ><a name="7532"
+      > </a
+      ><a name="7533" href="Ornament.ParallelComposition.Swap.html#7352" class="Bound"
+      >k</a
+      ><a name="7534" class="Symbol"
+      >)</a
+      ><a name="7535"
+      > </a
+      ><a name="7536" href="Ornament.ParallelComposition.Swap.html#7446" class="Bound"
+      >x</a
+      ><a name="7537" class="Symbol"
+      >))</a
+      ><a name="7539"
+      > </a
+      ><a name="7540" class="Symbol"
+      >}</a
+      ><a name="7541"
+      > </a
+      ><a name="7542" class="Symbol"
+      >}</a
+      ><a name="7543"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

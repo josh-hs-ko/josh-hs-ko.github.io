@@ -1,0 +1,3356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Description.Horizontal</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Horizontal data, which can be separated into &quot;shape&quot; and &quot;core&quot; (cf. containers), and shape equivalence.</a
+      ><a name="108"
+      >
+
+</a
+      ><a name="110" class="Keyword"
+      >module</a
+      ><a name="116"
+      > </a
+      ><a name="117" href="Description.Horizontal.html#1" class="Module"
+      >Description.Horizontal</a
+      ><a name="139"
+      > </a
+      ><a name="140" class="Keyword"
+      >where</a
+      ><a name="145"
+      >
+
+</a
+      ><a name="147" class="Keyword"
+      >open</a
+      ><a name="151"
+      > </a
+      ><a name="152" class="Keyword"
+      >import</a
+      ><a name="158"
+      > </a
+      ><a name="159" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="187"
+      >
+</a
+      ><a name="188" class="Keyword"
+      >open</a
+      ><a name="192"
+      > </a
+      ><a name="193" class="Keyword"
+      >import</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="216"
+      >
+</a
+      ><a name="217" class="Keyword"
+      >open</a
+      ><a name="221"
+      > </a
+      ><a name="222" class="Keyword"
+      >import</a
+      ><a name="228"
+      > </a
+      ><a name="229" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="249"
+      >
+</a
+      ><a name="250" class="Keyword"
+      >open</a
+      ><a name="254"
+      > </a
+      ><a name="255" class="Keyword"
+      >import</a
+      ><a name="261"
+      > </a
+      ><a name="262" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="277"
+      >
+</a
+      ><a name="278" class="Keyword"
+      >open</a
+      ><a name="282"
+      > </a
+      ><a name="283" class="Keyword"
+      >import</a
+      ><a name="289"
+      > </a
+      ><a name="290" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="301"
+      >
+
+</a
+      ><a name="303" class="Keyword"
+      >open</a
+      ><a name="307"
+      > </a
+      ><a name="308" class="Keyword"
+      >import</a
+      ><a name="314"
+      > </a
+      ><a name="315" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="323"
+      > </a
+      ><a name="324" class="Keyword"
+      >using</a
+      ><a name="329"
+      > </a
+      ><a name="330" class="Symbol"
+      >(</a
+      ><a name="331" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="333" class="Symbol"
+      >;</a
+      ><a name="334"
+      > </a
+      ><a name="335" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="340" class="Symbol"
+      >;</a
+      ><a name="341"
+      > </a
+      ><a name="342" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="345" class="Symbol"
+      >)</a
+      ><a name="346"
+      >
+</a
+      ><a name="347" class="Keyword"
+      >open</a
+      ><a name="351"
+      > </a
+      ><a name="352" class="Keyword"
+      >import</a
+      ><a name="358"
+      > </a
+      ><a name="359" href="Data.Unit.html#1" class="Module"
+      >Data.Unit</a
+      ><a name="368"
+      > </a
+      ><a name="369" class="Keyword"
+      >using</a
+      ><a name="374"
+      > </a
+      ><a name="375" class="Symbol"
+      >(</a
+      ><a name="376" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="377" class="Symbol"
+      >;</a
+      ><a name="378"
+      > </a
+      ><a name="379" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="381" class="Symbol"
+      >)</a
+      ><a name="382"
+      >
+</a
+      ><a name="383" class="Keyword"
+      >open</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Keyword"
+      >import</a
+      ><a name="394"
+      > </a
+      ><a name="395" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="407"
+      > </a
+      ><a name="408" class="Keyword"
+      >using</a
+      ><a name="413"
+      > </a
+      ><a name="414" class="Symbol"
+      >(</a
+      ><a name="415" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="416" class="Symbol"
+      >;</a
+      ><a name="417"
+      > </a
+      ><a name="418" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="426" class="Symbol"
+      >;</a
+      ><a name="427"
+      > </a
+      ><a name="428" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="431" class="Symbol"
+      >;</a
+      ><a name="432"
+      > </a
+      ><a name="433" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="438" class="Symbol"
+      >;</a
+      ><a name="439"
+      > </a
+      ><a name="440" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="445" class="Symbol"
+      >)</a
+      ><a name="446"
+      > </a
+      ><a name="447" class="Keyword"
+      >renaming</a
+      ><a name="455"
+      > </a
+      ><a name="456" class="Symbol"
+      >(</a
+      ><a name="457" href="Data.Product.html#1872" class="Function"
+      >map</a
+      ><a name="460"
+      > </a
+      ><a name="461" class="Symbol"
+      >to</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="Data.Product.html#1872" class="Function"
+      >_**_</a
+      ><a name="468" class="Symbol"
+      >)</a
+      ><a name="469"
+      >
+</a
+      ><a name="470" class="Keyword"
+      >open</a
+      ><a name="474"
+      > </a
+      ><a name="475" class="Keyword"
+      >import</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="491"
+      > </a
+      ><a name="492" class="Keyword"
+      >using</a
+      ><a name="497"
+      > </a
+      ><a name="498" class="Symbol"
+      >(</a
+      ><a name="499" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="503" class="Symbol"
+      >;</a
+      ><a name="504"
+      > </a
+      ><a name="505" href="Data.List.Base.html#5519" class="InductiveConstructor"
+      >[]</a
+      ><a name="507" class="Symbol"
+      >;</a
+      ><a name="508"
+      > </a
+      ><a name="509" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >_&#8759;_</a
+      ><a name="512" class="Symbol"
+      >)</a
+      ><a name="513"
+      >
+</a
+      ><a name="514" class="Keyword"
+      >open</a
+      ><a name="518"
+      > </a
+      ><a name="519" class="Keyword"
+      >import</a
+      ><a name="525"
+      > </a
+      ><a name="526" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="563"
+      > </a
+      ><a name="564" class="Keyword"
+      >using</a
+      ><a name="569"
+      > </a
+      ><a name="570" class="Symbol"
+      >(</a
+      ><a name="571" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="574" class="Symbol"
+      >;</a
+      ><a name="575"
+      > </a
+      ><a name="576" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="580" class="Symbol"
+      >;</a
+      ><a name="581"
+      > </a
+      ><a name="582" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="586" class="Symbol"
+      >)</a
+      ><a name="587"
+      >
+</a
+      ><a name="588" class="Keyword"
+      >open</a
+      ><a name="592"
+      > </a
+      ><a name="593" class="Keyword"
+      >import</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Keyword"
+      >using</a
+      ><a name="643"
+      > </a
+      ><a name="644" class="Symbol"
+      >(</a
+      ><a name="645" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="648" class="Symbol"
+      >;</a
+      ><a name="649"
+      > </a
+      ><a name="650" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="656" class="Symbol"
+      >)</a
+      ><a name="657"
+      > </a
+      ><a name="658" class="Keyword"
+      >renaming</a
+      ><a name="666"
+      > </a
+      ><a name="667" class="Symbol"
+      >(</a
+      ><a name="668" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >cong</a
+      ><a name="672"
+      > </a
+      ><a name="673" class="Symbol"
+      >to</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="681" class="Symbol"
+      >)</a
+      ><a name="682"
+      >
+
+
+</a
+      ><a name="685" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="689"
+      > </a
+      ><a name="690" class="Symbol"
+      >:</a
+      ><a name="691"
+      > </a
+      ><a name="692" class="Symbol"
+      >{</a
+      ><a name="693" href="Description.Horizontal.html#693" class="Bound"
+      >I</a
+      ><a name="694"
+      > </a
+      ><a name="695" class="Symbol"
+      >:</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="PrimitiveType"
+      >Set</a
+      ><a name="700" class="Symbol"
+      >}</a
+      ><a name="701"
+      > </a
+      ><a name="702" class="Symbol"
+      >(</a
+      ><a name="703" href="Description.Horizontal.html#703" class="Bound"
+      >D</a
+      ><a name="704"
+      > </a
+      ><a name="705" class="Symbol"
+      >:</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="712"
+      > </a
+      ><a name="713" href="Description.Horizontal.html#693" class="Bound"
+      >I</a
+      ><a name="714" class="Symbol"
+      >)</a
+      ><a name="715"
+      > </a
+      ><a name="716" class="Symbol"
+      >{</a
+      ><a name="717" href="Description.Horizontal.html#717" class="Bound"
+      >X</a
+      ><a name="718"
+      > </a
+      ><a name="719" class="Symbol"
+      >:</a
+      ><a name="720"
+      > </a
+      ><a name="721" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="725"
+      > </a
+      ><a name="726" href="Description.Horizontal.html#693" class="Bound"
+      >I</a
+      ><a name="727"
+      > </a
+      ><a name="728" class="Symbol"
+      >&#8594;</a
+      ><a name="729"
+      > </a
+      ><a name="730" class="PrimitiveType"
+      >Set</a
+      ><a name="733" class="Symbol"
+      >}</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >&#8594;</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="Description.Horizontal.html#703" class="Bound"
+      >D</a
+      ><a name="740"
+      > </a
+      ><a name="741" href="Description.Horizontal.html#717" class="Bound"
+      >X</a
+      ><a name="742"
+      > </a
+      ><a name="743" class="Symbol"
+      >&#8594;</a
+      ><a name="744"
+      > </a
+      ><a name="745" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="749"
+      > </a
+      ><a name="750" href="Description.Horizontal.html#693" class="Bound"
+      >I</a
+      ><a name="751"
+      >
+</a
+      ><a name="752" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Symbol"
+      >(</a
+      ><a name="758" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="Description.Horizontal.html#760" class="Bound"
+      >is</a
+      ><a name="762" class="Symbol"
+      >)</a
+      ><a name="763"
+      >  </a
+      ><a name="765" href="Description.Horizontal.html#765" class="Bound"
+      >x</a
+      ><a name="766"
+      >        </a
+      ><a name="774" class="Symbol"
+      >=</a
+      ><a name="775"
+      > </a
+      ><a name="776" href="Description.Horizontal.html#760" class="Bound"
+      >is</a
+      ><a name="778"
+      >
+</a
+      ><a name="779" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >(</a
+      ><a name="785" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Description.Horizontal.html#787" class="Bound"
+      >S</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="Description.Horizontal.html#789" class="Bound"
+      >D</a
+      ><a name="790" class="Symbol"
+      >)</a
+      ><a name="791"
+      > </a
+      ><a name="792" class="Symbol"
+      >(</a
+      ><a name="793" href="Description.Horizontal.html#793" class="Bound"
+      >s</a
+      ><a name="794"
+      > </a
+      ><a name="795" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="796"
+      > </a
+      ><a name="797" href="Description.Horizontal.html#797" class="Bound"
+      >hs</a
+      ><a name="799" class="Symbol"
+      >)</a
+      ><a name="800"
+      > </a
+      ><a name="801" class="Symbol"
+      >=</a
+      ><a name="802"
+      > </a
+      ><a name="803" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="807"
+      > </a
+      ><a name="808" class="Symbol"
+      >(</a
+      ><a name="809" href="Description.Horizontal.html#789" class="Bound"
+      >D</a
+      ><a name="810"
+      > </a
+      ><a name="811" href="Description.Horizontal.html#793" class="Bound"
+      >s</a
+      ><a name="812" class="Symbol"
+      >)</a
+      ><a name="813"
+      > </a
+      ><a name="814" href="Description.Horizontal.html#797" class="Bound"
+      >hs</a
+      ><a name="816"
+      >
+
+</a
+      ><a name="818" href="Description.Horizontal.html#818" class="Function"
+      >core</a
+      ><a name="822"
+      > </a
+      ><a name="823" class="Symbol"
+      >:</a
+      ><a name="824"
+      > </a
+      ><a name="825" class="Symbol"
+      >{</a
+      ><a name="826" href="Description.Horizontal.html#826" class="Bound"
+      >I</a
+      ><a name="827"
+      > </a
+      ><a name="828" class="Symbol"
+      >:</a
+      ><a name="829"
+      > </a
+      ><a name="830" class="PrimitiveType"
+      >Set</a
+      ><a name="833" class="Symbol"
+      >}</a
+      ><a name="834"
+      > </a
+      ><a name="835" class="Symbol"
+      >(</a
+      ><a name="836" href="Description.Horizontal.html#836" class="Bound"
+      >D</a
+      ><a name="837"
+      > </a
+      ><a name="838" class="Symbol"
+      >:</a
+      ><a name="839"
+      > </a
+      ><a name="840" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="845"
+      > </a
+      ><a name="846" href="Description.Horizontal.html#826" class="Bound"
+      >I</a
+      ><a name="847" class="Symbol"
+      >)</a
+      ><a name="848"
+      > </a
+      ><a name="849" class="Symbol"
+      >{</a
+      ><a name="850" href="Description.Horizontal.html#850" class="Bound"
+      >X</a
+      ><a name="851"
+      > </a
+      ><a name="852" class="Symbol"
+      >:</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="Description.Horizontal.html#826" class="Bound"
+      >I</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >&#8594;</a
+      ><a name="862"
+      > </a
+      ><a name="863" class="PrimitiveType"
+      >Set</a
+      ><a name="866" class="Symbol"
+      >}</a
+      ><a name="867"
+      > </a
+      ><a name="868" class="Symbol"
+      >(</a
+      ><a name="869" href="Description.Horizontal.html#869" class="Bound"
+      >hs</a
+      ><a name="871"
+      > </a
+      ><a name="872" class="Symbol"
+      >:</a
+      ><a name="873"
+      > </a
+      ><a name="874" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="875"
+      > </a
+      ><a name="876" href="Description.Horizontal.html#836" class="Bound"
+      >D</a
+      ><a name="877"
+      > </a
+      ><a name="878" href="Description.Horizontal.html#850" class="Bound"
+      >X</a
+      ><a name="879" class="Symbol"
+      >)</a
+      ><a name="880"
+      > </a
+      ><a name="881" class="Symbol"
+      >&#8594;</a
+      ><a name="882"
+      > </a
+      ><a name="883" href="Description.Horizontal.html#850" class="Bound"
+      >X</a
+      ><a name="884"
+      > </a
+      ><a name="885" class="Symbol"
+      >(</a
+      ><a name="886" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="890"
+      > </a
+      ><a name="891" href="Description.Horizontal.html#836" class="Bound"
+      >D</a
+      ><a name="892"
+      > </a
+      ><a name="893" href="Description.Horizontal.html#869" class="Bound"
+      >hs</a
+      ><a name="895" class="Symbol"
+      >)</a
+      ><a name="896"
+      >
+</a
+      ><a name="897" href="Description.Horizontal.html#818" class="Function"
+      >core</a
+      ><a name="901"
+      > </a
+      ><a name="902" class="Symbol"
+      >(</a
+      ><a name="903" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="904"
+      > </a
+      ><a name="905" href="Description.Horizontal.html#905" class="Bound"
+      >is</a
+      ><a name="907" class="Symbol"
+      >)</a
+      ><a name="908"
+      >  </a
+      ><a name="910" href="Description.Horizontal.html#910" class="Bound"
+      >x</a
+      ><a name="911"
+      >        </a
+      ><a name="919" class="Symbol"
+      >=</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="Description.Horizontal.html#910" class="Bound"
+      >x</a
+      ><a name="922"
+      >
+</a
+      ><a name="923" href="Description.Horizontal.html#818" class="Function"
+      >core</a
+      ><a name="927"
+      > </a
+      ><a name="928" class="Symbol"
+      >(</a
+      ><a name="929" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="930"
+      > </a
+      ><a name="931" href="Description.Horizontal.html#931" class="Bound"
+      >S</a
+      ><a name="932"
+      > </a
+      ><a name="933" href="Description.Horizontal.html#933" class="Bound"
+      >D</a
+      ><a name="934" class="Symbol"
+      >)</a
+      ><a name="935"
+      > </a
+      ><a name="936" class="Symbol"
+      >(</a
+      ><a name="937" href="Description.Horizontal.html#937" class="Bound"
+      >s</a
+      ><a name="938"
+      > </a
+      ><a name="939" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="940"
+      > </a
+      ><a name="941" href="Description.Horizontal.html#941" class="Bound"
+      >hs</a
+      ><a name="943" class="Symbol"
+      >)</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >=</a
+      ><a name="946"
+      > </a
+      ><a name="947" href="Description.Horizontal.html#818" class="Function"
+      >core</a
+      ><a name="951"
+      > </a
+      ><a name="952" class="Symbol"
+      >(</a
+      ><a name="953" href="Description.Horizontal.html#933" class="Bound"
+      >D</a
+      ><a name="954"
+      > </a
+      ><a name="955" href="Description.Horizontal.html#937" class="Bound"
+      >s</a
+      ><a name="956" class="Symbol"
+      >)</a
+      ><a name="957"
+      > </a
+      ><a name="958" href="Description.Horizontal.html#941" class="Bound"
+      >hs</a
+      ><a name="960"
+      >
+
+</a
+      ><a name="962" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="963"
+      > </a
+      ><a name="964" class="Symbol"
+      >:</a
+      ><a name="965"
+      > </a
+      ><a name="966" class="Symbol"
+      >{</a
+      ><a name="967" href="Description.Horizontal.html#967" class="Bound"
+      >I</a
+      ><a name="968"
+      > </a
+      ><a name="969" class="Symbol"
+      >:</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="PrimitiveType"
+      >Set</a
+      ><a name="974" class="Symbol"
+      >}</a
+      ><a name="975"
+      > </a
+      ><a name="976" class="Symbol"
+      >&#8594;</a
+      ><a name="977"
+      > </a
+      ><a name="978" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="Description.Horizontal.html#967" class="Bound"
+      >I</a
+      ><a name="985"
+      > </a
+      ><a name="986" class="Symbol"
+      >&#8594;</a
+      ><a name="987"
+      > </a
+      ><a name="988" class="PrimitiveType"
+      >Set</a
+      ><a name="991"
+      >
+</a
+      ><a name="992" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="993"
+      > </a
+      ><a name="994" href="Description.Horizontal.html#994" class="Bound"
+      >D</a
+      ><a name="995"
+      > </a
+      ><a name="996" class="Symbol"
+      >=</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="999"
+      > </a
+      ><a name="1000" href="Description.Horizontal.html#994" class="Bound"
+      >D</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" class="Symbol"
+      >(</a
+      ><a name="1003" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1010" class="Symbol"
+      >)</a
+      ><a name="1011"
+      >
+
+</a
+      ><a name="1013" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" class="Symbol"
+      >:</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" class="Symbol"
+      >{</a
+      ><a name="1025" href="Description.Horizontal.html#1025" class="Bound"
+      >I</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" class="Symbol"
+      >:</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="PrimitiveType"
+      >Set</a
+      ><a name="1032" class="Symbol"
+      >}</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" class="Symbol"
+      >(</a
+      ><a name="1035" href="Description.Horizontal.html#1035" class="Bound"
+      >D</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" class="Symbol"
+      >:</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1044"
+      > </a
+      ><a name="1045" href="Description.Horizontal.html#1025" class="Bound"
+      >I</a
+      ><a name="1046" class="Symbol"
+      >)</a
+      ><a name="1047"
+      > </a
+      ><a name="1048" class="Symbol"
+      >(</a
+      ><a name="1049" href="Description.Horizontal.html#1049" class="Bound"
+      >X</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" class="Symbol"
+      >:</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1057"
+      > </a
+      ><a name="1058" href="Description.Horizontal.html#1025" class="Bound"
+      >I</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" class="Symbol"
+      >&#8594;</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" class="PrimitiveType"
+      >Set</a
+      ><a name="1065" class="Symbol"
+      >)</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" class="Symbol"
+      >(</a
+      ><a name="1068" href="Description.Horizontal.html#1068" class="Bound"
+      >hs</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >:</a
+      ><a name="1072"
+      > </a
+      ><a name="1073" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="1074"
+      > </a
+      ><a name="1075" href="Description.Horizontal.html#1035" class="Bound"
+      >D</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="Description.Horizontal.html#1049" class="Bound"
+      >X</a
+      ><a name="1078" class="Symbol"
+      >)</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" class="Symbol"
+      >&#8594;</a
+      ><a name="1081"
+      > </a
+      ><a name="1082" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" class="Symbol"
+      >(</a
+      ><a name="1085" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" href="Description.Horizontal.html#1035" class="Bound"
+      >D</a
+      ><a name="1088" class="Symbol"
+      >)</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Symbol"
+      >(</a
+      ><a name="1091" href="Description.Horizontal.html#1049" class="Bound"
+      >X</a
+      ><a name="1092"
+      > </a
+      ><a name="1093" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1094"
+      > </a
+      ><a name="1095" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="Description.Horizontal.html#1035" class="Bound"
+      >D</a
+      ><a name="1101" class="Symbol"
+      >)</a
+      ><a name="1102"
+      >
+</a
+      ><a name="1103" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" class="Symbol"
+      >(</a
+      ><a name="1113" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="Description.Horizontal.html#1115" class="Bound"
+      >is</a
+      ><a name="1117" class="Symbol"
+      >)</a
+      ><a name="1118"
+      >  </a
+      ><a name="1120" href="Description.Horizontal.html#1120" class="Bound"
+      >X</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="Description.Horizontal.html#1122" class="Bound"
+      >x</a
+      ><a name="1123"
+      >        </a
+      ><a name="1131" class="Symbol"
+      >=</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="1135"
+      > </a
+      ><a name="1136" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1137"
+      > </a
+      ><a name="1138" href="Description.Horizontal.html#1122" class="Bound"
+      >x</a
+      ><a name="1139"
+      >
+</a
+      ><a name="1140" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1148"
+      > </a
+      ><a name="1149" class="Symbol"
+      >(</a
+      ><a name="1150" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="1151"
+      > </a
+      ><a name="1152" href="Description.Horizontal.html#1152" class="Bound"
+      >S</a
+      ><a name="1153"
+      > </a
+      ><a name="1154" href="Description.Horizontal.html#1154" class="Bound"
+      >D</a
+      ><a name="1155" class="Symbol"
+      >)</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" href="Description.Horizontal.html#1157" class="Bound"
+      >X</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" class="Symbol"
+      >(</a
+      ><a name="1160" href="Description.Horizontal.html#1160" class="Bound"
+      >s</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1163"
+      > </a
+      ><a name="1164" href="Description.Horizontal.html#1164" class="Bound"
+      >hs</a
+      ><a name="1166" class="Symbol"
+      >)</a
+      ><a name="1167"
+      > </a
+      ><a name="1168" class="Symbol"
+      >=</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" class="Symbol"
+      >(</a
+      ><a name="1171" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1174"
+      > </a
+      ><a name="1175" href="Description.Horizontal.html#1160" class="Bound"
+      >s</a
+      ><a name="1176"
+      > </a
+      ><a name="1177" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1182" class="Symbol"
+      >)</a
+      ><a name="1183"
+      > </a
+      ><a name="1184" class="Symbol"
+      >(</a
+      ><a name="1185" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1193"
+      > </a
+      ><a name="1194" class="Symbol"
+      >(</a
+      ><a name="1195" href="Description.Horizontal.html#1154" class="Bound"
+      >D</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="Description.Horizontal.html#1160" class="Bound"
+      >s</a
+      ><a name="1198" class="Symbol"
+      >)</a
+      ><a name="1199"
+      > </a
+      ><a name="1200" href="Description.Horizontal.html#1157" class="Bound"
+      >X</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="Description.Horizontal.html#1164" class="Bound"
+      >hs</a
+      ><a name="1204" class="Symbol"
+      >)</a
+      ><a name="1205"
+      >
+
+</a
+      ><a name="1207" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >:</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" class="Symbol"
+      >{</a
+      ><a name="1217" href="Description.Horizontal.html#1217" class="Bound"
+      >I</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Symbol"
+      >:</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" class="PrimitiveType"
+      >Set</a
+      ><a name="1224" class="Symbol"
+      >}</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" class="Symbol"
+      >(</a
+      ><a name="1227" href="Description.Horizontal.html#1227" class="Bound"
+      >D</a
+      ><a name="1228"
+      > </a
+      ><a name="1229" class="Symbol"
+      >:</a
+      ><a name="1230"
+      > </a
+      ><a name="1231" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="Description.Horizontal.html#1217" class="Bound"
+      >I</a
+      ><a name="1238" class="Symbol"
+      >)</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >(</a
+      ><a name="1241" href="Description.Horizontal.html#1241" class="Bound"
+      >X</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="Symbol"
+      >:</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1249"
+      > </a
+      ><a name="1250" href="Description.Horizontal.html#1217" class="Bound"
+      >I</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" class="Symbol"
+      >&#8594;</a
+      ><a name="1253"
+      > </a
+      ><a name="1254" class="PrimitiveType"
+      >Set</a
+      ><a name="1257" class="Symbol"
+      >)</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >&#8594;</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" class="Symbol"
+      >(</a
+      ><a name="1264" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="Description.Horizontal.html#1227" class="Bound"
+      >D</a
+      ><a name="1267" class="Symbol"
+      >)</a
+      ><a name="1268"
+      > </a
+      ><a name="1269" class="Symbol"
+      >(</a
+      ><a name="1270" href="Description.Horizontal.html#1241" class="Bound"
+      >X</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="Description.Horizontal.html#1227" class="Bound"
+      >D</a
+      ><a name="1280" class="Symbol"
+      >)</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" class="Symbol"
+      >&#8594;</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" href="Description.Horizontal.html#1227" class="Bound"
+      >D</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="Description.Horizontal.html#1241" class="Bound"
+      >X</a
+      ><a name="1289"
+      >
+</a
+      ><a name="1290" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="Symbol"
+      >(</a
+      ><a name="1298" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="Description.Horizontal.html#1300" class="Bound"
+      >is</a
+      ><a name="1302" class="Symbol"
+      >)</a
+      ><a name="1303"
+      >  </a
+      ><a name="1305" href="Description.Horizontal.html#1305" class="Bound"
+      >X</a
+      ><a name="1306"
+      > </a
+      ><a name="1307" class="Symbol"
+      >(_</a
+      ><a name="1309"
+      >        </a
+      ><a name="1317" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Description.Horizontal.html#1319" class="Bound"
+      >x</a
+      ><a name="1320" class="Symbol"
+      >)</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" class="Symbol"
+      >=</a
+      ><a name="1323"
+      > </a
+      ><a name="1324" href="Description.Horizontal.html#1319" class="Bound"
+      >x</a
+      ><a name="1325"
+      >
+</a
+      ><a name="1326" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" class="Symbol"
+      >(</a
+      ><a name="1334" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="Description.Horizontal.html#1336" class="Bound"
+      >S</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Description.Horizontal.html#1338" class="Bound"
+      >D</a
+      ><a name="1339" class="Symbol"
+      >)</a
+      ><a name="1340"
+      > </a
+      ><a name="1341" href="Description.Horizontal.html#1341" class="Bound"
+      >X</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" class="Symbol"
+      >((</a
+      ><a name="1345" href="Description.Horizontal.html#1345" class="Bound"
+      >s</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="Description.Horizontal.html#1349" class="Bound"
+      >hs</a
+      ><a name="1351" class="Symbol"
+      >)</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1354"
+      > </a
+      ><a name="1355" href="Description.Horizontal.html#1355" class="Bound"
+      >x</a
+      ><a name="1356" class="Symbol"
+      >)</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" class="Symbol"
+      >=</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" href="Description.Horizontal.html#1345" class="Bound"
+      >s</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" class="Symbol"
+      >(</a
+      ><a name="1372" href="Description.Horizontal.html#1338" class="Bound"
+      >D</a
+      ><a name="1373"
+      > </a
+      ><a name="1374" href="Description.Horizontal.html#1345" class="Bound"
+      >s</a
+      ><a name="1375" class="Symbol"
+      >)</a
+      ><a name="1376"
+      > </a
+      ><a name="1377" href="Description.Horizontal.html#1341" class="Bound"
+      >X</a
+      ><a name="1378"
+      > </a
+      ><a name="1379" class="Symbol"
+      >(</a
+      ><a name="1380" href="Description.Horizontal.html#1349" class="Bound"
+      >hs</a
+      ><a name="1382"
+      > </a
+      ><a name="1383" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1384"
+      > </a
+      ><a name="1385" href="Description.Horizontal.html#1355" class="Bound"
+      >x</a
+      ><a name="1386" class="Symbol"
+      >)</a
+      ><a name="1387"
+      >
+
+</a
+      ><a name="1389" href="Description.Horizontal.html#1389" class="Function"
+      >&#7714;-decomp-&#7776;</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >:</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" class="Symbol"
+      >{</a
+      ><a name="1403" href="Description.Horizontal.html#1403" class="Bound"
+      >I</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" class="Symbol"
+      >:</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" class="PrimitiveType"
+      >Set</a
+      ><a name="1410" class="Symbol"
+      >}</a
+      ><a name="1411"
+      > </a
+      ><a name="1412" class="Symbol"
+      >(</a
+      ><a name="1413" href="Description.Horizontal.html#1413" class="Bound"
+      >D</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Symbol"
+      >:</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="Description.Horizontal.html#1403" class="Bound"
+      >I</a
+      ><a name="1424" class="Symbol"
+      >)</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" class="Symbol"
+      >(</a
+      ><a name="1427" href="Description.Horizontal.html#1427" class="Bound"
+      >hs</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >:</a
+      ><a name="1431"
+      > </a
+      ><a name="1432" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="1433"
+      > </a
+      ><a name="1434" href="Description.Horizontal.html#1413" class="Bound"
+      >D</a
+      ><a name="1435" class="Symbol"
+      >)</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" class="Symbol"
+      >&#8594;</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1447"
+      > </a
+      ><a name="1448" href="Description.Horizontal.html#1413" class="Bound"
+      >D</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" class="Symbol"
+      >(</a
+      ><a name="1451" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1458" class="Symbol"
+      >)</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" href="Description.Horizontal.html#1427" class="Bound"
+      >hs</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" class="Symbol"
+      >(</a
+      ><a name="1466" href="Description.Horizontal.html#1427" class="Bound"
+      >hs</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="1473" class="Symbol"
+      >)</a
+      ><a name="1474"
+      >
+</a
+      ><a name="1475" href="Description.Horizontal.html#1389" class="Function"
+      >&#7714;-decomp-&#7776;</a
+      ><a name="1485"
+      > </a
+      ><a name="1486" class="Symbol"
+      >(</a
+      ><a name="1487" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="Description.Horizontal.html#1489" class="Bound"
+      >is</a
+      ><a name="1491" class="Symbol"
+      >)</a
+      ><a name="1492"
+      >  </a
+      ><a name="1494" class="Symbol"
+      >_</a
+      ><a name="1495"
+      >        </a
+      ><a name="1503" class="Symbol"
+      >=</a
+      ><a name="1504"
+      > </a
+      ><a name="1505" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1509"
+      >
+</a
+      ><a name="1510" href="Description.Horizontal.html#1389" class="Function"
+      >&#7714;-decomp-&#7776;</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" class="Symbol"
+      >(</a
+      ><a name="1522" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="1523"
+      > </a
+      ><a name="1524" href="Description.Horizontal.html#1524" class="Bound"
+      >S</a
+      ><a name="1525"
+      > </a
+      ><a name="1526" href="Description.Horizontal.html#1526" class="Bound"
+      >D</a
+      ><a name="1527" class="Symbol"
+      >)</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" class="Symbol"
+      >(</a
+      ><a name="1530" href="Description.Horizontal.html#1530" class="Bound"
+      >s</a
+      ><a name="1531"
+      > </a
+      ><a name="1532" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" href="Description.Horizontal.html#1534" class="Bound"
+      >hs</a
+      ><a name="1536" class="Symbol"
+      >)</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" class="Symbol"
+      >=</a
+      ><a name="1539"
+      > </a
+      ><a name="1540" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" class="Symbol"
+      >(</a
+      ><a name="1546" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="Description.Horizontal.html#1530" class="Bound"
+      >s</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="Data.Product.html#1872" class="Function Operator"
+      >**</a
+      ><a name="1554"
+      > </a
+      ><a name="1555" href="Function.html#1012" class="Function"
+      >id</a
+      ><a name="1557" class="Symbol"
+      >)</a
+      ><a name="1558"
+      > </a
+      ><a name="1559" class="Symbol"
+      >(</a
+      ><a name="1560" href="Description.Horizontal.html#1389" class="Function"
+      >&#7714;-decomp-&#7776;</a
+      ><a name="1570"
+      > </a
+      ><a name="1571" class="Symbol"
+      >(</a
+      ><a name="1572" href="Description.Horizontal.html#1526" class="Bound"
+      >D</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" href="Description.Horizontal.html#1530" class="Bound"
+      >s</a
+      ><a name="1575" class="Symbol"
+      >)</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" href="Description.Horizontal.html#1534" class="Bound"
+      >hs</a
+      ><a name="1579" class="Symbol"
+      >)</a
+      ><a name="1580"
+      >
+
+</a
+      ><a name="1582" href="Description.Horizontal.html#1582" class="Function"
+      >&#7714;-comp-&#7776;</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" class="Symbol"
+      >:</a
+      ><a name="1592"
+      > </a
+      ><a name="1593" class="Symbol"
+      >{</a
+      ><a name="1594" href="Description.Horizontal.html#1594" class="Bound"
+      >I</a
+      ><a name="1595"
+      > </a
+      ><a name="1596" class="Symbol"
+      >:</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" class="PrimitiveType"
+      >Set</a
+      ><a name="1601" class="Symbol"
+      >}</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" class="Symbol"
+      >(</a
+      ><a name="1604" href="Description.Horizontal.html#1604" class="Bound"
+      >D</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >:</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1613"
+      > </a
+      ><a name="1614" href="Description.Horizontal.html#1594" class="Bound"
+      >I</a
+      ><a name="1615" class="Symbol"
+      >)</a
+      ><a name="1616"
+      > </a
+      ><a name="1617" class="Symbol"
+      >(</a
+      ><a name="1618" href="Description.Horizontal.html#1618" class="Bound"
+      >hs</a
+      ><a name="1620"
+      > </a
+      ><a name="1621" class="Symbol"
+      >:</a
+      ><a name="1622"
+      > </a
+      ><a name="1623" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="1624"
+      > </a
+      ><a name="1625" href="Description.Horizontal.html#1604" class="Bound"
+      >D</a
+      ><a name="1626" class="Symbol"
+      >)</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >&#8594;</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1636"
+      > </a
+      ><a name="1637" href="Description.Horizontal.html#1604" class="Bound"
+      >D</a
+      ><a name="1638"
+      > </a
+      ><a name="1639" class="Symbol"
+      >(</a
+      ><a name="1640" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" href="Agda.Builtin.Unit.html#69" class="Record"
+      >&#8868;</a
+      ><a name="1647" class="Symbol"
+      >)</a
+      ><a name="1648"
+      > </a
+      ><a name="1649" class="Symbol"
+      >(</a
+      ><a name="1650" href="Description.Horizontal.html#1618" class="Bound"
+      >hs</a
+      ><a name="1652"
+      > </a
+      ><a name="1653" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="Agda.Builtin.Unit.html#106" class="InductiveConstructor"
+      >tt</a
+      ><a name="1657" class="Symbol"
+      >)</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="Description.Horizontal.html#1618" class="Bound"
+      >hs</a
+      ><a name="1663"
+      >
+</a
+      ><a name="1664" href="Description.Horizontal.html#1582" class="Function"
+      >&#7714;-comp-&#7776;</a
+      ><a name="1672"
+      > </a
+      ><a name="1673" class="Symbol"
+      >(</a
+      ><a name="1674" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" href="Description.Horizontal.html#1676" class="Bound"
+      >is</a
+      ><a name="1678" class="Symbol"
+      >)</a
+      ><a name="1679"
+      >  </a
+      ><a name="1681" class="Symbol"
+      >_</a
+      ><a name="1682"
+      >        </a
+      ><a name="1690" class="Symbol"
+      >=</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1696"
+      >
+</a
+      ><a name="1697" href="Description.Horizontal.html#1582" class="Function"
+      >&#7714;-comp-&#7776;</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" class="Symbol"
+      >(</a
+      ><a name="1707" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="Description.Horizontal.html#1709" class="Bound"
+      >S</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" href="Description.Horizontal.html#1711" class="Bound"
+      >D</a
+      ><a name="1712" class="Symbol"
+      >)</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" class="Symbol"
+      >(</a
+      ><a name="1715" href="Description.Horizontal.html#1715" class="Bound"
+      >s</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="Description.Horizontal.html#1719" class="Bound"
+      >hs</a
+      ><a name="1721" class="Symbol"
+      >)</a
+      ><a name="1722"
+      > </a
+      ><a name="1723" class="Symbol"
+      >=</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >(</a
+      ><a name="1731" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Description.Horizontal.html#1715" class="Bound"
+      >s</a
+      ><a name="1736" class="Symbol"
+      >)</a
+      ><a name="1737"
+      > </a
+      ><a name="1738" class="Symbol"
+      >(</a
+      ><a name="1739" href="Description.Horizontal.html#1582" class="Function"
+      >&#7714;-comp-&#7776;</a
+      ><a name="1747"
+      > </a
+      ><a name="1748" class="Symbol"
+      >(</a
+      ><a name="1749" href="Description.Horizontal.html#1711" class="Bound"
+      >D</a
+      ><a name="1750"
+      > </a
+      ><a name="1751" href="Description.Horizontal.html#1715" class="Bound"
+      >s</a
+      ><a name="1752" class="Symbol"
+      >)</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="Description.Horizontal.html#1719" class="Bound"
+      >hs</a
+      ><a name="1756" class="Symbol"
+      >)</a
+      ><a name="1757"
+      >
+
+</a
+      ><a name="1759" href="Description.Horizontal.html#1759" class="Function"
+      >&#7714;-iso</a
+      ><a name="1764"
+      > </a
+      ><a name="1765" class="Symbol"
+      >:</a
+      ><a name="1766"
+      > </a
+      ><a name="1767" class="Symbol"
+      >{</a
+      ><a name="1768" href="Description.Horizontal.html#1768" class="Bound"
+      >I</a
+      ><a name="1769"
+      > </a
+      ><a name="1770" class="Symbol"
+      >:</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" class="PrimitiveType"
+      >Set</a
+      ><a name="1775" class="Symbol"
+      >}</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" class="Symbol"
+      >(</a
+      ><a name="1778" href="Description.Horizontal.html#1778" class="Bound"
+      >D</a
+      ><a name="1779"
+      > </a
+      ><a name="1780" class="Symbol"
+      >:</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Description.Horizontal.html#1768" class="Bound"
+      >I</a
+      ><a name="1789" class="Symbol"
+      >)</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" class="Symbol"
+      >(</a
+      ><a name="1792" href="Description.Horizontal.html#1792" class="Bound"
+      >X</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" class="Symbol"
+      >:</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1800"
+      > </a
+      ><a name="1801" href="Description.Horizontal.html#1768" class="Bound"
+      >I</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >&#8594;</a
+      ><a name="1804"
+      > </a
+      ><a name="1805" class="PrimitiveType"
+      >Set</a
+      ><a name="1808" class="Symbol"
+      >)</a
+      ><a name="1809"
+      > </a
+      ><a name="1810" class="Symbol"
+      >&#8594;</a
+      ><a name="1811"
+      > </a
+      ><a name="1812" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1815"
+      > </a
+      ><a name="1816" href="Prelude.Function.html#3133" class="Function"
+      >Fun</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" class="Symbol"
+      >(</a
+      ><a name="1821" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" href="Description.Horizontal.html#1778" class="Bound"
+      >D</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="Description.Horizontal.html#1792" class="Bound"
+      >X</a
+      ><a name="1826" class="Symbol"
+      >)</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" class="Symbol"
+      >(</a
+      ><a name="1829" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" class="Symbol"
+      >(</a
+      ><a name="1832" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="Description.Horizontal.html#1778" class="Bound"
+      >D</a
+      ><a name="1835" class="Symbol"
+      >)</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >(</a
+      ><a name="1838" href="Description.Horizontal.html#1792" class="Bound"
+      >X</a
+      ><a name="1839"
+      > </a
+      ><a name="1840" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1841"
+      > </a
+      ><a name="1842" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="1846"
+      > </a
+      ><a name="1847" href="Description.Horizontal.html#1778" class="Bound"
+      >D</a
+      ><a name="1848" class="Symbol"
+      >))</a
+      ><a name="1850"
+      >
+</a
+      ><a name="1851" href="Description.Horizontal.html#1759" class="Function"
+      >&#7714;-iso</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" class="Symbol"
+      >{</a
+      ><a name="1858" href="Description.Horizontal.html#1858" class="Bound"
+      >I</a
+      ><a name="1859" class="Symbol"
+      >}</a
+      ><a name="1860"
+      > </a
+      ><a name="1861" href="Description.Horizontal.html#1861" class="Bound"
+      >D</a
+      ><a name="1862"
+      > </a
+      ><a name="1863" href="Description.Horizontal.html#1863" class="Bound"
+      >X</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" class="Symbol"
+      >=</a
+      ><a name="1866"
+      >
+  </a
+      ><a name="1869" class="Keyword"
+      >record</a
+      ><a name="1875"
+      > </a
+      ><a name="1876" class="Symbol"
+      >{</a
+      ><a name="1877"
+      > </a
+      ><a name="1878" class="Field"
+      >to</a
+      ><a name="1880"
+      >   </a
+      ><a name="1883" class="Symbol"
+      >=</a
+      ><a name="1884"
+      > </a
+      ><a name="1885" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="1893"
+      > </a
+      ><a name="1894" href="Description.Horizontal.html#1861" class="Bound"
+      >D</a
+      ><a name="1895"
+      > </a
+      ><a name="1896" href="Description.Horizontal.html#1863" class="Bound"
+      >X</a
+      ><a name="1897"
+      >
+         </a
+      ><a name="1907" class="Symbol"
+      >;</a
+      ><a name="1908"
+      > </a
+      ><a name="1909" class="Field"
+      >from</a
+      ><a name="1913"
+      > </a
+      ><a name="1914" class="Symbol"
+      >=</a
+      ><a name="1915"
+      > </a
+      ><a name="1916" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="1922"
+      >   </a
+      ><a name="1925" href="Description.Horizontal.html#1861" class="Bound"
+      >D</a
+      ><a name="1926"
+      > </a
+      ><a name="1927" href="Description.Horizontal.html#1863" class="Bound"
+      >X</a
+      ><a name="1928"
+      >
+         </a
+      ><a name="1938" class="Symbol"
+      >;</a
+      ><a name="1939"
+      > </a
+      ><a name="1940" class="Field"
+      >from-to-inverse</a
+      ><a name="1955"
+      > </a
+      ><a name="1956" class="Symbol"
+      >=</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="Description.Horizontal.html#2049" class="Function"
+      >comp-decomp-inverse</a
+      ><a name="1977"
+      > </a
+      ><a name="1978" href="Description.Horizontal.html#1861" class="Bound"
+      >D</a
+      ><a name="1979"
+      > </a
+      ><a name="1980" href="Description.Horizontal.html#1863" class="Bound"
+      >X</a
+      ><a name="1981"
+      >
+         </a
+      ><a name="1991" class="Symbol"
+      >;</a
+      ><a name="1992"
+      > </a
+      ><a name="1993" class="Field"
+      >to-from-inverse</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" class="Symbol"
+      >=</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2030"
+      > </a
+      ><a name="2031" href="Description.Horizontal.html#1861" class="Bound"
+      >D</a
+      ><a name="2032"
+      > </a
+      ><a name="2033" href="Description.Horizontal.html#1863" class="Bound"
+      >X</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >}</a
+      ><a name="2036"
+      >
+  </a
+      ><a name="2039" class="Keyword"
+      >where</a
+      ><a name="2044"
+      >
+    </a
+      ><a name="2049" href="Description.Horizontal.html#2049" class="Function"
+      >comp-decomp-inverse</a
+      ><a name="2068"
+      > </a
+      ><a name="2069" class="Symbol"
+      >:</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" class="Symbol"
+      >(</a
+      ><a name="2072" href="Description.Horizontal.html#2072" class="Bound"
+      >D</a
+      ><a name="2073"
+      > </a
+      ><a name="2074" class="Symbol"
+      >:</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2081"
+      > </a
+      ><a name="2082" href="Description.Horizontal.html#1858" class="Bound"
+      >I</a
+      ><a name="2083" class="Symbol"
+      >)</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" class="Symbol"
+      >(</a
+      ><a name="2086" href="Description.Horizontal.html#2086" class="Bound"
+      >X</a
+      ><a name="2087"
+      > </a
+      ><a name="2088" class="Symbol"
+      >:</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" href="Description.Horizontal.html#1858" class="Bound"
+      >I</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" class="Symbol"
+      >&#8594;</a
+      ><a name="2098"
+      > </a
+      ><a name="2099" class="PrimitiveType"
+      >Set</a
+      ><a name="2102" class="Symbol"
+      >)</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" class="Symbol"
+      >(</a
+      ><a name="2105" href="Description.Horizontal.html#2105" class="Bound"
+      >hs</a
+      ><a name="2107"
+      > </a
+      ><a name="2108" class="Symbol"
+      >:</a
+      ><a name="2109"
+      > </a
+      ><a name="2110" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="2111"
+      > </a
+      ><a name="2112" href="Description.Horizontal.html#2072" class="Bound"
+      >D</a
+      ><a name="2113"
+      > </a
+      ><a name="2114" href="Description.Horizontal.html#2086" class="Bound"
+      >X</a
+      ><a name="2115" class="Symbol"
+      >)</a
+      ><a name="2116"
+      > </a
+      ><a name="2117" class="Symbol"
+      >&#8594;</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="2125"
+      > </a
+      ><a name="2126" href="Description.Horizontal.html#2072" class="Bound"
+      >D</a
+      ><a name="2127"
+      > </a
+      ><a name="2128" href="Description.Horizontal.html#2086" class="Bound"
+      >X</a
+      ><a name="2129"
+      > </a
+      ><a name="2130" class="Symbol"
+      >(</a
+      ><a name="2131" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" href="Description.Horizontal.html#2072" class="Bound"
+      >D</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" href="Description.Horizontal.html#2086" class="Bound"
+      >X</a
+      ><a name="2143"
+      > </a
+      ><a name="2144" href="Description.Horizontal.html#2105" class="Bound"
+      >hs</a
+      ><a name="2146" class="Symbol"
+      >)</a
+      ><a name="2147"
+      > </a
+      ><a name="2148" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="Description.Horizontal.html#2105" class="Bound"
+      >hs</a
+      ><a name="2152"
+      >
+    </a
+      ><a name="2157" href="Description.Horizontal.html#2049" class="Function"
+      >comp-decomp-inverse</a
+      ><a name="2176"
+      > </a
+      ><a name="2177" class="Symbol"
+      >(</a
+      ><a name="2178" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="2179"
+      > </a
+      ><a name="2180" href="Description.Horizontal.html#2180" class="Bound"
+      >is</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" class="Symbol"
+      >)</a
+      ><a name="2184"
+      > </a
+      ><a name="2185" href="Description.Horizontal.html#2185" class="Bound"
+      >X</a
+      ><a name="2186"
+      > </a
+      ><a name="2187" href="Description.Horizontal.html#2187" class="Bound"
+      >x</a
+      ><a name="2188"
+      >        </a
+      ><a name="2196" class="Symbol"
+      >=</a
+      ><a name="2197"
+      > </a
+      ><a name="2198" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2202"
+      >
+    </a
+      ><a name="2207" href="Description.Horizontal.html#2049" class="Function"
+      >comp-decomp-inverse</a
+      ><a name="2226"
+      > </a
+      ><a name="2227" class="Symbol"
+      >(</a
+      ><a name="2228" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" href="Description.Horizontal.html#2230" class="Bound"
+      >S</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="Description.Horizontal.html#2232" class="Bound"
+      >D</a
+      ><a name="2233" class="Symbol"
+      >)</a
+      ><a name="2234"
+      > </a
+      ><a name="2235" href="Description.Horizontal.html#2235" class="Bound"
+      >X</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >(</a
+      ><a name="2238" href="Description.Horizontal.html#2238" class="Bound"
+      >s</a
+      ><a name="2239"
+      > </a
+      ><a name="2240" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2241"
+      > </a
+      ><a name="2242" href="Description.Horizontal.html#2242" class="Bound"
+      >hs</a
+      ><a name="2244" class="Symbol"
+      >)</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" class="Symbol"
+      >=</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2252"
+      > </a
+      ><a name="2253" class="Symbol"
+      >(</a
+      ><a name="2254" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2257"
+      > </a
+      ><a name="2258" href="Description.Horizontal.html#2238" class="Bound"
+      >s</a
+      ><a name="2259" class="Symbol"
+      >)</a
+      ><a name="2260"
+      > </a
+      ><a name="2261" class="Symbol"
+      >(</a
+      ><a name="2262" href="Description.Horizontal.html#2049" class="Function"
+      >comp-decomp-inverse</a
+      ><a name="2281"
+      > </a
+      ><a name="2282" class="Symbol"
+      >(</a
+      ><a name="2283" href="Description.Horizontal.html#2232" class="Bound"
+      >D</a
+      ><a name="2284"
+      > </a
+      ><a name="2285" href="Description.Horizontal.html#2238" class="Bound"
+      >s</a
+      ><a name="2286" class="Symbol"
+      >)</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="Description.Horizontal.html#2235" class="Bound"
+      >X</a
+      ><a name="2289"
+      > </a
+      ><a name="2290" href="Description.Horizontal.html#2242" class="Bound"
+      >hs</a
+      ><a name="2292" class="Symbol"
+      >)</a
+      ><a name="2293"
+      >
+    </a
+      ><a name="2298" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2317"
+      > </a
+      ><a name="2318" class="Symbol"
+      >:</a
+      ><a name="2319"
+      >
+      </a
+      ><a name="2326" class="Symbol"
+      >(</a
+      ><a name="2327" href="Description.Horizontal.html#2327" class="Bound"
+      >D</a
+      ><a name="2328"
+      > </a
+      ><a name="2329" class="Symbol"
+      >:</a
+      ><a name="2330"
+      > </a
+      ><a name="2331" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2336"
+      > </a
+      ><a name="2337" href="Description.Horizontal.html#1858" class="Bound"
+      >I</a
+      ><a name="2338" class="Symbol"
+      >)</a
+      ><a name="2339"
+      > </a
+      ><a name="2340" class="Symbol"
+      >(</a
+      ><a name="2341" href="Description.Horizontal.html#2341" class="Bound"
+      >X</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" class="Symbol"
+      >:</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2349"
+      > </a
+      ><a name="2350" href="Description.Horizontal.html#1858" class="Bound"
+      >I</a
+      ><a name="2351"
+      > </a
+      ><a name="2352" class="Symbol"
+      >&#8594;</a
+      ><a name="2353"
+      > </a
+      ><a name="2354" class="PrimitiveType"
+      >Set</a
+      ><a name="2357" class="Symbol"
+      >)</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" class="Symbol"
+      >(</a
+      ><a name="2360" href="Description.Horizontal.html#2360" class="Bound"
+      >hsx</a
+      ><a name="2363"
+      > </a
+      ><a name="2364" class="Symbol"
+      >:</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" class="Symbol"
+      >(</a
+      ><a name="2369" href="Description.Horizontal.html#962" class="Function"
+      >&#7776;</a
+      ><a name="2370"
+      > </a
+      ><a name="2371" href="Description.Horizontal.html#2327" class="Bound"
+      >D</a
+      ><a name="2372" class="Symbol"
+      >)</a
+      ><a name="2373"
+      > </a
+      ><a name="2374" class="Symbol"
+      >(</a
+      ><a name="2375" href="Description.Horizontal.html#2341" class="Bound"
+      >X</a
+      ><a name="2376"
+      > </a
+      ><a name="2377" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="2378"
+      > </a
+      ><a name="2379" href="Description.Horizontal.html#685" class="Function"
+      >next</a
+      ><a name="2383"
+      > </a
+      ><a name="2384" href="Description.Horizontal.html#2327" class="Bound"
+      >D</a
+      ><a name="2385" class="Symbol"
+      >))</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" class="Symbol"
+      >&#8594;</a
+      ><a name="2389"
+      > </a
+      ><a name="2390" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" href="Description.Horizontal.html#2327" class="Bound"
+      >D</a
+      ><a name="2400"
+      > </a
+      ><a name="2401" href="Description.Horizontal.html#2341" class="Bound"
+      >X</a
+      ><a name="2402"
+      > </a
+      ><a name="2403" class="Symbol"
+      >(</a
+      ><a name="2404" href="Description.Horizontal.html#1207" class="Function"
+      >&#7714;-comp</a
+      ><a name="2410"
+      > </a
+      ><a name="2411" href="Description.Horizontal.html#2327" class="Bound"
+      >D</a
+      ><a name="2412"
+      > </a
+      ><a name="2413" href="Description.Horizontal.html#2341" class="Bound"
+      >X</a
+      ><a name="2414"
+      > </a
+      ><a name="2415" href="Description.Horizontal.html#2360" class="Bound"
+      >hsx</a
+      ><a name="2418" class="Symbol"
+      >)</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2421"
+      > </a
+      ><a name="2422" href="Description.Horizontal.html#2360" class="Bound"
+      >hsx</a
+      ><a name="2425"
+      >
+    </a
+      ><a name="2430" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2449"
+      > </a
+      ><a name="2450" class="Symbol"
+      >(</a
+      ><a name="2451" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="2452"
+      > </a
+      ><a name="2453" href="Description.Horizontal.html#2453" class="Bound"
+      >is</a
+      ><a name="2455" class="Symbol"
+      >)</a
+      ><a name="2456"
+      >  </a
+      ><a name="2458" href="Description.Horizontal.html#2458" class="Bound"
+      >X</a
+      ><a name="2459"
+      > </a
+      ><a name="2460" class="Symbol"
+      >(_</a
+      ><a name="2462"
+      >        </a
+      ><a name="2470" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" href="Description.Horizontal.html#2472" class="Bound"
+      >x</a
+      ><a name="2473" class="Symbol"
+      >)</a
+      ><a name="2474"
+      > </a
+      ><a name="2475" class="Symbol"
+      >=</a
+      ><a name="2476"
+      > </a
+      ><a name="2477" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2481"
+      >
+    </a
+      ><a name="2486" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" class="Symbol"
+      >(</a
+      ><a name="2507" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="2508"
+      > </a
+      ><a name="2509" href="Description.Horizontal.html#2509" class="Bound"
+      >S</a
+      ><a name="2510"
+      > </a
+      ><a name="2511" href="Description.Horizontal.html#2511" class="Bound"
+      >D</a
+      ><a name="2512" class="Symbol"
+      >)</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="Description.Horizontal.html#2514" class="Bound"
+      >X</a
+      ><a name="2515"
+      > </a
+      ><a name="2516" class="Symbol"
+      >((</a
+      ><a name="2518" href="Description.Horizontal.html#2518" class="Bound"
+      >s</a
+      ><a name="2519"
+      > </a
+      ><a name="2520" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2521"
+      > </a
+      ><a name="2522" href="Description.Horizontal.html#2522" class="Bound"
+      >hs</a
+      ><a name="2524" class="Symbol"
+      >)</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="Description.Horizontal.html#2528" class="Bound"
+      >x</a
+      ><a name="2529" class="Symbol"
+      >)</a
+      ><a name="2530"
+      > </a
+      ><a name="2531" class="Symbol"
+      >=</a
+      ><a name="2532"
+      > </a
+      ><a name="2533" href="Prelude.Product.html#508" class="Function"
+      >cong&#8322;-pair</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" class="Symbol"
+      >(</a
+      ><a name="2545" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2549"
+      > </a
+      ><a name="2550" class="Symbol"
+      >(</a
+      ><a name="2551" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="Description.Horizontal.html#2518" class="Bound"
+      >s</a
+      ><a name="2556" class="Symbol"
+      >)</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" class="Symbol"
+      >(</a
+      ><a name="2559" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2563"
+      > </a
+      ><a name="2564" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2569"
+      > </a
+      ><a name="2570" class="Symbol"
+      >(</a
+      ><a name="2571" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" class="Symbol"
+      >(</a
+      ><a name="2592" href="Description.Horizontal.html#2511" class="Bound"
+      >D</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="Description.Horizontal.html#2518" class="Bound"
+      >s</a
+      ><a name="2595" class="Symbol"
+      >)</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" href="Description.Horizontal.html#2514" class="Bound"
+      >X</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" class="Symbol"
+      >(</a
+      ><a name="2600" href="Description.Horizontal.html#2522" class="Bound"
+      >hs</a
+      ><a name="2602"
+      > </a
+      ><a name="2603" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2604"
+      > </a
+      ><a name="2605" href="Description.Horizontal.html#2528" class="Bound"
+      >x</a
+      ><a name="2606" class="Symbol"
+      >))))</a
+      ><a name="2610"
+      >
+                                                              </a
+      ><a name="2673" class="Symbol"
+      >(</a
+      ><a name="2674" href="Relation.Binary.HeterogeneousEquality.html#2056" class="Function"
+      >hcong</a
+      ><a name="2679"
+      > </a
+      ><a name="2680" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="2685"
+      > </a
+      ><a name="2686" class="Symbol"
+      >(</a
+      ><a name="2687" href="Relation.Binary.HeterogeneousEquality.html#1006" class="Function"
+      >&#8801;-to-&#8773;</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" class="Symbol"
+      >(</a
+      ><a name="2695" href="Description.Horizontal.html#2298" class="Function"
+      >decomp-comp-inverse</a
+      ><a name="2714"
+      > </a
+      ><a name="2715" class="Symbol"
+      >(</a
+      ><a name="2716" href="Description.Horizontal.html#2511" class="Bound"
+      >D</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="Description.Horizontal.html#2518" class="Bound"
+      >s</a
+      ><a name="2719" class="Symbol"
+      >)</a
+      ><a name="2720"
+      > </a
+      ><a name="2721" href="Description.Horizontal.html#2514" class="Bound"
+      >X</a
+      ><a name="2722"
+      > </a
+      ><a name="2723" class="Symbol"
+      >(</a
+      ><a name="2724" href="Description.Horizontal.html#2522" class="Bound"
+      >hs</a
+      ><a name="2726"
+      > </a
+      ><a name="2727" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2728"
+      > </a
+      ><a name="2729" href="Description.Horizontal.html#2528" class="Bound"
+      >x</a
+      ><a name="2730" class="Symbol"
+      >))))</a
+      ><a name="2734"
+      >
+
+</a
+      ><a name="2736" href="Description.Horizontal.html#2736" class="Function"
+      >&#7714;-map-to-&#7714;-decomp</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" class="Symbol"
+      >:</a
+      ><a name="2755"
+      > </a
+      ><a name="2756" class="Symbol"
+      >{</a
+      ><a name="2757" href="Description.Horizontal.html#2757" class="Bound"
+      >I</a
+      ><a name="2758"
+      > </a
+      ><a name="2759" class="Symbol"
+      >:</a
+      ><a name="2760"
+      > </a
+      ><a name="2761" class="PrimitiveType"
+      >Set</a
+      ><a name="2764" class="Symbol"
+      >}</a
+      ><a name="2765"
+      > </a
+      ><a name="2766" class="Symbol"
+      >(</a
+      ><a name="2767" href="Description.Horizontal.html#2767" class="Bound"
+      >D</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" class="Symbol"
+      >:</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="2776"
+      > </a
+      ><a name="2777" href="Description.Horizontal.html#2757" class="Bound"
+      >I</a
+      ><a name="2778" class="Symbol"
+      >)</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" class="Symbol"
+      >(</a
+      ><a name="2781" href="Description.Horizontal.html#2781" class="Bound"
+      >X</a
+      ><a name="2782"
+      > </a
+      ><a name="2783" class="Symbol"
+      >:</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2789"
+      > </a
+      ><a name="2790" href="Description.Horizontal.html#2757" class="Bound"
+      >I</a
+      ><a name="2791"
+      > </a
+      ><a name="2792" class="Symbol"
+      >&#8594;</a
+      ><a name="2793"
+      > </a
+      ><a name="2794" class="PrimitiveType"
+      >Set</a
+      ><a name="2797" class="Symbol"
+      >)</a
+      ><a name="2798"
+      > </a
+      ><a name="2799" class="Symbol"
+      >(</a
+      ><a name="2800" href="Description.Horizontal.html#2800" class="Bound"
+      >hs</a
+      ><a name="2802"
+      > </a
+      ><a name="2803" class="Symbol"
+      >:</a
+      ><a name="2804"
+      > </a
+      ><a name="2805" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="2806"
+      > </a
+      ><a name="2807" href="Description.Horizontal.html#2767" class="Bound"
+      >D</a
+      ><a name="2808"
+      > </a
+      ><a name="2809" href="Description.Horizontal.html#2781" class="Bound"
+      >X</a
+      ><a name="2810" class="Symbol"
+      >)</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" class="Symbol"
+      >&#8594;</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" href="Description.html#4575" class="Function"
+      >&#7714;-map</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" href="Description.Horizontal.html#2767" class="Bound"
+      >D</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" href="Prelude.Function.html#3458" class="Function"
+      >!</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" href="Description.Horizontal.html#2800" class="Bound"
+      >hs</a
+      ><a name="2826"
+      > </a
+      ><a name="2827" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="2834"
+      > </a
+      ><a name="2835" class="Symbol"
+      >(</a
+      ><a name="2836" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="2844"
+      > </a
+      ><a name="2845" href="Description.Horizontal.html#2767" class="Bound"
+      >D</a
+      ><a name="2846"
+      > </a
+      ><a name="2847" href="Description.Horizontal.html#2781" class="Bound"
+      >X</a
+      ><a name="2848"
+      > </a
+      ><a name="2849" href="Description.Horizontal.html#2800" class="Bound"
+      >hs</a
+      ><a name="2851" class="Symbol"
+      >)</a
+      ><a name="2852"
+      >
+</a
+      ><a name="2853" href="Description.Horizontal.html#2736" class="Function"
+      >&#7714;-map-to-&#7714;-decomp</a
+      ><a name="2870"
+      > </a
+      ><a name="2871" class="Symbol"
+      >(</a
+      ><a name="2872" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="2873"
+      > </a
+      ><a name="2874" href="Description.Horizontal.html#2874" class="Bound"
+      >is</a
+      ><a name="2876" class="Symbol"
+      >)</a
+      ><a name="2877"
+      >  </a
+      ><a name="2879" href="Description.Horizontal.html#2879" class="Bound"
+      >X</a
+      ><a name="2880"
+      > </a
+      ><a name="2881" class="Symbol"
+      >_</a
+      ><a name="2882"
+      >        </a
+      ><a name="2890" class="Symbol"
+      >=</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2896"
+      >
+</a
+      ><a name="2897" href="Description.Horizontal.html#2736" class="Function"
+      >&#7714;-map-to-&#7714;-decomp</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" class="Symbol"
+      >(</a
+      ><a name="2916" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="2917"
+      > </a
+      ><a name="2918" href="Description.Horizontal.html#2918" class="Bound"
+      >S</a
+      ><a name="2919"
+      > </a
+      ><a name="2920" href="Description.Horizontal.html#2920" class="Bound"
+      >D</a
+      ><a name="2921" class="Symbol"
+      >)</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" href="Description.Horizontal.html#2923" class="Bound"
+      >X</a
+      ><a name="2924"
+      > </a
+      ><a name="2925" class="Symbol"
+      >(</a
+      ><a name="2926" href="Description.Horizontal.html#2926" class="Bound"
+      >s</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="Description.Horizontal.html#2930" class="Bound"
+      >hs</a
+      ><a name="2932" class="Symbol"
+      >)</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" class="Symbol"
+      >=</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >(</a
+      ><a name="2942" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" href="Description.Horizontal.html#2926" class="Bound"
+      >s</a
+      ><a name="2947" class="Symbol"
+      >)</a
+      ><a name="2948"
+      > </a
+      ><a name="2949" class="Symbol"
+      >(</a
+      ><a name="2950" href="Description.Horizontal.html#2736" class="Function"
+      >&#7714;-map-to-&#7714;-decomp</a
+      ><a name="2967"
+      > </a
+      ><a name="2968" class="Symbol"
+      >(</a
+      ><a name="2969" href="Description.Horizontal.html#2920" class="Bound"
+      >D</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" href="Description.Horizontal.html#2926" class="Bound"
+      >s</a
+      ><a name="2972" class="Symbol"
+      >)</a
+      ><a name="2973"
+      > </a
+      ><a name="2974" href="Description.Horizontal.html#2923" class="Bound"
+      >X</a
+      ><a name="2975"
+      > </a
+      ><a name="2976" href="Description.Horizontal.html#2930" class="Bound"
+      >hs</a
+      ><a name="2978" class="Symbol"
+      >)</a
+      ><a name="2979"
+      >
+
+</a
+      ><a name="2981" href="Description.Horizontal.html#2981" class="Function"
+      >&#7714;-map-preserves-shape</a
+      ><a name="3002"
+      > </a
+      ><a name="3003" class="Symbol"
+      >:</a
+      ><a name="3004"
+      >
+  </a
+      ><a name="3007" class="Symbol"
+      >{</a
+      ><a name="3008" href="Description.Horizontal.html#3008" class="Bound"
+      >I</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" class="Symbol"
+      >:</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" class="PrimitiveType"
+      >Set</a
+      ><a name="3015" class="Symbol"
+      >}</a
+      ><a name="3016"
+      > </a
+      ><a name="3017" class="Symbol"
+      >(</a
+      ><a name="3018" href="Description.Horizontal.html#3018" class="Bound"
+      >D</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" class="Symbol"
+      >:</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" href="Description.html#599" class="Datatype"
+      >RDesc</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="Description.Horizontal.html#3008" class="Bound"
+      >I</a
+      ><a name="3029" class="Symbol"
+      >)</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" class="Symbol"
+      >(</a
+      ><a name="3032" href="Description.Horizontal.html#3032" class="Bound"
+      >X</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" href="Description.Horizontal.html#3034" class="Bound"
+      >Y</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" class="Symbol"
+      >:</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="Description.Horizontal.html#3008" class="Bound"
+      >I</a
+      ><a name="3044"
+      > </a
+      ><a name="3045" class="Symbol"
+      >&#8594;</a
+      ><a name="3046"
+      > </a
+      ><a name="3047" class="PrimitiveType"
+      >Set</a
+      ><a name="3050" class="Symbol"
+      >)</a
+      ><a name="3051"
+      > </a
+      ><a name="3052" class="Symbol"
+      >(</a
+      ><a name="3053" href="Description.Horizontal.html#3053" class="Bound"
+      >f</a
+      ><a name="3054"
+      > </a
+      ><a name="3055" class="Symbol"
+      >:</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" href="Description.Horizontal.html#3032" class="Bound"
+      >X</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" href="Prelude.Function.Fam.html#1514" class="Function Operator"
+      >&#8649;</a
+      ><a name="3060"
+      > </a
+      ><a name="3061" href="Description.Horizontal.html#3034" class="Bound"
+      >Y</a
+      ><a name="3062" class="Symbol"
+      >)</a
+      ><a name="3063"
+      > </a
+      ><a name="3064" class="Symbol"
+      >(</a
+      ><a name="3065" href="Description.Horizontal.html#3065" class="Bound"
+      >xs</a
+      ><a name="3067"
+      > </a
+      ><a name="3068" class="Symbol"
+      >:</a
+      ><a name="3069"
+      > </a
+      ><a name="3070" href="Description.html#744" class="Function"
+      >&#7714;</a
+      ><a name="3071"
+      > </a
+      ><a name="3072" href="Description.Horizontal.html#3018" class="Bound"
+      >D</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="Description.Horizontal.html#3032" class="Bound"
+      >X</a
+      ><a name="3075" class="Symbol"
+      >)</a
+      ><a name="3076"
+      > </a
+      ><a name="3077" class="Symbol"
+      >&#8594;</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3084"
+      > </a
+      ><a name="3085" class="Symbol"
+      >(</a
+      ><a name="3086" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="3094"
+      > </a
+      ><a name="3095" href="Description.Horizontal.html#3018" class="Bound"
+      >D</a
+      ><a name="3096"
+      > </a
+      ><a name="3097" href="Description.Horizontal.html#3032" class="Bound"
+      >X</a
+      ><a name="3098"
+      > </a
+      ><a name="3099" href="Description.Horizontal.html#3065" class="Bound"
+      >xs</a
+      ><a name="3101" class="Symbol"
+      >)</a
+      ><a name="3102"
+      > </a
+      ><a name="3103" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="3104"
+      > </a
+      ><a name="3105" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" class="Symbol"
+      >(</a
+      ><a name="3112" href="Description.Horizontal.html#1013" class="Function"
+      >&#7714;-decomp</a
+      ><a name="3120"
+      > </a
+      ><a name="3121" href="Description.Horizontal.html#3018" class="Bound"
+      >D</a
+      ><a name="3122"
+      > </a
+      ><a name="3123" href="Description.Horizontal.html#3034" class="Bound"
+      >Y</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" class="Symbol"
+      >(</a
+      ><a name="3126" href="Description.html#4575" class="Function"
+      >&#7714;-map</a
+      ><a name="3131"
+      > </a
+      ><a name="3132" href="Description.Horizontal.html#3018" class="Bound"
+      >D</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" href="Description.Horizontal.html#3053" class="Bound"
+      >f</a
+      ><a name="3135"
+      > </a
+      ><a name="3136" href="Description.Horizontal.html#3065" class="Bound"
+      >xs</a
+      ><a name="3138" class="Symbol"
+      >))</a
+      ><a name="3140"
+      >
+</a
+      ><a name="3141" href="Description.Horizontal.html#2981" class="Function"
+      >&#7714;-map-preserves-shape</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" class="Symbol"
+      >(</a
+      ><a name="3164" href="Description.html#630" class="InductiveConstructor"
+      >&#7807;</a
+      ><a name="3165"
+      > </a
+      ><a name="3166" href="Description.Horizontal.html#3166" class="Bound"
+      >is</a
+      ><a name="3168" class="Symbol"
+      >)</a
+      ><a name="3169"
+      >  </a
+      ><a name="3171" href="Description.Horizontal.html#3171" class="Bound"
+      >X</a
+      ><a name="3172"
+      > </a
+      ><a name="3173" href="Description.Horizontal.html#3173" class="Bound"
+      >Y</a
+      ><a name="3174"
+      > </a
+      ><a name="3175" href="Description.Horizontal.html#3175" class="Bound"
+      >f</a
+      ><a name="3176"
+      > </a
+      ><a name="3177" href="Description.Horizontal.html#3177" class="Bound"
+      >xs</a
+      ><a name="3179"
+      >       </a
+      ><a name="3186" class="Symbol"
+      >=</a
+      ><a name="3187"
+      > </a
+      ><a name="3188" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3192"
+      >
+</a
+      ><a name="3193" href="Description.Horizontal.html#2981" class="Function"
+      >&#7714;-map-preserves-shape</a
+      ><a name="3214"
+      > </a
+      ><a name="3215" class="Symbol"
+      >(</a
+      ><a name="3216" href="Description.html#662" class="InductiveConstructor"
+      >&#963;</a
+      ><a name="3217"
+      > </a
+      ><a name="3218" href="Description.Horizontal.html#3218" class="Bound"
+      >S</a
+      ><a name="3219"
+      > </a
+      ><a name="3220" href="Description.Horizontal.html#3220" class="Bound"
+      >D</a
+      ><a name="3221" class="Symbol"
+      >)</a
+      ><a name="3222"
+      > </a
+      ><a name="3223" href="Description.Horizontal.html#3223" class="Bound"
+      >X</a
+      ><a name="3224"
+      > </a
+      ><a name="3225" href="Description.Horizontal.html#3225" class="Bound"
+      >Y</a
+      ><a name="3226"
+      > </a
+      ><a name="3227" href="Description.Horizontal.html#3227" class="Bound"
+      >f</a
+      ><a name="3228"
+      > </a
+      ><a name="3229" class="Symbol"
+      >(</a
+      ><a name="3230" href="Description.Horizontal.html#3230" class="Bound"
+      >s</a
+      ><a name="3231"
+      > </a
+      ><a name="3232" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3233"
+      > </a
+      ><a name="3234" href="Description.Horizontal.html#3234" class="Bound"
+      >xs</a
+      ><a name="3236" class="Symbol"
+      >)</a
+      ><a name="3237"
+      > </a
+      ><a name="3238" class="Symbol"
+      >=</a
+      ><a name="3239"
+      > </a
+      ><a name="3240" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="3244"
+      > </a
+      ><a name="3245" class="Symbol"
+      >(</a
+      ><a name="3246" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="3249"
+      > </a
+      ><a name="3250" href="Description.Horizontal.html#3230" class="Bound"
+      >s</a
+      ><a name="3251" class="Symbol"
+      >)</a
+      ><a name="3252"
+      > </a
+      ><a name="3253" class="Symbol"
+      >(</a
+      ><a name="3254" href="Description.Horizontal.html#2981" class="Function"
+      >&#7714;-map-preserves-shape</a
+      ><a name="3275"
+      > </a
+      ><a name="3276" class="Symbol"
+      >(</a
+      ><a name="3277" href="Description.Horizontal.html#3220" class="Bound"
+      >D</a
+      ><a name="3278"
+      > </a
+      ><a name="3279" href="Description.Horizontal.html#3230" class="Bound"
+      >s</a
+      ><a name="3280" class="Symbol"
+      >)</a
+      ><a name="3281"
+      > </a
+      ><a name="3282" href="Description.Horizontal.html#3223" class="Bound"
+      >X</a
+      ><a name="3283"
+      > </a
+      ><a name="3284" href="Description.Horizontal.html#3225" class="Bound"
+      >Y</a
+      ><a name="3285"
+      > </a
+      ><a name="3286" href="Description.Horizontal.html#3227" class="Bound"
+      >f</a
+      ><a name="3287"
+      > </a
+      ><a name="3288" href="Description.Horizontal.html#3234" class="Bound"
+      >xs</a
+      ><a name="3290" class="Symbol"
+      >)</a
+      ><a name="3291"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

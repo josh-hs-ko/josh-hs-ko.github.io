@@ -1,0 +1,2206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Refinement.Category</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Families of refinements form a category `FRef`.</a
+      ><a name="51"
+      >
+
+</a
+      ><a name="53" class="Keyword"
+      >module</a
+      ><a name="59"
+      > </a
+      ><a name="60" href="Refinement.Category.html#1" class="Module"
+      >Refinement.Category</a
+      ><a name="79"
+      > </a
+      ><a name="80" class="Keyword"
+      >where</a
+      ><a name="85"
+      >
+
+</a
+      ><a name="87" class="Keyword"
+      >open</a
+      ><a name="91"
+      > </a
+      ><a name="92" class="Keyword"
+      >import</a
+      ><a name="98"
+      > </a
+      ><a name="99" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="115"
+      >
+</a
+      ><a name="116" class="Keyword"
+      >open</a
+      ><a name="120"
+      > </a
+      ><a name="121" class="Keyword"
+      >import</a
+      ><a name="127"
+      > </a
+      ><a name="128" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="144"
+      >
+</a
+      ><a name="145" class="Keyword"
+      >open</a
+      ><a name="149"
+      > </a
+      ><a name="150" class="Keyword"
+      >import</a
+      ><a name="156"
+      > </a
+      ><a name="157" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="177"
+      >
+</a
+      ><a name="178" class="Keyword"
+      >open</a
+      ><a name="182"
+      > </a
+      ><a name="183" class="Keyword"
+      >import</a
+      ><a name="189"
+      > </a
+      ><a name="190" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="210"
+      >
+</a
+      ><a name="211" class="Keyword"
+      >open</a
+      ><a name="215"
+      > </a
+      ><a name="216" class="Keyword"
+      >import</a
+      ><a name="222"
+      > </a
+      ><a name="223" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="238"
+      >
+</a
+      ><a name="239" class="Keyword"
+      >open</a
+      ><a name="243"
+      > </a
+      ><a name="244" class="Keyword"
+      >import</a
+      ><a name="250"
+      > </a
+      ><a name="251" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="261"
+      >
+
+</a
+      ><a name="263" class="Keyword"
+      >open</a
+      ><a name="267"
+      > </a
+      ><a name="268" class="Keyword"
+      >import</a
+      ><a name="274"
+      > </a
+      ><a name="275" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="283"
+      > </a
+      ><a name="284" class="Keyword"
+      >using</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Symbol"
+      >(</a
+      ><a name="291" href="Function.html#713" class="Function Operator"
+      >_&#8728;_</a
+      ><a name="294" class="Symbol"
+      >)</a
+      ><a name="295"
+      >
+</a
+      ><a name="296" class="Keyword"
+      >open</a
+      ><a name="300"
+      > </a
+      ><a name="301" class="Keyword"
+      >import</a
+      ><a name="307"
+      > </a
+      ><a name="308" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="320"
+      > </a
+      ><a name="321" class="Keyword"
+      >using</a
+      ><a name="326"
+      > </a
+      ><a name="327" class="Symbol"
+      >(</a
+      ><a name="328" href="Data.Product.html#439" class="Record"
+      >&#931;</a
+      ><a name="329" class="Symbol"
+      >;</a
+      ><a name="330"
+      > </a
+      ><a name="331" href="Data.Product.html#706" class="Function"
+      >&#931;-syntax</a
+      ><a name="339" class="Symbol"
+      >;</a
+      ><a name="340"
+      > </a
+      ><a name="341" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="344" class="Symbol"
+      >;</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="351" class="Symbol"
+      >;</a
+      ><a name="352"
+      > </a
+      ><a name="353" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="358" class="Symbol"
+      >;</a
+      ><a name="359"
+      > </a
+      ><a name="360" href="Data.Product.html#1073" class="Function Operator"
+      >_&#215;_</a
+      ><a name="363" class="Symbol"
+      >;</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="Data.Product.html#1691" class="Function Operator"
+      >&lt;_,_&gt;</a
+      ><a name="370" class="Symbol"
+      >)</a
+      ><a name="371"
+      >
+</a
+      ><a name="372" class="Keyword"
+      >open</a
+      ><a name="376"
+      > </a
+      ><a name="377" class="Keyword"
+      >import</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="399"
+      > </a
+      ><a name="400" class="Keyword"
+      >using</a
+      ><a name="405"
+      > </a
+      ><a name="406" class="Symbol"
+      >(</a
+      ><a name="407" class="Keyword"
+      >module</a
+      ><a name="413"
+      > </a
+      ><a name="414" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="420" class="Symbol"
+      >)</a
+      ><a name="421"
+      >
+</a
+      ><a name="422" class="Keyword"
+      >open</a
+      ><a name="426"
+      > </a
+      ><a name="427" class="Keyword"
+      >import</a
+      ><a name="433"
+      > </a
+      ><a name="434" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="471"
+      > </a
+      ><a name="472" class="Keyword"
+      >using</a
+      ><a name="477"
+      > </a
+      ><a name="478" class="Symbol"
+      >(</a
+      ><a name="479" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="482" class="Symbol"
+      >;</a
+      ><a name="483"
+      > </a
+      ><a name="484" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="488" class="Symbol"
+      >;</a
+      ><a name="489"
+      > </a
+      ><a name="490" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="495" class="Symbol"
+      >;</a
+      ><a name="496"
+      > </a
+      ><a name="497" href="Relation.Binary.PropositionalEquality.html#1036" class="Function"
+      >cong</a
+      ><a name="501" class="Symbol"
+      >)</a
+      ><a name="502"
+      >
+</a
+      ><a name="503" class="Keyword"
+      >open</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="Keyword"
+      >import</a
+      ><a name="514"
+      > </a
+      ><a name="515" href="Relation.Binary.HeterogeneousEquality.html#1" class="Module"
+      >Relation.Binary.HeterogeneousEquality</a
+      ><a name="552"
+      > </a
+      ><a name="553" class="Keyword"
+      >using</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >(</a
+      ><a name="560" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >_&#8773;_</a
+      ><a name="563" class="Symbol"
+      >)</a
+      ><a name="564"
+      > </a
+      ><a name="565" class="Keyword"
+      >renaming</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >(</a
+      ><a name="575" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >refl</a
+      ><a name="579"
+      > </a
+      ><a name="580" class="Symbol"
+      >to</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="Relation.Binary.HeterogeneousEquality.Core.html#607" class="InductiveConstructor"
+      >hrefl</a
+      ><a name="588" class="Symbol"
+      >)</a
+      ><a name="589"
+      >
+
+</a
+      ><a name="591" href="Refinement.Category.html#591" class="Function"
+      >FRef</a
+      ><a name="595"
+      > </a
+      ><a name="596" class="Symbol"
+      >:</a
+      ><a name="597"
+      > </a
+      ><a name="598" href="Prelude.Category.html#736" class="Record"
+      >Category</a
+      ><a name="606"
+      >
+</a
+      ><a name="607" href="Refinement.Category.html#591" class="Function"
+      >FRef</a
+      ><a name="611"
+      > </a
+      ><a name="612" class="Symbol"
+      >=</a
+      ><a name="613"
+      > </a
+      ><a name="614" class="Keyword"
+      >record</a
+      ><a name="620"
+      > </a
+      ><a name="621" class="Symbol"
+      >{</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Field"
+      >Object</a
+      ><a name="629"
+      >   </a
+      ><a name="632" class="Symbol"
+      >=</a
+      ><a name="633"
+      > </a
+      ><a name="634" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="636"
+      > </a
+      ><a name="637" href="Refinement.Category.html#637" class="Bound"
+      >I</a
+      ><a name="638"
+      > </a
+      ><a name="639" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="PrimitiveType"
+      >Set</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="646"
+      > </a
+      ><a name="647" class="Symbol"
+      >(</a
+      ><a name="648" href="Refinement.Category.html#637" class="Bound"
+      >I</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >&#8594;</a
+      ><a name="651"
+      > </a
+      ><a name="652" class="PrimitiveType"
+      >Set</a
+      ><a name="655" class="Symbol"
+      >)</a
+      ><a name="656"
+      >
+              </a
+      ><a name="671" class="Symbol"
+      >;</a
+      ><a name="672"
+      > </a
+      ><a name="673" class="Field"
+      >Morphism</a
+      ><a name="681"
+      > </a
+      ><a name="682" class="Symbol"
+      >=</a
+      ><a name="683"
+      > </a
+      ><a name="684" class="Symbol"
+      >&#955;</a
+      ><a name="685"
+      > </a
+      ><a name="686" class="Symbol"
+      >{</a
+      ><a name="687"
+      > </a
+      ><a name="688" class="Symbol"
+      >(</a
+      ><a name="689" href="Refinement.Category.html#689" class="Bound"
+      >J</a
+      ><a name="690"
+      > </a
+      ><a name="691" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="692"
+      > </a
+      ><a name="693" href="Refinement.Category.html#693" class="Bound"
+      >Y</a
+      ><a name="694" class="Symbol"
+      >)</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >(</a
+      ><a name="697" href="Refinement.Category.html#697" class="Bound"
+      >I</a
+      ><a name="698"
+      > </a
+      ><a name="699" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="700"
+      > </a
+      ><a name="701" href="Refinement.Category.html#701" class="Bound"
+      >X</a
+      ><a name="702" class="Symbol"
+      >)</a
+      ><a name="703"
+      > </a
+      ><a name="704" class="Symbol"
+      >&#8594;</a
+      ><a name="705"
+      >
+                                 </a
+      ><a name="739" class="Keyword"
+      >record</a
+      ><a name="745"
+      > </a
+      ><a name="746" class="Symbol"
+      >{</a
+      ><a name="747"
+      > </a
+      ><a name="748" class="Field"
+      >Carrier</a
+      ><a name="755"
+      > </a
+      ><a name="756" class="Symbol"
+      >=</a
+      ><a name="757"
+      > </a
+      ><a name="758" href="Data.Product.html#706" class="Function"
+      >&#931;[</a
+      ><a name="760"
+      > </a
+      ><a name="761" href="Refinement.Category.html#761" class="Bound"
+      >e</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="Data.Product.html#706" class="Function"
+      >&#8712;</a
+      ><a name="764"
+      > </a
+      ><a name="765" class="Symbol"
+      >(</a
+      ><a name="766" href="Refinement.Category.html#689" class="Bound"
+      >J</a
+      ><a name="767"
+      > </a
+      ><a name="768" class="Symbol"
+      >&#8594;</a
+      ><a name="769"
+      > </a
+      ><a name="770" href="Refinement.Category.html#697" class="Bound"
+      >I</a
+      ><a name="771" class="Symbol"
+      >)</a
+      ><a name="772"
+      > </a
+      ><a name="773" href="Data.Product.html#706" class="Function"
+      >]</a
+      ><a name="774"
+      > </a
+      ><a name="775" href="Refinement.html#5133" class="Record"
+      >FRefinement</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Refinement.Category.html#761" class="Bound"
+      >e</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="Refinement.Category.html#701" class="Bound"
+      >X</a
+      ><a name="790"
+      > </a
+      ><a name="791" href="Refinement.Category.html#693" class="Bound"
+      >Y</a
+      ><a name="792"
+      >
+                                        </a
+      ><a name="833" class="Symbol"
+      >;</a
+      ><a name="834"
+      > </a
+      ><a name="835" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="838"
+      > </a
+      ><a name="839" class="Symbol"
+      >=</a
+      ><a name="840"
+      > </a
+      ><a name="841" class="Symbol"
+      >&#955;</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >{</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >(</a
+      ><a name="846" href="Refinement.Category.html#846" class="Bound"
+      >e</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="849"
+      > </a
+      ><a name="850" href="Refinement.Category.html#850" class="Bound"
+      >r</a
+      ><a name="851" class="Symbol"
+      >)</a
+      ><a name="852"
+      > </a
+      ><a name="853" class="Symbol"
+      >(</a
+      ><a name="854" href="Refinement.Category.html#854" class="Bound"
+      >f</a
+      ><a name="855"
+      > </a
+      ><a name="856" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="Refinement.Category.html#858" class="Bound"
+      >s</a
+      ><a name="859" class="Symbol"
+      >)</a
+      ><a name="860"
+      > </a
+      ><a name="861" class="Symbol"
+      >&#8594;</a
+      ><a name="862"
+      >
+                                                    </a
+      ><a name="915" href="Prelude.Function.Fam.html#2052" class="Record"
+      >FamMorphismEq</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >(</a
+      ><a name="930" href="Refinement.Category.html#689" class="Bound"
+      >J</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="933"
+      > </a
+      ><a name="934" href="Refinement.Category.html#693" class="Bound"
+      >Y</a
+      ><a name="935" class="Symbol"
+      >)</a
+      ><a name="936"
+      > </a
+      ><a name="937" class="Symbol"
+      >(</a
+      ><a name="938" href="Refinement.Category.html#697" class="Bound"
+      >I</a
+      ><a name="939"
+      > </a
+      ><a name="940" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="941"
+      > </a
+      ><a name="942" href="Refinement.Category.html#701" class="Bound"
+      >X</a
+      ><a name="943" class="Symbol"
+      >)</a
+      ><a name="944"
+      > </a
+      ><a name="945" class="Symbol"
+      >(</a
+      ><a name="946" href="Refinement.Category.html#846" class="Bound"
+      >e</a
+      ><a name="947"
+      > </a
+      ><a name="948" href="Prelude.Function.Fam.html#1956" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="949"
+      > </a
+      ><a name="950" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="968"
+      > </a
+      ><a name="969" href="Refinement.Category.html#850" class="Bound"
+      >r</a
+      ><a name="970" class="Symbol"
+      >)</a
+      ><a name="971"
+      > </a
+      ><a name="972" class="Symbol"
+      >(</a
+      ><a name="973" href="Refinement.Category.html#854" class="Bound"
+      >f</a
+      ><a name="974"
+      > </a
+      ><a name="975" href="Prelude.Function.Fam.html#1956" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="976"
+      > </a
+      ><a name="977" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="Refinement.Category.html#858" class="Bound"
+      >s</a
+      ><a name="997" class="Symbol"
+      >)</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >}</a
+      ><a name="1000"
+      >
+                                        </a
+      ><a name="1041" class="Symbol"
+      >;</a
+      ><a name="1042"
+      > </a
+      ><a name="1043" class="Field"
+      >isEquivalence</a
+      ><a name="1056"
+      > </a
+      ><a name="1057" class="Symbol"
+      >=</a
+      ><a name="1058"
+      >
+                                            </a
+      ><a name="1103" class="Keyword"
+      >record</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" class="Symbol"
+      >{</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" class="Field"
+      >refl</a
+      ><a name="1116"
+      > </a
+      ><a name="1117" class="Symbol"
+      >=</a
+      ><a name="1118"
+      > </a
+      ><a name="1119" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="1124"
+      > </a
+      ><a name="1125" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="1133"
+      >
+                                                   </a
+      ><a name="1185" class="Symbol"
+      >;</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" class="Field"
+      >sym</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" class="Symbol"
+      >=</a
+      ><a name="1192"
+      > </a
+      ><a name="1193" class="Symbol"
+      >&#955;</a
+      ><a name="1194"
+      > </a
+      ><a name="1195" class="Symbol"
+      >{</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" class="Symbol"
+      >(</a
+      ><a name="1198" href="Refinement.Category.html#1198" class="Bound"
+      >eeq</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" href="Refinement.Category.html#1204" class="Bound"
+      >req</a
+      ><a name="1207" class="Symbol"
+      >)</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" class="Symbol"
+      >&#8594;</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" href="Prelude.Function.html#998" class="Function"
+      >fsym</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" href="Refinement.Category.html#1198" class="Bound"
+      >eeq</a
+      ><a name="1219"
+      > </a
+      ><a name="1220" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="Prelude.Function.html#1991" class="Function"
+      >&#8785;-sym</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" href="Refinement.Category.html#1204" class="Bound"
+      >req</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" class="Symbol"
+      >}</a
+      ><a name="1233"
+      >
+                                                   </a
+      ><a name="1285" class="Symbol"
+      >;</a
+      ><a name="1286"
+      > </a
+      ><a name="1287" class="Field"
+      >trans</a
+      ><a name="1292"
+      > </a
+      ><a name="1293" class="Symbol"
+      >=</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >&#955;</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" class="Symbol"
+      >{</a
+      ><a name="1298"
+      > </a
+      ><a name="1299" class="Symbol"
+      >(</a
+      ><a name="1300" href="Refinement.Category.html#1300" class="Bound"
+      >eeq</a
+      ><a name="1303"
+      > </a
+      ><a name="1304" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" href="Refinement.Category.html#1306" class="Bound"
+      >req</a
+      ><a name="1309" class="Symbol"
+      >)</a
+      ><a name="1310"
+      > </a
+      ><a name="1311" class="Symbol"
+      >(</a
+      ><a name="1312" href="Refinement.Category.html#1312" class="Bound"
+      >eeq'</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1318"
+      > </a
+      ><a name="1319" href="Refinement.Category.html#1319" class="Bound"
+      >req'</a
+      ><a name="1323" class="Symbol"
+      >)</a
+      ><a name="1324"
+      > </a
+      ><a name="1325" class="Symbol"
+      >&#8594;</a
+      ><a name="1326"
+      > </a
+      ><a name="1327" href="Prelude.Function.html#1099" class="Function"
+      >ftrans</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="Refinement.Category.html#1300" class="Bound"
+      >eeq</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" href="Refinement.Category.html#1312" class="Bound"
+      >eeq'</a
+      ><a name="1342"
+      > </a
+      ><a name="1343" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" href="Prelude.Function.html#2126" class="Function"
+      >&#8785;-trans</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1357"
+      > </a
+      ><a name="1358" href="Refinement.Category.html#1306" class="Bound"
+      >req</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="Refinement.Category.html#1319" class="Bound"
+      >req'</a
+      ><a name="1366" class="Symbol"
+      >}</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Symbol"
+      >}</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" class="Symbol"
+      >}</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" class="Symbol"
+      >}</a
+      ><a name="1373"
+      >
+              </a
+      ><a name="1388" class="Symbol"
+      >;</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" class="Field Operator"
+      >_&#183;_</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" class="Symbol"
+      >=</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" class="Symbol"
+      >&#955;</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" class="Symbol"
+      >{</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" class="Symbol"
+      >(</a
+      ><a name="1401" href="Refinement.Category.html#1401" class="Bound"
+      >e</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="Refinement.Category.html#1405" class="Bound"
+      >r</a
+      ><a name="1406" class="Symbol"
+      >)</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >(</a
+      ><a name="1409" href="Refinement.Category.html#1409" class="Bound"
+      >f</a
+      ><a name="1410"
+      > </a
+      ><a name="1411" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1412"
+      > </a
+      ><a name="1413" href="Refinement.Category.html#1413" class="Bound"
+      >s</a
+      ><a name="1414" class="Symbol"
+      >)</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" class="Symbol"
+      >&#8594;</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" class="Symbol"
+      >(</a
+      ><a name="1419" href="Refinement.Category.html#1401" class="Bound"
+      >e</a
+      ><a name="1420"
+      > </a
+      ><a name="1421" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1422"
+      > </a
+      ><a name="1423" href="Refinement.Category.html#1409" class="Bound"
+      >f</a
+      ><a name="1424" class="Symbol"
+      >)</a
+      ><a name="1425"
+      > </a
+      ><a name="1426" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" href="Refinement.html#5469" class="Function"
+      >FRef-trans</a
+      ><a name="1438"
+      > </a
+      ><a name="1439" href="Refinement.Category.html#1405" class="Bound"
+      >r</a
+      ><a name="1440"
+      > </a
+      ><a name="1441" href="Refinement.Category.html#1413" class="Bound"
+      >s</a
+      ><a name="1442"
+      > </a
+      ><a name="1443" class="Symbol"
+      >}</a
+      ><a name="1444"
+      >
+              </a
+      ><a name="1459" class="Symbol"
+      >;</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" class="Field"
+      >id</a
+      ><a name="1463"
+      >  </a
+      ><a name="1465" class="Symbol"
+      >=</a
+      ><a name="1466"
+      > </a
+      ><a name="1467" href="Function.html#1012" class="Function"
+      >Function.id</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1480"
+      > </a
+      ><a name="1481" href="Refinement.html#5369" class="Function"
+      >FRef-refl</a
+      ><a name="1490"
+      >
+              </a
+      ><a name="1505" class="Symbol"
+      >;</a
+      ><a name="1506"
+      > </a
+      ><a name="1507" class="Field"
+      >id-l</a
+      ><a name="1511"
+      >   </a
+      ><a name="1514" class="Symbol"
+      >=</a
+      ><a name="1515"
+      > </a
+      ><a name="1516" class="Symbol"
+      >&#955;</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" class="Symbol"
+      >{</a
+      ><a name="1519"
+      > </a
+      ><a name="1520" class="Symbol"
+      >(</a
+      ><a name="1521" href="Refinement.Category.html#1521" class="Bound"
+      >e</a
+      ><a name="1522"
+      > </a
+      ><a name="1523" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" href="Refinement.Category.html#1525" class="Bound"
+      >r</a
+      ><a name="1526" class="Symbol"
+      >)</a
+      ><a name="1527"
+      > </a
+      ><a name="1528" class="Symbol"
+      >&#8594;</a
+      ><a name="1529"
+      > </a
+      ><a name="1530" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1537"
+      > </a
+      ><a name="1538" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="1544"
+      > </a
+      ><a name="1545" class="Symbol"
+      >}</a
+      ><a name="1546"
+      >
+              </a
+      ><a name="1561" class="Symbol"
+      >;</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" class="Field"
+      >id-r</a
+      ><a name="1567"
+      >   </a
+      ><a name="1570" class="Symbol"
+      >=</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >&#955;</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >{</a
+      ><a name="1575"
+      > </a
+      ><a name="1576" class="Symbol"
+      >(</a
+      ><a name="1577" href="Refinement.Category.html#1577" class="Bound"
+      >e</a
+      ><a name="1578"
+      > </a
+      ><a name="1579" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="Refinement.Category.html#1581" class="Bound"
+      >r</a
+      ><a name="1582" class="Symbol"
+      >)</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" class="Symbol"
+      >&#8594;</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="1591"
+      > </a
+      ><a name="1592" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1593"
+      > </a
+      ><a name="1594" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" class="Symbol"
+      >}</a
+      ><a name="1602"
+      >
+              </a
+      ><a name="1617" class="Symbol"
+      >;</a
+      ><a name="1618"
+      > </a
+      ><a name="1619" class="Field"
+      >assoc</a
+      ><a name="1624"
+      >  </a
+      ><a name="1626" class="Symbol"
+      >=</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >&#955;</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="Refinement.Category.html#1630" class="Bound"
+      >_</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="Refinement.Category.html#1632" class="Bound"
+      >_</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="Refinement.Category.html#1634" class="Bound"
+      >_</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >&#8594;</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="1643"
+      > </a
+      ><a name="1644" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1645"
+      > </a
+      ><a name="1646" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="1652"
+      >
+              </a
+      ><a name="1667" class="Symbol"
+      >;</a
+      ><a name="1668"
+      > </a
+      ><a name="1669" class="Field"
+      >cong-l</a
+      ><a name="1675"
+      > </a
+      ><a name="1676" class="Symbol"
+      >=</a
+      ><a name="1677"
+      > </a
+      ><a name="1678" class="Symbol"
+      >&#955;</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" class="Symbol"
+      >{</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" class="Symbol"
+      >{</a
+      ><a name="1683" href="Refinement.Category.html#1683" class="Bound"
+      >I</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" href="Refinement.Category.html#1687" class="Bound"
+      >X</a
+      ><a name="1688" class="Symbol"
+      >}</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" class="Symbol"
+      >{</a
+      ><a name="1691" href="Refinement.Category.html#1691" class="Bound"
+      >J</a
+      ><a name="1692"
+      > </a
+      ><a name="1693" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1694"
+      > </a
+      ><a name="1695" href="Refinement.Category.html#1695" class="Bound"
+      >Y</a
+      ><a name="1696" class="Symbol"
+      >}</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" class="Symbol"
+      >{</a
+      ><a name="1699" href="Refinement.Category.html#1699" class="Bound"
+      >K</a
+      ><a name="1700"
+      > </a
+      ><a name="1701" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1702"
+      > </a
+      ><a name="1703" href="Refinement.Category.html#1703" class="Bound"
+      >Z</a
+      ><a name="1704" class="Symbol"
+      >}</a
+      ><a name="1705"
+      > </a
+      ><a name="1706" class="Symbol"
+      >{</a
+      ><a name="1707" href="Refinement.Category.html#1707" class="Bound"
+      >e</a
+      ><a name="1708"
+      > </a
+      ><a name="1709" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1710"
+      > </a
+      ><a name="1711" href="Refinement.Category.html#1711" class="Bound"
+      >r</a
+      ><a name="1712" class="Symbol"
+      >}</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" class="Symbol"
+      >{</a
+      ><a name="1715" href="Refinement.Category.html#1715" class="Bound"
+      >f</a
+      ><a name="1716"
+      > </a
+      ><a name="1717" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" href="Refinement.Category.html#1719" class="Bound"
+      >s</a
+      ><a name="1720" class="Symbol"
+      >}</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" class="Symbol"
+      >(</a
+      ><a name="1723" href="Refinement.Category.html#1723" class="Bound"
+      >g</a
+      ><a name="1724"
+      > </a
+      ><a name="1725" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1726"
+      > </a
+      ><a name="1727" href="Refinement.Category.html#1727" class="Bound"
+      >t</a
+      ><a name="1728" class="Symbol"
+      >)</a
+      ><a name="1729"
+      > </a
+      ><a name="1730" class="Symbol"
+      >(</a
+      ><a name="1731" href="Refinement.Category.html#1731" class="Bound"
+      >eeq</a
+      ><a name="1734"
+      > </a
+      ><a name="1735" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1736"
+      > </a
+      ><a name="1737" href="Refinement.Category.html#1737" class="Bound"
+      >req</a
+      ><a name="1740" class="Symbol"
+      >)</a
+      ><a name="1741"
+      > </a
+      ><a name="1742" class="Symbol"
+      >&#8594;</a
+      ><a name="1743"
+      >
+                              </a
+      ><a name="1774" href="Prelude.Function.html#1403" class="Function"
+      >fcong-l</a
+      ><a name="1781"
+      > </a
+      ><a name="1782" href="Refinement.Category.html#1723" class="Bound"
+      >g</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="Refinement.Category.html#1731" class="Bound"
+      >eeq</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1789"
+      >
+                              </a
+      ><a name="1820" class="Symbol"
+      >&#955;</a
+      ><a name="1821"
+      > </a
+      ><a name="1822" class="Symbol"
+      >{</a
+      ><a name="1823" href="Refinement.Category.html#1823" class="Bound"
+      >i</a
+      ><a name="1824" class="Symbol"
+      >}</a
+      ><a name="1825"
+      > </a
+      ><a name="1826" class="Symbol"
+      >&#8594;</a
+      ><a name="1827"
+      > </a
+      ><a name="1828" href="Prelude.Function.html#2333" class="Function"
+      >&#8785;-cong-l</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >(</a
+      ><a name="1838" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" href="Refinement.Category.html#1727" class="Bound"
+      >t</a
+      ><a name="1858" class="Symbol"
+      >)</a
+      ><a name="1859"
+      > </a
+      ><a name="1860" class="Symbol"
+      >(</a
+      ><a name="1861" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="1879"
+      > </a
+      ><a name="1880" href="Refinement.Category.html#1727" class="Bound"
+      >t</a
+      ><a name="1881" class="Symbol"
+      >)</a
+      ><a name="1882"
+      >
+                                               </a
+      ><a name="1930" class="Symbol"
+      >(</a
+      ><a name="1931" href="Relation.Binary.PropositionalEquality.Core.html#705" class="Function"
+      >subst</a
+      ><a name="1936"
+      > </a
+      ><a name="1937" class="Symbol"
+      >(&#955;</a
+      ><a name="1939"
+      > </a
+      ><a name="1940" href="Refinement.Category.html#1940" class="Bound"
+      >j</a
+      ><a name="1941"
+      > </a
+      ><a name="1942" class="Symbol"
+      >&#8594;</a
+      ><a name="1943"
+      > </a
+      ><a name="1944" class="Symbol"
+      >(</a
+      ><a name="1945" href="Refinement.Category.html#1945" class="Bound"
+      >x</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" class="Symbol"
+      >:</a
+      ><a name="1948"
+      > </a
+      ><a name="1949" href="Refinement.Category.html#1695" class="Bound"
+      >Y</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" class="Symbol"
+      >(</a
+      ><a name="1952" href="Refinement.Category.html#1707" class="Bound"
+      >e</a
+      ><a name="1953"
+      > </a
+      ><a name="1954" href="Refinement.Category.html#1823" class="Bound"
+      >i</a
+      ><a name="1955" class="Symbol"
+      >))</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" class="Symbol"
+      >(</a
+      ><a name="1959" href="Refinement.Category.html#1959" class="Bound"
+      >x'</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" class="Symbol"
+      >:</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" href="Refinement.Category.html#1695" class="Bound"
+      >Y</a
+      ><a name="1965"
+      > </a
+      ><a name="1966" href="Refinement.Category.html#1940" class="Bound"
+      >j</a
+      ><a name="1967" class="Symbol"
+      >)</a
+      ><a name="1968"
+      > </a
+      ><a name="1969" class="Symbol"
+      >&#8594;</a
+      ><a name="1970"
+      >
+                                                             </a
+      ><a name="2032" href="Refinement.Category.html#1945" class="Bound"
+      >x</a
+      ><a name="2033"
+      > </a
+      ><a name="2034" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="2035"
+      > </a
+      ><a name="2036" href="Refinement.Category.html#1959" class="Bound"
+      >x'</a
+      ><a name="2038"
+      > </a
+      ><a name="2039" class="Symbol"
+      >&#8594;</a
+      ><a name="2040"
+      > </a
+      ><a name="2041" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="Refinement.Category.html#1727" class="Bound"
+      >t</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="Refinement.Category.html#1945" class="Bound"
+      >x</a
+      ><a name="2063"
+      > </a
+      ><a name="2064" href="Relation.Binary.HeterogeneousEquality.Core.html#544" class="Datatype Operator"
+      >&#8773;</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="Refinement.Category.html#1727" class="Bound"
+      >t</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" href="Refinement.Category.html#1959" class="Bound"
+      >x'</a
+      ><a name="2089" class="Symbol"
+      >)</a
+      ><a name="2090"
+      >
+                                                      </a
+      ><a name="2145" class="Symbol"
+      >(</a
+      ><a name="2146" href="Refinement.Category.html#1731" class="Bound"
+      >eeq</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="Refinement.Category.html#1823" class="Bound"
+      >i</a
+      ><a name="2151" class="Symbol"
+      >)</a
+      ><a name="2152"
+      > </a
+      ><a name="2153" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="2159" class="Symbol"
+      >)</a
+      ><a name="2160"
+      >
+                                               </a
+      ><a name="2208" href="Refinement.Category.html#1737" class="Bound"
+      >req</a
+      ><a name="2211"
+      > </a
+      ><a name="2212" class="Symbol"
+      >}</a
+      ><a name="2213"
+      >
+              </a
+      ><a name="2228" class="Symbol"
+      >;</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" class="Field"
+      >cong-r</a
+      ><a name="2236"
+      > </a
+      ><a name="2237" class="Symbol"
+      >=</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" class="Symbol"
+      >&#955;</a
+      ><a name="2240"
+      > </a
+      ><a name="2241" class="Symbol"
+      >{</a
+      ><a name="2242"
+      > </a
+      ><a name="2243" class="Symbol"
+      >{</a
+      ><a name="2244" href="Refinement.Category.html#2244" class="Bound"
+      >I</a
+      ><a name="2245"
+      > </a
+      ><a name="2246" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2247"
+      > </a
+      ><a name="2248" href="Refinement.Category.html#2248" class="Bound"
+      >X</a
+      ><a name="2249" class="Symbol"
+      >}</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" class="Symbol"
+      >{</a
+      ><a name="2252" href="Refinement.Category.html#2252" class="Bound"
+      >J</a
+      ><a name="2253"
+      > </a
+      ><a name="2254" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2255"
+      > </a
+      ><a name="2256" href="Refinement.Category.html#2256" class="Bound"
+      >Y</a
+      ><a name="2257" class="Symbol"
+      >}</a
+      ><a name="2258"
+      > </a
+      ><a name="2259" class="Symbol"
+      >{</a
+      ><a name="2260" href="Refinement.Category.html#2260" class="Bound"
+      >K</a
+      ><a name="2261"
+      > </a
+      ><a name="2262" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" href="Refinement.Category.html#2264" class="Bound"
+      >Z</a
+      ><a name="2265" class="Symbol"
+      >}</a
+      ><a name="2266"
+      > </a
+      ><a name="2267" class="Symbol"
+      >{</a
+      ><a name="2268" href="Refinement.Category.html#2268" class="Bound"
+      >e</a
+      ><a name="2269"
+      > </a
+      ><a name="2270" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2271"
+      > </a
+      ><a name="2272" href="Refinement.Category.html#2272" class="Bound"
+      >r</a
+      ><a name="2273" class="Symbol"
+      >}</a
+      ><a name="2274"
+      > </a
+      ><a name="2275" class="Symbol"
+      >{</a
+      ><a name="2276" href="Refinement.Category.html#2276" class="Bound"
+      >f</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2279"
+      > </a
+      ><a name="2280" href="Refinement.Category.html#2280" class="Bound"
+      >s</a
+      ><a name="2281" class="Symbol"
+      >}</a
+      ><a name="2282"
+      > </a
+      ><a name="2283" class="Symbol"
+      >(</a
+      ><a name="2284" href="Refinement.Category.html#2284" class="Bound"
+      >g</a
+      ><a name="2285"
+      > </a
+      ><a name="2286" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" href="Refinement.Category.html#2288" class="Bound"
+      >t</a
+      ><a name="2289" class="Symbol"
+      >)</a
+      ><a name="2290"
+      > </a
+      ><a name="2291" class="Symbol"
+      >(</a
+      ><a name="2292" href="Refinement.Category.html#2292" class="Bound"
+      >eeq</a
+      ><a name="2295"
+      > </a
+      ><a name="2296" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2297"
+      > </a
+      ><a name="2298" href="Refinement.Category.html#2298" class="Bound"
+      >req</a
+      ><a name="2301" class="Symbol"
+      >)</a
+      ><a name="2302"
+      > </a
+      ><a name="2303" class="Symbol"
+      >&#8594;</a
+      ><a name="2304"
+      >
+                              </a
+      ><a name="2335" href="Prelude.Function.html#1547" class="Function"
+      >fcong-r</a
+      ><a name="2342"
+      > </a
+      ><a name="2343" href="Refinement.Category.html#2284" class="Bound"
+      >g</a
+      ><a name="2344"
+      > </a
+      ><a name="2345" href="Refinement.Category.html#2292" class="Bound"
+      >eeq</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" class="Symbol"
+      >&#955;</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" class="Symbol"
+      >{</a
+      ><a name="2354" href="Refinement.Category.html#2354" class="Bound"
+      >i</a
+      ><a name="2355" class="Symbol"
+      >}</a
+      ><a name="2356"
+      > </a
+      ><a name="2357" class="Symbol"
+      >&#8594;</a
+      ><a name="2358"
+      > </a
+      ><a name="2359" href="Prelude.Function.html#2579" class="Function"
+      >&#8785;-cong-r</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" class="Symbol"
+      >(</a
+      ><a name="2369" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="Refinement.Category.html#2288" class="Bound"
+      >t</a
+      ><a name="2389" class="Symbol"
+      >)</a
+      ><a name="2390"
+      > </a
+      ><a name="2391" class="Symbol"
+      >(</a
+      ><a name="2392" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="2410"
+      > </a
+      ><a name="2411" href="Refinement.Category.html#2288" class="Bound"
+      >t</a
+      ><a name="2412" class="Symbol"
+      >)</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="2420"
+      > </a
+      ><a name="2421" href="Refinement.Category.html#2298" class="Bound"
+      >req</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" class="Symbol"
+      >}</a
+      ><a name="2426"
+      > </a
+      ><a name="2427" class="Symbol"
+      >}</a
+      ><a name="2428"
+      >
+
+</a
+      ><a name="2430" href="Refinement.Category.html#2430" class="Function"
+      >FRefF</a
+      ><a name="2435"
+      > </a
+      ><a name="2436" class="Symbol"
+      >:</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" href="Prelude.Category.html#1740" class="Record"
+      >Functor</a
+      ><a name="2445"
+      > </a
+      ><a name="2446" href="Refinement.Category.html#591" class="Function"
+      >FRef</a
+      ><a name="2450"
+      > </a
+      ><a name="2451" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2454"
+      >
+</a
+      ><a name="2455" href="Refinement.Category.html#2430" class="Function"
+      >FRefF</a
+      ><a name="2460"
+      > </a
+      ><a name="2461" class="Symbol"
+      >=</a
+      ><a name="2462"
+      > </a
+      ><a name="2463" class="Keyword"
+      >record</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" class="Symbol"
+      >{</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" class="Field"
+      >object</a
+      ><a name="2478"
+      >   </a
+      ><a name="2481" class="Symbol"
+      >=</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="Function.html#1012" class="Function"
+      >Function.id</a
+      ><a name="2494"
+      >
+               </a
+      ><a name="2510" class="Symbol"
+      >;</a
+      ><a name="2511"
+      > </a
+      ><a name="2512" class="Field"
+      >morphism</a
+      ><a name="2520"
+      > </a
+      ><a name="2521" class="Symbol"
+      >=</a
+      ><a name="2522"
+      > </a
+      ><a name="2523" class="Symbol"
+      >&#955;</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" class="Symbol"
+      >{</a
+      ><a name="2526"
+      > </a
+      ><a name="2527" class="Symbol"
+      >(</a
+      ><a name="2528" href="Refinement.Category.html#2528" class="Bound"
+      >e</a
+      ><a name="2529"
+      > </a
+      ><a name="2530" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2531"
+      > </a
+      ><a name="2532" href="Refinement.Category.html#2532" class="Bound"
+      >r</a
+      ><a name="2533" class="Symbol"
+      >)</a
+      ><a name="2534"
+      > </a
+      ><a name="2535" class="Symbol"
+      >&#8594;</a
+      ><a name="2536"
+      > </a
+      ><a name="2537" href="Refinement.Category.html#2528" class="Bound"
+      >e</a
+      ><a name="2538"
+      > </a
+      ><a name="2539" href="Prelude.Function.Fam.html#1956" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2540"
+      > </a
+      ><a name="2541" href="Refinement.html#5300" class="Function"
+      >FRefinement.forget</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="Refinement.Category.html#2532" class="Bound"
+      >r</a
+      ><a name="2561"
+      > </a
+      ><a name="2562" class="Symbol"
+      >}</a
+      ><a name="2563"
+      >
+               </a
+      ><a name="2579" class="Symbol"
+      >;</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" class="Field"
+      >&#8776;-respecting</a
+      ><a name="2593"
+      >    </a
+      ><a name="2597" class="Symbol"
+      >=</a
+      ><a name="2598"
+      > </a
+      ><a name="2599" class="Symbol"
+      >&#955;</a
+      ><a name="2600"
+      > </a
+      ><a name="2601" class="Symbol"
+      >{</a
+      ><a name="2602"
+      > </a
+      ><a name="2603" class="Symbol"
+      >(</a
+      ><a name="2604" href="Refinement.Category.html#2604" class="Bound"
+      >eq</a
+      ><a name="2606"
+      > </a
+      ><a name="2607" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2608"
+      > </a
+      ><a name="2609" href="Refinement.Category.html#2609" class="Bound"
+      >eq'</a
+      ><a name="2612" class="Symbol"
+      >)</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" class="Symbol"
+      >&#8594;</a
+      ><a name="2615"
+      > </a
+      ><a name="2616" href="Refinement.Category.html#2604" class="Bound"
+      >eq</a
+      ><a name="2618"
+      > </a
+      ><a name="2619" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" href="Refinement.Category.html#2609" class="Bound"
+      >eq'</a
+      ><a name="2624"
+      > </a
+      ><a name="2625" class="Symbol"
+      >}</a
+      ><a name="2626"
+      >
+               </a
+      ><a name="2642" class="Symbol"
+      >;</a
+      ><a name="2643"
+      > </a
+      ><a name="2644" class="Field"
+      >id-preserving</a
+      ><a name="2657"
+      >   </a
+      ><a name="2660" class="Symbol"
+      >=</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2669"
+      > </a
+      ><a name="2670" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="2676"
+      >
+               </a
+      ><a name="2692" class="Symbol"
+      >;</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" class="Field"
+      >comp-preserving</a
+      ><a name="2709"
+      > </a
+      ><a name="2710" class="Symbol"
+      >=</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" class="Symbol"
+      >&#955;</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="Refinement.Category.html#2714" class="Bound"
+      >_</a
+      ><a name="2715"
+      > </a
+      ><a name="2716" href="Refinement.Category.html#2716" class="Bound"
+      >_</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" class="Symbol"
+      >&#8594;</a
+      ><a name="2719"
+      > </a
+      ><a name="2720" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="2725"
+      > </a
+      ><a name="2726" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2727"
+      > </a
+      ><a name="2728" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >}</a
+      ><a name="2736"
+      >
+
+</a
+      ><a name="2738" href="Refinement.Category.html#2738" class="Function"
+      >FRefC</a
+      ><a name="2743"
+      > </a
+      ><a name="2744" class="Symbol"
+      >:</a
+      ><a name="2745"
+      > </a
+      ><a name="2746" href="Prelude.Category.html#1740" class="Record"
+      >Functor</a
+      ><a name="2753"
+      > </a
+      ><a name="2754" href="Prelude.Function.Fam.html#2252" class="Function"
+      >Fam</a
+      ><a name="2757"
+      > </a
+      ><a name="2758" href="Refinement.Category.html#591" class="Function"
+      >FRef</a
+      ><a name="2762"
+      >
+</a
+      ><a name="2763" href="Refinement.Category.html#2738" class="Function"
+      >FRefC</a
+      ><a name="2768"
+      > </a
+      ><a name="2769" class="Symbol"
+      >=</a
+      ><a name="2770"
+      > </a
+      ><a name="2771" class="Keyword"
+      >record</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" class="Symbol"
+      >{</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" class="Field"
+      >object</a
+      ><a name="2786"
+      >   </a
+      ><a name="2789" class="Symbol"
+      >=</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="Function.html#1012" class="Function"
+      >Function.id</a
+      ><a name="2802"
+      >
+               </a
+      ><a name="2818" class="Symbol"
+      >;</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" class="Field"
+      >morphism</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" class="Symbol"
+      >=</a
+      ><a name="2830"
+      > </a
+      ><a name="2831" class="Symbol"
+      >&#955;</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" class="Symbol"
+      >{</a
+      ><a name="2834"
+      > </a
+      ><a name="2835" class="Symbol"
+      >{</a
+      ><a name="2836" href="Refinement.Category.html#2836" class="Bound"
+      >J</a
+      ><a name="2837"
+      > </a
+      ><a name="2838" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2839"
+      > </a
+      ><a name="2840" href="Refinement.Category.html#2840" class="Bound"
+      >Y</a
+      ><a name="2841" class="Symbol"
+      >}</a
+      ><a name="2842"
+      > </a
+      ><a name="2843" class="Symbol"
+      >{</a
+      ><a name="2844" href="Refinement.Category.html#2844" class="Bound"
+      >I</a
+      ><a name="2845"
+      > </a
+      ><a name="2846" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2847"
+      > </a
+      ><a name="2848" href="Refinement.Category.html#2848" class="Bound"
+      >X</a
+      ><a name="2849" class="Symbol"
+      >}</a
+      ><a name="2850"
+      > </a
+      ><a name="2851" class="Symbol"
+      >(</a
+      ><a name="2852" href="Refinement.Category.html#2852" class="Bound"
+      >e</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="Prelude.Function.Fam.html#1956" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2855"
+      > </a
+      ><a name="2856" href="Refinement.Category.html#2856" class="Bound"
+      >u</a
+      ><a name="2857" class="Symbol"
+      >)</a
+      ><a name="2858"
+      > </a
+      ><a name="2859" class="Symbol"
+      >&#8594;</a
+      ><a name="2860"
+      > </a
+      ><a name="2861" href="Refinement.Category.html#2852" class="Bound"
+      >e</a
+      ><a name="2862"
+      > </a
+      ><a name="2863" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2864"
+      > </a
+      ><a name="2865" href="Refinement.html#5711" class="Function"
+      >canonFRef</a
+      ><a name="2874"
+      > </a
+      ><a name="2875" href="Refinement.Category.html#2856" class="Bound"
+      >u</a
+      ><a name="2876"
+      > </a
+      ><a name="2877" class="Symbol"
+      >}</a
+      ><a name="2878"
+      >
+               </a
+      ><a name="2894" class="Symbol"
+      >;</a
+      ><a name="2895"
+      > </a
+      ><a name="2896" class="Field"
+      >&#8776;-respecting</a
+      ><a name="2908"
+      >    </a
+      ><a name="2912" class="Symbol"
+      >=</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" class="Symbol"
+      >&#955;</a
+      ><a name="2915"
+      > </a
+      ><a name="2916" class="Symbol"
+      >{</a
+      ><a name="2917"
+      > </a
+      ><a name="2918" class="Symbol"
+      >(</a
+      ><a name="2919" href="Refinement.Category.html#2919" class="Bound"
+      >eq</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="Refinement.Category.html#2924" class="Bound"
+      >eq'</a
+      ><a name="2927" class="Symbol"
+      >)</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" class="Symbol"
+      >&#8594;</a
+      ><a name="2930"
+      > </a
+      ><a name="2931" href="Refinement.Category.html#2919" class="Bound"
+      >eq</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" href="Refinement.Category.html#2924" class="Bound"
+      >eq'</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" class="Symbol"
+      >}</a
+      ><a name="2941"
+      >
+               </a
+      ><a name="2957" class="Symbol"
+      >;</a
+      ><a name="2958"
+      > </a
+      ><a name="2959" class="Field"
+      >id-preserving</a
+      ><a name="2972"
+      >   </a
+      ><a name="2975" class="Symbol"
+      >=</a
+      ><a name="2976"
+      > </a
+      ><a name="2977" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="2982"
+      > </a
+      ><a name="2983" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2984"
+      > </a
+      ><a name="2985" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="2991"
+      >
+               </a
+      ><a name="3007" class="Symbol"
+      >;</a
+      ><a name="3008"
+      > </a
+      ><a name="3009" class="Field"
+      >comp-preserving</a
+      ><a name="3024"
+      > </a
+      ><a name="3025" class="Symbol"
+      >=</a
+      ><a name="3026"
+      > </a
+      ><a name="3027" class="Symbol"
+      >&#955;</a
+      ><a name="3028"
+      > </a
+      ><a name="3029" href="Refinement.Category.html#3029" class="Bound"
+      >_</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" href="Refinement.Category.html#3031" class="Bound"
+      >_</a
+      ><a name="3032"
+      > </a
+      ><a name="3033" class="Symbol"
+      >&#8594;</a
+      ><a name="3034"
+      > </a
+      ><a name="3035" href="Prelude.Function.html#918" class="Function"
+      >frefl</a
+      ><a name="3040"
+      > </a
+      ><a name="3041" href="Prelude.Function.Fam.html#2139" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3042"
+      > </a
+      ><a name="3043" href="Prelude.Function.html#1903" class="Function"
+      >&#8785;-refl</a
+      ><a name="3049"
+      > </a
+      ><a name="3050" class="Symbol"
+      >}</a
+      ><a name="3051"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

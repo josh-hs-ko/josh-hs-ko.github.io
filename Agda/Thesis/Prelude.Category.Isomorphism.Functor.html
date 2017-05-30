@@ -1,0 +1,1053 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Prelude.Category.Isomorphism.Functor</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >-- Isomorphisms are preserved by functors.</a
+      ><a name="43"
+      >
+
+</a
+      ><a name="45" class="Keyword"
+      >open</a
+      ><a name="49"
+      > </a
+      ><a name="50" class="Keyword"
+      >import</a
+      ><a name="56"
+      > </a
+      ><a name="57" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Keyword"
+      >open</a
+      ><a name="78"
+      > </a
+      ><a name="79" class="Keyword"
+      >import</a
+      ><a name="85"
+      > </a
+      ><a name="86" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="91"
+      >
+
+</a
+      ><a name="93" class="Keyword"
+      >module</a
+      ><a name="99"
+      > </a
+      ><a name="100" href="Prelude.Category.Isomorphism.Functor.html#1" class="Module"
+      >Prelude.Category.Isomorphism.Functor</a
+      ><a name="136"
+      >
+  </a
+      ><a name="139" class="Symbol"
+      >{</a
+      ><a name="140" href="Prelude.Category.Isomorphism.Functor.html#140" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="142"
+      > </a
+      ><a name="143" href="Prelude.Category.Isomorphism.Functor.html#143" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="145"
+      > </a
+      ><a name="146" href="Prelude.Category.Isomorphism.Functor.html#146" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="148"
+      > </a
+      ><a name="149" class="Symbol"
+      >:</a
+      ><a name="150"
+      > </a
+      ><a name="151" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="156" class="Symbol"
+      >}</a
+      ><a name="157"
+      > </a
+      ><a name="158" class="Symbol"
+      >{</a
+      ><a name="159" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="160"
+      > </a
+      ><a name="161" class="Symbol"
+      >:</a
+      ><a name="162"
+      > </a
+      ><a name="163" href="Prelude.Category.html#736" class="Record"
+      >Category</a
+      ><a name="171"
+      > </a
+      ><a name="172" class="Symbol"
+      >{</a
+      ><a name="173" href="Prelude.Category.Isomorphism.Functor.html#140" class="Bound"
+      >&#8467;&#8320;</a
+      ><a name="175" class="Symbol"
+      >}</a
+      ><a name="176"
+      > </a
+      ><a name="177" class="Symbol"
+      >{</a
+      ><a name="178" href="Prelude.Category.Isomorphism.Functor.html#143" class="Bound"
+      >&#8467;&#8321;</a
+      ><a name="180" class="Symbol"
+      >}</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Symbol"
+      >{</a
+      ><a name="183" href="Prelude.Category.Isomorphism.Functor.html#146" class="Bound"
+      >&#8467;&#8322;</a
+      ><a name="185" class="Symbol"
+      >}}</a
+      ><a name="187"
+      > </a
+      ><a name="188" class="Symbol"
+      >{</a
+      ><a name="189" href="Prelude.Category.Isomorphism.Functor.html#189" class="Bound"
+      >&#8467;&#8323;</a
+      ><a name="191"
+      > </a
+      ><a name="192" href="Prelude.Category.Isomorphism.Functor.html#192" class="Bound"
+      >&#8467;&#8324;</a
+      ><a name="194"
+      > </a
+      ><a name="195" href="Prelude.Category.Isomorphism.Functor.html#195" class="Bound"
+      >&#8467;&#8325;</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Symbol"
+      >:</a
+      ><a name="199"
+      > </a
+      ><a name="200" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="205" class="Symbol"
+      >}</a
+      ><a name="206"
+      > </a
+      ><a name="207" class="Symbol"
+      >{</a
+      ><a name="208" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="209"
+      > </a
+      ><a name="210" class="Symbol"
+      >:</a
+      ><a name="211"
+      > </a
+      ><a name="212" href="Prelude.Category.html#736" class="Record"
+      >Category</a
+      ><a name="220"
+      > </a
+      ><a name="221" class="Symbol"
+      >{</a
+      ><a name="222" href="Prelude.Category.Isomorphism.Functor.html#189" class="Bound"
+      >&#8467;&#8323;</a
+      ><a name="224" class="Symbol"
+      >}</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Symbol"
+      >{</a
+      ><a name="227" href="Prelude.Category.Isomorphism.Functor.html#192" class="Bound"
+      >&#8467;&#8324;</a
+      ><a name="229" class="Symbol"
+      >}</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Symbol"
+      >{</a
+      ><a name="232" href="Prelude.Category.Isomorphism.Functor.html#195" class="Bound"
+      >&#8467;&#8325;</a
+      ><a name="234" class="Symbol"
+      >}}</a
+      ><a name="236"
+      > </a
+      ><a name="237" class="Symbol"
+      >(</a
+      ><a name="238" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="239"
+      > </a
+      ><a name="240" class="Symbol"
+      >:</a
+      ><a name="241"
+      > </a
+      ><a name="242" href="Prelude.Category.html#1740" class="Record"
+      >Functor</a
+      ><a name="249"
+      > </a
+      ><a name="250" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="251"
+      > </a
+      ><a name="252" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="253" class="Symbol"
+      >)</a
+      ><a name="254"
+      > </a
+      ><a name="255" class="Keyword"
+      >where</a
+      ><a name="260"
+      >
+
+</a
+      ><a name="262" class="Keyword"
+      >open</a
+      ><a name="266"
+      > </a
+      ><a name="267" class="Keyword"
+      >import</a
+      ><a name="273"
+      > </a
+      ><a name="274" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="302"
+      >
+
+</a
+      ><a name="304" class="Keyword"
+      >open</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="Keyword"
+      >import</a
+      ><a name="315"
+      > </a
+      ><a name="316" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="331"
+      > </a
+      ><a name="332" class="Keyword"
+      >using</a
+      ><a name="337"
+      > </a
+      ><a name="338" class="Symbol"
+      >(</a
+      ><a name="339" class="Keyword"
+      >module</a
+      ><a name="345"
+      > </a
+      ><a name="346" href="Relation.Binary.html#233" class="Module"
+      >Setoid</a
+      ><a name="352" class="Symbol"
+      >)</a
+      ><a name="353"
+      >
+</a
+      ><a name="354" class="Keyword"
+      >import</a
+      ><a name="360"
+      > </a
+      ><a name="361" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >Relation.Binary.EqReasoning</a
+      ><a name="388"
+      > </a
+      ><a name="389" class="Symbol"
+      >as</a
+      ><a name="391"
+      > </a
+      ><a name="392" class="Module"
+      >EqReasoning</a
+      ><a name="403"
+      >
+
+</a
+      ><a name="405" class="Keyword"
+      >open</a
+      ><a name="409"
+      > </a
+      ><a name="410" href="Prelude.Category.html#736" class="Module"
+      >Category</a
+      ><a name="418"
+      >
+</a
+      ><a name="419" class="Keyword"
+      >open</a
+      ><a name="423"
+      > </a
+      ><a name="424" href="Prelude.Category.html#736" class="Module"
+      >Category</a
+      ><a name="432"
+      > </a
+      ><a name="433" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="434"
+      > </a
+      ><a name="435" class="Keyword"
+      >using</a
+      ><a name="440"
+      > </a
+      ><a name="441" class="Symbol"
+      >()</a
+      ><a name="443"
+      > </a
+      ><a name="444" class="Keyword"
+      >renaming</a
+      ><a name="452"
+      > </a
+      ><a name="453" class="Symbol"
+      >(</a
+      ><a name="454"
+      >_&#8776;_ </a
+      ><a name="458" class="Symbol"
+      >to</a
+      ><a name="460"
+      > _&#8776;C_</a
+      ><a name="465" class="Symbol"
+      >;</a
+      ><a name="466"
+      > _&#183;_ </a
+      ><a name="471" class="Symbol"
+      >to</a
+      ><a name="473"
+      > _&#183;C_</a
+      ><a name="478" class="Symbol"
+      >)</a
+      ><a name="479"
+      >
+</a
+      ><a name="480" class="Keyword"
+      >open</a
+      ><a name="484"
+      > </a
+      ><a name="485" href="Prelude.Category.html#736" class="Module"
+      >Category</a
+      ><a name="493"
+      > </a
+      ><a name="494" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="495"
+      > </a
+      ><a name="496" class="Keyword"
+      >using</a
+      ><a name="501"
+      > </a
+      ><a name="502" class="Symbol"
+      >()</a
+      ><a name="504"
+      > </a
+      ><a name="505" class="Keyword"
+      >renaming</a
+      ><a name="513"
+      > </a
+      ><a name="514" class="Symbol"
+      >(</a
+      ><a name="515"
+      >_&#8776;_ </a
+      ><a name="519" class="Symbol"
+      >to</a
+      ><a name="521"
+      > _&#8776;D_</a
+      ><a name="526" class="Symbol"
+      >;</a
+      ><a name="527"
+      > _&#183;_ </a
+      ><a name="532" class="Symbol"
+      >to</a
+      ><a name="534"
+      > _&#183;D_</a
+      ><a name="539" class="Symbol"
+      >)</a
+      ><a name="540"
+      >
+</a
+      ><a name="541" class="Keyword"
+      >open</a
+      ><a name="545"
+      > </a
+      ><a name="546" href="Prelude.Category.html#1740" class="Module"
+      >Functor</a
+      ><a name="553"
+      >
+
+</a
+      ><a name="555" class="Keyword"
+      >private</a
+      ><a name="562"
+      >
+
+  </a
+      ><a name="566" href="Prelude.Category.Isomorphism.Functor.html#566" class="Function"
+      >inverse</a
+      ><a name="573"
+      > </a
+      ><a name="574" class="Symbol"
+      >:</a
+      ><a name="575"
+      > </a
+      ><a name="576" class="Symbol"
+      >{</a
+      ><a name="577" href="Prelude.Category.Isomorphism.Functor.html#577" class="Bound"
+      >X</a
+      ><a name="578"
+      > </a
+      ><a name="579" href="Prelude.Category.Isomorphism.Functor.html#579" class="Bound"
+      >Y</a
+      ><a name="580"
+      > </a
+      ><a name="581" class="Symbol"
+      >:</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="Prelude.Category.html#854" class="Field"
+      >Object</a
+      ><a name="589"
+      > </a
+      ><a name="590" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="591" class="Symbol"
+      >}</a
+      ><a name="592"
+      > </a
+      ><a name="593" class="Symbol"
+      >&#8594;</a
+      ><a name="594"
+      > </a
+      ><a name="595" class="Symbol"
+      >(</a
+      ><a name="596" href="Prelude.Category.Isomorphism.Functor.html#596" class="Bound"
+      >i</a
+      ><a name="597"
+      > </a
+      ><a name="598" class="Symbol"
+      >:</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="603"
+      > </a
+      ><a name="604" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="605"
+      > </a
+      ><a name="606" href="Prelude.Category.Isomorphism.Functor.html#577" class="Bound"
+      >X</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="Prelude.Category.Isomorphism.Functor.html#579" class="Bound"
+      >Y</a
+      ><a name="609" class="Symbol"
+      >)</a
+      ><a name="610"
+      > </a
+      ><a name="611" class="Symbol"
+      >&#8594;</a
+      ><a name="612"
+      > </a
+      ><a name="613" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="621"
+      > </a
+      ><a name="622" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="623"
+      > </a
+      ><a name="624" class="Symbol"
+      >(</a
+      ><a name="625" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >Iso.to</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="Prelude.Category.Isomorphism.Functor.html#596" class="Bound"
+      >i</a
+      ><a name="633" class="Symbol"
+      >)</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="Prelude.Category.html#1100" class="Function Operator"
+      >&#183;D</a
+      ><a name="637"
+      > </a
+      ><a name="638" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >(</a
+      ><a name="650" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >Iso.from</a
+      ><a name="658"
+      > </a
+      ><a name="659" href="Prelude.Category.Isomorphism.Functor.html#596" class="Bound"
+      >i</a
+      ><a name="660" class="Symbol"
+      >)</a
+      ><a name="661"
+      > </a
+      ><a name="662" href="Prelude.Category.html#999" class="Function Operator"
+      >&#8776;D</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="Prelude.Category.html#1150" class="Field"
+      >id</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="669"
+      >
+  </a
+      ><a name="672" href="Prelude.Category.Isomorphism.Functor.html#566" class="Function"
+      >inverse</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >{</a
+      ><a name="681" href="Prelude.Category.Isomorphism.Functor.html#681" class="Bound"
+      >X</a
+      ><a name="682" class="Symbol"
+      >}</a
+      ><a name="683"
+      > </a
+      ><a name="684" class="Symbol"
+      >{</a
+      ><a name="685" href="Prelude.Category.Isomorphism.Functor.html#685" class="Bound"
+      >Y</a
+      ><a name="686" class="Symbol"
+      >}</a
+      ><a name="687"
+      > </a
+      ><a name="688" href="Prelude.Category.Isomorphism.Functor.html#688" class="Bound"
+      >i</a
+      ><a name="689"
+      > </a
+      ><a name="690" class="Symbol"
+      >=</a
+      ><a name="691"
+      >
+    </a
+      ><a name="696" href="Relation.Binary.PreorderReasoning.html#1154" class="Function Operator"
+      >begin</a
+      ><a name="701"
+      >
+      </a
+      ><a name="708" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="716"
+      > </a
+      ><a name="717" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="718"
+      > </a
+      ><a name="719" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >to</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="Prelude.Category.html#1100" class="Function Operator"
+      >&#183;D</a
+      ><a name="724"
+      > </a
+      ><a name="725" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="733"
+      > </a
+      ><a name="734" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="735"
+      > </a
+      ><a name="736" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >from</a
+      ><a name="740"
+      >
+        </a
+      ><a name="749" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8776;&#10216;</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="762"
+      > </a
+      ><a name="763" href="Prelude.Category.Isomorphism.Functor.html#954" class="Function"
+      >setoid</a
+      ><a name="769"
+      > </a
+      ><a name="770" class="Symbol"
+      >(</a
+      ><a name="771" href="Prelude.Category.html#2341" class="Field"
+      >comp-preserving</a
+      ><a name="786"
+      > </a
+      ><a name="787" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >to</a
+      ><a name="791"
+      > </a
+      ><a name="792" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >from</a
+      ><a name="796" class="Symbol"
+      >)</a
+      ><a name="797"
+      > </a
+      ><a name="798" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="799"
+      >
+      </a
+      ><a name="806" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="814"
+      > </a
+      ><a name="815" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="816"
+      > </a
+      ><a name="817" class="Symbol"
+      >(</a
+      ><a name="818" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >to</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="Prelude.Category.html#1100" class="Function Operator"
+      >&#183;C</a
+      ><a name="823"
+      > </a
+      ><a name="824" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >from</a
+      ><a name="828" class="Symbol"
+      >)</a
+      ><a name="829"
+      >
+        </a
+      ><a name="838" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8776;&#10216;</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="Prelude.Category.html#2202" class="Field"
+      >&#8776;-respecting</a
+      ><a name="853"
+      > </a
+      ><a name="854" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="855"
+      > </a
+      ><a name="856" href="Prelude.Category.Isomorphism.html#760" class="Field"
+      >to-from-inverse</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="873"
+      >
+      </a
+      ><a name="880" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="888"
+      > </a
+      ><a name="889" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="890"
+      > </a
+      ><a name="891" class="Symbol"
+      >(</a
+      ><a name="892" href="Prelude.Category.html#1150" class="Field"
+      >id</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="896" class="Symbol"
+      >)</a
+      ><a name="897"
+      >
+        </a
+      ><a name="906" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#8776;&#10216;</a
+      ><a name="908"
+      > </a
+      ><a name="909" href="Prelude.Category.html#2285" class="Field"
+      >id-preserving</a
+      ><a name="922"
+      > </a
+      ><a name="923" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="924"
+      > </a
+      ><a name="925" href="Relation.Binary.PreorderReasoning.html#1220" class="Function Operator"
+      >&#10217;</a
+      ><a name="926"
+      >
+      </a
+      ><a name="933" href="Prelude.Category.html#1150" class="Field"
+      >id</a
+      ><a name="935"
+      > </a
+      ><a name="936" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="937"
+      >
+    </a
+      ><a name="942" href="Relation.Binary.PreorderReasoning.html#1519" class="Function Operator"
+      >&#8718;</a
+      ><a name="943"
+      >
+    </a
+      ><a name="948" class="Keyword"
+      >where</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="Prelude.Category.Isomorphism.Functor.html#954" class="Function"
+      >setoid</a
+      ><a name="960"
+      > </a
+      ><a name="961" class="Symbol"
+      >=</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="Prelude.Category.html#876" class="Field"
+      >Morphism</a
+      ><a name="971"
+      > </a
+      ><a name="972" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="973"
+      > </a
+      ><a name="974" class="Symbol"
+      >(</a
+      ><a name="975" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="981"
+      > </a
+      ><a name="982" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="983"
+      > </a
+      ><a name="984" href="Prelude.Category.Isomorphism.Functor.html#685" class="Bound"
+      >Y</a
+      ><a name="985" class="Symbol"
+      >)</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >(</a
+      ><a name="988" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="996"
+      > </a
+      ><a name="997" href="Prelude.Category.Isomorphism.Functor.html#685" class="Bound"
+      >Y</a
+      ><a name="998" class="Symbol"
+      >)</a
+      ><a name="999"
+      >
+          </a
+      ><a name="1010" class="Keyword"
+      >open</a
+      ><a name="1014"
+      > </a
+      ><a name="1015" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >EqReasoning</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="Prelude.Category.Isomorphism.Functor.html#954" class="Function"
+      >setoid</a
+      ><a name="1033"
+      >
+          </a
+      ><a name="1044" class="Keyword"
+      >open</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" href="Prelude.Category.Isomorphism.html#632" class="Module"
+      >Iso</a
+      ><a name="1052"
+      > </a
+      ><a name="1053" href="Prelude.Category.Isomorphism.Functor.html#688" class="Bound"
+      >i</a
+      ><a name="1054"
+      >
+
+</a
+      ><a name="1056" href="Prelude.Category.Isomorphism.Functor.html#1056" class="Function"
+      >iso-preserving</a
+      ><a name="1070"
+      > </a
+      ><a name="1071" class="Symbol"
+      >:</a
+      ><a name="1072"
+      > </a
+      ><a name="1073" class="Symbol"
+      >{</a
+      ><a name="1074" href="Prelude.Category.Isomorphism.Functor.html#1074" class="Bound"
+      >X</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="Prelude.Category.Isomorphism.Functor.html#1076" class="Bound"
+      >Y</a
+      ><a name="1077"
+      > </a
+      ><a name="1078" class="Symbol"
+      >:</a
+      ><a name="1079"
+      > </a
+      ><a name="1080" href="Prelude.Category.html#854" class="Field"
+      >Object</a
+      ><a name="1086"
+      > </a
+      ><a name="1087" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="1088" class="Symbol"
+      >}</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Symbol"
+      >&#8594;</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" href="Prelude.Category.Isomorphism.Functor.html#1074" class="Bound"
+      >X</a
+      ><a name="1099"
+      > </a
+      ><a name="1100" href="Prelude.Category.Isomorphism.Functor.html#1076" class="Bound"
+      >Y</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >&#8594;</a
+      ><a name="1103"
+      > </a
+      ><a name="1104" href="Prelude.Category.Isomorphism.html#632" class="Record"
+      >Iso</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" href="Prelude.Category.Isomorphism.Functor.html#208" class="Bound"
+      >D</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" class="Symbol"
+      >(</a
+      ><a name="1111" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1117"
+      > </a
+      ><a name="1118" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="Prelude.Category.Isomorphism.Functor.html#1074" class="Bound"
+      >X</a
+      ><a name="1121" class="Symbol"
+      >)</a
+      ><a name="1122"
+      > </a
+      ><a name="1123" class="Symbol"
+      >(</a
+      ><a name="1124" href="Prelude.Category.html#2110" class="Field"
+      >object</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Prelude.Category.Isomorphism.Functor.html#1076" class="Bound"
+      >Y</a
+      ><a name="1134" class="Symbol"
+      >)</a
+      ><a name="1135"
+      >
+</a
+      ><a name="1136" href="Prelude.Category.Isomorphism.Functor.html#1056" class="Function"
+      >iso-preserving</a
+      ><a name="1150"
+      > </a
+      ><a name="1151" class="Symbol"
+      >{</a
+      ><a name="1152" href="Prelude.Category.Isomorphism.Functor.html#1152" class="Bound"
+      >X</a
+      ><a name="1153" class="Symbol"
+      >}</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" class="Symbol"
+      >{</a
+      ><a name="1156" href="Prelude.Category.Isomorphism.Functor.html#1156" class="Bound"
+      >Y</a
+      ><a name="1157" class="Symbol"
+      >}</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" href="Prelude.Category.Isomorphism.Functor.html#1159" class="Bound"
+      >i</a
+      ><a name="1160"
+      > </a
+      ><a name="1161" class="Symbol"
+      >=</a
+      ><a name="1162"
+      >
+  </a
+      ><a name="1165" class="Keyword"
+      >record</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Symbol"
+      >{</a
+      ><a name="1173"
+      > </a
+      ><a name="1174" class="Field"
+      >to</a
+      ><a name="1176"
+      >   </a
+      ><a name="1179" class="Symbol"
+      >=</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="1189"
+      > </a
+      ><a name="1190" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="1191"
+      > </a
+      ><a name="1192" href="Prelude.Category.Isomorphism.html#685" class="Field"
+      >to</a
+      ><a name="1194"
+      >
+         </a
+      ><a name="1204" class="Symbol"
+      >;</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" class="Field"
+      >from</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >=</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" href="Prelude.Category.html#2143" class="Field"
+      >morphism</a
+      ><a name="1221"
+      > </a
+      ><a name="1222" href="Prelude.Category.Isomorphism.Functor.html#238" class="Bound"
+      >F</a
+      ><a name="1223"
+      > </a
+      ><a name="1224" href="Prelude.Category.Isomorphism.html#704" class="Field"
+      >from</a
+      ><a name="1228"
+      >
+         </a
+      ><a name="1238" class="Symbol"
+      >;</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Field"
+      >to-from-inverse</a
+      ><a name="1255"
+      > </a
+      ><a name="1256" class="Symbol"
+      >=</a
+      ><a name="1257"
+      > </a
+      ><a name="1258" href="Prelude.Category.Isomorphism.Functor.html#566" class="Function"
+      >inverse</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="Prelude.Category.Isomorphism.Functor.html#1159" class="Bound"
+      >i</a
+      ><a name="1267"
+      >
+         </a
+      ><a name="1277" class="Symbol"
+      >;</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" class="Field"
+      >from-to-inverse</a
+      ><a name="1294"
+      > </a
+      ><a name="1295" class="Symbol"
+      >=</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="Prelude.Category.Isomorphism.Functor.html#566" class="Function"
+      >inverse</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Symbol"
+      >(</a
+      ><a name="1306" href="Relation.Binary.Core.html#4960" class="Function"
+      >Setoid.sym</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" class="Symbol"
+      >(</a
+      ><a name="1318" href="Prelude.Category.Isomorphism.html#1753" class="Function"
+      >IsoSetoid</a
+      ><a name="1327"
+      > </a
+      ><a name="1328" href="Prelude.Category.Isomorphism.Functor.html#159" class="Bound"
+      >C</a
+      ><a name="1329" class="Symbol"
+      >)</a
+      ><a name="1330"
+      > </a
+      ><a name="1331" href="Prelude.Category.Isomorphism.Functor.html#1159" class="Bound"
+      >i</a
+      ><a name="1332" class="Symbol"
+      >)</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" class="Symbol"
+      >}</a
+      ><a name="1335"
+      >
+  </a
+      ><a name="1338" class="Keyword"
+      >where</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="Keyword"
+      >open</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" href="Prelude.Category.Isomorphism.html#632" class="Module"
+      >Iso</a
+      ><a name="1352"
+      > </a
+      ><a name="1353" href="Prelude.Category.Isomorphism.Functor.html#1159" class="Bound"
+      >i</a
+      ><a name="1354"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

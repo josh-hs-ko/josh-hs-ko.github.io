@@ -1,0 +1,551 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Everything</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="Everything.html#1" class="Module"
+      >Everything</a
+      ><a name="18"
+      > </a
+      ><a name="19" class="Keyword"
+      >where</a
+      ><a name="24"
+      >
+
+</a
+      ><a name="26" class="Keyword"
+      >import</a
+      ><a name="32"
+      > </a
+      ><a name="33" href="Prelude.Category.html#1" class="Module"
+      >Prelude.Category</a
+      ><a name="49"
+      >
+</a
+      ><a name="50" class="Keyword"
+      >import</a
+      ><a name="56"
+      > </a
+      ><a name="57" href="Prelude.Category.Isomorphism.html#1" class="Module"
+      >Prelude.Category.Isomorphism</a
+      ><a name="85"
+      >
+</a
+      ><a name="86" class="Keyword"
+      >import</a
+      ><a name="92"
+      > </a
+      ><a name="93" href="Prelude.Category.Isomorphism.Functor.html#1" class="Module"
+      >Prelude.Category.Isomorphism.Functor</a
+      ><a name="129"
+      >
+</a
+      ><a name="130" class="Keyword"
+      >import</a
+      ><a name="136"
+      > </a
+      ><a name="137" href="Prelude.Category.NaturalTransformation.html#1" class="Module"
+      >Prelude.Category.NaturalTransformation</a
+      ><a name="175"
+      >
+</a
+      ><a name="176" class="Keyword"
+      >import</a
+      ><a name="182"
+      > </a
+      ><a name="183" href="Prelude.Category.Pullback.html#1" class="Module"
+      >Prelude.Category.Pullback</a
+      ><a name="208"
+      >
+</a
+      ><a name="209" class="Keyword"
+      >import</a
+      ><a name="215"
+      > </a
+      ><a name="216" href="Prelude.Category.Pullback.Midpoint.html#1" class="Module"
+      >Prelude.Category.Pullback.Midpoint</a
+      ><a name="250"
+      >
+</a
+      ><a name="251" class="Keyword"
+      >import</a
+      ><a name="257"
+      > </a
+      ><a name="258" href="Prelude.Category.Slice.html#1" class="Module"
+      >Prelude.Category.Slice</a
+      ><a name="280"
+      >
+</a
+      ><a name="281" class="Keyword"
+      >import</a
+      ><a name="287"
+      > </a
+      ><a name="288" href="Prelude.Category.Slice.Functor.html#1" class="Module"
+      >Prelude.Category.Slice.Functor</a
+      ><a name="318"
+      >
+</a
+      ><a name="319" class="Keyword"
+      >import</a
+      ><a name="325"
+      > </a
+      ><a name="326" href="Prelude.Category.Span.html#1" class="Module"
+      >Prelude.Category.Span</a
+      ><a name="347"
+      >
+</a
+      ><a name="348" class="Keyword"
+      >import</a
+      ><a name="354"
+      > </a
+      ><a name="355" href="Prelude.Category.WCat.html#1" class="Module"
+      >Prelude.Category.WCat</a
+      ><a name="376"
+      >
+</a
+      ><a name="377" class="Keyword"
+      >import</a
+      ><a name="383"
+      > </a
+      ><a name="384" href="Prelude.Equality.html#1" class="Module"
+      >Prelude.Equality</a
+      ><a name="400"
+      >
+</a
+      ><a name="401" class="Keyword"
+      >import</a
+      ><a name="407"
+      > </a
+      ><a name="408" href="Prelude.Function.html#1" class="Module"
+      >Prelude.Function</a
+      ><a name="424"
+      >
+</a
+      ><a name="425" class="Keyword"
+      >import</a
+      ><a name="431"
+      > </a
+      ><a name="432" href="Prelude.Function.Fam.html#1" class="Module"
+      >Prelude.Function.Fam</a
+      ><a name="452"
+      >
+</a
+      ><a name="453" class="Keyword"
+      >import</a
+      ><a name="459"
+      > </a
+      ><a name="460" href="Prelude.Function.Isomorphism.html#1" class="Module"
+      >Prelude.Function.Isomorphism</a
+      ><a name="488"
+      >
+</a
+      ><a name="489" class="Keyword"
+      >import</a
+      ><a name="495"
+      > </a
+      ><a name="496" href="Prelude.InverseImage.html#1" class="Module"
+      >Prelude.InverseImage</a
+      ><a name="516"
+      >
+</a
+      ><a name="517" class="Keyword"
+      >import</a
+      ><a name="523"
+      > </a
+      ><a name="524" href="Prelude.Preorder.html#1" class="Module"
+      >Prelude.Preorder</a
+      ><a name="540"
+      >
+</a
+      ><a name="541" class="Keyword"
+      >import</a
+      ><a name="547"
+      > </a
+      ><a name="548" href="Prelude.Product.html#1" class="Module"
+      >Prelude.Product</a
+      ><a name="563"
+      >
+</a
+      ><a name="564" class="Keyword"
+      >import</a
+      ><a name="570"
+      > </a
+      ><a name="571" href="Refinement.html#1" class="Module"
+      >Refinement</a
+      ><a name="581"
+      >
+</a
+      ><a name="582" class="Keyword"
+      >import</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="Refinement.Category.html#1" class="Module"
+      >Refinement.Category</a
+      ><a name="608"
+      >
+</a
+      ><a name="609" class="Keyword"
+      >import</a
+      ><a name="615"
+      > </a
+      ><a name="616" href="Description.html#1" class="Module"
+      >Description</a
+      ><a name="627"
+      >
+</a
+      ><a name="628" class="Keyword"
+      >import</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="Description.Horizontal.html#1" class="Module"
+      >Description.Horizontal</a
+      ><a name="657"
+      >
+</a
+      ><a name="658" class="Keyword"
+      >import</a
+      ><a name="664"
+      > </a
+      ><a name="665" href="Ornament.html#1" class="Module"
+      >Ornament</a
+      ><a name="673"
+      >
+</a
+      ><a name="674" class="Keyword"
+      >import</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="Ornament.Algebraic.html#1" class="Module"
+      >Ornament.Algebraic</a
+      ><a name="699"
+      >
+</a
+      ><a name="700" class="Keyword"
+      >import</a
+      ><a name="706"
+      > </a
+      ><a name="707" href="Ornament.Algebraic.EquivalenceTheorem.html#1" class="Module"
+      >Ornament.Algebraic.EquivalenceTheorem</a
+      ><a name="744"
+      >
+</a
+      ><a name="745" class="Keyword"
+      >import</a
+      ><a name="751"
+      > </a
+      ><a name="752" href="Ornament.Category.html#1" class="Module"
+      >Ornament.Category</a
+      ><a name="769"
+      >
+</a
+      ><a name="770" class="Keyword"
+      >import</a
+      ><a name="776"
+      > </a
+      ><a name="777" href="Ornament.Equivalence.html#1" class="Module"
+      >Ornament.Equivalence</a
+      ><a name="797"
+      >
+</a
+      ><a name="798" class="Keyword"
+      >import</a
+      ><a name="804"
+      > </a
+      ><a name="805" href="Ornament.Horizontal.html#1" class="Module"
+      >Ornament.Horizontal</a
+      ><a name="824"
+      >
+</a
+      ><a name="825" class="Keyword"
+      >import</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="Ornament.Horizontal.Category.html#1" class="Module"
+      >Ornament.Horizontal.Category</a
+      ><a name="860"
+      >
+</a
+      ><a name="861" class="Keyword"
+      >import</a
+      ><a name="867"
+      > </a
+      ><a name="868" href="Ornament.Horizontal.Equivalence.html#1" class="Module"
+      >Ornament.Horizontal.Equivalence</a
+      ><a name="899"
+      >
+</a
+      ><a name="900" class="Keyword"
+      >import</a
+      ><a name="906"
+      > </a
+      ><a name="907" href="Ornament.Horizontal.Pullback.html#1" class="Module"
+      >Ornament.Horizontal.Pullback</a
+      ><a name="935"
+      >
+</a
+      ><a name="936" class="Keyword"
+      >import</a
+      ><a name="942"
+      > </a
+      ><a name="943" href="Ornament.ParallelComposition.html#1" class="Module"
+      >Ornament.ParallelComposition</a
+      ><a name="971"
+      >
+</a
+      ><a name="972" class="Keyword"
+      >import</a
+      ><a name="978"
+      > </a
+      ><a name="979" href="Ornament.ParallelComposition.Pullback.html#1" class="Module"
+      >Ornament.ParallelComposition.Pullback</a
+      ><a name="1016"
+      >
+</a
+      ><a name="1017" class="Keyword"
+      >import</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" href="Ornament.ParallelComposition.Swap.html#1" class="Module"
+      >Ornament.ParallelComposition.Swap</a
+      ><a name="1057"
+      >
+</a
+      ><a name="1058" class="Keyword"
+      >import</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" href="Ornament.RefinementSemantics.html#1" class="Module"
+      >Ornament.RefinementSemantics</a
+      ><a name="1093"
+      >
+</a
+      ><a name="1094" class="Keyword"
+      >import</a
+      ><a name="1100"
+      > </a
+      ><a name="1101" href="Ornament.SequentialComposition.html#1" class="Module"
+      >Ornament.SequentialComposition</a
+      ><a name="1131"
+      >
+</a
+      ><a name="1132" class="Keyword"
+      >import</a
+      ><a name="1138"
+      > </a
+      ><a name="1139" href="Relation.html#1" class="Module"
+      >Relation</a
+      ><a name="1147"
+      >
+</a
+      ><a name="1148" class="Keyword"
+      >import</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" href="Relation.AlgCategory.html#1" class="Module"
+      >Relation.AlgCategory</a
+      ><a name="1175"
+      >
+</a
+      ><a name="1176" class="Keyword"
+      >import</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" href="Relation.CompChain.html#1" class="Module"
+      >Relation.CompChain</a
+      ><a name="1201"
+      >
+</a
+      ><a name="1202" class="Keyword"
+      >import</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" href="Relation.Division.html#1" class="Module"
+      >Relation.Division</a
+      ><a name="1226"
+      >
+</a
+      ><a name="1227" class="Keyword"
+      >import</a
+      ><a name="1233"
+      > </a
+      ><a name="1234" href="Relation.Fold.html#1" class="Module"
+      >Relation.Fold</a
+      ><a name="1247"
+      >
+</a
+      ><a name="1248" class="Keyword"
+      >import</a
+      ><a name="1254"
+      > </a
+      ><a name="1255" href="Relation.GreedyTheorem.html#1" class="Module"
+      >Relation.GreedyTheorem</a
+      ><a name="1277"
+      >
+</a
+      ><a name="1278" class="Keyword"
+      >import</a
+      ><a name="1284"
+      > </a
+      ><a name="1285" href="Relation.Hylomorphism.html#1" class="Module"
+      >Relation.Hylomorphism</a
+      ><a name="1306"
+      >
+</a
+      ><a name="1307" class="Keyword"
+      >import</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="Relation.Join.html#1" class="Module"
+      >Relation.Join</a
+      ><a name="1327"
+      >
+</a
+      ><a name="1328" class="Keyword"
+      >import</a
+      ><a name="1334"
+      > </a
+      ><a name="1335" href="Relation.Meet.html#1" class="Module"
+      >Relation.Meet</a
+      ><a name="1348"
+      >
+</a
+      ><a name="1349" class="Keyword"
+      >import</a
+      ><a name="1355"
+      > </a
+      ><a name="1356" href="Relation.Minimum.html#1" class="Module"
+      >Relation.Minimum</a
+      ><a name="1372"
+      >
+</a
+      ><a name="1373" class="Keyword"
+      >import</a
+      ><a name="1379"
+      > </a
+      ><a name="1380" href="Examples.BinomialHeap.html#1" class="Module"
+      >Examples.BinomialHeap</a
+      ><a name="1401"
+      >
+</a
+      ><a name="1402" class="Keyword"
+      >import</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="Examples.Bool.html#1" class="Module"
+      >Examples.Bool</a
+      ><a name="1422"
+      >
+</a
+      ><a name="1423" class="Keyword"
+      >import</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" href="Examples.Fin.html#1" class="Module"
+      >Examples.Fin</a
+      ><a name="1442"
+      >
+</a
+      ><a name="1443" class="Keyword"
+      >import</a
+      ><a name="1449"
+      > </a
+      ><a name="1450" href="Examples.FoldFusion.html#1" class="Module"
+      >Examples.FoldFusion</a
+      ><a name="1469"
+      >
+</a
+      ><a name="1470" class="Keyword"
+      >import</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="Examples.Insertion.html#1" class="Module"
+      >Examples.Insertion</a
+      ><a name="1495"
+      >
+</a
+      ><a name="1496" class="Keyword"
+      >import</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="Examples.LeftistHeap.html#1" class="Module"
+      >Examples.LeftistHeap</a
+      ><a name="1523"
+      >
+</a
+      ><a name="1524" class="Keyword"
+      >import</a
+      ><a name="1530"
+      > </a
+      ><a name="1531" href="Examples.List.html#1" class="Module"
+      >Examples.List</a
+      ><a name="1544"
+      >
+</a
+      ><a name="1545" class="Keyword"
+      >import</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="Examples.List.Ordered.html#1" class="Module"
+      >Examples.List.Ordered</a
+      ><a name="1573"
+      >
+</a
+      ><a name="1574" class="Keyword"
+      >import</a
+      ><a name="1580"
+      > </a
+      ><a name="1581" href="Examples.List.Vec.html#1" class="Module"
+      >Examples.List.Vec</a
+      ><a name="1598"
+      >
+</a
+      ><a name="1599" class="Keyword"
+      >import</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="Examples.Metamorphism.html#1" class="Module"
+      >Examples.Metamorphism</a
+      ><a name="1627"
+      >
+</a
+      ><a name="1628" class="Keyword"
+      >import</a
+      ><a name="1634"
+      > </a
+      ><a name="1635" href="Examples.MinCoinChange.html#1" class="Module"
+      >Examples.MinCoinChange</a
+      ><a name="1657"
+      >
+</a
+      ><a name="1658" class="Keyword"
+      >import</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="Examples.Nat.html#1" class="Module"
+      >Examples.Nat</a
+      ><a name="1677"
+      >
+</a
+      ><a name="1678" class="Keyword"
+      >import</a
+      ><a name="1684"
+      > </a
+      ><a name="1685" href="Examples.Nat.TotalOrdering.html#1" class="Module"
+      >Examples.Nat.TotalOrdering</a
+      ><a name="1711"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>
