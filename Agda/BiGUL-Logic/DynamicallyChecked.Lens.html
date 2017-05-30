@@ -1,0 +1,3618 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >DynamicallyChecked.Lens</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >module</a
+      ><a name="7"
+      > </a
+      ><a name="8" href="DynamicallyChecked.Lens.html#1" class="Module"
+      >DynamicallyChecked.Lens</a
+      ><a name="31"
+      > </a
+      ><a name="32" class="Keyword"
+      >where</a
+      ><a name="37"
+      >
+
+</a
+      ><a name="39" class="Keyword"
+      >open</a
+      ><a name="43"
+      > </a
+      ><a name="44" class="Keyword"
+      >import</a
+      ><a name="50"
+      > </a
+      ><a name="51" href="DynamicallyChecked.Partiality.html#1" class="Module"
+      >DynamicallyChecked.Partiality</a
+      ><a name="80"
+      >
+</a
+      ><a name="81" class="Keyword"
+      >open</a
+      ><a name="85"
+      > </a
+      ><a name="86" class="Keyword"
+      >import</a
+      ><a name="92"
+      > </a
+      ><a name="93" href="DynamicallyChecked.Utilities.html#1" class="Module"
+      >DynamicallyChecked.Utilities</a
+      ><a name="121"
+      >
+
+</a
+      ><a name="123" class="Keyword"
+      >open</a
+      ><a name="127"
+      > </a
+      ><a name="128" class="Keyword"
+      >import</a
+      ><a name="134"
+      > </a
+      ><a name="135" href="Function.html#1" class="Module"
+      >Function</a
+      ><a name="143"
+      >
+</a
+      ><a name="144" class="Keyword"
+      >open</a
+      ><a name="148"
+      > </a
+      ><a name="149" class="Keyword"
+      >import</a
+      ><a name="155"
+      > </a
+      ><a name="156" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="168"
+      >
+</a
+      ><a name="169" class="Keyword"
+      >open</a
+      ><a name="173"
+      > </a
+      ><a name="174" class="Keyword"
+      >import</a
+      ><a name="180"
+      > </a
+      ><a name="181" href="Relation.Nullary.html#1" class="Module"
+      >Relation.Nullary</a
+      ><a name="197"
+      >
+</a
+      ><a name="198" class="Keyword"
+      >open</a
+      ><a name="202"
+      > </a
+      ><a name="203" class="Keyword"
+      >import</a
+      ><a name="209"
+      > </a
+      ><a name="210" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="225"
+      >
+</a
+      ><a name="226" class="Keyword"
+      >open</a
+      ><a name="230"
+      > </a
+      ><a name="231" class="Keyword"
+      >import</a
+      ><a name="237"
+      > </a
+      ><a name="238" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="275"
+      >
+
+
+</a
+      ><a name="278" class="Keyword"
+      >record</a
+      ><a name="284"
+      > </a
+      ><a name="285" href="DynamicallyChecked.Lens.html#285" class="Record"
+      >Lens</a
+      ><a name="289"
+      > </a
+      ><a name="290" class="Symbol"
+      >(</a
+      ><a name="291" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="292"
+      > </a
+      ><a name="293" href="DynamicallyChecked.Lens.html#293" class="Bound"
+      >V</a
+      ><a name="294"
+      > </a
+      ><a name="295" class="Symbol"
+      >:</a
+      ><a name="296"
+      > </a
+      ><a name="297" class="PrimitiveType"
+      >Set</a
+      ><a name="300" class="Symbol"
+      >)</a
+      ><a name="301"
+      > </a
+      ><a name="302" class="Symbol"
+      >:</a
+      ><a name="303"
+      > </a
+      ><a name="304" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="308"
+      > </a
+      ><a name="309" class="Keyword"
+      >where</a
+      ><a name="314"
+      >
+  </a
+      ><a name="317" class="Keyword"
+      >field</a
+      ><a name="322"
+      >
+    </a
+      ><a name="327" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >put</a
+      ><a name="330"
+      > </a
+      ><a name="331" class="Symbol"
+      >:</a
+      ><a name="332"
+      > </a
+      ><a name="333" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Symbol"
+      >&#8594;</a
+      ><a name="336"
+      > </a
+      ><a name="337" href="DynamicallyChecked.Lens.html#293" class="Bound"
+      >V</a
+      ><a name="338"
+      > </a
+      ><a name="339" class="Symbol"
+      >&#8594;</a
+      ><a name="340"
+      > </a
+      ><a name="341" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="344"
+      > </a
+      ><a name="345" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="346"
+      >
+    </a
+      ><a name="351" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >get</a
+      ><a name="354"
+      > </a
+      ><a name="355" class="Symbol"
+      >:</a
+      ><a name="356"
+      > </a
+      ><a name="357" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Symbol"
+      >&#8594;</a
+      ><a name="360"
+      > </a
+      ><a name="361" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="364"
+      > </a
+      ><a name="365" href="DynamicallyChecked.Lens.html#293" class="Bound"
+      >V</a
+      ><a name="366"
+      >
+    </a
+      ><a name="371" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >PutGet</a
+      ><a name="377"
+      > </a
+      ><a name="378" class="Symbol"
+      >:</a
+      ><a name="379"
+      > </a
+      ><a name="380" class="Symbol"
+      >{</a
+      ><a name="381" href="DynamicallyChecked.Lens.html#381" class="Bound"
+      >s</a
+      ><a name="382"
+      > </a
+      ><a name="383" class="Symbol"
+      >:</a
+      ><a name="384"
+      > </a
+      ><a name="385" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="386" class="Symbol"
+      >}</a
+      ><a name="387"
+      > </a
+      ><a name="388" class="Symbol"
+      >{</a
+      ><a name="389" href="DynamicallyChecked.Lens.html#389" class="Bound"
+      >v</a
+      ><a name="390"
+      > </a
+      ><a name="391" class="Symbol"
+      >:</a
+      ><a name="392"
+      > </a
+      ><a name="393" href="DynamicallyChecked.Lens.html#293" class="Bound"
+      >V</a
+      ><a name="394" class="Symbol"
+      >}</a
+      ><a name="395"
+      > </a
+      ><a name="396" class="Symbol"
+      >{</a
+      ><a name="397" href="DynamicallyChecked.Lens.html#397" class="Bound"
+      >s'</a
+      ><a name="399"
+      > </a
+      ><a name="400" class="Symbol"
+      >:</a
+      ><a name="401"
+      > </a
+      ><a name="402" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="403" class="Symbol"
+      >}</a
+      ><a name="404"
+      > </a
+      ><a name="405" class="Symbol"
+      >&#8594;</a
+      ><a name="406"
+      > </a
+      ><a name="407" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >put</a
+      ><a name="410"
+      > </a
+      ><a name="411" href="DynamicallyChecked.Lens.html#381" class="Bound"
+      >s</a
+      ><a name="412"
+      > </a
+      ><a name="413" href="DynamicallyChecked.Lens.html#389" class="Bound"
+      >v</a
+      ><a name="414"
+      > </a
+      ><a name="415" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="416"
+      > </a
+      ><a name="417" href="DynamicallyChecked.Lens.html#397" class="Bound"
+      >s'</a
+      ><a name="419"
+      > </a
+      ><a name="420" class="Symbol"
+      >&#8594;</a
+      ><a name="421"
+      > </a
+      ><a name="422" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >get</a
+      ><a name="425"
+      > </a
+      ><a name="426" href="DynamicallyChecked.Lens.html#397" class="Bound"
+      >s'</a
+      ><a name="428"
+      > </a
+      ><a name="429" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="430"
+      > </a
+      ><a name="431" href="DynamicallyChecked.Lens.html#389" class="Bound"
+      >v</a
+      ><a name="432"
+      >
+    </a
+      ><a name="437" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >GetPut</a
+      ><a name="443"
+      > </a
+      ><a name="444" class="Symbol"
+      >:</a
+      ><a name="445"
+      > </a
+      ><a name="446" class="Symbol"
+      >{</a
+      ><a name="447" href="DynamicallyChecked.Lens.html#447" class="Bound"
+      >s</a
+      ><a name="448"
+      > </a
+      ><a name="449" class="Symbol"
+      >:</a
+      ><a name="450"
+      > </a
+      ><a name="451" href="DynamicallyChecked.Lens.html#291" class="Bound"
+      >S</a
+      ><a name="452" class="Symbol"
+      >}</a
+      ><a name="453"
+      > </a
+      ><a name="454" class="Symbol"
+      >{</a
+      ><a name="455" href="DynamicallyChecked.Lens.html#455" class="Bound"
+      >v</a
+      ><a name="456"
+      > </a
+      ><a name="457" class="Symbol"
+      >:</a
+      ><a name="458"
+      > </a
+      ><a name="459" href="DynamicallyChecked.Lens.html#293" class="Bound"
+      >V</a
+      ><a name="460" class="Symbol"
+      >}</a
+      ><a name="461"
+      > </a
+      ><a name="462" class="Symbol"
+      >&#8594;</a
+      ><a name="463"
+      > </a
+      ><a name="464" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >get</a
+      ><a name="467"
+      > </a
+      ><a name="468" href="DynamicallyChecked.Lens.html#447" class="Bound"
+      >s</a
+      ><a name="469"
+      > </a
+      ><a name="470" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="471"
+      > </a
+      ><a name="472" href="DynamicallyChecked.Lens.html#455" class="Bound"
+      >v</a
+      ><a name="473"
+      > </a
+      ><a name="474" class="Symbol"
+      >&#8594;</a
+      ><a name="475"
+      > </a
+      ><a name="476" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >put</a
+      ><a name="479"
+      > </a
+      ><a name="480" href="DynamicallyChecked.Lens.html#447" class="Bound"
+      >s</a
+      ><a name="481"
+      > </a
+      ><a name="482" href="DynamicallyChecked.Lens.html#455" class="Bound"
+      >v</a
+      ><a name="483"
+      > </a
+      ><a name="484" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="485"
+      > </a
+      ><a name="486" href="DynamicallyChecked.Lens.html#447" class="Bound"
+      >s</a
+      ><a name="487"
+      >
+
+</a
+      ><a name="489" class="Keyword"
+      >infix</a
+      ><a name="494"
+      > </a
+      ><a name="495" class="Number"
+      >1</a
+      ><a name="496"
+      > </a
+      ><a name="497" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="500"
+      >
+
+</a
+      ><a name="502" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="505"
+      > </a
+      ><a name="506" class="Symbol"
+      >:</a
+      ><a name="507"
+      > </a
+      ><a name="508" class="PrimitiveType"
+      >Set</a
+      ><a name="511"
+      > </a
+      ><a name="512" class="Symbol"
+      >&#8594;</a
+      ><a name="513"
+      > </a
+      ><a name="514" class="PrimitiveType"
+      >Set</a
+      ><a name="517"
+      > </a
+      ><a name="518" class="Symbol"
+      >&#8594;</a
+      ><a name="519"
+      > </a
+      ><a name="520" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="524"
+      >
+</a
+      ><a name="525" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >_&#8646;_</a
+      ><a name="528"
+      > </a
+      ><a name="529" class="Symbol"
+      >=</a
+      ><a name="530"
+      > </a
+      ><a name="531" href="DynamicallyChecked.Lens.html#285" class="Record"
+      >Lens</a
+      ><a name="535"
+      >
+
+</a
+      ><a name="537" href="DynamicallyChecked.Lens.html#537" class="Function Operator"
+      >_&#8828;&#7486;_</a
+      ><a name="541"
+      > </a
+      ><a name="542" class="Symbol"
+      >:</a
+      ><a name="543"
+      > </a
+      ><a name="544" class="Symbol"
+      >{</a
+      ><a name="545" href="DynamicallyChecked.Lens.html#545" class="Bound"
+      >A</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >:</a
+      ><a name="548"
+      > </a
+      ><a name="549" class="PrimitiveType"
+      >Set</a
+      ><a name="552" class="Symbol"
+      >}</a
+      ><a name="553"
+      > </a
+      ><a name="554" class="Symbol"
+      >&#8594;</a
+      ><a name="555"
+      > </a
+      ><a name="556" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="559"
+      > </a
+      ><a name="560" href="DynamicallyChecked.Lens.html#545" class="Bound"
+      >A</a
+      ><a name="561"
+      > </a
+      ><a name="562" class="Symbol"
+      >&#8594;</a
+      ><a name="563"
+      > </a
+      ><a name="564" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="567"
+      > </a
+      ><a name="568" href="DynamicallyChecked.Lens.html#545" class="Bound"
+      >A</a
+      ><a name="569"
+      > </a
+      ><a name="570" class="Symbol"
+      >&#8594;</a
+      ><a name="571"
+      > </a
+      ><a name="572" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="576"
+      >
+</a
+      ><a name="577" href="DynamicallyChecked.Lens.html#577" class="Bound"
+      >mx</a
+      ><a name="579"
+      > </a
+      ><a name="580" href="DynamicallyChecked.Lens.html#537" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="582"
+      > </a
+      ><a name="583" href="DynamicallyChecked.Lens.html#583" class="Bound"
+      >my</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Symbol"
+      >=</a
+      ><a name="587"
+      > </a
+      ><a name="588" class="Symbol"
+      >&#8704;</a
+      ><a name="589"
+      > </a
+      ><a name="590" class="Symbol"
+      >{</a
+      ><a name="591" href="DynamicallyChecked.Lens.html#591" class="Bound"
+      >a</a
+      ><a name="592" class="Symbol"
+      >}</a
+      ><a name="593"
+      > </a
+      ><a name="594" class="Symbol"
+      >&#8594;</a
+      ><a name="595"
+      > </a
+      ><a name="596" href="DynamicallyChecked.Lens.html#577" class="Bound"
+      >mx</a
+      ><a name="598"
+      > </a
+      ><a name="599" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="600"
+      > </a
+      ><a name="601" href="DynamicallyChecked.Lens.html#591" class="Bound"
+      >a</a
+      ><a name="602"
+      > </a
+      ><a name="603" class="Symbol"
+      >&#8594;</a
+      ><a name="604"
+      > </a
+      ><a name="605" href="DynamicallyChecked.Lens.html#583" class="Bound"
+      >my</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="DynamicallyChecked.Lens.html#591" class="Bound"
+      >a</a
+      ><a name="611"
+      >
+
+</a
+      ><a name="613" href="DynamicallyChecked.Lens.html#613" class="Function Operator"
+      >_&#8776;&#7486;_</a
+      ><a name="617"
+      > </a
+      ><a name="618" class="Symbol"
+      >:</a
+      ><a name="619"
+      > </a
+      ><a name="620" class="Symbol"
+      >{</a
+      ><a name="621" href="DynamicallyChecked.Lens.html#621" class="Bound"
+      >A</a
+      ><a name="622"
+      > </a
+      ><a name="623" class="Symbol"
+      >:</a
+      ><a name="624"
+      > </a
+      ><a name="625" class="PrimitiveType"
+      >Set</a
+      ><a name="628" class="Symbol"
+      >}</a
+      ><a name="629"
+      > </a
+      ><a name="630" class="Symbol"
+      >&#8594;</a
+      ><a name="631"
+      > </a
+      ><a name="632" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="635"
+      > </a
+      ><a name="636" href="DynamicallyChecked.Lens.html#621" class="Bound"
+      >A</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Symbol"
+      >&#8594;</a
+      ><a name="639"
+      > </a
+      ><a name="640" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="643"
+      > </a
+      ><a name="644" href="DynamicallyChecked.Lens.html#621" class="Bound"
+      >A</a
+      ><a name="645"
+      > </a
+      ><a name="646" class="Symbol"
+      >&#8594;</a
+      ><a name="647"
+      > </a
+      ><a name="648" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="652"
+      >
+</a
+      ><a name="653" href="DynamicallyChecked.Lens.html#653" class="Bound"
+      >mx</a
+      ><a name="655"
+      > </a
+      ><a name="656" href="DynamicallyChecked.Lens.html#613" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="658"
+      > </a
+      ><a name="659" href="DynamicallyChecked.Lens.html#659" class="Bound"
+      >my</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Symbol"
+      >=</a
+      ><a name="663"
+      > </a
+      ><a name="664" class="Symbol"
+      >(</a
+      ><a name="665" href="DynamicallyChecked.Lens.html#653" class="Bound"
+      >mx</a
+      ><a name="667"
+      > </a
+      ><a name="668" href="DynamicallyChecked.Lens.html#537" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="670"
+      > </a
+      ><a name="671" href="DynamicallyChecked.Lens.html#659" class="Bound"
+      >my</a
+      ><a name="673" class="Symbol"
+      >)</a
+      ><a name="674"
+      > </a
+      ><a name="675" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="676"
+      > </a
+      ><a name="677" class="Symbol"
+      >(</a
+      ><a name="678" href="DynamicallyChecked.Lens.html#659" class="Bound"
+      >my</a
+      ><a name="680"
+      > </a
+      ><a name="681" href="DynamicallyChecked.Lens.html#537" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="683"
+      > </a
+      ><a name="684" href="DynamicallyChecked.Lens.html#653" class="Bound"
+      >mx</a
+      ><a name="686" class="Symbol"
+      >)</a
+      ><a name="687"
+      >
+
+</a
+      ><a name="689" href="DynamicallyChecked.Lens.html#689" class="Function"
+      >uniqueness-lemma</a
+      ><a name="705"
+      > </a
+      ><a name="706" class="Symbol"
+      >:</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >{</a
+      ><a name="709" href="DynamicallyChecked.Lens.html#709" class="Bound"
+      >S</a
+      ><a name="710"
+      > </a
+      ><a name="711" href="DynamicallyChecked.Lens.html#711" class="Bound"
+      >V</a
+      ><a name="712"
+      > </a
+      ><a name="713" class="Symbol"
+      >:</a
+      ><a name="714"
+      > </a
+      ><a name="715" class="PrimitiveType"
+      >Set</a
+      ><a name="718" class="Symbol"
+      >}</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >(</a
+      ><a name="721" href="DynamicallyChecked.Lens.html#721" class="Bound"
+      >l</a
+      ><a name="722"
+      > </a
+      ><a name="723" href="DynamicallyChecked.Lens.html#723" class="Bound"
+      >l'</a
+      ><a name="725"
+      > </a
+      ><a name="726" class="Symbol"
+      >:</a
+      ><a name="727"
+      > </a
+      ><a name="728" href="DynamicallyChecked.Lens.html#709" class="Bound"
+      >S</a
+      ><a name="729"
+      > </a
+      ><a name="730" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="731"
+      > </a
+      ><a name="732" href="DynamicallyChecked.Lens.html#711" class="Bound"
+      >V</a
+      ><a name="733" class="Symbol"
+      >)</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >{</a
+      ><a name="736" href="DynamicallyChecked.Lens.html#736" class="Bound"
+      >s</a
+      ><a name="737"
+      > </a
+      ><a name="738" class="Symbol"
+      >:</a
+      ><a name="739"
+      > </a
+      ><a name="740" href="DynamicallyChecked.Lens.html#709" class="Bound"
+      >S</a
+      ><a name="741" class="Symbol"
+      >}</a
+      ><a name="742"
+      > </a
+      ><a name="743" class="Symbol"
+      >{</a
+      ><a name="744" href="DynamicallyChecked.Lens.html#744" class="Bound"
+      >v</a
+      ><a name="745"
+      > </a
+      ><a name="746" class="Symbol"
+      >:</a
+      ><a name="747"
+      > </a
+      ><a name="748" href="DynamicallyChecked.Lens.html#711" class="Bound"
+      >V</a
+      ><a name="749" class="Symbol"
+      >}</a
+      ><a name="750"
+      > </a
+      ><a name="751" class="Symbol"
+      >&#8594;</a
+      ><a name="752"
+      >
+                   </a
+      ><a name="772" class="Symbol"
+      >({</a
+      ><a name="774" href="DynamicallyChecked.Lens.html#774" class="Bound"
+      >s</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >:</a
+      ><a name="777"
+      > </a
+      ><a name="778" href="DynamicallyChecked.Lens.html#709" class="Bound"
+      >S</a
+      ><a name="779" class="Symbol"
+      >}</a
+      ><a name="780"
+      > </a
+      ><a name="781" class="Symbol"
+      >{</a
+      ><a name="782" href="DynamicallyChecked.Lens.html#782" class="Bound"
+      >v</a
+      ><a name="783"
+      > </a
+      ><a name="784" class="Symbol"
+      >:</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="DynamicallyChecked.Lens.html#711" class="Bound"
+      >V</a
+      ><a name="787" class="Symbol"
+      >}</a
+      ><a name="788"
+      > </a
+      ><a name="789" class="Symbol"
+      >&#8594;</a
+      ><a name="790"
+      > </a
+      ><a name="791" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="799"
+      > </a
+      ><a name="800" href="DynamicallyChecked.Lens.html#721" class="Bound"
+      >l</a
+      ><a name="801"
+      > </a
+      ><a name="802" href="DynamicallyChecked.Lens.html#774" class="Bound"
+      >s</a
+      ><a name="803"
+      > </a
+      ><a name="804" href="DynamicallyChecked.Lens.html#782" class="Bound"
+      >v</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="DynamicallyChecked.Lens.html#537" class="Function Operator"
+      >&#8828;&#7486;</a
+      ><a name="808"
+      > </a
+      ><a name="809" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="817"
+      > </a
+      ><a name="818" href="DynamicallyChecked.Lens.html#723" class="Bound"
+      >l'</a
+      ><a name="820"
+      > </a
+      ><a name="821" href="DynamicallyChecked.Lens.html#774" class="Bound"
+      >s</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="DynamicallyChecked.Lens.html#782" class="Bound"
+      >v</a
+      ><a name="824" class="Symbol"
+      >)</a
+      ><a name="825"
+      > </a
+      ><a name="826" class="Symbol"
+      >&#8594;</a
+      ><a name="827"
+      > </a
+      ><a name="828" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="836"
+      > </a
+      ><a name="837" href="DynamicallyChecked.Lens.html#721" class="Bound"
+      >l</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="DynamicallyChecked.Lens.html#736" class="Bound"
+      >s</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="842"
+      > </a
+      ><a name="843" href="DynamicallyChecked.Lens.html#744" class="Bound"
+      >v</a
+      ><a name="844"
+      > </a
+      ><a name="845" class="Symbol"
+      >&#8594;</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="855"
+      > </a
+      ><a name="856" href="DynamicallyChecked.Lens.html#723" class="Bound"
+      >l'</a
+      ><a name="858"
+      > </a
+      ><a name="859" href="DynamicallyChecked.Lens.html#736" class="Bound"
+      >s</a
+      ><a name="860"
+      > </a
+      ><a name="861" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="862"
+      > </a
+      ><a name="863" href="DynamicallyChecked.Lens.html#744" class="Bound"
+      >v</a
+      ><a name="864"
+      >
+</a
+      ><a name="865" href="DynamicallyChecked.Lens.html#689" class="Function"
+      >uniqueness-lemma</a
+      ><a name="881"
+      > </a
+      ><a name="882" href="DynamicallyChecked.Lens.html#882" class="Bound"
+      >l</a
+      ><a name="883"
+      > </a
+      ><a name="884" href="DynamicallyChecked.Lens.html#884" class="Bound"
+      >l'</a
+      ><a name="886"
+      > </a
+      ><a name="887" href="DynamicallyChecked.Lens.html#887" class="Bound"
+      >put-&#8828;</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Symbol"
+      >=</a
+      ><a name="894"
+      > </a
+      ><a name="895" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="906"
+      > </a
+      ><a name="907" href="DynamicallyChecked.Lens.html#884" class="Bound"
+      >l'</a
+      ><a name="909"
+      > </a
+      ><a name="910" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="911"
+      > </a
+      ><a name="912" href="DynamicallyChecked.Lens.html#887" class="Bound"
+      >put-&#8828;</a
+      ><a name="917"
+      > </a
+      ><a name="918" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="919"
+      > </a
+      ><a name="920" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="931"
+      > </a
+      ><a name="932" href="DynamicallyChecked.Lens.html#882" class="Bound"
+      >l</a
+      ><a name="933"
+      >
+
+</a
+      ><a name="935" href="DynamicallyChecked.Lens.html#935" class="Function"
+      >uniqueness</a
+      ><a name="945"
+      > </a
+      ><a name="946" class="Symbol"
+      >:</a
+      ><a name="947"
+      > </a
+      ><a name="948" class="Symbol"
+      >{</a
+      ><a name="949" href="DynamicallyChecked.Lens.html#949" class="Bound"
+      >S</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="DynamicallyChecked.Lens.html#951" class="Bound"
+      >V</a
+      ><a name="952"
+      > </a
+      ><a name="953" class="Symbol"
+      >:</a
+      ><a name="954"
+      > </a
+      ><a name="955" class="PrimitiveType"
+      >Set</a
+      ><a name="958" class="Symbol"
+      >}</a
+      ><a name="959"
+      > </a
+      ><a name="960" class="Symbol"
+      >(</a
+      ><a name="961" href="DynamicallyChecked.Lens.html#961" class="Bound"
+      >l</a
+      ><a name="962"
+      > </a
+      ><a name="963" href="DynamicallyChecked.Lens.html#963" class="Bound"
+      >l'</a
+      ><a name="965"
+      > </a
+      ><a name="966" class="Symbol"
+      >:</a
+      ><a name="967"
+      > </a
+      ><a name="968" href="DynamicallyChecked.Lens.html#949" class="Bound"
+      >S</a
+      ><a name="969"
+      > </a
+      ><a name="970" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="971"
+      > </a
+      ><a name="972" href="DynamicallyChecked.Lens.html#951" class="Bound"
+      >V</a
+      ><a name="973" class="Symbol"
+      >)</a
+      ><a name="974"
+      > </a
+      ><a name="975" class="Symbol"
+      >&#8594;</a
+      ><a name="976"
+      >
+             </a
+      ><a name="990" class="Symbol"
+      >({</a
+      ><a name="992" href="DynamicallyChecked.Lens.html#992" class="Bound"
+      >s</a
+      ><a name="993"
+      > </a
+      ><a name="994" class="Symbol"
+      >:</a
+      ><a name="995"
+      > </a
+      ><a name="996" href="DynamicallyChecked.Lens.html#949" class="Bound"
+      >S</a
+      ><a name="997" class="Symbol"
+      >}</a
+      ><a name="998"
+      > </a
+      ><a name="999" class="Symbol"
+      >{</a
+      ><a name="1000" href="DynamicallyChecked.Lens.html#1000" class="Bound"
+      >v</a
+      ><a name="1001"
+      > </a
+      ><a name="1002" class="Symbol"
+      >:</a
+      ><a name="1003"
+      > </a
+      ><a name="1004" href="DynamicallyChecked.Lens.html#951" class="Bound"
+      >V</a
+      ><a name="1005" class="Symbol"
+      >}</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" class="Symbol"
+      >&#8594;</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="1017"
+      > </a
+      ><a name="1018" href="DynamicallyChecked.Lens.html#961" class="Bound"
+      >l</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" href="DynamicallyChecked.Lens.html#992" class="Bound"
+      >s</a
+      ><a name="1021"
+      > </a
+      ><a name="1022" href="DynamicallyChecked.Lens.html#1000" class="Bound"
+      >v</a
+      ><a name="1023"
+      > </a
+      ><a name="1024" href="DynamicallyChecked.Lens.html#613" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="1026"
+      > </a
+      ><a name="1027" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="1035"
+      > </a
+      ><a name="1036" href="DynamicallyChecked.Lens.html#963" class="Bound"
+      >l'</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="DynamicallyChecked.Lens.html#992" class="Bound"
+      >s</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" href="DynamicallyChecked.Lens.html#1000" class="Bound"
+      >v</a
+      ><a name="1042" class="Symbol"
+      >)</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" class="Symbol"
+      >&#8594;</a
+      ><a name="1045"
+      > </a
+      ><a name="1046" class="Symbol"
+      >{</a
+      ><a name="1047" href="DynamicallyChecked.Lens.html#1047" class="Bound"
+      >s</a
+      ><a name="1048"
+      > </a
+      ><a name="1049" class="Symbol"
+      >:</a
+      ><a name="1050"
+      > </a
+      ><a name="1051" href="DynamicallyChecked.Lens.html#949" class="Bound"
+      >S</a
+      ><a name="1052" class="Symbol"
+      >}</a
+      ><a name="1053"
+      > </a
+      ><a name="1054" class="Symbol"
+      >&#8594;</a
+      ><a name="1055"
+      > </a
+      ><a name="1056" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="1064"
+      > </a
+      ><a name="1065" href="DynamicallyChecked.Lens.html#961" class="Bound"
+      >l</a
+      ><a name="1066"
+      > </a
+      ><a name="1067" href="DynamicallyChecked.Lens.html#1047" class="Bound"
+      >s</a
+      ><a name="1068"
+      > </a
+      ><a name="1069" href="DynamicallyChecked.Lens.html#613" class="Function Operator"
+      >&#8776;&#7486;</a
+      ><a name="1071"
+      > </a
+      ><a name="1072" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="DynamicallyChecked.Lens.html#963" class="Bound"
+      >l'</a
+      ><a name="1083"
+      > </a
+      ><a name="1084" href="DynamicallyChecked.Lens.html#1047" class="Bound"
+      >s</a
+      ><a name="1085"
+      >
+</a
+      ><a name="1086" href="DynamicallyChecked.Lens.html#935" class="Function"
+      >uniqueness</a
+      ><a name="1096"
+      > </a
+      ><a name="1097" href="DynamicallyChecked.Lens.html#1097" class="Bound"
+      >l</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" href="DynamicallyChecked.Lens.html#1099" class="Bound"
+      >l'</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" href="DynamicallyChecked.Lens.html#1102" class="Bound"
+      >put-eq</a
+      ><a name="1108"
+      > </a
+      ><a name="1109" class="Symbol"
+      >=</a
+      ><a name="1110"
+      > </a
+      ><a name="1111" href="DynamicallyChecked.Lens.html#689" class="Function"
+      >uniqueness-lemma</a
+      ><a name="1127"
+      > </a
+      ><a name="1128" href="DynamicallyChecked.Lens.html#1097" class="Bound"
+      >l</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" href="DynamicallyChecked.Lens.html#1099" class="Bound"
+      >l'</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" class="Symbol"
+      >(</a
+      ><a name="1134" href="Data.Product.html#525" class="Field"
+      >proj&#8321;</a
+      ><a name="1139"
+      > </a
+      ><a name="1140" href="DynamicallyChecked.Lens.html#1102" class="Bound"
+      >put-eq</a
+      ><a name="1146" class="Symbol"
+      >)</a
+      ><a name="1147"
+      > </a
+      ><a name="1148" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" href="DynamicallyChecked.Lens.html#689" class="Function"
+      >uniqueness-lemma</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="DynamicallyChecked.Lens.html#1099" class="Bound"
+      >l'</a
+      ><a name="1169"
+      > </a
+      ><a name="1170" href="DynamicallyChecked.Lens.html#1097" class="Bound"
+      >l</a
+      ><a name="1171"
+      > </a
+      ><a name="1172" class="Symbol"
+      >(</a
+      ><a name="1173" href="Data.Product.html#539" class="Field"
+      >proj&#8322;</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" href="DynamicallyChecked.Lens.html#1102" class="Bound"
+      >put-eq</a
+      ><a name="1185" class="Symbol"
+      >)</a
+      ><a name="1186"
+      >
+
+</a
+      ><a name="1188" href="DynamicallyChecked.Lens.html#1188" class="Function"
+      >iso-lens</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" class="Symbol"
+      >:</a
+      ><a name="1198"
+      > </a
+      ><a name="1199" class="Symbol"
+      >{</a
+      ><a name="1200" href="DynamicallyChecked.Lens.html#1200" class="Bound"
+      >A</a
+      ><a name="1201"
+      > </a
+      ><a name="1202" href="DynamicallyChecked.Lens.html#1202" class="Bound"
+      >B</a
+      ><a name="1203"
+      > </a
+      ><a name="1204" class="Symbol"
+      >:</a
+      ><a name="1205"
+      > </a
+      ><a name="1206" class="PrimitiveType"
+      >Set</a
+      ><a name="1209" class="Symbol"
+      >}</a
+      ><a name="1210"
+      > </a
+      ><a name="1211" class="Symbol"
+      >&#8594;</a
+      ><a name="1212"
+      > </a
+      ><a name="1213" href="DynamicallyChecked.Lens.html#1200" class="Bound"
+      >A</a
+      ><a name="1214"
+      > </a
+      ><a name="1215" href="DynamicallyChecked.Partiality.html#12346" class="Function Operator"
+      >&#8773;</a
+      ><a name="1216"
+      > </a
+      ><a name="1217" href="DynamicallyChecked.Lens.html#1202" class="Bound"
+      >B</a
+      ><a name="1218"
+      > </a
+      ><a name="1219" class="Symbol"
+      >&#8594;</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" href="DynamicallyChecked.Lens.html#1200" class="Bound"
+      >A</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="DynamicallyChecked.Lens.html#1202" class="Bound"
+      >B</a
+      ><a name="1226"
+      >
+</a
+      ><a name="1227" href="DynamicallyChecked.Lens.html#1188" class="Function"
+      >iso-lens</a
+      ><a name="1235"
+      > </a
+      ><a name="1236" href="DynamicallyChecked.Lens.html#1236" class="Bound"
+      >iso</a
+      ><a name="1239"
+      > </a
+      ><a name="1240" class="Symbol"
+      >=</a
+      ><a name="1241"
+      > </a
+      ><a name="1242" class="Keyword"
+      >record</a
+      ><a name="1248"
+      >
+  </a
+      ><a name="1251" class="Symbol"
+      >{</a
+      ><a name="1252"
+      > </a
+      ><a name="1253" class="Field"
+      >put</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" class="Symbol"
+      >=</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="Function.html#1053" class="Function"
+      >const</a
+      ><a name="1264"
+      > </a
+      ><a name="1265" class="Symbol"
+      >(</a
+      ><a name="1266" href="DynamicallyChecked.Partiality.html#12191" class="Field"
+      >Iso.from</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="DynamicallyChecked.Lens.html#1236" class="Bound"
+      >iso</a
+      ><a name="1278" class="Symbol"
+      >)</a
+      ><a name="1279"
+      >
+  </a
+      ><a name="1282" class="Symbol"
+      >;</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" class="Field"
+      >get</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" class="Symbol"
+      >=</a
+      ><a name="1289"
+      > </a
+      ><a name="1290" href="DynamicallyChecked.Partiality.html#12170" class="Field"
+      >Iso.to</a
+      ><a name="1296"
+      > </a
+      ><a name="1297" href="DynamicallyChecked.Lens.html#1236" class="Bound"
+      >iso</a
+      ><a name="1300"
+      >
+  </a
+      ><a name="1303" class="Symbol"
+      >;</a
+      ><a name="1304"
+      > </a
+      ><a name="1305" class="Field"
+      >PutGet</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" class="Symbol"
+      >=</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="DynamicallyChecked.Partiality.html#12274" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="DynamicallyChecked.Lens.html#1236" class="Bound"
+      >iso</a
+      ><a name="1337"
+      >
+  </a
+      ><a name="1340" class="Symbol"
+      >;</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Field"
+      >GetPut</a
+      ><a name="1348"
+      > </a
+      ><a name="1349" class="Symbol"
+      >=</a
+      ><a name="1350"
+      > </a
+      ><a name="1351" href="DynamicallyChecked.Partiality.html#12212" class="Field"
+      >Iso.to-from-inverse</a
+      ><a name="1370"
+      > </a
+      ><a name="1371" href="DynamicallyChecked.Lens.html#1236" class="Bound"
+      >iso</a
+      ><a name="1374"
+      > </a
+      ><a name="1375" class="Symbol"
+      >}</a
+      ><a name="1376"
+      >
+
+</a
+      ><a name="1378" href="DynamicallyChecked.Lens.html#1378" class="Function"
+      >skip-lens</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" class="Symbol"
+      >:</a
+      ><a name="1389"
+      > </a
+      ><a name="1390" class="Symbol"
+      >{</a
+      ><a name="1391" href="DynamicallyChecked.Lens.html#1391" class="Bound"
+      >S</a
+      ><a name="1392"
+      > </a
+      ><a name="1393" href="DynamicallyChecked.Lens.html#1393" class="Bound"
+      >V</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" class="Symbol"
+      >:</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" class="PrimitiveType"
+      >Set</a
+      ><a name="1400" class="Symbol"
+      >}</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" class="Symbol"
+      >&#8594;</a
+      ><a name="1403"
+      > </a
+      ><a name="1404" href="Relation.Binary.Core.html#3490" class="Function"
+      >Decidable</a
+      ><a name="1413"
+      > </a
+      ><a name="1414" class="Symbol"
+      >(</a
+      ><a name="1415" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1418"
+      > </a
+      ><a name="1419" class="Symbol"
+      >{</a
+      ><a name="1420" class="Argument"
+      >A</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >=</a
+      ><a name="1423"
+      > </a
+      ><a name="1424" href="DynamicallyChecked.Lens.html#1393" class="Bound"
+      >V</a
+      ><a name="1425" class="Symbol"
+      >})</a
+      ><a name="1427"
+      > </a
+      ><a name="1428" class="Symbol"
+      >&#8594;</a
+      ><a name="1429"
+      > </a
+      ><a name="1430" class="Symbol"
+      >(</a
+      ><a name="1431" href="DynamicallyChecked.Lens.html#1391" class="Bound"
+      >S</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" class="Symbol"
+      >&#8594;</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" href="DynamicallyChecked.Lens.html#1393" class="Bound"
+      >V</a
+      ><a name="1436" class="Symbol"
+      >)</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" class="Symbol"
+      >&#8594;</a
+      ><a name="1439"
+      > </a
+      ><a name="1440" href="DynamicallyChecked.Lens.html#1391" class="Bound"
+      >S</a
+      ><a name="1441"
+      > </a
+      ><a name="1442" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="1443"
+      > </a
+      ><a name="1444" href="DynamicallyChecked.Lens.html#1393" class="Bound"
+      >V</a
+      ><a name="1445"
+      >
+</a
+      ><a name="1446" href="DynamicallyChecked.Lens.html#1378" class="Function"
+      >skip-lens</a
+      ><a name="1455"
+      > </a
+      ><a name="1456" class="Symbol"
+      >{</a
+      ><a name="1457" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1458" class="Symbol"
+      >}</a
+      ><a name="1459"
+      > </a
+      ><a name="1460" class="Symbol"
+      >{</a
+      ><a name="1461" href="DynamicallyChecked.Lens.html#1461" class="Bound"
+      >V</a
+      ><a name="1462" class="Symbol"
+      >}</a
+      ><a name="1463"
+      > </a
+      ><a name="1464" href="DynamicallyChecked.Lens.html#1464" class="Bound Operator"
+      >_&#8799;_</a
+      ><a name="1467"
+      > </a
+      ><a name="1468" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1469"
+      > </a
+      ><a name="1470" class="Symbol"
+      >=</a
+      ><a name="1471"
+      > </a
+      ><a name="1472" class="Keyword"
+      >record</a
+      ><a name="1478"
+      >
+  </a
+      ><a name="1481" class="Symbol"
+      >{</a
+      ><a name="1482"
+      > </a
+      ><a name="1483" class="Field"
+      >put</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" class="Symbol"
+      >=</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1492"
+      >
+  </a
+      ><a name="1495" class="Symbol"
+      >;</a
+      ><a name="1496"
+      > </a
+      ><a name="1497" class="Field"
+      >get</a
+      ><a name="1500"
+      > </a
+      ><a name="1501" class="Symbol"
+      >=</a
+      ><a name="1502"
+      > </a
+      ><a name="1503" href="DynamicallyChecked.Partiality.html#500" class="InductiveConstructor"
+      >return</a
+      ><a name="1509"
+      > </a
+      ><a name="1510" href="Function.html#713" class="Function Operator"
+      >&#8728;</a
+      ><a name="1511"
+      > </a
+      ><a name="1512" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1513"
+      >
+  </a
+      ><a name="1516" class="Symbol"
+      >;</a
+      ><a name="1517"
+      > </a
+      ><a name="1518" class="Field"
+      >PutGet</a
+      ><a name="1524"
+      > </a
+      ><a name="1525" class="Symbol"
+      >=</a
+      ><a name="1526"
+      > </a
+      ><a name="1527" class="Symbol"
+      >&#955;</a
+      ><a name="1528"
+      > </a
+      ><a name="1529" href="DynamicallyChecked.Lens.html#1529" class="Bound"
+      >put&#8614;</a
+      ><a name="1533"
+      > </a
+      ><a name="1534" class="Symbol"
+      >&#8594;</a
+      ><a name="1535"
+      > </a
+      ><a name="1536" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" class="Symbol"
+      >(</a
+      ><a name="1544" href="DynamicallyChecked.Lens.html#1732" class="Function"
+      >PutGet</a
+      ><a name="1550"
+      > </a
+      ><a name="1551" href="DynamicallyChecked.Lens.html#1529" class="Bound"
+      >put&#8614;</a
+      ><a name="1555" class="Symbol"
+      >)</a
+      ><a name="1556"
+      >
+  </a
+      ><a name="1559" class="Symbol"
+      >;</a
+      ><a name="1560"
+      > </a
+      ><a name="1561" class="Field"
+      >GetPut</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" class="Symbol"
+      >=</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" class="Symbol"
+      >&#955;</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" class="Symbol"
+      >{</a
+      ><a name="1573"
+      > </a
+      ><a name="1574" class="Symbol"
+      >{_}</a
+      ><a name="1577"
+      > </a
+      ><a name="1578" class="Symbol"
+      >{</a
+      ><a name="1579" class="DottedPattern Symbol"
+      >._</a
+      ><a name="1581" class="Symbol"
+      >}</a
+      ><a name="1582"
+      > </a
+      ><a name="1583" class="Symbol"
+      >(</a
+      ><a name="1584" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="1590"
+      > </a
+      ><a name="1591" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1595" class="Symbol"
+      >)</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" class="Symbol"
+      >&#8594;</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" class="Symbol"
+      >}</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" class="Symbol"
+      >}</a
+      ><a name="1609"
+      >
+  </a
+      ><a name="1612" class="Keyword"
+      >where</a
+      ><a name="1617"
+      >  
+    </a
+      ><a name="1624" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1627"
+      > </a
+      ><a name="1628" class="Symbol"
+      >:</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" class="Symbol"
+      >&#8594;</a
+      ><a name="1633"
+      > </a
+      ><a name="1634" href="DynamicallyChecked.Lens.html#1461" class="Bound"
+      >V</a
+      ><a name="1635"
+      > </a
+      ><a name="1636" class="Symbol"
+      >&#8594;</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="DynamicallyChecked.Partiality.html#475" class="Datatype"
+      >Par</a
+      ><a name="1641"
+      > </a
+      ><a name="1642" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1643"
+      >
+    </a
+      ><a name="1648" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1651"
+      > </a
+      ><a name="1652" href="DynamicallyChecked.Lens.html#1652" class="Bound"
+      >s</a
+      ><a name="1653"
+      > </a
+      ><a name="1654" href="DynamicallyChecked.Lens.html#1654" class="Bound"
+      >v</a
+      ><a name="1655"
+      > </a
+      ><a name="1656" class="Keyword"
+      >with</a
+      ><a name="1660"
+      > </a
+      ><a name="1661" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1662"
+      > </a
+      ><a name="1663" href="DynamicallyChecked.Lens.html#1652" class="Bound"
+      >s</a
+      ><a name="1664"
+      > </a
+      ><a name="1665" href="DynamicallyChecked.Lens.html#1464" class="Bound Operator"
+      >&#8799;</a
+      ><a name="1666"
+      > </a
+      ><a name="1667" href="DynamicallyChecked.Lens.html#1654" class="Bound"
+      >v</a
+      ><a name="1668"
+      >
+    </a
+      ><a name="1673" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1676"
+      > </a
+      ><a name="1677" href="DynamicallyChecked.Lens.html#1677" class="Bound"
+      >s</a
+      ><a name="1678"
+      > </a
+      ><a name="1679" href="DynamicallyChecked.Lens.html#1679" class="Bound"
+      >v</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" class="Symbol"
+      >|</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" href="Relation.Nullary.html#520" class="InductiveConstructor"
+      >yes</a
+      ><a name="1686"
+      > </a
+      ><a name="1687" class="Symbol"
+      >_</a
+      ><a name="1688"
+      > </a
+      ><a name="1689" class="Symbol"
+      >=</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" href="DynamicallyChecked.Partiality.html#500" class="InductiveConstructor"
+      >return</a
+      ><a name="1697"
+      > </a
+      ><a name="1698" href="DynamicallyChecked.Lens.html#1677" class="Bound"
+      >s</a
+      ><a name="1699"
+      >
+    </a
+      ><a name="1704" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1707"
+      > </a
+      ><a name="1708" href="DynamicallyChecked.Lens.html#1708" class="Bound"
+      >s</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="DynamicallyChecked.Lens.html#1710" class="Bound"
+      >v</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >|</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="Relation.Nullary.html#547" class="InductiveConstructor"
+      >no</a
+      ><a name="1716"
+      >  </a
+      ><a name="1718" class="Symbol"
+      >_</a
+      ><a name="1719"
+      > </a
+      ><a name="1720" class="Symbol"
+      >=</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="DynamicallyChecked.Partiality.html#588" class="InductiveConstructor"
+      >fail</a
+      ><a name="1726"
+      >
+
+    </a
+      ><a name="1732" href="DynamicallyChecked.Lens.html#1732" class="Function"
+      >PutGet</a
+      ><a name="1738"
+      > </a
+      ><a name="1739" class="Symbol"
+      >:</a
+      ><a name="1740"
+      > </a
+      ><a name="1741" class="Symbol"
+      >{</a
+      ><a name="1742" href="DynamicallyChecked.Lens.html#1742" class="Bound"
+      >s</a
+      ><a name="1743"
+      > </a
+      ><a name="1744" class="Symbol"
+      >:</a
+      ><a name="1745"
+      > </a
+      ><a name="1746" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1747" class="Symbol"
+      >}</a
+      ><a name="1748"
+      > </a
+      ><a name="1749" class="Symbol"
+      >{</a
+      ><a name="1750" href="DynamicallyChecked.Lens.html#1750" class="Bound"
+      >v</a
+      ><a name="1751"
+      > </a
+      ><a name="1752" class="Symbol"
+      >:</a
+      ><a name="1753"
+      > </a
+      ><a name="1754" href="DynamicallyChecked.Lens.html#1461" class="Bound"
+      >V</a
+      ><a name="1755" class="Symbol"
+      >}</a
+      ><a name="1756"
+      > </a
+      ><a name="1757" class="Symbol"
+      >{</a
+      ><a name="1758" href="DynamicallyChecked.Lens.html#1758" class="Bound"
+      >s'</a
+      ><a name="1760"
+      > </a
+      ><a name="1761" class="Symbol"
+      >:</a
+      ><a name="1762"
+      > </a
+      ><a name="1763" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1764" class="Symbol"
+      >}</a
+      ><a name="1765"
+      > </a
+      ><a name="1766" class="Symbol"
+      >&#8594;</a
+      ><a name="1767"
+      > </a
+      ><a name="1768" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1771"
+      > </a
+      ><a name="1772" href="DynamicallyChecked.Lens.html#1742" class="Bound"
+      >s</a
+      ><a name="1773"
+      > </a
+      ><a name="1774" href="DynamicallyChecked.Lens.html#1750" class="Bound"
+      >v</a
+      ><a name="1775"
+      > </a
+      ><a name="1776" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="1777"
+      > </a
+      ><a name="1778" href="DynamicallyChecked.Lens.html#1758" class="Bound"
+      >s'</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >&#8594;</a
+      ><a name="1782"
+      > </a
+      ><a name="1783" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1784"
+      > </a
+      ><a name="1785" href="DynamicallyChecked.Lens.html#1758" class="Bound"
+      >s'</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" href="Agda.Builtin.Equality.html#83" class="Datatype Operator"
+      >&#8801;</a
+      ><a name="1789"
+      > </a
+      ><a name="1790" href="DynamicallyChecked.Lens.html#1750" class="Bound"
+      >v</a
+      ><a name="1791"
+      >
+    </a
+      ><a name="1796" href="DynamicallyChecked.Lens.html#1732" class="Function"
+      >PutGet</a
+      ><a name="1802"
+      > </a
+      ><a name="1803" class="Symbol"
+      >{</a
+      ><a name="1804" href="DynamicallyChecked.Lens.html#1804" class="Bound"
+      >s</a
+      ><a name="1805" class="Symbol"
+      >}</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" class="Symbol"
+      >{</a
+      ><a name="1808" href="DynamicallyChecked.Lens.html#1808" class="Bound"
+      >v</a
+      ><a name="1809" class="Symbol"
+      >}</a
+      ><a name="1810"
+      > </a
+      ><a name="1811" href="DynamicallyChecked.Lens.html#1811" class="Bound"
+      >put&#8614;</a
+      ><a name="1815"
+      >          </a
+      ><a name="1825" class="Keyword"
+      >with</a
+      ><a name="1829"
+      > </a
+      ><a name="1830" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1831"
+      > </a
+      ><a name="1832" href="DynamicallyChecked.Lens.html#1804" class="Bound"
+      >s</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="DynamicallyChecked.Lens.html#1464" class="Bound Operator"
+      >&#8799;</a
+      ><a name="1835"
+      > </a
+      ><a name="1836" href="DynamicallyChecked.Lens.html#1808" class="Bound"
+      >v</a
+      ><a name="1837"
+      >
+    </a
+      ><a name="1842" href="DynamicallyChecked.Lens.html#1732" class="Function"
+      >PutGet</a
+      ><a name="1848"
+      >         </a
+      ><a name="1857" class="Symbol"
+      >(</a
+      ><a name="1858" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="1864"
+      > </a
+      ><a name="1865" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1869" class="Symbol"
+      >)</a
+      ><a name="1870"
+      > </a
+      ><a name="1871" class="Symbol"
+      >|</a
+      ><a name="1872"
+      > </a
+      ><a name="1873" href="Relation.Nullary.html#520" class="InductiveConstructor"
+      >yes</a
+      ><a name="1876"
+      > </a
+      ><a name="1877" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1881"
+      > </a
+      ><a name="1882" class="Symbol"
+      >=</a
+      ><a name="1883"
+      > </a
+      ><a name="1884" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="1888"
+      >
+    </a
+      ><a name="1893" href="DynamicallyChecked.Lens.html#1732" class="Function"
+      >PutGet</a
+      ><a name="1899"
+      >         </a
+      ><a name="1908" class="Symbol"
+      >()</a
+      ><a name="1910"
+      >            </a
+      ><a name="1922" class="Symbol"
+      >|</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" href="Relation.Nullary.html#547" class="InductiveConstructor"
+      >no</a
+      ><a name="1926"
+      >  </a
+      ><a name="1928" class="Symbol"
+      >_</a
+      ><a name="1929"
+      >
+    
+    </a
+      ><a name="1939" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="1945"
+      > </a
+      ><a name="1946" class="Symbol"
+      >:</a
+      ><a name="1947"
+      > </a
+      ><a name="1948" class="Symbol"
+      >{</a
+      ><a name="1949" href="DynamicallyChecked.Lens.html#1949" class="Bound"
+      >s</a
+      ><a name="1950"
+      > </a
+      ><a name="1951" class="Symbol"
+      >:</a
+      ><a name="1952"
+      > </a
+      ><a name="1953" href="DynamicallyChecked.Lens.html#1457" class="Bound"
+      >S</a
+      ><a name="1954" class="Symbol"
+      >}</a
+      ><a name="1955"
+      > </a
+      ><a name="1956" class="Symbol"
+      >&#8594;</a
+      ><a name="1957"
+      > </a
+      ><a name="1958" href="DynamicallyChecked.Lens.html#1624" class="Function"
+      >put</a
+      ><a name="1961"
+      > </a
+      ><a name="1962" href="DynamicallyChecked.Lens.html#1949" class="Bound"
+      >s</a
+      ><a name="1963"
+      > </a
+      ><a name="1964" class="Symbol"
+      >(</a
+      ><a name="1965" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1966"
+      > </a
+      ><a name="1967" href="DynamicallyChecked.Lens.html#1949" class="Bound"
+      >s</a
+      ><a name="1968" class="Symbol"
+      >)</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >&#8614;</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" href="DynamicallyChecked.Lens.html#1949" class="Bound"
+      >s</a
+      ><a name="1973"
+      >
+    </a
+      ><a name="1978" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >{</a
+      ><a name="1986" href="DynamicallyChecked.Lens.html#1986" class="Bound"
+      >s</a
+      ><a name="1987" class="Symbol"
+      >}</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" class="Keyword"
+      >with</a
+      ><a name="1993"
+      > </a
+      ><a name="1994" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="1995"
+      > </a
+      ><a name="1996" href="DynamicallyChecked.Lens.html#1986" class="Bound"
+      >s</a
+      ><a name="1997"
+      > </a
+      ><a name="1998" href="DynamicallyChecked.Lens.html#1464" class="Bound Operator"
+      >&#8799;</a
+      ><a name="1999"
+      > </a
+      ><a name="2000" href="DynamicallyChecked.Lens.html#1468" class="Bound"
+      >f</a
+      ><a name="2001"
+      > </a
+      ><a name="2002" href="DynamicallyChecked.Lens.html#1986" class="Bound"
+      >s</a
+      ><a name="2003"
+      >
+    </a
+      ><a name="2008" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="2014"
+      > </a
+      ><a name="2015" class="Symbol"
+      >{</a
+      ><a name="2016" href="DynamicallyChecked.Lens.html#2016" class="Bound"
+      >s</a
+      ><a name="2017" class="Symbol"
+      >}</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >|</a
+      ><a name="2020"
+      > </a
+      ><a name="2021" href="Relation.Nullary.html#520" class="InductiveConstructor"
+      >yes</a
+      ><a name="2024"
+      > </a
+      ><a name="2025" class="Symbol"
+      >_</a
+      ><a name="2026"
+      >  </a
+      ><a name="2028" class="Symbol"
+      >=</a
+      ><a name="2029"
+      > </a
+      ><a name="2030" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="2036"
+      > </a
+      ><a name="2037" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2041"
+      >
+    </a
+      ><a name="2046" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="2052"
+      > </a
+      ><a name="2053" class="Symbol"
+      >{</a
+      ><a name="2054" href="DynamicallyChecked.Lens.html#2054" class="Bound"
+      >s</a
+      ><a name="2055" class="Symbol"
+      >}</a
+      ><a name="2056"
+      > </a
+      ><a name="2057" class="Symbol"
+      >|</a
+      ><a name="2058"
+      > </a
+      ><a name="2059" href="Relation.Nullary.html#547" class="InductiveConstructor"
+      >no</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="DynamicallyChecked.Lens.html#2062" class="Bound"
+      >neq</a
+      ><a name="2065"
+      > </a
+      ><a name="2066" class="Keyword"
+      >with</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="DynamicallyChecked.Lens.html#2062" class="Bound"
+      >neq</a
+      ><a name="2074"
+      > </a
+      ><a name="2075" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="2079"
+      >
+    </a
+      ><a name="2084" href="DynamicallyChecked.Lens.html#1939" class="Function"
+      >GetPut</a
+      ><a name="2090"
+      > </a
+      ><a name="2091" class="Symbol"
+      >{</a
+      ><a name="2092" href="DynamicallyChecked.Lens.html#2092" class="Bound"
+      >s</a
+      ><a name="2093" class="Symbol"
+      >}</a
+      ><a name="2094"
+      > </a
+      ><a name="2095" class="Symbol"
+      >|</a
+      ><a name="2096"
+      > </a
+      ><a name="2097" href="Relation.Nullary.html#547" class="InductiveConstructor"
+      >no</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" href="DynamicallyChecked.Lens.html#2100" class="Bound"
+      >neq</a
+      ><a name="2103"
+      > </a
+      ><a name="2104" class="Symbol"
+      >|</a
+      ><a name="2105"
+      > </a
+      ><a name="2106" class="Symbol"
+      >()</a
+      ><a name="2108"
+      >
+
+</a
+      ><a name="2110" class="Keyword"
+      >infixr</a
+      ><a name="2116"
+      > </a
+      ><a name="2117" class="Number"
+      >3</a
+      ><a name="2118"
+      > </a
+      ><a name="2119" href="DynamicallyChecked.Lens.html#2136" class="Function Operator"
+      >_&#8596;_</a
+      ><a name="2122"
+      > </a
+      ><a name="2123" href="DynamicallyChecked.Lens.html#2980" class="Function Operator"
+      >_&#8597;_</a
+      ><a name="2126"
+      > </a
+      ><a name="2127" href="DynamicallyChecked.Lens.html#2543" class="Function Operator"
+      >_&#9666;_</a
+      ><a name="2130"
+      > </a
+      ><a name="2131" href="DynamicallyChecked.Lens.html#2908" class="Function Operator"
+      >_&#9656;_</a
+      ><a name="2134"
+      >
+
+</a
+      ><a name="2136" href="DynamicallyChecked.Lens.html#2136" class="Function Operator"
+      >_&#8596;_</a
+      ><a name="2139"
+      > </a
+      ><a name="2140" class="Symbol"
+      >:</a
+      ><a name="2141"
+      > </a
+      ><a name="2142" class="Symbol"
+      >{</a
+      ><a name="2143" href="DynamicallyChecked.Lens.html#2143" class="Bound"
+      >A</a
+      ><a name="2144"
+      > </a
+      ><a name="2145" href="DynamicallyChecked.Lens.html#2145" class="Bound"
+      >B</a
+      ><a name="2146"
+      > </a
+      ><a name="2147" href="DynamicallyChecked.Lens.html#2147" class="Bound"
+      >C</a
+      ><a name="2148"
+      > </a
+      ><a name="2149" class="Symbol"
+      >:</a
+      ><a name="2150"
+      > </a
+      ><a name="2151" class="PrimitiveType"
+      >Set</a
+      ><a name="2154" class="Symbol"
+      >}</a
+      ><a name="2155"
+      > </a
+      ><a name="2156" class="Symbol"
+      >&#8594;</a
+      ><a name="2157"
+      > </a
+      ><a name="2158" href="DynamicallyChecked.Lens.html#2143" class="Bound"
+      >A</a
+      ><a name="2159"
+      > </a
+      ><a name="2160" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2161"
+      > </a
+      ><a name="2162" href="DynamicallyChecked.Lens.html#2145" class="Bound"
+      >B</a
+      ><a name="2163"
+      > </a
+      ><a name="2164" class="Symbol"
+      >&#8594;</a
+      ><a name="2165"
+      > </a
+      ><a name="2166" href="DynamicallyChecked.Lens.html#2145" class="Bound"
+      >B</a
+      ><a name="2167"
+      > </a
+      ><a name="2168" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2169"
+      > </a
+      ><a name="2170" href="DynamicallyChecked.Lens.html#2147" class="Bound"
+      >C</a
+      ><a name="2171"
+      > </a
+      ><a name="2172" class="Symbol"
+      >&#8594;</a
+      ><a name="2173"
+      > </a
+      ><a name="2174" href="DynamicallyChecked.Lens.html#2143" class="Bound"
+      >A</a
+      ><a name="2175"
+      > </a
+      ><a name="2176" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2177"
+      > </a
+      ><a name="2178" href="DynamicallyChecked.Lens.html#2147" class="Bound"
+      >C</a
+      ><a name="2179"
+      >
+</a
+      ><a name="2180" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2181"
+      > </a
+      ><a name="2182" href="DynamicallyChecked.Lens.html#2136" class="Function Operator"
+      >&#8596;</a
+      ><a name="2183"
+      > </a
+      ><a name="2184" href="DynamicallyChecked.Lens.html#2184" class="Bound"
+      >r</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >=</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" class="Keyword"
+      >record</a
+      ><a name="2194"
+      >
+  </a
+      ><a name="2197" class="Symbol"
+      >{</a
+      ><a name="2198"
+      > </a
+      ><a name="2199" class="Field"
+      >put</a
+      ><a name="2202"
+      > </a
+      ><a name="2203" class="Symbol"
+      >=</a
+      ><a name="2204"
+      > </a
+      ><a name="2205" class="Symbol"
+      >&#955;</a
+      ><a name="2206"
+      > </a
+      ><a name="2207" href="DynamicallyChecked.Lens.html#2207" class="Bound"
+      >a</a
+      ><a name="2208"
+      > </a
+      ><a name="2209" href="DynamicallyChecked.Lens.html#2209" class="Bound"
+      >c</a
+      ><a name="2210"
+      > </a
+      ><a name="2211" class="Symbol"
+      >&#8594;</a
+      ><a name="2212"
+      > </a
+      ><a name="2213" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="2221"
+      > </a
+      ><a name="2222" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2223"
+      > </a
+      ><a name="2224" href="DynamicallyChecked.Lens.html#2207" class="Bound"
+      >a</a
+      ><a name="2225"
+      > </a
+      ><a name="2226" href="DynamicallyChecked.Partiality.html#535" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2229"
+      > </a
+      ><a name="2230" class="Symbol"
+      >&#955;</a
+      ><a name="2231"
+      > </a
+      ><a name="2232" href="DynamicallyChecked.Lens.html#2232" class="Bound"
+      >b</a
+      ><a name="2233"
+      > </a
+      ><a name="2234" class="Symbol"
+      >&#8594;</a
+      ><a name="2235"
+      > </a
+      ><a name="2236" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="2244"
+      > </a
+      ><a name="2245" href="DynamicallyChecked.Lens.html#2184" class="Bound"
+      >r</a
+      ><a name="2246"
+      > </a
+      ><a name="2247" href="DynamicallyChecked.Lens.html#2232" class="Bound"
+      >b</a
+      ><a name="2248"
+      > </a
+      ><a name="2249" href="DynamicallyChecked.Lens.html#2209" class="Bound"
+      >c</a
+      ><a name="2250"
+      > </a
+      ><a name="2251" href="DynamicallyChecked.Partiality.html#535" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2254"
+      > </a
+      ><a name="2255" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="2263"
+      > </a
+      ><a name="2264" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2265"
+      > </a
+      ><a name="2266" href="DynamicallyChecked.Lens.html#2207" class="Bound"
+      >a</a
+      ><a name="2267"
+      >
+  </a
+      ><a name="2270" class="Symbol"
+      >;</a
+      ><a name="2271"
+      > </a
+      ><a name="2272" class="Field"
+      >get</a
+      ><a name="2275"
+      > </a
+      ><a name="2276" class="Symbol"
+      >=</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" href="DynamicallyChecked.Lens.html#2184" class="Bound"
+      >r</a
+      ><a name="2288"
+      > </a
+      ><a name="2289" href="DynamicallyChecked.Partiality.html#1933" class="Function Operator"
+      >&lt;=&lt;</a
+      ><a name="2292"
+      > </a
+      ><a name="2293" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="2301"
+      > </a
+      ><a name="2302" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2303"
+      >
+  </a
+      ><a name="2306" class="Symbol"
+      >;</a
+      ><a name="2307"
+      > </a
+      ><a name="2308" class="Field"
+      >PutGet</a
+      ><a name="2314"
+      > </a
+      ><a name="2315" class="Symbol"
+      >=</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" class="Symbol"
+      >&#955;</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" class="Symbol"
+      >{</a
+      ><a name="2320"
+      > </a
+      ><a name="2321" class="Symbol"
+      >(</a
+      ><a name="2322" href="DynamicallyChecked.Lens.html#2322" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="2331"
+      > </a
+      ><a name="2332" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2335"
+      > </a
+      ><a name="2336" href="DynamicallyChecked.Lens.html#2336" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="2346"
+      > </a
+      ><a name="2347" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="DynamicallyChecked.Lens.html#2351" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="2364" class="Symbol"
+      >)</a
+      ><a name="2365"
+      > </a
+      ><a name="2366" class="Symbol"
+      >&#8594;</a
+      ><a name="2367"
+      > </a
+      ><a name="2368" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="2379"
+      > </a
+      ><a name="2380" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2381"
+      > </a
+      ><a name="2382" href="DynamicallyChecked.Lens.html#2351" class="Bound"
+      >put-l-a-b'&#8614;a'</a
+      ><a name="2395"
+      > </a
+      ><a name="2396" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2399"
+      > </a
+      ><a name="2400" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="2411"
+      > </a
+      ><a name="2412" href="DynamicallyChecked.Lens.html#2184" class="Bound"
+      >r</a
+      ><a name="2413"
+      > </a
+      ><a name="2414" href="DynamicallyChecked.Lens.html#2336" class="Bound"
+      >put-r-b&#8614;b'</a
+      ><a name="2424"
+      > </a
+      ><a name="2425" class="Symbol"
+      >}</a
+      ><a name="2426"
+      >
+  </a
+      ><a name="2429" class="Symbol"
+      >;</a
+      ><a name="2430"
+      > </a
+      ><a name="2431" class="Field"
+      >GetPut</a
+      ><a name="2437"
+      > </a
+      ><a name="2438" class="Symbol"
+      >=</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" class="Symbol"
+      >&#955;</a
+      ><a name="2441"
+      > </a
+      ><a name="2442" class="Symbol"
+      >{</a
+      ><a name="2443"
+      > </a
+      ><a name="2444" class="Symbol"
+      >(</a
+      ><a name="2445" href="DynamicallyChecked.Lens.html#2445" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="2454"
+      > </a
+      ><a name="2455" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2458"
+      > </a
+      ><a name="2459" href="DynamicallyChecked.Lens.html#2459" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="2468" class="Symbol"
+      >)</a
+      ><a name="2469"
+      > </a
+      ><a name="2470" class="Symbol"
+      >&#8594;</a
+      ><a name="2471"
+      > </a
+      ><a name="2472" href="DynamicallyChecked.Lens.html#2445" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="2481"
+      > </a
+      ><a name="2482" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2485"
+      > </a
+      ><a name="2486" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="2497"
+      > </a
+      ><a name="2498" href="DynamicallyChecked.Lens.html#2184" class="Bound"
+      >r</a
+      ><a name="2499"
+      > </a
+      ><a name="2500" href="DynamicallyChecked.Lens.html#2459" class="Bound"
+      >get-r-b&#8614;c</a
+      ><a name="2509"
+      > </a
+      ><a name="2510" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2513"
+      > </a
+      ><a name="2514" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="2525"
+      > </a
+      ><a name="2526" href="DynamicallyChecked.Lens.html#2180" class="Bound"
+      >l</a
+      ><a name="2527"
+      > </a
+      ><a name="2528" href="DynamicallyChecked.Lens.html#2445" class="Bound"
+      >get-l-a&#8614;b</a
+      ><a name="2537"
+      > </a
+      ><a name="2538" class="Symbol"
+      >}</a
+      ><a name="2539"
+      > </a
+      ><a name="2540" class="Symbol"
+      >}</a
+      ><a name="2541"
+      >
+
+</a
+      ><a name="2543" href="DynamicallyChecked.Lens.html#2543" class="Function Operator"
+      >_&#9666;_</a
+      ><a name="2546"
+      > </a
+      ><a name="2547" class="Symbol"
+      >:</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" class="Symbol"
+      >{</a
+      ><a name="2550" href="DynamicallyChecked.Lens.html#2550" class="Bound"
+      >A</a
+      ><a name="2551"
+      > </a
+      ><a name="2552" href="DynamicallyChecked.Lens.html#2552" class="Bound"
+      >B</a
+      ><a name="2553"
+      > </a
+      ><a name="2554" href="DynamicallyChecked.Lens.html#2554" class="Bound"
+      >C</a
+      ><a name="2555"
+      > </a
+      ><a name="2556" class="Symbol"
+      >:</a
+      ><a name="2557"
+      > </a
+      ><a name="2558" class="PrimitiveType"
+      >Set</a
+      ><a name="2561" class="Symbol"
+      >}</a
+      ><a name="2562"
+      > </a
+      ><a name="2563" class="Symbol"
+      >&#8594;</a
+      ><a name="2564"
+      > </a
+      ><a name="2565" href="DynamicallyChecked.Lens.html#2550" class="Bound"
+      >A</a
+      ><a name="2566"
+      > </a
+      ><a name="2567" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2568"
+      > </a
+      ><a name="2569" href="DynamicallyChecked.Lens.html#2552" class="Bound"
+      >B</a
+      ><a name="2570"
+      > </a
+      ><a name="2571" class="Symbol"
+      >&#8594;</a
+      ><a name="2572"
+      > </a
+      ><a name="2573" href="DynamicallyChecked.Lens.html#2552" class="Bound"
+      >B</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" href="DynamicallyChecked.Partiality.html#12346" class="Function Operator"
+      >&#8773;</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="DynamicallyChecked.Lens.html#2554" class="Bound"
+      >C</a
+      ><a name="2578"
+      > </a
+      ><a name="2579" class="Symbol"
+      >&#8594;</a
+      ><a name="2580"
+      > </a
+      ><a name="2581" href="DynamicallyChecked.Lens.html#2550" class="Bound"
+      >A</a
+      ><a name="2582"
+      > </a
+      ><a name="2583" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2584"
+      > </a
+      ><a name="2585" href="DynamicallyChecked.Lens.html#2554" class="Bound"
+      >C</a
+      ><a name="2586"
+      >
+</a
+      ><a name="2587" href="DynamicallyChecked.Lens.html#2587" class="Bound"
+      >l</a
+      ><a name="2588"
+      > </a
+      ><a name="2589" href="DynamicallyChecked.Lens.html#2543" class="Function Operator"
+      >&#9666;</a
+      ><a name="2590"
+      > </a
+      ><a name="2591" href="DynamicallyChecked.Lens.html#2591" class="Bound"
+      >iso</a
+      ><a name="2594"
+      > </a
+      ><a name="2595" class="Symbol"
+      >=</a
+      ><a name="2596"
+      > </a
+      ><a name="2597" class="Keyword"
+      >record</a
+      ><a name="2603"
+      >
+  </a
+      ><a name="2606" class="Symbol"
+      >{</a
+      ><a name="2607"
+      > </a
+      ><a name="2608" class="Field"
+      >put</a
+      ><a name="2611"
+      > </a
+      ><a name="2612" class="Symbol"
+      >=</a
+      ><a name="2613"
+      > </a
+      ><a name="2614" class="Symbol"
+      >&#955;</a
+      ><a name="2615"
+      > </a
+      ><a name="2616" href="DynamicallyChecked.Lens.html#2616" class="Bound"
+      >a</a
+      ><a name="2617"
+      > </a
+      ><a name="2618" href="DynamicallyChecked.Lens.html#2618" class="Bound"
+      >c</a
+      ><a name="2619"
+      > </a
+      ><a name="2620" class="Symbol"
+      >&#8594;</a
+      ><a name="2621"
+      > </a
+      ><a name="2622" href="DynamicallyChecked.Partiality.html#12191" class="Field"
+      >Iso.from</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" href="DynamicallyChecked.Lens.html#2591" class="Bound"
+      >iso</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" href="DynamicallyChecked.Lens.html#2618" class="Bound"
+      >c</a
+      ><a name="2636"
+      > </a
+      ><a name="2637" href="DynamicallyChecked.Partiality.html#535" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2640"
+      > </a
+      ><a name="2641" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="2649"
+      > </a
+      ><a name="2650" href="DynamicallyChecked.Lens.html#2587" class="Bound"
+      >l</a
+      ><a name="2651"
+      > </a
+      ><a name="2652" href="DynamicallyChecked.Lens.html#2616" class="Bound"
+      >a</a
+      ><a name="2653"
+      >
+  </a
+      ><a name="2656" class="Symbol"
+      >;</a
+      ><a name="2657"
+      > </a
+      ><a name="2658" class="Field"
+      >get</a
+      ><a name="2661"
+      > </a
+      ><a name="2662" class="Symbol"
+      >=</a
+      ><a name="2663"
+      > </a
+      ><a name="2664" href="DynamicallyChecked.Partiality.html#12170" class="Field"
+      >Iso.to</a
+      ><a name="2670"
+      > </a
+      ><a name="2671" href="DynamicallyChecked.Lens.html#2591" class="Bound"
+      >iso</a
+      ><a name="2674"
+      > </a
+      ><a name="2675" href="DynamicallyChecked.Partiality.html#1933" class="Function Operator"
+      >&lt;=&lt;</a
+      ><a name="2678"
+      > </a
+      ><a name="2679" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="2687"
+      > </a
+      ><a name="2688" href="DynamicallyChecked.Lens.html#2587" class="Bound"
+      >l</a
+      ><a name="2689"
+      >
+  </a
+      ><a name="2692" class="Symbol"
+      >;</a
+      ><a name="2693"
+      > </a
+      ><a name="2694" class="Field"
+      >PutGet</a
+      ><a name="2700"
+      > </a
+      ><a name="2701" class="Symbol"
+      >=</a
+      ><a name="2702"
+      > </a
+      ><a name="2703" class="Symbol"
+      >&#955;</a
+      ><a name="2704"
+      > </a
+      ><a name="2705" class="Symbol"
+      >{</a
+      ><a name="2706"
+      > </a
+      ><a name="2707" class="Symbol"
+      >(</a
+      ><a name="2708" href="DynamicallyChecked.Lens.html#2708" class="Bound"
+      >from-v&#8614;v'</a
+      ><a name="2717"
+      > </a
+      ><a name="2718" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" href="DynamicallyChecked.Lens.html#2722" class="Bound"
+      >put-s-v'&#8614;s'</a
+      ><a name="2733" class="Symbol"
+      >)</a
+      ><a name="2734"
+      > </a
+      ><a name="2735" class="Symbol"
+      >&#8594;</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="2748"
+      > </a
+      ><a name="2749" href="DynamicallyChecked.Lens.html#2587" class="Bound"
+      >l</a
+      ><a name="2750"
+      > </a
+      ><a name="2751" href="DynamicallyChecked.Lens.html#2722" class="Bound"
+      >put-s-v'&#8614;s'</a
+      ><a name="2762"
+      > </a
+      ><a name="2763" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2766"
+      > </a
+      ><a name="2767" href="DynamicallyChecked.Partiality.html#12274" class="Field"
+      >Iso.from-to-inverse</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="DynamicallyChecked.Lens.html#2591" class="Bound"
+      >iso</a
+      ><a name="2790"
+      > </a
+      ><a name="2791" href="DynamicallyChecked.Lens.html#2708" class="Bound"
+      >from-v&#8614;v'</a
+      ><a name="2800"
+      > </a
+      ><a name="2801" class="Symbol"
+      >}</a
+      ><a name="2802"
+      >
+  </a
+      ><a name="2805" class="Symbol"
+      >;</a
+      ><a name="2806"
+      > </a
+      ><a name="2807" class="Field"
+      >GetPut</a
+      ><a name="2813"
+      > </a
+      ><a name="2814" class="Symbol"
+      >=</a
+      ><a name="2815"
+      > </a
+      ><a name="2816" class="Symbol"
+      >&#955;</a
+      ><a name="2817"
+      > </a
+      ><a name="2818" class="Symbol"
+      >{</a
+      ><a name="2819"
+      > </a
+      ><a name="2820" class="Symbol"
+      >(</a
+      ><a name="2821" href="DynamicallyChecked.Lens.html#2821" class="Bound"
+      >get-s&#8614;v</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2832"
+      > </a
+      ><a name="2833" href="DynamicallyChecked.Lens.html#2833" class="Bound"
+      >to-v&#8614;v'</a
+      ><a name="2840" class="Symbol"
+      >)</a
+      ><a name="2841"
+      > </a
+      ><a name="2842" class="Symbol"
+      >&#8594;</a
+      ><a name="2843"
+      > </a
+      ><a name="2844" href="DynamicallyChecked.Partiality.html#12212" class="Field"
+      >Iso.to-from-inverse</a
+      ><a name="2863"
+      > </a
+      ><a name="2864" href="DynamicallyChecked.Lens.html#2591" class="Bound"
+      >iso</a
+      ><a name="2867"
+      > </a
+      ><a name="2868" href="DynamicallyChecked.Lens.html#2833" class="Bound"
+      >to-v&#8614;v'</a
+      ><a name="2875"
+      > </a
+      ><a name="2876" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="2879"
+      > </a
+      ><a name="2880" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="2891"
+      > </a
+      ><a name="2892" href="DynamicallyChecked.Lens.html#2587" class="Bound"
+      >l</a
+      ><a name="2893"
+      > </a
+      ><a name="2894" href="DynamicallyChecked.Lens.html#2821" class="Bound"
+      >get-s&#8614;v</a
+      ><a name="2901"
+      > </a
+      ><a name="2902" class="Symbol"
+      >}</a
+      ><a name="2903"
+      > </a
+      ><a name="2904" class="Symbol"
+      >}</a
+      ><a name="2905"
+      > 
+
+</a
+      ><a name="2908" href="DynamicallyChecked.Lens.html#2908" class="Function Operator"
+      >_&#9656;_</a
+      ><a name="2911"
+      > </a
+      ><a name="2912" class="Symbol"
+      >:</a
+      ><a name="2913"
+      > </a
+      ><a name="2914" class="Symbol"
+      >{</a
+      ><a name="2915" href="DynamicallyChecked.Lens.html#2915" class="Bound"
+      >A</a
+      ><a name="2916"
+      > </a
+      ><a name="2917" href="DynamicallyChecked.Lens.html#2917" class="Bound"
+      >B</a
+      ><a name="2918"
+      > </a
+      ><a name="2919" href="DynamicallyChecked.Lens.html#2919" class="Bound"
+      >C</a
+      ><a name="2920"
+      > </a
+      ><a name="2921" class="Symbol"
+      >:</a
+      ><a name="2922"
+      > </a
+      ><a name="2923" class="PrimitiveType"
+      >Set</a
+      ><a name="2926" class="Symbol"
+      >}</a
+      ><a name="2927"
+      > </a
+      ><a name="2928" class="Symbol"
+      >&#8594;</a
+      ><a name="2929"
+      > </a
+      ><a name="2930" href="DynamicallyChecked.Lens.html#2915" class="Bound"
+      >A</a
+      ><a name="2931"
+      > </a
+      ><a name="2932" href="DynamicallyChecked.Partiality.html#12346" class="Function Operator"
+      >&#8773;</a
+      ><a name="2933"
+      > </a
+      ><a name="2934" href="DynamicallyChecked.Lens.html#2917" class="Bound"
+      >B</a
+      ><a name="2935"
+      > </a
+      ><a name="2936" class="Symbol"
+      >&#8594;</a
+      ><a name="2937"
+      > </a
+      ><a name="2938" href="DynamicallyChecked.Lens.html#2917" class="Bound"
+      >B</a
+      ><a name="2939"
+      > </a
+      ><a name="2940" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2941"
+      > </a
+      ><a name="2942" href="DynamicallyChecked.Lens.html#2919" class="Bound"
+      >C</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" class="Symbol"
+      >&#8594;</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" href="DynamicallyChecked.Lens.html#2915" class="Bound"
+      >A</a
+      ><a name="2947"
+      > </a
+      ><a name="2948" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2949"
+      > </a
+      ><a name="2950" href="DynamicallyChecked.Lens.html#2919" class="Bound"
+      >C</a
+      ><a name="2951"
+      >
+</a
+      ><a name="2952" href="DynamicallyChecked.Lens.html#2952" class="Bound"
+      >iso</a
+      ><a name="2955"
+      > </a
+      ><a name="2956" href="DynamicallyChecked.Lens.html#2908" class="Function Operator"
+      >&#9656;</a
+      ><a name="2957"
+      > </a
+      ><a name="2958" href="DynamicallyChecked.Lens.html#2958" class="Bound"
+      >l</a
+      ><a name="2959"
+      > </a
+      ><a name="2960" class="Symbol"
+      >=</a
+      ><a name="2961"
+      > </a
+      ><a name="2962" href="DynamicallyChecked.Lens.html#1188" class="Function"
+      >iso-lens</a
+      ><a name="2970"
+      > </a
+      ><a name="2971" href="DynamicallyChecked.Lens.html#2952" class="Bound"
+      >iso</a
+      ><a name="2974"
+      > </a
+      ><a name="2975" href="DynamicallyChecked.Lens.html#2136" class="Function Operator"
+      >&#8596;</a
+      ><a name="2976"
+      > </a
+      ><a name="2977" href="DynamicallyChecked.Lens.html#2958" class="Bound"
+      >l</a
+      ><a name="2978"
+      >
+
+</a
+      ><a name="2980" href="DynamicallyChecked.Lens.html#2980" class="Function Operator"
+      >_&#8597;_</a
+      ><a name="2983"
+      > </a
+      ><a name="2984" class="Symbol"
+      >:</a
+      ><a name="2985"
+      > </a
+      ><a name="2986" class="Symbol"
+      >{</a
+      ><a name="2987" href="DynamicallyChecked.Lens.html#2987" class="Bound"
+      >A</a
+      ><a name="2988"
+      > </a
+      ><a name="2989" href="DynamicallyChecked.Lens.html#2989" class="Bound"
+      >B</a
+      ><a name="2990"
+      > </a
+      ><a name="2991" href="DynamicallyChecked.Lens.html#2991" class="Bound"
+      >C</a
+      ><a name="2992"
+      > </a
+      ><a name="2993" href="DynamicallyChecked.Lens.html#2993" class="Bound"
+      >D</a
+      ><a name="2994"
+      > </a
+      ><a name="2995" class="Symbol"
+      >:</a
+      ><a name="2996"
+      > </a
+      ><a name="2997" class="PrimitiveType"
+      >Set</a
+      ><a name="3000" class="Symbol"
+      >}</a
+      ><a name="3001"
+      > </a
+      ><a name="3002" class="Symbol"
+      >&#8594;</a
+      ><a name="3003"
+      > </a
+      ><a name="3004" href="DynamicallyChecked.Lens.html#2987" class="Bound"
+      >A</a
+      ><a name="3005"
+      > </a
+      ><a name="3006" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="3007"
+      > </a
+      ><a name="3008" href="DynamicallyChecked.Lens.html#2989" class="Bound"
+      >B</a
+      ><a name="3009"
+      > </a
+      ><a name="3010" class="Symbol"
+      >&#8594;</a
+      ><a name="3011"
+      > </a
+      ><a name="3012" href="DynamicallyChecked.Lens.html#2991" class="Bound"
+      >C</a
+      ><a name="3013"
+      > </a
+      ><a name="3014" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" href="DynamicallyChecked.Lens.html#2993" class="Bound"
+      >D</a
+      ><a name="3017"
+      > </a
+      ><a name="3018" class="Symbol"
+      >&#8594;</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" href="DynamicallyChecked.Lens.html#2987" class="Bound"
+      >A</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="3023"
+      > </a
+      ><a name="3024" href="DynamicallyChecked.Lens.html#2991" class="Bound"
+      >C</a
+      ><a name="3025"
+      > </a
+      ><a name="3026" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="3027"
+      > </a
+      ><a name="3028" href="DynamicallyChecked.Lens.html#2989" class="Bound"
+      >B</a
+      ><a name="3029"
+      > </a
+      ><a name="3030" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="3031"
+      > </a
+      ><a name="3032" href="DynamicallyChecked.Lens.html#2993" class="Bound"
+      >D</a
+      ><a name="3033"
+      >
+</a
+      ><a name="3034" href="DynamicallyChecked.Lens.html#3034" class="Bound"
+      >l</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="DynamicallyChecked.Lens.html#2980" class="Function Operator"
+      >&#8597;</a
+      ><a name="3037"
+      > </a
+      ><a name="3038" href="DynamicallyChecked.Lens.html#3038" class="Bound"
+      >r</a
+      ><a name="3039"
+      > </a
+      ><a name="3040" class="Symbol"
+      >=</a
+      ><a name="3041"
+      > </a
+      ><a name="3042" class="Keyword"
+      >record</a
+      ><a name="3048"
+      >
+  </a
+      ><a name="3051" class="Symbol"
+      >{</a
+      ><a name="3052"
+      > </a
+      ><a name="3053" class="Field"
+      >put</a
+      ><a name="3056"
+      > </a
+      ><a name="3057" class="Symbol"
+      >=</a
+      ><a name="3058"
+      > </a
+      ><a name="3059" class="Symbol"
+      >&#955;</a
+      ><a name="3060"
+      > </a
+      ><a name="3061" class="Symbol"
+      >{</a
+      ><a name="3062"
+      > </a
+      ><a name="3063" class="Symbol"
+      >(</a
+      ><a name="3064" href="DynamicallyChecked.Lens.html#3064" class="Bound"
+      >a</a
+      ><a name="3065"
+      > </a
+      ><a name="3066" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3067"
+      > </a
+      ><a name="3068" href="DynamicallyChecked.Lens.html#3068" class="Bound"
+      >c</a
+      ><a name="3069" class="Symbol"
+      >)</a
+      ><a name="3070"
+      > </a
+      ><a name="3071" class="Symbol"
+      >(</a
+      ><a name="3072" href="DynamicallyChecked.Lens.html#3072" class="Bound"
+      >b</a
+      ><a name="3073"
+      > </a
+      ><a name="3074" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3075"
+      > </a
+      ><a name="3076" href="DynamicallyChecked.Lens.html#3076" class="Bound"
+      >d</a
+      ><a name="3077" class="Symbol"
+      >)</a
+      ><a name="3078"
+      > </a
+      ><a name="3079" class="Symbol"
+      >&#8594;</a
+      ><a name="3080"
+      > </a
+      ><a name="3081" href="DynamicallyChecked.Partiality.html#2112" class="Function"
+      >liftPar&#8322;</a
+      ><a name="3089"
+      > </a
+      ><a name="3090" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="3093"
+      > </a
+      ><a name="3094" class="Symbol"
+      >(</a
+      ><a name="3095" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="3103"
+      > </a
+      ><a name="3104" href="DynamicallyChecked.Lens.html#3034" class="Bound"
+      >l</a
+      ><a name="3105"
+      > </a
+      ><a name="3106" href="DynamicallyChecked.Lens.html#3064" class="Bound"
+      >a</a
+      ><a name="3107"
+      > </a
+      ><a name="3108" href="DynamicallyChecked.Lens.html#3072" class="Bound"
+      >b</a
+      ><a name="3109" class="Symbol"
+      >)</a
+      ><a name="3110"
+      > </a
+      ><a name="3111" class="Symbol"
+      >(</a
+      ><a name="3112" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >Lens.put</a
+      ><a name="3120"
+      > </a
+      ><a name="3121" href="DynamicallyChecked.Lens.html#3038" class="Bound"
+      >r</a
+      ><a name="3122"
+      > </a
+      ><a name="3123" href="DynamicallyChecked.Lens.html#3068" class="Bound"
+      >c</a
+      ><a name="3124"
+      > </a
+      ><a name="3125" href="DynamicallyChecked.Lens.html#3076" class="Bound"
+      >d</a
+      ><a name="3126" class="Symbol"
+      >)</a
+      ><a name="3127"
+      > </a
+      ><a name="3128" class="Symbol"
+      >}</a
+      ><a name="3129"
+      >
+  </a
+      ><a name="3132" class="Symbol"
+      >;</a
+      ><a name="3133"
+      > </a
+      ><a name="3134" class="Field"
+      >get</a
+      ><a name="3137"
+      > </a
+      ><a name="3138" class="Symbol"
+      >=</a
+      ><a name="3139"
+      > </a
+      ><a name="3140" class="Symbol"
+      >&#955;</a
+      ><a name="3141"
+      > </a
+      ><a name="3142" class="Symbol"
+      >{</a
+      ><a name="3143"
+      > </a
+      ><a name="3144" class="Symbol"
+      >(</a
+      ><a name="3145" href="DynamicallyChecked.Lens.html#3145" class="Bound"
+      >a</a
+      ><a name="3146"
+      > </a
+      ><a name="3147" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3148"
+      > </a
+      ><a name="3149" href="DynamicallyChecked.Lens.html#3149" class="Bound"
+      >c</a
+      ><a name="3150" class="Symbol"
+      >)</a
+      ><a name="3151"
+      > </a
+      ><a name="3152" class="Symbol"
+      >&#8594;</a
+      ><a name="3153"
+      > </a
+      ><a name="3154" href="DynamicallyChecked.Partiality.html#2112" class="Function"
+      >liftPar&#8322;</a
+      ><a name="3162"
+      > </a
+      ><a name="3163" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >_,_</a
+      ><a name="3166"
+      > </a
+      ><a name="3167" class="Symbol"
+      >(</a
+      ><a name="3168" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="3176"
+      > </a
+      ><a name="3177" href="DynamicallyChecked.Lens.html#3034" class="Bound"
+      >l</a
+      ><a name="3178"
+      > </a
+      ><a name="3179" href="DynamicallyChecked.Lens.html#3145" class="Bound"
+      >a</a
+      ><a name="3180" class="Symbol"
+      >)</a
+      ><a name="3181"
+      > </a
+      ><a name="3182" class="Symbol"
+      >(</a
+      ><a name="3183" href="DynamicallyChecked.Lens.html#351" class="Field"
+      >Lens.get</a
+      ><a name="3191"
+      > </a
+      ><a name="3192" href="DynamicallyChecked.Lens.html#3038" class="Bound"
+      >r</a
+      ><a name="3193"
+      > </a
+      ><a name="3194" href="DynamicallyChecked.Lens.html#3149" class="Bound"
+      >c</a
+      ><a name="3195" class="Symbol"
+      >)</a
+      ><a name="3196"
+      > </a
+      ><a name="3197" class="Symbol"
+      >}</a
+      ><a name="3198"
+      >
+  </a
+      ><a name="3201" class="Symbol"
+      >;</a
+      ><a name="3202"
+      > </a
+      ><a name="3203" class="Field"
+      >PutGet</a
+      ><a name="3209"
+      > </a
+      ><a name="3210" class="Symbol"
+      >=</a
+      ><a name="3211"
+      > </a
+      ><a name="3212" class="Symbol"
+      >&#955;</a
+      ><a name="3213"
+      > </a
+      ><a name="3214" class="Symbol"
+      >{</a
+      ><a name="3215"
+      > </a
+      ><a name="3216" class="Symbol"
+      >(</a
+      ><a name="3217" href="DynamicallyChecked.Lens.html#3217" class="Bound"
+      >put-l&#8614;</a
+      ><a name="3223"
+      > </a
+      ><a name="3224" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3227"
+      > </a
+      ><a name="3228" href="DynamicallyChecked.Lens.html#3228" class="Bound"
+      >put-r&#8614;</a
+      ><a name="3234"
+      > </a
+      ><a name="3235" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3238"
+      > </a
+      ><a name="3239" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="3245"
+      > </a
+      ><a name="3246" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3250" class="Symbol"
+      >)</a
+      ><a name="3251"
+      > </a
+      ><a name="3252" class="Symbol"
+      >&#8594;</a
+      ><a name="3253"
+      > </a
+      ><a name="3254" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="3265"
+      > </a
+      ><a name="3266" href="DynamicallyChecked.Lens.html#3034" class="Bound"
+      >l</a
+      ><a name="3267"
+      > </a
+      ><a name="3268" href="DynamicallyChecked.Lens.html#3217" class="Bound"
+      >put-l&#8614;</a
+      ><a name="3274"
+      > </a
+      ><a name="3275" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3278"
+      > </a
+      ><a name="3279" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >Lens.PutGet</a
+      ><a name="3290"
+      > </a
+      ><a name="3291" href="DynamicallyChecked.Lens.html#3038" class="Bound"
+      >r</a
+      ><a name="3292"
+      > </a
+      ><a name="3293" href="DynamicallyChecked.Lens.html#3228" class="Bound"
+      >put-r&#8614;</a
+      ><a name="3299"
+      > </a
+      ><a name="3300" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3303"
+      > </a
+      ><a name="3304" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="3310"
+      > </a
+      ><a name="3311" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3315"
+      > </a
+      ><a name="3316" class="Symbol"
+      >}</a
+      ><a name="3317"
+      >
+  </a
+      ><a name="3320" class="Symbol"
+      >;</a
+      ><a name="3321"
+      > </a
+      ><a name="3322" class="Field"
+      >GetPut</a
+      ><a name="3328"
+      > </a
+      ><a name="3329" class="Symbol"
+      >=</a
+      ><a name="3330"
+      > </a
+      ><a name="3331" class="Symbol"
+      >&#955;</a
+      ><a name="3332"
+      > </a
+      ><a name="3333" class="Symbol"
+      >{</a
+      ><a name="3334"
+      > </a
+      ><a name="3335" class="Symbol"
+      >(</a
+      ><a name="3336" href="DynamicallyChecked.Lens.html#3336" class="Bound"
+      >get-l&#8614;</a
+      ><a name="3342"
+      > </a
+      ><a name="3343" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3346"
+      > </a
+      ><a name="3347" href="DynamicallyChecked.Lens.html#3347" class="Bound"
+      >get-r&#8614;</a
+      ><a name="3353"
+      > </a
+      ><a name="3354" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3357"
+      > </a
+      ><a name="3358" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="3364"
+      > </a
+      ><a name="3365" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3369" class="Symbol"
+      >)</a
+      ><a name="3370"
+      > </a
+      ><a name="3371" class="Symbol"
+      >&#8594;</a
+      ><a name="3372"
+      > </a
+      ><a name="3373" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="3384"
+      > </a
+      ><a name="3385" href="DynamicallyChecked.Lens.html#3034" class="Bound"
+      >l</a
+      ><a name="3386"
+      > </a
+      ><a name="3387" href="DynamicallyChecked.Lens.html#3336" class="Bound"
+      >get-l&#8614;</a
+      ><a name="3393"
+      > </a
+      ><a name="3394" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3397"
+      > </a
+      ><a name="3398" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >Lens.GetPut</a
+      ><a name="3409"
+      > </a
+      ><a name="3410" href="DynamicallyChecked.Lens.html#3038" class="Bound"
+      >r</a
+      ><a name="3411"
+      > </a
+      ><a name="3412" href="DynamicallyChecked.Lens.html#3347" class="Bound"
+      >get-r&#8614;</a
+      ><a name="3418"
+      > </a
+      ><a name="3419" href="DynamicallyChecked.Partiality.html#2686" class="InductiveConstructor Operator"
+      >&gt;&gt;=</a
+      ><a name="3422"
+      > </a
+      ><a name="3423" href="DynamicallyChecked.Partiality.html#2616" class="InductiveConstructor"
+      >return</a
+      ><a name="3429"
+      > </a
+      ><a name="3430" href="Agda.Builtin.Equality.html#140" class="InductiveConstructor"
+      >refl</a
+      ><a name="3434"
+      > </a
+      ><a name="3435" class="Symbol"
+      >}</a
+      ><a name="3436"
+      > </a
+      ><a name="3437" class="Symbol"
+      >}</a
+      ><a name="3438"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>

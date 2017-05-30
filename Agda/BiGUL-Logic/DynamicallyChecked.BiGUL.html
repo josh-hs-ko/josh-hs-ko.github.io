@@ -1,0 +1,2911 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >DynamicallyChecked.BiGUL</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Keyword"
+      >open</a
+      ><a name="5"
+      > </a
+      ><a name="6" class="Keyword"
+      >import</a
+      ><a name="12"
+      > </a
+      ><a name="13" href="DynamicallyChecked.Universe.html#1" class="Module"
+      >DynamicallyChecked.Universe</a
+      ><a name="40"
+      >
+</a
+      ><a name="41" class="Keyword"
+      >open</a
+      ><a name="45"
+      > </a
+      ><a name="46" class="Keyword"
+      >import</a
+      ><a name="52"
+      > </a
+      ><a name="53" href="Data.Nat.html#1" class="Module"
+      >Data.Nat</a
+      ><a name="61"
+      >
+
+</a
+      ><a name="63" class="Keyword"
+      >module</a
+      ><a name="69"
+      > </a
+      ><a name="70" href="DynamicallyChecked.BiGUL.html#1" class="Module"
+      >DynamicallyChecked.BiGUL</a
+      ><a name="94"
+      > </a
+      ><a name="95" class="Keyword"
+      >where</a
+      ><a name="100"
+      >
+
+</a
+      ><a name="102" class="Keyword"
+      >open</a
+      ><a name="106"
+      > </a
+      ><a name="107" class="Keyword"
+      >import</a
+      ><a name="113"
+      > </a
+      ><a name="114" href="DynamicallyChecked.Utilities.html#1" class="Module"
+      >DynamicallyChecked.Utilities</a
+      ><a name="142"
+      >
+</a
+      ><a name="143" class="Keyword"
+      >open</a
+      ><a name="147"
+      > </a
+      ><a name="148" class="Keyword"
+      >import</a
+      ><a name="154"
+      > </a
+      ><a name="155" href="DynamicallyChecked.Partiality.html#1" class="Module"
+      >DynamicallyChecked.Partiality</a
+      ><a name="184"
+      >
+</a
+      ><a name="185" class="Keyword"
+      >open</a
+      ><a name="189"
+      > </a
+      ><a name="190" class="Keyword"
+      >import</a
+      ><a name="196"
+      > </a
+      ><a name="197" href="DynamicallyChecked.Lens.html#1" class="Module"
+      >DynamicallyChecked.Lens</a
+      ><a name="220"
+      >
+</a
+      ><a name="221" class="Keyword"
+      >open</a
+      ><a name="225"
+      > </a
+      ><a name="226" class="Keyword"
+      >import</a
+      ><a name="232"
+      > </a
+      ><a name="233" href="DynamicallyChecked.Rearrangement.html#1" class="Module"
+      >DynamicallyChecked.Rearrangement</a
+      ><a name="265"
+      >
+</a
+      ><a name="266" class="Keyword"
+      >open</a
+      ><a name="270"
+      > </a
+      ><a name="271" class="Keyword"
+      >import</a
+      ><a name="277"
+      > </a
+      ><a name="278" href="DynamicallyChecked.Case.html#1" class="Module"
+      >DynamicallyChecked.Case</a
+      ><a name="301"
+      > </a
+      ><a name="302" class="Symbol"
+      >as</a
+      ><a name="304"
+      > </a
+      ><a name="305" class="Module"
+      >Case</a
+      ><a name="309"
+      >
+
+</a
+      ><a name="311" class="Keyword"
+      >open</a
+      ><a name="315"
+      > </a
+      ><a name="316" class="Keyword"
+      >import</a
+      ><a name="322"
+      > </a
+      ><a name="323" href="Level.html#1" class="Module"
+      >Level</a
+      ><a name="328"
+      >
+</a
+      ><a name="329" class="Keyword"
+      >open</a
+      ><a name="333"
+      > </a
+      ><a name="334" class="Keyword"
+      >import</a
+      ><a name="340"
+      > </a
+      ><a name="341" href="Data.Product.html#1" class="Module"
+      >Data.Product</a
+      ><a name="353"
+      >
+</a
+      ><a name="354" class="Keyword"
+      >open</a
+      ><a name="358"
+      > </a
+      ><a name="359" class="Keyword"
+      >import</a
+      ><a name="365"
+      > </a
+      ><a name="366" href="Data.Bool.html#1" class="Module"
+      >Data.Bool</a
+      ><a name="375"
+      >
+</a
+      ><a name="376" class="Keyword"
+      >open</a
+      ><a name="380"
+      > </a
+      ><a name="381" class="Keyword"
+      >import</a
+      ><a name="387"
+      > </a
+      ><a name="388" href="Data.Maybe.html#1" class="Module"
+      >Data.Maybe</a
+      ><a name="398"
+      >
+</a
+      ><a name="399" class="Keyword"
+      >open</a
+      ><a name="403"
+      > </a
+      ><a name="404" class="Keyword"
+      >import</a
+      ><a name="410"
+      > </a
+      ><a name="411" href="Data.List.html#1" class="Module"
+      >Data.List</a
+      ><a name="420"
+      >
+</a
+      ><a name="421" class="Keyword"
+      >open</a
+      ><a name="425"
+      > </a
+      ><a name="426" class="Keyword"
+      >import</a
+      ><a name="432"
+      > </a
+      ><a name="433" href="Relation.Nullary.html#1" class="Module"
+      >Relation.Nullary</a
+      ><a name="449"
+      >
+</a
+      ><a name="450" class="Keyword"
+      >open</a
+      ><a name="454"
+      > </a
+      ><a name="455" class="Keyword"
+      >import</a
+      ><a name="461"
+      > </a
+      ><a name="462" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation.Binary.PropositionalEquality</a
+      ><a name="499"
+      >
+
+
+</a
+      ><a name="502" class="Keyword"
+      >mutual</a
+      ><a name="508"
+      >
+
+  </a
+      ><a name="512" class="Keyword"
+      >data</a
+      ><a name="516"
+      > </a
+      ><a name="517" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="522"
+      > </a
+      ><a name="523" class="Symbol"
+      >{</a
+      ><a name="524" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="525"
+      > </a
+      ><a name="526" class="Symbol"
+      >:</a
+      ><a name="527"
+      > </a
+      ><a name="528" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="529" class="Symbol"
+      >}</a
+      ><a name="530"
+      > </a
+      ><a name="531" class="Symbol"
+      >(</a
+      ><a name="532" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="533"
+      > </a
+      ><a name="534" class="Symbol"
+      >:</a
+      ><a name="535"
+      > </a
+      ><a name="536" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="543"
+      > </a
+      ><a name="544" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="545" class="Symbol"
+      >)</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="Symbol"
+      >:</a
+      ><a name="548"
+      > </a
+      ><a name="549" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="550"
+      > </a
+      ><a name="551" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="552"
+      > </a
+      ><a name="553" class="Symbol"
+      >&#8594;</a
+      ><a name="554"
+      > </a
+      ><a name="555" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="556"
+      > </a
+      ><a name="557" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="558"
+      > </a
+      ><a name="559" class="Symbol"
+      >&#8594;</a
+      ><a name="560"
+      > </a
+      ><a name="561" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="565"
+      > </a
+      ><a name="566" class="Keyword"
+      >where</a
+      ><a name="571"
+      >
+    </a
+      ><a name="576" href="DynamicallyChecked.BiGUL.html#576" class="InductiveConstructor"
+      >fail</a
+      ><a name="580"
+      >    </a
+      ><a name="584" class="Symbol"
+      >:</a
+      ><a name="585"
+      > </a
+      ><a name="586" class="Symbol"
+      >{</a
+      ><a name="587" href="DynamicallyChecked.BiGUL.html#587" class="Bound"
+      >S</a
+      ><a name="588"
+      > </a
+      ><a name="589" href="DynamicallyChecked.BiGUL.html#589" class="Bound"
+      >V</a
+      ><a name="590"
+      > </a
+      ><a name="591" class="Symbol"
+      >:</a
+      ><a name="592"
+      > </a
+      ><a name="593" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="594"
+      > </a
+      ><a name="595" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="596" class="Symbol"
+      >}</a
+      ><a name="597"
+      > </a
+      ><a name="598" class="Symbol"
+      >&#8594;</a
+      ><a name="599"
+      > </a
+      ><a name="600" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="605"
+      > </a
+      ><a name="606" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="607"
+      > </a
+      ><a name="608" href="DynamicallyChecked.BiGUL.html#587" class="Bound"
+      >S</a
+      ><a name="609"
+      > </a
+      ><a name="610" href="DynamicallyChecked.BiGUL.html#589" class="Bound"
+      >V</a
+      ><a name="611"
+      >
+    </a
+      ><a name="616" href="DynamicallyChecked.BiGUL.html#616" class="InductiveConstructor"
+      >skip</a
+      ><a name="620"
+      >    </a
+      ><a name="624" class="Symbol"
+      >:</a
+      ><a name="625"
+      > </a
+      ><a name="626" class="Symbol"
+      >{</a
+      ><a name="627" href="DynamicallyChecked.BiGUL.html#627" class="Bound"
+      >S</a
+      ><a name="628"
+      > </a
+      ><a name="629" href="DynamicallyChecked.BiGUL.html#629" class="Bound"
+      >V</a
+      ><a name="630"
+      > </a
+      ><a name="631" class="Symbol"
+      >:</a
+      ><a name="632"
+      > </a
+      ><a name="633" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="634"
+      > </a
+      ><a name="635" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="636" class="Symbol"
+      >}</a
+      ><a name="637"
+      > </a
+      ><a name="638" class="Symbol"
+      >(</a
+      ><a name="639" href="DynamicallyChecked.BiGUL.html#639" class="Bound"
+      >f</a
+      ><a name="640"
+      > </a
+      ><a name="641" class="Symbol"
+      >:</a
+      ><a name="642"
+      > </a
+      ><a name="643" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="644"
+      > </a
+      ><a name="645" href="DynamicallyChecked.BiGUL.html#627" class="Bound"
+      >S</a
+      ><a name="646"
+      > </a
+      ><a name="647" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="648"
+      > </a
+      ><a name="649" class="Symbol"
+      >(</a
+      ><a name="650" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="653" class="Symbol"
+      >)</a
+      ><a name="654"
+      > </a
+      ><a name="655" class="Symbol"
+      >&#8594;</a
+      ><a name="656"
+      > </a
+      ><a name="657" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="658"
+      > </a
+      ><a name="659" href="DynamicallyChecked.BiGUL.html#629" class="Bound"
+      >V</a
+      ><a name="660"
+      > </a
+      ><a name="661" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="662"
+      > </a
+      ><a name="663" class="Symbol"
+      >(</a
+      ><a name="664" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="665"
+      > </a
+      ><a name="666" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="667" class="Symbol"
+      >))</a
+      ><a name="669"
+      > </a
+      ><a name="670" class="Symbol"
+      >&#8594;</a
+      ><a name="671"
+      > </a
+      ><a name="672" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="677"
+      > </a
+      ><a name="678" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="679"
+      > </a
+      ><a name="680" href="DynamicallyChecked.BiGUL.html#627" class="Bound"
+      >S</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="DynamicallyChecked.BiGUL.html#629" class="Bound"
+      >V</a
+      ><a name="683"
+      >
+    </a
+      ><a name="688" href="DynamicallyChecked.BiGUL.html#688" class="InductiveConstructor"
+      >replace</a
+      ><a name="695"
+      > </a
+      ><a name="696" class="Symbol"
+      >:</a
+      ><a name="697"
+      > </a
+      ><a name="698" class="Symbol"
+      >{</a
+      ><a name="699" href="DynamicallyChecked.BiGUL.html#699" class="Bound"
+      >S</a
+      ><a name="700"
+      > </a
+      ><a name="701" class="Symbol"
+      >:</a
+      ><a name="702"
+      > </a
+      ><a name="703" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="704"
+      > </a
+      ><a name="705" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="706" class="Symbol"
+      >}</a
+      ><a name="707"
+      > </a
+      ><a name="708" class="Symbol"
+      >&#8594;</a
+      ><a name="709"
+      > </a
+      ><a name="710" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="715"
+      > </a
+      ><a name="716" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="717"
+      > </a
+      ><a name="718" href="DynamicallyChecked.BiGUL.html#699" class="Bound"
+      >S</a
+      ><a name="719"
+      > </a
+      ><a name="720" href="DynamicallyChecked.BiGUL.html#699" class="Bound"
+      >S</a
+      ><a name="721"
+      >
+    </a
+      ><a name="726" href="DynamicallyChecked.BiGUL.html#726" class="InductiveConstructor"
+      >prod</a
+      ><a name="730"
+      >    </a
+      ><a name="734" class="Symbol"
+      >:</a
+      ><a name="735"
+      > </a
+      ><a name="736" class="Symbol"
+      >{</a
+      ><a name="737" href="DynamicallyChecked.BiGUL.html#737" class="Bound"
+      >S</a
+      ><a name="738"
+      > </a
+      ><a name="739" href="DynamicallyChecked.BiGUL.html#739" class="Bound"
+      >V</a
+      ><a name="740"
+      > </a
+      ><a name="741" href="DynamicallyChecked.BiGUL.html#741" class="Bound"
+      >S'</a
+      ><a name="743"
+      > </a
+      ><a name="744" href="DynamicallyChecked.BiGUL.html#744" class="Bound"
+      >V'</a
+      ><a name="746"
+      > </a
+      ><a name="747" class="Symbol"
+      >:</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="750"
+      > </a
+      ><a name="751" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="752" class="Symbol"
+      >}</a
+      ><a name="753"
+      > </a
+      ><a name="754" class="Symbol"
+      >(</a
+      ><a name="755" href="DynamicallyChecked.BiGUL.html#755" class="Bound"
+      >b</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Symbol"
+      >:</a
+      ><a name="758"
+      > </a
+      ><a name="759" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="764"
+      > </a
+      ><a name="765" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="766"
+      > </a
+      ><a name="767" href="DynamicallyChecked.BiGUL.html#737" class="Bound"
+      >S</a
+      ><a name="768"
+      > </a
+      ><a name="769" href="DynamicallyChecked.BiGUL.html#739" class="Bound"
+      >V</a
+      ><a name="770" class="Symbol"
+      >)</a
+      ><a name="771"
+      > </a
+      ><a name="772" class="Symbol"
+      >(</a
+      ><a name="773" href="DynamicallyChecked.BiGUL.html#773" class="Bound"
+      >b'</a
+      ><a name="775"
+      > </a
+      ><a name="776" class="Symbol"
+      >:</a
+      ><a name="777"
+      > </a
+      ><a name="778" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="785"
+      > </a
+      ><a name="786" href="DynamicallyChecked.BiGUL.html#741" class="Bound"
+      >S'</a
+      ><a name="788"
+      > </a
+      ><a name="789" href="DynamicallyChecked.BiGUL.html#744" class="Bound"
+      >V'</a
+      ><a name="791" class="Symbol"
+      >)</a
+      ><a name="792"
+      > </a
+      ><a name="793" class="Symbol"
+      >&#8594;</a
+      ><a name="794"
+      > </a
+      ><a name="795" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="800"
+      > </a
+      ><a name="801" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="802"
+      > </a
+      ><a name="803" class="Symbol"
+      >(</a
+      ><a name="804" href="DynamicallyChecked.BiGUL.html#737" class="Bound"
+      >S</a
+      ><a name="805"
+      > </a
+      ><a name="806" href="DynamicallyChecked.Universe.html#581" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="DynamicallyChecked.BiGUL.html#741" class="Bound"
+      >S'</a
+      ><a name="810" class="Symbol"
+      >)</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >(</a
+      ><a name="813" href="DynamicallyChecked.BiGUL.html#739" class="Bound"
+      >V</a
+      ><a name="814"
+      > </a
+      ><a name="815" href="DynamicallyChecked.Universe.html#581" class="InductiveConstructor Operator"
+      >&#8855;</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="DynamicallyChecked.BiGUL.html#744" class="Bound"
+      >V'</a
+      ><a name="819" class="Symbol"
+      >)</a
+      ><a name="820"
+      >
+    </a
+      ><a name="825" href="DynamicallyChecked.BiGUL.html#825" class="InductiveConstructor"
+      >rearrS</a
+      ><a name="831"
+      >  </a
+      ><a name="833" class="Symbol"
+      >:</a
+      ><a name="834"
+      > </a
+      ><a name="835" class="Symbol"
+      >{</a
+      ><a name="836" href="DynamicallyChecked.BiGUL.html#836" class="Bound"
+      >S</a
+      ><a name="837"
+      > </a
+      ><a name="838" href="DynamicallyChecked.BiGUL.html#838" class="Bound"
+      >S'</a
+      ><a name="840"
+      > </a
+      ><a name="841" href="DynamicallyChecked.BiGUL.html#841" class="Bound"
+      >V</a
+      ><a name="842"
+      > </a
+      ><a name="843" class="Symbol"
+      >:</a
+      ><a name="844"
+      > </a
+      ><a name="845" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="846"
+      > </a
+      ><a name="847" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="848" class="Symbol"
+      >}</a
+      ><a name="849"
+      >
+              </a
+      ><a name="864" class="Symbol"
+      >(</a
+      ><a name="865" href="DynamicallyChecked.BiGUL.html#865" class="Bound"
+      >spat</a
+      ><a name="869"
+      > </a
+      ><a name="870" class="Symbol"
+      >:</a
+      ><a name="871"
+      > </a
+      ><a name="872" href="DynamicallyChecked.Universe.html#2712" class="Datatype"
+      >Pattern</a
+      ><a name="879"
+      > </a
+      ><a name="880" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="881"
+      > </a
+      ><a name="882" href="DynamicallyChecked.BiGUL.html#836" class="Bound"
+      >S</a
+      ><a name="883" class="Symbol"
+      >)</a
+      ><a name="884"
+      > </a
+      ><a name="885" class="Symbol"
+      >(</a
+      ><a name="886" href="DynamicallyChecked.BiGUL.html#886" class="Bound"
+      >spat'</a
+      ><a name="891"
+      > </a
+      ><a name="892" class="Symbol"
+      >:</a
+      ><a name="893"
+      > </a
+      ><a name="894" href="DynamicallyChecked.Universe.html#2712" class="Datatype"
+      >Pattern</a
+      ><a name="901"
+      > </a
+      ><a name="902" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="903"
+      > </a
+      ><a name="904" href="DynamicallyChecked.BiGUL.html#838" class="Bound"
+      >S'</a
+      ><a name="906" class="Symbol"
+      >)</a
+      ><a name="907"
+      > </a
+      ><a name="908" class="Symbol"
+      >(</a
+      ><a name="909" href="DynamicallyChecked.BiGUL.html#909" class="Bound"
+      >expr</a
+      ><a name="913"
+      > </a
+      ><a name="914" class="Symbol"
+      >:</a
+      ><a name="915"
+      > </a
+      ><a name="916" href="DynamicallyChecked.Rearrangement.html#1380" class="Function"
+      >Expr</a
+      ><a name="920"
+      > </a
+      ><a name="921" href="DynamicallyChecked.BiGUL.html#865" class="Bound"
+      >spat</a
+      ><a name="925"
+      > </a
+      ><a name="926" href="DynamicallyChecked.BiGUL.html#886" class="Bound"
+      >spat'</a
+      ><a name="931" class="Symbol"
+      >)</a
+      ><a name="932"
+      > </a
+      ><a name="933" class="Symbol"
+      >(</a
+      ><a name="934" href="DynamicallyChecked.BiGUL.html#934" class="Bound"
+      >c</a
+      ><a name="935"
+      > </a
+      ><a name="936" class="Symbol"
+      >:</a
+      ><a name="937"
+      > </a
+      ><a name="938" href="DynamicallyChecked.Rearrangement.html#20354" class="Function"
+      >CompleteExpr</a
+      ><a name="950"
+      > </a
+      ><a name="951" href="DynamicallyChecked.BiGUL.html#865" class="Bound"
+      >spat</a
+      ><a name="955"
+      > </a
+      ><a name="956" href="DynamicallyChecked.BiGUL.html#886" class="Bound"
+      >spat'</a
+      ><a name="961"
+      > </a
+      ><a name="962" href="DynamicallyChecked.BiGUL.html#909" class="Bound"
+      >expr</a
+      ><a name="966" class="Symbol"
+      >)</a
+      ><a name="967"
+      >
+              </a
+      ><a name="982" class="Symbol"
+      >(</a
+      ><a name="983" href="DynamicallyChecked.BiGUL.html#983" class="Bound"
+      >b</a
+      ><a name="984"
+      > </a
+      ><a name="985" class="Symbol"
+      >:</a
+      ><a name="986"
+      > </a
+      ><a name="987" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="992"
+      > </a
+      ><a name="993" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="994"
+      > </a
+      ><a name="995" href="DynamicallyChecked.BiGUL.html#838" class="Bound"
+      >S'</a
+      ><a name="997"
+      > </a
+      ><a name="998" href="DynamicallyChecked.BiGUL.html#841" class="Bound"
+      >V</a
+      ><a name="999" class="Symbol"
+      >)</a
+      ><a name="1000"
+      > </a
+      ><a name="1001" class="Symbol"
+      >&#8594;</a
+      ><a name="1002"
+      > </a
+      ><a name="1003" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1010"
+      > </a
+      ><a name="1011" href="DynamicallyChecked.BiGUL.html#836" class="Bound"
+      >S</a
+      ><a name="1012"
+      > </a
+      ><a name="1013" href="DynamicallyChecked.BiGUL.html#841" class="Bound"
+      >V</a
+      ><a name="1014"
+      >
+    </a
+      ><a name="1019" href="DynamicallyChecked.BiGUL.html#1019" class="InductiveConstructor"
+      >rearrV</a
+      ><a name="1025"
+      >  </a
+      ><a name="1027" class="Symbol"
+      >:</a
+      ><a name="1028"
+      > </a
+      ><a name="1029" class="Symbol"
+      >{</a
+      ><a name="1030" href="DynamicallyChecked.BiGUL.html#1030" class="Bound"
+      >S</a
+      ><a name="1031"
+      > </a
+      ><a name="1032" href="DynamicallyChecked.BiGUL.html#1032" class="Bound"
+      >V</a
+      ><a name="1033"
+      > </a
+      ><a name="1034" href="DynamicallyChecked.BiGUL.html#1034" class="Bound"
+      >V'</a
+      ><a name="1036"
+      > </a
+      ><a name="1037" class="Symbol"
+      >:</a
+      ><a name="1038"
+      > </a
+      ><a name="1039" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="1040"
+      > </a
+      ><a name="1041" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="1042" class="Symbol"
+      >}</a
+      ><a name="1043"
+      >
+              </a
+      ><a name="1058" class="Symbol"
+      >(</a
+      ><a name="1059" href="DynamicallyChecked.BiGUL.html#1059" class="Bound"
+      >vpat</a
+      ><a name="1063"
+      > </a
+      ><a name="1064" class="Symbol"
+      >:</a
+      ><a name="1065"
+      > </a
+      ><a name="1066" href="DynamicallyChecked.Universe.html#2712" class="Datatype"
+      >Pattern</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1075"
+      > </a
+      ><a name="1076" href="DynamicallyChecked.BiGUL.html#1032" class="Bound"
+      >V</a
+      ><a name="1077" class="Symbol"
+      >)</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" class="Symbol"
+      >(</a
+      ><a name="1080" href="DynamicallyChecked.BiGUL.html#1080" class="Bound"
+      >vpat'</a
+      ><a name="1085"
+      > </a
+      ><a name="1086" class="Symbol"
+      >:</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" href="DynamicallyChecked.Universe.html#2712" class="Datatype"
+      >Pattern</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1097"
+      > </a
+      ><a name="1098" href="DynamicallyChecked.BiGUL.html#1034" class="Bound"
+      >V'</a
+      ><a name="1100" class="Symbol"
+      >)</a
+      ><a name="1101"
+      > </a
+      ><a name="1102" class="Symbol"
+      >(</a
+      ><a name="1103" href="DynamicallyChecked.BiGUL.html#1103" class="Bound"
+      >expr</a
+      ><a name="1107"
+      > </a
+      ><a name="1108" class="Symbol"
+      >:</a
+      ><a name="1109"
+      > </a
+      ><a name="1110" href="DynamicallyChecked.Rearrangement.html#1380" class="Function"
+      >Expr</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" href="DynamicallyChecked.BiGUL.html#1059" class="Bound"
+      >vpat</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" href="DynamicallyChecked.BiGUL.html#1080" class="Bound"
+      >vpat'</a
+      ><a name="1125" class="Symbol"
+      >)</a
+      ><a name="1126"
+      > </a
+      ><a name="1127" class="Symbol"
+      >(</a
+      ><a name="1128" href="DynamicallyChecked.BiGUL.html#1128" class="Bound"
+      >c</a
+      ><a name="1129"
+      > </a
+      ><a name="1130" class="Symbol"
+      >:</a
+      ><a name="1131"
+      > </a
+      ><a name="1132" href="DynamicallyChecked.Rearrangement.html#20354" class="Function"
+      >CompleteExpr</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="DynamicallyChecked.BiGUL.html#1059" class="Bound"
+      >vpat</a
+      ><a name="1149"
+      > </a
+      ><a name="1150" href="DynamicallyChecked.BiGUL.html#1080" class="Bound"
+      >vpat'</a
+      ><a name="1155"
+      > </a
+      ><a name="1156" href="DynamicallyChecked.BiGUL.html#1103" class="Bound"
+      >expr</a
+      ><a name="1160" class="Symbol"
+      >)</a
+      ><a name="1161"
+      >
+              </a
+      ><a name="1176" class="Symbol"
+      >(</a
+      ><a name="1177" href="DynamicallyChecked.BiGUL.html#1177" class="Bound"
+      >b</a
+      ><a name="1178"
+      > </a
+      ><a name="1179" class="Symbol"
+      >:</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="DynamicallyChecked.BiGUL.html#1030" class="Bound"
+      >S</a
+      ><a name="1190"
+      > </a
+      ><a name="1191" href="DynamicallyChecked.BiGUL.html#1034" class="Bound"
+      >V'</a
+      ><a name="1193" class="Symbol"
+      >)</a
+      ><a name="1194"
+      > </a
+      ><a name="1195" class="Symbol"
+      >&#8594;</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1204"
+      > </a
+      ><a name="1205" href="DynamicallyChecked.BiGUL.html#1030" class="Bound"
+      >S</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" href="DynamicallyChecked.BiGUL.html#1032" class="Bound"
+      >V</a
+      ><a name="1208"
+      >
+    </a
+      ><a name="1213" href="DynamicallyChecked.BiGUL.html#1213" class="InductiveConstructor"
+      >case</a
+      ><a name="1217"
+      >    </a
+      ><a name="1221" class="Symbol"
+      >:</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >{</a
+      ><a name="1224" href="DynamicallyChecked.BiGUL.html#1224" class="Bound"
+      >S</a
+      ><a name="1225"
+      > </a
+      ><a name="1226" href="DynamicallyChecked.BiGUL.html#1226" class="Bound"
+      >V</a
+      ><a name="1227"
+      > </a
+      ><a name="1228" class="Symbol"
+      >:</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="1231"
+      > </a
+      ><a name="1232" href="DynamicallyChecked.BiGUL.html#524" class="Bound"
+      >n</a
+      ><a name="1233" class="Symbol"
+      >}</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" class="Symbol"
+      >(</a
+      ><a name="1236" href="DynamicallyChecked.BiGUL.html#1236" class="Bound"
+      >branches</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" class="Symbol"
+      >:</a
+      ><a name="1246"
+      > </a
+      ><a name="1247" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="1251"
+      > </a
+      ><a name="1252" class="Symbol"
+      >(</a
+      ><a name="1253" href="DynamicallyChecked.BiGUL.html#1526" class="Function"
+      >CaseBranch</a
+      ><a name="1263"
+      > </a
+      ><a name="1264" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1265"
+      > </a
+      ><a name="1266" href="DynamicallyChecked.BiGUL.html#1224" class="Bound"
+      >S</a
+      ><a name="1267"
+      > </a
+      ><a name="1268" href="DynamicallyChecked.BiGUL.html#1226" class="Bound"
+      >V</a
+      ><a name="1269" class="Symbol"
+      >))</a
+      ><a name="1271"
+      > </a
+      ><a name="1272" class="Symbol"
+      >&#8594;</a
+      ><a name="1273"
+      > </a
+      ><a name="1274" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1279"
+      > </a
+      ><a name="1280" href="DynamicallyChecked.BiGUL.html#532" class="Bound"
+      >F</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="DynamicallyChecked.BiGUL.html#1224" class="Bound"
+      >S</a
+      ><a name="1283"
+      > </a
+      ><a name="1284" href="DynamicallyChecked.BiGUL.html#1226" class="Bound"
+      >V</a
+      ><a name="1285"
+      >
+
+  </a
+      ><a name="1289" class="Keyword"
+      >data</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="DynamicallyChecked.BiGUL.html#1294" class="Datatype"
+      >CaseBranchType</a
+      ><a name="1308"
+      > </a
+      ><a name="1309" class="Symbol"
+      >{</a
+      ><a name="1310" href="DynamicallyChecked.BiGUL.html#1310" class="Bound"
+      >n</a
+      ><a name="1311"
+      > </a
+      ><a name="1312" class="Symbol"
+      >:</a
+      ><a name="1313"
+      > </a
+      ><a name="1314" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="1315" class="Symbol"
+      >}</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" class="Symbol"
+      >(</a
+      ><a name="1318" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1319"
+      > </a
+      ><a name="1320" class="Symbol"
+      >:</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" href="DynamicallyChecked.BiGUL.html#1310" class="Bound"
+      >n</a
+      ><a name="1331" class="Symbol"
+      >)</a
+      ><a name="1332"
+      > </a
+      ><a name="1333" class="Symbol"
+      >(</a
+      ><a name="1334" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" href="DynamicallyChecked.BiGUL.html#1336" class="Bound"
+      >V</a
+      ><a name="1337"
+      > </a
+      ><a name="1338" class="Symbol"
+      >:</a
+      ><a name="1339"
+      > </a
+      ><a name="1340" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" href="DynamicallyChecked.BiGUL.html#1310" class="Bound"
+      >n</a
+      ><a name="1343" class="Symbol"
+      >)</a
+      ><a name="1344"
+      > </a
+      ><a name="1345" class="Symbol"
+      >:</a
+      ><a name="1346"
+      > </a
+      ><a name="1347" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" class="Keyword"
+      >where</a
+      ><a name="1357"
+      >
+    </a
+      ><a name="1362" href="DynamicallyChecked.BiGUL.html#1362" class="InductiveConstructor"
+      >normal</a
+      ><a name="1368"
+      >   </a
+      ><a name="1371" class="Symbol"
+      >:</a
+      ><a name="1372"
+      > </a
+      ><a name="1373" class="Symbol"
+      >(</a
+      ><a name="1374" href="DynamicallyChecked.BiGUL.html#1374" class="Bound"
+      >b</a
+      ><a name="1375"
+      > </a
+      ><a name="1376" class="Symbol"
+      >:</a
+      ><a name="1377"
+      > </a
+      ><a name="1378" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1385"
+      > </a
+      ><a name="1386" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" href="DynamicallyChecked.BiGUL.html#1336" class="Bound"
+      >V</a
+      ><a name="1389" class="Symbol"
+      >)</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" class="Symbol"
+      >(</a
+      ><a name="1392" href="DynamicallyChecked.BiGUL.html#1392" class="Bound"
+      >q</a
+      ><a name="1393"
+      > </a
+      ><a name="1394" class="Symbol"
+      >:</a
+      ><a name="1395"
+      > </a
+      ><a name="1396" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1397"
+      > </a
+      ><a name="1398" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1399"
+      > </a
+      ><a name="1400" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1401"
+      > </a
+      ><a name="1402" class="Symbol"
+      >(</a
+      ><a name="1403" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1404"
+      > </a
+      ><a name="1405" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1406" class="Symbol"
+      >)</a
+      ><a name="1407"
+      > </a
+      ><a name="1408" class="Symbol"
+      >&#8594;</a
+      ><a name="1409"
+      > </a
+      ><a name="1410" href="Agda.Builtin.Bool.html#67" class="Datatype"
+      >Bool</a
+      ><a name="1414" class="Symbol"
+      >)</a
+      ><a name="1415"
+      > </a
+      ><a name="1416" class="Symbol"
+      >&#8594;</a
+      ><a name="1417"
+      > </a
+      ><a name="1418" href="DynamicallyChecked.BiGUL.html#1294" class="Datatype"
+      >CaseBranchType</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1434"
+      > </a
+      ><a name="1435" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1436"
+      > </a
+      ><a name="1437" href="DynamicallyChecked.BiGUL.html#1336" class="Bound"
+      >V</a
+      ><a name="1438"
+      >
+    </a
+      ><a name="1443" href="DynamicallyChecked.BiGUL.html#1443" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="1451"
+      > </a
+      ><a name="1452" class="Symbol"
+      >:</a
+      ><a name="1453"
+      > </a
+      ><a name="1454" class="Symbol"
+      >(</a
+      ><a name="1455" href="DynamicallyChecked.BiGUL.html#1455" class="Bound"
+      >f</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" class="Symbol"
+      >:</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1462"
+      > </a
+      ><a name="1463" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1464"
+      > </a
+      ><a name="1465" class="Symbol"
+      >(</a
+      ><a name="1466" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1467"
+      > </a
+      ><a name="1468" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1469" class="Symbol"
+      >)</a
+      ><a name="1470"
+      > </a
+      ><a name="1471" class="Symbol"
+      >&#8594;</a
+      ><a name="1472"
+      > </a
+      ><a name="1473" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1474"
+      > </a
+      ><a name="1475" href="DynamicallyChecked.BiGUL.html#1336" class="Bound"
+      >V</a
+      ><a name="1476"
+      > </a
+      ><a name="1477" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1478"
+      > </a
+      ><a name="1479" class="Symbol"
+      >(</a
+      ><a name="1480" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1481"
+      > </a
+      ><a name="1482" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1483" class="Symbol"
+      >)</a
+      ><a name="1484"
+      > </a
+      ><a name="1485" class="Symbol"
+      >&#8594;</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1488"
+      > </a
+      ><a name="1489" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1490"
+      > </a
+      ><a name="1491" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1492"
+      > </a
+      ><a name="1493" class="Symbol"
+      >(</a
+      ><a name="1494" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1495"
+      > </a
+      ><a name="1496" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1497" class="Symbol"
+      >))</a
+      ><a name="1499"
+      > </a
+      ><a name="1500" class="Symbol"
+      >&#8594;</a
+      ><a name="1501"
+      > </a
+      ><a name="1502" href="DynamicallyChecked.BiGUL.html#1294" class="Datatype"
+      >CaseBranchType</a
+      ><a name="1516"
+      > </a
+      ><a name="1517" href="DynamicallyChecked.BiGUL.html#1318" class="Bound"
+      >F</a
+      ><a name="1518"
+      > </a
+      ><a name="1519" href="DynamicallyChecked.BiGUL.html#1334" class="Bound"
+      >S</a
+      ><a name="1520"
+      > </a
+      ><a name="1521" href="DynamicallyChecked.BiGUL.html#1336" class="Bound"
+      >V</a
+      ><a name="1522"
+      >
+
+  </a
+      ><a name="1526" href="DynamicallyChecked.BiGUL.html#1526" class="Function"
+      >CaseBranch</a
+      ><a name="1536"
+      > </a
+      ><a name="1537" class="Symbol"
+      >:</a
+      ><a name="1538"
+      > </a
+      ><a name="1539" class="Symbol"
+      >{</a
+      ><a name="1540" href="DynamicallyChecked.BiGUL.html#1540" class="Bound"
+      >n</a
+      ><a name="1541"
+      > </a
+      ><a name="1542" class="Symbol"
+      >:</a
+      ><a name="1543"
+      > </a
+      ><a name="1544" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="1545" class="Symbol"
+      >}</a
+      ><a name="1546"
+      > </a
+      ><a name="1547" class="Symbol"
+      >(</a
+      ><a name="1548" href="DynamicallyChecked.BiGUL.html#1548" class="Bound"
+      >F</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" class="Symbol"
+      >:</a
+      ><a name="1551"
+      > </a
+      ><a name="1552" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="1559"
+      > </a
+      ><a name="1560" href="DynamicallyChecked.BiGUL.html#1540" class="Bound"
+      >n</a
+      ><a name="1561" class="Symbol"
+      >)</a
+      ><a name="1562"
+      > </a
+      ><a name="1563" class="Symbol"
+      >(</a
+      ><a name="1564" href="DynamicallyChecked.BiGUL.html#1564" class="Bound"
+      >S</a
+      ><a name="1565"
+      > </a
+      ><a name="1566" href="DynamicallyChecked.BiGUL.html#1566" class="Bound"
+      >V</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" class="Symbol"
+      >:</a
+      ><a name="1569"
+      > </a
+      ><a name="1570" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="1571"
+      > </a
+      ><a name="1572" href="DynamicallyChecked.BiGUL.html#1540" class="Bound"
+      >n</a
+      ><a name="1573" class="Symbol"
+      >)</a
+      ><a name="1574"
+      > </a
+      ><a name="1575" class="Symbol"
+      >&#8594;</a
+      ><a name="1576"
+      > </a
+      ><a name="1577" class="PrimitiveType"
+      >Set&#8321;</a
+      ><a name="1581"
+      >
+  </a
+      ><a name="1584" href="DynamicallyChecked.BiGUL.html#1526" class="Function"
+      >CaseBranch</a
+      ><a name="1594"
+      > </a
+      ><a name="1595" href="DynamicallyChecked.BiGUL.html#1595" class="Bound"
+      >F</a
+      ><a name="1596"
+      > </a
+      ><a name="1597" href="DynamicallyChecked.BiGUL.html#1597" class="Bound"
+      >S</a
+      ><a name="1598"
+      > </a
+      ><a name="1599" href="DynamicallyChecked.BiGUL.html#1599" class="Bound"
+      >V</a
+      ><a name="1600"
+      > </a
+      ><a name="1601" class="Symbol"
+      >=</a
+      ><a name="1602"
+      > </a
+      ><a name="1603" class="Symbol"
+      >(</a
+      ><a name="1604" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="DynamicallyChecked.BiGUL.html#1597" class="Bound"
+      >S</a
+      ><a name="1607"
+      > </a
+      ><a name="1608" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1609"
+      > </a
+      ><a name="1610" class="Symbol"
+      >(</a
+      ><a name="1611" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1612"
+      > </a
+      ><a name="1613" href="DynamicallyChecked.BiGUL.html#1595" class="Bound"
+      >F</a
+      ><a name="1614" class="Symbol"
+      >)</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="Symbol"
+      >&#8594;</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1619"
+      > </a
+      ><a name="1620" href="DynamicallyChecked.BiGUL.html#1599" class="Bound"
+      >V</a
+      ><a name="1621"
+      > </a
+      ><a name="1622" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1623"
+      > </a
+      ><a name="1624" class="Symbol"
+      >(</a
+      ><a name="1625" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1626"
+      > </a
+      ><a name="1627" href="DynamicallyChecked.BiGUL.html#1595" class="Bound"
+      >F</a
+      ><a name="1628" class="Symbol"
+      >)</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >&#8594;</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="Agda.Builtin.Bool.html#67" class="Datatype"
+      >Bool</a
+      ><a name="1636" class="Symbol"
+      >)</a
+      ><a name="1637"
+      > </a
+      ><a name="1638" href="Data.Product.html#1073" class="Function Operator"
+      >&#215;</a
+      ><a name="1639"
+      > </a
+      ><a name="1640" href="DynamicallyChecked.BiGUL.html#1294" class="Datatype"
+      >CaseBranchType</a
+      ><a name="1654"
+      > </a
+      ><a name="1655" href="DynamicallyChecked.BiGUL.html#1595" class="Bound"
+      >F</a
+      ><a name="1656"
+      > </a
+      ><a name="1657" href="DynamicallyChecked.BiGUL.html#1597" class="Bound"
+      >S</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="DynamicallyChecked.BiGUL.html#1599" class="Bound"
+      >V</a
+      ><a name="1660"
+      >
+
+</a
+      ><a name="1662" href="DynamicallyChecked.BiGUL.html#1662" class="Function"
+      >elimCaseBranchType</a
+      ><a name="1680"
+      > </a
+      ><a name="1681" class="Symbol"
+      >:</a
+      ><a name="1682"
+      > </a
+      ><a name="1683" class="Symbol"
+      >{</a
+      ><a name="1684" href="DynamicallyChecked.BiGUL.html#1684" class="Bound"
+      >n</a
+      ><a name="1685"
+      > </a
+      ><a name="1686" class="Symbol"
+      >:</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="1689" class="Symbol"
+      >}</a
+      ><a name="1690"
+      > </a
+      ><a name="1691" class="Symbol"
+      >{</a
+      ><a name="1692" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1693"
+      > </a
+      ><a name="1694" class="Symbol"
+      >:</a
+      ><a name="1695"
+      > </a
+      ><a name="1696" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="1703"
+      > </a
+      ><a name="1704" href="DynamicallyChecked.BiGUL.html#1684" class="Bound"
+      >n</a
+      ><a name="1705" class="Symbol"
+      >}</a
+      ><a name="1706"
+      > </a
+      ><a name="1707" class="Symbol"
+      >{</a
+      ><a name="1708" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1709"
+      > </a
+      ><a name="1710" href="DynamicallyChecked.BiGUL.html#1710" class="Bound"
+      >V</a
+      ><a name="1711"
+      > </a
+      ><a name="1712" class="Symbol"
+      >:</a
+      ><a name="1713"
+      > </a
+      ><a name="1714" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="1715"
+      > </a
+      ><a name="1716" href="DynamicallyChecked.BiGUL.html#1684" class="Bound"
+      >n</a
+      ><a name="1717" class="Symbol"
+      >}</a
+      ><a name="1718"
+      > </a
+      ><a name="1719" class="Symbol"
+      >{</a
+      ><a name="1720" href="DynamicallyChecked.BiGUL.html#1720" class="Bound"
+      >l</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" class="Symbol"
+      >:</a
+      ><a name="1723"
+      > </a
+      ><a name="1724" href="Agda.Primitive.html#408" class="Postulate"
+      >Level</a
+      ><a name="1729" class="Symbol"
+      >}</a
+      ><a name="1730"
+      > </a
+      ><a name="1731" class="Symbol"
+      >{</a
+      ><a name="1732" href="DynamicallyChecked.BiGUL.html#1732" class="Bound"
+      >A</a
+      ><a name="1733"
+      > </a
+      ><a name="1734" class="Symbol"
+      >:</a
+      ><a name="1735"
+      > </a
+      ><a name="1736" class="PrimitiveType"
+      >Set</a
+      ><a name="1739"
+      > </a
+      ><a name="1740" href="DynamicallyChecked.BiGUL.html#1720" class="Bound"
+      >l</a
+      ><a name="1741" class="Symbol"
+      >}</a
+      ><a name="1742"
+      > </a
+      ><a name="1743" class="Symbol"
+      >&#8594;</a
+      ><a name="1744"
+      >
+                     </a
+      ><a name="1766" class="Symbol"
+      >(</a
+      ><a name="1767" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="1772"
+      > </a
+      ><a name="1773" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1774"
+      > </a
+      ><a name="1775" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1776"
+      > </a
+      ><a name="1777" href="DynamicallyChecked.BiGUL.html#1710" class="Bound"
+      >V</a
+      ><a name="1778"
+      > </a
+      ><a name="1779" class="Symbol"
+      >&#8594;</a
+      ><a name="1780"
+      > </a
+      ><a name="1781" class="Symbol"
+      >(</a
+      ><a name="1782" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1783"
+      > </a
+      ><a name="1784" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1785"
+      > </a
+      ><a name="1786" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1787"
+      > </a
+      ><a name="1788" class="Symbol"
+      >(</a
+      ><a name="1789" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1790"
+      > </a
+      ><a name="1791" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1792" class="Symbol"
+      >)</a
+      ><a name="1793"
+      > </a
+      ><a name="1794" class="Symbol"
+      >&#8594;</a
+      ><a name="1795"
+      > </a
+      ><a name="1796" href="Agda.Builtin.Bool.html#67" class="Datatype"
+      >Bool</a
+      ><a name="1800" class="Symbol"
+      >)</a
+      ><a name="1801"
+      > </a
+      ><a name="1802" class="Symbol"
+      >&#8594;</a
+      ><a name="1803"
+      > </a
+      ><a name="1804" href="DynamicallyChecked.BiGUL.html#1732" class="Bound"
+      >A</a
+      ><a name="1805" class="Symbol"
+      >)</a
+      ><a name="1806"
+      > </a
+      ><a name="1807" class="Symbol"
+      >&#8594;</a
+      ><a name="1808"
+      > </a
+      ><a name="1809" class="Symbol"
+      >((</a
+      ><a name="1811" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1812"
+      > </a
+      ><a name="1813" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1814"
+      > </a
+      ><a name="1815" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1816"
+      > </a
+      ><a name="1817" class="Symbol"
+      >(</a
+      ><a name="1818" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1819"
+      > </a
+      ><a name="1820" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1821" class="Symbol"
+      >)</a
+      ><a name="1822"
+      > </a
+      ><a name="1823" class="Symbol"
+      >&#8594;</a
+      ><a name="1824"
+      > </a
+      ><a name="1825" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1826"
+      > </a
+      ><a name="1827" href="DynamicallyChecked.BiGUL.html#1710" class="Bound"
+      >V</a
+      ><a name="1828"
+      > </a
+      ><a name="1829" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1830"
+      > </a
+      ><a name="1831" class="Symbol"
+      >(</a
+      ><a name="1832" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1833"
+      > </a
+      ><a name="1834" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1835" class="Symbol"
+      >)</a
+      ><a name="1836"
+      > </a
+      ><a name="1837" class="Symbol"
+      >&#8594;</a
+      ><a name="1838"
+      > </a
+      ><a name="1839" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="1840"
+      > </a
+      ><a name="1841" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1842"
+      > </a
+      ><a name="1843" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="1844"
+      > </a
+      ><a name="1845" class="Symbol"
+      >(</a
+      ><a name="1846" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="1847"
+      > </a
+      ><a name="1848" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1849" class="Symbol"
+      >))</a
+      ><a name="1851"
+      > </a
+      ><a name="1852" class="Symbol"
+      >&#8594;</a
+      ><a name="1853"
+      > </a
+      ><a name="1854" href="DynamicallyChecked.BiGUL.html#1732" class="Bound"
+      >A</a
+      ><a name="1855" class="Symbol"
+      >)</a
+      ><a name="1856"
+      > </a
+      ><a name="1857" class="Symbol"
+      >&#8594;</a
+      ><a name="1858"
+      >
+                     </a
+      ><a name="1880" href="DynamicallyChecked.BiGUL.html#1294" class="Datatype"
+      >CaseBranchType</a
+      ><a name="1894"
+      > </a
+      ><a name="1895" href="DynamicallyChecked.BiGUL.html#1692" class="Bound"
+      >F</a
+      ><a name="1896"
+      > </a
+      ><a name="1897" href="DynamicallyChecked.BiGUL.html#1708" class="Bound"
+      >S</a
+      ><a name="1898"
+      > </a
+      ><a name="1899" href="DynamicallyChecked.BiGUL.html#1710" class="Bound"
+      >V</a
+      ><a name="1900"
+      > </a
+      ><a name="1901" class="Symbol"
+      >&#8594;</a
+      ><a name="1902"
+      > </a
+      ><a name="1903" href="DynamicallyChecked.BiGUL.html#1732" class="Bound"
+      >A</a
+      ><a name="1904"
+      >
+</a
+      ><a name="1905" href="DynamicallyChecked.BiGUL.html#1662" class="Function"
+      >elimCaseBranchType</a
+      ><a name="1923"
+      > </a
+      ><a name="1924" href="DynamicallyChecked.BiGUL.html#1924" class="Bound"
+      >n</a
+      ><a name="1925"
+      > </a
+      ><a name="1926" href="DynamicallyChecked.BiGUL.html#1926" class="Bound"
+      >a</a
+      ><a name="1927"
+      > </a
+      ><a name="1928" class="Symbol"
+      >(</a
+      ><a name="1929" href="DynamicallyChecked.BiGUL.html#1362" class="InductiveConstructor"
+      >normal</a
+      ><a name="1935"
+      > </a
+      ><a name="1936" href="DynamicallyChecked.BiGUL.html#1936" class="Bound"
+      >b</a
+      ><a name="1937"
+      > </a
+      ><a name="1938" href="DynamicallyChecked.BiGUL.html#1938" class="Bound"
+      >q</a
+      ><a name="1939" class="Symbol"
+      >)</a
+      ><a name="1940"
+      > </a
+      ><a name="1941" class="Symbol"
+      >=</a
+      ><a name="1942"
+      > </a
+      ><a name="1943" href="DynamicallyChecked.BiGUL.html#1924" class="Bound"
+      >n</a
+      ><a name="1944"
+      > </a
+      ><a name="1945" href="DynamicallyChecked.BiGUL.html#1936" class="Bound"
+      >b</a
+      ><a name="1946"
+      > </a
+      ><a name="1947" href="DynamicallyChecked.BiGUL.html#1938" class="Bound"
+      >q</a
+      ><a name="1948"
+      >
+</a
+      ><a name="1949" href="DynamicallyChecked.BiGUL.html#1662" class="Function"
+      >elimCaseBranchType</a
+      ><a name="1967"
+      > </a
+      ><a name="1968" href="DynamicallyChecked.BiGUL.html#1968" class="Bound"
+      >n</a
+      ><a name="1969"
+      > </a
+      ><a name="1970" href="DynamicallyChecked.BiGUL.html#1970" class="Bound"
+      >a</a
+      ><a name="1971"
+      > </a
+      ><a name="1972" class="Symbol"
+      >(</a
+      ><a name="1973" href="DynamicallyChecked.BiGUL.html#1443" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="1981"
+      > </a
+      ><a name="1982" href="DynamicallyChecked.BiGUL.html#1982" class="Bound"
+      >f</a
+      ><a name="1983" class="Symbol"
+      >)</a
+      ><a name="1984"
+      > </a
+      ><a name="1985" class="Symbol"
+      >=</a
+      ><a name="1986"
+      > </a
+      ><a name="1987" href="DynamicallyChecked.BiGUL.html#1970" class="Bound"
+      >a</a
+      ><a name="1988"
+      > </a
+      ><a name="1989" href="DynamicallyChecked.BiGUL.html#1982" class="Bound"
+      >f</a
+      ><a name="1990"
+      >
+
+</a
+      ><a name="1992" class="Keyword"
+      >mutual</a
+      ><a name="1998"
+      >
+
+  </a
+      ><a name="2002" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2008"
+      > </a
+      ><a name="2009" class="Symbol"
+      >:</a
+      ><a name="2010"
+      > </a
+      ><a name="2011" class="Symbol"
+      >{</a
+      ><a name="2012" href="DynamicallyChecked.BiGUL.html#2012" class="Bound"
+      >n</a
+      ><a name="2013"
+      > </a
+      ><a name="2014" class="Symbol"
+      >:</a
+      ><a name="2015"
+      > </a
+      ><a name="2016" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="2017" class="Symbol"
+      >}</a
+      ><a name="2018"
+      > </a
+      ><a name="2019" class="Symbol"
+      >{</a
+      ><a name="2020" href="DynamicallyChecked.BiGUL.html#2020" class="Bound"
+      >F</a
+      ><a name="2021"
+      > </a
+      ><a name="2022" class="Symbol"
+      >:</a
+      ><a name="2023"
+      > </a
+      ><a name="2024" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="2031"
+      > </a
+      ><a name="2032" href="DynamicallyChecked.BiGUL.html#2012" class="Bound"
+      >n</a
+      ><a name="2033" class="Symbol"
+      >}</a
+      ><a name="2034"
+      > </a
+      ><a name="2035" class="Symbol"
+      >{</a
+      ><a name="2036" href="DynamicallyChecked.BiGUL.html#2036" class="Bound"
+      >S</a
+      ><a name="2037"
+      > </a
+      ><a name="2038" href="DynamicallyChecked.BiGUL.html#2038" class="Bound"
+      >V</a
+      ><a name="2039"
+      > </a
+      ><a name="2040" class="Symbol"
+      >:</a
+      ><a name="2041"
+      > </a
+      ><a name="2042" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="2043"
+      > </a
+      ><a name="2044" href="DynamicallyChecked.BiGUL.html#2012" class="Bound"
+      >n</a
+      ><a name="2045" class="Symbol"
+      >}</a
+      ><a name="2046"
+      > </a
+      ><a name="2047" class="Symbol"
+      >(</a
+      ><a name="2048" href="DynamicallyChecked.BiGUL.html#2048" class="Bound"
+      >b</a
+      ><a name="2049"
+      > </a
+      ><a name="2050" class="Symbol"
+      >:</a
+      ><a name="2051"
+      > </a
+      ><a name="2052" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >BiGUL</a
+      ><a name="2057"
+      > </a
+      ><a name="2058" href="DynamicallyChecked.BiGUL.html#2020" class="Bound"
+      >F</a
+      ><a name="2059"
+      > </a
+      ><a name="2060" href="DynamicallyChecked.BiGUL.html#2036" class="Bound"
+      >S</a
+      ><a name="2061"
+      > </a
+      ><a name="2062" href="DynamicallyChecked.BiGUL.html#2038" class="Bound"
+      >V</a
+      ><a name="2063" class="Symbol"
+      >)</a
+      ><a name="2064"
+      > </a
+      ><a name="2065" class="Symbol"
+      >&#8594;</a
+      ><a name="2066"
+      > </a
+      ><a name="2067" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2068"
+      > </a
+      ><a name="2069" href="DynamicallyChecked.BiGUL.html#2036" class="Bound"
+      >S</a
+      ><a name="2070"
+      > </a
+      ><a name="2071" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2072"
+      > </a
+      ><a name="2073" class="Symbol"
+      >(</a
+      ><a name="2074" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2075"
+      > </a
+      ><a name="2076" href="DynamicallyChecked.BiGUL.html#2020" class="Bound"
+      >F</a
+      ><a name="2077" class="Symbol"
+      >)</a
+      ><a name="2078"
+      > </a
+      ><a name="2079" href="DynamicallyChecked.Lens.html#502" class="Function Operator"
+      >&#8646;</a
+      ><a name="2080"
+      > </a
+      ><a name="2081" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2082"
+      > </a
+      ><a name="2083" href="DynamicallyChecked.BiGUL.html#2038" class="Bound"
+      >V</a
+      ><a name="2084"
+      > </a
+      ><a name="2085" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2086"
+      > </a
+      ><a name="2087" class="Symbol"
+      >(</a
+      ><a name="2088" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2089"
+      > </a
+      ><a name="2090" href="DynamicallyChecked.BiGUL.html#2020" class="Bound"
+      >F</a
+      ><a name="2091" class="Symbol"
+      >)</a
+      ><a name="2092"
+      >
+  </a
+      ><a name="2095" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2101"
+      >         </a
+      ><a name="2110" href="DynamicallyChecked.BiGUL.html#576" class="InductiveConstructor"
+      >fail</a
+      ><a name="2114"
+      >                         </a
+      ><a name="2139" class="Symbol"
+      >=</a
+      ><a name="2140"
+      > </a
+      ><a name="2141" href="DynamicallyChecked.Lens.html#1188" class="Function"
+      >iso-lens</a
+      ><a name="2149"
+      > </a
+      ><a name="2150" href="DynamicallyChecked.Partiality.html#12380" class="Function"
+      >empty-iso</a
+      ><a name="2159"
+      >
+  </a
+      ><a name="2162" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2168"
+      >         </a
+      ><a name="2177" class="Symbol"
+      >(</a
+      ><a name="2178" href="DynamicallyChecked.BiGUL.html#616" class="InductiveConstructor"
+      >skip</a
+      ><a name="2182"
+      > </a
+      ><a name="2183" class="Symbol"
+      >{</a
+      ><a name="2184" class="Argument"
+      >V</a
+      ><a name="2185"
+      > </a
+      ><a name="2186" class="Symbol"
+      >=</a
+      ><a name="2187"
+      > </a
+      ><a name="2188" href="DynamicallyChecked.BiGUL.html#2188" class="Bound"
+      >V</a
+      ><a name="2189" class="Symbol"
+      >}</a
+      ><a name="2190"
+      > </a
+      ><a name="2191" href="DynamicallyChecked.BiGUL.html#2191" class="Bound"
+      >f</a
+      ><a name="2192" class="Symbol"
+      >)</a
+      ><a name="2193"
+      >             </a
+      ><a name="2206" class="Symbol"
+      >=</a
+      ><a name="2207"
+      > </a
+      ><a name="2208" href="DynamicallyChecked.Lens.html#1378" class="Function"
+      >skip-lens</a
+      ><a name="2217"
+      > </a
+      ><a name="2218" class="Symbol"
+      >(</a
+      ><a name="2219" href="DynamicallyChecked.Universe.html#1683" class="Function"
+      >U-dec</a
+      ><a name="2224"
+      > </a
+      ><a name="2225" href="DynamicallyChecked.BiGUL.html#2188" class="Bound"
+      >V</a
+      ><a name="2226" class="Symbol"
+      >)</a
+      ><a name="2227"
+      > </a
+      ><a name="2228" href="DynamicallyChecked.BiGUL.html#2191" class="Bound"
+      >f</a
+      ><a name="2229"
+      >
+  </a
+      ><a name="2232" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2238"
+      >         </a
+      ><a name="2247" href="DynamicallyChecked.BiGUL.html#688" class="InductiveConstructor"
+      >replace</a
+      ><a name="2254"
+      >                      </a
+      ><a name="2276" class="Symbol"
+      >=</a
+      ><a name="2277"
+      > </a
+      ><a name="2278" href="DynamicallyChecked.Lens.html#1188" class="Function"
+      >iso-lens</a
+      ><a name="2286"
+      > </a
+      ><a name="2287" href="DynamicallyChecked.Partiality.html#12532" class="Function"
+      >id-iso</a
+      ><a name="2293"
+      >
+  </a
+      ><a name="2296" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2302"
+      >         </a
+      ><a name="2311" class="Symbol"
+      >(</a
+      ><a name="2312" href="DynamicallyChecked.BiGUL.html#726" class="InductiveConstructor"
+      >prod</a
+      ><a name="2316"
+      > </a
+      ><a name="2317" href="DynamicallyChecked.BiGUL.html#2317" class="Bound"
+      >b</a
+      ><a name="2318"
+      > </a
+      ><a name="2319" href="DynamicallyChecked.BiGUL.html#2319" class="Bound"
+      >b'</a
+      ><a name="2321" class="Symbol"
+      >)</a
+      ><a name="2322"
+      >                  </a
+      ><a name="2340" class="Symbol"
+      >=</a
+      ><a name="2341"
+      > </a
+      ><a name="2342" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2348"
+      > </a
+      ><a name="2349" href="DynamicallyChecked.BiGUL.html#2317" class="Bound"
+      >b</a
+      ><a name="2350"
+      > </a
+      ><a name="2351" href="DynamicallyChecked.Lens.html#2980" class="Function Operator"
+      >&#8597;</a
+      ><a name="2352"
+      > </a
+      ><a name="2353" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2359"
+      > </a
+      ><a name="2360" href="DynamicallyChecked.BiGUL.html#2319" class="Bound"
+      >b'</a
+      ><a name="2362"
+      >
+  </a
+      ><a name="2365" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2371"
+      >         </a
+      ><a name="2380" class="Symbol"
+      >(</a
+      ><a name="2381" href="DynamicallyChecked.BiGUL.html#825" class="InductiveConstructor"
+      >rearrS</a
+      ><a name="2387"
+      > </a
+      ><a name="2388" href="DynamicallyChecked.BiGUL.html#2388" class="Bound"
+      >spat</a
+      ><a name="2392"
+      > </a
+      ><a name="2393" href="DynamicallyChecked.BiGUL.html#2393" class="Bound"
+      >spat'</a
+      ><a name="2398"
+      > </a
+      ><a name="2399" href="DynamicallyChecked.BiGUL.html#2399" class="Bound"
+      >expr</a
+      ><a name="2403"
+      > </a
+      ><a name="2404" href="DynamicallyChecked.BiGUL.html#2404" class="Bound"
+      >c</a
+      ><a name="2405"
+      > </a
+      ><a name="2406" href="DynamicallyChecked.BiGUL.html#2406" class="Bound"
+      >b</a
+      ><a name="2407" class="Symbol"
+      >)</a
+      ><a name="2408"
+      > </a
+      ><a name="2409" class="Symbol"
+      >=</a
+      ><a name="2410"
+      > </a
+      ><a name="2411" href="DynamicallyChecked.Rearrangement.html#32116" class="Function"
+      >rearrangement-iso</a
+      ><a name="2428"
+      > </a
+      ><a name="2429" href="DynamicallyChecked.BiGUL.html#2388" class="Bound"
+      >spat</a
+      ><a name="2433"
+      > </a
+      ><a name="2434" href="DynamicallyChecked.BiGUL.html#2393" class="Bound"
+      >spat'</a
+      ><a name="2439"
+      > </a
+      ><a name="2440" href="DynamicallyChecked.BiGUL.html#2399" class="Bound"
+      >expr</a
+      ><a name="2444"
+      > </a
+      ><a name="2445" href="DynamicallyChecked.BiGUL.html#2404" class="Bound"
+      >c</a
+      ><a name="2446"
+      > </a
+      ><a name="2447" href="DynamicallyChecked.Lens.html#2908" class="Function Operator"
+      >&#9656;</a
+      ><a name="2448"
+      > </a
+      ><a name="2449" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2455"
+      > </a
+      ><a name="2456" href="DynamicallyChecked.BiGUL.html#2406" class="Bound"
+      >b</a
+      ><a name="2457"
+      >
+  </a
+      ><a name="2460" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2466"
+      >         </a
+      ><a name="2475" class="Symbol"
+      >(</a
+      ><a name="2476" href="DynamicallyChecked.BiGUL.html#1019" class="InductiveConstructor"
+      >rearrV</a
+      ><a name="2482"
+      > </a
+      ><a name="2483" href="DynamicallyChecked.BiGUL.html#2483" class="Bound"
+      >vpat</a
+      ><a name="2487"
+      > </a
+      ><a name="2488" href="DynamicallyChecked.BiGUL.html#2488" class="Bound"
+      >vpat'</a
+      ><a name="2493"
+      > </a
+      ><a name="2494" href="DynamicallyChecked.BiGUL.html#2494" class="Bound"
+      >expr</a
+      ><a name="2498"
+      > </a
+      ><a name="2499" href="DynamicallyChecked.BiGUL.html#2499" class="Bound"
+      >c</a
+      ><a name="2500"
+      > </a
+      ><a name="2501" href="DynamicallyChecked.BiGUL.html#2501" class="Bound"
+      >b</a
+      ><a name="2502" class="Symbol"
+      >)</a
+      ><a name="2503"
+      > </a
+      ><a name="2504" class="Symbol"
+      >=</a
+      ><a name="2505"
+      > </a
+      ><a name="2506" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2512"
+      > </a
+      ><a name="2513" href="DynamicallyChecked.BiGUL.html#2501" class="Bound"
+      >b</a
+      ><a name="2514"
+      > </a
+      ><a name="2515" href="DynamicallyChecked.Lens.html#2543" class="Function Operator"
+      >&#9666;</a
+      ><a name="2516"
+      > </a
+      ><a name="2517" href="DynamicallyChecked.Partiality.html#12736" class="Function"
+      >sym-iso</a
+      ><a name="2524"
+      > </a
+      ><a name="2525" class="Symbol"
+      >(</a
+      ><a name="2526" href="DynamicallyChecked.Rearrangement.html#32116" class="Function"
+      >rearrangement-iso</a
+      ><a name="2543"
+      > </a
+      ><a name="2544" href="DynamicallyChecked.BiGUL.html#2483" class="Bound"
+      >vpat</a
+      ><a name="2548"
+      > </a
+      ><a name="2549" href="DynamicallyChecked.BiGUL.html#2488" class="Bound"
+      >vpat'</a
+      ><a name="2554"
+      > </a
+      ><a name="2555" href="DynamicallyChecked.BiGUL.html#2494" class="Bound"
+      >expr</a
+      ><a name="2559"
+      > </a
+      ><a name="2560" href="DynamicallyChecked.BiGUL.html#2499" class="Bound"
+      >c</a
+      ><a name="2561" class="Symbol"
+      >)</a
+      ><a name="2562"
+      >
+  </a
+      ><a name="2565" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2571"
+      > </a
+      ><a name="2572" class="Symbol"
+      >{</a
+      ><a name="2573" class="Argument"
+      >F</a
+      ><a name="2574"
+      > </a
+      ><a name="2575" class="Symbol"
+      >=</a
+      ><a name="2576"
+      > </a
+      ><a name="2577" href="DynamicallyChecked.BiGUL.html#2577" class="Bound"
+      >F</a
+      ><a name="2578" class="Symbol"
+      >}</a
+      ><a name="2579"
+      > </a
+      ><a name="2580" class="Symbol"
+      >(</a
+      ><a name="2581" href="DynamicallyChecked.BiGUL.html#1213" class="InductiveConstructor"
+      >case</a
+      ><a name="2585"
+      > </a
+      ><a name="2586" class="Symbol"
+      >{</a
+      ><a name="2587" href="DynamicallyChecked.BiGUL.html#2587" class="Bound"
+      >S</a
+      ><a name="2588" class="Symbol"
+      >}</a
+      ><a name="2589"
+      > </a
+      ><a name="2590" class="Symbol"
+      >{</a
+      ><a name="2591" href="DynamicallyChecked.BiGUL.html#2591" class="Bound"
+      >V</a
+      ><a name="2592" class="Symbol"
+      >}</a
+      ><a name="2593"
+      > </a
+      ><a name="2594" href="DynamicallyChecked.BiGUL.html#2594" class="Bound"
+      >branches</a
+      ><a name="2602" class="Symbol"
+      >)</a
+      ><a name="2603"
+      >      </a
+      ><a name="2609" class="Symbol"
+      >=</a
+      ><a name="2610"
+      > </a
+      ><a name="2611" href="DynamicallyChecked.Case.html#7367" class="Function"
+      >case-lens</a
+      ><a name="2620"
+      > </a
+      ><a name="2621" class="Symbol"
+      >(</a
+      ><a name="2622" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2623"
+      > </a
+      ><a name="2624" href="DynamicallyChecked.BiGUL.html#2587" class="Bound"
+      >S</a
+      ><a name="2625"
+      > </a
+      ><a name="2626" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2627"
+      > </a
+      ><a name="2628" class="Symbol"
+      >(</a
+      ><a name="2629" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2630"
+      > </a
+      ><a name="2631" href="DynamicallyChecked.BiGUL.html#2577" class="Bound"
+      >F</a
+      ><a name="2632" class="Symbol"
+      >))</a
+      ><a name="2634"
+      > </a
+      ><a name="2635" class="Symbol"
+      >(</a
+      ><a name="2636" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2637"
+      > </a
+      ><a name="2638" href="DynamicallyChecked.BiGUL.html#2591" class="Bound"
+      >V</a
+      ><a name="2639"
+      > </a
+      ><a name="2640" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2641"
+      > </a
+      ><a name="2642" class="Symbol"
+      >(</a
+      ><a name="2643" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2644"
+      > </a
+      ><a name="2645" href="DynamicallyChecked.BiGUL.html#2577" class="Bound"
+      >F</a
+      ><a name="2646" class="Symbol"
+      >))</a
+      ><a name="2648"
+      > </a
+      ><a name="2649" class="Symbol"
+      >(</a
+      ><a name="2650" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="2667"
+      > </a
+      ><a name="2668" href="DynamicallyChecked.BiGUL.html#2594" class="Bound"
+      >branches</a
+      ><a name="2676" class="Symbol"
+      >)</a
+      ><a name="2677"
+      >
+
+  </a
+      ><a name="2681" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="2698"
+      > </a
+      ><a name="2699" class="Symbol"
+      >:</a
+      ><a name="2700"
+      > </a
+      ><a name="2701" class="Symbol"
+      >{</a
+      ><a name="2702" href="DynamicallyChecked.BiGUL.html#2702" class="Bound"
+      >n</a
+      ><a name="2703"
+      > </a
+      ><a name="2704" class="Symbol"
+      >:</a
+      ><a name="2705"
+      > </a
+      ><a name="2706" href="Agda.Builtin.Nat.html#97" class="Datatype"
+      >&#8469;</a
+      ><a name="2707" class="Symbol"
+      >}</a
+      ><a name="2708"
+      > </a
+      ><a name="2709" class="Symbol"
+      >{</a
+      ><a name="2710" href="DynamicallyChecked.BiGUL.html#2710" class="Bound"
+      >F</a
+      ><a name="2711"
+      > </a
+      ><a name="2712" class="Symbol"
+      >:</a
+      ><a name="2713"
+      > </a
+      ><a name="2714" href="DynamicallyChecked.Universe.html#784" class="Function"
+      >Functor</a
+      ><a name="2721"
+      > </a
+      ><a name="2722" href="DynamicallyChecked.BiGUL.html#2702" class="Bound"
+      >n</a
+      ><a name="2723" class="Symbol"
+      >}</a
+      ><a name="2724"
+      > </a
+      ><a name="2725" class="Symbol"
+      >{</a
+      ><a name="2726" href="DynamicallyChecked.BiGUL.html#2726" class="Bound"
+      >S</a
+      ><a name="2727"
+      > </a
+      ><a name="2728" href="DynamicallyChecked.BiGUL.html#2728" class="Bound"
+      >V</a
+      ><a name="2729"
+      > </a
+      ><a name="2730" class="Symbol"
+      >:</a
+      ><a name="2731"
+      > </a
+      ><a name="2732" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >U</a
+      ><a name="2733"
+      > </a
+      ><a name="2734" href="DynamicallyChecked.BiGUL.html#2702" class="Bound"
+      >n</a
+      ><a name="2735" class="Symbol"
+      >}</a
+      ><a name="2736"
+      > </a
+      ><a name="2737" class="Symbol"
+      >&#8594;</a
+      ><a name="2738"
+      >
+                      </a
+      ><a name="2761" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2765"
+      > </a
+      ><a name="2766" class="Symbol"
+      >(</a
+      ><a name="2767" href="DynamicallyChecked.BiGUL.html#1526" class="Function"
+      >CaseBranch</a
+      ><a name="2777"
+      > </a
+      ><a name="2778" href="DynamicallyChecked.BiGUL.html#2710" class="Bound"
+      >F</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" href="DynamicallyChecked.BiGUL.html#2726" class="Bound"
+      >S</a
+      ><a name="2781"
+      > </a
+      ><a name="2782" href="DynamicallyChecked.BiGUL.html#2728" class="Bound"
+      >V</a
+      ><a name="2783" class="Symbol"
+      >)</a
+      ><a name="2784"
+      > </a
+      ><a name="2785" class="Symbol"
+      >&#8594;</a
+      ><a name="2786"
+      > </a
+      ><a name="2787" href="Agda.Builtin.List.html#80" class="Datatype"
+      >List</a
+      ><a name="2791"
+      > </a
+      ><a name="2792" class="Symbol"
+      >(</a
+      ><a name="2793" href="DynamicallyChecked.Case.html#726" class="Function"
+      >Case.Branch</a
+      ><a name="2804"
+      > </a
+      ><a name="2805" class="Symbol"
+      >(</a
+      ><a name="2806" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2807"
+      > </a
+      ><a name="2808" href="DynamicallyChecked.BiGUL.html#2726" class="Bound"
+      >S</a
+      ><a name="2809"
+      > </a
+      ><a name="2810" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2811"
+      > </a
+      ><a name="2812" class="Symbol"
+      >(</a
+      ><a name="2813" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2814"
+      > </a
+      ><a name="2815" href="DynamicallyChecked.BiGUL.html#2710" class="Bound"
+      >F</a
+      ><a name="2816" class="Symbol"
+      >))</a
+      ><a name="2818"
+      > </a
+      ><a name="2819" class="Symbol"
+      >(</a
+      ><a name="2820" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10214;</a
+      ><a name="2821"
+      > </a
+      ><a name="2822" href="DynamicallyChecked.BiGUL.html#2728" class="Bound"
+      >V</a
+      ><a name="2823"
+      > </a
+      ><a name="2824" href="DynamicallyChecked.Universe.html#607" class="Function Operator"
+      >&#10215;</a
+      ><a name="2825"
+      > </a
+      ><a name="2826" class="Symbol"
+      >(</a
+      ><a name="2827" href="DynamicallyChecked.Universe.html#833" class="Datatype"
+      >&#956;</a
+      ><a name="2828"
+      > </a
+      ><a name="2829" href="DynamicallyChecked.BiGUL.html#2710" class="Bound"
+      >F</a
+      ><a name="2830" class="Symbol"
+      >)))</a
+      ><a name="2833"
+      >
+  </a
+      ><a name="2836" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="2853"
+      > </a
+      ><a name="2854" href="Agda.Builtin.List.html#117" class="InductiveConstructor"
+      >[]</a
+      ><a name="2856"
+      >                            </a
+      ><a name="2884" class="Symbol"
+      >=</a
+      ><a name="2885"
+      > </a
+      ><a name="2886" href="Agda.Builtin.List.html#117" class="InductiveConstructor"
+      >[]</a
+      ><a name="2888"
+      >
+  </a
+      ><a name="2891" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="2908"
+      > </a
+      ><a name="2909" class="Symbol"
+      >((</a
+      ><a name="2911" href="DynamicallyChecked.BiGUL.html#2911" class="Bound"
+      >p</a
+      ><a name="2912"
+      > </a
+      ><a name="2913" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2914"
+      > </a
+      ><a name="2915" href="DynamicallyChecked.BiGUL.html#1362" class="InductiveConstructor"
+      >normal</a
+      ><a name="2921"
+      > </a
+      ><a name="2922" href="DynamicallyChecked.BiGUL.html#2922" class="Bound"
+      >b</a
+      ><a name="2923"
+      > </a
+      ><a name="2924" href="DynamicallyChecked.BiGUL.html#2924" class="Bound"
+      >q</a
+      ><a name="2925" class="Symbol"
+      >)</a
+      ><a name="2926"
+      > </a
+      ><a name="2927" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2928"
+      > </a
+      ><a name="2929" href="DynamicallyChecked.BiGUL.html#2929" class="Bound"
+      >branches</a
+      ><a name="2937" class="Symbol"
+      >)</a
+      ><a name="2938"
+      > </a
+      ><a name="2939" class="Symbol"
+      >=</a
+      ><a name="2940"
+      > </a
+      ><a name="2941" class="Symbol"
+      >(</a
+      ><a name="2942" href="DynamicallyChecked.BiGUL.html#2911" class="Bound"
+      >p</a
+      ><a name="2943"
+      > </a
+      ><a name="2944" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="2945"
+      > </a
+      ><a name="2946" href="DynamicallyChecked.Case.html#371" class="InductiveConstructor"
+      >normal</a
+      ><a name="2952"
+      > </a
+      ><a name="2953" class="Symbol"
+      >(</a
+      ><a name="2954" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >interp</a
+      ><a name="2960"
+      > </a
+      ><a name="2961" href="DynamicallyChecked.BiGUL.html#2922" class="Bound"
+      >b</a
+      ><a name="2962" class="Symbol"
+      >)</a
+      ><a name="2963"
+      > </a
+      ><a name="2964" href="DynamicallyChecked.BiGUL.html#2924" class="Bound"
+      >q</a
+      ><a name="2965" class="Symbol"
+      >)</a
+      ><a name="2966"
+      > </a
+      ><a name="2967" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="2968"
+      > </a
+      ><a name="2969" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="2986"
+      > </a
+      ><a name="2987" href="DynamicallyChecked.BiGUL.html#2929" class="Bound"
+      >branches</a
+      ><a name="2995"
+      >
+  </a
+      ><a name="2998" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="3015"
+      > </a
+      ><a name="3016" class="Symbol"
+      >((</a
+      ><a name="3018" href="DynamicallyChecked.BiGUL.html#3018" class="Bound"
+      >p</a
+      ><a name="3019"
+      > </a
+      ><a name="3020" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3021"
+      > </a
+      ><a name="3022" href="DynamicallyChecked.BiGUL.html#1443" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="3030"
+      > </a
+      ><a name="3031" href="DynamicallyChecked.BiGUL.html#3031" class="Bound"
+      >u</a
+      ><a name="3032" class="Symbol"
+      >)</a
+      ><a name="3033"
+      > </a
+      ><a name="3034" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3035"
+      > </a
+      ><a name="3036" href="DynamicallyChecked.BiGUL.html#3036" class="Bound"
+      >branches</a
+      ><a name="3044" class="Symbol"
+      >)</a
+      ><a name="3045"
+      > </a
+      ><a name="3046" class="Symbol"
+      >=</a
+      ><a name="3047"
+      > </a
+      ><a name="3048" class="Symbol"
+      >(</a
+      ><a name="3049" href="DynamicallyChecked.BiGUL.html#3018" class="Bound"
+      >p</a
+      ><a name="3050"
+      > </a
+      ><a name="3051" href="Data.Product.html#509" class="InductiveConstructor Operator"
+      >,</a
+      ><a name="3052"
+      > </a
+      ><a name="3053" href="DynamicallyChecked.Case.html#418" class="InductiveConstructor"
+      >adaptive</a
+      ><a name="3061"
+      > </a
+      ><a name="3062" href="DynamicallyChecked.BiGUL.html#3031" class="Bound"
+      >u</a
+      ><a name="3063" class="Symbol"
+      >)</a
+      ><a name="3064"
+      > </a
+      ><a name="3065" href="Agda.Builtin.List.html#132" class="InductiveConstructor Operator"
+      >&#8759;</a
+      ><a name="3066"
+      > </a
+      ><a name="3067" href="DynamicallyChecked.BiGUL.html#2681" class="Function"
+      >interp-CaseBranch</a
+      ><a name="3084"
+      > </a
+      ><a name="3085" href="DynamicallyChecked.BiGUL.html#3036" class="Bound"
+      >branches</a
+      ><a name="3093"
+      >
+</a
+      ></pre
+    ></body
+  ></html
+>
