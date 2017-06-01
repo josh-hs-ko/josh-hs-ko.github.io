@@ -4,6 +4,7 @@ import Authors
 import PermVenues
 import Publications
 
+import Data.Function
 import Data.List
 import Data.Hash.MD5 as MD5
 import Text.PrettyPrint
@@ -102,6 +103,16 @@ renderPublication as pvs p =
                                in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
                         (info p))
 
+renderPublications :: [Author] -> [PermVenue] -> [Publication] -> Doc
+renderPublications as pvs =
+  foldr ($+$) empty .
+  map (\ps -> blockElement "div" [("class",["row"])] $
+                blockElement "div" [("class", ["col-sm-3"])]
+                  (inlineElement "h3" [("class", ["section-title"])] (int (year (head ps)))) $+$
+                blockElement "div" [("class", ["col-sm-9"])]
+                  (foldr ($+$) empty (map (renderPublication as pvs) ps))) .
+  groupBy ((==) `on` year)
+
 process :: String -> String
 process inputStr =
   let start = "<!-- AUTO-GENERATED PUBLICATIONS -->"
@@ -113,7 +124,7 @@ process inputStr =
   in  unlines ls0 ++
       render (nest indent $
                 text start $+$
-                foldr ($+$) empty (map (renderPublication authorList permVenueList) publicationList) $+$
+                renderPublications authorList permVenueList publicationList $+$
                 text end) ++ "\n" ++
       unlines ls1
 
