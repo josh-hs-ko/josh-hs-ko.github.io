@@ -19,6 +19,22 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title    = "An axiomatic basis for bidirectional programming"
+      , authors  = [ "Hsiang-Shang Ko"
+                   , "Zhenjiang Hu"
+                   ]
+      , venue    = Nothing
+      , year     = 2017
+      , types    = [ (Unpublished, "Submitted")
+                   ]
+      , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
+                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
+                   , ("Agda code", Just "HTML", "Agda/BiGUL-Logic/Everything.html")
+                   ]
+      , info     = [ ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al. [2007]’s asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are highly declarative, and only allow the programmer to specify a consistency relation with limited control over the behaviour of the automatically derived consistency restorer. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must have the ability to fully control and reason about the consistency restoration behaviour of their bidirectional programs. The putback-based approach to bidirectional programming aims to provide exactly this ability, and this paper strengthens the putback-based position by proposing the first fully fledged reasoning framework for a bidirectional language — a Hoare-style logic for Ko et al. [2016]’s putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
+                   ]
+      }
+  , Publication
       { title    = "Palgol: A high-level DSL for vertex-centric graph processing with remote data access"
       , authors  = [ "Yongzhe Zhang"
                    , "Hsiang-Shang Ko"
@@ -33,22 +49,6 @@ publicationList =
                    ]
       , info     = [ ("arXiv", "1703.09542", Nothing)
                    , ("Abstract", "Pregel is a popular parallel computing model for dealing with large-scale graphs. However, it can be tricky to implement graph algorithms correctly and efficiently in Pregel’s vertex-centric model, as programmers need to carefully restructure an algorithm in terms of supersteps and message passing, which are low-level and detached from the algorithm descriptions. Some domain-specific languages (DSLs) have been proposed to provide more intuitive ways to implement graph algorithms, but none of them can flexibly describe remote access (reading or writing attributes of other vertices through references), causing a still wide range of algorithms hard to implement.</p><p>To address this problem, we design and implement Palgol, a more declarative and powerful DSL which supports remote access. In particular, programmers can use a more declarative syntax called <em>global field access</em> to directly read data on remote vertices. By structuring supersteps in a high-level vertex-centric computation model and analyzing the logic patterns of global field access, we provide a novel algorithm for compiling Palgol programs to efficient Pregel code. We demonstrate the power of Palgol by using it to implement a bunch of practical Pregel algorithms and compare them with hand-written code. The evaluation result shows that the efficiency of Palgol is comparable with that of hand-written code.", Nothing)
-                   ]
-      }
-  , Publication
-      { title    = "An axiomatic basis for bidirectional programming"
-      , authors  = [ "Hsiang-Shang Ko"
-                   , "Zhenjiang Hu"
-                   ]
-      , venue    = Nothing
-      , year     = 2017
-      , types    = [ (Unpublished, "Draft manuscript")
-                   ]
-      , links    = [ ("PDF", Nothing, "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
-                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
-                   , ("Agda code", Just "HTML", "Agda/BiGUL-Logic/Everything.html")
-                   ]
-      , info     = [ ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al. [2007]’s asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are highly declarative, and only allow the programmer to specify a consistency relation with limited control over the behaviour of the automatically derived consistency restorer. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must have the ability to fully control and reason about the consistency restoration behaviour of their bidirectional programs. The putback-based approach to bidirectional programming aims to provide exactly this ability, and this paper strengthens the putback-based position by proposing the first fully fledged reasoning framework for a bidirectional language — a Hoare-style logic for Ko et al. [2016]’s putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                    ]
       }
   , Publication
