@@ -26,9 +26,9 @@ publicationList =
                    ]
       , venue    = Just ("Asian Symposium on Programming Languages and Systems (APLAS)", Just ("https://www-aplas.github.io", IncludeYear))
       , year     = 2017
-      , types    = [ (Published, "To appear")
-                   ]
-      , links    = [ ("Repository", Nothing, "https://bitbucket.org/zyz915/palgol")
+      , types    = []
+      , links    = [ ("PDF", Just "preprint", "manuscripts/APLAS17.pdf")
+                   , ("Repository", Nothing, "https://bitbucket.org/zyz915/palgol")
                    ]
       , info     = [ ("Technical report", "arXiv:1703.09542", Nothing)
                    , ("Abstract", "Pregel is a popular distributed computing model for dealing with large-scale graphs. However, it can be tricky to implement graph algorithms correctly and efficiently in Pregel’s vertex-centric model, especially when the algorithm has multiple computation stages, complicated data dependencies, or even communication over dynamic internal data structures. Some domain-specific languages (DSLs) have been proposed to provide more intuitive ways to implement graph algorithms, but due to the lack of support for <em>remote access</em> — reading or writing attributes of other vertices through references — they cannot handle the above mentioned dynamic communication, causing a class of Pregel algorithms with fast convergence impossible to implement.</p><p>To address this problem, we design and implement Palgol, a more declarative and powerful DSL which supports remote access. In particular, programmers can use a more declarative syntax called <em>chain access</em> to naturally specify dynamic communication as if directly reading data on arbitrary remote vertices. By analyzing the logic patterns of chain access, we provide a novel algorithm for compiling Palgol programs to efficient Pregel code. We demonstrate the power of Palgol by using it to implement several practical Pregel algorithms, and the evaluation result shows that the efficiency of Palgol is comparable with that of hand-written code.", Nothing)
