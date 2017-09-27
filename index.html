@@ -72,7 +72,7 @@
         <div class="col-sm-9">
 
           <p>I am interested in the discovery of mathematical and logical structures of computation so that they can be manifested in programming languages and effectively guide the programmer. I approach problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em> or, in general, <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>. For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.</p>
-          <p>My current focus is on <em>bidirectional programming</em> for dealing with <em>consistency maintenance</em> (synchronisation) problems. So far my results are built around the small bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a>, about which there are an Agda formalisation (of which an initial version was <a href="#publication-c48b059c">reported</a>), a Haskell port (which is available on <a href="https://hackage.haskell.org/package/BiGUL">Hackage</a>, and based on which there is a <a href="#publication-5d3c0d1a">tutorial</a>), and <a href="#publication-e124d6a0">a latest semi-formal treatment in terms of an axiomatic semantics</a>. The ultimate goal is to bring the form of and support for bidirectional programming closer to general-purpose programming, such that general bidirectional programming techniques can be developed and applied in a wide variety of real-world synchronisation scenarios.
+          <p>My current focus is on <em>bidirectional programming</em> for dealing with <em>consistency maintenance</em> (synchronisation) problems. So far my results are built around the small bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a>, about which there are an Agda formalisation (of which an initial version was <a href="#publication-c48b059c">reported</a>), a Haskell port (which is available on <a href="https://hackage.haskell.org/package/BiGUL">Hackage</a>, and based on which there is a <a href="#publication-b519de53">tutorial</a>), and <a href="#publication-e124d6a0">a latest semi-formal treatment in terms of an axiomatic semantics</a>. The ultimate goal is to bring the form of and support for bidirectional programming closer to general-purpose programming, such that general bidirectional programming techniques can be developed and applied in a wide variety of real-world synchronisation scenarios.
           </p>
           <p>Previously, I explored the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into programs and mechanically verified by typechecking. This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families. I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and its formalisation using dependent types.</p>
           <div class="expertise-list">
@@ -274,10 +274,10 @@
               </div>
             </div>
           </div>
-          <div class="publication" id="publication-5d3c0d1a">
+          <div class="publication" id="publication-b519de53">
             <div class="publication-entry">
               <div class="publication-title">
-                <a href="#publication-5d3c0d1a">Principle and practice of bidirectional programming in BiGUL</a>
+                <a href="#publication-b519de53">Principles and practice of bidirectional programming in BiGUL</a>
               </div>
               <div class="publication-authors">
                 <a href="http://research.nii.ac.jp/~hu/">Zhenjiang Hu</a> and Hsiang-Shang Ko
@@ -286,21 +286,20 @@
                 <span class="venue"><a href="https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/">Oxford Summer School on Bidirectional Transformations</a> </span>2017
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><span class="publication-type type-unpublished">Draft manuscript</span></span>
                 <span class="publication-link-outer"><span class="publication-type type-warning">Publication planned</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/raw/master/SSBX16/tutorial.pdf">PDF</a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16">Literate Haskell source</a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-5d3c0d1a">More info</span></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/raw/master/SSBX16/tutorial.pdf">PDF<span class="link-note">(preprint)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16">Haskell source</a></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-b519de53">More info</span></span>
               </div>
             </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-5d3c0d1a">
+            <div class="panel panel-publication-info collapse" id="publication-info-b519de53">
               <div class="panel-body publication-info">
                 <div class="row">
                   <div class="col-sm-2 publication-info-title">
                     Abstract
                   </div>
                   <div class="col-sm-10">
-                    <p>Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this tutorial, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.</p>
+                    <p>Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional applications can be developed in BiGUL.</p>
                   </div>
                 </div>
               </div>
