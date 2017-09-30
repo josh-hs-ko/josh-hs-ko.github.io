@@ -130,5 +130,5 @@ process inputStr =
       unlines ls1
 
 main :: IO ()
-main = let targetFile = "index.html"
+main = let targetFile = "../index.html"
        in  Strict.readFile targetFile >>= writeFile targetFile . process
