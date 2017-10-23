@@ -175,6 +175,1614 @@
       >HoareLogic.Examples.ReplaceAll</a
       ><a name="595"
       >
+
+
+</a
+      ><a name="598" class="Comment"
+      >--------</a
+      ><a name="606"
+      >
+</a
+      ><a name="607" class="Comment"
+      >-- Section 2</a
+      ><a name="619"
+      >
+
+</a
+      ><a name="621" href="Everything.html#621" class="Function"
+      >Definition-2&#183;1</a
+      ><a name="635"
+      > </a
+      ><a name="636" class="Symbol"
+      >=</a
+      ><a name="637"
+      > </a
+      ><a name="638" href="DynamicallyChecked.BiGUL.html#517" class="Datatype"
+      >DynamicallyChecked.BiGUL.BiGUL</a
+      ><a name="668"
+      >
+</a
+      ><a name="669" class="Comment"
+      >---</a
+      ><a name="672"
+      >
+</a
+      ><a name="673" class="Comment"
+      >---  The type of BiGUL programs depends on a universe of mutually recursive polynomial types:</a
+      ><a name="766"
+      >
+</a
+      ><a name="767" class="Comment"
+      >---</a
+      ><a name="770"
+      >
+</a
+      ><a name="771" href="Everything.html#771" class="Function"
+      >_</a
+      ><a name="772"
+      > </a
+      ><a name="773" class="Symbol"
+      >=</a
+      ><a name="774"
+      >    </a
+      ><a name="778" href="DynamicallyChecked.Universe.html#432" class="Datatype"
+      >DynamicallyChecked.Universe.U</a
+      ><a name="807"
+      >
+</a
+      ><a name="808" class="Comment"
+      >---</a
+      ><a name="811"
+      >
+</a
+      ><a name="812" class="Comment"
+      >---  The put semantics of a BiGUL program is extracted as follows. First we interpret the program</a
+      ><a name="909"
+      >
+</a
+      ><a name="910" class="Comment"
+      >---  as a well-behaved lens of type:</a
+      ><a name="946"
+      >
+</a
+      ><a name="947" class="Comment"
+      >---</a
+      ><a name="950"
+      >
+</a
+      ><a name="951" href="Everything.html#951" class="Function"
+      >_</a
+      ><a name="952"
+      > </a
+      ><a name="953" class="Symbol"
+      >=</a
+      ><a name="954"
+      >    </a
+      ><a name="958" href="DynamicallyChecked.Lens.html#285" class="Record"
+      >DynamicallyChecked.Lens.Lens</a
+      ><a name="986"
+      >
+</a
+      ><a name="987" class="Comment"
+      >---</a
+      ><a name="990"
+      >
+</a
+      ><a name="991" class="Comment"
+      >---  using the interpreter:</a
+      ><a name="1018"
+      >
+</a
+      ><a name="1019" class="Comment"
+      >---</a
+      ><a name="1022"
+      >
+</a
+      ><a name="1023" href="Everything.html#1023" class="Function"
+      >_</a
+      ><a name="1024"
+      > </a
+      ><a name="1025" class="Symbol"
+      >=</a
+      ><a name="1026"
+      >    </a
+      ><a name="1030" href="DynamicallyChecked.BiGUL.html#2002" class="Function"
+      >DynamicallyChecked.BiGUL.interp</a
+      ><a name="1061"
+      >
+</a
+      ><a name="1062" class="Comment"
+      >---</a
+      ><a name="1065"
+      >
+</a
+      ><a name="1066" class="Comment"
+      >---  We can then extract a put function from the lens using the projection function:</a
+      ><a name="1150"
+      >
+</a
+      ><a name="1151" class="Comment"
+      >---</a
+      ><a name="1154"
+      >
+</a
+      ><a name="1155" href="Everything.html#1155" class="Function"
+      >_</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >=</a
+      ><a name="1158"
+      >    </a
+      ><a name="1162" href="DynamicallyChecked.Lens.html#327" class="Field"
+      >DynamicallyChecked.Lens.Lens.put</a
+      ><a name="1194"
+      >
+</a
+      ><a name="1195" class="Comment"
+      >---</a
+      ><a name="1198"
+      >
+</a
+      ><a name="1199" class="Comment"
+      >---  Finally, the return type of the put function is wrapped inside the Par type constructor</a
+      ><a name="1291"
+      >
+</a
+      ><a name="1292" class="Comment"
+      >---  (see Section 2 of the BiGUL paper at PEPM 2016: https://doi.org/10.1145/2847538.2847544),</a
+      ><a name="1386"
+      >
+</a
+      ><a name="1387" class="Comment"
+      >---  which can be turned into Maybe using:</a
+      ><a name="1429"
+      >
+</a
+      ><a name="1430" class="Comment"
+      >---</a
+      ><a name="1433"
+      >
+</a
+      ><a name="1434" href="Everything.html#1434" class="Function"
+      >_</a
+      ><a name="1435"
+      > </a
+      ><a name="1436" class="Symbol"
+      >=</a
+      ><a name="1437"
+      >    </a
+      ><a name="1441" href="DynamicallyChecked.Partiality.html#787" class="Function"
+      >DynamicallyChecked.Partiality.runPar</a
+      ><a name="1477"
+      >
+</a
+      ><a name="1478" class="Comment"
+      >---</a
+      ><a name="1481"
+      >
+</a
+      ><a name="1482" class="Comment"
+      >---  The get semantics is similar.</a
+      ><a name="1516"
+      >
+</a
+      ><a name="1517" class="Comment"
+      >---</a
+      ><a name="1520"
+      >
+
+</a
+      ><a name="1522" href="Everything.html#1522" class="Function"
+      >Theorem-2&#183;2-PutGet</a
+      ><a name="1540"
+      > </a
+      ><a name="1541" class="Symbol"
+      >=</a
+      ><a name="1542"
+      > </a
+      ><a name="1543" href="DynamicallyChecked.Lens.html#371" class="Field"
+      >DynamicallyChecked.Lens.Lens.PutGet</a
+      ><a name="1578"
+      >
+</a
+      ><a name="1579" href="Everything.html#1579" class="Function"
+      >Theorem-2&#183;2-GetPut</a
+      ><a name="1597"
+      > </a
+      ><a name="1598" class="Symbol"
+      >=</a
+      ><a name="1599"
+      > </a
+      ><a name="1600" href="DynamicallyChecked.Lens.html#437" class="Field"
+      >DynamicallyChecked.Lens.Lens.GetPut</a
+      ><a name="1635"
+      >
+</a
+      ><a name="1636" class="Comment"
+      >---</a
+      ><a name="1639"
+      >
+</a
+      ><a name="1640" class="Comment"
+      >---  Since, as shown for Definition 2.1, every BiGUL program is interpreted as a Lens,</a
+      ><a name="1726"
+      >
+</a
+      ><a name="1727" class="Comment"
+      >---  in which these two proofs are mandatory, the put and get semantics of any BiGUL</a
+      ><a name="1811"
+      >
+</a
+      ><a name="1812" class="Comment"
+      >---  program are necessarily well-behaved.</a
+      ><a name="1854"
+      >
+</a
+      ><a name="1855" class="Comment"
+      >---</a
+      ><a name="1858"
+      >
+</a
+      ><a name="1859" class="Comment"
+      >---  We could read Par as a synonym of Maybe, and understand a type mx &#8614; x in the</a
+      ><a name="1940"
+      >
+</a
+      ><a name="1941" class="Comment"
+      >---  well-behavedness statements as mx &#8801; just x. Formally, the type constructor</a
+      ><a name="2020"
+      >
+</a
+      ><a name="2021" class="Comment"
+      >---</a
+      ><a name="2024"
+      >
+</a
+      ><a name="2025" href="Everything.html#2025" class="Function"
+      >_</a
+      ><a name="2026"
+      > </a
+      ><a name="2027" class="Symbol"
+      >=</a
+      ><a name="2028"
+      >    </a
+      ><a name="2032" href="DynamicallyChecked.Partiality.html#4523" class="Function Operator"
+      >DynamicallyChecked.Partiality._&#8614;_</a
+      ><a name="2065"
+      >
+</a
+      ><a name="2066" class="Comment"
+      >---</a
+      ><a name="2069"
+      >
+</a
+      ><a name="2070" class="Comment"
+      >---  is a shorthand for</a
+      ><a name="2093"
+      >
+</a
+      ><a name="2094" class="Comment"
+      >---</a
+      ><a name="2097"
+      >
+</a
+      ><a name="2098" href="Everything.html#2098" class="Function"
+      >_</a
+      ><a name="2099"
+      > </a
+      ><a name="2100" class="Symbol"
+      >=</a
+      ><a name="2101"
+      >    </a
+      ><a name="2105" href="DynamicallyChecked.Partiality.html#2567" class="Datatype"
+      >DynamicallyChecked.Partiality.CompSeq</a
+      ><a name="2142"
+      >
+</a
+      ><a name="2143" class="Comment"
+      >---</a
+      ><a name="2146"
+      >
+</a
+      ><a name="2147" class="Comment"
+      >---  and the equivalence between CompSeq mx x and runPar mx &#8801; just x is witnessed by:</a
+      ><a name="2232"
+      >
+</a
+      ><a name="2233" class="Comment"
+      >---</a
+      ><a name="2236"
+      >
+</a
+      ><a name="2237" href="Everything.html#2237" class="Function"
+      >_</a
+      ><a name="2238"
+      > </a
+      ><a name="2239" class="Symbol"
+      >=</a
+      ><a name="2240"
+      >    </a
+      ><a name="2244" href="DynamicallyChecked.Partiality.html#7010" class="Function"
+      >DynamicallyChecked.Partiality.fromCompSeq</a
+      ><a name="2285"
+      >
+</a
+      ><a name="2286" href="Everything.html#2286" class="Function"
+      >_</a
+      ><a name="2287"
+      > </a
+      ><a name="2288" class="Symbol"
+      >=</a
+      ><a name="2289"
+      >    </a
+      ><a name="2293" href="DynamicallyChecked.Partiality.html#4583" class="Function"
+      >DynamicallyChecked.Partiality.toCompSeq</a
+      ><a name="2332"
+      >
+</a
+      ><a name="2333" class="Comment"
+      >---</a
+      ><a name="2336"
+      >
+</a
+      ><a name="2337" class="Comment"
+      >---  Again, see Section 2 of the PEPM 2016 paper for more detail.</a
+      ><a name="2402"
+      >
+</a
+      ><a name="2403" class="Comment"
+      >---</a
+      ><a name="2406"
+      >
+
+</a
+      ><a name="2408" href="Everything.html#2408" class="Function"
+      >Lemma-2&#183;3</a
+      ><a name="2417"
+      > </a
+      ><a name="2418" class="Symbol"
+      >=</a
+      ><a name="2419"
+      > </a
+      ><a name="2420" href="DynamicallyChecked.Lens.html#935" class="Function"
+      >DynamicallyChecked.Lens.uniqueness</a
+      ><a name="2454"
+      >
+
+
+</a
+      ><a name="2457" class="Comment"
+      >--------</a
+      ><a name="2465"
+      >
+</a
+      ><a name="2466" class="Comment"
+      >-- Section 3</a
+      ><a name="2478"
+      >
+
+</a
+      ><a name="2480" href="Everything.html#2480" class="Function"
+      >Notation-3&#183;1</a
+      ><a name="2492"
+      > </a
+      ><a name="2493" class="Symbol"
+      >=</a
+      ><a name="2494"
+      > </a
+      ><a name="2495" href="HoareLogic.Semantics.html#522" class="Function"
+      >HoareLogic.Semantics.&#8473;</a
+      ><a name="2517"
+      >
+
+</a
+      ><a name="2519" href="Everything.html#2519" class="Function"
+      >Definition-3&#183;2</a
+      ><a name="2533"
+      > </a
+      ><a name="2534" class="Symbol"
+      >=</a
+      ><a name="2535"
+      > </a
+      ><a name="2536" href="HoareLogic.Triple.html#990" class="Datatype"
+      >HoareLogic.Triple.Triple</a
+      ><a name="2560"
+      >
+</a
+      ><a name="2561" class="Comment"
+      >---</a
+      ><a name="2564"
+      >
+</a
+      ><a name="2565" class="Comment"
+      >---  For the preconditions and postconditions, we exploit the fact that relations are</a
+      ><a name="2650"
+      >
+</a
+      ><a name="2651" class="Comment"
+      >---  just Set-valued functions and specify them using functional notations. For example,</a
+      ><a name="2739"
+      >
+</a
+      ><a name="2740" class="Comment"
+      >---  the precondition for replace</a
+      ><a name="2773"
+      >
+</a
+      ><a name="2774" class="Comment"
+      >---</a
+      ><a name="2777"
+      >
+</a
+      ><a name="2778" href="Everything.html#2778" class="Function"
+      >_</a
+      ><a name="2779"
+      > </a
+      ><a name="2780" class="Symbol"
+      >=</a
+      ><a name="2781"
+      >    </a
+      ><a name="2785" href="HoareLogic.Semantics.html#655" class="Function"
+      >HoareLogic.Semantics.&#928;</a
+      ><a name="2807"
+      >
+</a
+      ><a name="2808" class="Comment"
+      >---</a
+      ><a name="2811"
+      >
+</a
+      ><a name="2812" class="Comment"
+      >---  is the constant function always returning the unit type &#8868;, and the postcondition</a
+      ><a name="2897"
+      >
+</a
+      ><a name="2898" class="Comment"
+      >---  is expanded as follows:</a
+      ><a name="2926"
+      >
+</a
+      ><a name="2927" class="Comment"
+      >---</a
+      ><a name="2930"
+      >
+</a
+      ><a name="2931" class="Comment"
+      >---      uncurry _&#8801;_ &#8728; Product.map id proj&#8321;</a
+      ><a name="2974"
+      >
+</a
+      ><a name="2975" class="Comment"
+      >---    = &#955; { (s' , s , v) &#8594; uncurry _&#8801;_ (Product.map id proj&#8321; (s' , s , v)) }</a
+      ><a name="3052"
+      >
+</a
+      ><a name="3053" class="Comment"
+      >---    = &#955; { (s' , s , v) &#8594; uncurry _&#8801;_ (s' , s) }</a
+      ><a name="3103"
+      >
+</a
+      ><a name="3104" class="Comment"
+      >---    = &#955; { (s' , s , v) &#8594; s' &#8801; s }</a
+      ><a name="3140"
+      >
+</a
+      ><a name="3141" class="Comment"
+      >---</a
+      ><a name="3144"
+      >
+</a
+      ><a name="3145" class="Comment"
+      >---  where the use of the anonymous &#955;-expressions directly correspond to the comprehension</a
+      ><a name="3235"
+      >
+</a
+      ><a name="3236" class="Comment"
+      >---  relation syntax (Notation 3.4) used in the paper. We can, of course, directly use</a
+      ><a name="3322"
+      >
+</a
+      ><a name="3323" class="Comment"
+      >---  anonymous &#955;-expressions to specify relations, as done in the prod rule, for example.</a
+      ><a name="3412"
+      >
+</a
+      ><a name="3413" class="Comment"
+      >---</a
+      ><a name="3416"
+      >
+</a
+      ><a name="3417" class="Comment"
+      >---  The rearrangement rules presented in the paper rely essentially on pattern-matching</a
+      ><a name="3505"
+      >
+</a
+      ><a name="3506" class="Comment"
+      >---  comprehension relations, and non-linear patterns can appear in these relations.</a
+      ><a name="3590"
+      >
+</a
+      ><a name="3591" class="Comment"
+      >---  We cannot simply use anonymous &#955;-expressions to model them since non-linear patterns</a
+      ><a name="3680"
+      >
+</a
+      ><a name="3681" class="Comment"
+      >---  are not allowed. Below is an account of how we circumvented the problem. We build on</a
+      ><a name="3770"
+      >
+</a
+      ><a name="3771" class="Comment"
+      >---  the formalisation of pattern matching in the PEPM 2016 paper (Section 3.2):</a
+      ><a name="3851"
+      >
+</a
+      ><a name="3852" class="Comment"
+      >---</a
+      ><a name="3855"
+      >
+</a
+      ><a name="3856" href="Everything.html#3856" class="Function"
+      >_</a
+      ><a name="3857"
+      > </a
+      ><a name="3858" class="Symbol"
+      >=</a
+      ><a name="3859"
+      >    </a
+      ><a name="3863" href="DynamicallyChecked.Universe.html#8095" class="Function"
+      >DynamicallyChecked.Universe.PatternMatching.pat-iso</a
+      ><a name="3914"
+      >
+</a
+      ><a name="3915" class="Comment"
+      >---</a
+      ><a name="3918"
+      >
+</a
+      ><a name="3919" class="Comment"
+      >---  To avoid going into the detail, below we will give a simplified account, hiding all</a
+      ><a name="4007"
+      >
+</a
+      ><a name="4008" class="Comment"
+      >---  parameters and indices. Suppose that we are rearranging the view from vpat for type V</a
+      ><a name="4098"
+      >
+</a
+      ><a name="4099" class="Comment"
+      >---  to wpat for type W. We first defines a type:</a
+      ><a name="4148"
+      >
+</a
+      ><a name="4149" class="Comment"
+      >---</a
+      ><a name="4152"
+      >
+</a
+      ><a name="4153" href="Everything.html#4153" class="Function"
+      >_</a
+      ><a name="4154"
+      > </a
+      ><a name="4155" class="Symbol"
+      >=</a
+      ><a name="4156"
+      >    </a
+      ><a name="4160" href="DynamicallyChecked.Universe.html#4318" class="Function"
+      >DynamicallyChecked.Universe.PatternMatching.PatResult</a
+      ><a name="4213"
+      >
+</a
+      ><a name="4214" class="Comment"
+      >---</a
+      ><a name="4217"
+      >
+</a
+      ><a name="4218" class="Comment"
+      >---  An inhabitant of PatResult is the result of matching a value of type V with vpat, and</a
+      ><a name="4308"
+      >
+</a
+      ><a name="4309" class="Comment"
+      >---  can be thought of as a mapping from every variable in vpat to the component matching</a
+      ><a name="4398"
+      >
+</a
+      ><a name="4399" class="Comment"
+      >---  the variable. Two relations are then defined:</a
+      ><a name="4449"
+      >
+</a
+      ><a name="4450" class="Comment"
+      >---</a
+      ><a name="4453"
+      >
+</a
+      ><a name="4454" href="Everything.html#4454" class="Function"
+      >_</a
+      ><a name="4455"
+      > </a
+      ><a name="4456" class="Symbol"
+      >=</a
+      ><a name="4457"
+      >    </a
+      ><a name="4461" href="HoareLogic.Rearrangement.html#582" class="Function"
+      >HoareLogic.Rearrangement.Match</a
+      ><a name="4491"
+      >
+</a
+      ><a name="4492" class="Comment"
+      >---</a
+      ><a name="4495"
+      >
+</a
+      ><a name="4496" class="Comment"
+      >---  which can be thought to have the simplified type P(V &#215; PatResult)), relates v : V and</a
+      ><a name="4586"
+      >
+</a
+      ><a name="4587" class="Comment"
+      >---  r : PatResult if and only if v matches vpat and r is the result of the matching</a
+      ><a name="4671"
+      >
+</a
+      ><a name="4672" class="Comment"
+      >---  (as witnessed by:</a
+      ><a name="4694"
+      >
+</a
+      ><a name="4695" class="Comment"
+      >---</a
+      ><a name="4698"
+      >
+</a
+      ><a name="4699" href="Everything.html#4699" class="Function"
+      >_</a
+      ><a name="4700"
+      > </a
+      ><a name="4701" class="Symbol"
+      >=</a
+      ><a name="4702"
+      >    </a
+      ><a name="4706" href="HoareLogic.Rearrangement.html#5959" class="Function"
+      >HoareLogic.Rearrangement.fromMatch</a
+      ><a name="4740"
+      >
+</a
+      ><a name="4741" href="Everything.html#4741" class="Function"
+      >_</a
+      ><a name="4742"
+      > </a
+      ><a name="4743" class="Symbol"
+      >=</a
+      ><a name="4744"
+      >    </a
+      ><a name="4748" href="HoareLogic.Rearrangement.html#2928" class="Function"
+      >HoareLogic.Rearrangement.toMatch</a
+      ><a name="4780"
+      >
+</a
+      ><a name="4781" class="Comment"
+      >---</a
+      ><a name="4784"
+      >
+</a
+      ><a name="4785" class="Comment"
+      >---  ), and</a
+      ><a name="4796"
+      >
+</a
+      ><a name="4797" class="Comment"
+      >---</a
+      ><a name="4800"
+      >
+</a
+      ><a name="4801" href="Everything.html#4801" class="Function"
+      >_</a
+      ><a name="4802"
+      > </a
+      ><a name="4803" class="Symbol"
+      >=</a
+      ><a name="4804"
+      >    </a
+      ><a name="4808" href="HoareLogic.Rearrangement.html#1872" class="Function"
+      >HoareLogic.Rearrangement.Eval</a
+      ><a name="4837"
+      >
+</a
+      ><a name="4838" class="Comment"
+      >---</a
+      ><a name="4841"
+      >
+</a
+      ><a name="4842" class="Comment"
+      >---  which has the simplified type P(PatResult &#215; W), relates r : PatResult and w : W if and</a
+      ><a name="4933"
+      >
+</a
+      ><a name="4934" class="Comment"
+      >---  only if w is the result of evaluating wpat (as an expression) using r as the environment</a
+      ><a name="5027"
+      >
+</a
+      ><a name="5028" class="Comment"
+      >---  (witnessed by:</a
+      ><a name="5047"
+      >
+</a
+      ><a name="5048" class="Comment"
+      >---</a
+      ><a name="5051"
+      >
+</a
+      ><a name="5052" href="Everything.html#5052" class="Function"
+      >_</a
+      ><a name="5053"
+      > </a
+      ><a name="5054" class="Symbol"
+      >=</a
+      ><a name="5055"
+      >    </a
+      ><a name="5059" href="HoareLogic.Rearrangement.html#6951" class="Function"
+      >HoareLogic.Rearrangement.fromEval</a
+      ><a name="5092"
+      >
+</a
+      ><a name="5093" href="Everything.html#5093" class="Function"
+      >_</a
+      ><a name="5094"
+      > </a
+      ><a name="5095" class="Symbol"
+      >=</a
+      ><a name="5096"
+      >    </a
+      ><a name="5100" href="HoareLogic.Rearrangement.html#4370" class="Function"
+      >HoareLogic.Rearrangement.toEval</a
+      ><a name="5131"
+      >
+</a
+      ><a name="5132" class="Comment"
+      >---</a
+      ><a name="5135"
+      >
+</a
+      ><a name="5136" class="Comment"
+      >---  ) With these two relations, we state the precondition for the whole rearrV program as</a
+      ><a name="5226"
+      >
+</a
+      ><a name="5227" class="Comment"
+      >---</a
+      ><a name="5230"
+      >
+</a
+      ><a name="5231" class="Comment"
+      >---    &lt; s v | &#8707;r. Match v r &#8743; R s r &gt;</a
+      ><a name="5269"
+      >
+</a
+      ><a name="5270" class="Comment"
+      >---</a
+      ><a name="5273"
+      >
+</a
+      ><a name="5274" class="Comment"
+      >---  and the precondition for the inner program as</a
+      ><a name="5324"
+      >
+</a
+      ><a name="5325" class="Comment"
+      >---</a
+      ><a name="5328"
+      >
+</a
+      ><a name="5329" class="Comment"
+      >---    &lt; s w | &#8707;r. Eval r w &#8743; R s r &gt;</a
+      ><a name="5366"
+      >
+</a
+      ><a name="5367" class="Comment"
+      >---</a
+      ><a name="5370"
+      >
+</a
+      ><a name="5371" class="Comment"
+      >---  making no use of (non-linear) pattern-matching comprehension relations.</a
+      ><a name="5447"
+      >
+</a
+      ><a name="5448" class="Comment"
+      >---</a
+      ><a name="5451"
+      >
+
+</a
+      ><a name="5453" href="Everything.html#5453" class="Function"
+      >Theorem-3&#183;3-&#8658;</a
+      ><a name="5466"
+      > </a
+      ><a name="5467" class="Symbol"
+      >=</a
+      ><a name="5468"
+      > </a
+      ><a name="5469" href="HoareLogic.Triple.html#7273" class="Function"
+      >HoareLogic.Triple.soundness</a
+      ><a name="5496"
+      >
+</a
+      ><a name="5497" href="Everything.html#5497" class="Function"
+      >Theorem-3&#183;3-&#8656;</a
+      ><a name="5510"
+      > </a
+      ><a name="5511" class="Symbol"
+      >=</a
+      ><a name="5512"
+      > </a
+      ><a name="5513" href="HoareLogic.Completeness.html#12421" class="Function"
+      >HoareLogic.Completeness.completeness</a
+      ><a name="5549"
+      >
+</a
+      ><a name="5550" class="Comment"
+      >---</a
+      ><a name="5553"
+      >
+</a
+      ><a name="5554" class="Comment"
+      >---  Soundness is proved by induction as usual, and completeness is proved mainly by showing</a
+      ><a name="5646"
+      >
+</a
+      ><a name="5647" class="Comment"
+      >---  that a triple about the exact put semantics can be derived:</a
+      ><a name="5711"
+      >
+</a
+      ><a name="5712" class="Comment"
+      >---</a
+      ><a name="5715"
+      >
+</a
+      ><a name="5716" href="Everything.html#5716" class="Function"
+      >_</a
+      ><a name="5717"
+      > </a
+      ><a name="5718" class="Symbol"
+      >=</a
+      ><a name="5719"
+      >    </a
+      ><a name="5723" href="HoareLogic.Completeness.html#2631" class="Function"
+      >HoareLogic.Completeness.semantics-triple</a
+      ><a name="5763"
+      >
+</a
+      ><a name="5764" class="Comment"
+      >---</a
+      ><a name="5767"
+      >
+</a
+      ><a name="5768" class="Comment"
+      >---  which, in the paper's notation, is:</a
+      ><a name="5808"
+      >
+</a
+      ><a name="5809" class="Comment"
+      >---</a
+      ><a name="5812"
+      >
+</a
+      ><a name="5813" class="Comment"
+      >---    { s v | &#8707;s'. put b s v = just s' }  b  { s' s v | put b s v = just s' }</a
+      ><a name="5891"
+      >
+</a
+      ><a name="5892" class="Comment"
+      >---</a
+      ><a name="5895"
+      >
+</a
+      ><a name="5896" class="Comment"
+      >---  for any BiGUL program b. Completeness is then a corollary: Suppose that the right-hand</a
+      ><a name="5987"
+      >
+</a
+      ><a name="5988" class="Comment"
+      >---  side of Theorem 3.3 holds. Then the precondition R implies that of the above triple,</a
+      ><a name="6077"
+      >
+</a
+      ><a name="6078" class="Comment"
+      >---  whose postcondition, together with R, implies the desired postcondition R'.</a
+      ><a name="6158"
+      >
+
+</a
+      ><a name="6160" href="Everything.html#6160" class="Function"
+      >Theorem-3&#183;8</a
+      ><a name="6171"
+      > </a
+      ><a name="6172" class="Symbol"
+      >=</a
+      ><a name="6173"
+      > </a
+      ><a name="6174" href="HoareLogic.Semantics.html#1810" class="Function"
+      >HoareLogic.Semantics.partial-forward-consistency</a
+      ><a name="6222"
+      >
+</a
+      ><a name="6223" class="Comment"
+      >---</a
+      ><a name="6226"
+      >
+</a
+      ><a name="6227" class="Comment"
+      >---  We do not use the definition of graphs (Definition 3.7) in the formalisation</a
+      ><a name="6308"
+      >
+</a
+      ><a name="6309" class="Comment"
+      >---  due to size issues. All references to graphs are expanded inline.</a
+      ><a name="6379"
+      >
+</a
+      ><a name="6380" class="Comment"
+      >---</a
+      ><a name="6383"
+      >
+
+
+</a
+      ><a name="6386" class="Comment"
+      >--------</a
+      ><a name="6394"
+      >
+</a
+      ><a name="6395" class="Comment"
+      >-- Section 4</a
+      ><a name="6407"
+      >
+
+</a
+      ><a name="6409" href="Everything.html#6409" class="Function"
+      >Example-4&#183;1</a
+      ><a name="6420"
+      > </a
+      ><a name="6421" class="Symbol"
+      >=</a
+      ><a name="6422"
+      > </a
+      ><a name="6423" href="HoareLogic.Examples.Miscellaneous.html#4802" class="Function"
+      >HoareLogic.Examples.Miscellaneous.replace&#178;-correctness</a
+      ><a name="6477"
+      >
+
+</a
+      ><a name="6479" href="Everything.html#6479" class="Function"
+      >Section-4&#183;3-example</a
+      ><a name="6498"
+      > </a
+      ><a name="6499" class="Symbol"
+      >=</a
+      ><a name="6500"
+      > </a
+      ><a name="6501" href="HoareLogic.Examples.Miscellaneous.html#5084" class="Function"
+      >HoareLogic.Examples.Miscellaneous.replace&#178;-equal-view-correctness</a
+      ><a name="6566"
+      >
+</a
+      ><a name="6567" class="Comment"
+      >---</a
+      ><a name="6570"
+      >
+</a
+      ><a name="6571" class="Comment"
+      >---  The postcondition proved is stronger than that in the paper.</a
+      ><a name="6636"
+      >
+</a
+      ><a name="6637" class="Comment"
+      >---  In the comprehension relation notation:</a
+      ><a name="6681"
+      >
+</a
+      ><a name="6682" class="Comment"
+      >---</a
+      ><a name="6685"
+      >
+</a
+      ><a name="6686" class="Comment"
+      >---    &lt; (s' , t') _ (v , w) | s' = t' &#8743; (s' , t') = (v , w) &gt;</a
+      ><a name="6748"
+      >
+</a
+      ><a name="6749" class="Comment"
+      >---</a
+      ><a name="6752"
+      >
+
+</a
+      ><a name="6754" href="Everything.html#6754" class="Function"
+      >Example-4&#183;2</a
+      ><a name="6765"
+      > </a
+      ><a name="6766" class="Symbol"
+      >=</a
+      ><a name="6767"
+      > </a
+      ><a name="6768" href="HoareLogic.Examples.Miscellaneous.html#5833" class="Function"
+      >HoareLogic.Examples.Miscellaneous.keepHeight-correctness</a
+      ><a name="6824"
+      >
+</a
+      ><a name="6825" class="Comment"
+      >---</a
+      ><a name="6828"
+      >
+</a
+      ><a name="6829" class="Comment"
+      >---  The formalisation provides a correct-by-construction but very cryptic way of</a
+      ><a name="6910"
+      >
+</a
+      ><a name="6911" class="Comment"
+      >---  writing rearranging &#955;-expressions, as can be seen, e.g., in the definition</a
+      ><a name="6990"
+      >
+</a
+      ><a name="6991" class="Comment"
+      >---  of keepHeight:</a
+      ><a name="7010"
+      >
+</a
+      ><a name="7011" class="Comment"
+      >---</a
+      ><a name="7014"
+      >
+</a
+      ><a name="7015" href="Everything.html#7015" class="Function"
+      >_</a
+      ><a name="7016"
+      > </a
+      ><a name="7017" class="Symbol"
+      >=</a
+      ><a name="7018"
+      >    </a
+      ><a name="7022" href="HoareLogic.Examples.Miscellaneous.html#5682" class="Function"
+      >HoareLogic.Examples.Miscellaneous.keepHeight</a
+      ><a name="7066"
+      >
+</a
+      ><a name="7067" class="Comment"
+      >---</a
+      ><a name="7070"
+      >
+</a
+      ><a name="7071" class="Comment"
+      >---  The Haskell port of BiGUL allows the programmer to write ordinary &#955;-expressions</a
+      ><a name="7155"
+      >
+</a
+      ><a name="7156" class="Comment"
+      >---  in rearragements, and uses Template Haskell to check the invertibility constraints</a
+      ><a name="7243"
+      >
+</a
+      ><a name="7244" class="Comment"
+      >---  and generate the actual code.</a
+      ><a name="7278"
+      >
+</a
+      ><a name="7279" class="Comment"
+      >---  </a
+      ><a name="7284"
+      >
+
+</a
+      ><a name="7286" href="Everything.html#7286" class="Function"
+      >Example-4&#183;3</a
+      ><a name="7297"
+      > </a
+      ><a name="7298" class="Symbol"
+      >=</a
+      ><a name="7299"
+      > </a
+      ><a name="7300" href="HoareLogic.Examples.Miscellaneous.html#3438" class="Function"
+      >HoareLogic.Examples.Miscellaneous.eqCheck-correctness</a
+      ><a name="7353"
+      >
+
+</a
+      ><a name="7355" href="Everything.html#7355" class="Function"
+      >Example-4&#183;4</a
+      ><a name="7366"
+      > </a
+      ><a name="7367" class="Symbol"
+      >=</a
+      ><a name="7368"
+      > </a
+      ><a name="7369" href="HoareLogic.Examples.Miscellaneous.html#7997" class="Function"
+      >HoareLogic.Examples.Miscellaneous.resetHeight-correctness</a
+      ><a name="7426"
+      >
+
+</a
+      ><a name="7428" href="Everything.html#7428" class="Function"
+      >Example-4&#183;5-i</a
+      ><a name="7441"
+      >  </a
+      ><a name="7443" class="Symbol"
+      >=</a
+      ><a name="7444"
+      > </a
+      ><a name="7445" href="HoareLogic.Examples.Miscellaneous.html#1103" class="Function"
+      >HoareLogic.Examples.Miscellaneous.emb-correctness</a
+      ><a name="7494"
+      >
+</a
+      ><a name="7495" href="Everything.html#7495" class="Function"
+      >Example-4&#183;5-ii</a
+      ><a name="7509"
+      > </a
+      ><a name="7510" class="Symbol"
+      >=</a
+      ><a name="7511"
+      > </a
+      ><a name="7512" href="HoareLogic.Examples.Miscellaneous.html#2072" class="Function"
+      >HoareLogic.Examples.Miscellaneous.emb-correctness'</a
+      ><a name="7562"
+      >
+
+
+</a
+      ><a name="7565" class="Comment"
+      >--------</a
+      ><a name="7573"
+      >
+</a
+      ><a name="7574" class="Comment"
+      >-- Section 5</a
+      ><a name="7586"
+      >
+
+</a
+      ><a name="7588" href="Everything.html#7588" class="Function"
+      >alwaysResetHeight-putback-triple</a
+      ><a name="7620"
+      > </a
+      ><a name="7621" class="Symbol"
+      >=</a
+      ><a name="7622"
+      > </a
+      ><a name="7623" href="HoareLogic.Examples.Miscellaneous.html#9102" class="Function"
+      >HoareLogic.Examples.Miscellaneous.alwaysResetHeight-correctness</a
+      ><a name="7686"
+      >
+
+</a
+      ><a name="7688" href="Everything.html#7688" class="Function"
+      >Definition-5&#183;1</a
+      ><a name="7702"
+      > </a
+      ><a name="7703" class="Symbol"
+      >=</a
+      ><a name="7704"
+      > </a
+      ><a name="7705" href="HoareLogic.Triple.html#11076" class="Datatype"
+      >HoareLogic.Triple.TripleR</a
+      ><a name="7730"
+      >
+
+</a
+      ><a name="7732" href="Everything.html#7732" class="Function"
+      >Theorem-5&#183;2-&#8658;</a
+      ><a name="7745"
+      > </a
+      ><a name="7746" class="Symbol"
+      >=</a
+      ><a name="7747"
+      > </a
+      ><a name="7748" href="HoareLogic.Triple.html#14433" class="Function"
+      >HoareLogic.Triple.soundnessR</a
+      ><a name="7776"
+      >
+</a
+      ><a name="7777" href="Everything.html#7777" class="Function"
+      >Theorem-5&#183;2-&#8656;</a
+      ><a name="7790"
+      > </a
+      ><a name="7791" class="Symbol"
+      >=</a
+      ><a name="7792"
+      > </a
+      ><a name="7793" href="HoareLogic.Completeness.html#20254" class="Function"
+      >HoareLogic.Completeness.completenessR</a
+      ><a name="7830"
+      >
+</a
+      ><a name="7831" class="Comment"
+      >---</a
+      ><a name="7834"
+      >
+</a
+      ><a name="7835" class="Comment"
+      >---  The proofs are analogous to those of Theorem 3.3</a
+      ><a name="7888"
+      >
+</a
+      ><a name="7889" class="Comment"
+      >---</a
+      ><a name="7892"
+      >
+
+</a
+      ><a name="7894" href="Everything.html#7894" class="Function"
+      >Lemma-5&#183;3-&#8658;</a
+      ><a name="7905"
+      > </a
+      ><a name="7906" class="Symbol"
+      >=</a
+      ><a name="7907"
+      > </a
+      ><a name="7908" href="HoareLogic.Semantics.html#5348" class="Function"
+      >HoareLogic.Semantics.range-interpretation-r</a
+      ><a name="7951"
+      >
+</a
+      ><a name="7952" href="Everything.html#7952" class="Function"
+      >Lemma-5&#183;3-&#8656;</a
+      ><a name="7963"
+      > </a
+      ><a name="7964" class="Symbol"
+      >=</a
+      ><a name="7965"
+      > </a
+      ><a name="7966" href="HoareLogic.Semantics.html#5915" class="Function"
+      >HoareLogic.Semantics.range-interpretation-l</a
+      ><a name="8009"
+      >
+
+</a
+      ><a name="8011" href="Everything.html#8011" class="Function"
+      >Theorem-5&#183;4</a
+      ><a name="8022"
+      > </a
+      ><a name="8023" class="Symbol"
+      >=</a
+      ><a name="8024"
+      > </a
+      ><a name="8025" href="HoareLogic.Semantics.html#6386" class="Function"
+      >HoareLogic.Semantics.total-forward-consistency</a
+      ><a name="8071"
+      >
+
+</a
+      ><a name="8073" href="Everything.html#8073" class="Function"
+      >Example-5&#183;5</a
+      ><a name="8084"
+      > </a
+      ><a name="8085" class="Symbol"
+      >=</a
+      ><a name="8086"
+      > </a
+      ><a name="8087" href="HoareLogic.Examples.Miscellaneous.html#2908" class="Function"
+      >HoareLogic.Examples.Miscellaneous.emb-range</a
+      ><a name="8130"
+      >
+
+</a
+      ><a name="8132" href="Everything.html#8132" class="Function"
+      >Example-5&#183;6</a
+      ><a name="8143"
+      > </a
+      ><a name="8144" class="Symbol"
+      >=</a
+      ><a name="8145"
+      > </a
+      ><a name="8146" href="HoareLogic.Examples.Miscellaneous.html#9586" class="Function"
+      >HoareLogic.Examples.Miscellaneous.alwaysResetHeight-range</a
+      ><a name="8203"
+      >
+
+
+</a
+      ><a name="8206" class="Comment"
+      >--------</a
+      ><a name="8214"
+      >
+</a
+      ><a name="8215" class="Comment"
+      >-- Section 6</a
+      ><a name="8227"
+      >
+
+</a
+      ><a name="8229" href="Everything.html#8229" class="Function"
+      >Theorem-6&#183;1</a
+      ><a name="8240"
+      > </a
+      ><a name="8241" class="Symbol"
+      >=</a
+      ><a name="8242"
+      > </a
+      ><a name="8243" href="HoareLogic.Triple.html#9291" class="Function"
+      >HoareLogic.Triple.expandTriple</a
+      ><a name="8273"
+      >
+
+</a
+      ><a name="8275" href="Everything.html#8275" class="Function"
+      >Theorem-6&#183;2</a
+      ><a name="8286"
+      > </a
+      ><a name="8287" class="Symbol"
+      >=</a
+      ><a name="8288"
+      > </a
+      ><a name="8289" href="HoareLogic.Triple.html#16331" class="Function"
+      >HoareLogic.Triple.expandTripleR</a
+      ><a name="8320"
+      >
+
+
+</a
+      ><a name="8323" class="Comment"
+      >--------</a
+      ><a name="8331"
+      >
+</a
+      ><a name="8332" class="Comment"
+      >-- Section 7</a
+      ><a name="8344"
+      >
+
+</a
+      ><a name="8346" href="Everything.html#8346" class="Function"
+      >keyAlign-putback-triple</a
+      ><a name="8369"
+      > </a
+      ><a name="8370" class="Symbol"
+      >=</a
+      ><a name="8371"
+      > </a
+      ><a name="8372" href="HoareLogic.Examples.Alignment.html#11332" class="Function"
+      >HoareLogic.Examples.Alignment.keyAlign-correctness</a
+      ><a name="8422"
+      >
+</a
+      ><a name="8423" class="Comment"
+      >---</a
+      ><a name="8426"
+      >
+</a
+      ><a name="8427" class="Comment"
+      >---  The datatypes of source and view lists need to be encoded in the universe so that</a
+      ><a name="8513"
+      >
+</a
+      ><a name="8514" class="Comment"
+      >---  we can write BiGUL programs operating on them:</a
+      ><a name="8565"
+      >
+</a
+      ><a name="8566" class="Comment"
+      >---</a
+      ><a name="8569"
+      >
+</a
+      ><a name="8570" href="Everything.html#8570" class="Function"
+      >_</a
+      ><a name="8571"
+      > </a
+      ><a name="8572" class="Symbol"
+      >=</a
+      ><a name="8573"
+      >    </a
+      ><a name="8577" href="HoareLogic.Examples.Alignment.html#867" class="Function"
+      >HoareLogic.Examples.Alignment.F</a
+      ><a name="8608"
+      >
+</a
+      ><a name="8609" class="Comment"
+      >---</a
+      ><a name="8612"
+      >
+</a
+      ><a name="8613" class="Comment"
+      >---  In general, the set of all datatypes to be processed by a BiGUL program needs to be</a
+      ><a name="8701"
+      >
+</a
+      ><a name="8702" class="Comment"
+      >---  fixed in advance and encoded as a base functor, on which the type of the BiGUL program</a
+      ><a name="8793"
+      >
+</a
+      ><a name="8794" class="Comment"
+      >---  depends.</a
+      ><a name="8807"
+      >
+</a
+      ><a name="8808" class="Comment"
+      >---</a
+      ><a name="8811"
+      >
+</a
+      ><a name="8812" class="Comment"
+      >---  As mentioned in the paper, the actually verified key-based alignment program</a
+      ><a name="8893"
+      >
+</a
+      ><a name="8894" class="Comment"
+      >---</a
+      ><a name="8897"
+      >
+</a
+      ><a name="8898" href="Everything.html#8898" class="Function"
+      >_</a
+      ><a name="8899"
+      > </a
+      ><a name="8900" class="Symbol"
+      >=</a
+      ><a name="8901"
+      >    </a
+      ><a name="8905" href="HoareLogic.Examples.Alignment.html#1977" class="Function"
+      >HoareLogic.Examples.Alignment.keyAlign&#7470;</a
+      ><a name="8944"
+      >
+</a
+      ><a name="8945" class="Comment"
+      >---</a
+      ><a name="8948"
+      >
+</a
+      ><a name="8949" class="Comment"
+      >---  is only the (non-recursive) body of keyAlign in Figure 4, and the auxiliary function</a
+      ><a name="9038"
+      >
+</a
+      ><a name="9039" class="Comment"
+      >---</a
+      ><a name="9042"
+      >
+</a
+      ><a name="9043" href="Everything.html#9043" class="Function"
+      >_</a
+      ><a name="9044"
+      > </a
+      ><a name="9045" class="Symbol"
+      >=</a
+      ><a name="9046"
+      >    </a
+      ><a name="9050" href="HoareLogic.Examples.Alignment.html#1355" class="Function"
+      >HoareLogic.Examples.Alignment.extract</a
+      ><a name="9087"
+      >
+</a
+      ><a name="9088" class="Comment"
+      >---</a
+      ><a name="9091"
+      >
+</a
+      ><a name="9092" class="Comment"
+      >---  includes some redundant branches to pass Agda's totality check. Also different from</a
+      ><a name="9180"
+      >
+</a
+      ><a name="9181" class="Comment"
+      >---  Figure 4 are some uses of Agda-specific programming patterns, like using an explicitly</a
+      ><a name="9272"
+      >
+</a
+      ><a name="9273" class="Comment"
+      >---  recursive function</a
+      ><a name="9296"
+      >
+</a
+      ><a name="9297" class="Comment"
+      >---</a
+      ><a name="9300"
+      >
+</a
+      ><a name="9301" href="Everything.html#9301" class="Function"
+      >_</a
+      ><a name="9302"
+      > </a
+      ><a name="9303" class="Symbol"
+      >=</a
+      ><a name="9304"
+      >    </a
+      ><a name="9308" href="HoareLogic.Examples.Alignment.html#1777" class="Function"
+      >HoareLogic.Examples.Alignment.headMatch</a
+      ><a name="9347"
+      >
+</a
+      ><a name="9348" class="Comment"
+      >---</a
+      ><a name="9351"
+      >
+</a
+      ><a name="9352" class="Comment"
+      >---  to represent the main condition of the fourth branch. Such modifications help to make</a
+      ><a name="9442"
+      >
+</a
+      ><a name="9443" class="Comment"
+      >---  it easier to obtain proofs of properties needed in the derivation of the triple.</a
+      ><a name="9528"
+      >
+</a
+      ><a name="9529" class="Comment"
+      >---</a
+      ><a name="9532"
+      >
+
+</a
+      ><a name="9534" href="Everything.html#9534" class="Function"
+      >keyAlign-range-triple</a
+      ><a name="9555"
+      > </a
+      ><a name="9556" class="Symbol"
+      >=</a
+      ><a name="9557"
+      > </a
+      ><a name="9558" href="HoareLogic.Examples.Alignment.html#18438" class="Function"
+      >HoareLogic.Examples.Alignment.keyAlign-range</a
+      ><a name="9602"
+      >
+
+
+</a
+      ><a name="9605" class="Comment"
+      >--------</a
+      ><a name="9613"
+      >
+</a
+      ><a name="9614" class="Comment"
+      >-- Section 8</a
+      ><a name="9626"
+      >
+
+</a
+      ><a name="9628" href="Everything.html#9628" class="Function"
+      >soundness-of-composition-rule</a
+      ><a name="9657"
+      > </a
+      ><a name="9658" class="Symbol"
+      >=</a
+      ><a name="9659"
+      > </a
+      ><a name="9660" href="HoareLogic.Semantics.html#8575" class="Function"
+      >HoareLogic.Semantics.composition-soundness</a
+      ><a name="9702"
+      >
+
+</a
+      ><a name="9704" href="Everything.html#9704" class="Function"
+      >replaceAll-putback-triple</a
+      ><a name="9729"
+      > </a
+      ><a name="9730" class="Symbol"
+      >=</a
+      ><a name="9731"
+      > </a
+      ><a name="9732" href="HoareLogic.Examples.ReplaceAll.html#2135" class="Function"
+      >HoareLogic.Examples.ReplaceAll.replaceAll-correctness</a
+      ><a name="9785"
+      >
+</a
+      ><a name="9786" href="Everything.html#9786" class="Function"
+      >replaceAll-range-triple</a
+      ><a name="9809"
+      >   </a
+      ><a name="9812" class="Symbol"
+      >=</a
+      ><a name="9813"
+      > </a
+      ><a name="9814" href="HoareLogic.Examples.ReplaceAll.html#7308" class="Function"
+      >HoareLogic.Examples.ReplaceAll.replaceAll-range</a
+      ><a name="9861"
+      >
 </a
       ></pre
     ><script type="text/javascript">
