@@ -27,7 +27,7 @@ publicationList =
       , year    = 2018
       , types   = []
       , links   = [ ("PDF", Just "draft", "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
-                  , ("Agda code", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul/src/logic/Agda/")
+                  , ("Agda code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/logic/POPL18/formalisation.zip")
                   , ("Agda code", Just "HTML", "Agda/BiGUL-Logic/Everything.html")
                   ]
       , info    = [ ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
