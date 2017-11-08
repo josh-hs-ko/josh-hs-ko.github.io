@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Relation.Binary.PreorderReasoning</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- The Agda standard library</a
+      ><a name="102"
+      >
+</a
+      ><a name="103" class="Comment"
+      >--</a
+      ><a name="105"
+      >
+</a
+      ><a name="106" class="Comment"
+      >-- Convenient syntax for &quot;equational reasoning&quot; using a preorder</a
+      ><a name="170"
+      >
+</a
+      ><a name="171" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="243"
+      >
+
+</a
+      ><a name="245" class="Comment"
+      >-- I think that the idea behind this library is originally Ulf</a
+      ><a name="307"
+      >
+</a
+      ><a name="308" class="Comment"
+      >-- Norell's. I have adapted it to my tastes and mixfix operators,</a
+      ><a name="373"
+      >
+</a
+      ><a name="374" class="Comment"
+      >-- though.</a
+      ><a name="384"
+      >
+
+</a
+      ><a name="386" class="Comment"
+      >-- If you need to use several instances of this module in a given</a
+      ><a name="451"
+      >
+</a
+      ><a name="452" class="Comment"
+      >-- file, then you can use the following approach:</a
+      ><a name="501"
+      >
+</a
+      ><a name="502" class="Comment"
+      >--</a
+      ><a name="504"
+      >
+</a
+      ><a name="505" class="Comment"
+      >--   import Relation.Binary.PreorderReasoning as Pre</a
+      ><a name="557"
+      >
+</a
+      ><a name="558" class="Comment"
+      >--</a
+      ><a name="560"
+      >
+</a
+      ><a name="561" class="Comment"
+      >--   f x y z = begin</a
+      ><a name="581"
+      >
+</a
+      ><a name="582" class="Comment"
+      >--     ...</a
+      ><a name="592"
+      >
+</a
+      ><a name="593" class="Comment"
+      >--       &#8718;</a
+      ><a name="603"
+      >
+</a
+      ><a name="604" class="Comment"
+      >--     where open Pre preorder&#8321;</a
+      ><a name="635"
+      >
+</a
+      ><a name="636" class="Comment"
+      >--</a
+      ><a name="638"
+      >
+</a
+      ><a name="639" class="Comment"
+      >--   g i j = begin</a
+      ><a name="657"
+      >
+</a
+      ><a name="658" class="Comment"
+      >--     ...</a
+      ><a name="668"
+      >
+</a
+      ><a name="669" class="Comment"
+      >--       &#8718;</a
+      ><a name="679"
+      >
+</a
+      ><a name="680" class="Comment"
+      >--     where open Pre preorder&#8322;</a
+      ><a name="711"
+      >
+
+</a
+      ><a name="713" class="Keyword"
+      >open</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Keyword"
+      >import</a
+      ><a name="724"
+      > </a
+      ><a name="725" href="Relation.Binary.html#1" class="Module"
+      >Relation.Binary</a
+      ><a name="740"
+      >
+
+</a
+      ><a name="742" class="Keyword"
+      >module</a
+      ><a name="748"
+      > </a
+      ><a name="749" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >Relation.Binary.PreorderReasoning</a
+      ><a name="782"
+      >
+         </a
+      ><a name="792" class="Symbol"
+      >{</a
+      ><a name="793" href="Relation.Binary.PreorderReasoning.html#793" class="Bound"
+      >p&#8321;</a
+      ><a name="795"
+      > </a
+      ><a name="796" href="Relation.Binary.PreorderReasoning.html#796" class="Bound"
+      >p&#8322;</a
+      ><a name="798"
+      > </a
+      ><a name="799" href="Relation.Binary.PreorderReasoning.html#799" class="Bound"
+      >p&#8323;</a
+      ><a name="801" class="Symbol"
+      >}</a
+      ><a name="802"
+      > </a
+      ><a name="803" class="Symbol"
+      >(</a
+      ><a name="804" href="Relation.Binary.PreorderReasoning.html#804" class="Bound"
+      >P</a
+      ><a name="805"
+      > </a
+      ><a name="806" class="Symbol"
+      >:</a
+      ><a name="807"
+      > </a
+      ><a name="808" href="Relation.Binary.html#1414" class="Record"
+      >Preorder</a
+      ><a name="816"
+      > </a
+      ><a name="817" href="Relation.Binary.PreorderReasoning.html#793" class="Bound"
+      >p&#8321;</a
+      ><a name="819"
+      > </a
+      ><a name="820" href="Relation.Binary.PreorderReasoning.html#796" class="Bound"
+      >p&#8322;</a
+      ><a name="822"
+      > </a
+      ><a name="823" href="Relation.Binary.PreorderReasoning.html#799" class="Bound"
+      >p&#8323;</a
+      ><a name="825" class="Symbol"
+      >)</a
+      ><a name="826"
+      > </a
+      ><a name="827" class="Keyword"
+      >where</a
+      ><a name="832"
+      >
+
+</a
+      ><a name="834" class="Keyword"
+      >open</a
+      ><a name="838"
+      > </a
+      ><a name="839" href="Relation.Binary.html#1414" class="Module"
+      >Preorder</a
+      ><a name="847"
+      > </a
+      ><a name="848" href="Relation.Binary.PreorderReasoning.html#804" class="Bound"
+      >P</a
+      ><a name="849"
+      >
+
+</a
+      ><a name="851" class="Keyword"
+      >infix</a
+      ><a name="856"
+      >  </a
+      ><a name="858" class="Number"
+      >4</a
+      ><a name="859"
+      > _IsRelatedTo_
+</a
+      ><a name="874" class="Keyword"
+      >infix</a
+      ><a name="879"
+      >  </a
+      ><a name="881" class="Number"
+      >2</a
+      ><a name="882"
+      > _&#8718;
+</a
+      ><a name="886" class="Keyword"
+      >infixr</a
+      ><a name="892"
+      > </a
+      ><a name="893" class="Number"
+      >2</a
+      ><a name="894"
+      > _&#8764;&#10216;_&#10217;_ _&#8776;&#10216;_&#10217;_
+</a
+      ><a name="909" class="Keyword"
+      >infix</a
+      ><a name="914"
+      >  </a
+      ><a name="916" class="Number"
+      >1</a
+      ><a name="917"
+      > begin_
+
+</a
+      ><a name="926" class="Comment"
+      >-- This seemingly unnecessary type is used to make it possible to</a
+      ><a name="991"
+      >
+</a
+      ><a name="992" class="Comment"
+      >-- infer arguments even if the underlying equality evaluates.</a
+      ><a name="1053"
+      >
+
+</a
+      ><a name="1055" class="Keyword"
+      >data</a
+      ><a name="1059"
+      > </a
+      ><a name="1060" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >_IsRelatedTo_</a
+      ><a name="1073"
+      > </a
+      ><a name="1074" class="Symbol"
+      >(</a
+      ><a name="1075" href="Relation.Binary.PreorderReasoning.html#1075" class="Bound"
+      >x</a
+      ><a name="1076"
+      > </a
+      ><a name="1077" href="Relation.Binary.PreorderReasoning.html#1077" class="Bound"
+      >y</a
+      ><a name="1078"
+      > </a
+      ><a name="1079" class="Symbol"
+      >:</a
+      ><a name="1080"
+      > </a
+      ><a name="1081" href="Relation.Binary.html#1493" class="Function"
+      >Carrier</a
+      ><a name="1088" class="Symbol"
+      >)</a
+      ><a name="1089"
+      > </a
+      ><a name="1090" class="Symbol"
+      >:</a
+      ><a name="1091"
+      > </a
+      ><a name="1092" class="PrimitiveType"
+      >Set</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" href="Relation.Binary.PreorderReasoning.html#799" class="Bound"
+      >p&#8323;</a
+      ><a name="1098"
+      > </a
+      ><a name="1099" class="Keyword"
+      >where</a
+      ><a name="1104"
+      >
+  </a
+      ><a name="1107" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1112"
+      > </a
+      ><a name="1113" class="Symbol"
+      >:</a
+      ><a name="1114"
+      > </a
+      ><a name="1115" class="Symbol"
+      >(</a
+      ><a name="1116" href="Relation.Binary.PreorderReasoning.html#1116" class="Bound"
+      >x&#8764;y</a
+      ><a name="1119"
+      > </a
+      ><a name="1120" class="Symbol"
+      >:</a
+      ><a name="1121"
+      > </a
+      ><a name="1122" href="Relation.Binary.PreorderReasoning.html#1075" class="Bound"
+      >x</a
+      ><a name="1123"
+      > </a
+      ><a name="1124" href="Relation.Binary.html#1577" class="Function Operator"
+      >&#8764;</a
+      ><a name="1125"
+      > </a
+      ><a name="1126" href="Relation.Binary.PreorderReasoning.html#1077" class="Bound"
+      >y</a
+      ><a name="1127" class="Symbol"
+      >)</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="Symbol"
+      >&#8594;</a
+      ><a name="1130"
+      > </a
+      ><a name="1131" href="Relation.Binary.PreorderReasoning.html#1075" class="Bound"
+      >x</a
+      ><a name="1132"
+      > </a
+      ><a name="1133" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1144"
+      > </a
+      ><a name="1145" href="Relation.Binary.PreorderReasoning.html#1077" class="Bound"
+      >y</a
+      ><a name="1146"
+      >
+
+</a
+      ><a name="1148" href="Relation.Binary.PreorderReasoning.html#1148" class="Function Operator"
+      >begin_</a
+      ><a name="1154"
+      > </a
+      ><a name="1155" class="Symbol"
+      >:</a
+      ><a name="1156"
+      > </a
+      ><a name="1157" class="Symbol"
+      >&#8704;</a
+      ><a name="1158"
+      > </a
+      ><a name="1159" class="Symbol"
+      >{</a
+      ><a name="1160" href="Relation.Binary.PreorderReasoning.html#1160" class="Bound"
+      >x</a
+      ><a name="1161"
+      > </a
+      ><a name="1162" href="Relation.Binary.PreorderReasoning.html#1162" class="Bound"
+      >y</a
+      ><a name="1163" class="Symbol"
+      >}</a
+      ><a name="1164"
+      > </a
+      ><a name="1165" class="Symbol"
+      >&#8594;</a
+      ><a name="1166"
+      > </a
+      ><a name="1167" href="Relation.Binary.PreorderReasoning.html#1160" class="Bound"
+      >x</a
+      ><a name="1168"
+      > </a
+      ><a name="1169" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1180"
+      > </a
+      ><a name="1181" href="Relation.Binary.PreorderReasoning.html#1162" class="Bound"
+      >y</a
+      ><a name="1182"
+      > </a
+      ><a name="1183" class="Symbol"
+      >&#8594;</a
+      ><a name="1184"
+      > </a
+      ><a name="1185" href="Relation.Binary.PreorderReasoning.html#1160" class="Bound"
+      >x</a
+      ><a name="1186"
+      > </a
+      ><a name="1187" href="Relation.Binary.html#1577" class="Function Operator"
+      >&#8764;</a
+      ><a name="1188"
+      > </a
+      ><a name="1189" href="Relation.Binary.PreorderReasoning.html#1162" class="Bound"
+      >y</a
+      ><a name="1190"
+      >
+</a
+      ><a name="1191" href="Relation.Binary.PreorderReasoning.html#1148" class="Function Operator"
+      >begin</a
+      ><a name="1196"
+      > </a
+      ><a name="1197" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" href="Relation.Binary.PreorderReasoning.html#1203" class="Bound"
+      >x&#8764;y</a
+      ><a name="1206"
+      > </a
+      ><a name="1207" class="Symbol"
+      >=</a
+      ><a name="1208"
+      > </a
+      ><a name="1209" href="Relation.Binary.PreorderReasoning.html#1203" class="Bound"
+      >x&#8764;y</a
+      ><a name="1212"
+      >
+
+</a
+      ><a name="1214" href="Relation.Binary.PreorderReasoning.html#1214" class="Function Operator"
+      >_&#8764;&#10216;_&#10217;_</a
+      ><a name="1220"
+      > </a
+      ><a name="1221" class="Symbol"
+      >:</a
+      ><a name="1222"
+      > </a
+      ><a name="1223" class="Symbol"
+      >&#8704;</a
+      ><a name="1224"
+      > </a
+      ><a name="1225" href="Relation.Binary.PreorderReasoning.html#1225" class="Bound"
+      >x</a
+      ><a name="1226"
+      > </a
+      ><a name="1227" class="Symbol"
+      >{</a
+      ><a name="1228" href="Relation.Binary.PreorderReasoning.html#1228" class="Bound"
+      >y</a
+      ><a name="1229"
+      > </a
+      ><a name="1230" href="Relation.Binary.PreorderReasoning.html#1230" class="Bound"
+      >z</a
+      ><a name="1231" class="Symbol"
+      >}</a
+      ><a name="1232"
+      > </a
+      ><a name="1233" class="Symbol"
+      >&#8594;</a
+      ><a name="1234"
+      > </a
+      ><a name="1235" href="Relation.Binary.PreorderReasoning.html#1225" class="Bound"
+      >x</a
+      ><a name="1236"
+      > </a
+      ><a name="1237" href="Relation.Binary.html#1577" class="Function Operator"
+      >&#8764;</a
+      ><a name="1238"
+      > </a
+      ><a name="1239" href="Relation.Binary.PreorderReasoning.html#1228" class="Bound"
+      >y</a
+      ><a name="1240"
+      > </a
+      ><a name="1241" class="Symbol"
+      >&#8594;</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" href="Relation.Binary.PreorderReasoning.html#1228" class="Bound"
+      >y</a
+      ><a name="1244"
+      > </a
+      ><a name="1245" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" href="Relation.Binary.PreorderReasoning.html#1230" class="Bound"
+      >z</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" class="Symbol"
+      >&#8594;</a
+      ><a name="1260"
+      > </a
+      ><a name="1261" href="Relation.Binary.PreorderReasoning.html#1225" class="Bound"
+      >x</a
+      ><a name="1262"
+      > </a
+      ><a name="1263" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1274"
+      > </a
+      ><a name="1275" href="Relation.Binary.PreorderReasoning.html#1230" class="Bound"
+      >z</a
+      ><a name="1276"
+      >
+</a
+      ><a name="1277" class="Symbol"
+      >_</a
+      ><a name="1278"
+      > </a
+      ><a name="1279" href="Relation.Binary.PreorderReasoning.html#1214" class="Function Operator"
+      >&#8764;&#10216;</a
+      ><a name="1281"
+      > </a
+      ><a name="1282" href="Relation.Binary.PreorderReasoning.html#1282" class="Bound"
+      >x&#8764;y</a
+      ><a name="1285"
+      > </a
+      ><a name="1286" href="Relation.Binary.PreorderReasoning.html#1214" class="Function Operator"
+      >&#10217;</a
+      ><a name="1287"
+      > </a
+      ><a name="1288" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1293"
+      > </a
+      ><a name="1294" href="Relation.Binary.PreorderReasoning.html#1294" class="Bound"
+      >y&#8764;z</a
+      ><a name="1297"
+      > </a
+      ><a name="1298" class="Symbol"
+      >=</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1305"
+      > </a
+      ><a name="1306" class="Symbol"
+      >(</a
+      ><a name="1307" href="Relation.Binary.html#1134" class="Function"
+      >trans</a
+      ><a name="1312"
+      > </a
+      ><a name="1313" href="Relation.Binary.PreorderReasoning.html#1282" class="Bound"
+      >x&#8764;y</a
+      ><a name="1316"
+      > </a
+      ><a name="1317" href="Relation.Binary.PreorderReasoning.html#1294" class="Bound"
+      >y&#8764;z</a
+      ><a name="1320" class="Symbol"
+      >)</a
+      ><a name="1321"
+      >
+
+</a
+      ><a name="1323" href="Relation.Binary.PreorderReasoning.html#1323" class="Function Operator"
+      >_&#8776;&#10216;_&#10217;_</a
+      ><a name="1329"
+      > </a
+      ><a name="1330" class="Symbol"
+      >:</a
+      ><a name="1331"
+      > </a
+      ><a name="1332" class="Symbol"
+      >&#8704;</a
+      ><a name="1333"
+      > </a
+      ><a name="1334" href="Relation.Binary.PreorderReasoning.html#1334" class="Bound"
+      >x</a
+      ><a name="1335"
+      > </a
+      ><a name="1336" class="Symbol"
+      >{</a
+      ><a name="1337" href="Relation.Binary.PreorderReasoning.html#1337" class="Bound"
+      >y</a
+      ><a name="1338"
+      > </a
+      ><a name="1339" href="Relation.Binary.PreorderReasoning.html#1339" class="Bound"
+      >z</a
+      ><a name="1340" class="Symbol"
+      >}</a
+      ><a name="1341"
+      > </a
+      ><a name="1342" class="Symbol"
+      >&#8594;</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" href="Relation.Binary.PreorderReasoning.html#1334" class="Bound"
+      >x</a
+      ><a name="1345"
+      > </a
+      ><a name="1346" href="Relation.Binary.html#1516" class="Function Operator"
+      >&#8776;</a
+      ><a name="1347"
+      > </a
+      ><a name="1348" href="Relation.Binary.PreorderReasoning.html#1337" class="Bound"
+      >y</a
+      ><a name="1349"
+      > </a
+      ><a name="1350" class="Symbol"
+      >&#8594;</a
+      ><a name="1351"
+      > </a
+      ><a name="1352" href="Relation.Binary.PreorderReasoning.html#1337" class="Bound"
+      >y</a
+      ><a name="1353"
+      > </a
+      ><a name="1354" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" href="Relation.Binary.PreorderReasoning.html#1339" class="Bound"
+      >z</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Symbol"
+      >&#8594;</a
+      ><a name="1369"
+      > </a
+      ><a name="1370" href="Relation.Binary.PreorderReasoning.html#1334" class="Bound"
+      >x</a
+      ><a name="1371"
+      > </a
+      ><a name="1372" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1383"
+      > </a
+      ><a name="1384" href="Relation.Binary.PreorderReasoning.html#1339" class="Bound"
+      >z</a
+      ><a name="1385"
+      >
+</a
+      ><a name="1386" class="Symbol"
+      >_</a
+      ><a name="1387"
+      > </a
+      ><a name="1388" href="Relation.Binary.PreorderReasoning.html#1323" class="Function Operator"
+      >&#8776;&#10216;</a
+      ><a name="1390"
+      > </a
+      ><a name="1391" href="Relation.Binary.PreorderReasoning.html#1391" class="Bound"
+      >x&#8776;y</a
+      ><a name="1394"
+      > </a
+      ><a name="1395" href="Relation.Binary.PreorderReasoning.html#1323" class="Function Operator"
+      >&#10217;</a
+      ><a name="1396"
+      > </a
+      ><a name="1397" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1402"
+      > </a
+      ><a name="1403" href="Relation.Binary.PreorderReasoning.html#1403" class="Bound"
+      >y&#8764;z</a
+      ><a name="1406"
+      > </a
+      ><a name="1407" class="Symbol"
+      >=</a
+      ><a name="1408"
+      > </a
+      ><a name="1409" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1414"
+      > </a
+      ><a name="1415" class="Symbol"
+      >(</a
+      ><a name="1416" href="Relation.Binary.html#1134" class="Function"
+      >trans</a
+      ><a name="1421"
+      > </a
+      ><a name="1422" class="Symbol"
+      >(</a
+      ><a name="1423" href="Relation.Binary.html#1104" class="Function"
+      >reflexive</a
+      ><a name="1432"
+      > </a
+      ><a name="1433" href="Relation.Binary.PreorderReasoning.html#1391" class="Bound"
+      >x&#8776;y</a
+      ><a name="1436" class="Symbol"
+      >)</a
+      ><a name="1437"
+      > </a
+      ><a name="1438" href="Relation.Binary.PreorderReasoning.html#1403" class="Bound"
+      >y&#8764;z</a
+      ><a name="1441" class="Symbol"
+      >)</a
+      ><a name="1442"
+      >
+
+</a
+      ><a name="1444" href="Relation.Binary.PreorderReasoning.html#1444" class="Function Operator"
+      >_&#8718;</a
+      ><a name="1446"
+      > </a
+      ><a name="1447" class="Symbol"
+      >:</a
+      ><a name="1448"
+      > </a
+      ><a name="1449" class="Symbol"
+      >&#8704;</a
+      ><a name="1450"
+      > </a
+      ><a name="1451" href="Relation.Binary.PreorderReasoning.html#1451" class="Bound"
+      >x</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" class="Symbol"
+      >&#8594;</a
+      ><a name="1454"
+      > </a
+      ><a name="1455" href="Relation.Binary.PreorderReasoning.html#1451" class="Bound"
+      >x</a
+      ><a name="1456"
+      > </a
+      ><a name="1457" href="Relation.Binary.PreorderReasoning.html#1060" class="Datatype Operator"
+      >IsRelatedTo</a
+      ><a name="1468"
+      > </a
+      ><a name="1469" href="Relation.Binary.PreorderReasoning.html#1451" class="Bound"
+      >x</a
+      ><a name="1470"
+      >
+</a
+      ><a name="1471" href="Relation.Binary.PreorderReasoning.html#1444" class="Function Operator"
+      >_&#8718;</a
+      ><a name="1473"
+      > </a
+      ><a name="1474" class="Symbol"
+      >_</a
+      ><a name="1475"
+      > </a
+      ><a name="1476" class="Symbol"
+      >=</a
+      ><a name="1477"
+      > </a
+      ><a name="1478" href="Relation.Binary.PreorderReasoning.html#1107" class="InductiveConstructor"
+      >relTo</a
+      ><a name="1483"
+      > </a
+      ><a name="1484" href="Relation.Binary.html#1211" class="Function"
+      >refl</a
+      ><a name="1488"
+      >
+</a
+      ></pre
+    ><script type="text/javascript">
+       var sc_project=11306427;
+       var sc_invisible=1;
+       var sc_security="8a5e32af";
+       var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+       document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+     </script>
+     <noscript>
+       <div class="statcounter">
+         <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+       </div>
+     </noscript></body
+  ></html
+>

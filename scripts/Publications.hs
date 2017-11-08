@@ -237,7 +237,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
                    , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2502413&preflayout=flat#formats")
-                   , ("Slides", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/algOrn/DTP.pdf")
+                   , ("Slides", Nothing, "slides/DTP13.pdf")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -255,7 +255,8 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Agda code", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/pcOrn")
+                   , ("Agda code", Just "zip", "Agda/PI13/PI13.zip")
+                   , ("Agda code", Just "HTML", "Agda/PI13/Everything.html")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -274,10 +275,12 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
-                   , ("Agda code & slides", Nothing, "http://www.cs.ox.ac.uk/people/hsiang-shang.ko/OAOAOO")
+                   , ("Agda code", Just "HTML", "Agda/WGP11/OAOAOO.html")
+                   , ("Slides", Nothing, "slides/WGP11.pdf")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
+                   , ("Related slides", "Same topic at the <a href=\"slides/DTP11.pdf\">Workshop on Dependently Typed Programming (DTP) 2011</a>, and “numerical representations à la ornamentation” at <a href=\"slides/FitA12.pdf\">Fun in the Afternoon 2012</a>", Nothing)
                    , ("Note", "This paper has been superseded by an <a href=\"#publication-685cb02c\">extended version in Progress in Informatics</a>.", Nothing)
                    , ("Abstract", "Dependently typed programmers are encouraged to use inductive families to integrate constraints with data construction. Different constraints are used in different contexts, leading to different versions of datatypes for the same data structure. Modular implementation of common operations for these structurally similar datatypes has been a longstanding problem. We propose a datatype-generic solution based on McBride’s datatype ornaments, exploiting an isomorphism whose interpretation borrows ideas from realisability. Relevant properties of the operations are separately proven for each constraint, and after the programmer selects several constraints to impose on a basic datatype and synthesises an inductive family incorporating those constraints, the operations can be routinely upgraded to work with the synthesised inductive family.", Nothing)
                    ]

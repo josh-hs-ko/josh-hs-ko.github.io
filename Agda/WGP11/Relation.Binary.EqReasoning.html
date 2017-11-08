@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Relation.Binary.EqReasoning</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- Convenient syntax for equational reasoning</a
+      ><a name="119"
+      >
+</a
+      ><a name="120" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="192"
+      >
+
+</a
+      ><a name="194" class="Symbol"
+      >{-#</a
+      ><a name="197"
+      > </a
+      ><a name="198" class="Keyword"
+      >OPTIONS</a
+      ><a name="205"
+      > --universe-polymorphism </a
+      ><a name="230" class="Symbol"
+      >#-}</a
+      ><a name="233"
+      >
+
+</a
+      ><a name="235" class="Comment"
+      >-- Example use:</a
+      ><a name="250"
+      >
+
+</a
+      ><a name="252" class="Comment"
+      >-- n*0&#8801;0 : &#8704; n &#8594; n * 0 &#8801; 0</a
+      ><a name="278"
+      >
+</a
+      ><a name="279" class="Comment"
+      >-- n*0&#8801;0 zero    = refl</a
+      ><a name="302"
+      >
+</a
+      ><a name="303" class="Comment"
+      >-- n*0&#8801;0 (suc n) =</a
+      ><a name="321"
+      >
+</a
+      ><a name="322" class="Comment"
+      >--   begin</a
+      ><a name="332"
+      >
+</a
+      ><a name="333" class="Comment"
+      >--     suc n * 0</a
+      ><a name="349"
+      >
+</a
+      ><a name="350" class="Comment"
+      >--   &#8776;&#10216; refl &#10217;</a
+      ><a name="364"
+      >
+</a
+      ><a name="365" class="Comment"
+      >--     n * 0 + 0</a
+      ><a name="381"
+      >
+</a
+      ><a name="382" class="Comment"
+      >--   &#8776;&#10216; ... &#10217;</a
+      ><a name="395"
+      >
+</a
+      ><a name="396" class="Comment"
+      >--     n * 0</a
+      ><a name="408"
+      >
+</a
+      ><a name="409" class="Comment"
+      >--   &#8776;&#10216; n*0&#8801;0 n &#10217;</a
+      ><a name="426"
+      >
+</a
+      ><a name="427" class="Comment"
+      >--     0</a
+      ><a name="435"
+      >
+</a
+      ><a name="436" class="Comment"
+      >--   &#8718;</a
+      ><a name="442"
+      >
+
+</a
+      ><a name="444" class="Comment"
+      >-- Note that some modules contain generalised versions of specific</a
+      ><a name="510"
+      >
+</a
+      ><a name="511" class="Comment"
+      >-- instantiations of this module. For instance, the module &#8801;-Reasoning</a
+      ><a name="581"
+      >
+</a
+      ><a name="582" class="Comment"
+      >-- in Relation.Binary.PropositionalEquality is recommended for</a
+      ><a name="644"
+      >
+</a
+      ><a name="645" class="Comment"
+      >-- equational reasoning when the underlying equality is</a
+      ><a name="700"
+      >
+</a
+      ><a name="701" class="Comment"
+      >-- Relation.Binary.PropositionalEquality._&#8801;_.</a
+      ><a name="746"
+      >
+
+</a
+      ><a name="748" class="Keyword"
+      >open</a
+      ><a name="752"
+      > </a
+      ><a name="753" class="Keyword"
+      >import</a
+      ><a name="759"
+      > </a
+      ><a name="760" href="Relation.Binary.html#1" class="Module"
+      >Relation</a
+      ><a name="768"
+      >.</a
+      ><a name="769" href="Relation.Binary.html#1" class="Module"
+      >Binary</a
+      ><a name="775"
+      >
+
+</a
+      ><a name="777" class="Keyword"
+      >module</a
+      ><a name="783"
+      > </a
+      ><a name="784" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >Relation</a
+      ><a name="792"
+      >.</a
+      ><a name="793" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >Binary</a
+      ><a name="799"
+      >.</a
+      ><a name="800" href="Relation.Binary.EqReasoning.html#1" class="Module"
+      >EqReasoning</a
+      ><a name="811"
+      > </a
+      ><a name="812" class="Symbol"
+      >{</a
+      ><a name="813" href="Relation.Binary.EqReasoning.html#813" class="Bound"
+      >s&#8321;</a
+      ><a name="815"
+      > </a
+      ><a name="816" href="Relation.Binary.EqReasoning.html#816" class="Bound"
+      >s&#8322;</a
+      ><a name="818" class="Symbol"
+      >}</a
+      ><a name="819"
+      > </a
+      ><a name="820" class="Symbol"
+      >(</a
+      ><a name="821" href="Relation.Binary.EqReasoning.html#821" class="Bound"
+      >S</a
+      ><a name="822"
+      > </a
+      ><a name="823" class="Symbol"
+      >:</a
+      ><a name="824"
+      > </a
+      ><a name="825" href="Relation.Binary.html#1861" class="Record"
+      >Setoid</a
+      ><a name="831"
+      > </a
+      ><a name="832" href="Relation.Binary.EqReasoning.html#813" class="Bound"
+      >s&#8321;</a
+      ><a name="834"
+      > </a
+      ><a name="835" href="Relation.Binary.EqReasoning.html#816" class="Bound"
+      >s&#8322;</a
+      ><a name="837" class="Symbol"
+      >)</a
+      ><a name="838"
+      > </a
+      ><a name="839" class="Keyword"
+      >where</a
+      ><a name="844"
+      >
+
+</a
+      ><a name="846" class="Keyword"
+      >open</a
+      ><a name="850"
+      > </a
+      ><a name="851" href="Relation.Binary.html#1861" class="Module"
+      >Setoid</a
+      ><a name="857"
+      > </a
+      ><a name="858" href="Relation.Binary.EqReasoning.html#821" class="Bound"
+      >S</a
+      ><a name="859"
+      >
+</a
+      ><a name="860" class="Keyword"
+      >import</a
+      ><a name="866"
+      > </a
+      ><a name="867" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >Relation</a
+      ><a name="875"
+      >.</a
+      ><a name="876" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >Binary</a
+      ><a name="882"
+      >.</a
+      ><a name="883" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreorderReasoning</a
+      ><a name="900"
+      > </a
+      ><a name="901" class="Symbol"
+      >as</a
+      ><a name="903"
+      > </a
+      ><a name="904" class="Module"
+      >PreR</a
+      ><a name="908"
+      >
+</a
+      ><a name="909" class="Keyword"
+      >open</a
+      ><a name="913"
+      > </a
+      ><a name="914" href="Relation.Binary.PreorderReasoning.html#1" class="Module"
+      >PreR</a
+      ><a name="918"
+      > </a
+      ><a name="919" href="Relation.Binary.html#2230" class="Function"
+      >preorder</a
+      ><a name="927"
+      > </a
+      ><a name="928" class="Keyword"
+      >public</a
+      ><a name="934"
+      >
+       </a
+      ><a name="942" class="Keyword"
+      >renaming</a
+      ><a name="950"
+      > </a
+      ><a name="951" class="Symbol"
+      >(</a
+      ><a name="952"
+      > _&#8764;&#10216;_&#10217;_  </a
+      ><a name="961" class="Symbol"
+      >to</a
+      ><a name="963"
+      > _&#8776;&#10216;_&#10217;_
+                </a
+      ><a name="987" class="Symbol"
+      >;</a
+      ><a name="988"
+      > _&#8776;&#10216;_&#10217;_  </a
+      ><a name="997" class="Symbol"
+      >to</a
+      ><a name="999"
+      > _&#8801;&#10216;_&#10217;_
+                </a
+      ><a name="1023" class="Symbol"
+      >)</a
+      ><a name="1024"
+      >
+</a
+      ></pre
+    ><script type="text/javascript">
+       var sc_project=11306427;
+       var sc_invisible=1;
+       var sc_security="8a5e32af";
+       var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+       document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+     </script>
+     <noscript>
+       <div class="statcounter">
+         <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+       </div>
+     </noscript></body
+  ></html
+>

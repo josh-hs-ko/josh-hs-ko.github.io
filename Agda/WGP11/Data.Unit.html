@@ -1,0 +1,977 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+><head
+  ><title
+    >Data.Unit</title
+    ><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"
+     /><meta http-equiv="Content-Style-Type" content="text/css"
+     /><link href="Agda.css" rel="stylesheet" type="text/css"
+     /></head
+  ><body
+  ><pre
+    ><a name="1" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="73"
+      >
+</a
+      ><a name="74" class="Comment"
+      >-- The unit type</a
+      ><a name="90"
+      >
+</a
+      ><a name="91" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="163"
+      >
+
+</a
+      ><a name="165" class="Keyword"
+      >module</a
+      ><a name="171"
+      > </a
+      ><a name="172" href="Data.Unit.html#1" class="Module"
+      >Data</a
+      ><a name="176"
+      >.</a
+      ><a name="177" href="Data.Unit.html#1" class="Module"
+      >Unit</a
+      ><a name="181"
+      > </a
+      ><a name="182" class="Keyword"
+      >where</a
+      ><a name="187"
+      >
+
+</a
+      ><a name="189" class="Keyword"
+      >open</a
+      ><a name="193"
+      > </a
+      ><a name="194" class="Keyword"
+      >import</a
+      ><a name="200"
+      > </a
+      ><a name="201" href="Data.Sum.html#1" class="Module"
+      >Data</a
+      ><a name="205"
+      >.</a
+      ><a name="206" href="Data.Sum.html#1" class="Module"
+      >Sum</a
+      ><a name="209"
+      >
+</a
+      ><a name="210" class="Keyword"
+      >open</a
+      ><a name="214"
+      > </a
+      ><a name="215" class="Keyword"
+      >import</a
+      ><a name="221"
+      > </a
+      ><a name="222" href="Relation.Nullary.html#1" class="Module"
+      >Relation</a
+      ><a name="230"
+      >.</a
+      ><a name="231" href="Relation.Nullary.html#1" class="Module"
+      >Nullary</a
+      ><a name="238"
+      >
+</a
+      ><a name="239" class="Keyword"
+      >open</a
+      ><a name="243"
+      > </a
+      ><a name="244" class="Keyword"
+      >import</a
+      ><a name="250"
+      > </a
+      ><a name="251" href="Relation.Binary.html#1" class="Module"
+      >Relation</a
+      ><a name="259"
+      >.</a
+      ><a name="260" href="Relation.Binary.html#1" class="Module"
+      >Binary</a
+      ><a name="266"
+      >
+</a
+      ><a name="267" class="Keyword"
+      >open</a
+      ><a name="271"
+      > </a
+      ><a name="272" class="Keyword"
+      >import</a
+      ><a name="278"
+      > </a
+      ><a name="279" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Relation</a
+      ><a name="287"
+      >.</a
+      ><a name="288" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >Binary</a
+      ><a name="294"
+      >.</a
+      ><a name="295" href="Relation.Binary.PropositionalEquality.html#1" class="Module"
+      >PropositionalEquality</a
+      ><a name="316"
+      > </a
+      ><a name="317" class="Symbol"
+      >as</a
+      ><a name="319"
+      > </a
+      ><a name="320" class="Module"
+      >PropEq</a
+      ><a name="326"
+      >
+  </a
+      ><a name="329" class="Keyword"
+      >using</a
+      ><a name="334"
+      > </a
+      ><a name="335" class="Symbol"
+      >(</a
+      ><a name="336"
+      >_&#8801;_</a
+      ><a name="339" class="Symbol"
+      >;</a
+      ><a name="340"
+      > refl</a
+      ><a name="345" class="Symbol"
+      >)</a
+      ><a name="346"
+      >
+
+</a
+      ><a name="348" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="420"
+      >
+</a
+      ><a name="421" class="Comment"
+      >-- Types</a
+      ><a name="429"
+      >
+
+</a
+      ><a name="431" class="Comment"
+      >-- Note that the name of this type is &quot;\top&quot;, not T.</a
+      ><a name="483"
+      >
+
+</a
+      ><a name="485" class="Keyword"
+      >record</a
+      ><a name="491"
+      > </a
+      ><a name="492" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="493"
+      > </a
+      ><a name="494" class="Symbol"
+      >:</a
+      ><a name="495"
+      > </a
+      ><a name="496" class="PrimitiveType"
+      >Set</a
+      ><a name="499"
+      > </a
+      ><a name="500" class="Keyword"
+      >where</a
+      ><a name="505"
+      >
+  </a
+      ><a name="508" class="Keyword"
+      >constructor</a
+      ><a name="519"
+      > </a
+      ><a name="520" href="Data.Unit.html#520" class="InductiveConstructor"
+      >tt</a
+      ><a name="522"
+      >
+
+</a
+      ><a name="524" class="Keyword"
+      >record</a
+      ><a name="530"
+      > </a
+      ><a name="531" href="Data.Unit.html#531" class="Record Operator"
+      >_&#8804;_</a
+      ><a name="534"
+      > </a
+      ><a name="535" class="Symbol"
+      >(</a
+      ><a name="536" href="Data.Unit.html#536" class="Bound"
+      >x</a
+      ><a name="537"
+      > </a
+      ><a name="538" href="Data.Unit.html#538" class="Bound"
+      >y</a
+      ><a name="539"
+      > </a
+      ><a name="540" class="Symbol"
+      >:</a
+      ><a name="541"
+      > </a
+      ><a name="542" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="543" class="Symbol"
+      >)</a
+      ><a name="544"
+      > </a
+      ><a name="545" class="Symbol"
+      >:</a
+      ><a name="546"
+      > </a
+      ><a name="547" class="PrimitiveType"
+      >Set</a
+      ><a name="550"
+      > </a
+      ><a name="551" class="Keyword"
+      >where</a
+      ><a name="556"
+      >
+
+</a
+      ><a name="558" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="630"
+      >
+</a
+      ><a name="631" class="Comment"
+      >-- Operations</a
+      ><a name="644"
+      >
+
+</a
+      ><a name="646" href="Data.Unit.html#646" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="649"
+      > </a
+      ><a name="650" class="Symbol"
+      >:</a
+      ><a name="651"
+      > </a
+      ><a name="652" href="Relation.Binary.Core.html#3520" class="Function"
+      >Decidable</a
+      ><a name="661"
+      > </a
+      ><a name="662" class="Symbol"
+      >{</a
+      ><a name="663"
+      >A </a
+      ><a name="665" class="Symbol"
+      >=</a
+      ><a name="666"
+      > </a
+      ><a name="667" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="668" class="Symbol"
+      >}</a
+      ><a name="669"
+      > </a
+      ><a name="670" href="Relation.Binary.Core.html#4612" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="673"
+      >
+</a
+      ><a name="674" class="Symbol"
+      >_</a
+      ><a name="675"
+      > </a
+      ><a name="676" href="Data.Unit.html#646" class="Function Operator"
+      >&#8799;</a
+      ><a name="677"
+      > </a
+      ><a name="678" class="Symbol"
+      >_</a
+      ><a name="679"
+      > </a
+      ><a name="680" class="Symbol"
+      >=</a
+      ><a name="681"
+      > </a
+      ><a name="682" href="Relation.Nullary.Core.html#513" class="InductiveConstructor"
+      >yes</a
+      ><a name="685"
+      > </a
+      ><a name="686" href="Relation.Binary.Core.html#4662" class="InductiveConstructor"
+      >refl</a
+      ><a name="690"
+      >
+
+</a
+      ><a name="692" href="Data.Unit.html#692" class="Function Operator"
+      >_&#8804;?_</a
+      ><a name="696"
+      > </a
+      ><a name="697" class="Symbol"
+      >:</a
+      ><a name="698"
+      > </a
+      ><a name="699" href="Relation.Binary.Core.html#3520" class="Function"
+      >Decidable</a
+      ><a name="708"
+      > </a
+      ><a name="709" href="Data.Unit.html#531" class="Record Operator"
+      >_&#8804;_</a
+      ><a name="712"
+      >
+</a
+      ><a name="713" class="Symbol"
+      >_</a
+      ><a name="714"
+      > </a
+      ><a name="715" href="Data.Unit.html#692" class="Function Operator"
+      >&#8804;?</a
+      ><a name="717"
+      > </a
+      ><a name="718" class="Symbol"
+      >_</a
+      ><a name="719"
+      > </a
+      ><a name="720" class="Symbol"
+      >=</a
+      ><a name="721"
+      > </a
+      ><a name="722" href="Relation.Nullary.Core.html#513" class="InductiveConstructor"
+      >yes</a
+      ><a name="725"
+      > </a
+      ><a name="726" class="Symbol"
+      >_</a
+      ><a name="727"
+      >
+
+</a
+      ><a name="729" href="Data.Unit.html#729" class="Function"
+      >total</a
+      ><a name="734"
+      > </a
+      ><a name="735" class="Symbol"
+      >:</a
+      ><a name="736"
+      > </a
+      ><a name="737" href="Relation.Binary.Core.html#3623" class="Function"
+      >Total</a
+      ><a name="742"
+      > </a
+      ><a name="743" href="Data.Unit.html#531" class="Record Operator"
+      >_&#8804;_</a
+      ><a name="746"
+      >
+</a
+      ><a name="747" href="Data.Unit.html#729" class="Function"
+      >total</a
+      ><a name="752"
+      > </a
+      ><a name="753" class="Symbol"
+      >_</a
+      ><a name="754"
+      > </a
+      ><a name="755" class="Symbol"
+      >_</a
+      ><a name="756"
+      > </a
+      ><a name="757" class="Symbol"
+      >=</a
+      ><a name="758"
+      > </a
+      ><a name="759" href="Data.Sum.html#469" class="InductiveConstructor"
+      >inj&#8321;</a
+      ><a name="763"
+      > </a
+      ><a name="764" class="Symbol"
+      >_</a
+      ><a name="765"
+      >
+
+</a
+      ><a name="767" class="Comment"
+      >------------------------------------------------------------------------</a
+      ><a name="839"
+      >
+</a
+      ><a name="840" class="Comment"
+      >-- Properties</a
+      ><a name="853"
+      >
+
+</a
+      ><a name="855" href="Data.Unit.html#855" class="Function"
+      >preorder</a
+      ><a name="863"
+      > </a
+      ><a name="864" class="Symbol"
+      >:</a
+      ><a name="865"
+      > </a
+      ><a name="866" href="Relation.Binary.html#1423" class="Record"
+      >Preorder</a
+      ><a name="874"
+      > </a
+      ><a name="875" class="Symbol"
+      >_</a
+      ><a name="876"
+      > </a
+      ><a name="877" class="Symbol"
+      >_</a
+      ><a name="878"
+      > </a
+      ><a name="879" class="Symbol"
+      >_</a
+      ><a name="880"
+      >
+</a
+      ><a name="881" href="Data.Unit.html#855" class="Function"
+      >preorder</a
+      ><a name="889"
+      > </a
+      ><a name="890" class="Symbol"
+      >=</a
+      ><a name="891"
+      > </a
+      ><a name="892" href="Relation.Binary.PropositionalEquality.html#1838" class="Function"
+      >PropEq</a
+      ><a name="898"
+      >.</a
+      ><a name="899" href="Relation.Binary.PropositionalEquality.html#1838" class="Function"
+      >preorder</a
+      ><a name="907"
+      > </a
+      ><a name="908" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="909"
+      >
+
+</a
+      ><a name="911" href="Data.Unit.html#911" class="Function"
+      >setoid</a
+      ><a name="917"
+      > </a
+      ><a name="918" class="Symbol"
+      >:</a
+      ><a name="919"
+      > </a
+      ><a name="920" href="Relation.Binary.html#1861" class="Record"
+      >Setoid</a
+      ><a name="926"
+      > </a
+      ><a name="927" class="Symbol"
+      >_</a
+      ><a name="928"
+      > </a
+      ><a name="929" class="Symbol"
+      >_</a
+      ><a name="930"
+      >
+</a
+      ><a name="931" href="Data.Unit.html#911" class="Function"
+      >setoid</a
+      ><a name="937"
+      > </a
+      ><a name="938" class="Symbol"
+      >=</a
+      ><a name="939"
+      > </a
+      ><a name="940" href="Relation.Binary.PropositionalEquality.html#1300" class="Function"
+      >PropEq</a
+      ><a name="946"
+      >.</a
+      ><a name="947" href="Relation.Binary.PropositionalEquality.html#1300" class="Function"
+      >setoid</a
+      ><a name="953"
+      > </a
+      ><a name="954" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="955"
+      >
+
+</a
+      ><a name="957" href="Data.Unit.html#957" class="Function"
+      >decTotalOrder</a
+      ><a name="970"
+      > </a
+      ><a name="971" class="Symbol"
+      >:</a
+      ><a name="972"
+      > </a
+      ><a name="973" href="Relation.Binary.html#7596" class="Record"
+      >DecTotalOrder</a
+      ><a name="986"
+      > </a
+      ><a name="987" class="Symbol"
+      >_</a
+      ><a name="988"
+      > </a
+      ><a name="989" class="Symbol"
+      >_</a
+      ><a name="990"
+      > </a
+      ><a name="991" class="Symbol"
+      >_</a
+      ><a name="992"
+      >
+</a
+      ><a name="993" href="Data.Unit.html#957" class="Function"
+      >decTotalOrder</a
+      ><a name="1006"
+      > </a
+      ><a name="1007" class="Symbol"
+      >=</a
+      ><a name="1008"
+      > </a
+      ><a name="1009" class="Keyword"
+      >record</a
+      ><a name="1015"
+      >
+  </a
+      ><a name="1018" class="Symbol"
+      >{</a
+      ><a name="1019"
+      > </a
+      ><a name="1020" class="Field"
+      >Carrier</a
+      ><a name="1027"
+      >         </a
+      ><a name="1036" class="Symbol"
+      >=</a
+      ><a name="1037"
+      > </a
+      ><a name="1038" href="Data.Unit.html#492" class="Record"
+      >&#8868;</a
+      ><a name="1039"
+      >
+  </a
+      ><a name="1042" class="Symbol"
+      >;</a
+      ><a name="1043"
+      > </a
+      ><a name="1044" class="Field Operator"
+      >_&#8776;_</a
+      ><a name="1047"
+      >             </a
+      ><a name="1060" class="Symbol"
+      >=</a
+      ><a name="1061"
+      > </a
+      ><a name="1062" href="Relation.Binary.Core.html#4612" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1065"
+      >
+  </a
+      ><a name="1068" class="Symbol"
+      >;</a
+      ><a name="1069"
+      > </a
+      ><a name="1070" class="Field Operator"
+      >_&#8804;_</a
+      ><a name="1073"
+      >             </a
+      ><a name="1086" class="Symbol"
+      >=</a
+      ><a name="1087"
+      > </a
+      ><a name="1088" href="Data.Unit.html#531" class="Record Operator"
+      >_&#8804;_</a
+      ><a name="1091"
+      >
+  </a
+      ><a name="1094" class="Symbol"
+      >;</a
+      ><a name="1095"
+      > </a
+      ><a name="1096" class="Field"
+      >isDecTotalOrder</a
+      ><a name="1111"
+      > </a
+      ><a name="1112" class="Symbol"
+      >=</a
+      ><a name="1113"
+      > </a
+      ><a name="1114" class="Keyword"
+      >record</a
+      ><a name="1120"
+      >
+      </a
+      ><a name="1127" class="Symbol"
+      >{</a
+      ><a name="1128"
+      > </a
+      ><a name="1129" class="Field"
+      >isTotalOrder</a
+      ><a name="1141"
+      > </a
+      ><a name="1142" class="Symbol"
+      >=</a
+      ><a name="1143"
+      > </a
+      ><a name="1144" class="Keyword"
+      >record</a
+      ><a name="1150"
+      >
+          </a
+      ><a name="1161" class="Symbol"
+      >{</a
+      ><a name="1162"
+      > </a
+      ><a name="1163" class="Field"
+      >isPartialOrder</a
+      ><a name="1177"
+      > </a
+      ><a name="1178" class="Symbol"
+      >=</a
+      ><a name="1179"
+      > </a
+      ><a name="1180" class="Keyword"
+      >record</a
+      ><a name="1186"
+      >
+              </a
+      ><a name="1201" class="Symbol"
+      >{</a
+      ><a name="1202"
+      > </a
+      ><a name="1203" class="Field"
+      >isPreorder</a
+      ><a name="1213"
+      > </a
+      ><a name="1214" class="Symbol"
+      >=</a
+      ><a name="1215"
+      > </a
+      ><a name="1216" class="Keyword"
+      >record</a
+      ><a name="1222"
+      >
+                  </a
+      ><a name="1241" class="Symbol"
+      >{</a
+      ><a name="1242"
+      > </a
+      ><a name="1243" class="Field"
+      >isEquivalence</a
+      ><a name="1256"
+      > </a
+      ><a name="1257" class="Symbol"
+      >=</a
+      ><a name="1258"
+      > </a
+      ><a name="1259" href="Relation.Binary.PropositionalEquality.Core.html#892" class="Function"
+      >PropEq</a
+      ><a name="1265"
+      >.</a
+      ><a name="1266" href="Relation.Binary.PropositionalEquality.Core.html#892" class="Function"
+      >isEquivalence</a
+      ><a name="1279"
+      >
+                  </a
+      ><a name="1298" class="Symbol"
+      >;</a
+      ><a name="1299"
+      > </a
+      ><a name="1300" class="Field"
+      >reflexive</a
+      ><a name="1309"
+      >     </a
+      ><a name="1314" class="Symbol"
+      >=</a
+      ><a name="1315"
+      > </a
+      ><a name="1316" class="Symbol"
+      >&#955;</a
+      ><a name="1317"
+      > </a
+      ><a name="1318" href="Data.Unit.html#1318" class="Bound"
+      >_</a
+      ><a name="1319"
+      > </a
+      ><a name="1320" class="Symbol"
+      >&#8594;</a
+      ><a name="1321"
+      > </a
+      ><a name="1322" class="Symbol"
+      >_</a
+      ><a name="1323"
+      >
+                  </a
+      ><a name="1342" class="Symbol"
+      >;</a
+      ><a name="1343"
+      > </a
+      ><a name="1344" class="Field"
+      >trans</a
+      ><a name="1349"
+      >         </a
+      ><a name="1358" class="Symbol"
+      >=</a
+      ><a name="1359"
+      > </a
+      ><a name="1360" class="Symbol"
+      >&#955;</a
+      ><a name="1361"
+      > </a
+      ><a name="1362" href="Data.Unit.html#1362" class="Bound"
+      >_</a
+      ><a name="1363"
+      > </a
+      ><a name="1364" href="Data.Unit.html#1364" class="Bound"
+      >_</a
+      ><a name="1365"
+      > </a
+      ><a name="1366" class="Symbol"
+      >&#8594;</a
+      ><a name="1367"
+      > </a
+      ><a name="1368" class="Symbol"
+      >_</a
+      ><a name="1369"
+      >
+                  </a
+      ><a name="1388" class="Symbol"
+      >}</a
+      ><a name="1389"
+      >
+              </a
+      ><a name="1404" class="Symbol"
+      >;</a
+      ><a name="1405"
+      > </a
+      ><a name="1406" class="Field"
+      >antisym</a
+      ><a name="1413"
+      >  </a
+      ><a name="1415" class="Symbol"
+      >=</a
+      ><a name="1416"
+      > </a
+      ><a name="1417" href="Data.Unit.html#1540" class="Function"
+      >antisym</a
+      ><a name="1424"
+      >
+              </a
+      ><a name="1439" class="Symbol"
+      >}</a
+      ><a name="1440"
+      >
+          </a
+      ><a name="1451" class="Symbol"
+      >;</a
+      ><a name="1452"
+      > </a
+      ><a name="1453" class="Field"
+      >total</a
+      ><a name="1458"
+      > </a
+      ><a name="1459" class="Symbol"
+      >=</a
+      ><a name="1460"
+      > </a
+      ><a name="1461" href="Data.Unit.html#729" class="Function"
+      >total</a
+      ><a name="1466"
+      >
+          </a
+      ><a name="1477" class="Symbol"
+      >}</a
+      ><a name="1478"
+      >
+      </a
+      ><a name="1485" class="Symbol"
+      >;</a
+      ><a name="1486"
+      > </a
+      ><a name="1487" class="Field Operator"
+      >_&#8799;_</a
+      ><a name="1490"
+      >  </a
+      ><a name="1492" class="Symbol"
+      >=</a
+      ><a name="1493"
+      > </a
+      ><a name="1494" href="Data.Unit.html#646" class="Function Operator"
+      >_&#8799;_</a
+      ><a name="1497"
+      >
+      </a
+      ><a name="1504" class="Symbol"
+      >;</a
+      ><a name="1505"
+      > </a
+      ><a name="1506" class="Field Operator"
+      >_&#8804;?_</a
+      ><a name="1510"
+      > </a
+      ><a name="1511" class="Symbol"
+      >=</a
+      ><a name="1512"
+      > </a
+      ><a name="1513" href="Data.Unit.html#692" class="Function Operator"
+      >_&#8804;?_</a
+      ><a name="1517"
+      >
+      </a
+      ><a name="1524" class="Symbol"
+      >}</a
+      ><a name="1525"
+      >
+  </a
+      ><a name="1528" class="Symbol"
+      >}</a
+      ><a name="1529"
+      >
+  </a
+      ><a name="1532" class="Keyword"
+      >where</a
+      ><a name="1537"
+      >
+  </a
+      ><a name="1540" href="Data.Unit.html#1540" class="Function"
+      >antisym</a
+      ><a name="1547"
+      > </a
+      ><a name="1548" class="Symbol"
+      >:</a
+      ><a name="1549"
+      > </a
+      ><a name="1550" href="Relation.Binary.Core.html#2889" class="Function"
+      >Antisymmetric</a
+      ><a name="1563"
+      > </a
+      ><a name="1564" href="Relation.Binary.Core.html#4612" class="Datatype Operator"
+      >_&#8801;_</a
+      ><a name="1567"
+      > </a
+      ><a name="1568" href="Data.Unit.html#531" class="Record Operator"
+      >_&#8804;_</a
+      ><a name="1571"
+      >
+  </a
+      ><a name="1574" href="Data.Unit.html#1540" class="Function"
+      >antisym</a
+      ><a name="1581"
+      > </a
+      ><a name="1582" class="Symbol"
+      >_</a
+      ><a name="1583"
+      > </a
+      ><a name="1584" class="Symbol"
+      >_</a
+      ><a name="1585"
+      > </a
+      ><a name="1586" class="Symbol"
+      >=</a
+      ><a name="1587"
+      > </a
+      ><a name="1588" href="Relation.Binary.Core.html#4662" class="InductiveConstructor"
+      >refl</a
+      ><a name="1592"
+      >
+
+</a
+      ><a name="1594" href="Data.Unit.html#1594" class="Function"
+      >decSetoid</a
+      ><a name="1603"
+      > </a
+      ><a name="1604" class="Symbol"
+      >:</a
+      ><a name="1605"
+      > </a
+      ><a name="1606" href="Relation.Binary.html#2930" class="Record"
+      >DecSetoid</a
+      ><a name="1615"
+      > </a
+      ><a name="1616" class="Symbol"
+      >_</a
+      ><a name="1617"
+      > </a
+      ><a name="1618" class="Symbol"
+      >_</a
+      ><a name="1619"
+      >
+</a
+      ><a name="1620" href="Data.Unit.html#1594" class="Function"
+      >decSetoid</a
+      ><a name="1629"
+      > </a
+      ><a name="1630" class="Symbol"
+      >=</a
+      ><a name="1631"
+      > </a
+      ><a name="1632" href="Relation.Binary.html#8095" class="Function"
+      >DecTotalOrder</a
+      ><a name="1645"
+      >.</a
+      ><a name="1646" href="Relation.Binary.html#8095" class="Function"
+      >Eq</a
+      ><a name="1648"
+      >.</a
+      ><a name="1649" href="Relation.Binary.html#8095" class="Function"
+      >decSetoid</a
+      ><a name="1658"
+      > </a
+      ><a name="1659" href="Data.Unit.html#957" class="Function"
+      >decTotalOrder</a
+      ><a name="1672"
+      >
+
+</a
+      ><a name="1674" href="Data.Unit.html#1674" class="Function"
+      >poset</a
+      ><a name="1679"
+      > </a
+      ><a name="1680" class="Symbol"
+      >:</a
+      ><a name="1681"
+      > </a
+      ><a name="1682" href="Relation.Binary.html#3682" class="Record"
+      >Poset</a
+      ><a name="1687"
+      > </a
+      ><a name="1688" class="Symbol"
+      >_</a
+      ><a name="1689"
+      > </a
+      ><a name="1690" class="Symbol"
+      >_</a
+      ><a name="1691"
+      > </a
+      ><a name="1692" class="Symbol"
+      >_</a
+      ><a name="1693"
+      >
+</a
+      ><a name="1694" href="Data.Unit.html#1674" class="Function"
+      >poset</a
+      ><a name="1699"
+      > </a
+      ><a name="1700" class="Symbol"
+      >=</a
+      ><a name="1701"
+      > </a
+      ><a name="1702" href="Relation.Binary.html#6773" class="Function"
+      >DecTotalOrder</a
+      ><a name="1715"
+      >.</a
+      ><a name="1716" href="Relation.Binary.html#6773" class="Function"
+      >poset</a
+      ><a name="1721"
+      > </a
+      ><a name="1722" href="Data.Unit.html#957" class="Function"
+      >decTotalOrder</a
+      ><a name="1735"
+      >
+</a
+      ></pre
+    ><script type="text/javascript">
+       var sc_project=11306427;
+       var sc_invisible=1;
+       var sc_security="8a5e32af";
+       var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+       document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+     </script>
+     <noscript>
+       <div class="statcounter">
+         <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+       </div>
+     </noscript></body
+  ></html
+>
