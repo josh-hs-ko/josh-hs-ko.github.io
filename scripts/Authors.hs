@@ -11,7 +11,7 @@ authorList :: [Author]
 authorList =
   [ Author
       { authorName = "Anthony Anjorin"
-      , authorURL  = "http://is.uni-paderborn.de/index.php?id=14962"
+      , authorURL  = "https://anthonyanjorin.github.io"
       }
   , Author
       { authorName = "Zinovy Diskin"
