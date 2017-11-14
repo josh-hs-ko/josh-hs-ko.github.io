@@ -1,5 +1,5 @@
 body {
-  background-color: #782327;
+  background-color: #faf6e8;
 }
 
 p {
@@ -40,12 +40,6 @@ a:hover {
   -ms-text-decoration-color: currentColor;
   -o-text-decoration-color: currentColor;
   -webkit-text-decoration-color: currentColor;
-}
-
-.back {
-  margin-top: 4px;
-  margin-bottom: 4px;
-  background-color: #faf6e8;
 }
 
 .main {
