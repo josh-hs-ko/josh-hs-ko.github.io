@@ -1,5 +1,5 @@
 body {
-  background-color: #782327;
+  background-color: #f1e3bb;
 }
 
 p {
@@ -42,9 +42,12 @@ a:hover {
   -webkit-text-decoration-color: currentColor;
 }
 
+.page-delimiter {
+  height: 4px;
+  background-color: #782327;
+}
+
 .back {
-  margin-top: 4px;
-  margin-bottom: 4px;
   background-color: #faf6e8;
 }
 
