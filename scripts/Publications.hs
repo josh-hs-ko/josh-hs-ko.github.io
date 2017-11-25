@@ -30,7 +30,7 @@ publicationList =
                   , ("Agda code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/logic/POPL18/formalisation.zip")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   ]
-      , info    = [ ("PACMPL", "2(POPL)", Nothing)
+      , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
                   , ("DOI", "10.1145/3158129", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
