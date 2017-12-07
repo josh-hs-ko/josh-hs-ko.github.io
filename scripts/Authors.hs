@@ -59,7 +59,7 @@ authorList =
       }
   , Author
       { authorName = "Tao Zan"
-      , authorURL  = "http://stefanzan.com"
+      , authorURL  = "http://www.prg.nii.ac.jp/members/stefanzan/"
       }
   , Author
       { authorName = "Yongzhe Zhang"
