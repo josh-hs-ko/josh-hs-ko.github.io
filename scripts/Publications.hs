@@ -272,7 +272,7 @@ publicationList =
       , authors  = [ "Hsiang-Shang Ko"
                    , "Jeremy Gibbons"
                    ]
-      , venue    = Just ("Workshop on Generic Programming (WGP)", Just ("http://www.wgp-sigplan.org/farmer/doku.php?id=2011", IncludeYear))
+      , venue    = Just ("Workshop on Generic Programming (WGP)", Just ("https://dl.acm.org/citation.cfm?id=2036918", IncludeYear))
       , year     = 2011
       , types    = [ (Warning, "Superseded")
                    ]
