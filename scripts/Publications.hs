@@ -26,8 +26,8 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "preprint", "https://bitbucket.org/prl_tokyo/bigul/raw/logic/POPL18/logic.pdf")
-                  , ("Agda code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/logic/POPL18/formalisation.zip")
+      , links   = [ ("PDF", Just "preprint", "https://bitbucket.org/prl_tokyo/bigul/raw/master/POPL18/logic.pdf")
+                  , ("Agda code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/raw/master/POPL18/formalisation.zip")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
