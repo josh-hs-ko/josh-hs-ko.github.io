@@ -26,8 +26,8 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "preprint", "https://bitbucket.org/prl_tokyo/bigul/raw/master/POPL18/logic.pdf")
-                  , ("Agda code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/raw/master/POPL18/formalisation.zip")
+      , links   = [ ("PDF", Just "ACM", "https://dl.acm.org/ft_gateway.cfm?id=3158129&ftid=1936992&dwn=1")
+                  , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=3158129&type=zip&path=%2F3160000%2F3158129%2Fsupp%2Fpopl18%2Dp3%2Daux%2Ezip&supp=1&dwn=1")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
@@ -176,7 +176,7 @@ publicationList =
       , year    = 2016
       , types   = []
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
-                  , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2847544&preflayout=flat#formats")
+                  , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=2847544&type=zip&path=%2F2850000%2F2847544%2Fsupp%2Fp61%2Dko%2Ds%2Ezip&supp=1&dwn=1")
                   , ("Agda code", Just "HTML", "Agda/PEPM16/BiGUL.Everything.html")
                   , ("Slides", Nothing, "slides/PEPM16.pdf")
                   , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
