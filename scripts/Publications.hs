@@ -219,7 +219,6 @@ publicationList =
       , types   = [ (Published, "DPhil dissertation")
                   ]
       , links   = [ ("PDF", Just "revised version", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
-                  , ("PDF", Just "Oxford", "https://ora.ox.ac.uk/objects/ora:9019/datastreams/THESIS01")
                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
                   , ("Agda code", Just "HTML", "Agda/Thesis/Everything.html")
                   ]
