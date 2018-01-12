@@ -29,6 +29,7 @@ publicationList =
       , links   = [ ("PDF", Just "ACM", "https://dl.acm.org/ft_gateway.cfm?id=3158129&ftid=1936992&dwn=1")
                   , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=3158129&type=zip&path=%2F3160000%2F3158129%2Fsupp%2Fpopl18%2Dp3%2Daux%2Ezip&supp=1&dwn=1")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
+                  , ("Slides", Nothing, "slides/POPL18.pdf")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
