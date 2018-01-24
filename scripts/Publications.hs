@@ -30,6 +30,7 @@ publicationList =
                   , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=3158129&path=%2F3160000%2F3158129%2Fsupp%2Fpopl18%2Dp3%2Daux%2Ezip&supp=1")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   , ("Slides", Nothing, "slides/POPL18.pdf")
+                  , ("Video", Nothing, "https://www.youtube.com/watch?v=-dNgQmRTYKg")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
