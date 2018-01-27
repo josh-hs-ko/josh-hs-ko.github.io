@@ -26,11 +26,11 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "ACM", "https://dl.acm.org/ft_gateway.cfm?id=3158129")
+      , links   = [ ("PDF", Nothing, "https://dl.acm.org/ft_gateway.cfm?id=3158129")
                   , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=3158129&path=%2F3160000%2F3158129%2Fsupp%2Fpopl18%2Dp3%2Daux%2Ezip&supp=1")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
-                  , ("Slides", Nothing, "slides/POPL18.pdf")
-                  , ("Video", Nothing, "https://www.youtube.com/watch?v=-dNgQmRTYKg")
+                  , ("Slides", Just "PDF", "slides/POPL18.pdf")
+                  , ("Video", Just "YouTube", "https://www.youtube.com/watch?v=-dNgQmRTYKg")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
@@ -49,7 +49,7 @@ publicationList =
       , types   = [ (Published, "Publication planned")
                   ]
       , links   = [ ("PDF", Just "preprint", "manuscripts/SSBX16-BiGUL.pdf")
-                  , ("Haskell code", Nothing, "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
+                  , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
                   ]
       , info    = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional application can be developed in BiGUL.", Nothing)
                   ]
@@ -64,7 +64,7 @@ publicationList =
       , year    = 2017
       , types   = []
       , links   = [ ("PDF", Just "preprint", "manuscripts/APLAS17.pdf")
-                  , ("Repository", Nothing, "https://bitbucket.org/zyz915/palgol")
+                  , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
                   ]
       , info    = [ ("LNCS", "10695", Nothing)
                   , ("Pages", "301–320", Nothing)
@@ -85,8 +85,8 @@ publicationList =
       , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1827/paper6.pdf")
-                  , ("Repository", Nothing, "https://github.com/eMoflon/benchmarx")
+      , links   = [ ("PDF", Nothing, "http://ceur-ws.org/Vol-1827/paper6.pdf")
+                  , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
                   ]
       , info    = [ ("Pages", "15–30", Nothing)
                   , ("URL", "http://ceur-ws.org/Vol-1827/paper6.pdf", Nothing)
@@ -102,7 +102,7 @@ publicationList =
       , year    = 2017
       , types   = []
       , links   = [ ("PDF", Just "preprint", "manuscripts/JFP17.pdf")
-                  , ("Agda code", Just "JFP", "https://www.cambridge.org/core/journals/journal-of-functional-programming/article/programming-with-ornaments/97C63D7C90556ACD2EC1482E63026A74#fndtn-supplementary-materials")
+                  , ("Agda code", Just "zip", "https://static.cambridge.org/resource/id/urn:cambridge.org:id:binary:20170630054855301-0846:S0956796816000307:S0956796816000307sup001.zip")
                   , ("Agda code", Just "HTML", "Agda/JFP17/Everything.html")
                   ]
       , info    = [ ("Volume", "27", Nothing)
@@ -143,7 +143,6 @@ publicationList =
       , types   = [ (Unpublished, "Technical report")
                   ]
       , links   = [ ("PDF", Just "revised version", "manuscripts/BiGUL-delta-alignment.pdf")
-                  , ("PDF", Just "GRACE Center", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf")
                   ]
       , info    = [ ("Number", "GRACE-TR 2016-03", Nothing)
                   , ("URL", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf", Nothing)
@@ -161,7 +160,7 @@ publicationList =
       , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
       , year    = 2016
       , types   = []
-      , links   = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1571/paper_3.pdf")
+      , links   = [ ("PDF", Nothing, "http://ceur-ws.org/Vol-1571/paper_3.pdf")
                   ]
       , info    = [ ("Pages", "77–89", Nothing)
                   , ("URL", "http://ceur-ws.org/Vol-1571/paper_3.pdf", Nothing)
@@ -180,8 +179,8 @@ publicationList =
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
                   , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=2847544&path=%2F2850000%2F2847544%2Fsupp%2Fp61%2Dko%2Ds%2Ezip&supp=1")
                   , ("Agda code", Just "HTML", "Agda/PEPM16/BiGUL.Everything.html")
-                  , ("Slides", Nothing, "slides/PEPM16.pdf")
-                  , ("Repository", Nothing, "https://bitbucket.org/prl_tokyo/bigul")
+                  , ("Slides", Just "PDF", "slides/PEPM16.pdf")
+                  , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
                   ]
       , info    = [ ("Pages", "61–72", Nothing)
                   , ("DOI", "10.1145/2847538.2847544", Nothing)
@@ -202,7 +201,7 @@ publicationList =
       , year    = 2015
       , types   = [ (Published, "Tool paper")
                   ]
-      , links   = [ ("PDF", Just "CEUR-WS.org", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
+      , links   = [ ("PDF", Nothing, "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
                   , ("Demo site", Nothing, "http://biyacc.yozora.moe")
                   ]
       , info    = [ ("Pages", "43–50", Nothing)
@@ -239,8 +238,8 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
-                   , ("Agda code", Just "ACM", "http://dl.acm.org/citation.cfm?id=2502413&preflayout=flat#formats")
-                   , ("Slides", Nothing, "slides/DTP13.pdf")
+                   , ("Agda code", Just "zip", "Agda/DTP13/DTP13.zip")
+                   , ("Slides", Just "PDF", "slides/DTP13.pdf")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -257,7 +256,7 @@ publicationList =
       , venue    = Just ("Progress in Informatics", Nothing)
       , year     = 2013
       , types    = []
-      , links    = [ ("PDF", Just "NII", "http://www.nii.ac.jp/pi/n10/10_65.pdf")
+      , links    = [ ("PDF", Nothing, "http://www.nii.ac.jp/pi/n10/10_65.pdf")
                    , ("Agda code", Just "zip", "Agda/PI13/PI13.zip")
                    , ("Agda code", Just "HTML", "Agda/PI13/Everything.html")
                    ]
@@ -279,7 +278,7 @@ publicationList =
                    ]
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
                    , ("Agda code", Just "HTML", "Agda/WGP11/OAOAOO.html")
-                   , ("Slides", Nothing, "slides/WGP11.pdf")
+                   , ("Slides", Just "PDF", "slides/WGP11.pdf")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
@@ -298,7 +297,7 @@ publicationList =
       , year     = 2009
       , types    = []
       , links    = [ ("PDF", Just "preprint", "manuscripts/JFP09.pdf")
-                   , ("Repository", Nothing, "https://github.com/scmu/aopa")
+                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
                    , ("Issue", "5", Nothing)
@@ -318,7 +317,7 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "preprint", "manuscripts/MPC08.pdf")
-                   , ("Repository", Nothing, "https://github.com/scmu/aopa")
+                   , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
                    , ("Pages", "268–283", Nothing)
