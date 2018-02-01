@@ -44,7 +44,7 @@ publicationList =
       , authors = [ "Zhenjiang Hu"
                   , "Hsiang-Shang Ko"
                   ]
-      , venue   = Just ("Oxford Summer School on Bidirectional Transformations", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
+      , venue   = Just ("Summer School on Bidirectional Transformations", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year    = 2017
       , types   = [ (Published, "Publication planned")
                   ]
@@ -185,7 +185,7 @@ publicationList =
       , info    = [ ("Pages", "61–72", Nothing)
                   , ("DOI", "10.1145/2847538.2847544", Nothing)
                   , ("Agda version", "2.4.2.4 with Standard Library version 0.11", Nothing)
-                  , ("Note", "The version of BiGUL described in this paper is outdated. See the <a href=\"#publication-a1e91c98\">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL, or the <a href=\"#publication-5d3c0d1a\">Oxford tutorial</a> for a gentler treatment.", Nothing)
+                  , ("Note", "The version of BiGUL described in this paper is outdated. See the <a href=\"#publication-a1e91c98\">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL, or the <a href=\"#publication-08d96a45\">SSBX tutorial</a> for a gentler treatment.", Nothing)
                   , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. The logic of a putback transformation is more sophisticated than that of a forward transformation and does not always give rise to well-behaved bidirectional programs; this calls for more robust language design to support development of well-behaved putback transformations. In this paper, we design and implement a concise core language BiGUL for putback-based bidirectional programming to serve as a foundation for higher-level putback-based languages. BiGUL is completely formally verified in the dependently typed programming language Agda to guarantee that any putback transformation written in BiGUL is well-behaved.", Nothing)
                   ]
       }
@@ -225,7 +225,7 @@ publicationList =
       , info    = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                   , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
-                  , ("Note", "The revised version uses https DOI links and fixes identifier hyperlinks and a few typos in the Oxford version.", Nothing)
+                  , ("Note", "The revised version uses https DOI links and fixes identifier hyperlinks and a few typos in the Bodleian version.", Nothing)
                    , ("Abstract", "Based on a natural unification of logic and computation, Martin-Löf’s <em>intuitionistic type theory</em> can be regarded simultaneously as a computationally meaningful higher-order logic system and an expressively typed functional programming language, in which proofs and programs are treated as the same entities. Two modes of programming can then be distinguished: in <em>externalism</em>, we construct a program separately from its correctness proof with respect to a given specification, whereas in <em>internalism</em>, we encode the specification in a sophisticated type such that any program inhabiting the type also encodes a correctness proof, and we can use type information as a guidance on program construction. Internalism is particularly effective in the presence of <em>inductive families</em>, whose design can have a strong influence on program structure. Techniques and mechanisms for facilitating internalist programming are still lacking, however.</p><p>This dissertation proposes that internalist programming can be facilitated by exploiting an interconnection between internalism and externalism, expressed as isomorphisms between inductive families into which data structure invariants are encoded and their simpler variants paired with predicates expressing those invariants. The interconnection has two directions: one <em>analysing</em> inductive families into simpler variants and predicates, and the other <em>synthesising</em> inductive families from simpler variants and specific predicates. They respectively give rise to two applications, one achieving a modular structure of internalist libraries, and the other bridging internalist programming with relational specifications and program derivation. The datatype-generic mechanisms supporting the applications are based on McBride’s <em>ornaments</em>. Theoretically, the key ornamental constructs — <em>parallel composition of ornaments</em> and <em>relational algebraic ornamentation</em> — are further characterised in terms of lightweight category theory. Most of the results are completely formalised in the Agda programming language.", Nothing)
                    ]
       }
