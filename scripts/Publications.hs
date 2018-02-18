@@ -27,7 +27,7 @@ publicationList =
       , year    = 2018
       , types   = [(Published, "Extended abstract")]
       , links   = []
-      , info    = [ ("Abstract", "Languages for programming state-based asymmetric lenses are usually based on lens combinators, whose style, having a functional programming origin, is alien to most programmers and awkward to use even for experienced functional programmers. We propose a <emph>visual syntax</emph> mimicking circuit diagrams for the combinator-based language BiGUL, provide a relational interpretation that allows the diagrams to be understood bidirectionally, and sketch how an editor for the visual syntax can help to construct, understand, and debug lens combinator programs in an intuitive and friendly way.", Nothing)
+      , info    = [ ("Abstract", "Languages for programming state-based asymmetric lenses are usually based on lens combinators, whose style, having a functional programming origin, is alien to most programmers and awkward to use even for experienced functional programmers. We propose a <em>visual syntax</em> mimicking circuit diagrams for the combinator-based language BiGUL, provide a relational interpretation that allows the diagrams to be understood bidirectionally, and sketch how an editor for the visual syntax can help to construct, understand, and debug lens combinator programs in an intuitive and friendly way.", Nothing)
                   ]
       }
   , Publication
