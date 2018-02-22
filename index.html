@@ -73,7 +73,7 @@
         <div class="col-sm-9">
 
           <p>I am interested in the discovery of mathematical and logical structures of computation so that they can be manifested in programming languages and effectively guide the programmer. I approach problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em> or, in general, <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>. For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.</p>
-          <p>My current focus is on <em>bidirectional programming</em> for dealing with <em>consistency maintenance</em> (synchronisation) problems. So far my results are built around the small “putback-based” bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there are an Agda formalisation (of which an initial version was <a href="#publication-c48b059c">reported</a> at <a href="http://conf.researchr.org/home/pepm-2016">PEPM 2016</a>), a Haskell port (which is available on <a href="https://hackage.haskell.org/package/BiGUL">Hackage</a>, and based on which there is a <a href="#publication-08d96a45">tutorial</a>), and <a href="#publication-e124d6a0">a semi-formal treatment in terms of an axiomatic semantics</a> (which was accepted for <a href="https://popl18.sigplan.org">POPL 2018</a>). The ultimate goal is to bring the form of and support for bidirectional programming closer to general-purpose programming, such that general bidirectional programming techniques can be developed and applied in a wide variety of real-world synchronisation scenarios.
+          <p>My current focus is on <em>bidirectional programming</em> for dealing with <em>consistency maintenance</em> (synchronisation) problems. So far my results are built around the small “putback-based” bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there are an Agda formalisation (of which an initial version was <a href="#publication-c48b059c">reported</a> at <a href="http://conf.researchr.org/home/pepm-2016">PEPM 2016</a>), a Haskell port (which is available on <a href="https://hackage.haskell.org/package/BiGUL">Hackage</a>), and <a href="#publication-e124d6a0">a semi-formal treatment in terms of an axiomatic semantics</a> (which was accepted for <a href="https://popl18.sigplan.org">POPL 2018</a>). The ultimate goal is to bring the form of and support for bidirectional programming closer to general-purpose programming, such that general bidirectional programming techniques can be developed and applied in a wide variety of real-world synchronisation scenarios.
           </p>
           <p>Previously, I explored the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into programs and mechanically verified by typechecking. This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families. I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and <a href="#publication-41007bea">its formalisation using dependent types</a>.</p>
           <div class="expertise-list">
@@ -265,37 +265,6 @@
           <h3 class="section-title">2017</h3>
         </div>
         <div class="col-sm-9">
-          <div class="publication" id="publication-08d96a45">
-            <div class="publication-entry">
-              <div class="publication-title">
-                <a href="#publication-08d96a45">Principles and practice of bidirectional programming in BiGUL</a>
-              </div>
-              <div class="publication-authors">
-                <a href="http://research.nii.ac.jp/~hu/">Zhenjiang Hu</a> and Hsiang-Shang Ko
-              </div>
-              <div class="publication-venue">
-                <span class="venue"><a href="https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/">Summer School on Bidirectional Transformations</a> </span>2017
-              </div>
-              <div class="publication-links">
-                <span class="publication-link-outer"><span class="publication-type type-published">Publication planned</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/SSBX16-BiGUL.pdf">PDF<span class="link-note">(preprint)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip">Haskell code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-08d96a45">More info</span></span>
-              </div>
-            </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-08d96a45">
-              <div class="panel-body publication-info">
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    Abstract
-                  </div>
-                  <div class="col-sm-10">
-                    <p>Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional application can be developed in BiGUL.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="publication" id="publication-551b3a6e">
             <div class="publication-entry">
               <div class="publication-title">
@@ -520,60 +489,6 @@
               </div>
             </div>
           </div>
-          <div class="publication" id="publication-1eba3e27">
-            <div class="publication-entry">
-              <div class="publication-title">
-                <a href="#publication-1eba3e27">The under-appreciated put: Implementing delta-alignment in BiGUL</a>
-              </div>
-              <div class="publication-authors">
-                <a href="http://wiki.di.uminho.pt/twiki/bin/view/Personal/JorgeMendes/WebHome">Jorge Mendes</a>, Hsiang-Shang Ko, and <a href="http://research.nii.ac.jp/~hu/">Zhenjiang Hu</a>
-              </div>
-              <div class="publication-venue">
-                <span class="venue"><a href="http://grace-center.jp">GRACE Center, National Institute of Informatics</a> </span>2016
-              </div>
-              <div class="publication-links">
-                <span class="publication-link-outer"><span class="publication-type type-unpublished">Technical report</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/BiGUL-delta-alignment.pdf">PDF<span class="link-note">(revised version)</span></a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-1eba3e27">More info</span></span>
-              </div>
-            </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-1eba3e27">
-              <div class="panel-body publication-info">
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    Number
-                  </div>
-                  <div class="col-sm-10">
-                    <p>GRACE-TR 2016-03</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    URL
-                  </div>
-                  <div class="col-sm-10">
-                    <p><a href="http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf">http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf</a></p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    Note
-                  </div>
-                  <div class="col-sm-10">
-                    <p>The revised version uses a concrete running example and contains more explanations.</p>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    Abstract
-                  </div>
-                  <div class="col-sm-10">
-                    <p>There are two approaches to bidirectional programming. One is the get-based method where one writes <em>get</em> and <em>put</em> is automatically derived, and the other is the put-based method where one writes <em>put</em> and <em>get</em> is automatically derived. In this paper, we argue that the put-based method deserves more attention, because a good language for programming <em>put</em> can not only give full control over the behavior of bidirectional transformations, but also enable us to efficiently develop various domain-specific bidirectional languages and use them seamlessly in one framework, which would be non-trivial with the get-based method. We demonstrate how the matching/delta/generic lenses can be implemented in BiGUL, a putback-based bidirectional language.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div class="publication" id="publication-aff25fdd">
             <div class="publication-entry">
               <div class="publication-title">
@@ -670,7 +585,7 @@
                     Note
                   </div>
                   <div class="col-sm-10">
-                    <p>The version of BiGUL described in this paper is outdated. See the <a href="#publication-a1e91c98">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL, or the <a href="#publication-08d96a45">SSBX tutorial</a> for a gentler treatment.</p>
+                    <p>The version of BiGUL described in this paper is outdated. See the <a href="#publication-a1e91c98">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL.</p>
                   </div>
                 </div>
                 <div class="row">
