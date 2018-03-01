@@ -19,7 +19,7 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
-      { title   = "Towards a Visual Editor for Lens Combinators"
+      { title   = "Towards a visual editor for lens combinators"
       , authors = [ "Anthony Anjorin"
                   , "Hsiang-Shang Ko"
                   ]
