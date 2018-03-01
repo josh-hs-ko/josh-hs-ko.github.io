@@ -25,9 +25,12 @@ publicationList =
                   ]
       , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("https://2018.programming-conference.org/track/bx-2018-papers", IncludeYear))
       , year    = 2018
-      , types   = [(Published, "Extended abstract")]
-      , links   = []
-      , info    = [ ("Abstract", "Languages for programming state-based asymmetric lenses are usually based on lens combinators, whose style, having a functional programming origin, is alien to most programmers and awkward to use even for experienced functional programmers. We propose a <em>visual syntax</em> mimicking circuit diagrams for the combinator-based language BiGUL, provide a relational interpretation that allows the diagrams to be understood bidirectionally, and sketch how an editor for the visual syntax can help to construct, understand, and debug lens combinator programs in an intuitive and friendly way.", Nothing)
+      , types   = [ (Published, "Extended abstract")
+                  ]
+      , links   = [ ("PDF", Just "preprint on Dropbox", "https://www.dropbox.com/s/z68ecyai82w3acf")
+                  ]
+      , info    = [ ("DOI", "10.1145/3191697.3191719", Nothing)
+                  , ("Abstract", "Languages for programming state-based asymmetric lenses are usually based on lens combinators, whose style, having a functional programming origin, is alien to most programmers and awkward to use even for experienced functional programmers. We propose a <em>visual syntax</em> mimicking circuit diagrams for the combinator-based language BiGUL, provide a relational interpretation that allows the diagrams to be understood bidirectionally, and sketch how an editor for the visual syntax can help to construct, understand, and debug lens combinator programs in an intuitive and friendly way.", Nothing)
                   ]
       }
   , Publication
