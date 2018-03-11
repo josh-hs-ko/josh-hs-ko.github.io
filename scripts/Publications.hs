@@ -19,6 +19,19 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Programming metamorphic algorithms in Agda (functional pearl)"
+      , authors = [ "Hsiang-Shang Ko"
+                  ]
+      , venue   = Nothing
+      , year    = 2018
+      , types   = [ (Unpublished, "Submitted")
+                  ]
+      , links   = [ ("PDF", Just "preprint", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
+                  ]
+      , info    = [ ("Abstract", "We conduct an experiment with interactive type-driven development in Agda, developing algorithms from their specifications encoded as intrinsic types, to see how useful the hints provided by Agda during an interactive development process can be. The algorithmic problem we choose is <em>metamorphisms</em>, whose definitional behaviour is consuming a data structure to compute an intermediate value and then producing a codata structure from that value, but there are other ways to compute them. We develop Gibbons’s [2007] streaming algorithm and Nakano’s [2013] jigsaw model interactively with Agda, turning intuitive ideas about these algorithms into formal conditions and programs that are correct by construction.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Towards a visual editor for lens combinators"
       , authors = [ "Anthony Anjorin"
                   , "Hsiang-Shang Ko"
