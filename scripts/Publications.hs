@@ -63,6 +63,23 @@ publicationList =
                   ]
       }
   , Publication
+      { title   = "Principles and practice of bidirectional programming in BiGUL"
+      , authors = [ "Zhenjiang Hu"
+                  , "Hsiang-Shang Ko"
+                  ]
+      , venue   = Just ("International Summer School on Bidirectional Transformations (Oxford, UK, 25–29 July 2016)", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
+      , year    = 2018
+      , types   = []
+      , links   = [ ("PDF", Just "preprint", "manuscripts/SSBX16.pdf")
+                  , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
+                  ]
+      , info    = [ ("LNCS", "9715", Nothing)
+                  , ("Pages", "100–150", Nothing)
+                  , ("DOI", "10.1007/978-3-319-79108-1_4", Nothing)
+                  , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional application can be developed in BiGUL.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "An axiomatic basis for bidirectional programming"
       , authors = [ "Hsiang-Shang Ko"
                   , "Zhenjiang Hu"
@@ -81,21 +98,6 @@ publicationList =
                   , ("DOI", "10.1145/3158129", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
                   , ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al.’s [2007] asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are based on a declarative programming model, and only allow the programmer to describe a consistency specification with ad hoc and/or awkward control over the consistency restoration behaviour. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must have the ability to fully control and reason about the consistency restoration behaviour. The putback-based approach to bidirectional programming aims to provide exactly this ability, and this paper strengthens the putback-based position by proposing the first fully fledged reasoning framework for a bidirectional language — a Hoare-style logic for Ko et al.’s [2016] putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
-                  ]
-      }
-  , Publication
-      { title   = "Principles and practice of bidirectional programming in BiGUL"
-      , authors = [ "Zhenjiang Hu"
-                  , "Hsiang-Shang Ko"
-                  ]
-      , venue   = Just ("Summer School on Bidirectional Transformations", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
-      , year    = 2017
-      , types   = [ (Published, "Publication planned")
-                  ]
-      , links   = [ ("PDF", Just "preprint", "manuscripts/SSBX16.pdf")
-                  , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
-                  ]
-      , info    = [ ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional application can be developed in BiGUL.", Nothing)
                   ]
       }
   , Publication
