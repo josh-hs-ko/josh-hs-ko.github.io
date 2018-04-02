@@ -74,6 +74,7 @@ publicationList =
                   , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
                   ]
       , info    = [ ("LNCS", "9715", Nothing)
+                  , ("Chapter", "4", Nothing)
                   , ("Pages", "100–150", Nothing)
                   , ("DOI", "10.1007/978-3-319-79108-1_4", Nothing)
                   , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. A key distinguishing feature of putback-based bidirectional programming is full control over the bidirectional behavior, which is important for specifying intended bidirectional transformations without any ambiguity. In this chapter, we will introduce BiGUL, a simple yet powerful putback-based bidirectional programming language, explaining the underlying principles and showing how various kinds of bidirectional application can be developed in BiGUL.", Nothing)
