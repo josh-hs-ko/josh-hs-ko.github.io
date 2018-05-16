@@ -19,27 +19,12 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
-      { title   = "Retentive lenses"
-      , authors = [ "Zirun Zhu"
-                  , "Hsiang-Shang Ko"
-                  , "Zhixuan Yang"
-                  , "Zhenjiang Hu"
-                  ]
-      , venue   = Nothing
-      , year    = 2018
-      , types   = [ (Unpublished, "Submitted")
-                  ]
-      , links   = []
-      , info    = [ ("Abstract", "Researchers in the field of bidirectional transformations have studied data synchronisation for a long time and proposed various properties, of which <em>well-behavedness</em> is the most fundamental. However, well-behavedness is not enough to characterise the result of an update (performed by <i>put</i>), regarding what information should be retained in the updated source. The root cause is that the property, Hippocraticness, for guaranteeing the retention of source information is too “global”, only requiring that the whole source should be unchanged if the whole view is.</p><p>In this paper we propose a new property <em>retentiveness</em>, which enables us to directly reason about the retention of source information locally. Central to our formulation of retentiveness is the notion of <em>links</em>, which are used to relate fragments of sources and views. These links are passed as additional input to the extended <it>put</it> function, which produces a new source in a way that preserves all the source fragments attached to the links. We validate the feasibility of retentiveness by designing a domain-specific language (DSL) supporting mutually recursive algebraic data types. We prove that any program written in our DSL gives rise to a pair of retentive <i>get</i> and <i>put</i>. We show the usefulness of retentiveness by presenting examples in two different research areas: resugaring and code refactoring.", Nothing)
-                  ]
-      }
-  , Publication
       { title   = "Programming metamorphic algorithms in Agda (functional pearl)"
       , authors = [ "Hsiang-Shang Ko"
                   ]
       , venue   = Nothing
       , year    = 2018
-      , types   = [ (Unpublished, "Submitted")
+      , types   = [ (Unpublished, "Draft manuscript")
                   ]
       , links   = [ ("PDF", Just "draft", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/src/master/MetamorphismsInAgda.agda")
