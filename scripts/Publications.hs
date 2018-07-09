@@ -41,7 +41,8 @@ publicationList =
       , year    = 2018
       , types   = [ (Published, "Extended abstract")
                   ]
-      , links   = [ ("Slides", Just "PDF", "slides/BX18.pdf")
+      , links   = [ ("PDF", Just "preprint on Dropbox", "https://www.dropbox.com/s/1c5bfsw5ry0drob")
+                  , ("Slides", Just "PDF", "slides/BX18.pdf")
                   ]
       , info    = [ ("Pages", "33–35", Nothing)
                   , ("DOI", "10.1145/3191697.3191719", Nothing)
