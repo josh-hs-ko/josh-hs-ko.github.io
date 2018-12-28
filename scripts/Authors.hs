@@ -26,6 +26,10 @@ authorList =
       , authorURL  = "http://research.nii.ac.jp/~hu/"
       }
   , Author
+      { authorName = "Keigo Imai"
+      , authorURL  = "http://www.ct.info.gifu-u.ac.jp/~keigoi/"
+      }
+  , Author
       { authorName = "Patrik Jansson"
       , authorURL  = "http://www.cse.chalmers.se/~patrikj/"
       }
@@ -56,6 +60,10 @@ authorList =
   , Author
       { authorName = "Bernhard Westfechtel"
       , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Westfechtel_Bernhard/"
+      }
+  , Author
+      { authorName = "Nobuko Yoshida"
+      , authorURL  = "http://mrg.doc.ic.ac.uk/people/nobuko-yoshida/"
       }
   , Author
       { authorName = "Tao Zan"
