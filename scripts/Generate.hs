@@ -49,8 +49,8 @@ renderVenueAndYear pvs Nothing       y = int y
 renderVenueAndYear pvs (Just (n, m)) y =
   let addLink = maybe id hyperlink (maybe (fmap permVenueURL (find ((== n) . permVenueName) pvs)) (Just . fst) m)
   in  case maybe ExcludeYear snd m of
-        IncludeYear -> addLink (text n <> text "&nbsp;&nbsp;" <> space <> int y)
-        ExcludeYear -> addLink (text n) <> text "&nbsp;&nbsp;" <> space <> int y
+        IncludeYear -> addLink (text n <> text "&ensp; " <> int y)
+        ExcludeYear -> addLink (text n) <> text "&ensp; " <> int y
 
 renderPublication :: [Author] -> [PermVenue] -> Publication -> Doc
 renderPublication as pvs p =
