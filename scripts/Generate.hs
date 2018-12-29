@@ -5,6 +5,7 @@ import PermVenues
 import Publications
 
 import Data.Function
+import Data.Char
 import Data.List
 import Data.Hash.MD5 as MD5
 import Text.PrettyPrint
@@ -35,7 +36,8 @@ hyperlink :: String -> Doc -> Doc
 hyperlink link = inlineElement "a" [("href", [link])]
 
 renderAuthor :: [Author] -> String -> Doc
-renderAuthor as n = maybe id (hyperlink . authorURL) (find ((== n) . authorName) as) (text n)
+renderAuthor as n = maybe id (hyperlink . authorURL) (find ((== n) . authorName) as)
+                      (text (concat (map (\c -> if isSpace c then "&nbsp;" else [c]) n)))
 
 oxfordList :: [Doc] -> Doc
 oxfordList []           = empty
