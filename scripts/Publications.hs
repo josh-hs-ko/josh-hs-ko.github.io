@@ -26,7 +26,7 @@ publicationList =
                   , "Nobuko Yoshida"
                   , "Zhenjiang Hu"
                   ]
-      , venue   = Just ("Workshop on Software Foundations for Data Interoperability", Just ("http://biscuits.work/second-workshop/", IncludeYear))
+      , venue   = Just ("Workshop on Software Foundations for Data Interoperability (SFDI)", Just ("http://biscuits.work/second-workshop/", IncludeYear))
       , year    = 2019
       , types   = [ (Published, "Short paper")
                   ]
