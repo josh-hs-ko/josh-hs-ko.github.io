@@ -75,6 +75,6 @@ authorList =
       }
   , Author
       { authorName = "Zirun Zhu"
-      , authorURL  = "http://www.prg.nii.ac.jp/members/zhu/"
+      , authorURL  = "https://php.yozora.moe"
       }
   ]
