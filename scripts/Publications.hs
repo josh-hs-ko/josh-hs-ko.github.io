@@ -30,7 +30,7 @@ publicationList =
       , year    = 2019
       , types   = [ (Published, "Short paper")
                   ]
-      , links   = [ ("PDF (preprint)", Nothing, "manuscripts/SFDI2019.pdf") ]
+      , links   = [ ("PDF", Just "preprint", "manuscripts/SFDI2019.pdf") ]
       , info    = [ ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
                   ]
       }
