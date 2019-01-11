@@ -30,7 +30,7 @@ publicationList =
       , year    = 2019
       , types   = [ (Published, "Short paper")
                   ]
-      , links   = [ ("PDF", Just "preprint", "manuscripts/SFDI19.pdf") ]
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/SFDI19.pdf") ]
       , info    = [ ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
                   ]
       }
@@ -73,7 +73,7 @@ publicationList =
       , venue   = Just ("International Summer School on Bidirectional Transformations (Oxford, UK, 25–29 July 2016)", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "preprint", "manuscripts/SSBX16.pdf")
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/SSBX16.pdf")
                   , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
                   ]
       , info    = [ ("LNCS", "9715", Nothing)
@@ -114,7 +114,7 @@ publicationList =
       , venue   = Just ("Asian Symposium on Programming Languages and Systems (APLAS)", Just ("https://www-aplas.github.io", IncludeYear))
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "preprint", "manuscripts/APLAS17.pdf")
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/APLAS17.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
                   ]
       , info    = [ ("LNCS", "10695", Nothing)
@@ -152,7 +152,7 @@ publicationList =
       , venue   = Just ("Journal of Functional Programming", Nothing)
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "preprint", "manuscripts/JFP17.pdf")
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/JFP17.pdf")
                   , ("Agda code", Just "zip", "https://static.cambridge.org/resource/id/urn:cambridge.org:id:binary:20170630054855301-0846:S0956796816000307:S0956796816000307sup001.zip")
                   , ("Agda code", Just "HTML", "Agda/JFP17/Everything.html")
                   ]
@@ -347,7 +347,7 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , types    = []
-      , links    = [ ("PDF", Just "preprint", "manuscripts/JFP09.pdf")
+      , links    = [ ("PDF", Just "accepted version", "manuscripts/JFP09.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
@@ -367,7 +367,7 @@ publicationList =
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF", Just "preprint", "manuscripts/MPC08.pdf")
+      , links    = [ ("PDF", Just "accepted version", "manuscripts/MPC08.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
