@@ -41,10 +41,10 @@ authorList =
       { authorName = "Erhan Leblebici"
       , authorURL  = "http://www.es.tu-darmstadt.de/es/team/erhan-leblebici/"
       }
-  , Author
-      { authorName = "Pedro Martins"
-      , authorURL  = "https://isr.uci.edu/users/pedro-ribeiro-martins"
-      }
+--, Author
+--    { authorName = "Pedro Martins"
+--    , authorURL  = "https://isr.uci.edu/users/pedro-ribeiro-martins"
+--    }
   , Author
       { authorName = "Jorge Mendes"
       , authorURL  = "http://wiki.di.uminho.pt/twiki/bin/view/Personal/JorgeMendes/WebHome"
