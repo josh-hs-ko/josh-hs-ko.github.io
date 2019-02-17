@@ -19,6 +19,24 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Bidirectional parsing and reflective printing for fully disambiguated grammars"
+      , authors = [ "Zirun Zhu"
+                  , "Hsiang-Shang Ko"
+                  , "Yongzhe Zhang"
+                  , "Pedro Martins"
+                  , "João Saraiva"
+                  , "Zhenjiang Hu"
+                  ]
+      , venue   = Nothing
+      , year    = 2019
+      , types   = [ (Unpublished, "In submission")
+                  ]
+      , links   = [ ("PDF", Nothing, "manuscripts/BiYacc.pdf")
+                  ]
+      , info    = [ ("Abstract", "Language designers usually need to implement parsers and printers. Despite being two closely related programs, in practice they are often designed separately, and then need to be revised and kept consistent as the language evolves. It will be more convenient if the parser and printer can be unified and developed in a single program, with their consistency guaranteed automatically. Furthermore, in certain scenarios (like showing compiler optimisation results to the programmer), it is desirable to have a more powerful <em>reflective</em> printer that, when an abstract syntax tree corresponding to a piece of program text is modified, can propagate the modification to the program text while preserving layouts, comments, and syntactic sugar.</p><p>To address these needs, we propose a domain-specific language BiYacc, whose programs denote both a parser and a reflective printer for a fully disambiguated context- free grammar. BiYacc is based on the theory of bidirectional transformations, which helps to guarantee by construction that the generated pairs of parsers and reflective printers are consistent. Handling grammatical ambiguity is particularly challenging: we propose an approach based on generalised parsing and disambiguation filters, which produce all the parse results and (try to) select the only correct one in the parsing direction; the filters are carefully bidirectionalised so that they also work in the printing direction and do not break the consistency between the parsers and reflective printers. We show that BiYacc is capable of facilitating many tasks such as Pombrio and Krishnamurthi’s ‘resugaring’, simple refactoring, and language evolution.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Towards bidirectional synchronization between communicating processes and session types"
       , authors = [ "Liye Guo"
                   , "Hsiang-Shang Ko"
