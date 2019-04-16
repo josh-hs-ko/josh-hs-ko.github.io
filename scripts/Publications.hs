@@ -19,6 +19,26 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Benchmarking bidirectional transformations: Applying the Benchmarx framework to the Families-to-Persons case"
+      , authors = [ "Anthony Anjorin"
+                  , "Thomas Buchmann"
+                  , "Bernhard Westfechtel"
+                  , "Zinovy Diskin"
+                  , "Hsiang-Shang Ko"
+                  , "Romina Eramo"
+                  , "Georg Hinkel"
+                  , "Leila Samimi-Dehkordi"
+                  , "Albert Zündorf"
+                  ]
+      , venue   = Nothing
+      , year    = 2019
+      , types   = [ (Unpublished, "In submission")
+                  ]
+      , links   = []
+      , info    = [ ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches.</p><p>This paper presents <em>Benchmarx</em>, a novel framework for evaluating bx tools that takes the heterogeneity of bx tools into account. The Benchmarx framework abstracts from technological spaces, specific tool architectures, and the internal data maintained by the tools. A benchmark for a specific bx problem is implemented by providing a suite of executable test cases. By implementing a set of general interfaces, a solution to such a benchmark may then be developed using a specific bx tool, and evaluated by executing the test suite.</p><p>To illustrate the use of the Benchmarx framework, we present a variety of solutions to the well-known Families-to-Persons benchmark, which involves synchronizing a database of families consisting of mother, father, daughters, and sons, with a database containing only unconnected male and female persons. The solutions were selected to demonstrate how the Benchmarx framework supports the systematic comparison of considerably different approaches to solving bx problems, including procedural approaches using pairs of unidirectional transformations, approaches that suitably combine bidirectional primitives, and approaches that utilize a grammar-based or constraint-based consistency specification for synchronization.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Bidirectional parsing and reflective printing for fully disambiguated grammars"
       , authors = [ "Zirun Zhu"
                   , "Hsiang-Shang Ko"
@@ -49,7 +69,8 @@ publicationList =
       , types   = [ (Published, "Short paper")
                   ]
       , links   = [ ("PDF", Just "accepted version", "manuscripts/SFDI19.pdf") ]
-      , info    = [ ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
+      , info    = [ ("DOI", "10.1109/BIGCOMP.2019.8679265", Nothing)
+                  , ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
                   ]
       }
   , Publication

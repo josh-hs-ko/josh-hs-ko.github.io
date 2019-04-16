@@ -14,12 +14,24 @@ authorList =
       , authorURL  = "https://anthonyanjorin.github.io"
       }
   , Author
+      { authorName = "Thomas Buchmann"
+      , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Buchmann_Thomas/"
+      }
+  , Author
       { authorName = "Zinovy Diskin"
       , authorURL  = "http://www.cs.toronto.edu/~zdiskin/"
       }
   , Author
+      { authorName = "Romina Eramo"
+      , authorURL  = "http://people.disim.univaq.it/romina.eramo/"
+      }
+  , Author
       { authorName = "Jeremy Gibbons"
       , authorURL  = "http://www.cs.ox.ac.uk/jeremy.gibbons/"
+      }
+  , Author
+      { authorName = "Georg Hinkel"
+      , authorURL  = "https://sdq.ipd.kit.edu/people/georg_hinkel/"
       }
   , Author
       { authorName = "Zhenjiang Hu"
@@ -54,6 +66,10 @@ authorList =
       , authorURL  = "http://www.iis.sinica.edu.tw/~scm/"
       }
   , Author
+      { authorName = "Leila Samimi-Dehkordi"
+      , authorURL  = "http://lsamimi.ir/"
+      }
+  , Author
       { authorName = "João Saraiva"
       , authorURL  = "http://haslab.uminho.pt/jas/"
       }
@@ -76,5 +92,9 @@ authorList =
   , Author
       { authorName = "Zirun Zhu"
       , authorURL  = "https://php.yozora.moe"
+      }
+  , Author
+      { authorName = "Albert Zündorf"
+      , authorURL  = "https://seblog.cs.uni-kassel.de/staff/albert-zundorf/"
       }
   ]
