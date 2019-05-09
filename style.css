@@ -19,6 +19,8 @@
   --cs-publication-more-info-link: #006c46;
   --cs-publication-more-info-link-hover: #00c800;
   --cs-publication-more-info-link-active: #00e900;
+  --cs-publication-target: #f5ecd1;
+  --cs-publication-target-border: #592c35;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,10 +41,12 @@
     --cs-publication-link: #5ea0d5;
     --cs-publication-link-hover: #7fcaff;
     --cs-publication-link-active: #7fe3ff;
-    --cs-publication-info: #002147;
+    --cs-publication-info: #00060e;
     --cs-publication-more-info-link: #00b31c;
     --cs-publication-more-info-link-hover: #00e300;
     --cs-publication-more-info-link-active: #00ff00;
+    --cs-publication-target: #002147;
+    --cs-publication-target-border: #887b1b;
   }
 }
 
@@ -224,10 +228,10 @@ span.name-block {
   padding-left: 1ex;
   margin-right: -1.25ex;
   padding-right: 1ex;
-  background: #f5ecd1;
+  background: var(--cs-publication-target);
   border-style: solid;
   border-width: .25ex;
-  border-color: #592c35;
+  border-color: var(--cs-publication-target-border);
   border-radius: 4px;
 }
 
