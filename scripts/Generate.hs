@@ -4,10 +4,12 @@ import Authors
 import PermVenues
 import Publications
 
+import Prelude hiding ((<>))
 import Data.Function
 import Data.Char
 import Data.List
-import Data.Hash.MD5 as MD5
+import Data.Digest.Pure.MD5 (md5)
+import Data.ByteString.Lazy.Char8 (pack)
 import Text.PrettyPrint
 import System.IO.Strict as Strict
 
@@ -56,9 +58,10 @@ renderVenueAndYear pvs (Just (n, m)) y =
 
 renderPublication :: [Author] -> [PermVenue] -> Publication -> Doc
 renderPublication as pvs p =
-  let md5    = take 8 (md5s (MD5.Str (title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p))))
-      pubId  = "publication-"      ++ md5
-      infoId = "publication-info-" ++ md5
+  let str    = title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p)
+      md5sum = take 8 . show . md5 . pack $ str
+      pubId  = "publication-"      ++ md5sum
+      infoId = "publication-info-" ++ md5sum
   in  blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
         (blockElement "div" [("class", ["publication-entry"])] $
            blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$

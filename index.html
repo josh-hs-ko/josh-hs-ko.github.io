@@ -72,15 +72,14 @@
         <div class="col-sm-9">
 
           <p>I am interested in the discovery of mathematical and logical structures of computation so that they can be manifested in programming languages and effectively guide the programmer. I approach problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em> or, in general, <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>. For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.</p>
-          <p>Over the past few years, I have mainly been working on <em>bidirectional programming</em> for dealing with <em>consistency maintenance</em> (synchronisation) problems. So far my results are built around the small “putback-based” bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there are an Agda formalisation (of which an initial version was <a href="#publication-c48b059c">reported</a> at <a href="http://conf.researchr.org/home/pepm-2016">PEPM 2016</a>), a Haskell port (which is available on <a href="https://hackage.haskell.org/package/BiGUL">Hackage</a>), and <a href="#publication-e124d6a0">a semi-formal treatment in terms of an axiomatic semantics</a> (which was presented at <a href="https://popl18.sigplan.org">POPL 2018</a>). The ultimate goal is to bring the form of and support for bidirectional programming closer to general-purpose programming, such that general bidirectional programming techniques can be developed and applied in a wide variety of real-world synchronisation scenarios.
-          </p>
-          <p>I have also been exploring the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into types and programs, and mechanically verified by type-checking. More interestingly, with an interactive development environment (like the <a href="https://agda.readthedocs.io/en/latest/tools/emacs-mode.html">Emacs mode offered by Agda</a>) that provides semantic hints in the form of type information, the programmer can gain better “<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>” regarding the meaning of the program being constructed. (See, for example, my (draft) <a href="#publication-036477b8">functional pearl on programming metamorphic algorithms</a>.) This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families. I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and <a href="#publication-41007bea">its formalisation using dependent types</a>.</p>
+          <p>I have been exploring the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into types and programs, and mechanically verified by type-checking. More interestingly, with an interactive development environment (like the <a href="https://agda.readthedocs.io/en/latest/tools/emacs-mode.html">Emacs mode offered by Agda</a>) that provides semantic hints in the form of type information, the programmer can gain better “<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>” regarding the meaning of the program being constructed. (See, for example, my (draft) <a href="#publication-036477b8">functional pearl on programming metamorphic algorithms</a>.) This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families. I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and <a href="#publication-41007bea">its dependently typed formalisation</a>.</p>
+          <p>I have also worked on <em><a href="https://www.cs.ox.ac.uk/publications/publication11924-abstract.html">bidirectional transformations</a></em> for solving consistency maintenance (synchronisation) problems. More specifically, my focus was on <em>bidirectional programming</em>, which is largely synonymous with the construction of <em>lenses</em>. My results in this area were built around a small bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there were an <a href="#publication-c48b059c">Agda formalisation</a>, a <a href="https://hackage.haskell.org/package/BiGUL">Haskell port</a>, and <a href="#publication-e124d6a0">an axiomatic semantics</a>. These results can be regarded as steps towards bringing the form of and support for bidirectional programming closer to general-purpose programming.</p>
           <div class="expertise-list">
             <span class="expertise">Dependently Typed Programming</span>
             <span class="expertise">Datatype-Generic Programming</span>
             <span class="expertise">Bidirectional Programming</span>
-            <span class="expertise">Algebra of Programming</span>
-            <span class="expertise">Functional Programming</span>
+            <span class="expertise">Algebra of Programming / Program Calculation</span>
+            <span class="expertise">Functional Programming &amp; Type Theory</span>
           </div>
 
         </div>
@@ -358,10 +357,10 @@
               </div>
             </div>
           </div>
-          <div class="publication" id="publication-14e4b0b8">
+          <div class="publication" id="publication-56ab7bca">
             <div class="publication-entry">
               <div class="publication-title">
-                <a href="#publication-14e4b0b8">Principles and practice of bidirectional programming in BiGUL</a>
+                <a href="#publication-56ab7bca">Principles and practice of bidirectional programming in BiGUL</a>
               </div>
               <div class="publication-authors">
                 <a href="http://research.nii.ac.jp/~hu/">Zhenjiang&nbsp;Hu</a> and Hsiang-Shang&nbsp;Ko
@@ -372,10 +371,10 @@
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="manuscripts/SSBX16.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip">Haskell code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-14e4b0b8">More info</span></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-56ab7bca">More info</span></span>
               </div>
             </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-14e4b0b8">
+            <div class="panel panel-publication-info collapse" id="publication-info-56ab7bca">
               <div class="panel-body publication-info">
                 <div class="row">
                   <div class="col-sm-2 publication-info-title">
@@ -775,7 +774,7 @@
                     Note
                   </div>
                   <div class="col-sm-10">
-                    <p>The version of BiGUL described in this paper is outdated. See the <a href="#publication-a1e91c98">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL.</p>
+                    <p>The version of BiGUL described in this paper is outdated. See the <a href="#publication-e124d6a0">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL.</p>
                   </div>
                 </div>
                 <div class="row">

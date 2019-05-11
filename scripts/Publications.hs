@@ -275,7 +275,7 @@ publicationList =
       , info    = [ ("Pages", "61–72", Nothing)
                   , ("DOI", "10.1145/2847538.2847544", Nothing)
                   , ("Agda version", "2.4.2.4 with Standard Library version 0.11", Nothing)
-                  , ("Note", "The version of BiGUL described in this paper is outdated. See the <a href=\"#publication-a1e91c98\">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL.", Nothing)
+                  , ("Note", "The version of BiGUL described in this paper is outdated. See the <a href=\"#publication-e124d6a0\">“axiomatic basis” paper</a> for a semi-formal axiomatic introduction to the current BiGUL.", Nothing)
                   , ("Abstract", "Putback-based bidirectional programming allows the programmer to write only one putback transformation, from which the unique corresponding forward transformation is derived for free. The logic of a putback transformation is more sophisticated than that of a forward transformation and does not always give rise to well-behaved bidirectional programs; this calls for more robust language design to support development of well-behaved putback transformations. In this paper, we design and implement a concise core language BiGUL for putback-based bidirectional programming to serve as a foundation for higher-level putback-based languages. BiGUL is completely formally verified in the dependently typed programming language Agda to guarantee that any putback transformation written in BiGUL is well-behaved.", Nothing)
                   ]
       }
