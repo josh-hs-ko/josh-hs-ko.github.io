@@ -1,9 +1,9 @@
 :root {
   --cs-background: #faf6e8;
   --cs-header: #002147;
-  --cs-text: #333333;
-  --cs-link-active: grey;
-  --cs-link-decoration: #d4d4d4;
+  --cs-text: #3b1d23;
+  --cs-link-active: #ab8876;
+  --cs-link-decoration: #cac0b6;
   --cs-navbar: #f1e3bb;
   --cs-navbar-link: #592c35;
   --cs-navbar-link-hover: #be7847;
@@ -46,7 +46,7 @@
     --cs-publication-more-info-link-hover: #00e300;
     --cs-publication-more-info-link-active: #00ff00;
     --cs-publication-target: #002147;
-    --cs-publication-target-border: #887b1b;
+    --cs-publication-target-border: #f1e3bb;
   }
 }
 
