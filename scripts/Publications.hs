@@ -19,7 +19,7 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
-      { title   = "Benchmarking bidirectional transformations: Applying the Benchmarx framework to the Families-to-Persons case"
+      { title   = "Benchmarking bidirectional transformations: Theory, implementation, application, and assessment"
       , authors = [ "Anthony Anjorin"
                   , "Thomas Buchmann"
                   , "Bernhard Westfechtel"
@@ -30,12 +30,12 @@ publicationList =
                   , "Leila Samimi-Dehkordi"
                   , "Albert Zündorf"
                   ]
-      , venue   = Nothing
+      , venue   =  Just ("Software and Systems Modeling", Nothing)
       , year    = 2019
-      , types   = [ (Unpublished, "In submission")
+      , types   = [ (Published, "To appear")
                   ]
       , links   = []
-      , info    = [ ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches.</p><p>This paper presents <em>Benchmarx</em>, a novel framework for evaluating bx tools that takes the heterogeneity of bx tools into account. The Benchmarx framework abstracts from technological spaces, specific tool architectures, and the internal data maintained by the tools. A benchmark for a specific bx problem is implemented by providing a suite of executable test cases. By implementing a set of general interfaces, a solution to such a benchmark may then be developed using a specific bx tool, and evaluated by executing the test suite.</p><p>To illustrate the use of the Benchmarx framework, we present a variety of solutions to the well-known Families-to-Persons benchmark, which involves synchronizing a database of families consisting of mother, father, daughters, and sons, with a database containing only unconnected male and female persons. The solutions were selected to demonstrate how the Benchmarx framework supports the systematic comparison of considerably different approaches to solving bx problems, including procedural approaches using pairs of unidirectional transformations, approaches that suitably combine bidirectional primitives, and approaches that utilize a grammar-based or constraint-based consistency specification for synchronization.", Nothing)
+      , info    = [ ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches.</p><p>This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.", Nothing)
                   ]
       }
   , Publication

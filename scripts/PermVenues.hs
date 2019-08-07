@@ -26,6 +26,10 @@ permVenueList =
       , permVenueURL  = "https://www.nii.ac.jp/pi/"
       }
   , PermVenue
+      { permVenueName = "Software and Systems Modeling"
+      , permVenueURL  = "http://www.sosym.org"
+      }
+  , PermVenue
       { permVenueName = "University of Oxford"
       , permVenueURL  = "http://www.ox.ac.uk"
       }
