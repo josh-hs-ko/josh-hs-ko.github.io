@@ -19,27 +19,7 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
-      { title   = "Benchmarking bidirectional transformations: Theory, implementation, application, and assessment"
-      , authors = [ "Anthony Anjorin"
-                  , "Thomas Buchmann"
-                  , "Bernhard Westfechtel"
-                  , "Zinovy Diskin"
-                  , "Hsiang-Shang Ko"
-                  , "Romina Eramo"
-                  , "Georg Hinkel"
-                  , "Leila Samimi-Dehkordi"
-                  , "Albert Zündorf"
-                  ]
-      , venue   =  Just ("Software and Systems Modeling", Nothing)
-      , year    = 2019
-      , types   = [ (Published, "To appear")
-                  ]
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/SoSyM19.pdf")]
-      , info    = [ ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches.</p><p>This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.", Nothing)
-                  ]
-      }
-  , Publication
-      { title   = "Bidirectional parsing and reflective printing for fully disambiguated grammars"
+      { title   = "Unifying parsing and reflective printing for fully disambiguated grammars"
       , authors = [ "Zirun Zhu"
                   , "Hsiang-Shang Ko"
                   , "Yongzhe Zhang"
@@ -54,6 +34,29 @@ publicationList =
       , links   = [ ("PDF", Nothing, "manuscripts/BiYacc.pdf")
                   ]
       , info    = [ ("Abstract", "Language designers usually need to implement parsers and printers. Despite being two closely related programs, in practice they are often designed separately, and then need to be revised and kept consistent as the language evolves. It will be more convenient if the parser and printer can be unified and developed in a single program, with their consistency guaranteed automatically. Furthermore, in certain scenarios (like showing compiler optimisation results to the programmer), it is desirable to have a more powerful <em>reflective</em> printer that, when an abstract syntax tree corresponding to a piece of program text is modified, can propagate the modification to the program text while preserving layouts, comments, and syntactic sugar.</p><p>To address these needs, we propose a domain-specific language BiYacc, whose programs denote both a parser and a reflective printer for a fully disambiguated context- free grammar. BiYacc is based on the theory of bidirectional transformations, which helps to guarantee by construction that the generated pairs of parsers and reflective printers are consistent. Handling grammatical ambiguity is particularly challenging: we propose an approach based on generalised parsing and disambiguation filters, which produce all the parse results and (try to) select the only correct one in the parsing direction; the filters are carefully bidirectionalised so that they also work in the printing direction and do not break the consistency between the parsers and reflective printers. We show that BiYacc is capable of facilitating many tasks such as Pombrio and Krishnamurthi’s ‘resugaring’, simple refactoring, and language evolution.", Nothing)
+                  ]
+      }
+  , Publication
+      { title   = "Benchmarking bidirectional transformations: Theory, implementation, application, and assessment"
+      , authors = [ "Anthony Anjorin"
+                  , "Thomas Buchmann"
+                  , "Bernhard Westfechtel"
+                  , "Zinovy Diskin"
+                  , "Hsiang-Shang Ko"
+                  , "Romina Eramo"
+                  , "Georg Hinkel"
+                  , "Leila Samimi-Dehkordi"
+                  , "Albert Zündorf"
+                  ]
+      , venue   =  Just ("Software and Systems Modeling", Nothing)
+      , year    = 2019
+      , types   = []
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/SoSyM19.pdf")
+                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
+                  , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
+                  ]
+      , info    = [ ("DOI", "10.1007/s10270-019-00752-x", Nothing)
+                  , ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches. This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.", Nothing)
                   ]
       }
   , Publication

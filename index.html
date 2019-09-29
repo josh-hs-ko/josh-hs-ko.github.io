@@ -178,6 +178,36 @@
           <h3 class="section-title">2019</h3>
         </div>
         <div class="col-sm-9">
+          <div class="publication" id="publication-1463068b">
+            <div class="publication-entry">
+              <div class="publication-title">
+                <a href="#publication-1463068b">Unifying parsing and reflective printing for fully disambiguated grammars</a>
+              </div>
+              <div class="publication-authors">
+                <a href="https://php.yozora.moe">Zirun&nbsp;Zhu</a>, Hsiang-Shang&nbsp;Ko, <a href="http://zyz915.github.io">Yongzhe&nbsp;Zhang</a>, Pedro&nbsp;Martins, <a href="http://haslab.uminho.pt/jas/">João&nbsp;Saraiva</a>, and <a href="http://research.nii.ac.jp/~hu/">Zhenjiang&nbsp;Hu</a>
+              </div>
+              <div class="publication-venue">
+                2019
+              </div>
+              <div class="publication-links">
+                <span class="publication-link-outer"><span class="publication-type type-unpublished">In submission</span></span>
+                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/BiYacc.pdf">PDF</a></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-1463068b">More info</span></span>
+              </div>
+            </div>
+            <div class="panel panel-publication-info collapse" id="publication-info-1463068b">
+              <div class="panel-body publication-info">
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Abstract
+                  </div>
+                  <div class="col-sm-10">
+                    <p>Language designers usually need to implement parsers and printers. Despite being two closely related programs, in practice they are often designed separately, and then need to be revised and kept consistent as the language evolves. It will be more convenient if the parser and printer can be unified and developed in a single program, with their consistency guaranteed automatically. Furthermore, in certain scenarios (like showing compiler optimisation results to the programmer), it is desirable to have a more powerful <em>reflective</em> printer that, when an abstract syntax tree corresponding to a piece of program text is modified, can propagate the modification to the program text while preserving layouts, comments, and syntactic sugar.</p><p>To address these needs, we propose a domain-specific language BiYacc, whose programs denote both a parser and a reflective printer for a fully disambiguated context- free grammar. BiYacc is based on the theory of bidirectional transformations, which helps to guarantee by construction that the generated pairs of parsers and reflective printers are consistent. Handling grammatical ambiguity is particularly challenging: we propose an approach based on generalised parsing and disambiguation filters, which produce all the parse results and (try to) select the only correct one in the parsing direction; the filters are carefully bidirectionalised so that they also work in the printing direction and do not break the consistency between the parsers and reflective printers. We show that BiYacc is capable of facilitating many tasks such as Pombrio and Krishnamurthi’s ‘resugaring’, simple refactoring, and language evolution.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="publication" id="publication-ba23de90">
             <div class="publication-entry">
               <div class="publication-title">
@@ -212,36 +242,6 @@
                   </div>
                   <div class="col-sm-10">
                     <p>Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches. This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="publication" id="publication-b13a49d8">
-            <div class="publication-entry">
-              <div class="publication-title">
-                <a href="#publication-b13a49d8">Bidirectional parsing and reflective printing for fully disambiguated grammars</a>
-              </div>
-              <div class="publication-authors">
-                <a href="https://php.yozora.moe">Zirun&nbsp;Zhu</a>, Hsiang-Shang&nbsp;Ko, <a href="http://zyz915.github.io">Yongzhe&nbsp;Zhang</a>, Pedro&nbsp;Martins, <a href="http://haslab.uminho.pt/jas/">João&nbsp;Saraiva</a>, and <a href="http://research.nii.ac.jp/~hu/">Zhenjiang&nbsp;Hu</a>
-              </div>
-              <div class="publication-venue">
-                2019
-              </div>
-              <div class="publication-links">
-                <span class="publication-link-outer"><span class="publication-type type-unpublished">In submission</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/BiYacc.pdf">PDF</a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-b13a49d8">More info</span></span>
-              </div>
-            </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-b13a49d8">
-              <div class="panel-body publication-info">
-                <div class="row">
-                  <div class="col-sm-2 publication-info-title">
-                    Abstract
-                  </div>
-                  <div class="col-sm-10">
-                    <p>Language designers usually need to implement parsers and printers. Despite being two closely related programs, in practice they are often designed separately, and then need to be revised and kept consistent as the language evolves. It will be more convenient if the parser and printer can be unified and developed in a single program, with their consistency guaranteed automatically. Furthermore, in certain scenarios (like showing compiler optimisation results to the programmer), it is desirable to have a more powerful <em>reflective</em> printer that, when an abstract syntax tree corresponding to a piece of program text is modified, can propagate the modification to the program text while preserving layouts, comments, and syntactic sugar.</p><p>To address these needs, we propose a domain-specific language BiYacc, whose programs denote both a parser and a reflective printer for a fully disambiguated context- free grammar. BiYacc is based on the theory of bidirectional transformations, which helps to guarantee by construction that the generated pairs of parsers and reflective printers are consistent. Handling grammatical ambiguity is particularly challenging: we propose an approach based on generalised parsing and disambiguation filters, which produce all the parse results and (try to) select the only correct one in the parsing direction; the filters are carefully bidirectionalised so that they also work in the printing direction and do not break the consistency between the parsers and reflective printers. We show that BiYacc is capable of facilitating many tasks such as Pombrio and Krishnamurthi’s ‘resugaring’, simple refactoring, and language evolution.</p>
                   </div>
                 </div>
               </div>
