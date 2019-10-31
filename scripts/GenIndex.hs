@@ -1,4 +1,4 @@
-module Generate where
+module GenIndex where
 
 import Authors
 import PermVenues
