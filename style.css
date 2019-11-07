@@ -171,6 +171,10 @@ ol {
   word-spacing: .2em;
 }
 
+.chinese-name {
+  font-weight: 500;
+}
+
 .after-section-title {
   padding-bottom: 1.25ex;
 }
@@ -190,11 +194,6 @@ ol {
 
 .text-block {
   display: inline-block;
-}
-
-.chinese-name {
-  font-size: 95%;
-  font-weight: 700;
 }
 
 .personal-info {
