@@ -60,6 +60,27 @@ body {
   background-color: var(--cs-background);
 }
 
+h1 {
+  font-weight: 600;
+  color: var(--cs-header);
+  line-height: 48px;
+}
+
+h2 {
+  margin-top: 0;
+  color: var(--cs-header);
+}
+
+h3 {
+  margin-top: 0;
+  color: var(--cs-header);
+}
+
+h4 {
+  margin-top: 0;
+  color: var(--cs-header);
+}
+
 p {
   margin-bottom: 2ex;
   text-align: justify;
@@ -98,18 +119,13 @@ a:hover {
   -webkit-text-decoration-color: currentColor;
 }
 
-.main {
-  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
-  font-size: 16px;
-  color: var(--cs-text);
-}
-
 pre {
-  font-family: 'Fira Code', monospace;
   color: var(--cs-code);
   background-color: transparent;
   border: none;
   margin-left: 1.5em;
+  margin-top: 2ex;
+  margin-bottom: 2ex;
   padding: 0;
   font-size: 100%;
 }
@@ -123,8 +139,40 @@ code {
   font-size: 100%;
 }
 
-.emch {
-  font-weight: 700;
+pre > code {
+  letter-spacing: 0;
+}
+
+blockquote {
+  border-color: var(--cs-text);
+  border-width: 1px;
+  font-size: 100%;
+  padding-top: 0;
+  padding-bottom: 0;
+  text-align: justify;
+}
+
+ul {
+  margin-bottom: 2ex;
+}
+
+ol {
+  margin-bottom: 2ex;
+}
+
+
+.main {
+  font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
+  font-size: 16px;
+  color: var(--cs-text);
+}
+
+.name {
+  word-spacing: .2em;
+}
+
+.after-section-title {
+  padding-bottom: 1.25ex;
 }
 
 .blog {
@@ -140,15 +188,13 @@ code {
   margin-bottom: 2ex;
 }
 
-.name {
-  font-weight: 600;
-  color: var(--cs-header);
-  word-spacing: .2em;
-  line-height: 48px;
+.text-block {
+  display: inline-block;
 }
 
-span.text-block {
-  display: inline-block;
+.chinese-name {
+  font-size: 95%;
+  font-weight: 700;
 }
 
 .personal-info {
@@ -162,8 +208,8 @@ span.text-block {
 }
 
 #photo {
-  width: 200px;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   border-radius: 4px;
 }
 
@@ -218,16 +264,10 @@ span.text-block {
   margin-top: 3ex;
 }
 
-.section-title {
-  margin-top: 0;
-  margin-bottom: 1.25ex;
-  color: var(--cs-header);
-}
-
 .paragraph-title {
   font-weight: 600;
   color: var(--cs-header);
-  margin-right: 2ex;
+  margin-right: 1em;
 }
 
 .expertise-list {
@@ -402,6 +442,20 @@ span.text-block {
   margin-top: -1ex;
 }
 
+.blog-entry {
+  font-weight: 600;
+  margin-bottom: 1ex;
+}
+
+.blog-entry-stamp {
+  color: var(--cs-header);
+  margin-left: 1em;
+}
+
+.blog-entry-date {
+  font-style: italic;
+}
+
 .post-number {
   font-size: 26px;
   color: var(--cs-header);
@@ -414,10 +468,25 @@ span.text-block {
   color: var(--cs-header);
 }
 
-.post-date {
+.post-time {
   margin-bottom: 3ex;
   font-style: italic;
   color: var(--cs-header);
+}
+
+hr {
+  width: 4em;
+  height: 2px;
+  border: none;
+  background-color: var(--cs-header);
+  margin-top: 3ex;
+  margin-bottom: 3ex;
+}
+
+.remark {
+  color: var(--cs-header);
+  text-align: center;
+  margin-bottom: 1ex;
 }
 
 .stamp {

@@ -3,6 +3,11 @@ module Publications where
 
 data PublicationType = Published | Warning | Unpublished
 
+publicationType :: a -> a -> a -> PublicationType -> a
+publicationType x y z Published   = x
+publicationType x y z Warning     = y
+publicationType x y z Unpublished = z
+
 data HyperlinkYear = IncludeYear | ExcludeYear
 
 data Publication = Publication

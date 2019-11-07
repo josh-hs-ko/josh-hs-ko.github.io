@@ -1,7 +1,7 @@
 all: ../index.html
 
-../index.html: GenIndex.hs Publications.hs Authors.hs PermVenues.hs
-	runghc GenIndex
+../index.html: Gen.hs Publications.hs Authors.hs PermVenues.hs
+	runghc Gen --publications
 
 agdahtml:
 	find ../Agda/$(dir)/*.html -exec stack runghc PatchAgdaHTML.hs {} \;
