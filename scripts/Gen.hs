@@ -60,11 +60,8 @@ main = do
             in  (not (null ps1) && entryNumber entry == postNumber,
                  if entryExists then entryTime entry else modTime,
                  if postTime /= modTime then Just modTime else Nothing,
-                 if entryExists
-                    then postList
-                    else ps0 ++
-                         PostEntry postNumber postTime title teaser :
-                         ps1)
+                 ps0 ++ PostEntry postNumber postTime title teaser :
+                 if entryExists then tail ps1 else ps1)
       let post' = insertPostNumber postNumber .
                   insertTime postTime mRevTime .
                   transformRemark $ post
@@ -79,9 +76,8 @@ main = do
         replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 newPostList)) <$>
           Strict.readFile indexFile
       spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
-      when (not entryExists) $ do
-        commit <- getYesOrNo "Commit?"
-        when commit (writeFile postListFile (show newPostList))
+      commit <- if entryExists then return True else getYesOrNo "Commit?"
+      when commit (writeFile postListFile (show newPostList))
 
 getYesOrNo :: String -> IO Bool
 getYesOrNo prompt = do
