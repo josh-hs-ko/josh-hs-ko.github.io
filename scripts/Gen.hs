@@ -19,6 +19,7 @@ import Text.PrettyPrint
 import System.Directory
 import System.Environment
 import System.Process
+import System.IO
 import System.IO.Strict as Strict
 import CMark
 
@@ -36,8 +37,8 @@ main = do
           Strict.readFile indexFile
       spawnProcess "open" [indexFile]
       return ()
-    '-':'-':'p':'o':'s':'t':testFlag -> do
-      guard (length args > 1 && (null testFlag || testFlag == "-test"))
+    "--post" -> do
+      guard (length args > 1)
       let postNumber    = read (args !! 1)
           postNumberStr = fillZeros 4 postNumber
           postListFile  = "post-list.txt"
@@ -50,41 +51,47 @@ main = do
       modTime <- utcToLocalTime <$> getCurrentTimeZone
                                 <*> getModificationTime postFile
       postList <- read <$> Strict.readFile postListFile
-      let (postTime, mRevTime, postList0, postList1) =
-            let (ps0, ps1)  = span ((> postNumber) . entryNumber) postList
-                entry       = head ps1
-                entryExists = not (null ps1) &&
-                              entryNumber entry == postNumber
-            in  (if entryExists then entryTime entry else modTime,
-                 if postTime /= modTime then Just modTime else Nothing,
-                 ps0,
-                 if entryExists then tail ps1 else ps1)
       (title, teaser, post) <-
         extractHeader . commonmarkToNode [] . Text.pack <$>
           Strict.readFile postFile
-      let processedPost =
-            insertPostNumber postNumber . insertTime postTime mRevTime .
-            transformRemark $ post
+      let (entryExists, postTime, mRevTime, newPostList) =
+            let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
+                entry      = head ps1
+            in  (not (null ps1) && entryNumber entry == postNumber,
+                 if entryExists then entryTime entry else modTime,
+                 if postTime /= modTime then Just modTime else Nothing,
+                 if entryExists
+                    then postList
+                    else ps0 ++
+                         PostEntry postNumber postTime title teaser :
+                         ps1)
+      let post' = insertPostNumber postNumber .
+                  insertTime postTime mRevTime .
+                  transformRemark $ post
       writeFile htmlFile =<<
-        replaceRange "POST"
-          (text (Text.unpack (nodeToHtml [optUnsafe] processedPost))) .
+        replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post'))) .
         replaceRange "METADATA" (postMetadata title teaser) <$>
           Strict.readFile templateFile
-      let newPostList = postList0 ++
-                        PostEntry postNumber postTime title teaser :
-                        postList1
       writeFile blogIndexFile =<<
         replaceRange "POST LIST" (postIndex newPostList) <$>
           Strict.readFile blogIndexFile
       writeFile indexFile =<<
         replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 newPostList)) <$>
           Strict.readFile indexFile
-      if not (null testFlag)
-      then do
-        spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
-        return ()
-      else do
-        writeFile postListFile (show newPostList)
+      spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
+      when (not entryExists) $ do
+        commit <- getYesOrNo "Commit?"
+        when commit (writeFile postListFile (show newPostList))
+
+getYesOrNo :: String -> IO Bool
+getYesOrNo prompt = do
+  putStr (prompt ++ " (yes/no) ")
+  hFlush stdout
+  response <- getLine
+  case map toLower response of
+    "yes" -> return True
+    "no"  -> return False
+    _     -> getYesOrNo prompt
 
 replaceRange :: String -> Doc -> String -> String
 replaceRange key doc str =
@@ -229,10 +236,10 @@ transformRemark n@(Node mp DOCUMENT ns) =
                                 (Text.pack "</div>")) ns0 : ns'
     _ -> n
 
-monthNames :: [String]
-monthNames = [undefined,
-              "January", "February", "March", "April", "May", "June",
-              "July", "August", "September", "October", "November", "December"]
+showMonth :: Int -> String
+showMonth m =
+  ["January", "February", "March", "April", "May", "June", "July", "August",
+   "September", "October", "November", "December"] !! (m - 1)
 
 fillZeros :: Int -> Int -> String
 fillZeros d n = let s = show n in replicate (d - length s) '0' ++ s
@@ -240,14 +247,13 @@ fillZeros d n = let s = show n in replicate (d - length s) '0' ++ s
 longTime :: LocalTime -> String
 longTime (LocalTime d (TimeOfDay hour min _)) =
   let (year, month, day) = toGregorian d
-  in  "at&nbsp;" ++ fillZeros 2 hour ++ ":" ++ fillZeros 2 min ++
-      " on&nbsp" ++ show day ++ "&nbsp;" ++ monthNames !! month ++
-      "&nbsp;" ++ show year
+  in  "at " ++ fillZeros 2 hour ++ ":" ++ fillZeros 2 min ++
+      " on " ++ show day ++ "&nbsp;" ++ showMonth month ++ "&nbsp;" ++ show year
 
 shortDate :: Day -> String
 shortDate d =
   let (year, month, day) = toGregorian d
-  in  show day ++ "&nbsp;" ++ take 3 (monthNames !! month) ++ "&nbsp;’" ++
+  in  show day ++ "&nbsp;" ++ take 3 (showMonth month) ++ "&nbsp;’" ++
       drop 2 (show year)
 
 insertPostNumber :: Int -> Node -> Node

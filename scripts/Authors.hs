@@ -35,7 +35,7 @@ authorList =
       }
   , Author
       { authorName = "Zhenjiang Hu"
-      , authorURL  = "http://research.nii.ac.jp/~hu/"
+      , authorURL  = "http://sei.pku.edu.cn/~hu/"
       }
   , Author
       { authorName = "Keigo Imai"
@@ -87,7 +87,7 @@ authorList =
       }
   , Author
       { authorName = "Yongzhe Zhang"
-      , authorURL  = "http://zyz915.github.io"
+      , authorURL  = "https://zyz915.github.io"
       }
   , Author
       { authorName = "Zirun Zhu"
