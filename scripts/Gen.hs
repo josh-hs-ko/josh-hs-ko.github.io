@@ -244,7 +244,7 @@ longTime :: LocalTime -> String
 longTime (LocalTime d (TimeOfDay hour min _)) =
   let (year, month, day) = toGregorian d
   in  "at " ++ fillZeros 2 hour ++ ":" ++ fillZeros 2 min ++
-      " on " ++ show day ++ "&nbsp;" ++ showMonth month ++ "&nbsp;" ++ show year
+      " on " ++ show day ++ " " ++ showMonth month ++ " " ++ show year
 
 shortDate :: Day -> String
 shortDate d =
