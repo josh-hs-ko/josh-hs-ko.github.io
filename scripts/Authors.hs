@@ -63,7 +63,7 @@ authorList =
       }
   , Author
       { authorName = "Shin-Cheng Mu"
-      , authorURL  = "https://www.iis.sinica.edu.tw/pages/scm/"
+      , authorURL  = "https://scm.iis.sinica.edu.tw/home/"
       }
   , Author
       { authorName = "Leila Samimi-Dehkordi"
