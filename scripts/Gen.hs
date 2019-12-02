@@ -39,55 +39,63 @@ main = do
       return ()
     "--post" -> do
       guard (length args > 1)
-      let postNumber    = read (args !! 1)
-          postNumberStr = fillZeros 4 postNumber
-          postListFile  = "post-list.txt"
-          templateFile  = "post-template.html"
-          postDirectory = "../blog/" ++ postNumberStr ++ "/"
-          postFile      = postDirectory ++ postNumberStr ++ ".md"
-          htmlFile      = postDirectory ++ "index.html"
-          blogIndexFile = "../blog/index.html"
-          indexFile     = "../index.html"
-      modTime <- utcToLocalTime <$> getCurrentTimeZone
-                                <*> getModificationTime postFile
-      postList <- read <$> Strict.readFile postListFile
-      (title, teaser, post) <-
-        extractHeader . commonmarkToNode [] . Text.pack <$>
-          Strict.readFile postFile
-      let (entryExists, postTime, mRevTime, newPostList) =
-            let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
-                entry      = head ps1
-            in  (not (null ps1) && entryNumber entry == postNumber,
-                 if entryExists then entryTime entry else modTime,
-                 if postTime /= modTime then Just modTime else Nothing,
-                 ps0 ++ PostEntry postNumber postTime title teaser :
-                 if entryExists then tail ps1 else ps1)
-      let post' = insertPostNumber postNumber .
-                  insertTime postTime mRevTime .
-                  transformRemark $ post
-      writeFile htmlFile =<<
-        replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post'))) .
-        replaceRange "METADATA" (postMetadata title teaser) <$>
-          Strict.readFile templateFile
-      writeFile blogIndexFile =<<
-        replaceRange "POST LIST" (postIndex newPostList) <$>
-          Strict.readFile blogIndexFile
-      writeFile indexFile =<<
-        replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 newPostList)) <$>
-          Strict.readFile indexFile
-      spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
-      commit <- if entryExists then return True else getYesOrNo "Commit?"
-      when commit (writeFile postListFile (show newPostList))
+      generatePost (read (args !! 1))
 
-getYesOrNo :: String -> IO Bool
-getYesOrNo prompt = do
-  putStr (prompt ++ " (yes/no) ")
+generatePost :: Int -> IO ()
+generatePost postNumber = do
+  let postNumberStr = fillZeros 4 postNumber
+      postListFile  = "post-list.txt"
+      templateFile  = "post-template.html"
+      postDirectory = "../blog/" ++ postNumberStr ++ "/"
+      postFile      = postDirectory ++ postNumberStr ++ ".md"
+      htmlFile      = postDirectory ++ "index.html"
+      blogIndexFile = "../blog/index.html"
+      indexFile     = "../index.html"
+  modTime <- utcToLocalTime <$> getCurrentTimeZone
+                            <*> getModificationTime postFile
+  postList <- read <$> Strict.readFile postListFile
+  (title, teaser, post) <-
+    extractHeader . commonmarkToNode [] . Text.pack <$>
+      Strict.readFile postFile
+  let (entryExists, postTime, mRevTime, newPostList) =
+        let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
+            entry      = head ps1
+        in  (not (null ps1) && entryNumber entry == postNumber,
+             if entryExists then entryTime entry else modTime,
+             if postTime /= modTime then Just modTime else Nothing,
+             ps0 ++ PostEntry postNumber postTime title teaser :
+             if entryExists then tail ps1 else ps1)
+  let post' = insertPostNumber postNumber .
+              insertTime postTime mRevTime .
+              transformRemark $ post
+  writeFile htmlFile =<<
+    replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post'))) .
+    replaceRange "METADATA" (postMetadata title teaser) <$>
+      Strict.readFile templateFile
+  writeFile blogIndexFile =<<
+    replaceRange "POST LIST" (postIndex newPostList) <$>
+      Strict.readFile blogIndexFile
+  writeFile indexFile =<<
+    replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 newPostList)) <$>
+      Strict.readFile indexFile
+  spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
+  regenerate <- getYesOrNo True "Regenerate?"
+  if regenerate
+  then generatePost postNumber
+  else do commit <- if entryExists then return True
+                                   else getYesOrNo False "Commit?"
+          when commit (writeFile postListFile (show newPostList))
+
+getYesOrNo :: Bool -> String -> IO Bool
+getYesOrNo defaultResult prompt = do
+  putStr (prompt ++ if defaultResult then " (YES/no) " else " (yes/NO) ")
   hFlush stdout
   response <- getLine
   case map toLower response of
+    ""    -> return defaultResult
     "yes" -> return True
     "no"  -> return False
-    _     -> getYesOrNo prompt
+    _     -> getYesOrNo defaultResult prompt
 
 replaceRange :: String -> Doc -> String -> String
 replaceRange key doc str =

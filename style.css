@@ -120,7 +120,7 @@ a:hover {
 }
 
 pre {
-  color: var(--cs-code);
+  color: var(--cs-text);
   background-color: transparent;
   border: none;
   margin-left: 1.5em;
@@ -132,7 +132,7 @@ pre {
 
 code {
   font-family: 'Fira Code', monospace;
-  color: var(--cs-code);
+  color: var(--cs-text);
   padding: 0;
   letter-spacing: -0.75px;
   background: transparent;
@@ -144,11 +144,13 @@ pre > code {
 }
 
 blockquote {
-  border-color: var(--cs-text);
-  border-width: 1px;
+  border-width: 0;
   font-size: 100%;
+  font-style: italic;
   padding-top: 0;
   padding-bottom: 0;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   text-align: justify;
 }
 
@@ -159,7 +161,6 @@ ul {
 ol {
   margin-bottom: 2ex;
 }
-
 
 .main {
   font-family: 'Open Sans', 'Noto Sans TC', sans-serif;

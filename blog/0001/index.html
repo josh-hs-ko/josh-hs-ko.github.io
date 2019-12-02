@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Semiring of order classes — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="If we regard the big-O notation as denoting classes/sets of functions, which I call ‘order classes’, we can start talking about their structures, and one such structure is the semiring of order classes. …">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0001
+</div>
+<h2>Semiring of order classes</h2>
+<div class="post-time">Posted at 16:29 on 2 December 2019</div>
+<p>I’ve always disliked the common abuse of the <a href="https://en.wikipedia.org/wiki/Big_O_notation">big-O notation</a>, and preferred to regard $\Order f$ — where $f \in \Nat \to {\mathbb Q^+}$, in which $\mathbb Q^+$ is the set of nonnegative rationals — as denoting a class/set of functions, namely
+$$ \Order f \defeq \braces{ \phi \in \Nat \to {\mathbb Q^+} \mid \exists N, C \in \Nat.\ \forall n \geq N.\ \phi\ n \leq C \cdot f\ n } $$
+(And yes, I’m omitting unnecessary parentheses and function arguments.)
+This way we can simply interpret statements like
+\begin{align}
+\Order f + \Order g &amp;= \Order(f + g) \label{eq:addition} \\
+\Order f \cdot \Order g &amp;= \Order(f \cdot g) \label{eq:multiplication}
+\end{align}
+as real equations about sets and their operations (pairwise element addition and multiplication on the left-hand sides for the two equations above), and even nicer, we can start talking about structures of these ‘order classes’.
+One potentially useful fact is that the order classes form a <a href="https://en.wikipedia.org/wiki/Semiring">semiring</a>, and the purpose of this post is to do the (not very exciting) verification.
+Some questions I asked myself while I thought it through are listed and answered in the end.</p>
+<p>With Equations \ref{eq:addition} and \ref{eq:multiplication} (which we will verify later), the verification is straightforward and essentially proceeds by applying the equations to the semiring laws.
+We can work slightly more abstractly with the following lemma.</p>
+<blockquote>
+<p><strong>Lemma.</strong>
+Let $(R, +, \cdot, 0, 1)$ be a semiring and $(S, +, \cdot, 0, 1)$ a set with similarly typed operations (whose names are overloaded) with no specified laws.
+If there is a surjective mapping $m \in R \to S$ that preserves all the four operations, then $S$ is a semiring as well.</p>
+</blockquote>
+<p>The proof of the lemma is routine; for example, letting $n \in S \to R$ be a right inverse of $m$, associativity of addition is proved by (for all $x, y, z \in S$)
+\begin{align*}
+&amp; (x + y) + z \\
+={}&amp; \reason{$n$ is a right inverse of $m$} \\
+&amp; (m\ (n\ x) + m\ (n\ y)) + m\ (n\ z) \\
+={}&amp; \reason{$m$ preserves addition (twice)} \\
+&amp; m\ ((n\ x + n\ y) + n\ z) \\
+={}&amp; \reason{associativity of addition on $R$} \\
+&amp; m\ (n\ x + (n\ y + n\ z)) \\
+={}&amp; \reason{$m$ preserves addition (twice)} \\
+&amp; m\ (n\ x) + (m\ (n\ y) + m\ (n\ z)) \\
+={}&amp; \reason{$n$ is a right inverse of $m$} \\
+&amp; x + (y + z)
+\end{align*}
+Then all it takes is instantiating the lemma with $R = \Nat \to {\mathbb Q^+}$ (with pointwise addition and multiplication and everywhere $0$ and $1$) and $m = \Order$.</p>
+<p>The real work is the verification of Equations \ref{eq:addition} and \ref{eq:multiplication}.
+For Equation \ref{eq:addition}, after expanding the definitions we see that, for all $h \in \Nat \to {\mathbb Q^+}$, we have to show the equivalence of the two statements
+\begin{align}
+\exists \phi, \psi \in \Nat \to \Nat.\ &amp; h = \phi + \psi \label{eq:lhs0} \\
+\and{}&amp; \exists \awa{N_\psi}{N_\phi}, \awa{C_\psi}{C_\phi} \in \Nat.\ \forall n \geq \awa{N_\psi}{N_\phi}.\ \phi\ n \leq \awa{C_\psi}{C_\phi} \cdot f\ n \label{eq:lhs1} \\
+\and{}&amp; \exists N_\psi, C_\psi \in \Nat.\ \forall n \geq N_\psi.\ \psi\ n \leq C_\psi \cdot g\ n \label{eq:lhs2}
+\end{align}
+and
+$$ \exists N_h, C_h \in \Nat.\ \forall n \geq N_h.\ h\ n \leq C_h \cdot (f\ n + g\ n) $$
+In the forward direction, choose $N_h \defeq \max(N_\phi, N_\psi)$ and $C_h \defeq \max(C_\phi, C_\psi)$.
+Then for all $n \geq N_h$,
+\begin{align}
+&amp; h\ n \notag \\
+={}   &amp; \reason{(\ref{eq:lhs0})} \notag \\
+&amp; \phi\ n + \psi\ n \notag \\
+\leq{}&amp; \reason{(\ref{eq:lhs1}) and (\ref{eq:lhs2})} \notag \\
+&amp; C_\phi \cdot f\ n + C_\psi \cdot g\ n \notag \\
+\leq{}&amp; \reason{choice of $C_h$; arithmetic} \label{step:monotonicity} \\
+&amp; C_h \cdot (f\ n + g\ n) \notag
+\end{align}
+As for the backward direction, since for all $x, y, z \in {\mathbb Q^+}$ we have
+\begin{equation}
+x \leq y + z \quad\Rightarrow\quad \exists y', z' \in {\mathbb Q^+}.\ x = y' + z' \and y' \leq y \and z' \leq z
+\label{eq:decomposition}
+\end{equation}
+we can find $\phi$ and $\psi$ such that for all $n \geq N_h$ we have $h\ n = \phi\ n + \psi\ n$, $\phi\ n \leq C_h \cdot f\ n$, and $\psi\ n \leq C_h \cdot g\ n $; additionally, for $n &lt; N_h$ we can make $\phi\ n \defeq h\ n$ and $\psi\ n \defeq 0$ to fully establish (\ref{eq:lhs0}).
+And (\ref{eq:lhs1}) and (\ref{eq:lhs2}) immediately follow if we choose both $N_\phi$ and $N_\psi$ to be $N_h$ and both $C_\phi$ and $C_\psi$ to be $C_h$.
+Equation \ref{eq:multiplication} can be proved similarly.</p>
+<h3>Q&amp;A</h3>
+<h4>Why don’t the order classes form a ring?</h4>
+<p>Because additive inverses don’t exist for the order classes in general.
+The obvious candidate $\Order(-f)$ doesn’t work (even if we expand the codomain to $\mathbb Q$) because $\Order f + \Order(-f) \neq \Order(0)$.
+Note that this breaks Equation \ref{eq:addition}.</p>
+<h4>How is Equation \ref{eq:addition} broken when functions can take negative values?</h4>
+<p>The inequality (\ref{step:monotonicity}) depends on the fact $C_\phi \leq C_h \Rightarrow C_\phi \cdot f\ n \leq C_h \cdot f\ n$ (and an analogous one for $C_\psi$ and $g$), which doesn’t hold if $f\ n$ is negative.</p>
+<h4>Can’t the codomain of the functions be just $\Nat$?</h4>
+<p>In this case the analogous property to (\ref{eq:decomposition}) for multiplication doesn’t hold — consider a function $h$ whose values are (increasingly large) primes and thus cannot be decomposed, but which can still be bounded by the product of two smaller-valued functions.</p>
+<h4>Is there a well-definedness problem for operations on the order classes?</h4>
+<p>It may seem that when we compute the order classes using Equations \ref{eq:addition} and \ref{eq:multiplication} we are doing something similar to the typical computation on equivalence classes, namely choosing representatives and performing computation on the representatives, in which case the result might crucially depend on the choice of representatives and become ill-defined.
+This is not the case for the order classes though, since order class addition/multiplication is not defined in terms of representatives — it’s just set addition/multiplication.
+Therefore the equations actually affirm that the result of order class addition/multiplication (which is defined independently from representatives) coincides with the result of adding/multiplying any representatives, and thus the choice of representatives is not crucial because all choices necessarily lead to the same independently defined result.
+In symbols: if $\Order f = \Order f'$ and $\Order g = \Order g'$, then
+$$ \Order(f + g) = \Order f + \Order g = \Order f' + \Order g' = \Order(f' + g') $$</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
