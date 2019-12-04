@@ -62,7 +62,7 @@
 0001
 </div>
 <h2>Semiring of order classes</h2>
-<div class="post-time">Posted at 16:29 on 2 December 2019</div>
+<div class="post-time">Posted at 16:29 on 2 December 2019, and revised at 08:21 on 4 December 2019</div>
 <p>I’ve always disliked the common abuse of the <a href="https://en.wikipedia.org/wiki/Big_O_notation">big-O notation</a>, and preferred to regard $\Order f$ — where $f \in \Nat \to {\mathbb Q^+}$, in which $\mathbb Q^+$ is the set of nonnegative rationals — as denoting a class/set of functions, namely
 $$ \Order f \defeq \braces{ \phi \in \Nat \to {\mathbb Q^+} \mid \exists N, C \in \Nat.\ \forall n \geq N.\ \phi\ n \leq C \cdot f\ n } $$
 (And yes, I’m omitting unnecessary parentheses and function arguments.)
@@ -95,11 +95,11 @@ If there is a surjective mapping $m \in R \to S$ that preserves all the four ope
 ={}&amp; \reason{$n$ is a right inverse of $m$} \\
 &amp; x + (y + z)
 \end{align*}
-Then all it takes is instantiating the lemma with $R = \Nat \to {\mathbb Q^+}$ (with pointwise addition and multiplication and everywhere $0$ and $1$) and $m = \Order$.</p>
+Then all it takes is instantiating the lemma with $R \defeq \Nat \to {\mathbb Q^+}$ (with pointwise addition and multiplication and everywhere $0$ and $1$), $m \defeq \Order$, and $S \defeq \braces{ \Order f \mid f \in \Nat \to {\mathbb Q^+} }$.</p>
 <p>The real work is the verification of Equations \ref{eq:addition} and \ref{eq:multiplication}.
 For Equation \ref{eq:addition}, after expanding the definitions we see that, for all $h \in \Nat \to {\mathbb Q^+}$, we have to show the equivalence of the two statements
 \begin{align}
-\exists \phi, \psi \in \Nat \to \Nat.\ &amp; h = \phi + \psi \label{eq:lhs0} \\
+\exists \phi, \psi \in \Nat \to {\mathbb Q^+}.\ &amp; h = \phi + \psi \label{eq:lhs0} \\
 \and{}&amp; \exists \awa{N_\psi}{N_\phi}, \awa{C_\psi}{C_\phi} \in \Nat.\ \forall n \geq \awa{N_\psi}{N_\phi}.\ \phi\ n \leq \awa{C_\psi}{C_\phi} \cdot f\ n \label{eq:lhs1} \\
 \and{}&amp; \exists N_\psi, C_\psi \in \Nat.\ \forall n \geq N_\psi.\ \psi\ n \leq C_\psi \cdot g\ n \label{eq:lhs2}
 \end{align}
@@ -137,8 +137,7 @@ Note that this breaks Equation \ref{eq:addition}.</p>
 <p>It may seem that when we compute the order classes using Equations \ref{eq:addition} and \ref{eq:multiplication} we are doing something similar to the typical computation on equivalence classes, namely choosing representatives and performing computation on the representatives, in which case the result might crucially depend on the choice of representatives and become ill-defined.
 This is not the case for the order classes though, since order class addition/multiplication is not defined in terms of representatives — it’s just set addition/multiplication.
 Therefore the equations actually affirm that the result of order class addition/multiplication (which is defined independently from representatives) coincides with the result of adding/multiplying any representatives, and thus the choice of representatives is not crucial because all choices necessarily lead to the same independently defined result.
-In symbols: if $\Order f = \Order f'$ and $\Order g = \Order g'$, then
-$$ \Order(f + g) = \Order f + \Order g = \Order f' + \Order g' = \Order(f' + g') $$</p>
+In symbols: if $\Order f = \Order f'$ and $\Order g = \Order g'$, then $\Order(f + g) = \Order f + \Order g = \Order f' + \Order g' = \Order(f' + g')$.</p>
 
 <!-- END OF POST -->
 
