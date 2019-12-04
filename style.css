@@ -162,6 +162,11 @@ ol {
   margin-bottom: 2ex;
 }
 
+.theorem {
+  font-style: normal;
+  font-weight: 600;
+}
+
 .main {
   font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
   font-size: 16px;

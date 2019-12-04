@@ -62,7 +62,7 @@
 0001
 </div>
 <h2>Semiring of order classes</h2>
-<div class="post-time">Posted at 16:29 on 2 December 2019, and revised at 08:21 on 4 December 2019</div>
+<div class="post-time">Posted at 16:29 on 2 December 2019, and revised at 12:17 on 4 December 2019</div>
 <p>I’ve always disliked the common abuse of the <a href="https://en.wikipedia.org/wiki/Big_O_notation">big-O notation</a>, and preferred to regard $\Order f$ — where $f \in \Nat \to {\mathbb Q^+}$, in which $\mathbb Q^+$ is the set of nonnegative rationals — as denoting a class/set of functions, namely
 $$ \Order f \defeq \braces{ \phi \in \Nat \to {\mathbb Q^+} \mid \exists N, C \in \Nat.\ \forall n \geq N.\ \phi\ n \leq C \cdot f\ n } $$
 (And yes, I’m omitting unnecessary parentheses and function arguments.)
@@ -77,7 +77,7 @@ Some questions I asked myself while I thought it through are listed and answered
 <p>With Equations \ref{eq:addition} and \ref{eq:multiplication} (which we will verify later), the verification is straightforward and essentially proceeds by applying the equations to the semiring laws.
 We can work slightly more abstractly with the following lemma.</p>
 <blockquote>
-<p><strong>Lemma.</strong>
+<p><span class="theorem">Lemma.</span>
 Let $(R, +, \cdot, 0, 1)$ be a semiring and $(S, +, \cdot, 0, 1)$ a set with similarly typed operations (whose names are overloaded) with no specified laws.
 If there is a surjective mapping $m \in R \to S$ that preserves all the four operations, then $S$ is a semiring as well.</p>
 </blockquote>
