@@ -11,11 +11,11 @@ window.MathJax = {
     tags: 'ams',
     macros: {
       awa: ['\\rlap{#2}\\phantom{#1}', 2],
-      and: '\\mathrel{\\wedge}',
+      and: '\\mathrel{\\thinspace\\wedge\\thinspace}',
       braces: ['\\{ \\thinspace #1 \\thinspace \\}', 1],
       defeq: '\\mathrel{\\vcenter{:}}=',
       Nat: '\\mathbb{N}',
-      or: '\\mathrel{\\vee}',
+      or: '\\mathrel{\\thinspace\\vee\\thinspace}',
       Order: '\\mathcal{O}',
       reason: ['\\quad \\{ \\thinspace \\text{#1} \\thinspace \\}', 1]
     }
