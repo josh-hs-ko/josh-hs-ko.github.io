@@ -9,6 +9,7 @@ window.MathJax = {
     },
     packages: {'[+]': ['noerrors']},
     tags: 'ams',
+    tagSide: 'left',
     macros: {
       awa: ['\\rlap{#2}\\phantom{#1}', 2],
       and: '\\mathrel{\\thinspace\\wedge\\thinspace}',
@@ -22,9 +23,7 @@ window.MathJax = {
   },
   chtml: {
     displayAlign: 'left',
-    displayIndent: '1.5em',
-    scale: 0.95,
-    adaptiveCSS: true
+    displayIndent: '1.5em'
   },
   options: {
     ignoreHtmlClass: 'tex2jax_ignore',
