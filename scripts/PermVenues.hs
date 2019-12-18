@@ -22,6 +22,10 @@ permVenueList =
       , permVenueURL  = "https://www.cambridge.org/core/journals/journal-of-functional-programming"
       }
   , PermVenue
+      { permVenueName = "New Generation Computing"
+      , permVenueURL  = "https://www.springer.com/journal/354"
+      }
+  , PermVenue
       { permVenueName = "Progress in Informatics"
       , permVenueURL  = "https://www.nii.ac.jp/pi/"
       }
