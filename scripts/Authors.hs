@@ -91,7 +91,7 @@ authorList =
       }
   , Author
       { authorName = "Zirun Zhu"
-      , authorURL  = "https://php.yozora.moe"
+      , authorURL  = "https://ac.k331.one"
       }
   , Author
       { authorName = "Albert Zündorf"
