@@ -134,13 +134,14 @@ code {
   font-family: 'Fira Code', monospace;
   color: var(--cs-text);
   padding: 0;
-  letter-spacing: -0.75px;
   background: transparent;
   font-size: 100%;
 }
 
-pre > code {
-  letter-spacing: 0;
+p > code {
+  margin-left: 0.15em;
+  margin-right: 0.15em;
+  letter-spacing: -1px;
 }
 
 blockquote {
