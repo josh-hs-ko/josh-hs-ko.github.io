@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Counting ticks — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="Recently I reread Nils Anders Danielsson’s POPL 2008 paper *Lightweight Semiformal Time Complexity Analysis for Purely Functional Data Structures*, whose technique (implemented in Agda) has been adopted by a few groups of people…">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0002
+</div>
+<h2>Counting ticks</h2>
+<div class="post-time">Posted at 15:49 on 15 January 2020</div>
+<p>Recently I reread Nils Anders Danielsson’s POPL 2008 paper <a href="https://doi.org/10.1145/1328897.1328457"><em>Lightweight Semiformal Time Complexity Analysis for Purely Functional Data Structures</em></a>, whose technique (implemented in Agda) has been adopted by a few groups of people like <a href="https://doi.org/10.1016/j.scico.2017.05.001">McCarthy et al</a> (who develop a comparable library in Coq) and very recently <a href="https://doi.org/10.1145/3371092">Handley et al</a> (who automate/mechanise the reasoning with Liquid Haskell and include <a href="https://doi.org/10.1145/3093333.3009858">relational cost analysis</a>).
+To a first and very crude approximation, the idea is to insert ‘ticks’ into a program corresponding to the uses of the resources we want to track (number of reductions, recursive calls, space allocations, etc), and then prove that the number of ticks is bounded by a particular function of a certain aspect of the input (e.g., the length of an input list).</p>
+<p>Running time is an intensional property of programs, so if we wanted to define a predicate that counts the ticks, the predicate would have to be defined on the structure of programs rather than the functions they compute; program execution also has to be somehow modelled and reasoned about explicitly.
+One way to avoid all this hassle is to modify the program a little and expose the ticks as a part of observable output: for example, rewriting the program into one that uses a writer monad to accumulate the ticks — this is what Handley et al (and presumably some others) do.
+We could then use whatever tools/techniques that are available for reasoning about program behaviour to prove bounds on the number of ticks — Liquid Haskell in Handley et al’s case.</p>
+<p>Exposing the ticks at value level can be somewhat unsatisfactory though: if unoptimised, the ticks would remain at runtime, but we only want to determine the number of ticks statically.
+What Danielsson does is expose the ticks at type level instead, through the use of a <em>graded monad</em> (called an annotated monad in the paper).
+A graded monad (which I <a href="https://doi.org/10.1145/3236781">learned from Jeremy Gibbons</a>) has an indexing structure that works like a (simplified version of) writer monad at type level: over a monoid $(A, (+), 0)$, the two operations of a graded monad <code>M : A -&gt; Set -&gt; Set</code> have types</p>
+<pre><code>return : X -&gt; M 0 X
+_&gt;&gt;=_  : M a X -&gt; (X -&gt; M b Y) -&gt; M (a + b) Y
+</code></pre>
+<p>and the usual monad laws type-check because of the monoid laws.
+Danielsson calls his ticking monad <code>Thunk</code> (graded over the monoid of natural numbers and addition), which features a ticking operation</p>
+<pre><code>√_ : Thunk n X -&gt; Thunk (1 + n) X
+</code></pre>
+<p>At runtime, <code>Thunk</code> is just the identity monad, and the uses of <code>Thunk</code> operations should be easy to optimise away.</p>
+<p><em>Remark.</em> One could instead define the ticking operation as</p>
+<pre><code>tick : Thunk 1 ⊤
+</code></pre>
+<p>but the two definitions are obviously interchangeable: <code>√_ = tick &gt;&gt;_</code> and <code>tick = √ return tt</code>. (<em>End of remark.</em>)</p>
+<p>Danielsson’s main aim is to verify (amortised) bounds for operations of lazy data structures, which contain ‘thunks’ whose contents are suspended and only evaluated when required.
+These thunks are explicitly represented as pieces of computation in the <code>Thunk</code> monad.
+For example, a lazy list is either empty or a pair of a head element and a <em>suspended</em> tail whose type is wrapped inside <code>Thunk</code>.
+<code>Thunk</code> is indexed with running time (i.e., the number of ticks that will happen if a thunk is evaluated), and we can add a parameter (<code>c</code> below) to the datatype of lazy lists specifying how much time is required to evaluate each thunk in a list:</p>
+<pre><code>data SeqL (A : Set) (c : ℕ) : ℕ -&gt; Set where
+  []  : SeqL A c 0
+  _∷_ : A -&gt; Thunk c (SeqL A c n) -&gt; SeqL A c (1 + n)
+</code></pre>
+<p>To state the number of ticks in terms of the length of the input list, we also make <code>SeqL</code> length-indexed.
+Here Danielsson’s example is insertion sort:</p>
+<pre><code>sort : Seq A n -&gt; Thunk (1 + 5 * n) (SeqL A (4 * n) n)
+sort []       = √ return []
+sort (x ∷ xs) = √ insert x =&lt;&lt; sort xs
+</code></pre>
+<p>where <code>Seq</code> is the (usual) strict version of length-indexed lists (that does not contain <code>Thunk</code>).
+What the type of <code>sort</code> says is rather fine-grained:
+assuming the length of the input list <code>xs</code> is <code>n</code>, the first constructor of <code>sort xs</code> can be computed in <code>1 + 5 * n</code> steps, and then each subsequent one takes <code>4 * n</code> steps to compute.
+In the body of <code>sort</code> there are two ticks, which record reductions from the left-hand side to the right-hand side of the equations (e.g., reducing <code>sort []</code> to <code>[]</code>).
+It’s easy to check that <code>sort</code> is type-correct given the type of <code>insert</code></p>
+<pre><code>insert : A -&gt; SeqL A c n -&gt; Thunk 4 (SeqL A (4 + c) (1 + n))
+</code></pre>
+<p>and assuming that the type-checker is aware of the necessary numeric properties like <code>1 + ((1 + 5 * n) + 4) = 1 + 5 * (n + 1)</code>.
+(Agda’s type-checker isn’t though, and hence the code above is actually not complete).
+Danielsson can then go on to show that computing the minimum of the result of <code>sort</code> takes only linear time (because only the first thunk needs to be forced).</p>
+<p>The definition of <code>insert</code> is a lot messier.
+First we put ticks in places where reductions happen in the usual definition of <code>insert</code>:</p>
+<pre><code>-- type-incorrect
+insert : A -&gt; SeqL A c n -&gt; Thunk 4 (SeqL A (4 + c) (1 + n))
+insert x []       = √ return (x ∷ return [])
+insert x (y ∷ ys) = √ x ≤? y &gt;&gt;= λ b →
+                    √ if b then return (x ∷ return (y ∷ ys))
+                           else return (y ∷ (insert x =&lt;&lt; ys))
+</code></pre>
+<p>where <code>_≤?_ : A -&gt; A -&gt; Thunk 1 Bool</code> is a comparison function on <code>A</code>.
+(Note that a tick is present at the beginning of the lambda expression to account for the beta-reduction.)
+This doesn’t type-check because the type of <code>insert</code> requires that the two clauses have the same running time, but the nil clause has only one tick whereas the cons clause has more; also, the <code>if_then_else_</code> expression is given the type</p>
+<pre><code>if_then_else_ : Bool -&gt; X -&gt; X -&gt; Thunk 1 X
+</code></pre>
+<p>which requires its two branches to have the same type, so there is a similar problem for the two branches.
+Therefore we have to put in various tick-adding functions into the definition to make all the numbers of ticks match — not just the top-level ticks, but also the ticks inside the thunks in the lists.
+The resulting code is</p>
+<pre><code>insert : A -&gt; SeqL A c n -&gt; Thunk 4 (SeqL A (4 + c) (1 + n))
+insert x []       = √ returnW 2 (x ∷ returnW (3 + c) [])
+insert x (y ∷ ys) = √ x ≤? y &gt;&gt;= λ b →
+                    √ if b then x ∷ wait (2 + c) (waitL 2 (y ∷ ys))
+                           else y ∷ (insert x =&lt;&lt; ys)
+</code></pre>
+<p>where the types of the tick-adding functions are</p>
+<pre><code>returnW : (n : ℕ) -&gt; X -&gt; Thunk (1 + n) X
+wait    : (n : ℕ) -&gt; Thunk m X -&gt; Thunk (1 + n + m) X
+waitL   : (c : ℕ) -&gt; SeqL A c' n -&gt; Thunk 1 (SeqL A (2 + c + c') n)
+</code></pre>
+<p><em>Comparison.</em> Handley et al uses inequalities in the types, so that the programmer only needs to show that the different costs of the clauses/branches are all below a common bound, avoiding the tedious tick-adding above. (<em>End of comparison.</em>)</p>
+<h3>Thoughts</h3>
+<p>I feel that, to make this all work, it takes a lot of fiddling and going back and forth between programs and types (to figure out the right time function in the type and add the necessary tick-adding functions in the program), whereas the usual practice is to write a function and then estimate/infer its running time extrinsically.
+Or putting it as a question: apart from simplifying the formalism, is there any benefit putting running time information in the types and programs intrinsically?
+(My current feeling is ‘not much’.)</p>
+<p>The way it all fits together is quite neat though:
+rather than developing dedicated formalisms, we can just reuse ordinary induction (intrinsically) to count ticks and verify solutions of recurrence relations, all from first principles; also, I regard the <code>Thunk</code> monad primarily as a way to record ticks, but it also works nicely for dealing with lazy evaluation — how the dual role works out is still somewhat mysterious to me.</p>
+<p>The other obvious question to ask is: why not switch to asymptotic analysis to avoid all the trouble with constants (and lower-order terms)?
+But a counter-question immediately pops out: what’s so important about asymptotic statements anyway?
+The complexity classes is important in theory, but in practice an algorithm, say, being in polynomial time doesn’t necessarily make it useful.
+So we have a dilemma here: we don’t usually care about constants too much, but we don’t want astronomically large constants either.
+More generally, what kind of running time (or, in general, resource) statements do we want in real life?</p>
+<hr />
+<div class="remark">
+This post was supposed to come out near the end of December, but I was suddenly told that I could start my job at IIS and hastily moved to Taipei.
+Will write about the whole story soon (I think).
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
