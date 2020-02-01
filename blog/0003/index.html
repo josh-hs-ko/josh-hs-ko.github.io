@@ -62,7 +62,7 @@
 0003
 </div>
 <h2>A small exercise on the floor (function)</h2>
-<div class="post-time">Posted at 19:41 on 1 February 2020</div>
+<div class="post-time">Posted at 19:41 on 1 February 2020, and revised at 20:17 on 1 February 2020</div>
 <p>I’m about to resubmit my functional pearl paper <a href="https://josh-hs-ko.github.io/#publication-036477b8"><em>Programming metamorphic algorithms in Agda</em></a> to the Journal of Functional Programming.
 A metamorphism is a fold followed by an unfold, and a typical example is base conversion (for fractions): consuming a list of digits to compute the value it represents by a fold, and then producing a colist of digits that represents the same value in a different base by an unfold.
 For instance, to convert $0.625$ in base $10$ to $0.101$ in base $2$, we can use a three-element <code>State</code> type that records the current accumulated value and the weights of the next input and output digits; consuming the decimal digits $6$, $2$, and $5$ updates the states like</p>
@@ -100,12 +100,12 @@ This post will be about the proof only, rather than the whole story about metamo
 &amp; v - \left\lfloor \frac{v}{w_o} \right\rfloor \times w_o + b_i \times w_i \leq w_o \label{eq:assumption-2}
 \end{align}</p>
 <p>and substitute $\lfloor v / w_o \rfloor$ for $e$ and $(v - \lfloor v/w_o \rfloor \times w_o, w_i, w_o/b_o)$ for $t$.
-To establish the consequent, first we need to prove that $\mathsf{coalg'}\ (alg\ s\ d) = \mathsf{coalg'}\ (v + d \times w_i, w_i / b_i, w_o)$ produces a $\mathsf{Just}$-value by checking that the condition of the <code>if</code> expression evaluates to true:</p>
+To establish the consequent, first we need to prove that $\mathsf{coalg'}\ (\mathsf{alg}\ s\ d) = \mathsf{coalg'}\ (v + d \times w_i, w_i / b_i, w_o)$ produces a $\mathsf{Just}$-value by checking that the condition of the <code>if</code> expression evaluates to true:</p>
 <p>\begin{align}
 &amp; v + d \times w_i &gt; 0 \label{eq:obligation-3} \\
 &amp; v + d \times w_i - \left\lfloor \frac{v + d \times w_i}{w_o} \right\rfloor \times w_o + b_i \times \frac{w_i}{b_i} \leq w_o \label{eq:obligation-4}
 \end{align}</p>
-<p>And then we should check that the digit and state produced are indeed the right-hand side of the equation; the two weights obviously match, and the remaining two obligations are</p>
+<p>And then we should check that the digit and state produced are indeed the right-hand side of the equation; the weights obviously match, and the remaining two obligations are</p>
 <p>\begin{align}
 &amp; \left\lfloor \frac{v + d \times w_i}{w_o} \right\rfloor = \left\lfloor \frac{v}{w_o} \right\rfloor \label{eq:obligation-5} \\
 &amp; v + d \times w_i - \left\lfloor \frac{v + d \times w_i}{w_o} \right\rfloor \times w_o = v - \left\lfloor \frac{v}{w_o} \right\rfloor \times w_o + d \times w_i \label{eq:obligation-6}
@@ -130,13 +130,13 @@ For Obligation \ref{eq:obligation-5}, what we’ll need is the contrapositive ve
 Since $d \times w_i$ is nonnegative and the floor function is monotonic, we only need to prove</p>
 <p>$$ \left\lfloor \frac{v + d \times w_i}{w_o} \right\rfloor \leq \left\lfloor \frac{v}{w_o} \right\rfloor $$</p>
 <p>And this can be derived from Assumption \ref{eq:assumption-2}:
-Moving the middle term to the right-hand side and use the fact $d &lt; b_i$ again, we get</p>
+Moving the middle term on the left-hand side to the right and use the fact $d &lt; b_i$ again, we get</p>
 <p>$$ v + d \times w_i &lt; v + b_i \times w_i \leq \left(\left\lfloor \frac{v}{w_o} \right\rfloor + 1\right) \times w_o $$</p>
-<p>Dividing both sides by $w_o$ (which is nonnegative and does not change the direction of the inequation), we get</p>
+<p>Dividing both sides by $w_o$ (which is nonnegative and hence the direction of the inequation does not change), we get</p>
 <p>$$ \frac{v + d \times w_i}{w_o} &lt; \left\lfloor \frac{v}{w_o} \right\rfloor + 1 $$</p>
 <p>The right-hand side is obviously an integer, so we’re entitled to put in the floor function:</p>
 <p>$$ \left\lfloor \frac{v + d \times w_i}{w_o} \right\rfloor &lt; \left\lfloor \frac{v}{w_o} \right\rfloor + 1 $$</p>
-<p>And this is equivalent to what we need to prove.</p>
+<p>This is an inequation on integers, and hence equivalent to what we need to prove.</p>
 <p>One question I’d love to ask is whether we can explain this proof intuitively (in particular, why we should use the universal property in this way), but I’ll leave the pondering to another time and get back to working on the paper.</p>
 
 <!-- END OF POST -->
