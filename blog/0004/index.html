@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 20:50 on 12 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory (namely construct a term of the corresponding type), aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -81,8 +81,8 @@ Then for some state transition relation $(\leadsto)$, we want to show that the i
 \forall (a, p) \leadsto (a', p').\ \mathsf{Inv}\ a\ p \to \mathsf{Inv}\ a'\ p'
 \label{eq:original-preservation}
 \end{equation}</p>
-<p>However, if we try to prove the above by SMT solving, the solver won’t too happy about $\mathsf{Inv}$, apparently because quantifier alternation — in this case two alternations in the sequence $\forall v\thinspace(i)\ \exists j\ \forall k$ — is very expensive to deal with.
-The verification people came up with a way to eliminate the $\exists j$ quantification, which looks like a form of <a href="https://en.wikipedia.org/wiki/Skolem_normal_form">Skolemisation</a> to me, and I decided to try to apply a more standard version of Skolemisation.
+<p>However, if we try to prove the above by SMT solving, the solver won’t be too happy about $\mathsf{Inv}$, apparently because quantifier alternation — in this case there are two alternations in the sequence $\forall v\thinspace(i)\ \exists j\ \forall k$ — is very expensive to deal with.
+My colleague came up with a way to eliminate the $\exists j$ quantification, which looks like a form of <a href="https://en.wikipedia.org/wiki/Skolem_normal_form">Skolemisation</a> to me, and I decided to try to apply a more standard version of Skolemisation.
 The idea is that the computation of $j$ is really independent of the invariant, and can be formulated independently as a function $f : (\mathbf n \to \mathsf V) \to \mathbf n \to \mathsf V \to \mathbf n$ with the spec</p>
 <p>\begin{align*}
 \mathsf{LastIndex}\ f \defeq {}&amp; \forall a : \mathbf n \to \mathsf V.\ \forall p : \mathbf n.\ \forall v : \mathsf V. \\
@@ -111,7 +111,7 @@ If we remove the spec of $f$ from $\mathsf{Inv}$, we’ll be left with</p>
 &amp; \quad f\ a\ p\ v &lt; p \wedge a\ (f\ a\ p\ v) = v \wedge (\forall k : \mathbf n.\ f\ a\ p\ v &lt; k \wedge k &lt; p \to a\ k \neq v) \wedge \mathsf P\ (f\ a\ p\ v) \\
 {}\equiv{}&amp; \reason{$\forall$ and $(A \to)$ distributes over conjunction} \\
 &amp; \exists f.\ \bigl(\forall v : \mathsf V.\ \mathsf{OccursIn}\ a\ p\ v \to \\
-&amp; \phantom{\exists f.\ \bigl(} \quad f\ a\ p\ v &lt; p \wedge a\ (f\ a\ p\ v) = v \wedge (\forall k : \mathbf n.\ f\ a\ p\ v &lt; k \wedge k &lt; p \to a\ k \neq v)\bigr) \wedge \\
+&amp; \phantom{\exists f.\ \bigl(} \quad f\ a\ p\ v &lt; p \wedge a\ (f\ a\ p\ v) = v \wedge (\forall k : \mathbf n.\ f\ a\ p\ v &lt; k \wedge k &lt; p \to a\ k \neq v)\bigr) \wedge {} \\
 &amp; \phantom{\exists f.\ } \bigl(\forall v : \mathsf V.\ \mathsf{OccursIn}\ a\ p\ v \to \mathsf P\ (f\ a\ p\ v)\bigr) \\
 {}\Leftarrow{}&amp; \reason{$\forall$-elimination; definition of $\mathsf{LastIndex}$} \\
 &amp; \exists f.\ \mathsf{LastIndex}\ f \wedge \forall v : \mathsf V.\ \mathsf{OccursIn}\ a\ p\ v \to \mathsf P\ (f\ a\ p\ v) \\
@@ -134,14 +134,14 @@ The preservation of this new invariant can then be transformed as follows (where
 &amp; \forall f.\ \mathsf{LastIndex}\ f \to \mathsf{Inv'}\ f\ a\ p \to \mathsf{Inv'}\ f\ a'\ p'
 \end{align*}</p>
 <p>We can then move the opening $\forall (a, p) \leadsto (a', p')$ inwards and arrive at (\ref{eq:nicer-preservation}).</p>
-<p>From my point of view, (\ref{eq:nicer-preservation}) is nicer to prove than (\ref{eq:original-preservation}) since we can just assume the existence of $f$ and its correctness, and what we need to prove now ($\mathsf{Inv'}$) is simpler than before ($\mathsf{Inv}$).
+<p>From my point of view, (\ref{eq:nicer-preservation}) is nicer to prove than (\ref{eq:original-preservation}) since we can just assume the existence of $f$ and its correctness, and what we need to establish now ($\mathsf{Inv'}$) is simpler than before ($\mathsf{Inv}$).
 The verification people don’t buy this argument though.
 To prove the validity of (\ref{eq:nicer-preservation}), they negate it</p>
 <p>$$ \exists f.\ \mathsf{LastIndex}\ f \wedge \exists (a, p) \leadsto (a', p').\ \mathsf{Inv'}\ f\ a\ p \wedge \neg \mathsf{Inv'}\ f\ a'\ p' $$</p>
-<p>and prove that the negated version does not have a model by SMT solving.
+<p>and prove by SMT solving that the negated version does not have a model.
 The existential quantifiers can be removed without changing the satisfiability of the formula (more precisely, $f$ is treated as an uninterpreted function here), so we would try to give the SMT solver the formula</p>
 <p>\begin{equation}
-\mathsf{LastIndex}\ f \wedge \mathsf{Inv'}\ f\ a\ p \wedge \neg \mathsf{Inv'}\ f\ a'\ p'
+\mathsf{LastIndex}\ f \wedge (a, p) \leadsto (a', p') \wedge \mathsf{Inv'}\ f\ a\ p \wedge \neg \mathsf{Inv'}\ f\ a'\ p'
 \label{eq:original-negation}
 \end{equation}</p>
 <p>which contains no quantifier alternation, except that we cannot — $\mathsf{LastIndex}\ f$ contains a higher-order quantification over $a$ (which is a function) and cannot be handled by the solver.
@@ -157,12 +157,12 @@ That is, we strengthen (\ref{eq:nicer-preservation}) as follows</p>
 \end{align*}</p>
 <p>and now the negated formula which we need to show doesn’t have a model is</p>
 <p>\begin{equation}
-(\mathsf{LastIndex}\ f)[a][p] \wedge (\mathsf{LastIndex}\ f)[a'][p'] \wedge \mathsf{Inv'}\ f\ a\ p \wedge \neg \mathsf{Inv'}\ f\ a'\ p'
+(a, p) \leadsto (a', p') \wedge (\mathsf{LastIndex}\ f)[a][p] \wedge (\mathsf{LastIndex}\ f)[a'][p'] \wedge \mathsf{Inv'}\ f\ a\ p \wedge \neg \mathsf{Inv'}\ f\ a'\ p'
 \label{eq:first-order-negation}
 \end{equation}</p>
 <p>which no longer contains higher-order quantification.
-This is a step I didn’t anticipate, probably because $\mathsf{LastIndex}\ f$ is a premise and it’s kind of counterintuitive/unnecessary to weaken it (throw what you have away).
-It remains to be seen whether this formula can be handled efficiently by the solver though: thinking intuitively, the function $f$ would have to be solved, which could be difficult.</p>
+This is a step I didn’t anticipate, probably because $\mathsf{LastIndex}\ f$ is a premise and it’s kind of counterintuitive/unnecessary to weaken it (throw away what you have).
+It remains to be seen whether this formula can be handled efficiently or even successfully by the solver though: thinking intuitively, the function $f$ would have to be solved, which could be difficult.</p>
 <p>The last interesting contrast between the two camps’ thinking is how we think about a formula being ‘stronger’.
 To me, a formula is stronger when it can be used to prove more things, whereas to the verification people a formula is stronger when it has less models.
 So when we move from (\ref{eq:original-negation}) to (\ref{eq:first-order-negation}), for example, they would see that (\ref{eq:first-order-negation}) has more models than (\ref{eq:original-negation}).
