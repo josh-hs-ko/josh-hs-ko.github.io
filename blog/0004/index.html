@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 11:46 on 13 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 11:48 on 13 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -145,7 +145,8 @@ The existential quantifiers can be removed without changing the satisfiability o
 \mathsf{Lookup}\ f \wedge (a, p) \leadsto (a', p') \wedge \mathsf{Inv}^*\ f\ a\ p \wedge \neg \mathsf{Inv}^*\ f\ a'\ p'
 \label{eq:original-negation}
 \end{equation}</p>
-<p>which contains no quantifier alternation, but this doesn’t work — $f$ is a higher-order function (whose first argument is a function), and subsequently $\mathsf{Lookup}\ f$ contains a higher-order quantification as well; this ‘higher-orderness’ cannot be handled by the solver.
+<p>which contains no quantifier alternation.
+This doesn’t work though: $f$ is a higher-order function (whose first argument is a function), and subsequently $\mathsf{Lookup}\ f$ contains a higher-order quantification as well; this ‘higher-orderness’ cannot be handled by the solver.
 Cleverly, my colleague observed that we don’t really need to use the whole $f$ and $\mathsf{Lookup}\ f$ — in the invariant preservation part of (\ref{eq:nicer-preservation}) we use only $f\ a\ p$ and $f\ a'\ p'$, that is, we need to look up the last index only in $(a, p)$ and $(a', p')$, so it should suffice to assume the existence of two functions $g, g' : \mathsf V \to \mathbf n$ satisfying $\mathsf{LookupIn}\ a\ p\ g$ and $\mathsf{LookupIn}\ a'\ p'\ g'$ where</p>
 <p>$$ \mathsf{LookupIn}\ a\ p\ g \defeq \forall v : \mathsf V.\ \mathsf{LastIndex}\ a\ p\ v\ (g\ v) $$</p>
 <p>which is a generalisation of $\mathsf{Lookup}$ since we can express $\mathsf{Lookup}$ in terms of $\mathsf{LookupIn}$: $\mathsf{Lookup}\ f \equiv \forall a : \mathbf n \to \mathsf V.\ \forall p : \mathbf n.\ \mathsf{LookupIn}\ a\ p\ (f\ a\ p)$.</p>
