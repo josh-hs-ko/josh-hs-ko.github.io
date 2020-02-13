@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 11:16 on 13 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 11:37 on 13 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -174,9 +174,9 @@ Cleverly, my colleague observed that we don’t really need to use the whole $f$
 (a, p) \leadsto (a', p') \wedge \mathsf{LookupIn}\ a\ p\ g \wedge \mathsf{LookupIn}\ a'\ p'\ g' \wedge \mathsf{Inv}^{**}\ a\ p\ g \wedge \neg \mathsf{Inv}^{**}\ a'\ p'\ g'
 \label{eq:first-order-negation}
 \end{equation}</p>
-<p>which no longer contains higher-order quantification.
+<p>which is no longer higher-order.
 This is a step I didn’t anticipate, probably because $f$ and $\mathsf{Lookup}\ f$ are premises and it’s kind of counterintuitive/unnecessary to weaken them (throw away what you have).
-It remains to be seen whether this formula can be handled efficiently or even successfully by the solver though: thinking intuitively, the functions $g$ and $g'$ would have to be solved, which could be difficult.</p>
+It remains to be seen whether this formula can be handled efficiently or even successfully by the solver though.</p>
 <p>The last interesting contrast between the two camps’ thinking is how we think about a formula being ‘stronger’.
 To me, a formula is stronger when it can be used to prove more things, whereas to the verification people a formula is stronger when it has less models.
 So when we move from (\ref{eq:original-negation}) to (\ref{eq:first-order-negation}), for example, they would see that (\ref{eq:first-order-negation}) has more models than (\ref{eq:original-negation}).
