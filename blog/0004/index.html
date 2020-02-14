@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 17:25 on 13 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 20:55 on 14 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -134,10 +134,10 @@ The preservation of this new invariant can then be transformed as follows (where
 {}\equiv{}&amp; \reason{$A \to A \wedge B \equiv A \to B$} \\
 &amp; \forall f.\ \mathsf{Lookup}\ f \to \mathsf{Inv}^*\ f\ a\ p \to \mathsf{Inv}^*\ f\ a'\ p'
 \end{align*}</p>
-<p>We can then move the opening $\forall (a, p) \leadsto (a', p')$ inwards and arrive at (\ref{eq:nicer-preservation}).</p>
-<p>From my point of view, (\ref{eq:nicer-preservation}) is nicer to prove than (\ref{eq:original-preservation}) since we can just assume the existence of $f$ and its correctness, and what we need to establish now ($\mathsf{Inv}^*$) is simpler than before ($\mathsf{Inv}$).
+<p>We can then move the opening $\forall (a, p) \leadsto (a', p')$ inwards and arrive at Formula \ref{eq:nicer-preservation}.</p>
+<p>From my point of view, Formula \ref{eq:nicer-preservation} is nicer to prove than Formula \ref{eq:original-preservation} since we can just assume the existence of $f$ and its correctness, and what we need to establish now ($\mathsf{Inv}^*$) is simpler than before ($\mathsf{Inv}$).
 The verification people don’t buy this argument though.
-To prove the validity of (\ref{eq:nicer-preservation}), they negate it</p>
+To prove the validity of Formula \ref{eq:nicer-preservation}, they negate it</p>
 <p>$$ \exists f.\ \mathsf{Lookup}\ f \wedge \exists (a, p) \leadsto (a', p').\ \mathsf{Inv}^*\ f\ a\ p \wedge \neg \mathsf{Inv}^*\ f\ a'\ p' $$</p>
 <p>and prove by SMT solving that the negated version does not have a model.
 The existential quantifiers can be removed without changing the satisfiability of the formula, so we would try to give the SMT solver the formula</p>
@@ -147,14 +147,14 @@ The existential quantifiers can be removed without changing the satisfiability o
 \end{equation}</p>
 <p>which contains no quantifier alternation.
 I’m somewhat dismayed by this change of view, because (at least conceptually) $f$ now needs to be found by the SMT solver and seems to become a burden rather than an asset as I originally thought.</p>
-<p>Moreover, the SMT solver doesn’t like (\ref{eq:original-negation}): $f$ is a higher-order function (whose first argument is a function), and subsequently $\mathsf{Lookup}\ f$ contains a higher-order quantification as well; this ‘higher-orderness’ cannot be handled by the solver.
+<p>Moreover, the SMT solver doesn’t like Formula \ref{eq:original-negation}: $f$ is a higher-order function (whose first argument is a function), and subsequently $\mathsf{Lookup}\ f$ contains a higher-order quantification as well; this ‘higher-orderness’ cannot be handled by the solver.
 But this problem can be remedied:
-cleverly, my colleague observed that we don’t really need to use the whole $f$ and $\mathsf{Lookup}\ f$ — in the invariant preservation part of (\ref{eq:nicer-preservation}) we use only $f\ a\ p$ and $f\ a'\ p'$, that is, we need to look up the last index only in $(a, p)$ and $(a', p')$, so it should suffice to assume the existence of two functions $g, g' : \mathsf V \to \mathbf n$ satisfying $\mathsf{LookupIn}\ a\ p\ g$ and $\mathsf{LookupIn}\ a'\ p'\ g'$ where</p>
+cleverly, my colleague observed that we don’t really need to use the whole $f$ and $\mathsf{Lookup}\ f$ — in the invariant preservation part of Formula \ref{eq:nicer-preservation} we use only $f\ a\ p$ and $f\ a'\ p'$, that is, we need to look up the last index only in $(a, p)$ and $(a', p')$, so it should suffice to assume the existence of two functions $g, g' : \mathsf V \to \mathbf n$ satisfying $\mathsf{LookupIn}\ a\ p\ g$ and $\mathsf{LookupIn}\ a'\ p'\ g'$ where</p>
 <p>$$ \mathsf{LookupIn}\ a\ p\ g \defeq \forall v : \mathsf V.\ \mathsf{LastIndex}\ a\ p\ v\ (g\ v) $$</p>
 <p>which is a generalisation of $\mathsf{Lookup}$ since we can express $\mathsf{Lookup}$ in terms of $\mathsf{LookupIn}$: $\mathsf{Lookup}\ f \equiv \forall a : \mathbf n \to \mathsf V.\ \forall p : \mathbf n.\ \mathsf{LookupIn}\ a\ p\ (f\ a\ p)$.</p>
 <p>More formally, define</p>
 <p>$$ \mathsf{Inv}^{**}\ a\ p\ g \defeq \forall v : \mathsf V.\ \mathsf{OccursIn}\ a\ p\ v \to \mathsf P\ (g\ v) $$</p>
-<p>so that $\mathsf{Inv}^*\ f\ a\ p \equiv \mathsf{Inv}^{**}\ a\ p\ (f\ a\ p)$, we strengthen (\ref{eq:nicer-preservation}) as follows:</p>
+<p>so that $\mathsf{Inv}^*\ f\ a\ p \equiv \mathsf{Inv}^{**}\ a\ p\ (f\ a\ p)$, we strengthen Formula \ref{eq:nicer-preservation} as follows:</p>
 <p>\begin{align*}
 &amp; \forall f.\ \mathsf{Lookup}\ f \to \forall (a, p) \leadsto (a', p').\ \mathsf{Inv}^{**}\ a\ p\ (f\ a\ p) \to \mathsf{Inv}^{**}\ a'\ p'\ (f\ a'\ p') \\
 {}\equiv{}&amp; \reason{swapping; definitions of $\mathsf{Lookup}$ and $\mathsf{LookupIn}$} \\
@@ -181,8 +181,8 @@ This is a step I didn’t anticipate, probably because $f$ and $\mathsf{Lookup}\
 It remains to be seen whether this formula can be handled efficiently or even successfully by the solver though.</p>
 <p>The last interesting contrast between the two camps’ thinking is how we think about a formula being ‘stronger’.
 To me, a formula is stronger when it can be used to prove more things, whereas to the verification people a formula is stronger when it has less models.
-So when we move from (\ref{eq:original-negation}) to (\ref{eq:first-order-negation}), for example, they would see that (\ref{eq:first-order-negation}) has more models than (\ref{eq:original-negation}).
-Then, if we can show by SMT solving that (\ref{eq:first-order-negation}) has no model, then (\ref{eq:original-negation}) must have no model either, which is what we want.
+So when we move from Formula \ref{eq:original-negation} to Formula \ref{eq:first-order-negation}, for example, they would see that Formula \ref{eq:first-order-negation} has more models than Formula \ref{eq:original-negation}.
+Then, if we can show by SMT solving that Formula \ref{eq:first-order-negation} has no model, then Formula \ref{eq:original-negation} must have no model either, which is what we want.
 Somehow I failed to figure out this argument during the discussion — it could be because I’d drained most of my brain power at that point.</p>
 
 <!-- END OF POST -->
