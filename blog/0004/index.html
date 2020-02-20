@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 20:55 on 14 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 12:52 on 20 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -152,7 +152,7 @@ But this problem can be remedied:
 cleverly, my colleague observed that we don’t really need to use the whole $f$ and $\mathsf{Lookup}\ f$ — in the invariant preservation part of Formula \ref{eq:nicer-preservation} we use only $f\ a\ p$ and $f\ a'\ p'$, that is, we need to look up the last index only in $(a, p)$ and $(a', p')$, so it should suffice to assume the existence of two functions $g, g' : \mathsf V \to \mathbf n$ satisfying $\mathsf{LookupIn}\ a\ p\ g$ and $\mathsf{LookupIn}\ a'\ p'\ g'$ where</p>
 <p>$$ \mathsf{LookupIn}\ a\ p\ g \defeq \forall v : \mathsf V.\ \mathsf{LastIndex}\ a\ p\ v\ (g\ v) $$</p>
 <p>which is a generalisation of $\mathsf{Lookup}$ since we can express $\mathsf{Lookup}$ in terms of $\mathsf{LookupIn}$: $\mathsf{Lookup}\ f \equiv \forall a : \mathbf n \to \mathsf V.\ \forall p : \mathbf n.\ \mathsf{LookupIn}\ a\ p\ (f\ a\ p)$.</p>
-<p>More formally, define</p>
+<p>More formally, defining</p>
 <p>$$ \mathsf{Inv}^{**}\ a\ p\ g \defeq \forall v : \mathsf V.\ \mathsf{OccursIn}\ a\ p\ v \to \mathsf P\ (g\ v) $$</p>
 <p>so that $\mathsf{Inv}^*\ f\ a\ p \equiv \mathsf{Inv}^{**}\ a\ p\ (f\ a\ p)$, we strengthen Formula \ref{eq:nicer-preservation} as follows:</p>
 <p>\begin{align*}
