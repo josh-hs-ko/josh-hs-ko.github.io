@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 15:21 on 23 February 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 00:00 on 24 February 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -138,11 +138,11 @@ The preservation of this new invariant can then be transformed as follows (where
 <p>From my point of view, Formula \ref{eq:nicer-preservation} is nicer to prove than Formula \ref{eq:original-preservation} since we can just assume the existence of $f$ and its correctness, and what we need to establish now ($\mathsf{Inv}^*$) is simpler than before ($\mathsf{Inv}$).
 The verification people don’t buy this argument though.
 To prove the validity of Formula \ref{eq:nicer-preservation}, they negate it</p>
-<p>$$ \exists f.\ \mathsf{Lookup}\ f \wedge \exists (a, p) \leadsto (a', p').\ \mathsf{Inv}^*\ f\ a\ p \wedge \neg \mathsf{Inv}^*\ f\ a'\ p' $$</p>
+<p>$$ \exists f.\ \mathsf{Lookup}\ f \wedge \exists (a, p) \leadsto (a', p').\ \mathsf{Inv}^*\ f\ a\ p \wedge \exists v : \mathsf V.\ \mathsf{OccursIn}\ a'\ p'\ v \wedge \neg \mathsf P\ (f\ a'\ p'\ v) $$</p>
 <p>and prove by SMT solving that the negated version does not have a model.
-The existential quantifiers can be removed without changing the satisfiability of the formula, so we would try to give the SMT solver the formula</p>
+Again by Skolemisation, the existential quantifiers can be removed without changing the satisfiability of the formula, so we would try to give the SMT solver the formula</p>
 <p>\begin{equation}
-\mathsf{Lookup}\ f \wedge (a, p) \leadsto (a', p') \wedge \mathsf{Inv}^*\ f\ a\ p \wedge \neg \mathsf{Inv}^*\ f\ a'\ p'
+\mathsf{Lookup}\ f \wedge (a, p) \leadsto (a', p') \wedge \mathsf{Inv}^*\ f\ a\ p \wedge i &lt; p' \wedge a'\ i = v \wedge \neg \mathsf P\ (f\ a'\ p'\ v)
 \label{eq:original-negation}
 \end{equation}</p>
 <p>which contains no quantifier alternation.
@@ -173,7 +173,7 @@ cleverly, my colleague <a href="http://bull.iis.sinica.edu.tw/yfc/doku.php">Yu-F
 \end{align*}</p>
 <p>Now the negated formula which we need to show doesn’t have a model is</p>
 <p>\begin{equation}
-(a, p) \leadsto (a', p') \wedge \mathsf{LookupIn}\ a\ p\ g \wedge \mathsf{LookupIn}\ a'\ p'\ g' \wedge \mathsf{Inv}^{**}\ a\ p\ g \wedge \neg \mathsf{Inv}^{**}\ a'\ p'\ g'
+(a, p) \leadsto (a', p') \wedge \mathsf{LookupIn}\ a\ p\ g \wedge \mathsf{LookupIn}\ a'\ p'\ g' \wedge \mathsf{Inv}^{**}\ a\ p\ g \wedge i &lt; p' \wedge a'\ i = v \wedge \neg \mathsf P\ (g'\ v)
 \label{eq:first-order-negation}
 \end{equation}</p>
 <p>which is no longer higher-order.
