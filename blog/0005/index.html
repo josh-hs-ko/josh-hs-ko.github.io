@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Defining algebraic effect handlers — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="This post is an incomplete digest of Andrej Bauer’s note *What is algebraic about algebraic effects and handlers?*. My goal is to arrive at a reasonable definition of handlers. (Spoiler: I don’t manage to achieve that goal, although we will see Bauer’s definition.)">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0005
+</div>
+<h2>Defining algebraic effect handlers</h2>
+<div class="post-time">Posted at 17:11 on 3 March 2020</div>
+<p>This post is an incomplete digest of <a href="http://www.andrej.com">Andrej Bauer</a>’s <a href="http://arxiv.org/abs/1807.05923"><em>What is algebraic about algebraic effects and handlers?</em></a>, which is a note of a tutorial given at a Dagstuhl seminar.
+My goal is to arrive at a reasonable definition of handlers.
+(Spoiler: I don’t manage to achieve that goal, although we will see Bauer’s definition.)
+The technical part of this post will be somewhat compact and lightweight, so that it’s easier for me to come back and take a quick look; for a fuller introduction, Bauer’s note itself is very accessible and highly recommended, and in particular gives a lot of examples.</p>
+<p>An algebraic theory prescribes a set of operations and their equational laws saying that applying the operations in two different ways should lead to the same result.
+For example, the theory of monoids is about two operations, say $0$ and $(+)$, satisfying the usual identity and associativity laws, where for example the left identity law $0 + x = x$ says that applying $(+)$ to $0$ and any element $x$ is the same as just $x$.
+Such applications of operations can be represented as trees whose leaves are variables and whose internal nodes are operations, or in Haskell syntax,</p>
+<p>\begin{eqnarray*}
+\mathbf{data}\ \mathsf{MTree}\ v &amp;=&amp; \mathsf{Return}\ v \\
+&amp;|&amp; \mathsf{Zero} \\
+&amp;|&amp; \mathsf{Plus}\ (\mathsf{MTree}\ v)\ (\mathsf{MTree}\ v)
+\end{eqnarray*}</p>
+<p>where the type of the trees is parametrised over the type of variables used.
+Application of operations is reminiscent of programs/syntax trees, and we can choose a suitable design of trees so as to formulate theories about more familiar programs.
+For example, stateful programs can be thought of as having two operations $\mathsf{get}$ and $\mathsf{put}$ operating on an implicit state of type $S$, with $\mathsf{get}$ reading the state and $\mathsf{put}$ overwriting the state.
+To represent stateful programs as trees, we need two generalisations (compared to the monoidal trees):
+We can think of $\mathsf{get}$ as a node having a potentially infinite number of branches indexed by all the possible states, where each branch is the continuation to be executed upon getting a particular state.
+As for $\mathsf{put}$, apart from a continuation, we should add to the node an extra field storing the value to be written to the state.
+So the trees representing stateful programs may be infinitely branching and have internal fields, or more precisely in Haskell syntax,</p>
+<p>\begin{eqnarray*}
+\mathbf{data}\ \mathsf{STree}\ v &amp;=&amp; \mathsf{Return}\ v \\
+&amp;|&amp; \mathsf{Get}\ (S \to \mathsf{STree}\ v) \\
+&amp;|&amp; \mathsf{Put}\ S\ (\mathsf{STree}\ v)
+\end{eqnarray*}</p>
+<p>We can then formulate laws on stateful programs, for example requiring that getting the state and then immediately putting it back is the same as doing nothing: <code>Get (\s -&gt; Put s cont)</code> should be ‘the same’ as just <code>cont</code>.</p>
+<p>The above account mixes syntax/signature and semantics/model, whereas modern logic suggests that we separate the two.
+Starting with the former:
+The signature/syntax of an algebraic theory $T$ is specified by a collection of operation symbols, where each symbol $\mathit{op}$ is associated with a parameter set $P$ and an arity set $A$, written $\mathit{op} : P \leadsto A$, and a set of purely formal equations between two trees/terms inductively constructed from some set of variables and the operation symbols.
+In (casual) Haskell syntax, the trees are defined by</p>
+<p>\begin{eqnarray*}
+\mathbf{data}\ \mathsf{Tree}_T\ v &amp;=&amp; \mathsf{Return}\ v \\
+&amp;|&amp; \ldots \\
+&amp;|&amp; \mathit{op}\ P\ (A \to \mathsf{Tree}_T\ v) \\
+&amp;|&amp; \ldots
+\end{eqnarray*}</p>
+<p>Note that this formulation is general enough to represent both the monoidal and stateful trees: $0 : \mathbf 1 \leadsto \mathbf 0$, $(+) : \mathbf 1 \leadsto \mathbf 2$, $\mathsf{get} : \mathbf 1 \leadsto S$, and $\mathsf{put} : S \leadsto \mathbf 1$, where $\mathbf n \defeq \set{0, \ldots, n-1}$.</p>
+<p>Semantically, define a model $M$ of $T$ to be a carrier set $|M|$ and a collection of functions corresponding to every operation symbol $\mathit{op} : P \leadsto A$ in $T$</p>
+<p>$$ \sem{\mathit{op}} : P \to (A \to |M|) \to |M|  $$</p>
+<p>on which the equations of $T$ should be valid:
+defining (casually)</p>
+<p>\begin{eqnarray*}
+\mathsf{eval} &amp;:&amp; (v \to |M|) \to \mathsf{Tree}_T\ v \to |M| \\
+\mathsf{eval}\ \sigma\ (\mathsf{Return}\ v) &amp;=&amp; \sigma\ v \\
+\mathsf{eval}\ \sigma\ (\mathit{op}\ p\ \mathit{ts}) &amp;=&amp; \sem{\mathit{op}}\ p\ (\mathsf{eval}\ \sigma \circ \mathit{ts})
+\end{eqnarray*}</p>
+<p>we require $\mathsf{eval}\ \sigma\ t = \mathsf{eval}\ \sigma\ u$ for every formal equation $t = u$ in $T$ and assignment $\sigma$.</p>
+<p>The intuition about theories being programs/syntax trees and their equations is formalised as a <em>term model</em> $\mathsf F_T\ X$ over some (result) type $X$, which contains programs/syntax trees identified up to the equations.
+In more detail:
+The carrier set $|\mathsf F_T\ X|$ is $\mathsf{Tree}_T\ X\mathop/{(\sim)}$ where $(\sim)$ is the congruent equivalence relation on $\mathsf{Tree}_T\ X$ inductively generated from the (semantic) equations
+$\mathsf{eval}\ \sigma\ t = \mathsf{eval}\ \sigma\ u$ for every (formal) equation $t = u$ in $T$ and assignment $\sigma$.
+The semantics of the operations of $T$ are just the constructors of $\mathsf{Tree}_T\ X$ operating on the representatives of the equivalence classes; they’re well-defined (on the quotient set) because $(\sim)$ is congruent, and they validate all the formal equations of $T$ because $(\sim)$ includes exactly those equations.
+This doesn’t seem to say much, but we may be able to deduce something stronger from the quotient construction: for the theory of state, for example, it can be shown that all the elements in the term model have the normal form <code>Get (\s -&gt; Put (f s) (Return (g s)))</code> for some <code>f : S -&gt; S</code> and <code>g : S -&gt; X</code>, and are isomorphic to the state transformers of type <code>S -&gt; X × S</code>.</p>
+<p>The term model is special because it is <em>free</em>, in the sense that it can be mapped to any other model of $T$ in a unique, structure-preserving way, and can thus be thought of as a representation capturing the common structure of all the models.
+This isn’t surprising though if we recall that the common structure in question is $T$, or more precisely, the equations about applications of operations specified by $T$, which are exactly what the term model represents.
+Formally, for every model $M$ of $T$ and function $f : X \to |M|$, there exists a unique homomorphism $h : \mathsf F_T\ X \to M$ such that $f = \mathsf{Return} \circ h$, and this $h$ is in fact $\mathsf{eval}\ f$ with its domain quotiented.
+An important consequence of this definition is that all the homomorphisms of type $\mathsf F_T\ X \to M$ are in one-to-one correspondence with the mappings of type $X \to |M|$.
+(One way to verify this directly is to check that $\mathsf{eval}$ is both injective and surjective.)</p>
+<p><em>Remark.</em>
+The choice of making the term model parametrised over $X$ may seem somewhat arbitrary, but it is ‘predicted’ by the general theory of adjunctions in category theory, and thus justified by the prevalence and usefulness (and even ‘inevitability’) of adjunctions.
+(<em>End of Remark.</em>)</p>
+<p><em>Discussion.</em>
+In Section 2.1 ‘Computations as free models’ of Bauer’s note, he says</p>
+<blockquote>
+<p>Among all the models of an algebraic theory of computational effects, which one best describe[s] the actual computational effects?
+If a theory of computational effects truly is adequately described by its signature and equations, then the free model ought to be the desired one.</p>
+</blockquote>
+<p>I was confused by this seemly under-justified identification of computation and the free model — the former is a very rich and diverse concept whereas the latter is just programs and equations, so there seems to be a fairly big gap.
+But after re-reading Bauer’s words more carefully, I see that his every mention of computation should be qualified by ‘algebraic’, that is, he only talks about computations whose behaviour can be characterised by equations (such as state), and then everything makes sense.
+This does greatly reduce the strength of his statement though, to the extent that the statement becomes almost tautological.
+Moreover, I am still concerned about the gap — that is, I am doubtful about how many computational effects are algebraic, in the sense that we can truly understand the effects just through equations.
+It’s great to be able to give effects an algebraic structure so that we can perform equational reasoning about them, but it probably goes too far (or is still too early) to say that to understand the behaviour of effectful programs all it takes is to understand the equations, except in simple and well-studied cases like state.
+(<em>End of discussion.</em>)</p>
+<p>Bauer then defines handlers as transformations of computations from one theory to another, i.e., of type $\mathsf F_T\ X \to \mathsf F_{T'}\ X'$.
+My intuition here is that $T$ consists of high-level operations (and $X$ is some abstract type) whereas the operations of $T'$ are low-level micro-instructions (and $X'$ is some primitive type), and a handler’s job is to implement the high-level operations in terms of the low-level micro-instructions.
+With a leap of faith Bauer postulates that handlers should be homomorphisms on models of $T$.
+This means that $\mathsf F_{T'}\ X'$ should be a model of $T$ in the first place, that is, for each $\mathit{op} : P \leadsto A$ in $T$ we should give an interpretation</p>
+<p>$$ \sem{\mathit{op}} : P \to (A \to |\mathsf F_{T'}\ X'|) \to |\mathsf F_{T'}\ X'| $$</p>
+<p>and show that the equations of $T$ hold for these interpretations (using the equations of $T'$).
+These amount to translating each high-level operation to low-level micro-instructions (assuming that the micro-instructions corresponding to its operands are known) and proving that the laws of the low-level micro-instructions imply those of the high-level operations.
+Then all it takes to define a homomorphism from $\mathsf F_T\ X$ to $\mathsf F_{T'}\ X'$ is to give a function of type</p>
+<p>$$ X \to |\mathsf F_{T'}\ X'| $$</p>
+<p>which is used to handle the $\mathsf{Return}$ nodes.
+In short, Bauer ‘predicts’ handlers to be folds on (equivalence classes of) the trees of type $\mathsf F_T\ X$ based on the ubiquity of homomorphisms, but I find this prediction less acceptable (‘inevitable’) than the one about free models.
+Besides, the result type of Bauer’s handlers is not what we usually see — for state, for example, the type of the usual handler is something like</p>
+<p>$$ \mathsf F_T\ X \to S \to \mathsf F_{T'}\ (X' \times S) $$</p>
+<p>where $T$ has the two stateful operations and $T'$ is $T$ without the two operations.
+We could again require that this should be a homomorphism, and repeat the reasoning above to arrive at a suitable definition, but I still don’t see a way to justify the requirement — indeed, Bauer noted at the end of the note that ‘in practice we often want handlers that break the equations’.
+Oh well.</p>
+<hr />
+<div class="remark">
+It seems that my natural blogging frequency is about once every two weeks.. 🤔
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>

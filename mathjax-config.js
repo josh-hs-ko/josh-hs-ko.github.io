@@ -18,7 +18,8 @@ window.MathJax = {
       Nat: '\\mathbb{N}',
       or: '\\mathrel{\\thinspace\\vee\\thinspace}',
       Order: '\\mathcal{O}',
-      reason: ['\\quad \\{ \\thinspace \\text{#1} \\thinspace \\}', 1]
+      reason: ['\\quad \\{ \\thinspace \\text{#1} \\thinspace \\}', 1],
+      sem: ['[\\![#1]\\!]', 1]
     }
   },
   chtml: {
