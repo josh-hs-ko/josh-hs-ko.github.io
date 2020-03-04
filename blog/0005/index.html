@@ -62,7 +62,7 @@
 0005
 </div>
 <h2>Defining algebraic effect handlers</h2>
-<div class="post-time">Posted at 17:11 on 3 March 2020</div>
+<div class="post-time">Posted at 17:11 on 3 March 2020, and revised at 00:09 on 4 March 2020</div>
 <p>This post is an incomplete digest of <a href="http://www.andrej.com">Andrej Bauer</a>’s <a href="http://arxiv.org/abs/1807.05923"><em>What is algebraic about algebraic effects and handlers?</em></a>, which is a note of a tutorial given at a Dagstuhl seminar.
 My goal is to arrive at a reasonable definition of handlers.
 (Spoiler: I don’t manage to achieve that goal, although we will see Bauer’s definition.)
@@ -117,7 +117,7 @@ The semantics of the operations of $T$ are just the constructors of $\mathsf{Tre
 This doesn’t seem to say much, but we may be able to deduce something stronger from the quotient construction: for the theory of state, for example, it can be shown that all the elements in the term model have the normal form <code>Get (\s -&gt; Put (f s) (Return (g s)))</code> for some <code>f : S -&gt; S</code> and <code>g : S -&gt; X</code>, and are isomorphic to the state transformers of type <code>S -&gt; X × S</code>.</p>
 <p>The term model is special because it is <em>free</em>, in the sense that it can be mapped to any other model of $T$ in a unique, structure-preserving way, and can thus be thought of as a representation capturing the common structure of all the models.
 This isn’t surprising though if we recall that the common structure in question is $T$, or more precisely, the equations about applications of operations specified by $T$, which are exactly what the term model represents.
-Formally, for every model $M$ of $T$ and function $f : X \to |M|$, there exists a unique homomorphism $h : \mathsf F_T\ X \to M$ such that $f = \mathsf{Return} \circ h$, and this $h$ is in fact $\mathsf{eval}\ f$ with its domain quotiented.
+Formally, for every model $M$ of $T$ and function $f : X \to |M|$, there exists a unique homomorphism $h : \mathsf F_T\ X \to M$ such that $f = h \circ \mathsf{Return}$, and this $h$ is in fact $\mathsf{eval}\ f$ with its domain quotiented.
 An important consequence of this definition is that all the homomorphisms of type $\mathsf F_T\ X \to M$ are in one-to-one correspondence with the mappings of type $X \to |M|$.
 (One way to verify this directly is to check that $\mathsf{eval}$ is both injective and surjective.)</p>
 <p><em>Remark.</em>
