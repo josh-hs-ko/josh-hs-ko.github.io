@@ -157,8 +157,8 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129?download=true")
-                  , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip&download=true")
+      , links   = [ ("PDF", Just "ACM DL eReader", "https://dl.acm.org/doi/pdf/10.1145/3158129")
+                  , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   , ("Slides", Just "PDF", "slides/POPL18.pdf")
                   , ("Video", Just "YouTube", "https://www.youtube.com/watch?v=-dNgQmRTYKg")
@@ -242,7 +242,7 @@ publicationList =
       , year    = 2016
       , types   = [ (Warning, "Superseded")
                   ]
-      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21371")
+      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2997364.2997369?cid=81488664395")
                   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("Pages", "2–14", Nothing)
@@ -295,8 +295,8 @@ publicationList =
       , venue   = Just ("Workshop on Partial Evaluation and Program Manipulation (PEPM)", Just ("http://conf.researchr.org/home/pepm-2016", IncludeYear))
       , year    = 2016
       , types   = []
-      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21372")
-                  , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=2847544&path=%2F2850000%2F2847544%2Fsupp%2Fp61%2Dko%2Ds%2Ezip&supp=1")
+      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2847538.2847544?cid=81488664395")
+                  , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2847538.2847544&file=p61-ko-s.zip")
                   , ("Agda code", Just "HTML", "Agda/PEPM16/BiGUL.Everything.html")
                   , ("Slides", Just "PDF", "slides/PEPM16.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
@@ -356,7 +356,7 @@ publicationList =
       , venue    = Just ("Workshop on Dependently Typed Programming (DTP)", Just ("http://www.seas.upenn.edu/~sweirich/dtp13/", IncludeYear))
       , year     = 2013
       , types    = []
-      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21373")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2502409.2502413?cid=81488664395")
                    , ("Agda code", Just "zip", "Agda/DTP13/DTP13.zip")
                    , ("Slides", Just "PDF", "slides/DTP13.pdf")
                    ]
@@ -395,7 +395,7 @@ publicationList =
       , year     = 2011
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N21374")
+      , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2036918.2036921?cid=81488664395")
                    , ("Agda code", Just "HTML", "Agda/WGP11/OAOAOO.html")
                    , ("Slides", Just "PDF", "slides/WGP11.pdf")
                    ]
