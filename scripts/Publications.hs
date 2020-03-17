@@ -123,7 +123,7 @@ publicationList =
       , year    = 2018
       , types   = [ (Published, "Extended abstract")
                   ]
-      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/authorize?N665118")
+      , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/3191697.3191719?cid=81488664395")
                   , ("Slides", Just "PDF", "slides/BX18.pdf")
                   ]
       , info    = [ ("Pages", "33–35", Nothing)
@@ -157,8 +157,8 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Nothing, "https://dl.acm.org/ft_gateway.cfm?id=3158129")
-                  , ("Agda code", Just "zip", "https://dl.acm.org/ft_gateway.cfm?id=3158129&path=%2F3160000%2F3158129%2Fsupp%2Fpopl18%2Dp3%2Daux%2Ezip&supp=1")
+      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129?download=true")
+                  , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip&download=true")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   , ("Slides", Just "PDF", "slides/POPL18.pdf")
                   , ("Video", Just "YouTube", "https://www.youtube.com/watch?v=-dNgQmRTYKg")
