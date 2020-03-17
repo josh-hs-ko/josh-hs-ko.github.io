@@ -357,7 +357,7 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2502409.2502413?cid=81488664395")
-                   , ("Agda code", Just "zip", "Agda/DTP13/DTP13.zip")
+                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2502409.2502413&file=dtp04.zip")
                    , ("Slides", Just "PDF", "slides/DTP13.pdf")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
