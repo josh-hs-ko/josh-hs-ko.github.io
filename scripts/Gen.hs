@@ -215,7 +215,7 @@ renderPublications as pvs =
   foldr ($+$) empty .
   map (\ps -> blockElement "div" [("class",["row"])] $
                 (blockElement "div" [("class", ["col-sm-3"])] $
-                   inlineElement "h3" [] (int (year (head ps))) $+$
+                   inlineElement "h3" [("class", ["year-group"])] (int (year (head ps))) $+$
                    inlineElement "div" [("class", ["after-section-title"])] empty) $+$
                 blockElement "div" [("class", ["col-sm-9"])]
                   (foldr ($+$) empty (map (renderPublication as pvs) ps))) .

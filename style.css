@@ -72,12 +72,19 @@ h2 {
 }
 
 h3 {
-  margin-top: 0;
+  margin-top: 2ex;
+  margin-bottom: 2ex;
   color: var(--cs-header);
+}
+
+.year-group {
+  margin-top: 0;
+  margin-bottom: .5ex;
 }
 
 h4 {
   margin-top: 0;
+  margin-bottom: 2ex;
   color: var(--cs-header);
 }
 

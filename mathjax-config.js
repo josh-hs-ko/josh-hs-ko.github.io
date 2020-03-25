@@ -14,6 +14,7 @@ window.MathJax = {
       awa: ['\\rlap{#2}\\phantom{#1}', 2],
       and: '\\mathrel{\\thinspace\\wedge\\thinspace}',
       braces: ['\\{ \\thinspace #1 \\thinspace \\}', 1],
+      Coloneqq: '\\mathrel{\\vcenter{::}}=',
       defeq: '\\mathrel{\\vcenter{:}}=',
       Nat: '\\mathbb{N}',
       or: '\\mathrel{\\thinspace\\vee\\thinspace}',
