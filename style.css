@@ -4,7 +4,6 @@
   --cs-text: #3b1d23;
   --cs-link-active: #ab8876;
   --cs-link-decoration: #cac0b6;
-  --cs-link-decoration-subtitle: #c5d2e0;
   --cs-navbar: #f1e3bb;
   --cs-navbar-link: #592c35;
   --cs-navbar-link-hover: #be7847;
@@ -23,7 +22,7 @@
   --cs-publication-target: #f5ecd1;
   --cs-publication-target-border: #592c35;
   --cs-code: #782327;
-  --cs-post-number-opacity: 0.2;
+  --cs-post-number-opacity: .2;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,11 +32,10 @@
     --cs-text: #c6c0b0;
     --cs-link-active: #fbf8ee;
     --cs-link-decoration: #636058;
-    --cs-link-decoration-subtitle: #4b92db;
     --cs-navbar: #50171a;
     --cs-navbar-link: #e1a358;
     --cs-navbar-link-hover: #f1e3bb;
-    --cs-navbar-link-active: white;
+    --cs-navbar-link-active: #ffffff;
     --cs-expertise: #4b92db;
     --cs-type-published: #00ab28;
     --cs-type-warning: #a97318;
@@ -52,7 +50,7 @@
     --cs-publication-target: #002147;
     --cs-publication-target-border: #f1e3bb;
     --cs-code: #cfb692;
-    --cs-post-number-opacity: 0.4;
+    --cs-post-number-opacity: .4;
   }
 }
 
@@ -98,32 +96,32 @@ p {
   -webkit-hyphens: auto;
 }
 
-a:active {
-  color: var(--cs-link-active);
-}
-
 a {
   color: currentColor;
   text-decoration: underline;
-  text-decoration-color: var(--cs-link-decoration);
-  -moz-text-decoration-color: var(--cs-link-decoration);
-  -ms-text-decoration-color: var(--cs-link-decoration);
-  -o-text-decoration-color: var(--cs-link-decoration);
   -webkit-text-decoration-color: var(--cs-link-decoration);
-  transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -ms-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
+     -moz-text-decoration-color: var(--cs-link-decoration);
+      -ms-text-decoration-color: var(--cs-link-decoration);
+       -o-text-decoration-color: var(--cs-link-decoration);
+          text-decoration-color: var(--cs-link-decoration);
   -webkit-transition: all .2s ease-in-out;
+     -moz-transition: all .2s ease-in-out;
+      -ms-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
 }
 
 a:hover {
   color: currentColor;
-  text-decoration-color: currentColor;
-  -moz-text-decoration-color: currentColor;
-  -ms-text-decoration-color: currentColor;
-  -o-text-decoration-color: currentColor;
-  -webkit-text-decoration-color: currentColor;
+  -webkit-text-decoration-color: var(--cs-link-decoration-hover);
+     -moz-text-decoration-color: var(--cs-link-decoration-hover);
+      -ms-text-decoration-color: var(--cs-link-decoration-hover);
+       -o-text-decoration-color: var(--cs-link-decoration-hover);
+          text-decoration-color: var(--cs-link-decoration-hover);
+}
+
+a:active {
+  color: var(--cs-link-active);
 }
 
 pre {
@@ -146,8 +144,8 @@ code {
 }
 
 p > code {
-  margin-left: 0.15em;
-  margin-right: 0.15em;
+  margin-left: .15em;
+  margin-right: .15em;
   letter-spacing: -1px;
 }
 
@@ -429,11 +427,11 @@ ol {
 .publication-more-info {
   color: var(--cs-publication-more-info-link);
   border: 1px solid var(--cs-publication-more-info-link);
-  transition: all .2s ease-in-out;
-  -moz-transition: all .2s ease-in-out;
-  -ms-transition: all .2s ease-in-out;
-  -o-transition: all .2s ease-in-out;
   -webkit-transition: all .2s ease-in-out;
+     -moz-transition: all .2s ease-in-out;
+      -ms-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
 }
 
 .publication-more-info:hover {
