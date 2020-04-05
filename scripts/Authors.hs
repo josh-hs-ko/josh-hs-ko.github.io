@@ -78,6 +78,10 @@ authorList =
       , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Westfechtel_Bernhard/"
       }
   , Author
+      { authorName = "Zhixuan Yang"
+      , authorURL  = "https://yangzhixuan.github.io"
+      }
+  , Author
       { authorName = "Nobuko Yoshida"
       , authorURL  = "http://mrg.doc.ic.ac.uk/people/nobuko-yoshida/"
       }
