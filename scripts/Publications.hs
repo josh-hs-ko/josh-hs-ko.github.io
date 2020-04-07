@@ -52,7 +52,7 @@ publicationList =
                   ]
       , venue   = Nothing
       , year    = 2020
-      , types   = [ (Unpublished, "Draft manuscript")
+      , types   = [ (Unpublished, "Manuscript")
                   ]
       , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2001.02031")
                   ]
@@ -106,7 +106,7 @@ publicationList =
                   ]
       , venue   = Nothing
       , year    = 2018
-      , types   = [ (Unpublished, "Draft manuscript")
+      , types   = [ (Unpublished, "Manuscript")
                   ]
       , links   = [ ("PDF", Nothing, "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
                   , ("Agda code", Just "Bitbucket", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/src/master/MetamorphismsInAgda.agda")

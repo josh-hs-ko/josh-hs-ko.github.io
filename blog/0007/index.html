@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>A ‘systematic’ reformulation — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="A while ago I wrote [0004](/blog/0004/) about eliminating quantifier alternation, which took a fair amount of logic formula manipulation.
+Not long after that, my colleague [Yun-Sheng Chang](https://scholar.google.com/citations?user=KuJajQ4AAAAJ) came up with a reformulation that makes the solution much more streamlined; this post contains my presentation of the reformulation, along with a higher-level recap of what I did in [0004](/blog/0004/).">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0007
+</div>
+<h2>A ‘systematic’ reformulation</h2>
+<div class="post-time">Posted at 11:22 on 7 April 2020</div>
+<p>A while ago I wrote <a href="/blog/0004/">0004</a> about eliminating quantifier alternation, which took a fair amount of logic formula manipulation.
+(By the way, to our pleasant surprise, the SMT solver seems to prefer the derived formulas — inexplicably, however.)
+Not long after that, my colleague <a href="https://scholar.google.com/citations?user=KuJajQ4AAAAJ">Yun-Sheng Chang</a> came up with a reformulation that makes the solution much more streamlined; below is my presentation of the reformulation, along with a higher-level recap of what I did in <a href="/blog/0004/">0004</a>.
+The reformulation is a good example of the general principle of endowing definitions with enough structure to drive the construction of subsequent proofs; in this case the definitions in question are about transition <em>systems</em>, hence the title of this post.</p>
+<p>In <a href="/blog/0004/">0004</a> the problem was a simplified version, and here we need to restore a bit of its original form (while omitting some details given in <a href="/blog/0004/">0004</a>).
+Consider two transition systems $S$ and $T$, whose transition relations are both denoted by $(\leadsto)$.
+We want to establish that $S$ is simulated by $T$ within the envelope of a relation $R \subseteq S \times T$, that is,</p>
+<p>$$ \forall s, s' \in S.\ \forall t \in T.\ s \leadsto s' \mathrel\wedge R\ (s, t) \to \exists t' \in T.\ t \leadsto t' \mathrel\wedge R\ (s', t') $$</p>
+<p>The definition of $R$ needs to refer to some values (drawn from a set $V$) that are abstracted/extracted from states of $S$ as specified by a relation $F \subseteq S \times V$; we may assume that $F$ is total, that is, $\forall s \in S.\ \exists v \in V.\ F\ (s, v)$ (so that we can extract a value from any state).
+In other words, we actually want to define $R$ as a ternary relation $R_{SVT} \subseteq S \times V \times T$, and whenever we write $R_{SVT}\ (s, v, t)$ it is implied (by logical inference or just by convention) that $F\ (s, v)$ holds (so that $v$ is constrained and sometimes even determined by $s$, and is not intended to contribute an extra degree of freedom).</p>
+<p>One natural way to achieve this is to include $F$ in the definition of $R$ — a version which we denote by $R_{FSVT}$ — so that $R_{FSVT}\ (s, v, t)$ implies $F\ (s, v)$ by definition, but $R_{FSVT}$ is rather complicated (and causes the quantifier alternation problem).
+My observation in <a href="/blog/0004/">0004</a> was that we can separate $F$ from $R_{FSVT}$ by Skolemisation.
+In slightly more detail:
+The totality of $F$ implies the existence of a function $f \in S \to V$ satisfying $F$, that is,</p>
+<p>\begin{equation}
+\exists f \in S \to V.\ \mathsf{Spec}\ f
+\label{eq:choice}
+\end{equation}</p>
+<p>where</p>
+<p>$$ \mathsf{Spec}\ f \defeq \forall s \in S.\ F\ (s, f\ s) $$</p>
+<p>We can then use $f$ in the simulation statement</p>
+<p>$$ \mathsf{Sim}\ f \defeq \forall s, s' \in S.\ \forall t \in T.\ s \leadsto s' \mathrel\wedge R_{SVT}\ (s, f\ s, t) \to \exists t' \in T.\ t \leadsto t' \mathrel\wedge R_{SVT}\ (s', f\ s', t') $$</p>
+<p>However, $f$ appears free in $\mathsf{Sim}\ f$ and should be suitably quantified, so the complete statement should be</p>
+<p>\begin{equation}
+\exists f \in S \to V.\ \mathsf{Spec}\ f \mathrel\wedge \mathsf{Sim}\ f
+\label{eq:complete}
+\end{equation}</p>
+<p>where the two occurrences of $R_{SVT}\ (s, v, t)$ (where $s$, $f\ s$ and $s'$, $f\ s'$ are substituted for $s$, $v$) do ‘imply’ $F\ (s, v)$ due to $\mathsf{Spec}\ f$.
+(Note that we don’t need to use $R_{FSVT}$ but can just use $R_{SVT}$, which doesn’t need to imply $F$ logically.)
+To get from (\ref{eq:choice}) to (\ref{eq:complete}), it suffices to prove</p>
+<p>\begin{equation}
+\forall f \in S \to V.\ \mathsf{Spec}\ f \to \mathsf{Sim}\ f
+\label{eq:premise}
+\end{equation}</p>
+<p>and the first half of <a href="/blog/0004/">0004</a> is a derivation of (\ref{eq:premise}) from the version of the simulation statement that uses $R_{FSVT}$.</p>
+<p><a href="https://scholar.google.com/citations?user=KuJajQ4AAAAJ">Yun-Sheng</a>’s observation is that another place to stow $F$ is the transition system $S$.
+Conceptually, instead of computing the values associated with the states on demand, we can pre-compute the values and store them with the states.
+Technically, this gives rise to a new transition system $S^\dagger$: the set of states of $S^\dagger$ is $F$, and there is a transition $(s, v) \leadsto (s', v')$ in $S^\dagger$ exactly when $s \leadsto s'$ in $S$.
+The statement of $S^\dagger$ being simulated by $T$ becomes</p>
+<p>\begin{align*}
+&amp; \forall (s, v), (s, v') \in S^\dagger. \\
+&amp; \quad \forall t \in T.\ (s, v) \leadsto (s', v') \mathrel\wedge R_{S^\dagger T}\ ((s, v), t) \to \exists t' \in T.\ t \leadsto t' \mathrel\wedge R_{S^\dagger T}\ ((s', v'), t')
+\end{align*}</p>
+<p>where $R_{S^\dagger T} \subseteq S^\dagger \times T = F \times T$, so $R_{S^\dagger T}\ ((s, v), t)$ implies $F\ (s, v)$ by definition (‘at type level’).
+And, expanding the definition of $S^\dagger$, we see that the statement above is equivalent to</p>
+<p>\begin{align*}
+&amp; \forall s, s' \in S.\ \forall v, v' \in V.\ F\ (s, v) \mathrel\wedge F\ (s', v') \to \\
+&amp; \quad \forall t \in T.\ s \leadsto s' \mathrel\wedge R_{S^\dagger T}\ ((s, v), t) \to \exists t' \in T.\ t \leadsto t' \mathrel\wedge R_{S^\dagger T}\ ((s', v'), t')
+\end{align*}</p>
+<p>which is the ideal form derived at the end of <a href="/blog/0004/">0004</a>, where it took a lot of effort to get to the end, whereas here it all follows directly and neatly from the definition of $S^\dagger$.
+This is not the end of the story though — we still need to establish a simulation of $S$ by $S^\dagger$, so that we can get a simulation of $S$ by $T$ by transitivity.
+But this is easy: just take (the converse of) the first projection $\mathsf{fst}^\circ \subseteq S \times (S \times V)$ as the simulation relation, and the simulation can be established straightforwardly, notably using the totality of $F$.
+Then, by transitivity, the simulation relation between $S$ and $T$ will be the composite relation $\mathsf{fst}^\circ \cdot R_{S^\dagger T}$.</p>
+<p><a href="https://scholar.google.com/citations?user=KuJajQ4AAAAJ">Yun-Sheng</a> intended to distill this as a general technique for deriving formulas that can be handled more efficiently by SMT solvers.
+Alas, the modern SMT solving algorithms seem to be so complicated that it’s rather difficult to analyse the improvement brought by the technique, which is an unfortunate situation — creating machinery that we can no longer understand and control.
+But hopefully there’re still a few people who know these algorithms inside out?</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
