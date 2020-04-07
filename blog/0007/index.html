@@ -63,7 +63,7 @@ Not long after that, my colleague [Yun-Sheng Chang](https://scholar.google.com/c
 0007
 </div>
 <h2>A ‘systematic’ reformulation</h2>
-<div class="post-time">Posted at 11:22 on 7 April 2020</div>
+<div class="post-time">Posted at 11:22 on 7 April 2020, and revised at 03:39 on 8 April 2020</div>
 <p>A while ago I wrote <a href="/blog/0004/">0004</a> about eliminating quantifier alternation, which took a fair amount of logic formula manipulation.
 (By the way, to our pleasant surprise, the SMT solver seems to prefer the derived formulas — inexplicably, however.)
 Not long after that, my colleague <a href="https://scholar.google.com/citations?user=KuJajQ4AAAAJ">Yun-Sheng Chang</a> came up with a reformulation that makes the solution much more streamlined; below is my presentation of the reformulation, along with a higher-level recap of what I did in <a href="/blog/0004/">0004</a>.
@@ -104,7 +104,7 @@ Conceptually, instead of computing the values associated with the states on dema
 Technically, this gives rise to a new transition system $S^\dagger$: the set of states of $S^\dagger$ is $F$, and there is a transition $(s, v) \leadsto (s', v')$ in $S^\dagger$ exactly when $s \leadsto s'$ in $S$.
 The statement of $S^\dagger$ being simulated by $T$ becomes</p>
 <p>\begin{align*}
-&amp; \forall (s, v), (s, v') \in S^\dagger. \\
+&amp; \forall (s, v), (s', v') \in S^\dagger. \\
 &amp; \quad \forall t \in T.\ (s, v) \leadsto (s', v') \mathrel\wedge R_{S^\dagger T}\ ((s, v), t) \to \exists t' \in T.\ t \leadsto t' \mathrel\wedge R_{S^\dagger T}\ ((s', v'), t')
 \end{align*}</p>
 <p>where $R_{S^\dagger T} \subseteq S^\dagger \times T = F \times T$, so $R_{S^\dagger T}\ ((s, v), t)$ implies $F\ (s, v)$ by definition (‘at type level’).
