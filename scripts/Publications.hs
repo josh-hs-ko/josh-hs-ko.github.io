@@ -24,6 +24,20 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Programming metamorphic algorithms: An experiment in type-driven algorithm design"
+      , authors = [ "Hsiang-Shang Ko"
+                  ]
+      , venue   = Nothing
+      , year    = 2020
+      , types   = [ (Unpublished, "Submitted")
+                  ]
+      , links   = [ ("PDF", Nothing, "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
+                  , ("Agda code", Just "Bitbucket", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/src/master/MetamorphismsInAgda.agda")
+                  ]
+      , info    = [ ("Abstract", "In <em>dependently typed programming</em>, proofs of basic, structural properties can be embedded implicitly into programs and do not need to be written explicitly. Besides saving the effort of writing separate proofs, a most distinguishing and fascinating aspect of dependently typed programming is that it makes the idea of <em>interactive type-driven development</em> much more powerful, where expressive type information becomes useful hints that help the programmer to complete a program. There have not been many attempts at exploiting the full potential of the idea, though. As a departure from the usual properties dealt with in dependently typed programming, and as a demonstration that the idea of interactive type-driven development has more potential to be discovered, we conduct an experiment in ‘type-driven algorithm design’: we develop algorithms from their specifications encoded in sophisticated types, to see how useful the hints provided by a type-aware interactive development environment can be. The algorithmic problem we choose is <em>metamorphisms</em>, whose definitional behaviour is consuming a data structure to compute an intermediate value and then producing a codata structure from that value, but there are other ways to compute metamorphisms. We develop Gibbons’s streaming algorithm and Nakano’s jigsaw model in the interactive development environment provided by the dependently typed language Agda, turning intuitive ideas about these algorithms into formal conditions and programs that are correct by construction.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Unifying parsing and reflective printing for fully disambiguated grammars"
       , authors = [ "Zirun Zhu"
                   , "Hsiang-Shang Ko"
@@ -44,6 +58,31 @@ publicationList =
                   ]
       }
   , Publication
+      { title   = "Benchmarking bidirectional transformations: Theory, implementation, application, and assessment"
+      , authors = [ "Anthony Anjorin"
+                  , "Thomas Buchmann"
+                  , "Bernhard Westfechtel"
+                  , "Zinovy Diskin"
+                  , "Hsiang-Shang Ko"
+                  , "Romina Eramo"
+                  , "Georg Hinkel"
+                  , "Leila Samimi-Dehkordi"
+                  , "Albert Zündorf"
+                  ]
+      , venue   =  Just ("Software and Systems Modeling", Nothing)
+      , year    = 2020
+      , types   = []
+      , links   = [ ("PDF", Just "accepted version", "manuscripts/SoSyM20.pdf")
+                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
+                  , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
+                  ]
+      , info    = [ ("Volume", "19", Nothing)
+                  , ("Pages", "647–691", Nothing)
+                  , ("DOI", "10.1007/s10270-019-00752-x", Nothing)
+                  , ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches. This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Retentive lenses"
       , authors = [ "Zirun Zhu"
                   , "Zhixuan Yang"
@@ -61,29 +100,6 @@ publicationList =
                   ]
       }
   , Publication
-      { title   = "Benchmarking bidirectional transformations: Theory, implementation, application, and assessment"
-      , authors = [ "Anthony Anjorin"
-                  , "Thomas Buchmann"
-                  , "Bernhard Westfechtel"
-                  , "Zinovy Diskin"
-                  , "Hsiang-Shang Ko"
-                  , "Romina Eramo"
-                  , "Georg Hinkel"
-                  , "Leila Samimi-Dehkordi"
-                  , "Albert Zündorf"
-                  ]
-      , venue   =  Just ("Software and Systems Modeling", Nothing)
-      , year    = 2019
-      , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/SoSyM19.pdf")
-                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
-                  , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
-                  ]
-      , info    = [ ("DOI", "10.1007/s10270-019-00752-x", Nothing)
-                  , ("Abstract", "Bidirectional transformations (bx) are relevant for a wide range of application domains. While bx problems may be solved with unidirectional languages and tools, maintaining separate implementations of forward and backward synchronizers with mutually consistent behavior can be difficult, laborious, and error-prone. To address the challenges involved in handling bx problems, dedicated languages and tools for bx have been developed. Due to their heterogeneity, however, the numerous and diverse approaches to bx are difficult to compare, with the consequence that fundamental differences and similarities are not yet well understood. This motivates the need for suitable benchmarks that facilitate the comparison of bx approaches. This paper provides a comprehensive treatment of benchmarking bx, covering theory, implementation, application, and assessment. At the level of theory, we introduce a conceptual framework that defines and classifies architectures of bx tools. At the level of implementation, we describe <em>Benchmarx</em>, an infrastructure for benchmarking bx tools which is based on the conceptual framework. At the level of application, we report on a wide variety of solutions to the well-known Families-to-Persons benchmark, which were developed and compared with the help of Benchmarx. At the level of assessment, we reflect on the usefulness of the Benchmarx approach to benchmarking bx, based on the experiences gained from the Families-to-Persons benchmark.", Nothing)
-                  ]
-      }
-  , Publication
       { title   = "Towards bidirectional synchronization between communicating processes and session types"
       , authors = [ "Liye Guo"
                   , "Hsiang-Shang Ko"
@@ -98,20 +114,6 @@ publicationList =
       , links   = [ ("PDF", Just "accepted version", "manuscripts/SFDI19.pdf") ]
       , info    = [ ("DOI", "10.1109/BIGCOMP.2019.8679265", Nothing)
                   , ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
-                  ]
-      }
-  , Publication
-      { title   = "Programming metamorphic algorithms in Agda (functional pearl)"
-      , authors = [ "Hsiang-Shang Ko"
-                  ]
-      , venue   = Nothing
-      , year    = 2018
-      , types   = [ (Unpublished, "Manuscript")
-                  ]
-      , links   = [ ("PDF", Nothing, "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
-                  , ("Agda code", Just "Bitbucket", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/src/master/MetamorphismsInAgda.agda")
-                  ]
-      , info    = [ ("Abstract", "We conduct an experiment with interactive type-driven development in Agda, developing algorithms from their specifications encoded as intrinsic types, to see how useful the hints provided by Agda during an interactive development process can be. The algorithmic problem we choose is <em>metamorphisms</em>, whose definitional behaviour is consuming a data structure to compute an intermediate value and then producing a codata structure from that value, but there are other ways to compute metamorphisms. We develop Gibbons’s [2007] streaming algorithm and Nakano’s [2013] jigsaw model interactively with Agda, turning intuitive ideas about these algorithms into formal conditions and programs that are correct by construction.", Nothing)
                   ]
       }
   , Publication
