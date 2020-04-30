@@ -48,9 +48,9 @@ publicationList =
                   ]
       , venue   = Just ("New Generation Computing", Nothing)
       , year    = 2020
-      , types   = [ (Published, "To appear")
-                  ]
+      , types   = []
       , links   = [ ("PDF", Just "accepted version", "manuscripts/NGCO20.pdf")
+                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/b3SAc")
                   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("DOI", "10.1007/s00354-019-00082-y", Nothing)
@@ -159,7 +159,7 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "ACM DL eReader", "https://dl.acm.org/doi/pdf/10.1145/3158129")
+      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129?download=true")
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip")
                   , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
                   , ("Slides", Just "PDF", "slides/POPL18.pdf")
