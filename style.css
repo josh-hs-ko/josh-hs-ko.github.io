@@ -308,6 +308,20 @@ ol {
   text-indent: -1em;
 }
 
+.FLOLAC-logo {
+  position: relative;
+}
+
+#FLOLAC-logo {
+  height: 64px;
+  width: auto;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  z-index: -1;
+  opacity: .35;
+}
+
 .publication {
   margin-bottom: 2.5ex;
 }
