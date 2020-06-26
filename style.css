@@ -308,6 +308,13 @@ ol {
   text-indent: -1em;
 }
 
+.post-image {
+  width: 80%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .FLOLAC-logo {
   position: relative;
 }
