@@ -65,7 +65,6 @@ generatePost postNumber = do
              if postTime /= modTime then Just modTime else Nothing,
              ps0 ++ PostEntry postNumber postTime title teaser :
              if entryExists then tail ps1 else ps1)
-  print post
   let post' = insertPostNumber postNumber .
               insertTime postTime mRevTime .
               transformDisplayedImage .
@@ -237,9 +236,11 @@ transformDisplayedImage :: Node -> Node
 transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
   where
     f :: Node -> Node
-    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE src _) [n2]]) =
-      let img = "<img class=\"displayed-image\" src=\"" ++ Text.unpack src ++
-                "\" alt=\"" ++ Text.unpack (nodeToHtml [optUnsafe] n2) ++ "\"/>"
+    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE srcText _) [n2]]) =
+      let src = Text.unpack srcText
+          img = "<a href=\"" ++ src ++ "\">" ++
+                "<img class=\"displayed-image\" src=\"" ++ src ++
+                "\" alt=\"" ++ Text.unpack (nodeToHtml [optUnsafe] n2) ++ "\"/></a>"
       in  Node mp0 PARAGRAPH [Node mp1 (HTML_INLINE (Text.pack img)) []]
     f n = n
 
