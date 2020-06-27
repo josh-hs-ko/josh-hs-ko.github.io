@@ -65,8 +65,10 @@ generatePost postNumber = do
              if postTime /= modTime then Just modTime else Nothing,
              ps0 ++ PostEntry postNumber postTime title teaser :
              if entryExists then tail ps1 else ps1)
+  print post
   let post' = insertPostNumber postNumber .
               insertTime postTime mRevTime .
+              transformDisplayedImage .
               transformRemark $ post
   writeFile htmlFile =<<
     replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post'))) .
@@ -231,13 +233,23 @@ extractHeader (Node mp DOCUMENT (ne : ns@(nt : _))) =
       r = dropWhile isSpace . dropWhile (== '#') . dropWhile isSpace
   in  (r (c nt), c ne, Node mp DOCUMENT ns)
 
+transformDisplayedImage :: Node -> Node
+transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
+  where
+    f :: Node -> Node
+    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE src _) [n2]]) =
+      let img = "<img class=\"displayed-image\" src=\"" ++ Text.unpack src ++
+                "\" alt=\"" ++ Text.unpack (nodeToHtml [optUnsafe] n2) ++ "\"/>"
+      in  Node mp0 PARAGRAPH [Node mp1 (HTML_INLINE (Text.pack img)) []]
+    f n = n
+
 transformRemark :: Node -> Node
 transformRemark n@(Node mp DOCUMENT ns) =
   case reverse ns of
     Node mp0 PARAGRAPH ns0 : ns'@(Node _ THEMATIC_BREAK _ : _) ->
       Node mp DOCUMENT $ reverse $
         Node mp0 (CUSTOM_BLOCK (Text.pack "<div class=\"remark\">")
-                                (Text.pack "</div>")) ns0 : ns'
+                               (Text.pack "</div>")) ns0 : ns'
     _ -> n
 
 showMonth :: Int -> String
