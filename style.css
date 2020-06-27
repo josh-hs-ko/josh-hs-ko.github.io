@@ -23,7 +23,10 @@
   --cs-publication-target-border: #592c35;
   --cs-code: #782327;
   --cs-post-number-opacity: .2;
+  --cs-image-border: white;
 }
+
+/*
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -51,8 +54,11 @@
     --cs-publication-target-border: #f1e3bb;
     --cs-code: #cfb692;
     --cs-post-number-opacity: .4;
+    --cs-image-border: black;
   }
 }
+
+*/
 
 body {
   background-color: var(--cs-background);
@@ -313,6 +319,7 @@ ol {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: 4px solid var(--cs-image-border);
 }
 
 .FLOLAC-logo {
