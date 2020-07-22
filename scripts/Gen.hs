@@ -235,12 +235,21 @@ extractHeader (Node mp DOCUMENT (ne : ns@(nt : _))) =
 transformDisplayedImage :: Node -> Node
 transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
   where
+    processAlt' :: [Node] -> Maybe String
+    processAlt' [n] = Just (Text.unpack (nodeToHtml [optUnsafe] n))
+    processAlt' _   = Nothing
+    processAlt  :: [Node] -> (Maybe String, Maybe String)
+    processAlt (Node _ (CODE t) _ : ns) = (Just (Text.unpack t), processAlt' ns)
+    processAlt ns                       = (Nothing             , processAlt' ns)
     f :: Node -> Node
-    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE srcText _) [n2]]) =
+    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE srcText _) ns]) =
       let src = Text.unpack srcText
-          img = "<a href=\"" ++ src ++ "\">" ++
-                "<img class=\"displayed-image\" src=\"" ++ src ++
-                "\" alt=\"" ++ Text.unpack (nodeToHtml [optUnsafe] n2) ++ "\"/></a>"
+          (mc, ma) = processAlt ns
+          img = "<a href=\"" ++ src ++ "\"><img " ++
+                maybe "class=\"displayed-figure\"" id mc ++
+                " src=\"" ++ src ++ "\"" ++
+                maybe "" (\s -> " alt=\"" ++ s ++ "\"") ma ++
+                "/></a>"
       in  Node mp0 PARAGRAPH [Node mp1 (HTML_INLINE (Text.pack img)) []]
     f n = n
 

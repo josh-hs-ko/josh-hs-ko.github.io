@@ -314,7 +314,13 @@ ol {
   text-indent: -1em;
 }
 
-.displayed-image {
+.displayed-figure {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.displayed-photo {
   width: 80%;
   display: block;
   margin-left: auto;
