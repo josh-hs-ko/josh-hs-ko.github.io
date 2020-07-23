@@ -62,7 +62,7 @@
 0009
 </div>
 <h2>Verification of digital circuit verification</h2>
-<div class="post-time">Posted at 22:44 on 21 July 2020, and revised at 17:32 on 22 July 2020</div>
+<div class="post-time">Posted at 22:44 on 21 July 2020, and revised at 15:43 on 23 July 2020</div>
 <p>Chih-Sheng Chang, a summer intern of mine (who’s entering his third year at NTU’s Department of Electrical Engineering), mentioned to me a project he worked on, which used a SAT solver to verify the behaviour of a digital circuit design (built out of logic gates) against a reference one, and asked whether we can model the verification method in Agda and prove some of its properties.
 Yes of course!</p>
 <p>Starting with a reference circuit $R$, we may want to construct a more optimised implementation circuit $I$ and verify that its behaviour agrees with $R$.
@@ -109,8 +109,8 @@ For example, the result of three-valued comparison gate is necessarily boolean, 
 The types of circuit programs take the form $\mathsf{Circuit}\ \Gamma\ \Delta$ where $\Gamma$ is an association list of input variables and their types, and $\Delta$ is a list of output types.
 The circuit language has only two constructs, a $\mathsf{return}$ expression that selects some of the input variables $\vec x$ as outputs,</p>
 <p>$$ \frac{\Gamma \vdash \vec x : \Delta}{\mathsf{return}\ \vec x : \mathsf{Circuit}\ \Gamma\ \Delta} $$</p>
-<p>and a specialised $\mathsf{let}$-expression that applies a $\mathit{gate}$ to some of the input variables $\vec x$, binds the output of the gate to a new variable $y$, and continues with a circuit program $C$ that can access the variable $y$ in addition to those originally available:</p>
-<p>$$ \frac{\mathit{gate} : \Sigma \Rightarrow \tau \qquad \Gamma \vdash \vec x : \Sigma \qquad C : \mathsf{Circuit}\ (\Gamma, y : \tau)\ \Delta}{\mathsf{let}\ y = \mathit{gate}\ \vec x\ \mathsf{in}\ C : \mathsf{Circuit}\ \Gamma\ \Delta} $$</p>
+<p>and a specialised $\mathsf{let}$-expression that applies a $\mathit{gate}$ to some of the input variables $\vec x$, binds the outputs of the gate to some new variables $\vec y$, and continues with a circuit program $C$ that can access $\vec y$ in addition to those originally available:</p>
+<p>$$ \frac{\mathit{gate} : \Sigma \Rightarrow \Sigma' \qquad \Gamma \vdash \vec x : \Sigma \qquad C : \mathsf{Circuit}\ (\Gamma, \vec y : \Sigma')\ \Delta}{\mathsf{let}\ \vec y = \mathit{gate}\ \vec x\ \mathsf{in}\ C : \mathsf{Circuit}\ \Gamma\ \Delta} $$</p>
 <p>The semantics of a circuit $C : \mathsf{Circuit}\ \Gamma\ \Delta$ is a function $\sem{C} : \sem{\Gamma} \to \sem{\Delta}$ that maps a product of values whose types are exactly those in $\Gamma$ to a product of values similarly typed by $\Delta$.
 To compile a circuit to a boolean one, we use a function</p>
 <p>$$ \mathsf{compile} : \mathsf{Circuit}\ \Gamma\ \Delta \to \mathsf{Circuit}\ (\mathsf{encodeTypes}\ \Gamma)\ (\mathsf{encodeTypes}\ \Delta) $$</p>
@@ -128,7 +128,7 @@ Applying $\mathsf{decode}$ to both sides of the equation (and assuming $\mathsf{
 <p>$$ \forall y : \sem{\mathsf{encodeTypes}\ \Gamma}.\ \mathsf{decode}\ (\sem{\mathsf{compile}\ C}\ y) = 1 $$</p>
 <p>Equation \ref{eq:compile-correctness} allows us to rewrite the left-hand side and get</p>
 <p>$$ \forall y : \sem{\mathsf{encodeTypes}\ \Gamma}.\ \sem{C}\ (\mathsf{decode}\ y) = 1 $$</p>
-<p>If $\mathsf{decode}$ is surjective, the above will range over the entire domain of $\sem{C}$, and we will arrive at</p>
+<p>If $\mathsf{decode}$ is surjective, $\mathsf{decode}\ y$ will range over the entire domain of $\sem{C}$, and we will arrive at</p>
 <p>$$ \forall x : \sem{\Gamma}.\ \sem{C}\ x = 1 $$</p>
 <p>as required.
 And Equation \ref{eq:compile-correctness} itself shouldn’t be too hard to verify: we should be able to prove a similar equation for each gate we want to use, and then all it takes should be just an induction on the program structure.</p>
