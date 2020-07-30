@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>McBride’s razor — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="At FLOLAC ’20 I will present Conor McBride’s showcase example in his [original ornament paper](https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf), where the evaluation of additive expressions (which he calls ‘Hutton’s razor’) is compiled to instructions for a stack machine, and the preservation of semantics is proved purely by datatype indexing.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0010
+</div>
+<h2>McBride’s razor</h2>
+<div class="post-time">Posted at 22:02 on 30 July 2020</div>
+<p>Due to the pandemic, our original special lecturer for FLOLAC ’20 cannot make the trip, and we (lecturers at IIS) have to settle for something we can teach ourselves, which is dependently typed programming (in Agda).
+We’ll jointly cover basic stuff such as vectors, equational reasoning combinators, and the shallow embedding of logic formulas and their derivations, and more complex stuff including the deep embedding of propositional logic — which is just simply typed lambda calculus — and a few of its meta-theoretic properties.
+To draw a contrast with extrinsic theorem proving, in the last session I want to present something that demonstrates the power/potential of intrinsically typed programming and is more exciting than vectors, and Conor McBride’s showcase example in his <a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf">original ornament paper</a> comes to mind, where the evaluation of additive expressions (which he calls ‘Hutton’s razor’) is compiled to instructions for a stack machine, and the preservation of semantics is proved purely by datatype indexing.</p>
+<p>The focus of the three-hour session (including practicals) is the contrast between the extrinsic and intrinsic styles.
+The typical example is list append</p>
+<pre><code>_++_ : List A → List A → List A
+[]       ++ ys = ys
+(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+</code></pre>
+<p>and how it interacts with <code>length</code>:</p>
+<pre><code>++-length : (xs ys : List A) → length (xs ++ ys) ≡ length xs + length ys
+++-length []       ys = refl
+++-length (x ∷ xs) ys = cong suc (++-length xs ys)
+</code></pre>
+<p>This proof is somewhat trivial though — we could have convinced ourselves of the truth of <code>++-length</code> just by going through the definition of append and tracing the length of the lists appearing in the definition.
+In fact, the dependent type system can do the tracing for us: by working with vectors instead of lists, we can effortlessly make the definition of append carry the <code>++-length</code> theorem implicitly, eliding an explicit proof.</p>
+<pre><code>_++_ : Vec A m → Vec A n → Vec A (m + n)
+[]       ++ ys = ys
+(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+</code></pre>
+<p>‘McBride’s razor’ pushes the idea to an extreme and constitutes a more intriguing example.</p>
+<p>We start with a simple language of additive expressions and its evaluation function:</p>
+<pre><code>data Expr : Set where
+  lit : ℕ → Expr
+  _∔_ : Expr → Expr → Expr
+
+eval : Expr → ℕ
+eval (lit x) = x
+eval (l ∔ r) = eval l + eval r
+</code></pre>
+<p>The <code>eval</code> function is non-trivially recursive.
+We might want to eliminate the recursion by compiling it to a series of simple instructions that can be executed sequentially (so that, for example, we can delegate the task of expression evaluation to an elementary school kid, who can do it just by following simple instructions without having to learn about recursion).
+The instructions we’ll use are for manipulating a stack: we can push a number onto a stack or replace the top two numbers of a stack with their sum, and we also need a sequential composition operator to form a series of instructions.</p>
+<pre><code>data Prog : Set where
+  push : ℕ → Prog
+  add  : Prog
+  _▷_  : Prog → Prog → Prog
+</code></pre>
+<p>We’ll immediately encounter a problem, however, if we try to define the semantics of <code>Prog</code>:</p>
+<pre><code>⟦_⟧ : Prog → List ℕ → List ℕ
+⟦ push x ⟧ xs           = x ∷ xs
+⟦ add    ⟧ (x ∷ y ∷ xs) = (x + y) ∷ xs
+⟦ p ▷ q  ⟧ xs           = ⟦ q ⟧ (⟦ p ⟧ xs)
+</code></pre>
+<p>The problematic clause is the second one — there is no guarantee that <code>⟦ add ⟧</code> only operates on lists with at least two elements, and thus the above function is not total.
+We could wrap the result in a <code>Maybe</code>, but this would greatly complicate the definition.
+With indexed datatypes we can do better: instead of coping with instructions that can fail, we can work with only instructions that operate on stacks with enough elements and thus are guaranteed to succeed.
+This requires tracking the size of a stack and how instructions change the stack size, so we define</p>
+<pre><code>Stack : ℕ → Set
+Stack = Vec ℕ
+</code></pre>
+<p>and index <code>Prog</code> with the sizes of the stack before and after an instruction is executed:</p>
+<pre><code>data Prog : ℕ → ℕ → Set where
+  push : ℕ → Prog n (1 + n)
+  add  : Prog (2 + n) (1 + n)
+  _▷_  : Prog k m → Prog m n → Prog k n
+</code></pre>
+<p>Now the semantics function type-checks and is total:</p>
+<pre><code>⟦_⟧ : Prog m n → Stack m → Stack n
+⟦ push x ⟧ xs           = x ∷ xs
+⟦ add    ⟧ (x ∷ y ∷ xs) = (x + y) ∷ xs
+⟦ p ▷ q  ⟧ xs           = ⟦ q ⟧ (⟦ p ⟧ xs)
+</code></pre>
+<p>The compilation of an expression to a series of stack instructions performing its evaluation is pretty easy:</p>
+<pre><code>compile : Expr → Prog n (1 + n)
+compile (lit x) = push x
+compile (l ∔ r) = compile r ▷ compile l ▷ add
+</code></pre>
+<p>Usually we would run the compiled instructions on an empty stack and expect to get the evaluation result at the top of the stack, that is, we should have</p>
+<pre><code>(e : Expr) → head (⟦ compile e ⟧ []) ≡ eval e
+</code></pre>
+<p>The statement is too weak to be established by an induction though, and we have to strengthen it to one that fully characterises what <code>⟦ compile e ⟧</code> does, and then the induction will go through.
+The proof can be made more readable (but much longer) by using the equational reasoning combinators:</p>
+<pre><code>soundness : (e : Expr) (xs : Stack n) → ⟦ compile e ⟧ xs ≡ eval e ∷ xs
+soundness (lit x) xs =
+  begin
+    ⟦ compile (lit x) ⟧ xs
+  ≡⟨ refl ⟩
+    ⟦ push x ⟧ xs
+  ≡⟨ refl ⟩
+    x ∷ xs
+  ≡⟨ refl ⟩
+    eval (lit x) ∷ xs
+  ∎
+soundness (l ∔ r) xs =
+  begin
+    ⟦ compile (l ∔ r) ⟧ xs
+  ≡⟨ refl ⟩
+    ⟦ compile r ▷ compile l ▷ add ⟧ xs
+  ≡⟨ refl ⟩
+    ⟦ add ⟧ (⟦ compile l ⟧ (⟦ compile r ⟧ xs))
+  ≡⟨ cong (⟦ add ⟧ ∘ ⟦ compile l ⟧) (soundness r xs) ⟩
+    ⟦ add ⟧ (⟦ compile l ⟧ (eval r ∷ xs))
+  ≡⟨ cong ⟦ add ⟧ (soundness l (eval r ∷ xs)) ⟩
+    ⟦ add ⟧ (eval l ∷ eval r ∷ xs)
+  ≡⟨ refl ⟩
+    (eval l + eval r) ∷ xs
+  ≡⟨ refl ⟩
+    eval (l ∔ r) ∷ xs
+  ∎
+</code></pre>
+<p>Note that <code>compile (l ∔ r)</code> emits instructions for evaluating <code>r</code> before those for evaluating <code>l</code> — this order of putting the sub-results into the stack coincides with the order in which <code>⟦ add ⟧</code> sums the top two elements of the stack, so that we don’t have to invoke commutativity of addition in the soundness proof.</p>
+<p>The key observation here is that the soundness argument can be carried out in essentially the same way as <code>++-length</code>, because we can explain what a series of compiled instructions does by going through the definition of <code>compile</code>.
+Here the property we trace is more involved than length: it’s the semantics of the instructions.
+But in this particular case the type system can still manage to trace it for us entirely transparently!
+We index <code>Prog</code> with its semantics (i.e., fuse <code>⟦_⟧</code> into <code>Prog</code> in the same way as fusing <code>length</code> into <code>List</code>):</p>
+<pre><code>data Prog⁺ : (m n : ℕ) → (Stack m → Stack n) → Set where
+  push : (x : ℕ) → Prog⁺ n (1 + n) (x ∷_)
+  add  : Prog⁺ (2 + n) (1 + n) (apply _+_)
+  _▷_  : ∀ {f g} → Prog⁺ k m f → Prog⁺ m n g → Prog⁺ k n (g ∘ f)
+</code></pre>
+<p>where</p>
+<pre><code>apply : (ℕ → ℕ → ℕ) → Stack (2 + n) → Stack (1 + n)
+apply f (x ∷ y ∷ xs) = f x y ∷ xs
+</code></pre>
+<p>We can then require at type level that our compiler should produce instructions that have a particular semantics, and exactly the same definition goes through.</p>
+<pre><code>compile⁺ : (e : Expr) → Prog⁺ n (1 + n) (eval e ∷_)
+compile⁺ (lit x) = push x
+compile⁺ (l ∔ r) = compile⁺ r ▷ compile⁺ l ▷ add
+</code></pre>
+<p>Notably, in the definition of <code>compile⁺ (l ∔ r)</code>, if we swapped the order of the instructions for <code>r</code> and <code>l</code>, then <code>compile⁺</code> wouldn’t type-check.
+This can be considered either a feature or a bug: the type system guides you to write a program, which is good, but in this case it forces you to write a particular program but not the other one that’s also sensible, which is not so good.</p>
+<p>Besides filling out the definitions above, there are some more exercises intended for the students to play with and think about at this point.
+The easiest one is extending the <code>Expr</code> language (and all the subsequent definitions) with multiplication (or some other operator of the student’s choice).
+Generalising this a bit, we could allow the user to supply whatever binary operator they want to use,</p>
+<pre><code>data Expr : Set where
+  ...
+  binOp : (ℕ → ℕ → ℕ) → Expr → Expr → Expr
+</code></pre>
+<p>although the corresponding version of <code>Prog</code> would have to store arbitrary binary operators, which may be infeasible for an actual machine.
+This shows that, in formal verification, there is more to what we can prove — we may be able to prove very strong properties about something, but whether that something adequately models what we actually care about is a different and no less important matter.
+Another adequacy issue is that <code>Prog</code> is still non-trivially recursive: the composition operator still gives rise to a binary tree structure.
+To eliminate recursion, one way is to switch to a list representation,</p>
+<pre><code>data Instr : (m n : ℕ) → Set where
+  push : ℕ → Instr n (1 + n)
+  add  : Instr (2 + n) (1 + n)
+
+data Prog : (m n : ℕ) → Set where
+  end : Prog n n
+  _▸_ : Instr k m → Prog m n → Prog k n
+</code></pre>
+<p>and we’ll see that the semantics function becomes a tail-recursive one:</p>
+<pre><code>⟦_⟧ : Prog m n → Stack m → Stack n
+⟦ end        ⟧ xs           = xs
+⟦ push x ▸ p ⟧ xs           = ⟦ p ⟧ (x ∷ xs)
+⟦ add    ▸ p ⟧ (x ∷ y ∷ xs) = ⟦ p ⟧ ((x + y) ∷ xs)
+</code></pre>
+<p>The tail-recursive function can then be easily implemented as a machine that loops through the instructions and modifies the stack, since a tail-recursive function is just a (computable) representation of state transition (where the arguments to the function are the states).
+Another way to eliminate recursion, or at least the binary tree structure, is to rotate/<code>normalise</code> a tree to make it lean rightwards.
+Interestingly, this <code>normalise</code> function happens to be another good example for <code>Prog⁺</code>, since with <code>Prog⁺</code> we can directly say in the type of <code>normalise</code> that it does not change the semantics:</p>
+<pre><code>normalise : ∀ {f} → Prog⁺ m n f → Prog⁺ m n f
+normalise (push x)  = push x
+normalise add       = add
+normalise (binOp b) = binOp b
+normalise (p ▷ q)   = append (normalise p) (normalise q)
+</code></pre>
+<p>where</p>
+<pre><code>append : ∀ {f g} → Prog⁺ k m f → Prog⁺ m n g → Prog⁺ k n (g ∘ f)
+append (push x)  q = push x ▷ q
+append add       q = add ▷ q
+append (binOp b) q = binOp b ▷ q
+append (p ▷ p')  q = p ▷ append p' q
+</code></pre>
+<p>Putting adequacy issues aside, can we generalise <code>binOp</code> a bit more and allow operators of an arbitrary arity?</p>
+<pre><code>_^_ : Set → ℕ → Set
+A ^ zero = ⊤
+A ^ suc n = A × (A ^ n)
+
+data Expr : Set where
+  ...
+  op : (n : ℕ) → (ℕ ^ n → ℕ) → Expr ^ n → Expr
+</code></pre>
+<p>This turns out to be problematic for the intrinsic approach, because crucial to the success of type-checking <code>compile⁺</code> is the fact that the semantics of compiled instructions can be deemed judgementally equal to the semantics specified in the type, but for <code>op n</code> the equality in question contains <code>n</code> as a free variable, and cannot be established without an induction on <code>n</code>.
+By contrast, the extrinsic approach still works pretty much the same way, because there is no problem including an induction in the extrinsic proof.
+Similarly, as noted by Conor in the paper, if one tries to include some form of control structure in the <code>Expr</code> language (e.g., <code>ifz : Expr → Expr → Expr → Expr</code> with its semantics defined by <code>⟦ ifz c t e ⟧ = if ⟦ c ⟧ == 0 then ⟦ t ⟧ else ⟦ e ⟧</code>), they would also need to perform a case analysis on <code>⟦ c ⟧</code> to establish the necessary equality.
+These reveal the rigidity of the intrinsic approach.</p>
+<p>Finally, what Conor wanted to demonstrate with his ‘razor’ in the paper was the <em>recomputation lemma</em>: the index of an algebraically ornamented datatype can be recomputed by a fold on the original datatype.
+Specialised to the datatypes we’re dealing with, namely <code>Prog⁺</code> and <code>Prog</code>, the recomputation lemma can be stated and proved as follows,</p>
+<pre><code>recomputation : ∀ {f} (p : Prog⁺ m n f) xs → ⟦ forget p ⟧ xs ≡ f xs
+recomputation (push x) xs           = refl
+recomputation add      (x ∷ y ∷ xs) = refl
+recomputation (_▷_ {f = f} {g} p q) xs =
+  begin
+    ⟦ forget q ⟧ (⟦ forget p ⟧ xs)
+  ≡⟨ recomputation q (⟦ forget p ⟧ xs) ⟩
+   g (⟦ forget p ⟧ xs)
+  ≡⟨ cong g (recomputation p xs) ⟩
+    g (f xs)
+  ∎
+recomputation (binOp b) (x ∷ y ∷ xs) = refl
+</code></pre>
+<p>where <code>forget</code> erases the semantics index of <code>Prog⁺</code>:</p>
+<pre><code>forget : ∀ {f} → Prog⁺ m n f → Prog m n
+forget (push x) = push x
+forget add      = add
+forget (p ▷ q)  = forget p ▷ forget q
+</code></pre>
+<p>The soundness of <code>compile</code> is then directly a corollary of the recomputation lemma, provided that we redefine <code>compile</code> as <code>forget ∘ compile⁺</code>:</p>
+<pre><code>soundness' : (e : Expr) (xs : Stack n)
+           → ⟦ (forget ∘ compile⁺) e ⟧ xs ≡ eval e ∷ xs
+soundness' e = recomputation (compile⁺ e)
+</code></pre>
+<p>On the surface, the amount of effort for proving <code>soundness'</code> is only slightly less than for proving <code>soundness</code>: the slight difference is due to the fact that <code>recomputation</code> is just a routine induction on the structure of <code>Prog⁺</code>, whereas in <code>soundness</code> we need to deal with the specific combination of instructions used in <code>compile</code>.
+But in fact, the theory of ornamentation gives us <code>forget</code> and <code>recomputation</code> for free if we properly express the relationship between <code>Prog⁺</code> and <code>Prog</code>, although that requires datatype-generic programming techniques, which are out of scope for FLOLAC.
+(The relationship between <code>Prog⁺</code> and <code>Prog</code> can be inferred for free as well — see Ringer et al’s recent paper <a href="https://doi.org/10.4230/LIPIcs.ITP.2019.26">Ornaments for Proof Reuse in Coq</a>.)
+What can be left as an exercise at FLOLAC is probably the following: after showing the general definition of algebraically ornamented lists,</p>
+<pre><code>data AlgList (A {B} : Set) (f : A → B → B) (e : B) : B → Set where
+  []  : AlgList A f e e
+  _∷_ : (x : A) {y : B} → AlgList A f e y → AlgList A f e (f x y)
+</code></pre>
+<p>ask the students to (i) show that vectors are a special case of <code>AlgList</code>, (ii) state and prove the recomputation lemma for <code>AlgList</code>,</p>
+<pre><code>forget : {A B : Set} {f : A → B → B} {e : B} {y : B}
+       → AlgList A f e y → List A
+forget []       = []
+forget (x ∷ xs) = x ∷ forget xs
+
+recomputation : {A B : Set} {f : A → B → B} {e : B} {y : B}
+              → (xs : AlgList A f e y) → foldr f e (forget xs) ≡ y
+recomputation {f = f} []       = refl
+recomputation {f = f} (x ∷ xs) = cong (f x) (recomputation xs)
+</code></pre>
+<p>and (iii) use the recomputation lemma for <code>AlgList</code> to prove <code>++-length</code>.</p>
+<hr />
+<div class="remark">
+First post with a two-digit number!
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
