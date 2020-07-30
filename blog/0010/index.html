@@ -62,7 +62,7 @@
 0010
 </div>
 <h2>McBride’s razor</h2>
-<div class="post-time">Posted at 22:02 on 30 July 2020</div>
+<div class="post-time">Posted at 22:02 on 30 July 2020, and revised at 06:07 on 31 July 2020</div>
 <p>Due to the pandemic, our original special lecturer for FLOLAC ’20 cannot make the trip, and we (lecturers at IIS) have to settle for something we can teach ourselves, which is dependently typed programming (in Agda).
 We’ll jointly cover basic stuff such as vectors, equational reasoning combinators, and the shallow embedding of logic formulas and their derivations, and more complex stuff including the deep embedding of propositional logic — which is just simply typed lambda calculus — and a few of its meta-theoretic properties.
 To draw a contrast with extrinsic theorem proving, in the last session I want to present something that demonstrates the power/potential of intrinsically typed programming and is more exciting than vectors, and Conor McBride’s showcase example in his <a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf">original ornament paper</a> comes to mind, where the evaluation of additive expressions (which he calls ‘Hutton’s razor’) is compiled to instructions for a stack machine, and the preservation of semantics is proved purely by datatype indexing.</p>
@@ -168,7 +168,7 @@ soundness (l ∔ r) xs =
 <p>The key observation here is that the soundness argument can be carried out in essentially the same way as <code>++-length</code>, because we can explain what a series of compiled instructions does by going through the definition of <code>compile</code>.
 Here the property we trace is more involved than length: it’s the semantics of the instructions.
 But in this particular case the type system can still manage to trace it for us entirely transparently!
-We index <code>Prog</code> with its semantics (i.e., fuse <code>⟦_⟧</code> into <code>Prog</code> in the same way as fusing <code>length</code> into <code>List</code>):</p>
+We index <code>Prog</code> with its semantics (i.e., fuse <code>⟦_⟧</code> into <code>Prog</code> in the same way as fusing <code>length</code> into <code>List</code> to get vectors):</p>
 <pre><code>data Prog⁺ : (m n : ℕ) → (Stack m → Stack n) → Set where
   push : (x : ℕ) → Prog⁺ n (1 + n) (x ∷_)
   add  : Prog⁺ (2 + n) (1 + n) (apply _+_)
@@ -193,7 +193,7 @@ Generalising this a bit, we could allow the user to supply whatever binary opera
   binOp : (ℕ → ℕ → ℕ) → Expr → Expr → Expr
 </code></pre>
 <p>although the corresponding version of <code>Prog</code> would have to store arbitrary binary operators, which may be infeasible for an actual machine.
-This shows that, in formal verification, there is more to what we can prove — we may be able to prove very strong properties about something, but whether that something adequately models what we actually care about is a different and no less important matter.
+This shows that, in formal verification, there is more than what we can prove — we may be able to prove very strong properties about something, but whether that something adequately models what we actually care about is a different and no less important matter.
 Another adequacy issue is that <code>Prog</code> is still non-trivially recursive: the composition operator still gives rise to a binary tree structure.
 To eliminate recursion, one way is to switch to a list representation,</p>
 <pre><code>data Instr : (m n : ℕ) → Set where
