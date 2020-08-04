@@ -62,7 +62,7 @@
 0010
 </div>
 <h2>McBride’s razor</h2>
-<div class="post-time">Posted at 22:02 on 30 July 2020, and revised at 06:24 on 31 July 2020</div>
+<div class="post-time">Posted at 22:02 on 30 July 2020, and revised at 16:01 on 4 August 2020</div>
 <p>Due to the pandemic, our original special lecturer for FLOLAC ’20 cannot make the trip, and we (lecturers at IIS) have to settle for something we can teach ourselves, which is dependently typed programming (in Agda).
 We’ll jointly cover basic stuff such as vectors, equational reasoning combinators, and the shallow embedding of logic formulas and their derivations, and more complex stuff including the deep embedding of propositional logic — which is just simply typed lambda calculus — and a few of its meta-theoretic properties.
 To draw a contrast with extrinsic theorem proving, in the last session I want to present something that demonstrates the power/potential of intrinsically typed programming and is more exciting than vectors, and Conor McBride’s showcase example in his <a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf">original ornament paper</a> comes to mind, where the evaluation of additive expressions (which he calls ‘Hutton’s razor’) is compiled to instructions for a stack machine, and the preservation of semantics is proved purely by datatype indexing.</p>
@@ -235,7 +235,7 @@ data Expr : Set where
 </code></pre>
 <p>This turns out to be problematic for the intrinsic approach, because crucial to the success of type-checking <code>compile⁺</code> is the fact that the semantics of compiled instructions can be deemed judgementally equal to the semantics specified in the type, but for <code>op n</code> the equality in question contains <code>n</code> as a free variable, and cannot be established without an induction on <code>n</code>.
 By contrast, the extrinsic approach still works pretty much the same way, because there is no problem including an induction in the extrinsic proof.
-Similarly, as noted by Conor in the paper, if one tries to include some form of control structure in the <code>Expr</code> language (e.g., <code>ifz : Expr → Expr → Expr → Expr</code> with its semantics defined by <code>⟦ ifz c t e ⟧ = if ⟦ c ⟧ == 0 then ⟦ t ⟧ else ⟦ e ⟧</code>), they would also need to perform a case analysis on <code>⟦ c ⟧</code> to establish the necessary equality.
+Similarly, as noted by Conor in the paper, if one tries to include some form of control structure in the <code>Expr</code> language (e.g., <code>ifz : Expr → Expr → Expr → Expr</code> with its semantics defined by <code>eval (ifz c t e) = if eval c == 0 then eval t else eval e</code>), they would also need to perform a case analysis on <code>eval c</code> to establish the necessary equality.
 These reveal the rigidity of the intrinsic approach.</p>
 <p>Finally, what Conor wanted to demonstrate with his ‘razor’ in the paper was the <em>recomputation lemma</em>: the index of an algebraically ornamented datatype can be recomputed by a fold on the original datatype.
 Specialised to the datatypes we’re dealing with, namely <code>Prog⁺</code> and <code>Prog</code>, the recomputation lemma can be stated and proved as follows,</p>
