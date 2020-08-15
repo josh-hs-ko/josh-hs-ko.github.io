@@ -18,6 +18,18 @@ authorList =
       , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Buchmann_Thomas/"
       }
   , Author
+      { authorName = "Yuan-Hao Chang"
+      , authorURL  = "https://www.iis.sinica.edu.tw/~johnson/"
+      }
+  , Author
+      { authorName = "Yun-Sheng Chang"
+      , authorURL  = "https://scholar.google.com/citations?user=KuJajQ4AAAAJ"
+      }
+  , Author
+      { authorName = "Yu-Fang Chen"
+      , authorURL  = "http://bull.iis.sinica.edu.tw/yfc/doku.php"
+      }
+  , Author
       { authorName = "Zinovy Diskin"
       , authorURL  = "http://www.cs.toronto.edu/~zdiskin/"
       }
@@ -74,8 +86,16 @@ authorList =
       , authorURL  = "http://haslab.uminho.pt/jas/"
       }
   , Author
+      { authorName = "Che-Wei Tsao"
+      , authorURL  = "https://scholar.google.com/citations?user=nJiILWAAAAAJ"
+      }
+  , Author
       { authorName = "Bernhard Westfechtel"
       , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Westfechtel_Bernhard/"
+      }
+  , Author
+      { authorName = "Chun-Feng Wu"
+      , authorURL  = "https://cfwu417.github.io"
       }
   , Author
       { authorName = "Zhixuan Yang"
