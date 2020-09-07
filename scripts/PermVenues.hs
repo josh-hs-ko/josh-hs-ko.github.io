@@ -10,6 +10,10 @@ data PermVenue = PermVenue
 permVenueList :: [PermVenue]
 permVenueList =
   [ PermVenue
+      { permVenueName = "The Art, Science, and Engineering of Programming"
+      , permVenueURL  = "https://programming-journal.org"
+      }
+  , PermVenue
       { permVenueName = "arXiv"
       , permVenueURL  = "https://arxiv.org"
       }
