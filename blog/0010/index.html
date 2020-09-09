@@ -62,9 +62,9 @@
 0010
 </div>
 <h2>McBride’s razor</h2>
-<div class="post-time">Posted at 22:02 on 30 July 2020, and revised at 22:58 on 5 August 2020</div>
+<div class="post-time">Posted at 22:02 on 30 July 2020, and revised at 15:30 on 9 September 2020</div>
 <p>Due to the pandemic, our original special lecturer for FLOLAC ’20 cannot make the trip, and we (lecturers at IIS) have to settle for something we can teach ourselves, which is dependently typed programming (in Agda).
-We’ll jointly cover basic stuff such as vectors, equational reasoning combinators, and the shallow embedding of logic formulas and their derivations, and more complex stuff including the deep embedding of propositional logic — which is just simply typed lambda calculus — and a few of its meta-theoretic properties.
+We’ll jointly cover basic stuff such as vectors, equational reasoning combinators, and the shallow embedding of logic formulas and their derivations, and more complex stuff including the deep embedding of propositional logic — which is just simply typed lambda calculus — and a few of its meta-theoretic properties à la <a href="https://plfa.github.io">PLFA</a>.
 To draw a contrast with extrinsic theorem proving, in the last session I want to present something that demonstrates the power/potential of intrinsically typed programming and is more exciting than vectors, and Conor McBride’s showcase example in his <a href="https://personal.cis.strath.ac.uk/conor.mcbride/pub/OAAO/LitOrn.pdf">original ornament paper</a> comes to mind, where the evaluation of additive expressions (which he calls ‘Hutton’s razor’) is compiled to instructions for a stack machine, and the preservation of semantics is proved purely by datatype indexing.</p>
 <p>The focus of the three-hour session (including practicals) is the contrast between the extrinsic and intrinsic styles.
 The typical example is list append</p>
@@ -75,7 +75,18 @@ The typical example is list append</p>
 <p>and how it interacts with <code>length</code>:</p>
 <pre><code>++-length : (xs ys : List A) → length (xs ++ ys) ≡ length xs + length ys
 ++-length []       ys = refl
-++-length (x ∷ xs) ys = cong suc (++-length xs ys)
+++-length (x ∷ xs) ys =
+  begin
+    length ((x ∷ xs) ++ ys)
+  ≡⟨ refl ⟩
+    length (x ∷ (xs ++ ys))
+  ≡⟨ refl ⟩
+    1 + length (xs ++ ys)
+  ≡⟨ cong (1 +_) (++-length xs ys) ⟩
+    1 + length xs + length ys
+  ≡⟨ refl ⟩
+    length (x ∷ xs) + length ys
+  ∎
 </code></pre>
 <p>This proof is somewhat trivial though — we could have convinced ourselves of the truth of <code>++-length</code> just by going through the definition of append and tracing the length of the lists appearing in the definition.
 In fact, the dependent type system can do the tracing for us: by working with vectors instead of lists, we can effortlessly make the definition of append carry the <code>++-length</code> theorem implicitly, eliding an explicit proof.</p>
@@ -183,7 +194,27 @@ apply f (x ∷ y ∷ xs) = f x y ∷ xs
 compile⁺ (lit x) = push x
 compile⁺ (l ∔ r) = compile⁺ r ▷ compile⁺ l ▷ add
 </code></pre>
-<p>Notably, in the definition of <code>compile⁺ (l ∔ r)</code>, if we swapped the order of the instructions for <code>r</code> and <code>l</code>, then <code>compile⁺</code> wouldn’t type-check.
+<p>It is instructive to trace how the type-checking goes through: on the right-hand side of the <code>compile⁺ (l ∔ r)</code> clause, we have</p>
+<pre><code>compile⁺ r : Prog⁺      n  (1 + n) (eval r ∷_)
+compile⁺ l : Prog⁺ (1 + n) (2 + n) (eval l ∷_)
+</code></pre>
+<p>so definitionally the whole expression on the right-hand side has type</p>
+<pre><code>compile⁺ r ▷ compile⁺ l ▷ add
+  : Prog⁺ n (1 + n) (apply _+_ ∘ (eval l ∷_) ∘ (eval r ∷_))
+</code></pre>
+<p>where the semantic index can be shown to be definitionally equal to the required one:</p>
+<pre><code>  apply _+_ ∘ (eval l ∷_) ∘ (eval r ∷_)
+=   { η-conversion; function composition }
+  λ xs → apply _+_ (eval l ∷ eval r ∷ xs)
+=   { definition of apply }
+  λ xs → (eval l + eval r) ∷ xs
+=   { definition of eval }
+  λ xs → eval (l ∔ r) ∷ xs
+=   { η-conversion }
+  (eval (l ∔ r) ∷_)
+</code></pre>
+<p>We see that this is essentially the same reasoning as in <code>soundness (l ∔ r)</code>, except that the induction hypotheses have been implicitly applied, so the whole reasoning goes through definitionally and hence can be carried out by the type-checker itself — if anything other than the induction hypotheses and definitional equalities was required, then type-checking would fail.
+Notably, in the definition of <code>compile⁺ (l ∔ r)</code>, if we swapped the order of the instructions for <code>r</code> and <code>l</code>, then <code>compile⁺</code> wouldn’t type-check.
 This can be considered either a feature or a bug: the type system guides you to write a program, which is good, but in this case it forces you to write a particular program but not the other one that’s also sensible, which is not so good.</p>
 <p>Besides filling out the definitions above, there are some more exercises intended for the students to play with and think about at this point.
 The easiest one is extending the <code>Expr</code> language (and all the subsequent definitions) with multiplication (or some other operator of the student’s choice).
@@ -237,7 +268,11 @@ data Expr : Set where
 By contrast, the extrinsic approach still works pretty much the same way, because there is no problem including an induction in the extrinsic proof.
 Similarly, as noted by Conor in the paper, if one tries to include some form of control structure in the <code>Expr</code> language (e.g., <code>ifz : Expr → Expr → Expr → Expr</code> with its semantics defined by <code>eval (ifz c t e) = if eval c == 0 then eval t else eval e</code>), they would also need to perform a case analysis on <code>eval c</code> to establish the necessary equality.
 These reveal the rigidity of the intrinsic approach.</p>
-<p>Finally, what Conor wanted to demonstrate with his ‘razor’ in the paper was the <em>recomputation lemma</em>: the index of an algebraically ornamented datatype can be recomputed by a fold on the original datatype.
+<p>One may have some doubt about what we actually prove with <code>compile⁺</code>.
+If we regard <code>Prog⁺</code> as the foundational definition (and ensure that the semantic index is specified accurately), then constructing <code>compile⁺</code> seems good enough.
+On the other hand, eventually we will execute a program on a stack machine step by step and want to ensure that this stepwise execution has the intended behaviour, but this stepwise execution is defined only on the original <code>Prog</code> datatype via <code>⟦_⟧</code>, which has no formal relationship with <code>compile⁺</code>, so there is still a gap.
+The more reasonable story is therefore taking <code>Prog</code> and <code>⟦_⟧</code> as the foundational definition and <code>Prog⁺</code> as an auxiliary definition, and linking the latter back to the former.
+This was done in Conor’s original paper by the <em>recomputation lemma</em>, which says that the index of an algebraically ornamented datatype can be recomputed by a fold on the original datatype.
 Specialised to the datatypes we’re dealing with, namely <code>Prog⁺</code> and <code>Prog</code>, the recomputation lemma can be stated and proved as follows,</p>
 <pre><code>recomputation : ∀ {f} (p : Prog⁺ m n f) xs → ⟦ forget p ⟧ xs ≡ f xs
 recomputation (push x) xs           = refl
@@ -280,7 +315,7 @@ recomputation : {A B : Set} {f : A → B → B} {e : B} {y : B}
 recomputation {f = f} []       = refl
 recomputation {f = f} (x ∷ xs) = cong (f x) (recomputation xs)
 </code></pre>
-<p>and (iii) use the recomputation lemma for <code>AlgList</code> to prove <code>++-length</code>.</p>
+<p>and (iii) derive list append from vector append and use the recomputation lemma for <code>AlgList</code> to prove <code>++-length</code> for the derived list append.</p>
 <hr />
 <div class="remark">
 First post with a two-digit number!
