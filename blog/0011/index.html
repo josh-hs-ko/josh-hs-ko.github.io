@@ -62,20 +62,20 @@
 0011
 </div>
 <h2>Upper levels of the equality type tower</h2>
-<div class="post-time">Posted at 14:44 on 18 September 2020</div>
+<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 22:59 on 18 September 2020</div>
 <p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
 This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
 Traditionally we didn’t have to take this tower of equality types seriously though.
 For example, it doesn’t seem to make much sense to talk about different ways in which natural numbers are equal — $1 + 1$ and $2$ are ‘just equal’, and we don’t need the equality type $1 + 1 =_{\mathbb N} 2$ to have structures beyond the ability to distinguish inhabitance and uninhabitance.
-In Homotopy Type Theory, the type of natural numbers is called a <em>set</em> or a <em>$0$-type</em>.
+In Homotopy Type Theory (HoTT), the type of natural numbers is called a <em>set</em> or a <em>$0$-type</em>.
 In general, a type $A : \mathcal U$ is a set exactly when it satisfies the predicate</p>
 <p>$$ \mathsf{isSet}\ A \defeq \Pi(x\ y : A)\ \Pi(p\ q : x =_A y)\ p = q $$</p>
 <p>which says that any equality proofs about elements of $A$ are equal, so we no longer need to care about what equality proofs we get, and the structure of $x =_A y$ becomes trivial in the sense that it is only about inhabitance/uninhabitance.</p>
-<p>In general, however, we can go beyond sets and consider higher-dimensional ‘$n$-types’: for example, a type $A$ is a <em>$1$-type</em> exactly when all its equality types are $0$-types, so its equality proofs may have some non-trivial structure, but the equality proofs between its equality proofs are trivial.
+<p>In HoTT we can go beyond sets and consider higher-dimensional <em>$n$-types</em>: for example, a type $A$ is a <em>$1$-type</em> exactly when all its equality types are $0$-types, so its equality proofs may have some non-trivial structure, but the equality proofs between its equality proofs are trivial.
 More generally, we can inductively define a family of predicates characterising $n$-types, which are types whose equality types are all trivial above a certain level:</p>
 <p>$$ \mathsf{is\text-}(n+1)\mathsf{\text-type}\ A \defeq \Pi(x\ y : A)\ \mathsf{is\text-}n\mathsf{\text-type}\ (x =_A y) $$</p>
 <p>But here we’re more interested in the lower-dimensional direction.
-Substituting $-1$ for $n$ in the above definition and matching the resulting type equation with the definition of $\mathsf{isSet}$ (which should be the same as $\mathsf{is\text-}0\mathsf{\text-type}$), we get a definition of ‘$(-1)$-types’, which are also called <em>mere propositions</em>:</p>
+Substituting $-1$ for $n$ in the above definition and matching the resulting type equation with the definition of $\mathsf{isSet}$ (which should be the same as $\mathsf{is\text-}0\mathsf{\text-type}$), we get a definition of <em>$(-1)$-types</em>, which are also called <em>mere propositions</em>:</p>
 <p>$$ \mathsf{isProp}\ A \defeq \Pi(x\ y : A)\ x =_A y $$</p>
 <p>This coincides with the traditional notion of proposition: traditionally mathematicians only care about whether a proposition is true (inhabited) or not, and wouldn’t want to distinguish the elements inhabiting the proposition when it’s modelled as a type.
 Can we go further?
@@ -104,14 +104,14 @@ The inductive definition of $n$-types then takes contractible types as the base 
 </ol>
 <p>Note that the first answer in general proves an important theorem that $n$-types are also $(n+1)$-types: if we picture the equality types $x =_A y$ on a type $A$ as one level above $A$, then the first answer tells us that we can create a $(-2)$-level above a $(-2)$-type, pushing the latter down and making it a $(-1)$-type (since its equality types are $(-2)$-types), and this pushing works inductively for any $n$-type.
 Or probably more accurately: every type induces an infinitely tall tower of equality types (with the original type as the ground floor); if all the floors above a certain level have the trivial $(-2)$-structure, then the type at the ground floor is an $n$-type, and we can start counting from any $(-2)$-structured floor downwards to determine $n$.</p>
-<p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical for people like me who are not used to work with equality proofs (or paths, which can bring out some helpful intuition).
-The key is to see that the universal quantification in $\mathsf{isProp}\ A$ doesn’t just give an inhabitant in every $x =_A y$, but also relates these inhabitants since the universal quantification is a function, which preserves equality, so we can get an equality at a higher dimension.
+<p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical for people like me who are not used to working with equality proofs (or paths, which can help to bring out some topological intuition).
+The key is to see that the universal quantification in $\mathsf{isProp}\ A$ doesn’t just give an inhabitant in every $x =_A y$, but also relates these inhabitants by some equations since the universal quantification is a function, which preserves equality, so we can get an equality at a higher dimension.
 More precisely, given $A : \mathcal U$ and $f : \mathsf{isProp}\ A$, for any $x : A$ the partially applied function $f\ x : \Pi(y : A)\ x =_A y$ maps any equality proof $q : z =_A y$ between two possible inputs $z$, $y : A$ to one between the outputs $f\ x\ z : x =_A z$ and $f\ x\ y : x =_A y$.
 The two outputs don’t have the same type, however, so we need to transport $f\ x\ z : x =_A z$ to $q_*(f\ x\ z) : x =_A y$ before we can say that the two outputs are equal.
 The transportation $q_* : x =_A z \to x =_A y$ is between equality types, and all it does is concatenate $q$ to its input (by transitivity $(\cdot) : a = b \to b = c \to a = c$), so $q_*(f\ x\ z) = f\ x\ z \cdot q$.
 What we have constructed so far is</p>
 <p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ f\ x\ z \cdot q = f\ x\ y $$</p>
-<p>which links any $f\ x\ z$ and $f\ x\ y$.
+<p>which relates any $f\ x\ z$ and $f\ x\ y$.
 Observe more closely: the above says that in any $x =_A y$ all the elements of the form $f\ x\ z \cdot q$ are contractible to $f\ x\ y$, so if we can show that all the elements of $x =_A y$ can be cast in (shown to be equal to) the form $f\ x\ z \cdot q$ for some $z$ and $q$, we will have proved that $x =_A y$ is contractible, which is our goal.
 And this final proof obligation is indeed true because from any $p : x =_A y$ we can choose $z \defeq x$ and $q \defeq (f\ x\ x)^{-1} \cdot p$ and obtain $p = f\ x\ x \cdot (f\ x\ x)^{-1} \cdot p$ (where $(^{-1}) : a = b \to b = a$ is symmetry of equality), whose right-hand side is the required form.</p>
 
