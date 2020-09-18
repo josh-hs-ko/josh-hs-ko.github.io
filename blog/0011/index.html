@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Upper levels of the equality type tower — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="From one lemma, this post proves in Homotopy Type Theory that (i) equality types on a contractible type are also contractible, and that (ii) the definitions of sets and mere propositions match the general definitions of 0-types and (−1)-types.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0011
+</div>
+<h2>Upper levels of the equality type tower</h2>
+<div class="post-time">Posted at 14:44 on 18 September 2020</div>
+<p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
+This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
+Traditionally we didn’t have to take this tower of equality types seriously though.
+For example, it doesn’t seem to make much sense to talk about different ways in which natural numbers are equal — $1 + 1$ and $2$ are ‘just equal’, and we don’t need the equality type $1 + 1 =_{\mathbb N} 2$ to have structures beyond the ability to distinguish inhabitance and uninhabitance.
+In Homotopy Type Theory, the type of natural numbers is called a <em>set</em> or a <em>$0$-type</em>.
+In general, a type $A : \mathcal U$ is a set exactly when it satisfies the predicate</p>
+<p>$$ \mathsf{isSet}\ A \defeq \Pi(x\ y : A)\ \Pi(p\ q : x =_A y)\ p = q $$</p>
+<p>which says that any equality proofs about elements of $A$ are equal, so we no longer need to care about what equality proofs we get, and the structure of $x =_A y$ becomes trivial in the sense that it is only about inhabitance/uninhabitance.</p>
+<p>In general, however, we can go beyond sets and consider higher-dimensional ‘$n$-types’: for example, a type $A$ is a <em>$1$-type</em> exactly when all its equality types are $0$-types, so its equality proofs may have some non-trivial structure, but the equality proofs between its equality proofs are trivial.
+More generally, we can inductively define a family of predicates characterising $n$-types, which are types whose equality types are all trivial above a certain level:</p>
+<p>$$ \mathsf{is\text-}(n+1)\mathsf{\text-type}\ A \defeq \Pi(x\ y : A)\ \mathsf{is\text-}n\mathsf{\text-type}\ (x =_A y) $$</p>
+<p>But here we’re more interested in the lower-dimensional direction.
+Substituting $-1$ for $n$ in the above definition and matching the resulting type equation with the definition of $\mathsf{isSet}$ (which should be the same as $\mathsf{is\text-}0\mathsf{\text-type}$), we get a definition of ‘$(-1)$-types’, which are also called <em>mere propositions</em>:</p>
+<p>$$ \mathsf{isProp}\ A \defeq \Pi(x\ y : A)\ x =_A y $$</p>
+<p>This coincides with the traditional notion of proposition: traditionally mathematicians only care about whether a proposition is true (inhabited) or not, and wouldn’t want to distinguish the elements inhabiting the proposition when it’s modelled as a type.
+Can we go further?
+Alas, the definition of <em>$(-2)$-types</em> — which are also called <em>contractible types</em> — won’t reveal itself if we repeat the process; instead, the definition given in the HoTT book reads</p>
+<p>$$ \mathsf{isContr}\ A \defeq \Sigma(x : A)\ \Pi(y : A)\ x =_A y $$</p>
+<p>which says that there is an element that is equal to any (other) element, so a contractible type is basically one that has exactly one element.
+The inductive definition of $n$-types then takes contractible types as the base case:</p>
+<p>$$ \mathsf{is\text-}(-2)\mathsf{\text-type}\ A \defeq \mathsf{isContr}\ A $$</p>
+<p>Two questions naturally arise at this point:</p>
+<ol>
+<li>Why are $(-2)$-types the base case?  Or: why aren’t there ‘$(-3)$-types’ and so on?</li>
+<li>Do the definitions $\mathsf{isSet}$ and $\mathsf{isProp}$ really coincide with $\mathsf{is\text-}0\mathsf{\text-type}$ and $\mathsf{is\text-}(-1)\mathsf{\text-type}$?</li>
+</ol>
+<p>Both questions can be answered by the following lemma saying that the equality types on a mere proposition are contractible:</p>
+<p>\begin{equation}
+\Pi(A : \mathcal U)\ \mathsf{isProp}\ A \to \Pi(x\ y : A)\ \mathsf{isContr}\ (x =_A y)
+\tag{$*$}
+\label{lem:roof}
+\end{equation}</p>
+<p>Given the above lemma and the easily provable fact</p>
+<p>$$ \Pi(A : \mathcal U)\ \mathsf{isContr}\ A \to \mathsf{isProp}\ A $$</p>
+<p>we can readily give answers to the two questions:</p>
+<ol>
+<li>the equality types on a contractible type are also contractible, that is, ‘$(-3)$-types’ are actually just $(-2)$-types, and</li>
+<li>$\mathsf{isSet}$ and $\mathsf{isProp}$ imply $\mathsf{is\text-}0\mathsf{\text-type}$ and $\mathsf{is\text-}(-1)\mathsf{\text-type}$ respectively (and the opposite implications are immediate).</li>
+</ol>
+<p>Note that the first answer in general proves an important theorem that $n$-types are also $(n+1)$-types: if we picture the equality types $x =_A y$ on a type $A$ as one level above $A$, then the first answer tells us that we can create a $(-2)$-level above a $(-2)$-type, pushing the latter down and making it a $(-1)$-type (since its equality types are $(-2)$-types), and this pushing works inductively for any $n$-type.
+Or probably more accurately: every type induces an infinitely tall tower of equality types (with the original type as the ground floor); if all the floors above a certain level have the trivial $(-2)$-structure, then the type at the ground floor is an $n$-type, and we can start counting from any $(-2)$-structured floor downwards to determine $n$.</p>
+<p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical for people like me who are not used to work with equality proofs (or paths, which can bring out some helpful intuition).
+The key is to see that the universal quantification in $\mathsf{isProp}\ A$ doesn’t just give an inhabitant in every $x =_A y$, but also relates these inhabitants since the universal quantification is a function, which preserves equality, so we can get an equality at a higher dimension.
+More precisely, given $A : \mathcal U$ and $f : \mathsf{isProp}\ A$, for any $x : A$ the partially applied function $f\ x : \Pi(y : A)\ x =_A y$ maps any equality proof $q : z =_A y$ between two possible inputs $z$, $y : A$ to one between the outputs $f\ x\ z : x =_A z$ and $f\ x\ y : x =_A y$.
+The two outputs don’t have the same type, however, so we need to transport $f\ x\ z : x =_A z$ to $q_*(f\ x\ z) : x =_A y$ before we can say that the two outputs are equal.
+The transportation $q_* : x =_A z \to x =_A y$ is between equality types, and all it does is concatenate $q$ to its input (by transitivity $(\cdot) : a = b \to b = c \to a = c$), so $q_*(f\ x\ z) = f\ x\ z \cdot q$.
+What we have constructed so far is</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ f\ x\ z \cdot q = f\ x\ y $$</p>
+<p>which links any $f\ x\ z$ and $f\ x\ y$.
+Observe more closely: the above says that in any $x =_A y$ all the elements of the form $f\ x\ z \cdot q$ are contractible to $f\ x\ y$, so if we can show that all the elements of $x =_A y$ can be cast in (shown to be equal to) the form $f\ x\ z \cdot q$ for some $z$ and $q$, we will have proved that $x =_A y$ is contractible, which is our goal.
+And this final proof obligation is indeed true because from any $p : x =_A y$ we can choose $z \defeq x$ and $q \defeq (f\ x\ x)^{-1} \cdot p$ and obtain $p = f\ x\ x \cdot (f\ x\ x)^{-1} \cdot p$ (where $(^{-1}) : a = b \to b = a$ is symmetry of equality), whose right-hand side is the required form.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
