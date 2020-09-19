@@ -62,7 +62,7 @@
 0011
 </div>
 <h2>Upper levels of the equality type tower</h2>
-<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 10:11 on 19 September 2020</div>
+<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 13:58 on 19 September 2020</div>
 <p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
 This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
 Traditionally we didn’t have to take this tower of equality types seriously though.
@@ -91,7 +91,7 @@ The inductive definition of $n$-types then takes contractible types as the base 
 <li>Why are $(-2)$-types the base case?  Or: why aren’t there ‘$(-3)$-types’ and so on?</li>
 <li>Do the definitions $\mathsf{isSet}$ and $\mathsf{isProp}$ really coincide with $\mathsf{is\text-}0\mathsf{\text-type}$ and $\mathsf{is\text-}(-1)\mathsf{\text-type}$? (For example, by definition $\mathsf{is\text-}(-1)\mathsf{\text-type}\ A$ is
 $$ \Pi(x\ y : A)\ \Sigma(p : x =_A y)\ \Pi(q : x =_A y)\ p = q $$
-which is different from $\mathsf{isProp}\ A$, which only says that $x =_A y$ is inhabited but doesn’t mention its any other structure.)</li>
+which says more about the structure of $x =_A y$ than being inhabited and therefore looks more informative than $\mathsf{isProp}\ A$.)</li>
 </ol>
 <p>Both questions can be answered by the following lemma saying that the equality types on a mere proposition are contractible:</p>
 <p>\begin{equation}
