@@ -62,7 +62,7 @@
 0011
 </div>
 <h2>Upper levels of the equality type tower</h2>
-<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 23:26 on 18 September 2020</div>
+<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 10:11 on 19 September 2020</div>
 <p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
 This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
 Traditionally we didn’t have to take this tower of equality types seriously though.
@@ -71,11 +71,13 @@ In Homotopy Type Theory (HoTT), the type of natural numbers is called a <em>set<
 In general, a type $A : \mathcal U$ is a set exactly when it satisfies the predicate</p>
 <p>$$ \mathsf{isSet}\ A \defeq \Pi(x\ y : A)\ \Pi(p\ q : x =_A y)\ p = q $$</p>
 <p>which says that any equality proofs about elements of $A$ are equal, so we no longer need to care about what equality proofs we get, and the structure of $x =_A y$ becomes trivial in the sense that it is only about inhabitance/uninhabitance.</p>
-<p>In HoTT we can go beyond sets and consider higher-dimensional <em>$n$-types</em>: for example, a type $A$ is a <em>$1$-type</em> exactly when all its equality types are $0$-types, so its equality proofs may have some non-trivial structure, but the equality proofs between its equality proofs are trivial.
-More generally, we can inductively define a family of predicates characterising $n$-types, which are types whose equality types are all trivial above a certain level:</p>
+<p>In HoTT we can go beyond sets and consider higher-dimensional <em>$n$-types</em>: for example, a type $A$ is a <em>$1$-type</em> exactly when all its equality types $x =_A y$ are $0$-types, so the equality proofs on $A$ may have some non-trivial structure, but the equality proofs between the equality proofs on $A$ are trivial.
+More generally, we can inductively define a family of predicates characterising $n$-types, which are types whose equality types are all trivial above a certain level.
+The inductive case of the definition is</p>
 <p>$$ \mathsf{is\text-}(n+1)\mathsf{\text-type}\ A \defeq \Pi(x\ y : A)\ \mathsf{is\text-}n\mathsf{\text-type}\ (x =_A y) $$</p>
-<p>But here we’re more interested in the lower-dimensional direction.
-Substituting $-1$ for $n$ in the above definition and matching the resulting type equation with the definition of $\mathsf{isSet}$ (which should be the same as $\mathsf{is\text-}0\mathsf{\text-type}$), we get a definition of <em>$(-1)$-types</em>, which are also called <em>mere propositions</em>:</p>
+<p>(We’ll see the base case later.)
+But here we’re more interested in the lower-dimensional direction.
+Substituting $-1$ for $n$ in the above definition and matching the resulting type equation with the definition of $\mathsf{isSet}$ (which should be the same as $\mathsf{is\text-}0\mathsf{\text-type}$ but actually the two definitions are slightly different; the (reconcilable) difference is a small puzzle which we will formulate and solve below), we get a definition of <em>$(-1)$-types</em>, which are also called <em>mere propositions</em>:</p>
 <p>$$ \mathsf{isProp}\ A \defeq \Pi(x\ y : A)\ x =_A y $$</p>
 <p>This coincides with the traditional notion of proposition: traditionally mathematicians only care about whether a proposition is true (inhabited) or not, and wouldn’t want to distinguish the elements inhabiting the proposition when it’s modelled as a type.
 Can we go further?
@@ -87,7 +89,9 @@ The inductive definition of $n$-types then takes contractible types as the base 
 <p>Two questions naturally arise at this point:</p>
 <ol>
 <li>Why are $(-2)$-types the base case?  Or: why aren’t there ‘$(-3)$-types’ and so on?</li>
-<li>Do the definitions $\mathsf{isSet}$ and $\mathsf{isProp}$ really coincide with $\mathsf{is\text-}0\mathsf{\text-type}$ and $\mathsf{is\text-}(-1)\mathsf{\text-type}$?</li>
+<li>Do the definitions $\mathsf{isSet}$ and $\mathsf{isProp}$ really coincide with $\mathsf{is\text-}0\mathsf{\text-type}$ and $\mathsf{is\text-}(-1)\mathsf{\text-type}$? (For example, by definition $\mathsf{is\text-}(-1)\mathsf{\text-type}\ A$ is
+$$ \Pi(x\ y : A)\ \Sigma(p : x =_A y)\ \Pi(q : x =_A y)\ p = q $$
+which is different from $\mathsf{isProp}\ A$, which only says that $x =_A y$ is inhabited but doesn’t mention its any other structure.)</li>
 </ol>
 <p>Both questions can be answered by the following lemma saying that the equality types on a mere proposition are contractible:</p>
 <p>\begin{equation}
