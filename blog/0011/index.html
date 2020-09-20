@@ -62,7 +62,7 @@
 0011
 </div>
 <h2>Upper levels of the equality type tower</h2>
-<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 21:49 on 20 September 2020</div>
+<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 22:14 on 20 September 2020</div>
 <p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
 This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
 Traditionally we didn’t have to take this tower of equality types seriously though.
@@ -110,19 +110,19 @@ which says more about the structure of $x =_A y$ than being inhabited and theref
 Or probably more accurately: every type induces an infinitely tall tower of equality types (with the original type as the ground floor); if all the floors above a certain level have the trivial $(-2)$-structure, then the type at the ground floor is an $n$-type, and we can start counting from any $(-2)$-structured floor downwards to determine $n$.</p>
 <p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical to people like me who are not used to working with equality proofs (or paths, which can help to bring out some homotopical intuition).
 The key is to see that a function of type $\mathsf{isProp}\ A$ doesn’t just map any $x$, $y : A$ to an equality proof in $x =_A y$, but also relates the resulting equality proofs by some equations because all functions preserve equality, meaning that we can automatically get an equality between output equality proofs from an equality between input elements of $A$.
-More precisely, given $A : \mathcal U$ and $f : \mathsf{isProp}\ A$, for any $x : A$ the partially applied function $f\ x : \Pi(y : A)\ x =_A y$ maps any equality proof $q : z =_A y$ between two possible inputs $z$, $y : A$ to one between the outputs $f\ x\ z : x =_A z$ and $f\ x\ y : x =_A y$.
-The two outputs don’t have the same type, however, so we need to transport $f\ x\ z : x =_A z$ to $q_*(f\ x\ z) : x =_A y$ before we can say that the two outputs are equal.
-The transportation $q_* : x =_A z \to x =_A y$ is between equality types, and all it does is concatenate $q$ to its input (by transitivity $(\cdot) : a = b \to b = c \to a = c$), so $q_*(f\ x\ z) = f\ x\ z \cdot q$.
+More precisely, given $A : \mathcal U$ and $f : \mathsf{isProp}\ A$, for any $x : A$ the partially applied function $f\ x : \Pi(y : A)\ x =_A y$ maps any equality proof $p : z =_A y$ between two possible inputs $z$, $y : A$ to one between the outputs $f\ x\ z : x =_A z$ and $f\ x\ y : x =_A y$.
+The two outputs don’t have the same type, however, so we need to transport $f\ x\ z : x =_A z$ to $p_*(f\ x\ z) : x =_A y$ before we can say that the two outputs are equal.
+The transportation $p_* : x =_A z \to x =_A y$ is between equality types, and all it does is concatenate $p$ to its input (by transitivity $(\cdot) : a = b \to b = c \to a = c$), so $p_*(f\ x\ z) = f\ x\ z \cdot p$.
 What we have constructed so far is</p>
-<p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ f\ x\ z \cdot q = f\ x\ y $$</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ f\ x\ z \cdot p = f\ x\ y $$</p>
 <p>which relates any $f\ x\ z$ and $f\ x\ y$.
-Homotopically, we might think of this equality as symbolising the picture where $f\ x\ z$ can be continuously deformed to $f\ x\ y$ along any path $q : z =_A y$.
+Homotopically, we might think of this equality as symbolising the picture where $f\ x\ z$ can be continuously deformed to $f\ x\ y$ along any path $p : z =_A y$.
 Next we concatenate $(f\ x\ z)^{-1}$ (where $(^{-1}) : a = b \to b = a$ is symmetry of equality or path inversion) to both sides of the equation, cancelling out the $f\ x\ z$ on the left:</p>
-<p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ q = (f\ x\ z)^{-1} \cdot f\ x\ y $$</p>
-<p>This changes the orientation of the homotopy, which I find intuitive but am not absolutely certain about; fortunately, though, this step is backed by the path-calculating techniques developed in Chapter 2 of the HoTT book (and demonstrates that those techniques are worth learning).
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ p = (f\ x\ z)^{-1} \cdot f\ x\ y $$</p>
+<p>This changes the orientation of the homotopy, which I find intuitive but am not absolutely certain about; fortunately, though, this step is backed by the path calculation techniques developed in Chapter 2 of the HoTT book (and demonstrates that those techniques are worth learning).
 Finally we ‘pull’ $z$ to make it coincide with $x$ (that is, we substitute $x$ for $z$) and obtain</p>
-<p>$$ \Pi(x\ y : A)\ \Pi(q : x =_A y)\ q = (f\ x\ x)^{-1} \cdot f\ x\ y $$</p>
-<p>which says that every $x =_A y$ is contractible with $(f\ x\ x)^{-1} \cdot f\ x\ y$ as the center.</p>
+<p>$$ \Pi(x\ y : A)\ \Pi(p : x =_A y)\ p = (f\ x\ x)^{-1} \cdot f\ x\ y $$</p>
+<p>which is the same as saying that every $x =_A y$ is contractible with $(f\ x\ x)^{-1} \cdot f\ x\ y$ as the center.</p>
 
 <!-- END OF POST -->
 
