@@ -62,7 +62,7 @@
 0011
 </div>
 <h2>Upper levels of the equality type tower</h2>
-<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 13:58 on 19 September 2020</div>
+<div class="post-time">Posted at 14:44 on 18 September 2020, and revised at 21:49 on 20 September 2020</div>
 <p>In (Martin-Löf) Type Theory, equality between elements of a type is a type itself.
 This triggers a chain reaction that leads us to consider elements of an equality type between elements of an equality type between elements... and so on.
 Traditionally we didn’t have to take this tower of equality types seriously though.
@@ -83,7 +83,7 @@ Substituting $-1$ for $n$ in the above definition and matching the resulting typ
 Can we go further?
 Alas, the definition of <em>$(-2)$-types</em> — which are also called <em>contractible types</em> — won’t reveal itself if we repeat the process; instead, the definition given in the HoTT book reads</p>
 <p>$$ \mathsf{isContr}\ A \defeq \Sigma(x : A)\ \Pi(y : A)\ x =_A y $$</p>
-<p>which says that there is an element that is equal to any (other) element, so a contractible type is basically one that has exactly one element.
+<p>which says that there is an element (called the <em>center</em>) which is equal to any (other) element, so a contractible type is basically one that has exactly one element.
 The inductive definition of $n$-types then takes contractible types as the base case:</p>
 <p>$$ \mathsf{is\text-}(-2)\mathsf{\text-type}\ A \defeq \mathsf{isContr}\ A $$</p>
 <p>Two questions naturally arise at this point:</p>
@@ -108,7 +108,7 @@ which says more about the structure of $x =_A y$ than being inhabited and theref
 </ol>
 <p>Note that the first answer in general proves an important theorem that $n$-types are also $(n+1)$-types: if we picture the equality types $x =_A y$ on a type $A$ as one level above $A$, then the first answer tells us that we can create a $(-2)$-level above a $(-2)$-type, pushing the latter down and making it a $(-1)$-type (since its equality types are $(-2)$-types), and this pushing works inductively for any $n$-type.
 Or probably more accurately: every type induces an infinitely tall tower of equality types (with the original type as the ground floor); if all the floors above a certain level have the trivial $(-2)$-structure, then the type at the ground floor is an $n$-type, and we can start counting from any $(-2)$-structured floor downwards to determine $n$.</p>
-<p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical to people like me who are not used to working with equality proofs (or paths, which can help to bring out some topological intuition).
+<p>The proof of the lemma (\ref{lem:roof}) may appear slightly magical to people like me who are not used to working with equality proofs (or paths, which can help to bring out some homotopical intuition).
 The key is to see that a function of type $\mathsf{isProp}\ A$ doesn’t just map any $x$, $y : A$ to an equality proof in $x =_A y$, but also relates the resulting equality proofs by some equations because all functions preserve equality, meaning that we can automatically get an equality between output equality proofs from an equality between input elements of $A$.
 More precisely, given $A : \mathcal U$ and $f : \mathsf{isProp}\ A$, for any $x : A$ the partially applied function $f\ x : \Pi(y : A)\ x =_A y$ maps any equality proof $q : z =_A y$ between two possible inputs $z$, $y : A$ to one between the outputs $f\ x\ z : x =_A z$ and $f\ x\ y : x =_A y$.
 The two outputs don’t have the same type, however, so we need to transport $f\ x\ z : x =_A z$ to $q_*(f\ x\ z) : x =_A y$ before we can say that the two outputs are equal.
@@ -116,8 +116,13 @@ The transportation $q_* : x =_A z \to x =_A y$ is between equality types, and al
 What we have constructed so far is</p>
 <p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ f\ x\ z \cdot q = f\ x\ y $$</p>
 <p>which relates any $f\ x\ z$ and $f\ x\ y$.
-Observe more closely: the above says that in any $x =_A y$ all the elements of the form $f\ x\ z \cdot q$ are contractible to $f\ x\ y$, so if we can show that all the elements of $x =_A y$ can be cast in (shown to be equal to) the form $f\ x\ z \cdot q$ for some $z$ and $q$, we will have proved that $x =_A y$ is contractible, which is our goal.
-And this final proof obligation is indeed true because from any $p : x =_A y$ we can choose $z \defeq x$ and $q \defeq (f\ x\ x)^{-1} \cdot p$ and obtain $p = f\ x\ x \cdot (f\ x\ x)^{-1} \cdot p$ (where $(^{-1}) : a = b \to b = a$ is symmetry of equality), whose right-hand side is the required form.</p>
+Homotopically, we might think of this equality as symbolising the picture where $f\ x\ z$ can be continuously deformed to $f\ x\ y$ along any path $q : z =_A y$.
+Next we concatenate $(f\ x\ z)^{-1}$ (where $(^{-1}) : a = b \to b = a$ is symmetry of equality or path inversion) to both sides of the equation, cancelling out the $f\ x\ z$ on the left:</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(q : z =_A y)\ q = (f\ x\ z)^{-1} \cdot f\ x\ y $$</p>
+<p>This changes the orientation of the homotopy, which I find intuitive but am not absolutely certain about; fortunately, though, this step is backed by the path-calculating techniques developed in Chapter 2 of the HoTT book (and demonstrates that those techniques are worth learning).
+Finally we ‘pull’ $z$ to make it coincide with $x$ (that is, we substitute $x$ for $z$) and obtain</p>
+<p>$$ \Pi(x\ y : A)\ \Pi(q : x =_A y)\ q = (f\ x\ x)^{-1} \cdot f\ x\ y $$</p>
+<p>which says that every $x =_A y$ is contractible with $(f\ x\ x)^{-1} \cdot f\ x\ y$ as the center.</p>
 
 <!-- END OF POST -->
 
