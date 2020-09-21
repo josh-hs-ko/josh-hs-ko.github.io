@@ -62,7 +62,7 @@
 0012
 </div>
 <h2>More path calculations</h2>
-<div class="post-time">Posted at 20:56 on 21 September 2020</div>
+<div class="post-time">Posted at 20:56 on 21 September 2020, and revised at 21:15 on 21 September 2020</div>
 <p>Continuing <a href="/blog/0011/">0011</a>, there are a couple more important theorems that can be proved with similar path calculations.
 The first one is <em>Hedberg’s theorem</em>: if a type has decidable equality, then it is a set.
 Or formally:</p>
@@ -111,14 +111,14 @@ The same observation made at the beginning of the proof of Hedberg’s theorem i
 \label{type:choice}
 \end{equation}</p>
 <p>that is, from every inhabited type $A$ we can choose an element.
-A function of Type \ref{type:choice} must make its choices regardless of how the elements of a type is permuted, because univalence gives us the ability to arbitrarily permute the elements of a type by supplying an equivalence/isomorphism, but such choices are impossible.
+Again, a function of Type \ref{type:choice} preserves equality, which in this case implies that the function must make its choice consistently for each type before and after the elements of the type is arbitrarily permuted because univalence gives us the ability to permute the elements of a type by supplying an automorphism as an equivalence, but such choices are impossible.
 Technically, we start with a function $f$ of Type \ref{type:choice}, which preserves equality as before:</p>
 <p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ p_*(f\ A) = f\ B $$</p>
 <p>Again this is an equation on functions, which should map equal arguments to equal results:</p>
 <p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ \Pi(b : \| B \|)\ p_*(f\ A)\ b = f\ B\ b $$</p>
 <p>The transportation $p_* : (\| A \| \to A) \to (\| B \| \to B)$ is one between functions, and hence can be expanded to transportations of arguments and results as before:</p>
 <p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ \Pi(b : \| B \|)\ p_*(f\ A\ (p^{-1}_*\ b)) = f\ B\ b $$</p>
-<p>Since the second argument of $f$ is irrelevant, what this says is that the element $f\ A$ chosen from $A$ by $f$, when transported along $p$, should be the same as the element $f\ B$ chosen from $B$ by $f$.
+<p>Since the second argument of $f$ is irrelevant, what this says is that the element chosen from $A$ by $f$, when transported along $p$, should be the same as the element chosen from $B$ by $f$.
 If we allow non-trivial transportation when $A$ and $B$ are the same, then the equation will lead to a contradiction, but this non-trivial transportation is exactly one of the things univalence can give us.
 Concretely, substitute $\mathsf{Bool}$ for both $A$ and $B$, the equality $\mathsf{ua}(\mathsf{not})$ manufactured by univalence from the bijective function $\mathsf{not} : \mathsf{Bool} \to \mathsf{Bool}$ for $p$, and an arbitrary element — say $|\mathsf{true}|$ — for $b$, and we’ll get</p>
 <p>$$ \mathsf{ua}(\mathsf{not})_*(f\ \mathsf{Bool}\ (\mathsf{ua}(\mathsf{not})^{-1}_*\ |\mathsf{true}|)) = f\ \mathsf{Bool}\ |\mathsf{true}| $$</p>
