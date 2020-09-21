@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>More path calculations — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="With path calculations similar to those in [0011](/blog/0011/), we can prove a couple more important theorems in HoTT: Hedberg’s theorem and the incompatibility between univalence and the unconstrained law of excluded middle.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0012
+</div>
+<h2>More path calculations</h2>
+<div class="post-time">Posted at 20:56 on 21 September 2020</div>
+<p>Continuing <a href="/blog/0011/">0011</a>, there are a couple more important theorems that can be proved with similar path calculations.
+The first one is <em>Hedberg’s theorem</em>: if a type has decidable equality, then it is a set.
+Or formally:</p>
+<p>$$ \Pi(A : \mathcal U)\ (\Pi(x\ y : A)\ (x =_A y) + \neg (x =_A y)) \to \mathsf{isSet}\ A $$</p>
+<p>A useful observation here is that $A$ having decidable equality implies</p>
+<p>\begin{equation}
+\Pi(x\ y : A)\ \| x =_A y \| \to x =_A y
+\label{type:conditionally-propositional}
+\end{equation}</p>
+<p>where $\|\_\|$ is propositional truncation (with $|\_|$ as its constructor).
+Intuitively, having decidable equality means that for every $x =_A y$ we can produce an inhabitant or prove that the type is uninhabited, so if we know in advance that $x =_A y$ is inhabited (that is, we have $\| x =_A y \|$), then we can definitely produce an inhabitant.
+Type \ref{type:conditionally-propositional} is a conditional version of $\mathsf{isProp}$, and we can largely repeat the argument in <a href="/blog/0011/">0011</a> to create the equality structure required by $\mathsf{isSet}\ A$.
+Let $f$ be a function of Type \ref{type:conditionally-propositional}.
+Again attempting to relate $f\ x\ z$ and $f\ x\ y$, we can derive</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ p_*(f\ x\ z) = f\ x\ y $$</p>
+<p>This is an equality between functions, which implies that applying both sides to the same argument yields the same result:</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ \Pi(q : \| x =_A y \|)\ p_*(f\ x\ z)\ q = f\ x\ y\ q $$</p>
+<p>To proceed, we need to figure out how the transportation $p_*$ works.
+The transportation has type</p>
+<p>$$ p_* : (\| x =_A z \| \to x =_A z) \to (\| x =_A y \| \to x =_A y) $$
+That is, it needs to produce a function of type $\| x =_A y \| \to x =_A y$ from a function of type $\| x =_A z \| \to x =_A z$, and there seems to be only one sensible way: given an argument of type $\| x =_A y \|$, we transport it backwards along $p^{-1}$ to get an argument of type $\| x =_A z \|$, which is fed to the given function, producing a result of type $x =_A z$, and then we transport the result along $p$ to get the final result of type $x =_A y$.
+So we can rewrite the left-hand side of the equation and get</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ \Pi(q : \| x =_A y \|)\ p_*(f\ x\ z\ (p^{-1}_*\ q)) = f\ x\ y\ q $$</p>
+<p>Here the transportation $p^*$ is the familiar one between equality types sharing the same base point, so we rewrite the transportation,</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ \Pi(q : \| x =_A y \|)\ f\ x\ z\ (p^{-1}_*\ q) \cdot p = f\ x\ y\ q $$</p>
+<p>move $f\ x\ z\ (p^{-1}_*\ q)$ to the right-hand side,</p>
+<p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ \Pi(q : \| x =_A y \|)\ p = (f\ x\ z\ (p^{-1}_*\ q))^{-1} \cdot f\ x\ y\ q $$</p>
+<p>and substitute $x$ for $z$ and $|p|$ for $q$:</p>
+<p>$$ \Pi(x\ y : A)\ \Pi(p : x =_A y)\ p = (f\ x\ x\ (p^{-1}_*\ |p|))^{-1} \cdot f\ x\ y\ |p| $$</p>
+<p>The exact inhabitant produced on right-hand side depends on $x$ and $y$ but not $p$ (since the third argument of $f$ is truncated), so for any $p$, $q : x =_A y$ we have</p>
+<p>\begin{align*}
+&amp; p \\
+=~&amp; (f\ x\ x\ (p^{-1}_*\ |p|))^{-1} \cdot f\ x\ y\ |p| \\
+=~&amp; (f\ x\ x\ (q^{-1}_*\ |q|))^{-1} \cdot f\ x\ y\ |q| \\
+=~&amp; q
+\end{align*}</p>
+<p>completing the proof.
+Note that Type \ref{type:conditionally-propositional} is both sufficient (as shown above) and necessary for $A$ being a set.
+Sufficiency is shown above, and necessity is straightforward: $A$ being a set means that the equality types on $A$ are all mere propositions, so we can just eliminate any given $\| x =_A y \|$ with the equality type $x =_A y$ itself as the target type.</p>
+<p>The second theorem says that the unconstrained law of excluded middle is incompatible with univalence, that is,</p>
+<p>$$ \neg \Pi(A : \mathcal U)\ A + \neg A $$</p>
+<p>if the universe $\mathcal U$ is univalent.
+The same observation made at the beginning of the proof of Hedberg’s theorem is also useful here: the law of excluded middle implies</p>
+<p>\begin{equation}
+\Pi(A : \mathcal U)\ \| A \| \to A
+\label{type:choice}
+\end{equation}</p>
+<p>that is, from every inhabited type $A$ we can choose an element.
+A function of Type \ref{type:choice} must make its choices regardless of how the elements of a type is permuted, because univalence gives us the ability to arbitrarily permute the elements of a type by supplying an equivalence/isomorphism, but such choices are impossible.
+Technically, we start with a function $f$ of Type \ref{type:choice}, which preserves equality as before:</p>
+<p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ p_*(f\ A) = f\ B $$</p>
+<p>Again this is an equation on functions, which should map equal arguments to equal results:</p>
+<p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ \Pi(b : \| B \|)\ p_*(f\ A)\ b = f\ B\ b $$</p>
+<p>The transportation $p_* : (\| A \| \to A) \to (\| B \| \to B)$ is one between functions, and hence can be expanded to transportations of arguments and results as before:</p>
+<p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ \Pi(b : \| B \|)\ p_*(f\ A\ (p^{-1}_*\ b)) = f\ B\ b $$</p>
+<p>Since the second argument of $f$ is irrelevant, what this says is that the element $f\ A$ chosen from $A$ by $f$, when transported along $p$, should be the same as the element $f\ B$ chosen from $B$ by $f$.
+If we allow non-trivial transportation when $A$ and $B$ are the same, then the equation will lead to a contradiction, but this non-trivial transportation is exactly one of the things univalence can give us.
+Concretely, substitute $\mathsf{Bool}$ for both $A$ and $B$, the equality $\mathsf{ua}(\mathsf{not})$ manufactured by univalence from the bijective function $\mathsf{not} : \mathsf{Bool} \to \mathsf{Bool}$ for $p$, and an arbitrary element — say $|\mathsf{true}|$ — for $b$, and we’ll get</p>
+<p>$$ \mathsf{ua}(\mathsf{not})_*(f\ \mathsf{Bool}\ (\mathsf{ua}(\mathsf{not})^{-1}_*\ |\mathsf{true}|)) = f\ \mathsf{Bool}\ |\mathsf{true}| $$</p>
+<p>Rewriting the inner $\mathsf{ua}(\mathsf{not})^{-1}_*\ |\mathsf{true}|$ to just $|\mathsf{true}|$ (which is ok since any two elements of a truncated type are equal) and observing that the outer $\mathsf{ua}(\mathsf{not})_* : \mathsf{Bool} \to \mathsf{Bool}$ is just applying the function $\mathsf{not}$, we get</p>
+<p>$$ \mathsf{not}\ (f\ \mathsf{Bool}\ |\mathsf{true}|) = f\ \mathsf{Bool}\ |\mathsf{true}| $$</p>
+<p>which is clearly contradictory since $\mathsf{not}$ doesn’t have a fixed point.</p>
+<hr />
+<div class="remark">
+Next: univalence implies functional extensionality?
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
