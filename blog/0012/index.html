@@ -62,7 +62,7 @@
 0012
 </div>
 <h2>More path calculations</h2>
-<div class="post-time">Posted at 20:56 on 21 September 2020, and revised at 21:15 on 21 September 2020</div>
+<div class="post-time">Posted at 20:56 on 21 September 2020, and revised at 10:15 on 22 September 2020</div>
 <p>Continuing <a href="/blog/0011/">0011</a>, there are a couple more important theorems that can be proved with similar path calculations.
 The first one is <em>Hedberg’s theorem</em>: if a type has decidable equality, then it is a set.
 Or formally:</p>
@@ -92,7 +92,7 @@ So we can rewrite the left-hand side of the equation and get</p>
 <p>$$ \Pi(x\ z\ y : A)\ \Pi(p : z =_A y)\ \Pi(q : \| x =_A y \|)\ p = (f\ x\ z\ (p^{-1}_*\ q))^{-1} \cdot f\ x\ y\ q $$</p>
 <p>and substitute $x$ for $z$ and $|p|$ for $q$:</p>
 <p>$$ \Pi(x\ y : A)\ \Pi(p : x =_A y)\ p = (f\ x\ x\ (p^{-1}_*\ |p|))^{-1} \cdot f\ x\ y\ |p| $$</p>
-<p>The exact inhabitant produced on right-hand side depends on $x$ and $y$ but not $p$ (since the third argument of $f$ is truncated), so for any $p$, $q : x =_A y$ we have</p>
+<p>The exact inhabitant produced on the right-hand side depends on $x$ and $y$ but not $p$ (since the third argument of $f$ is truncated), so for any $p$, $q : x =_A y$ we have</p>
 <p>\begin{align*}
 &amp; p \\
 =~&amp; (f\ x\ x\ (p^{-1}_*\ |p|))^{-1} \cdot f\ x\ y\ |p| \\
@@ -111,7 +111,7 @@ The same observation made at the beginning of the proof of Hedberg’s theorem i
 \label{type:choice}
 \end{equation}</p>
 <p>that is, from every inhabited type $A$ we can choose an element.
-Again, a function of Type \ref{type:choice} preserves equality, which in this case implies that the function must make its choice consistently for each type before and after the elements of the type is arbitrarily permuted because univalence gives us the ability to permute the elements of a type by supplying an automorphism as an equivalence, but such choices are impossible.
+Again, a function of Type \ref{type:choice} preserves equality, which in this case implies that the function must make its choice for each type stably even when the elements of the type are permuted because univalence gives us the ability to permute the elements of a type by supplying an automorphism as an equivalence, but such choices are impossible.
 Technically, we start with a function $f$ of Type \ref{type:choice}, which preserves equality as before:</p>
 <p>$$ \Pi(A\ B : \mathcal U)\ \Pi(p : A =_{\mathcal U} B)\ p_*(f\ A) = f\ B $$</p>
 <p>Again this is an equation on functions, which should map equal arguments to equal results:</p>
