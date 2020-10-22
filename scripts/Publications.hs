@@ -56,7 +56,8 @@ publicationList =
       , types   = [ (Published, "Accepted")
                   ]
       , links   = []
-      , info    = [ ("Related blog posts", "<a href=\"/blog/0004/\">0004</a>, <a href=\"/blog/0007/\">0007</a>", Nothing)
+      , info    = [ ("URL", "https://www.usenix.org/conference/osdi20/presentation/chang", Nothing)
+                  , ("Related blog posts", "<a href=\"/blog/0004/\">0004</a>, <a href=\"/blog/0007/\">0007</a>", Nothing)
                   , ("Abstract", "We introduce the design of a snapshot-consistent flash translation layer (SCFTL) for flash disks, which has a stronger guarantee about the possible behaviors after a crash than conventional designs. More specifically, the flush operation of SCFTL also has the functionality of making a “disk snapshot.” When a crash occurs, the flash disk is guaranteed to recover to the state right before the last flush. The major benefit of SCFTL is that it allows a more efficient design of upper layers in the storage stack. For example, the file system hosted by SCFTL does not require the use of a journal for crash recovery. Instead, it only needs to perform a flush operation of SCFTL at the end of each atomic transaction. We use a two-layer approach, combining a proof assistant, a symbolic executor, and an SMT solver, to formally verify the correctness of our prototype SCFTL implementation. We optimize the xv6 file system by utilizing SCFTL’s stronger crash guarantee. Evaluation results show that the optimized xv6 is 3 to 30 times faster than the original version.", Nothing)
                   ]
       }
