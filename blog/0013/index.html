@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Rice’s theorem, modally typed — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="We experiment with formulating the paradoxical arguments for the undecidability of the halting problem and, more generally, Rice’s theorem in a modally typed setting using (a variation of) Kavvos’s intensional recursion, whose type corresponds to the Gödel–Löb axiom.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0013
+</div>
+<h2>Rice’s theorem, modally typed</h2>
+<div class="post-time">Posted at 17:15 on 30 October 2020</div>
+<p>My colleagues <a href="https://l-tchen.github.io">Liang-Ting Chen</a> and <a href="https://dblp.org/pid/273/7936.html">Tsung-Ju Chiang</a> and I have been looking into modal type theory in search of a solid theoretic foundation for typed meta-programming.
+In particular, we have concentrated on (a variation of) <a href="https://www.lambdabetaeta.eu">Alex Kavvos</a>’s <em>intensional recursion</em> (proposed <a href="https://arxiv.org/abs/1703.01288">here</a>), a type-theoretic formulation of the Gödel-Löb (GL) axiom.
+Computationally, GL corresponds to Kleene’s second recursion theorem, which allows us to write programs that have access to their own code.
+This self-referencing ability leads to paradoxical constructions that lie at the heart of the classic results in computability theory, for example the undecidability of the halting problem and, more generally, Rice’s theorem.
+Below is our attempt to formulate the arguments somewhat informally with modal types, followed by some discussions of future directions.</p>
+<p>We start with intensional recursion, which can be understood by comparing it with ‘extensional’ recursion, that is, the familiar fixed-point combinator that allows us to define recursive functions</p>
+<pre><code>Y : (α → α) → α
+</code></pre>
+<p>which satisfies the equation</p>
+<pre><code>Y f = f (Y f)
+</code></pre>
+<p>To define something of type <code>α</code> recursively with <code>Y</code>, we should supply a function of type <code>α → α</code>, in which we define something of type <code>α</code> in terms of the argument also of type <code>α</code>, which is a reference to the thing being defined.
+The type for intensional recursion has the same structure except that we throw in some modalities:</p>
+<pre><code>GL : □(□α → α) → □α
+</code></pre>
+<p>Think of <code>□α</code> as the type of ‘code representing something of type <code>α</code>’.
+Of the three <code>□</code>’s above, the second one is the most essential because it signifies what kind of self-reference is permitted here: to define (the code of) something of type <code>α</code> using <code>GL</code>, we supply (the code of) a function of type <code>□α → α</code>, in which we define something of type <code>α</code> in terms of the argument — this time of type <code>□α</code> — which is a reference to <em>the code of</em> the thing being defined.
+We can also write down a fixed-point equation for <code>GL</code>:</p>
+<pre><code>⟦ GL c ⟧ = ⟦ c ⟧ (GL c)
+</code></pre>
+<p>for all <code>c : □(□α → α)</code>, where <code>⟦_⟧ : □α → α</code> is the evaluator/interpreter function.
+This equation gives code a coinductive feel: <code>GL c : □α</code> by itself does not reduce, but if we ‘force’ it by applying <code>⟦_⟧</code>, a copy of its body <code>c</code> will be forced/evaluated/expanded, and the result will refer to <code>GL c</code> itself, which will need to be forced again to spawn another copy of <code>c</code>, and so on.</p>
+<p>An important fact has to be mentioned at this point: <code>GL</code> and <code>⟦_⟧</code> together give rise to <code>Y</code>, and thus non-termination.
+Here is the construction, which also serves as a first example of programming with <code>GL</code>:</p>
+<pre><code>Y : (α → α) → α
+Y = ⟦ GL ⌜λself f. f (⟦ self ⟧ f)⌝ ⟧
+</code></pre>
+<p>Here <code>⌜_⌝</code> quotes (at meta-level) a term of type <code>α</code> and turns it into a piece of code that has type <code>□α</code>; it interacts with evaluation via the equation <code>⟦ ⌜t⌝ ⟧ = t</code>.
+We’re defining the <code>Y</code> combinator using <code>GL</code>, so we can suppose that we’re given the code <code>self : □((α → α) → α)</code> of the combinator itself, and then define the combinator in terms of <code>self</code>.
+Onto the actual meat of the definition: the combinator should take a function <code>f : α → α</code> and compute the infinitely nested applications of <code>f</code>, so in the definition we receive a second argument <code>f</code> and make the outermost invocation of <code>f</code>, whose argument is computed by evaluating <code>self</code> — the code of the combinator — on <code>f</code>, producing the rest of the infinitely nested applications.
+It is straightforward to verify that this definition does give rise to the intended behaviour of extensional recursion:</p>
+<pre><code>  Y f
+=  {- above definition of Y -}
+  ⟦ GL ⌜λself f. f (⟦ self ⟧ f)⌝ ⟧ f
+=  {- fixed-point equation of GL -}
+  ⟦ ⌜λself f. f (⟦ self ⟧ f)⌝ ⟧ (GL ⌜λself f. f (⟦ self ⟧ f)⌝) f
+=  {- evaluating a quotation; function application (twice) -}
+  f (⟦ GL ⌜λself f. f (⟦ self ⟧ f)⌝ ⟧ f)
+=  {- above definition of Y -}
+  f (Y f)
+</code></pre>
+<p>Now we’re ready to establish the undecidability of the halting problem with <code>GL</code>.
+Suppose that we’re given a total decision procedure <code>h : □A → Bool</code> such that <code>h c = true</code> iff <code>⟦ c ⟧ ↓</code> (converges) for all <code>c : □A</code>.
+We can then construct a ‘disobedient’ program <code>GL oppositeH : □A</code> that does the opposite of what <code>h</code> says it does.
+Assuming the existence of a convergent value <code>stop : A</code>, it is tempting to define the body <code>oppositeH : □(□A → A)</code> as the quote of the function</p>
+<pre><code>λself. if h self then Y id else stop
+  : □A → A
+</code></pre>
+<p>which says that if <code>h</code> says it’s convergent then it will become <code>Y id</code> and diverge, or otherwise it will become <code>stop</code> and converge.
+However, the above expression is an open one (whose free variables are the assumptions <code>h</code> and <code>stop</code>), and quotation acts on closed expressions only (unless we switch to a contextual modal type theory, which we avoid for now).
+So to be technically correct, we should instead construct a closed expression</p>
+<pre><code>λh stop self. if h self then Y id else stop
+  : (□A → Bool) → A → □A → A
+</code></pre>
+<p>and define <code>oppositeH</code> by ‘applying’ the quote of the expression above to our two assumptions using the applicative combinator</p>
+<pre><code>_·_ : □(α → β) → □α → □β
+</code></pre>
+<p>which interacts with evaluation via the equation <code>⟦ cf · cx ⟧ = ⟦ cf ⟧ ⟦ cx ⟧</code>.
+This means that the assumptions should also be <code>□</code>-typed — our real assumptions are thus</p>
+<pre><code>ch    : □(□A → Bool)
+cstop : □A
+</code></pre>
+<p>such that <code>⟦ ch ⟧</code> is total, <code>⟦ ch ⟧ c = true</code> iff <code>⟦ c ⟧ ↓</code>, and <code>⟦ cstop ⟧ ↓</code>.
+Assuming that <code>_·_</code> is left-associative, the definition of <code>oppositeH</code> is then</p>
+<pre><code>oppositeH : □(□A → A)
+oppositeH = ⌜λh stop self. if h self then Y id else stop⌝ · ch · cstop
+</code></pre>
+<p>Now we can check that <code>GL oppositeH</code> is indeed disobedient and leads to a paradox and eventually a contradiction:</p>
+<pre><code>  ⟦ ch ⟧ (GL oppositeH) = true
+⇔  {- ⟦ ch ⟧ decides the halting problem -}
+  ⟦ GL oppositeH ⟧  ↓
+⇔  {- fixed-point equation of GL -}
+  ⟦ oppositeH ⟧ (GL oppositeH)  ↓
+⇔  {- definition of oppositeH; evaluating code application -}
+  if ⟦ ch ⟧ (GL oppositeH) then Y id else ⟦ cstop ⟧  ↓
+⇔  {- (only) the else branch converges -}
+  ⟦ ch ⟧ (GL oppositeH) = false
+</code></pre>
+<p>Note that if <code>⟦ ch ⟧</code> was not total, in particular if <code>⟦ ch ⟧</code> was not defined on <code>GL oppositeH</code>, then this bi-implication wouldn’t be a contradiction, so the totality assumption about <code>⟦ ch ⟧</code> is important — given that <code>⟦ ch ⟧ (GL oppositeH)</code> is defined, it is either <code>true</code> or <code>false</code>, but the argument above says that it has to be both, which is impossible.
+Also important is the assumption that <code>cstop</code> exists.
+Due to the presence of <code>Y</code>, we know that the type <code>A</code> necessarily has divergent values, but we can’t say the same thing for convergent values, and must assume their existence so that the construction can go through.
+This assumption can be phrased alternatively as ‘<code>A</code> has to contain both divergent and convergent values’, which is closer to the form of the ‘non-triviality’ assumption of Rice’s theorem, which we will see next.</p>
+<p>In the above construction, whether we are dealing with convergence or some other property doesn’t seem crucial — the essence of the construction is to do the opposite of what a given decision procedure <code>⟦ cd ⟧ : □A → Bool</code> (the evaluation of some <code>cd : □(□A → Bool)</code>) says, so we can carry out the construction as long as the property decided by <code>⟦ cd ⟧</code> is <em>non-trivial</em>, that is, there exist <code>ca : □A</code> and <code>cb : □A</code> such that <code>⟦ cd ⟧ ca = true</code> and <code>⟦ cd ⟧ cb = false</code>.
+The generalised construction is then</p>
+<pre><code>oppositeR : □(□A → A)
+oppositeR = ⌜λd a b self. if d self then b else a⌝ · cd · ca · cb
+</code></pre>
+<p>For the paradoxical argument to go through, however, we need one more assumption about <code>⟦ cd ⟧</code>: it should be <em>extensional</em>, that is, <code>⟦ cx ⟧ = ⟦ cy ⟧</code> implies <code>⟦ cd ⟧ cx = ⟦ cd ⟧ cy</code> for all <code>cx : □A</code> and <code>cy : □A</code> — the decision procedure should say the same thing for extensionally equal programs, i.e., programs with the same behaviour, or contrapositively, if two programs are distinguished by the decision procedure, they must have different behaviour.
+Now we can largely replay the argument:</p>
+<pre><code>  ⟦ cd ⟧ (GL oppositeR) = true
+⇔  {- (⇒) see below; (⇐) ⟦ cd ⟧ extensional and ⟦ cd ⟧ ca = true -}
+  ⟦ GL oppositeR ⟧ = ⟦ ca ⟧
+⇔  {- fixed-point equation of GL -}
+  ⟦ oppositeR ⟧ (GL oppositeR) = ⟦ ca ⟧
+⇔  {- definition of oppositeR; evaluating code application -}
+  if ⟦ cd ⟧ (GL oppositeR) then ⟦ cb ⟧ else ⟦ ca ⟧ = ⟦ ca ⟧
+⇔  {- (only) the else branch equals ⟦ ca ⟧ -}
+  ⟦ cd ⟧ (GL oppositeR) = false
+</code></pre>
+<p>In the forward direction of the first step, by the fixed-point equation of <code>GL</code> and the totality of <code>⟦ cd ⟧</code>, we see that <code>⟦ GL oppositeR ⟧</code> is either <code>⟦ ca ⟧</code> or <code>⟦ cb ⟧</code>, but the second case is impossible since <code>⟦ GL oppositeR ⟧ = ⟦ cb ⟧</code> would imply <code>⟦ cd ⟧ (GL oppositeR) = ⟦ cd ⟧ cb = false</code> by the extensionality of <code>⟦ cd ⟧</code>, contradicting the antecedent.
+The extensionality of <code>⟦ cd ⟧</code> also plays a role in the forward direction of the last step, where we need <code>⟦ ca ⟧ ≠ ⟦ cb ⟧</code>, which holds because <code>ca</code> and <code>cb</code> are distinguished by <code>⟦ cd ⟧</code> and thus cannot be extensionally equal.
+What we’ve proved is exactly Rice’s theorem: non-trivial and extensional decision procedures cannot exist — it is impossible to write a decision procedure that distinguishes programs in terms of their behaviour.</p>
+<p>The proofs and even the statements of the undecidability of the halting problem and Rice’s theorem presented here are different from those in existing literature, though.
+Traditional treatments are untyped and thus are able to construct an untyped self-application that leads to the paradox; the relationship between the untyped arguments and the typed ones presented here is still mysterious to me.
+Another mysterious relationship to be investigated is the one between the presented arguments, which use intensional recursion, and a categorical version of Rice’s theorem presented by Kavvos (<a href="https://doi.org/10.1007/978-3-662-54458-7_32">here</a>), which uses extensional recursion.</p>
+<p>And Rice’s theorem is still not intuitive enough to me, probably because it’s a negative theorem — what it constructs is a contradiction.
+In constructive mathematics we often prefer positive notions to negative ones — for example, instead of defining inequality as the negation of equality, which only says that it’s impossible for two things to be equal, it is preferable to use an <em>apartness</em> relation that positively provide evidence that separates two things.
+What would a positive version of Rice’s theorem look like?</p>
+<p>The theoretical foundation of the development above is essentially <a href="https://arxiv.org/abs/1703.01288">Kavvos’s <em>intensional PCF</em></a>, which (like PCF) is not strongly normalising (since we can derive <code>Y</code>).
+If what we want is a strongly normalising calculus with <code>GL</code>, then we can’t allow the calculus to be able to express evaluation, which, however, seems to be essential to the whole development.
+We’re now working on an alternative calculus (which should be strongly normalising) with two code modalities <code>□</code> and <code>⊠</code> (based on <a href="https://doi.org/10.1016/j.apal.2009.07.020">this paper</a>), where <code>□</code> marks code for self-reference but not for evaluation, and <code>⊠</code> marks code that can be evaluated.
+By ‘upgrading’ <code>GL</code> to the type <code>⊠(□α → α) → ⊠α</code> and including a combinator of type <code>⊠α → □α</code> in this calculus, we can type the construction for Rice’s theorem, which doesn’t evaluate the <code>□</code>-typed argument <code>self</code>, but not <code>Y</code>, which evaluates <code>self</code>.
+In this calculus, the halting problem ceases to be meaningful because all programs necessarily terminate.
+For Rice’s theorem to be meaningful, we need to make sure that the type <code>□A → Bool</code> is inhabited by non-constant functions so that the statement of Rice’s theorem properly quantifies over non-trivial decision procedures.
+That is, we should add to the calculus interesting operations on <code>□</code>-typed code (but not to the extent that enables its evaluation), or otherwise we can simply prove that anything of type <code>□A → Bool</code> is a constant function from the fact that we can’t do anything on <code>□</code>-typed stuff (which Tsung-Ju has done), without going through the argument for Rice’s theorem.
+But what operations can we add?
+For example, could we have the inverse of Rice’s theorem, which allows us to add non-trivial but non-extensional operations to the calculus without destroying strong normalisation?</p>
+<p>We should of course ask whether a calculus with <code>GL</code> is interesting practically, that is, has some uses other than constructing paradoxes.
+I mentioned that the fixed-point equation of <code>GL</code> has a coinductive feel, and indeed, the resemblance between <code>GL</code> and guarded corecursion has been noted by quite some people.
+So another aspect worth looking into is the relationship between the dual-modality calculus and guarded type theory.
+But still, are there more practical uses of <code>GL</code>?</p>
+<p>Finally, one reason to have a strongly normalising calculus is to use it as a proof system, which in this case should allow us to internalise Rice’s theorem, but how this can be done is still rather unclear.
+In particular, an equality assumption such as <code>⟦ cd ⟧ ca = true</code> should probably be expressed using an internalised term equality (or just reduction) relation on <code>□A</code>, but this relation is closely related to evaluation and should interact with the latter in some way, about which I sense the danger of self-reference...</p>
+<hr />
+<div class="remark">
+This post is harder to write than I thought... 😥
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
