@@ -28,7 +28,7 @@ publicationList =
       , authors = [ "Hsiang-Shang Ko"
                   ]
       , venue   = Just ("The Art, Science, and Engineering of Programming", Nothing)
-      , year    = 2020
+      , year    = 2021
       , types   = []
       , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2010.16302")
                   , ("Agda code", Just "Zenodo", "https://doi.org/10.5281/zenodo.4030101")
