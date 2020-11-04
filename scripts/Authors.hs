@@ -23,7 +23,7 @@ authorList =
       }
   , Author
       { authorName = "Yun-Sheng Chang"
-      , authorURL  = "https://scholar.google.com/citations?user=KuJajQ4AAAAJ"
+      , authorURL  = "https://yunshengtw.github.io"
       }
   , Author
       { authorName = "Yu-Fang Chen"

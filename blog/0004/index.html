@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 11:30 on 7 April 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 10:38 on 2 November 2020</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -82,7 +82,7 @@ Then for some state transition relation $(\leadsto)$, we want to show that the i
 \label{eq:original-preservation}
 \end{equation}</p>
 <p>However, if we try to prove the above by SMT solving, the solver won’t be too happy about $\mathsf{Inv}$, apparently because quantifier alternation — in this case there are two alternations in the sequence $\forall v\thinspace(i)\ \exists j\ \forall k$ — is very expensive to deal with.
-My colleague <a href="https://scholar.google.com/citations?user=KuJajQ4AAAAJ">Yun-Sheng Chang</a> came up with a way to eliminate the $\exists j$ quantification, which looks like a form of <a href="https://en.wikipedia.org/wiki/Skolem_normal_form">Skolemisation</a> to me, and I decided to try to apply a more standard version of Skolemisation.
+My colleague <a href="https://yunshengtw.github.io">Yun-Sheng Chang</a> came up with a way to eliminate the $\exists j$ quantification, which looks like a form of <a href="https://en.wikipedia.org/wiki/Skolem_normal_form">Skolemisation</a> to me, and I decided to try to apply a more standard version of Skolemisation.
 The idea is that the computation of $j$ is really independent of the invariant, and can be formulated independently as a function $f : (\mathbf n \to \mathsf V) \to \mathbf n \to \mathsf V \to \mathbf n$ satisfying the spec</p>
 <p>$$ \mathsf{Lookup}\ f \defeq \forall a : \mathbf n \to \mathsf V.\ \forall p : \mathbf n. \forall v : \mathsf V.\ \mathsf{LastIndex}\ a\ p\ v\ (f\ a\ p\ v) $$</p>
 <p>where</p>
