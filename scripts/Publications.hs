@@ -32,6 +32,7 @@ publicationList =
       , types   = []
       , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2010.16302")
                   , ("Agda code", Just "Zenodo", "https://doi.org/10.5281/zenodo.4030101")
+                  , ("Agda code", Just "HTML", "Agda/Programming21/MetamorphismsInAgda.html")
                   ]
       , info    = [ ("Volume",  "5", Nothing)
                   , ("Issue" ,  "2", Nothing)
