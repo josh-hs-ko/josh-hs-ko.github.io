@@ -1,3 +1,5 @@
+{-# OPTIONS -XViewPatterns #-}
+
 module Gen where
 
 import Authors
@@ -5,10 +7,12 @@ import PermVenues
 import Publications
 
 import Prelude hiding ((<>))
+import Control.Arrow ((***))
 import Control.Monad
 import Data.Function
 import Data.Char
 import Data.List
+import Data.List.Utils (split)
 import Data.Digest.Pure.MD5 (md5)
 import qualified Data.ByteString.Lazy.Char8 as ByteString
 import qualified Data.Text as Text
@@ -201,15 +205,20 @@ renderPublication as pvs p =
                            blockElement "div" [("class", ["row"])] $
                              blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
                              (blockElement "div" [("class", ["col-sm-10"])] $
-                               let murl = case (n, c, ml) of
-                                            (_, _, Just url) -> Just url
-                                            ('D':'O':'I':_, _, _) -> Just ("https://doi.org/" ++ c)
-                                            ('a':'r':'X':'i':'v':_, _, _) -> Just ("https://arxiv.org/abs/" ++ c)
-                                            (_, 'a':'r':'X':'i':'v':':':arXivNum, _) -> Just ("https://arxiv.org/abs/" ++ arXivNum)
-                                            (_, 'h':'t':'t':'p':_, _) -> Just c
-                                            _ -> Nothing
-                               in  inlineElement "p" [] (maybe id hyperlink murl (text c))))
+                               inlineElement "p" [] (processInfoEntry n c ml)))
                         (info p))
+  where
+    processInfoEntry :: String -> String -> Maybe String -> Doc
+    processInfoEntry _ c (Just url) = hyperlink url (text c)
+    processInfoEntry ((== "DOI") -> True) c _ = hyperlink ("https://doi.org/" ++ c) (text c)
+    processInfoEntry ((== "arXiv") -> True) c _ = hyperlink ("https://arxiv.org/abs/" ++ c) (text c)
+    processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ =
+      foldr (<+>) empty (punctuate (char ',') [ hyperlink ("/blog/" ++ n ++ "/") (text n) | n <- split ", " c ])
+    processInfoEntry _ c@(((== "arXiv:") *** id) . splitAt 6 -> (True, arXivNum)) _ =
+      hyperlink ("https://arxiv.org/abs/" ++ arXivNum) (text c)
+    processInfoEntry _ c@(("http" `isPrefixOf`) -> True) _ = hyperlink c (text c)
+    processInfoEntry _ c _ = text c
+
 
 renderPublications :: [Author] -> [PermVenue] -> [Publication] -> Doc
 renderPublications as pvs =
@@ -341,7 +350,7 @@ latestIndex :: [PostEntry] -> Doc
 latestIndex postList =
   foldr ($+$) empty
     [ let postNumberStr = fillZeros 4 (entryNumber entry)
-          postUrl       = "blog/" ++ postNumberStr ++ "/"
+          postUrl       = "/blog/" ++ postNumberStr ++ "/"
       in  inlineElement "p" [] $
             (inlineElement "span" [("class", ["paragraph-title"])] $
                hyperlink postUrl (text (cmarkNoPara (entryTitle entry)))) <>

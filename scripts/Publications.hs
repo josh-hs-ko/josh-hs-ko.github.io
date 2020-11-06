@@ -37,7 +37,8 @@ publicationList =
                   , ("Issue" ,  "2", Nothing)
                   , ("Article", "7", Nothing)
                   , ("DOI", "10.22152/programming-journal.org/2021/5/7", Nothing)
-                  , ("Related blog posts", "<a href=\"/blog/0003/\">0003</a>", Nothing)
+                  , ("Agda version", "2.6.1 with Standard Library version 1.3", Nothing)
+                  , ("Related blog post", "0003", Nothing)
                   , ("Abstract", "In <em>dependently typed programming</em>, proofs of basic, structural properties can be embedded implicitly into programs and do not need to be written explicitly. Besides saving the effort of writing separate proofs, a most distinguishing and fascinating aspect of dependently typed programming is that it makes the idea of <em>interactive type-driven development</em> much more powerful, where expressive type information becomes useful hints that help the programmer to complete a program. There have not been many attempts at exploiting the full potential of the idea, though. As a departure from the usual properties dealt with in dependently typed programming, and as a demonstration that the idea of interactive type-driven development has more potential to be discovered, we conduct an experiment in ‘type-driven algorithm design’: we develop algorithms from their specifications encoded in sophisticated types, to see how useful the hints provided by a type-aware interactive development environment can be. The algorithmic problem we choose is <em>metamorphisms</em>, whose definitional behaviour is consuming a data structure to compute an intermediate value and then producing a codata structure from that value, but there are other ways to compute metamorphisms. We develop Gibbons’s streaming algorithm and Nakano’s jigsaw model in the interactive development environment provided by the dependently typed language Agda, turning intuitive ideas about these algorithms into formal conditions and programs that are correct by construction.", Nothing)
                   ]
       }
@@ -56,10 +57,11 @@ publicationList =
       , year    = 2020
       , types   = []
       , links   = [ ("PDF", Nothing, "https://www.usenix.org/system/files/osdi20-chang.pdf")
+                  , ("Artefacts", Just "GitHub", "https://github.com/yunshengtw/scftl")
                   ]
       , info    = [ ("Pages", "81–97", Nothing)
                   , ("URL", "https://www.usenix.org/conference/osdi20/presentation/chang", Nothing)
-                  , ("Related blog posts", "<a href=\"/blog/0004/\">0004</a>, <a href=\"/blog/0007/\">0007</a>", Nothing)
+                  , ("Related blog posts", "0004, 0007", Nothing)
                   , ("Abstract", "This paper introduces the design of a snapshot-consistent flash translation layer (SCFTL) for flash disks, which has a stronger guarantee about the possible behavior after a crash than conventional designs. More specifically, the flush operation of SCFTL also has the functionality of making a “disk snapshot.” When a crash occurs, the flash disk is guaranteed to recover to the state right before the last flush. The major benefit of SCFTL is that it allows a more efficient design of upper layers in the storage stack. For example, the file system built on SCFTL does not require the use of a journal for crash recovery. Instead, it only needs to perform a flush operation of SCFTL at the end of each atomic transaction. We use a combination of a proof assistant, a symbolic executor, and an SMT solver, to formally verify the correctness of our SCFTL implementation. We modify the xv6 file system to support group commit and utilize SCFTL’s stronger crash guarantee. Our evaluation using file system benchmarks shows that the modified xv6 on SCFTL is 3 to 30 times faster than xv6 with logging on conventional FTLs, and is in the worst case only two times slower than the state-of-the-art setting: the ext4 file system on the Physical Block Device (pblk) FTL.", Nothing)
                   ]
       }
