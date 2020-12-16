@@ -254,7 +254,7 @@ publicationList =
       , year    = 2017
       , types   = []
       , links   = [ ("PDF", Just "accepted version", "manuscripts/JFP17.pdf")
-                  , ("Agda code", Just "zip", "https://static.cambridge.org/resource/id/urn:cambridge.org:id:binary:20170630054855301-0846:S0956796816000307:S0956796816000307sup001.zip")
+                  , ("Agda code", Just "zip", "https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0956796816000307/resource/name/S0956796816000307sup001.zip")
                   , ("Agda code", Just "HTML", "Agda/JFP17/Everything.html")
                   ]
       , info    = [ ("Volume", "27", Nothing)
