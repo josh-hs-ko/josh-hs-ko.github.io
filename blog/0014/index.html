@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Postulates of quantum theory as transition systems — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="Quantum theory starts with a few postulates about the states of quantum systems and how they evolve, and there are two formulations, one in terms of unit vectors and the other in terms of density operators.
+This post shows that the unit vector formulation gives rise to a very simple transition system, which we can then transform and optimise to get a transition system corresponding to the density operator formulation.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0014
+</div>
+<h2>Postulates of quantum theory as transition systems</h2>
+<div class="post-time">Posted at 17:33 on 23 December 2020</div>
+<p>I’ve been involved in a quantum computation reading group for almost a year.
+Most of the time I regarded myself as merely an observer and didn’t spend much time familiarising myself with the material, in particular the linear algebra toolbox.
+But recently I discovered <a href="https://www.cs.ox.ac.uk/people/bob.coecke/">Bob Coecke</a> and <a href="https://www.cs.ox.ac.uk/people/aleks.kissinger/">Aleks Kissinger</a>’s <a href="https://www.cambridge.org/gb/pqp"><em>Picturing Quantum Processes</em></a> (PQP henceforth), which is pretty much as intuitive and insightful as any quantum theory textbook can hope to be.
+More broadly, this whole ‘categorical quantum mechanics’ project is pointing towards a great extension of the Curry–Howard–Lambek correspondence to physics and topology.
+(See this <a href="https://doi.org/10.1007/978-3-642-12821-9_2">‘Rosetta stone’ paper</a> for an overview, or the book <a href="https://doi.org/10.1007/978-3-642-12821-9"><em>New Structures for Physics</em></a>, of which the Rosetta stone paper is Chapter 2, for some more in-depth treatments.)
+The correspondence between computation and logic was one decisive factor that drove me into programming language research; seeing it reach another scientific area, I get excited once again, because not only am I witnessing what I believe to be an important movement in science, I even have the chance to contribute to it!
+I’ll just start from something small though, which doesn’t even seem directly related to the Great Correspondence, although I can’t imagine doing it without the inspirations and techniques introduced by PQP, and it’s indeed a computing scientist’s take at physical stuff and thus interdisciplinary (to an extent).
+(To make typesetting simple, however, I’ll stick to the traditional <a href="https://en.wikipedia.org/wiki/Bra%E2%80%93ket_notation">Dirac notation</a> in this post rather than PQP’s diagrammatic language, but people familiar with PQP should have no difficulty reformulating the post in the diagrammatic language.)</p>
+<p>Quantum theory starts with a few postulates about the states of quantum systems and how they evolve, and there are two formulations, one in terms of unit vectors and the other in terms of <a href="https://en.wikipedia.org/wiki/Density_matrix">density operators</a>.
+The <a href="https://en.wikipedia.org/wiki/Quantum_Computation_and_Quantum_Information">standard quantum computing textbook by Nielsen and Chuang</a> mentions that the two formulations are ‘mathematically equivalent’, but they look rather different — in particular, the density operator formulation seems richer, in which we can talk about pure and mixed states, closed and open systems, etc.
+Gradually I get the feeling that the density operator formulation is really just a linear-algebraic way invented by the physicists to work with a particular probabilistic transition system arising from quantum theory, and things will be clearer if we rephrase the postulates and constructions explicitly in terms of transition systems.
+This post shows that the unit vector formulation gives rise to a very simple transition system, which we can then transform and optimise to get a transition system corresponding to the density operator formulation.</p>
+<h3>The unit vector postulates</h3>
+<p>The postulates of quantum theory set up quantum systems as a particular kind of probabilistic state transition system, which we’ll represent with a state transition function</p>
+<p>$$ \mathsf{pure}^\circ : H^\circ \to E \to H^\circ $$</p>
+<p>The state space $H^\circ$ is the unit vectors of a <a href="https://en.wikipedia.org/wiki/Hilbert_space">Hilbert space</a> $H$ over the complex numbers.
+In general $H$ can be infinite-dimensional, but in quantum computing (and also this post) we usually consider only finite-dimensional spaces.
+$E$ is the set of events that can happen to the system; for a quantum system, an event is a pair of a measurement $M$ (explained later) and a particular outcome $m$.
+If a quantum system is in state $|\psi\rangle$, on which we perform a measurement $M$ and get an outcome $m$ (with some probability), after which the system state becomes $|\psi'\rangle$, this state transition is represented as $\mathsf{pure}^\circ\ |\psi\rangle\ (M, m) = |\psi'\rangle$.</p>
+<p>By performing a measurement $M : O \to \mathcal L H$ (where $\mathcal L H$ is the set of linear operators from $H$ to $H$) we expect to get an outcome from a finite set $O$, and the measurement $M$ is conceived as a set of linear operators indexed by $O$; the general idea is that one outcome $m \in O$ will happen with some probability when $M$ is performed, after which the operator $M_m$ (which abbreviates the function application $M\ m$) is applied to the system state.
+The probability of an event happening to a system state $|\psi\rangle$, that is, performing a measurement $M$ on $|\psi\rangle$ and getting an outcome $m$, is $\langle\psi|  M_m^\dagger M_m|\psi\rangle$, and we should impose on the measurement operators a condition</p>
+<p>$$ \sum_{m \in O} M_m^\dagger M_m = I $$</p>
+<p>(where $M_m^\dagger$ is the <a href="https://en.wikipedia.org/wiki/Hermitian_adjoint">adjoint</a> of $M_m$ and $I$ is the identity operator) so that the probabilities of getting all the outcomes sum to one:</p>
+<p>\begin{align*}
+&amp; \sum_{m \in O} \langle\psi|  M_m^\dagger M_m|\psi\rangle \\
+=&amp; \reason{linearity} \\
+&amp; \langle\psi| \left( \sum_{m \in O} M_m^\dagger M_m \right) |\psi\rangle \\
+=&amp; \reason{condition on measurement operators; identity} \\
+&amp; \langle\psi|\psi\rangle \\
+=&amp; \reason{$|\psi\rangle$ is a unit vector} \\
+&amp; 1
+\end{align*}</p>
+<p>After the event happens, the measurement operator $M_m$ is applied to the state and yields $M_m|\psi\rangle$, but this state is usually not normalised (i.e., not of length one), so the precise transition is</p>
+<p>$$ \mathsf{pure}^\circ\ |\psi\rangle\ (M, m) = \frac{M_m|\psi\rangle}{\sqrt{\langle\psi|  M_m^\dagger M_m|\psi\rangle}} $$</p>
+<p>since the length of $M_m|\psi\rangle$ is exactly the square root of the probability that $(M, m)$ happens on $|\psi\rangle$.</p>
+<p>Note that this formulation is actually somewhat defective because an event may happen with zero probability and we’d end up with a zero vector, which cannot be normalised.
+To circumvent the problem, we could say that $\mathsf{pure}^\circ$ can only be invoked on an event that is known to happen with non-zero probability.
+This isn’t pretty, but fortunately we don’t have to use it because we’ll have a better formulation that entirely avoids the problem.
+Also, readers familiar with the original postulates should have noticed that we have omitted the unitary evolution postulate, because unitary evolution is a special case of measurement whose outcome set is singleton, in which case the measurement consists of only one operator $U$ satisfying $U^\dagger U = I$, which implies $U$ is unitary since the domain and codomain of $U$ (both being $H$) have the same dimension.</p>
+<h3>Moving probabilities from transitions to states</h3>
+<p>An important observation here is that the normalisation is not really necessary — if we let the system evolve simply by applying measurement operators without normalisation, we get a much simpler transition function</p>
+<p>\begin{align*}
+&amp; \mathsf{pure}^\bullet : H^\bullet \to E \to H^\bullet \\
+&amp; \mathsf{pure}^\bullet\ |\psi\rangle\ (M, m) = M_m|\psi\rangle
+\end{align*}</p>
+<p>where $H^\bullet$ is the vectors in $H$ whose length is at most one.
+This captures a different kind of probabilistic transition system where transitions are merely non-deterministic, and probabilities are encoded in states — in this case the probability of a state $|\psi\rangle$ is defined by</p>
+<p>\begin{align*}
+&amp; \mathsf{prob}^\bullet : H^\bullet \to [0, 1] \\
+&amp; \mathsf{prob}^\bullet\ |\psi\rangle = \langle \psi | \psi \rangle
+\end{align*}</p>
+<p>Think of the system as a probability-predicting model: starting from a state with probability one, we feed some events of interest into the system, and query the final state to get the probability with which these events happen.
+In particular, the probability of an event $(M, m)$ happening to a state $|\psi\rangle$ with probability one can be computed in this system as the probability of the state $M_m|\psi\rangle$, which is exactly $\langle\psi|M_m^\dagger M_m|\psi\rangle$.
+In general, events that lead a state with non-zero probability $p$ to a state with probability $q$ happen with probability $q/p$.
+This system allows more transitions than the system represented by $\mathsf{pure}^\circ$, namely those transitions to and from zero-probability states, but the paths of events in the original system are easily identifiable as the paths in the new system where all the states have non-zero probabilities, and by allowing paths with zero-probability states we don’t have to deal with corner cases and get a much simpler system.</p>
+<p>If the above jump from $\mathsf{pure}^\circ$ to $\mathsf{pure}^\bullet$ seems too big, we can go through another route that uses more general transformations on transition systems.
+Here is a sketch:
+We move probabilities from transitions to states by switching to this state space of dependent pairs</p>
+<p>$$ \mathsf P H^\circ = (p : [0, 1]) \times \mathbf{if}\ p = 0\ \mathbf{then}\ \mathsf{1}\ \mathbf{else}\ H^\circ $$</p>
+<p>which spares us from supplying a unit vector when the probability is zero (in which case we simply supply $*$, the unique element of a singleton set $\mathsf{1}$).
+We then derive from $\mathsf{pure}^\circ$ a transition function that accumulates probabilities in the first component of the state:</p>
+<p>\begin{align*}
+&amp; \mathsf{pure}^{\mathsf P\circ} : \mathsf P H^\circ \to E \to \mathsf P H^\circ \\
+&amp; \mathsf{pure}^{\mathsf P\circ}\ (0, *)\ (M, m) = (0, *) \\
+&amp; \mathsf{pure}^{\mathsf P\circ}\ (p, |\psi\rangle)\ (M, m) = \\
+&amp; \quad \mathbf{let}\ q = \langle\psi|M_m^\dagger M_m|\psi\rangle\ \mathbf{in}\ \mathbf{if}\ q = 0\ \mathbf{then}\ (0, *)\ \mathbf{else}\ (p \cdot q, M_m|\psi\rangle/\sqrt{q})
+\end{align*}</p>
+<p>In general this is a construction applicable to any transition system whose transitions are associated with elements of a monoid with a zero element.
+To derive $\mathsf{pure}^\bullet$,
+observe that there is an isomorphism between $\mathsf P H^\circ$ and $H^\bullet$ which converts between probability $p$ on the $\mathsf P H^\circ$ side and length $\sqrt{p}$ on the $H^\bullet$ side, and we can use this isomorphism to substitute $H^\bullet$ for $\mathsf P H^\circ$ without changing the observable behaviour.</p>
+<p>In more detail: $\mathsf{pure}^{\mathsf P\circ}$ together with the probability-projecting function $\pi : \mathsf P H^\circ \to [0, 1]$ implements the coinductive type</p>
+<p>\begin{equation}
+\exists S.\ (S \to [0, 1]) \times (S \to E \to S)
+\label{type:quantum-system}
+\end{equation}</p>
+<p>which precisely describes the kind of system we’re working with: the state space $S$ of the system is existentially quantified and therefore abstract/hidden, and all we can do to a system/state is query the probability of (arriving at) the state or get the next state after a specified event happens.
+This matches the situation of quantum systems, whose states can only be measured (usually destructively) and not ‘observed’ (non-destructively) in any other way, so the exact state space is not available to us.
+(The probability querying is the result of our particular choice of theoretical modelling and not directly physical, but it is conceivable that we can perform experiments repeatedly to get the probability that a particular series of events happens, which is predicted by querying the final state in our system.)
+We can thus swap the state space for an isomorphic one: composing the isomorphism between $\mathsf P H^\circ$ and $H^\bullet$ appropriately with $\mathsf{pure}^{\mathsf P\circ}$ and $\pi$ gives $\mathsf{pure}^\bullet$ and $\mathsf{prob}^\bullet$, which constitute another implementation of Type \ref{type:quantum-system} that is <a href="https://en.wikipedia.org/wiki/Bisimulation">bisimilar</a> to $\mathsf{pure}^{\mathsf P\circ}$ and $\pi$ by construction — the same events and probability queries on the two systems will yield the same results.</p>
+<h3>Eliminating global phases</h3>
+<p>As simple as $\mathsf{pure}^\bullet$ is, it is still sensible to propose the following ‘state space optimisation’ problem: given that we only perform measurements and probability queries on the states, is there some redundant information we can eliminate from the states while keeping the same behaviour?
+This problem is a sensible one because quantum measurements can extract very little information from quantum states.
+For example, a qubit, which is a two-dimensional Hilbert space, holds information that amounts to two real numbers, but the best measurements we can perform on a qubit can only produce two outcomes — that is, they can emit only a classical bit.
+More generally, only orthogonal quantum states can be perfectly distinguished, in the sense that we can use a measurement to decide, among a set of orthogonal states, which state the system is in with probability one.
+Conversely, if two quantum states $|\psi\rangle$ and $|\varphi\rangle$ are not orthogonal, then we can project $|\varphi\rangle$ onto the subspace spanned by $|\psi\rangle$ to get a vector $\lambda|\psi\rangle$ for some $\lambda \neq 0$, and the rest of $|\varphi\rangle$ is another vector $|\varphi'\rangle$ which is orthogonal to $|\psi\rangle$ — this decomposes $|\varphi\rangle$ as the sum $\lambda|\psi\rangle + |\varphi'\rangle$ of a part that’s the same as $|\psi\rangle$ and the other part that’s totally different from $|\psi\rangle$; then, intuitively speaking, since the component $\lambda|\psi\rangle$ is non-zero, $|\varphi\rangle$ will look like $|\psi\rangle$ to some extent and therefore cannot be perfectly distinguished from $|\psi\rangle$.
+This geometric intuition will provide a bit of help with our development below.</p>
+<p>To phrase the problem more precisely:
+Can we find an equivalence relation $(\approx)$ on $H^\bullet$ that is respected by $\mathsf{pure}^\bullet$ and $\mathsf{prob}^\bullet$ so that we can ‘shrink’ the state space to the quotient $H^\bullet/(\approx)$?
+Moreover, can we find the largest such equivalence relation so that we can shrink the state space as much as possible?
+Here the ‘shrinking’ is justified because the quotiented functions $\mathsf{pure}^\bullet/(\approx) : H^\bullet/(\approx) \to E \to H^\bullet/(\approx)$ and $\mathsf{prob}^\bullet/(\approx) : H^\bullet/(\approx) \to [0, 1]$, as yet another implementation of Type \ref{type:quantum-system}, are still bisimilar to $\mathsf{pure}^\bullet$ and $\mathsf{prob}^\bullet$.
+Defining a predicate $\mathsf{Resp}$ on equivalence relations as</p>
+<p>\begin{align*}
+\mathsf{Resp}\ (\sim) \defeq{}
+&amp; \forall |\psi\rangle, |\varphi\rangle, e.\ |\psi\rangle \sim |\varphi\rangle \Rightarrow \mathsf{pure}^\bullet\ |\psi\rangle\ e \sim \mathsf{pure}^\bullet\ |\varphi\rangle\ e \\
+\mathrel\wedge{}
+&amp; \forall |\psi\rangle, |\varphi\rangle.\ |\psi\rangle \sim |\varphi\rangle \Rightarrow \mathsf{prob}^\bullet\ |\psi\rangle = \mathsf{prob}^\bullet\ |\varphi\rangle
+\end{align*}</p>
+<p>we see that what we want is an equivalence relation $(\approx)$ such that (i) $\mathsf{Resp}\ (\approx)$ holds and (ii) for any equivalence relation $(\sim)$ satisfying $\mathsf{Resp}$ it must be the case that $(\sim) \subseteq (\approx)$.
+Luckily, some calculations for Condition (ii) will lead us to the right relation.</p>
+<p>Suppose that $(\sim)$ is an equivalence relation on $H^\bullet$ and satisfies $\mathsf{Resp}$, and let $|\psi\rangle$, $|\varphi\rangle \in H^\bullet$ be two states satisfying $|\psi\rangle \sim |\varphi\rangle$.
+The aim is to show that $|\psi\rangle$ and $|\varphi\rangle$ must be related by a specific relation, and then we will have shown that $(\sim)$ is included in that relation, establishing Condition (ii).
+Observe $\mathsf{Resp}\ (\sim)$: it allows us to derive $\mathsf{prob}^\bullet\ |\psi\rangle = \mathsf{prob}^\bullet\ |\varphi\rangle$ and similar probability equations between pairs of descendants of $|\psi\rangle$ and $|\varphi\rangle$ resulting from the same series of events.
+This is very strong, since it says that $|\psi\rangle$ and $|\varphi\rangle$ are indistinguishable by any events in terms of probability, so rather than being orthogonal (and distinguishable), they are more likely to point towards the same direction.
+More precisely, if we decompose $|\varphi\rangle$ into $\lambda|\psi\rangle + |\varphi'\rangle$ for some $|\varphi'\rangle \perp |\psi\rangle$ and measure $|\varphi\rangle$ with something like $\langle\psi|$, we kind of expect to find that $\lambda$ is close to one and that the component $|\varphi'\rangle$ is actually zero.</p>
+<p>First consider the case $|\psi\rangle \neq 0$ (so that ‘measuring with $\langle\psi|$’ makes some sense).
+To construct a valid measurement involving $\langle\psi|$, we use the standard way of obtaining one from an <a href="https://en.wikipedia.org/wiki/Orthonormality">orthonormal basis</a>:
+Start with $r|\psi\rangle$ where $r \defeq 1/\sqrt{\mathsf{prob}^\bullet\ |\psi\rangle}$.
+This vector is normalised and can always be extended to an orthonormal basis $\{|i\rangle\}_i$ where $|0\rangle = r|\psi\rangle$.
+Then the operators $M_i \defeq |i\rangle\langle i|$ together form a measurement $M$ since $\sum_i |i\rangle\langle i| = I$.
+Now we reason:</p>
+<p>\begin{align*}
+&amp; |\psi\rangle \sim |\varphi\rangle \\
+\Rightarrow&amp; \reason{$\mathsf{Resp}\ (\sim)$ applied to the event $(M, 0)$} \\
+&amp; |0\rangle\langle 0|\psi\rangle \sim |0\rangle\langle 0|\varphi\rangle \\
+\Rightarrow&amp; \reason{the other clause of $\mathsf{Resp}\ (\sim)$} \\
+&amp; \mathsf{prob}^\bullet(|0\rangle\langle 0|\psi\rangle) = \mathsf{prob}^\bullet(|0\rangle\langle 0|\varphi\rangle) \\
+\Leftrightarrow&amp; \reason{revert $|0\rangle$ back to $|\psi\rangle$} \\
+&amp; \mathsf{prob}^\bullet(r^2|\psi\rangle\langle \psi|\psi\rangle) = \mathsf{prob}^\bullet(r^2|\psi\rangle\langle \psi|\varphi\rangle) \\
+\Leftrightarrow&amp; \reason{definition of $\mathsf{prob}^\bullet$} \\
+&amp; r^4\langle\psi|\psi\rangle^3 = r^4\langle\varphi|\psi\rangle\langle\psi|\varphi\rangle\langle\psi|\psi\rangle \\
+\Leftrightarrow&amp; \reason{$r^4 \neq 0$ and $\langle\psi|\psi\rangle \neq 0$} \\
+&amp; \langle\psi|\psi\rangle^2 = \langle\varphi|\psi\rangle\langle\psi|\varphi\rangle \\
+\Leftrightarrow&amp; \reason{decompose $|\varphi\rangle = \lambda|\psi\rangle + |\varphi'\rangle$} \\
+&amp; \langle\psi|\psi\rangle^2 = (\lambda^*\langle\psi|\psi\rangle + \langle\varphi'|\psi\rangle) (\lambda\langle\psi|\psi\rangle + \langle\psi|\varphi'\rangle) \\
+\Leftrightarrow&amp; \reason{$|\varphi'\rangle \perp |\psi\rangle$} \\
+&amp; \langle\psi|\psi\rangle^2 = \lambda^*\lambda \langle\psi|\psi\rangle^2 \\
+\Leftrightarrow&amp; \reason{$\langle\psi|\psi\rangle^2 \neq 0$} \\
+&amp; 1 = \lambda^*\lambda
+\end{align*}</p>
+<p>So $\lambda$ has length one.
+Moreover:</p>
+<p>\begin{align*}
+&amp; |\psi\rangle \sim |\varphi\rangle \\
+\Rightarrow&amp; \reason{$\mathsf{Resp}\ (\sim)$} \\
+&amp; \mathsf{prob}^\bullet\ |\psi\rangle = \mathsf{prob}^\bullet\ |\varphi\rangle \\
+\Leftrightarrow&amp; \reason{definition of $\mathsf{prob}^\bullet$} \\
+&amp; \langle\psi|\psi\rangle = \langle\varphi|\varphi\rangle \\
+\Leftrightarrow&amp; \reason{decompose $|\varphi\rangle = \lambda|\psi\rangle + |\varphi'\rangle$} \\
+&amp; \langle\psi|\psi\rangle = \lambda^*\lambda\langle\psi|\psi\rangle + \lambda^*\langle\psi|\varphi'\rangle + \lambda\langle\varphi'|\psi\rangle + \langle\varphi'|\varphi'\rangle \\
+\Leftrightarrow&amp; \reason{$|\varphi'\rangle \perp |\psi\rangle$} \\
+&amp; \langle\psi|\psi\rangle = \lambda^*\lambda\langle\psi|\psi\rangle + \langle\varphi'|\varphi'\rangle \\
+\Leftrightarrow&amp; \reason{$\lambda^*\lambda = 1$} \\
+&amp; 0 = \langle\varphi'|\varphi'\rangle \\
+\Leftrightarrow&amp; \reason{inner product} \\
+&amp; 0 = |\varphi'\rangle
+\end{align*}</p>
+<p>So $|\varphi\rangle$ is really just $e^{i\alpha}|\psi\rangle$ for some $\alpha$, where $e^{i\alpha}$ is the polar form of $\lambda$ (which we’ve deduced to have length one).
+We still have a case $|\psi\rangle = 0$ to consider, but in this case since $\mathsf{prob}^\bullet\ |\psi\rangle = \mathsf{prob}^\bullet\ |\varphi\rangle$ we also get $|\varphi\rangle = 0$, so we can choose any $\alpha$ and the equation $|\varphi\rangle = e^{i\alpha}|\psi\rangle$ is still satisfied.
+We have thus arrived at the relation
+$$ |\psi\rangle \approx |\varphi\rangle \defeq \exists \alpha.\ |\varphi\rangle = e^{i\alpha} |\psi\rangle $$
+which one can also verify to satisfy $\mathsf{Resp}$ and hence Condition (i), so we’ve found our desired relation — case closed!</p>
+<p>In quantum theory the number $e^{i\alpha}$ is called a ‘global phase’ and usually ignored, and the above argument justifies in terms of bisimilarity that global phases, and only global phases, are irrelevant to observable system behaviour and can be eliminated from the states.
+Perhaps counterintuitively, the easiest way to eliminate global phases is to duplicate the states — the standard way is to switch from a state $|\psi\rangle$ to a pure <a href="https://en.wikipedia.org/wiki/Density_matrix"><em>density operator</em></a> $|\psi\rangle\langle\psi|$ (in fact this is a ‘partial’ density operator since $|\psi\rangle$ is not necessarily normalised; we’ll take partial density operators as the default in this post), while PQP switches to the bipartite state $|\psi\rangle^*\otimes|\psi\rangle$, but either way eliminates exactly global phases from the states: for the density operator approach, both $|\psi\rangle$ and $e^{i\alpha}|\psi\rangle$ are mapped to the same density operator $|\psi\rangle\langle\psi| = e^{-i\alpha}e^{i\alpha}|\psi\rangle\langle\psi|$, and conversely, $|\psi\rangle\langle\psi| = |\varphi\rangle\langle\varphi|$ implies $|\psi\rangle \approx |\varphi\rangle$ (which is actually a part of the argument above).
+There is an isomorphism between $H^\bullet/(\approx)$ and the pure density operators $\mathit{PD}$ (a casual notation), simply because both sides hold the same amount of information, namely a state in $H^\bullet$, and the two sides differ only in how they interpret the state, either as the equivalence class represented by the state or as the ingredient for manufacturing a pure density operator.
+It is then easy to derive the pure density operator version of our transition system from $\mathsf{pure}^\bullet/(\approx)$ and $\mathsf{prob}^\bullet/(\approx)$,</p>
+<p>\begin{align*}
+&amp; \mathsf{pure}^\mathit{PD} : \mathit{PD} \to E \to \mathit{PD} \\
+&amp; \mathsf{pure}^\mathit{PD}\ |\psi\rangle\langle\psi|\ (M, m) = M_m|\psi\rangle\langle\psi|M_m^\dagger
+\end{align*}</p>
+<p>\begin{align*}
+&amp; \mathsf{prob}^\mathit{PD} : \mathit{PD} \to [0, 1] \\
+&amp; \mathsf{prob}^\mathit{PD}\ |\psi\rangle\langle\psi| = \langle\psi|\psi\rangle
+\end{align*}</p>
+<p>or simply</p>
+<p>\begin{align*}
+&amp; \mathsf{pure}^\mathit{PD} : \mathit{PD} \to E \to \mathit{PD} \\
+&amp; \mathsf{pure}^\mathit{PD}\ \rho\ (M, m) = M_m\rho M_m^\dagger
+\end{align*}</p>
+<p>\begin{align*}
+&amp; \mathsf{prob}^\mathit{PD} : \mathit{PD} \to [0, 1] \\
+&amp; \mathsf{prob}^\mathit{PD}\ \rho = \operatorname{tr}(\rho)
+\end{align*}</p>
+<p>where $\operatorname{tr}$ is the <a href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)">trace</a> of a linear operator, and here we’re using its <a href="https://en.wikipedia.org/wiki/Trace_(linear_algebra)#Cyclic_property">cyclicity</a> to rewrite the body of the probability query function: $\langle\psi|\psi\rangle = \operatorname{tr}(\langle\psi|\psi\rangle) = \operatorname{tr}(|\psi\rangle\langle\psi|)$.
+The resulting system is bisimilar to $\mathsf{pure}^\bullet/(\approx)$ and $\mathsf{prob}^\bullet/(\approx)$, and hence also $\mathsf{pure}^\bullet$ and $\mathsf{prob}^\bullet$.</p>
+<h3>Enriching transitions with uncertainty</h3>
+<p>So far we have dealt with <em>pure</em> states: even though the transition system is probabilistic, if we know what the initial state is and that a series of events have happened, we will know for sure what state the system is in.
+But when people introduce density operators, which is usually after introducing the pure theory, they just start talking about not having full information about the system, in which case the system is in a <em>mixed</em> state, which looks like a probability distribution over pure states but not quite.
+This was rather confusing to me because I didn’t see how we could lose information: if we perform a series of measurements and get a probability distribution over pure states (by aggregating all the states at the end of the paths with the same series of measurements but different outcomes), we will still know perfectly what states the system can possibly be in and their probabilities.
+On the other hand, a mixed state can correspond to many different probability distributions over pure states, meaning that we have lost track of precisely what states the system can be in.
+So, from the transition system’s point of view, there must be some kind of transformation on transition systems that allows the transitions to lose information, and consequently we can take a more radical quotient of the state space and get the mixed theory.</p>
+<p>The transformation I come up with is a natural one that generalises (deterministic) events to non-deterministic/uncertain ones.
+In the pure theory, an event $(M, m)$ means performing a measurement $M : O \to \mathcal L H$ and getting a particular outcome $m \in O$, in which case we can compute the next state precisely.
+But if we forget or don’t know for certain which outcome has happened, and only know that the outcome comes from a subset $\mathit{ms} \subseteq O$, then we can only compute a set of possible next states.
+This kind of uncertainty arises when we only operate on part of a quantum system: for example, we may have access to only the first qubit of a two-qubit system, and when a standard measurement that emits one of $00$, $01$, $10$, and $11$ is performed, the event we see will be either $(M, \{00, 01\})$ or $(M, \{10, 11\})$ since we can only assume that the measurement outcome for the second qubit is either $0$ or $1$ but we don’t know which.
+In this kind of situation, we usually say that we’re dealing with an open system, as opposed to a closed system, about which we have full information.
+The mixed transition system is more like a theoretical tool that helps us to model open systems: we can now feed uncertain events into the mixed transition system and query the probability that these uncertain events happen.</p>
+<p>More generally, a pure transition system can be turned into a mixed one as follows:
+The mixed state space is the finite power <em>multiset</em> $\mathcal P S$ of the pure state space $S$ (to keep track of the possible states a pure system can be in).
+The events are ‘uncertain’ events of the form $(M, \mathit{ms})$, the set of which we denote by $\mathit{UE}$.
+A mixed transition applies all possible transitions to all possible states, and a mixed probability query computes the sum of the probabilities of all possible states.
+Note that we use multisets since when the same state appears multiple times, by keeping all of them we record the right probability with which the state may happen; also, using multisets makes the theory more general and simpler since we don’t have to assume or deal with aggregation of multiple occurrences of the same state.
+For example, applying the construction to $\mathsf{pure}^\mathit{PD}$ and $\mathsf{prob}^\mathit{PD}$ we get</p>
+<p>\begin{align*}
+&amp; \mathsf{mixed}^\mathit{PD} : \mathcal P(\mathit{PD}) \to \mathit{UE} \to \mathcal P(\mathit{PD}) \\
+&amp; \mathsf{mixed}^\mathit{PD}\ \rho s\ (M, \mathit{ms}) = \{\, M_m\rho M_m^\dagger \mid \rho \in \rho s, m \in \mathit{ms} \,\}
+\end{align*}</p>
+<p>\begin{align*}
+&amp; \mathsf{mprob}^\mathit{PD} : \mathcal P(\mathit{PD}) \to [0, 1] \\
+&amp; \mathsf{mprob}^\mathit{PD}\ \rho s = \sum_{\rho \in \rho s} \operatorname{tr}(\rho)
+\end{align*}</p>
+<p>We can now attempt to perform state space optimisation again.
+Alas, in this case it isn’t immediately obvious to me how to compute the largest equivalence relation, so I’ll leave this part to a later time.
+But it is easy to verify that the physicists did things right: their chosen equivalence relation is</p>
+<p>$$ \rho s \approx \rho s' \defeq \sum \rho s = \sum \rho s' $$</p>
+<p>and this relation is indeed respected by $\mathsf{mixed}^\mathit{PD}$</p>
+<p>\begin{align*}
+&amp; \sum \mathsf{mixed}^\mathit{PD}\ \rho s\ (M, \mathit{ms}) \\
+=&amp; \reason{definition of $\mathsf{mixed}^\mathit{PD}$} \\
+&amp; \sum \{\, M_m\rho M_m^\dagger \mid \rho \in \rho s, m \in \mathit{ms} \,\} \\
+=&amp; \reason{linearity} \\
+&amp; \sum_m M_m \left( \sum \rho s \right) M_m^\dagger \\
+=&amp; \reason{assumption} \\
+&amp; \sum_m M_m \left( \sum \rho s' \right) M_m^\dagger \\
+=&amp; \reason{repackaging} \\
+&amp; \sum \mathsf{mixed}^\mathit{PD}\ \rho s'\ (M, \mathit{ms})
+\end{align*}</p>
+<p>and by $\mathsf{mprob}^\mathit{PD}$</p>
+<p>\begin{align*}
+&amp; \mathsf{mprob}^\mathit{PD}\ \rho s \\
+=&amp; \reason{definition of $\mathsf{mprob}^\mathit{PD}$} \\
+&amp; \sum_{\rho \in \rho s} \operatorname{tr}(\rho) \\
+=&amp; \reason{linearity} \\
+&amp; \operatorname{tr}\left(\sum \rho s\right) \\
+=&amp; \reason{assumption} \\
+&amp; \operatorname{tr}\left(\sum \rho s'\right) \\
+=&amp; \reason{repackaging} \\
+&amp; \mathsf{mprob}^\mathit{PD}\ \rho s' \\
+\end{align*}</p>
+<p>simply because of linearity.
+This equivalence relation allows us to drastically optimise a mixed state from a set of possible pure states to just one state by summing them, giving rise to the system</p>
+<p>\begin{align*}
+&amp; \mathsf{mixed}^D : D \to \mathit{UE} \to D \\
+&amp; \mathsf{mixed}^D\ \rho\ (M, \mathit{ms}) = \{\, M_m\rho M_m^\dagger \mid m \in \mathit{ms} \,\}
+\end{align*}</p>
+<p>\begin{align*}
+&amp; \mathsf{mprob}^D : D \to [0, 1] \\
+&amp; \mathsf{mprob}^D\ \rho = \operatorname{tr}(\rho)
+\end{align*}</p>
+<p>where $D$ is a casual notation for density operators.
+Somewhat surprisingly, this summing doesn’t destroy bisimilarity even though it loses quite a lot of information.
+This is perhaps because the major information we can get out of the system is probability queries, which for a mixed system are computed by summing, so everything is linear and we can just sum up the states in advance.</p>
+<p>I’ll need to think about it more, but for now I’m satisfied that it suffices to generalise events to uncertain ones to justify the density operator formulation.
+The intuitions behind all these constructions and arguments are probably already in the heads of physicists and quantum computing scientists, and they may even have written them down more formally somewhere, but at least the presentation in this post in terms of bisimilarity between transition systems is the one that’s clearest to me.
+One potentially interesting thing to think about is that we can get another mixed system by applying the uncertainty construction to $\mathsf{pure}^\bullet$ and $\mathsf{prob}^\bullet$ rather than $\mathsf{pure}^\mathit{PD}$ and $\mathsf{prob}^\mathit{PD}$, and it might be interesting to compare this system with the density operators.
+Also it might be interesting to try to apply the constructions somewhere else, but on the other hand these constructions by themselves are pretty straightforward and it’s probably not worthwhile to make a fuss of them.</p>
+<hr />
+<div class="remark">
+When these were in my head they didn’t look so long 🤔
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
