@@ -63,7 +63,7 @@ This post shows that the unit vector formulation gives rise to a very simple tra
 0014
 </div>
 <h2>Postulates of quantum theory as transition systems</h2>
-<div class="post-time">Posted at 17:33 on 23 December 2020, and revised at 18:06 on 23 December 2020</div>
+<div class="post-time">Posted at 17:33 on 23 December 2020, and revised at 21:57 on 23 December 2020</div>
 <p>I’ve been involved in a quantum computation reading group for almost a year.
 Most of the time I regarded myself as merely an observer and didn’t spend much time familiarising myself with the material, in particular the linear algebra toolbox.
 But recently I discovered <a href="https://www.cs.ox.ac.uk/people/bob.coecke/">Bob Coecke</a> and <a href="https://www.cs.ox.ac.uk/people/aleks.kissinger/">Aleks Kissinger</a>’s <a href="https://www.cambridge.org/gb/pqp"><em>Picturing Quantum Processes</em></a> (PQP henceforth), which is pretty much as intuitive and insightful as any quantum theory textbook can hope to be.
@@ -172,7 +172,7 @@ More precisely, if we decompose $|\varphi\rangle$ into $\lambda|\psi\rangle + |\
 To construct a valid measurement involving $\langle\psi|$, we use the standard way of obtaining one from an <a href="https://en.wikipedia.org/wiki/Orthonormality">orthonormal basis</a>:
 Start with $r|\psi\rangle$ where $r \defeq 1/\sqrt{\mathsf{prob}^\bullet\ |\psi\rangle}$.
 This vector is normalised and can always be extended to an orthonormal basis $\{|i\rangle\}_i$ where $|0\rangle = r|\psi\rangle$.
-Then the operators $M_i \defeq |i\rangle\langle i|$ together form a measurement $M$ since $\sum_i |i\rangle\langle i| = I$.
+Then the operators $M_i \defeq |i\rangle\langle i|$ together form a measurement $M$ since $\sum_i M_i^\dagger M_i = \sum_i |i\rangle\langle i|i\rangle\langle i| = \sum_i |i\rangle\langle i| = I$.
 Now we reason:</p>
 <p>\begin{align*}
 &amp; |\psi\rangle \sim |\varphi\rangle \\
