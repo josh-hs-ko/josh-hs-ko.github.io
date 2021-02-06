@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>A study of adjunctions: An isomorphic perspective on products — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="The universal property of (categorical) products can be reformulated as a useful family of isomorphisms.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0015
+</div>
+<h2>A study of adjunctions: An isomorphic perspective on products</h2>
+<div class="post-time">Posted at 21:44 on 6 February 2021</div>
+<p>This is the first of a series of posts with which I attempt to organise and interpret the basic definitions and constructions about <a href="https://en.wikipedia.org/wiki/Adjoint_functors">adjunctions</a> in a way that hopefully tells a story about (some of) the concepts that the definitions and constructions intend to capture.</p>
+<p>We start with products, which generalise greatest lower bounds in order theory.</p>
+<p><a href="product.svg"><img class="displayed-figure" src="product.svg" alt="The product diagram"/></a></p>
+<p>Like other categorical diagrams, the completed diagram above merely captures the typing and equational information in the universal property of products, but the logical interplay of the elements in the diagram is lost.
+To convey the full meaning of a diagram, it has to be drawn like casting a spell, with the precise statement of the universal property as the incantation — the spell-caster should say the statement/incantation and draw the corresponding parts of the diagram as they’re mentioned.
+Proficient category theory users should be able to recall the incantation/statement upon seeing the diagram: given two objects $A$ and $B$ in a category $\mathbb C$, an object $A \times B$ together with projection morphisms $\pi_\ell$ and $\pi_r$ is a product of $A$ and $B$ exactly when given every pair of morphisms $f$ and $g$ we can find a unique morphism $\langle f, g \rangle$ such that the diagram above commutes.
+The $\forall \exists$ pattern gives us a construction packing a pair of morphisms into a single morphism:</p>
+<p>$$ \langle \text_ , \text_ \rangle : \forall C.\ \mathbb C (C, A) \times \mathbb C (C, B) \to \mathbb C (C, A \times B) $$</p>
+<p>There is another construction in the opposite direction hidden in the final commutativity part of the universal property, namely</p>
+<p>$$ \pi \defeq \lambda m.\ (\pi_\ell \cdot m, \pi_r \cdot m) : \forall C.\ \mathbb C (C, A \times B) \to \mathbb C (C, A) \times \mathbb C (C, B) $$</p>
+<p>The commutativity part can be seen as saying that $\pi$ is a right inverse of $\langle \text_ , \text_ \rangle$ — we can use $\langle \text_ , \text_ \rangle$ to pack two morphisms into one, which can later be unpacked by $\pi$.
+The reverse is also true: we can unpack a morphism that goes into a product object, and pack up the resulting pair of morphisms to get back to where we started, because the universal property of products actually says exactly that $\pi$ is bijective (once we spot the presence of $\pi$ in the universal property).
+This can be seen more clearly in terms of a more abstract lemma.</p>
+<blockquote>
+<p><span class="theorem">Lemma.</span>
+A function $f : X \to Y$ is bijective if and only if for every $y : Y$ there exists a unique $x : X$ such that $f\ x = y$.</p>
+</blockquote>
+<p>The $\forall y.\ \exists x.\ f\ x = y$ part is exactly surjectivity, and the unique existence means that $f\ x = f\ x'$ implies $x = x'$, which is exactly injectivity.
+Substituting $\pi$ for $f$ (and correspondingly $\mathbb C (C, A \times B)$ for $X$ and $\mathbb C (C, A) \times \mathbb C (C, B)$ for $Y$), the right-hand side of the lemma becomes exactly the universal property of products, and the left-hand side of the lemma gives us a family of isomorphisms</p>
+<p>$$ \forall C.\ \mathbb C (C, A) \times \mathbb C (C, B) \cong \mathbb C (C, A \times B) $$</p>
+<p>whose forward and backward directions are $\langle \text_ , \text_ \rangle$ and $\pi$ respectively.</p>
+<p>The family of isomorphisms tells us that morphisms going into $A \times B$ are interconvertible with pairs of morphisms going into $A$ and $B$, and this is very useful because</p>
+<ul>
+<li>in the forward direction, pairs of morphisms with the same source object can be packed into single morphisms and expressed within the category $\mathbb C$ (and consequently, when we need to represent such pairs of morphisms, we can stay within $\mathbb C$  and don’t necessarily have to move to a different category, namely $\mathbb C \times \mathbb C$), and</li>
+<li>in the backward direction, to reason about morphisms targeting a product object in $\mathbb C$, we can unpack them to pairs of morphisms and reason about these pairs instead, using the richer structure of $\mathbb C \times \mathbb C$.</li>
+</ul>
+<p>Notably, together with the technique of indirect reasoning (an instance of Yoneda lemma), i.e.,</p>
+<p>$$ X \cong Y \quad\Leftrightarrow\quad \forall Z.\ \mathbb C (Z, X) \cong \mathbb C (Z, Y) $$</p>
+<p>we can use the family of isomorphisms to establish a range of other isomorphisms about products.
+For example, to show that $A \times B \cong B \times A$, we can simply reason as follows:</p>
+<p>\begin{align*}
+&amp; \mathbb C (Z, A \times B) \\
+\cong~&amp; \reason{product isomorphism} \\
+&amp; \mathbb C (Z, A) \times \mathbb C (Z, B) \\
+\cong~&amp; \reason{cartesian product} \\
+&amp; \mathbb C (Z, B) \times \mathbb C (Z, A) \\
+\cong~&amp; \reason{product isomorphism} \\
+&amp; \mathbb C (Z, B \times A)
+\end{align*}</p>
+<p>That is, (categorical) products are commutative up to isomorphism simply because cartesian products (on sets) are, and it is because of the isomorphism that we are able to port the property from $\mathbb C \times \mathbb C$ into $\mathbb C$.
+For larger examples, see Ralf Hinze and Daniel James’s paper ‘<a href="https://doi.org/10.1145/1863495.1863507">Reason isomorphically!</a>’.</p>
+<hr />
+<div class="remark">
+I’m going to try and keep future posts down to the size that I can write up in one day — long posts are quite a burden…
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
