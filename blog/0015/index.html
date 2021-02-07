@@ -62,7 +62,7 @@
 0015
 </div>
 <h2>A study of adjunctions: An isomorphic perspective on products</h2>
-<div class="post-time">Posted at 21:44 on 6 February 2021</div>
+<div class="post-time">Posted at 21:44 on 6 February 2021, and revised at 16:00 on 7 February 2021</div>
 <p>This is the first of a series of posts with which I attempt to organise and interpret the basic definitions and constructions about <a href="https://en.wikipedia.org/wiki/Adjoint_functors">adjunctions</a> in a way that hopefully tells a story about (some of) the concepts that the definitions and constructions intend to capture.</p>
 <p>We start with products, which generalise greatest lower bounds in order theory.</p>
 <p><a href="product.svg"><img class="displayed-figure" src="product.svg" alt="The product diagram"/></a></p>
@@ -89,7 +89,8 @@ Substituting $\pi$ for $f$ (and correspondingly $\mathbb C (C, A \times B)$ for 
 <li>in the forward direction, pairs of morphisms with the same source object can be packed into single morphisms and expressed within the category $\mathbb C$ (and consequently, when we need to represent such pairs of morphisms, we can stay within $\mathbb C$  and don’t necessarily have to move to a different category, namely $\mathbb C \times \mathbb C$), and</li>
 <li>in the backward direction, to reason about morphisms targeting a product object in $\mathbb C$, we can unpack them to pairs of morphisms and reason about these pairs instead, using the richer structure of $\mathbb C \times \mathbb C$.</li>
 </ul>
-<p>Notably, together with the technique of indirect reasoning (an instance of Yoneda lemma), i.e.,</p>
+<p>Notably, the isomorphism formulation helps to explain why there is the uniqueness requirement in the universal property formulation, as the role of the uniqueness requirement is clear when establishing the isomorphisms.</p>
+<p>Together with the technique of indirect reasoning (an instance of Yoneda lemma), i.e.,</p>
 <p>$$ X \cong Y \quad\Leftrightarrow\quad \forall Z.\ \mathbb C (Z, X) \cong \mathbb C (Z, Y) $$</p>
 <p>we can use the family of isomorphisms to establish a range of other isomorphisms about products.
 For example, to show that $A \times B \cong B \times A$, we can simply reason as follows:</p>
@@ -104,9 +105,15 @@ For example, to show that $A \times B \cong B \times A$, we can simply reason as
 \end{align*}</p>
 <p>That is, (categorical) products are commutative up to isomorphism simply because cartesian products (on sets) are, and it is because of the isomorphism that we are able to port the property from $\mathbb C \times \mathbb C$ into $\mathbb C$.
 For larger examples, see Ralf Hinze and Daniel James’s paper ‘<a href="https://doi.org/10.1145/1863495.1863507">Reason isomorphically!</a>’.</p>
+<p>In the above I’ve been hinting that the family of isomorphisms is really a bridge between the two categories $\mathbb C \times \mathbb C$ (about pairs of objects and morphisms) and $\mathbb C$ (about single objects and morphisms).
+Indeed, in the usual formulation that involves the diagonal functor $\Delta : \mathbb C \to \mathbb C \times \mathbb C$ (defined by $\Delta X \defeq (X, X)$ on objects and $\Delta f \defeq (f, f)$ on morphisms) the connection between the two categories becomes more explicit:</p>
+<p>$$ \forall C.\ \mathbb C \times \mathbb C (\Delta C, (A, B)) \cong \mathbb C (C, A \times B) $$</p>
+<p>Dually, $(\times) : \mathbb C \times \mathbb C \to \mathbb C$ can also be made a functor, and we start to see a general and symmetric form of isomorphisms $\mathbb D (\mathsf F X, Y) \cong \mathbb C (X, \mathsf G Y)$ where $\mathsf F : \mathbb C \to \mathbb D$ and $\mathsf G : \mathbb D \to \mathbb C$.
+But we’ll save this generalisation for later posts.</p>
+<p><strong>Next:</strong> <a href="/blog/0016/">0016 (A study of adjunctions: Galois connections)</a></p>
 <hr />
 <div class="remark">
-I’m going to try and keep future posts down to the size that I can write up in one day — long posts are quite a burden…
+I’m going to try and keep future posts down to the size that I can write up in one day — long posts are quite a burden to write…
 </div>
 
 <!-- END OF POST -->

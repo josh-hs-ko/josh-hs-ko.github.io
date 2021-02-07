@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>A study of adjunctions: Galois connections — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="An important special case of adjunctions is Galois connections, which can be very helpful for reasoning about order-theoretic optimising definitions.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0016
+</div>
+<h2>A study of adjunctions: Galois connections</h2>
+<div class="post-time">Posted at 17:28 on 7 February 2021</div>
+<p>Continuing <a href="/blog/0015/">0015</a>, here we look at what the isomorphisms give us in the important special case of preorder categories (whose objects are elements of a preorder and whose morphisms represent inequalities).
+The universal property of products specialises to the usual two-clause definition of greatest lower bounds: given elements $x$ and $y$ of a preorder, an element $x \sqcap y$ is a greatest lower bound of $x$ and $y$ exactly when</p>
+<ul>
+<li>$x \sqcap y$ is a lower bound of $x$ and $y$, that is, $x \sqcap y \leq x$ and $x \sqcap y \leq y$, and</li>
+<li>any lower bound of $x$ and $y$ is below $x \sqcap y$, that is, $z \leq x$ and $z \leq y$ implies $z \leq x \sqcap y$.</li>
+</ul>
+<p>Categorically, the first clause assembles the object $x \sqcap y$ and the two morphisms $x \sqcap y \leq x$ and $x \sqcap y \leq y$ into a span object of a (derived) span category where we consider only lower bounds of $x$ and $y$ and the preorder restricted to these lower bounds, and the second clause says that this particular span is terminal, that is, $x \sqcap y$ is the greatest element in this derived preorder of lower bounds.
+On the other hand, the family of product isomorphisms specialises to</p>
+<p>$$ \forall z.\ z \leq x \mathrel\wedge z \leq y ~\Leftrightarrow~ z \leq x \sqcap y $$</p>
+<p>If $x \sqcap y$ exists for all $x$ and $y$, then we can make $(\sqcap)$ a function, and the above statement should hold for all $x$ and $y$:</p>
+<p>$$ \forall x, y, z.\ z \leq x \mathrel\wedge z \leq y ~\Leftrightarrow~ z \leq x \sqcap y $$</p>
+<p>Being equivalent to the universal property, this statement fixes $(\sqcap)$ up to isomorphism, so if the preorder is in fact a partial order (where isomorphism implies equality), this statement will serve as a definition of $(\sqcap)$.
+Being able to read and write such ‘isomorphisms’ intuitively can save us a lot of time.
+In this case, the function being defined is $(\sqcap)$, which is supposed to compute the greatest lower bound, an optimisation (greatest) with respect to a property (lower bound).
+The property is written on the left-hand side: $z \leq x \mathrel\wedge z \leq y$ says $z$ is a lower bound of $x$ and $y$.
+And since we want to find the greatest element satisfying the property, on the right-hand side we put the thing being defined, namely $x \sqcap y$, on the larger side of the inequality.
+Then the left-to-right implication says that any lower bound $z$ is below $x \sqcap y$, and by substituting $x \sqcap y$ for $z$, the right-to-left implication tells us that $x \sqcap y$ is a lower bound (since $(\leq)$ is reflexive).</p>
+<p>It would be strange if whatever statement that looks like the one above always properly defined a function — we could have written some nonsense after all, in which case we couldn’t have defined anything.
+To make sure that we’re writing a sensible definition, we should ensure that the statement has the form</p>
+<p>$$ \forall x : P, y : Q.\ f\ x \leq_Q y ~\Leftrightarrow~ x \leq_P g\ y $$</p>
+<p>for some preorders $P$ and $Q$ and order-preserving functions $f : P \to Q$ and $g : Q \to P$; if $f$ satisfies certain conditions (which we will see in a later post), then $g$ will be properly defined.
+This specialises the general form of isomorphisms we caught a glimpse of at the end of <a href="/blog/0015/">0015</a> to preorder categories, and is called a <a href="https://en.wikipedia.org/wiki/Galois_connection">Galois connection</a>.</p>
+<p>Again, together with the technique of indirect reasoning, which specialises for partial orders to</p>
+<p>$$ x = y \quad\Leftrightarrow\quad \forall z.\ z \leq x \Leftrightarrow z \leq y $$</p>
+<p>we can reason about order-theoretic optimising definitions very easily.
+For example, reasoning about the <a href="https://en.wikipedia.org/wiki/Floor_and_ceiling_functions">floor function</a> can be a pain without the help of the right Galois connection.
+In Section 3.2 of Graham, Knuth, and Patashnik’s <a href="https://en.wikipedia.org/wiki/Concrete_Mathematics"><em>Concrete Mathematics</em></a> they use</p>
+<p>$$ \left\lfloor \sqrt{\lfloor r \rfloor} \right\rfloor = \left\lfloor \sqrt{r} \right\rfloor \qquad\text{for real } r \geq 0 $$</p>
+<p>as a first non-trivial property about floors.
+But if we characterise the floor function as finding the greatest integer below a real number,</p>
+<p>$$ \forall n : \mathbb Z^{0+}, r : \mathbb R^{0+}. \mathsf{inj}\ n \leq_{\mathbb R^{0+}} r ~\Leftrightarrow~ n \leq_{\mathbb Z^{0+}} \lfloor r \rfloor $$</p>
+<p>where $\mathsf{inj} : \mathbb Z^{0+} \to \mathbb R^{0+}$ promotes a non-negative integer to a non-negative real number (and will be omitted in the reasoning below), then the property becomes very easy to prove:</p>
+<p>\begin{align*}
+&amp; n \leq_{\mathbb Z^{0+}} \left\lfloor \sqrt{\lfloor r \rfloor} \right\rfloor \\
+\Leftrightarrow~&amp; \reason{Galois connection for floors} \\
+&amp; n \leq_{\mathbb R^{0+}} \sqrt{\lfloor r \rfloor} \\
+\Leftrightarrow~&amp; \reason{square root} \\
+&amp; n^2 \leq_{\mathbb R^{0+}} \lfloor r \rfloor \\
+\Leftrightarrow~&amp; \reason{both sides are integers} \\
+&amp; n^2 \leq_{\mathbb Z^{0+}} \lfloor r \rfloor \\
+\Leftrightarrow~&amp; \reason{Galois connection for floors} \\
+&amp; n^2 \leq_{\mathbb R^{0+}} r \\
+\Leftrightarrow~&amp; \reason{square root} \\
+&amp; n \leq_{\mathbb R^{0+}} \sqrt{r} \\
+\Leftrightarrow~&amp; \reason{Galois connection for floors} \\
+&amp; n \leq_{\mathbb Z^{0+}} \left\lfloor \sqrt{r} \right\rfloor
+\end{align*}</p>
+<p>Similar to what we did with the commutativity of products in <a href="/blog/0015/">0015</a>, the crux of this reasoning is using the Galois connection to switch to the more liberal domain of real numbers to deal with the square root.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>

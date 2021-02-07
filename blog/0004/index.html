@@ -62,7 +62,7 @@
 0004
 </div>
 <h2>The other camp</h2>
-<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 10:38 on 2 November 2020</div>
+<div class="post-time">Posted at 19:30 on 12 February 2020, and revised at 10:47 on 7 February 2021</div>
 <p>Yesterday I joined a discussion with some of the program verification people at IIS, and found that we think about the same logical formulas in different or even opposite ways, which is quite interesting.
 When thinking about the validity of a formula, my first instinct is to do it in type theory, that is, construct a term of the corresponding type, aided by some classical equivalences if thinking about classical validity; in short, I think syntactically (as a typed term is equivalent to a derivation in natural deduction) and intuitionistically (by default).
 On the other hand, the verification people (at least when using an SMT solver) negate the formula and think whether there is a model, which is semantic, and they (almost?) exclusively use classical logic.
@@ -184,7 +184,7 @@ To me, a formula is stronger when it can be used to prove more things, whereas t
 So when we move from Formula \ref{eq:original-negation} to Formula \ref{eq:first-order-negation}, for example, they would see that Formula \ref{eq:first-order-negation} has more models than Formula \ref{eq:original-negation}.
 Then, if we can show by SMT solving that Formula \ref{eq:first-order-negation} has no model, then Formula \ref{eq:original-negation} must have no model either, which is what we want.
 Somehow I failed to figure out this argument during the discussion — it could be because I needed more time to overcome the disorientation brought by the change of view, or simply because I’d drained most of my brain power at that point.</p>
-<p><strong>Follow-up:</strong> <a href="/blog/0007/">0007</a></p>
+<p><strong>Follow-up:</strong> <a href="/blog/0007/">0007 (A ‘systematic’ reformulation)</a></p>
 
 <!-- END OF POST -->
 
