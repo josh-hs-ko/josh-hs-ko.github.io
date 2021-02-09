@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>A study of adjunctions: Universality and natural isomorphism — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="Naturality enters the picture as we prove that the two formulations of optimising definitions in terms of universality and isomorphism are equivalent.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0017
+</div>
+<h2>A study of adjunctions: Universality and natural isomorphism</h2>
+<div class="post-time">Posted at 23:02 on 9 February 2021</div>
+<p>In <a href="/blog/0015/">0015</a> and <a href="/blog/0016/">0016</a> we’ve seen that an optimising definition can be formulated in the form of universality or a family of isomorphisms.
+To make the two forms interconvertible, however, there is one property missing: the family of isomorphisms should be a <a href="https://en.wikipedia.org/wiki/Natural_transformation">natural isomorphism</a>.
+Specialised to products, this interconvertibility means that for objects $A$, $B$, and $A \times B$ in a category $\mathbb C$, the following two statements imply each other:</p>
+<ol>
+<li>The <a href="https://en.wikipedia.org/wiki/Comma_category">comma category</a> $\Delta \downarrow (A, B)$ has a terminal object $(\pi_\ell, \pi_r) : \Delta(A \times B) \to (A, B)$.</li>
+<li>There is a natural isomorphism $\mathsf{pack} : \forall X.\ \mathbb C \times \mathbb C (\Delta X, (A, B)) \cong \mathbb C (X, A \times B)$.</li>
+</ol>
+<p>Note that the formulation above is already quite general except that we’re using a specific functor $\Delta$ into a specific category $\mathbb C \times \mathbb C$ rather than a generic functor $\mathsf F : \mathbb C \to \mathbb D$.
+We won’t be relying essentially on the specifics of $\Delta$ below, so formally our reasoning will work just fine for a generic functor, but hopefully by restricting to $\Delta$ it’ll be easier to connect the reasoning to our established intuitions about products.</p>
+<h3>From universality to natural isomorphism</h3>
+<p><a href="/blog/0015/">0015</a> has already shown that the universality statement can be seen as a family of isomorphisms in disguise, so what’s missing in this direction is just the naturality.
+The intuition for a natural transformation $\alpha : \forall X.\ \mathsf F X \to \mathsf G X$ is that $\alpha$ operates on a two-level structure, namely the object $X$ from a base category and the functor $\mathsf F$, and the effect of $\alpha$ is entirely at the functor level (transforming $\mathsf F$ to $\mathsf G$) and doesn’t depend on $X$; consequently, if there is some transformation $f : X \to Y$ to be applied at the base level alongside $\alpha$, it doesn’t matter in which order the two transformations are applied:</p>
+<p><a href="natural-transformations.svg"><img class="displayed-figure" src="natural-transformations.svg" alt="Natural transformations"/></a></p>
+<p>Starting from $\mathsf F X$, we can either</p>
+<ul>
+<li>apply the base-level transformation $f$ under $\mathsf F$, i.e., $\mathsf F f$, to get $\mathsf F Y$, and then apply the functor-level transformation $\alpha_Y$ to get $\mathsf G Y$, or</li>
+<li>apply the functor-level transformation $\alpha_X$ to get $\mathsf G X$, and then apply the base-level transformation $f$ under $\mathsf G$, i.e., $\mathsf G f$, to get $\mathsf G Y$,</li>
+</ul>
+<p>and either route gives us the same result.
+That is, we use the commutativity to capture the intuition that $\alpha$ and $f$ operate independently at two levels.</p>
+<p>For $\mathsf{pack}$, the naturality we want to establish is</p>
+<p><a href="naturality.svg"><img class="displayed-figure" src="naturality.svg" alt="The naturality"/></a></p>
+<p>The functor $\mathsf G$ for $\mathsf{pack}$ is the contravariant hom-functor $\mathbb C (\text_, A \times B)$, which maps a source object $X$ to the set of morphisms of type $X \to A \times B$; a base transformation $f : X \to Y$ under this functor transforms (contravariantly) a morphism of type $Y \to A \times B$ to one of type $X \to A \times B$ which ‘preprocesses’ its input with $f$ before invoking the original morphism.
+The functor $\mathsf F$ for $\mathsf{pack}$ is similar, so a base transformation under the functor is also some kind of preprocessing, although in this case we also have to duplicate the source change with $\Delta$.
+The naturality can then be interpreted as saying that the two operations ‘$\mathsf{pack}$-ing morphism pairs into one’ and ‘preprocessing the morphism source’ are commutative.</p>
+<p>Now suppose that we have universality, which says that any morphism pair $p : \Delta Y \to (A, B)$ can be uniquely factored through the same morphism pair $(\pi_\ell, \pi_r) : \Delta (A \times B) \to (A, B)$; that is, any $p$ can be rewritten in the canonical form $(\pi_\ell, \pi_r) \cdot \Delta g$ where the ‘core’ part $g$ is necessarily $\mathsf{pack}\ p$.
+What’s interesting about this particular canonical form is that adding preprocessing $\Delta f$ to $p$ is the same as adding preprocessing $f$ to the core of $p$’s canonical form:</p>
+<p>$$ p \cdot \Delta f = (\pi_\ell, \pi_r) \cdot \Delta g \cdot \Delta f = (\pi_\ell, \pi_r) \cdot \Delta(g \cdot f) $$</p>
+<p>So, to compute the canonical form of $p \cdot \Delta f$, we don’t need to insist that preprocessing be added to the morphism before it’s $\mathsf{pack}$-ed into its core, because we can always add preprocessing to the $\mathsf{pack}$-ed core later — canonicity/universality guarantees that adding preprocessing afterwards will get us the same core as adding preprocessing beforehand.
+Therefore it doesn’t matter in which order we do $\mathsf{pack}$-ing and preprocessing, which is exactly the naturality of $\mathsf{pack}$.</p>
+<p>More formally:</p>
+<p><a href="canonical-forms.svg"><img class="displayed-figure" src="canonical-forms.svg" alt="Rewriting into canonical forms"/></a></p>
+<p>To rewrite $p \cdot \Delta f$ into its canonical form, we can either directly $\mathsf{pack}$ the entire morphism, arriving at $(\pi_\ell, \pi_r) \cdot \Delta(\mathsf{pack}(p \cdot \Delta f))$, or $\mathsf{pack}$ only $p$ and then add preprocessing $f$ to the core $\mathsf{pack}\ p$, arriving at $(\pi_\ell, \pi_r) \cdot \Delta(\mathsf{pack}\ p \cdot f)$.
+In either way we end up with a canonical form, and the cores of the two canonical forms, namely $\mathsf{pack}(p \cdot \Delta f)$ and $\mathsf{pack}\ p \cdot f$, must be equal.</p>
+<h3>From natural isomorphism to universality</h3>
+<p>Conversely, given $\mathsf{pack}$ we want to show that every $p : \Delta Y \to (A, B)$ can be rewritten into the canonical form designated by universality (whose core should be unique).
+Well, there is already an almost trivial canonical form: every $p$ can be rewritten as $\mathsf{pack}^{-1}(\mathsf{pack}\ p)$ where the $\mathsf{pack}\ p$ part cannot be anything else (because $\mathsf{pack}$ and $\mathsf{pack}^{-1}$ are inverse to each other).
+Intuitively, $\mathsf{pack}^{-1}$ expands a core back to a morphism pair, and one possible way to do the expansion is plugging a core $f$ into the canonical form $\varepsilon \cdot \Delta f$ for some $\varepsilon : \Delta(A \times B) \to (A, B)$; if we can show that this is exactly what happens, namely $\mathsf{pack}^{-1}\ f = \varepsilon \cdot \Delta f$ for some $\varepsilon$, then we’re done.</p>
+<p>The weapon available to us is the naturality of $\mathsf{pack}^{-1}$, which is the commutativity of $\mathsf{pack}^{-1}$ and preprocessing.
+Again, there’s something interesting that makes preprocessing relevant here:
+the domain of $\mathsf{pack}^{-1}$ is all the morphisms into a fixed object $A \times B$, so every such morphism $f$ can be seen as a piece of preprocessing for the identity morphism $\mathsf{id}_{A \times B}$.
+Thus by the naturality of $\mathsf{pack}^{-1}$, we can just apply $\mathsf{pack}^{-1}$ to the identity morphism and add whatever preprocessing we want afterwards instead of adding the preprocessing before $\mathsf{pack}^{-1}$:</p>
+<p>$$ \mathsf{pack}^{-1}\ f = \mathsf{pack}^{-1}(\mathsf{id}_{A \times B} \cdot f) = \mathsf{pack}^{-1}(\mathsf{id}_{A \times B}) \cdot \Delta f $$</p>
+<p>And this is exactly what we want, with $\varepsilon \defeq \mathsf{pack}^{-1}(\mathsf{id}_{A \times B})$.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
