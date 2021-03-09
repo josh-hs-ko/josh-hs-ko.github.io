@@ -30,7 +30,7 @@ publicationList =
       , venue   = Just ("The Art, Science, and Engineering of Programming", Nothing)
       , year    = 2021
       , types   = []
-      , links   = [ ("PDF", Just "corrected version", "https://bitbucket.org/josh-hs-ko/MetamorphismsInAgda/raw/master/MetamorphismsInAgda.pdf")
+      , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2010.16302v3")
                   , ("Agda code", Just "Zenodo", "https://doi.org/10.5281/zenodo.4030101")
                   , ("Agda code", Just "HTML", "Agda/Programming21/MetamorphismsInAgda.html")
                   ]
