@@ -1,0 +1,27 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=white node] (0) at (0, 0) {};
+		\node [style=white bold node] (1) at (-4, 0) {};
+		\node [style=white node] (2) at (-3, 2) {};
+		\node [style=none] (3) at (-5, 2) {};
+		\node [style=none] (4) at (-4, -2) {};
+		\node [style=white bold node] (5) at (4, 0) {};
+		\node [style=white node] (6) at (3, 2) {};
+		\node [style=none] (7) at (5, 2) {};
+		\node [style=none] (8) at (4, -2) {};
+		\node [style=none] (9) at (0, 2) {};
+		\node [style=none] (10) at (0, -2) {};
+		\node [style=none] (11) at (-2, 0) {$=$};
+		\node [style=none] (12) at (2, 0) {$=$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=bold line, bend right] (1) to (2);
+		\draw [style=bold line] (4.center) to (1);
+		\draw [style=bold line, bend left] (1) to (3.center);
+		\draw [style=bold line, bend left] (5) to (6);
+		\draw [style=bold line] (8.center) to (5);
+		\draw [style=bold line, bend right] (5) to (7.center);
+		\draw [style=bold line] (9.center) to (0);
+		\draw [style=bold line] (0) to (10.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

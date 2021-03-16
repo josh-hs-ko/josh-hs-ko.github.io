@@ -1,0 +1,70 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=white node] (0) at (-2, -1) {};
+		\node [style=none] (1) at (-2, -2.25) {};
+		\node [style=white node] (2) at (-2, 1) {};
+		\node [style=none] (4) at (-2, 2.25) {};
+		\node [style=none] (7) at (0, 0) {$=$};
+		\node [style=grey bold node] (8) at (4, -2) {};
+		\node [style=none] (9) at (2, -2.25) {};
+		\node [style=grey bold node] (10) at (4, 0) {};
+		\node [style=white bold node] (11) at (2, 0) {};
+		\node [style=white node] (12) at (4, 2) {};
+		\node [style=none] (14) at (2, 2.25) {};
+		\node [style=none] (15) at (3.25, 2.75) {};
+		\node [style=none] (16) at (4.75, 2.75) {};
+		\node [style=none] (17) at (4.75, 1.25) {};
+		\node [style=none] (18) at (3.25, 1.25) {};
+		\node [style=none] (19) at (4.75, 0.75) {};
+		\node [style=none] (20) at (4.75, -0.75) {};
+		\node [style=none] (21) at (1.25, -0.75) {};
+		\node [style=none] (22) at (1.25, 0.75) {};
+		\node [style=none] (23) at (-2.75, -0.25) {};
+		\node [style=none] (24) at (-1.25, -0.25) {};
+		\node [style=none] (25) at (-1.25, -1.75) {};
+		\node [style=none] (26) at (-2.75, -1.75) {};
+		\node [style=none] (31) at (-2.75, 0.25) {};
+		\node [style=none] (32) at (-1.25, 0.25) {};
+		\node [style=none] (33) at (-1.25, 1.75) {};
+		\node [style=none] (34) at (-2.75, 1.75) {};
+		\node [style=none] (35) at (3.25, -1.25) {};
+		\node [style=none] (36) at (4.75, -1.25) {};
+		\node [style=none] (37) at (4.75, -2.75) {};
+		\node [style=none] (38) at (3.25, -2.75) {};
+		\node [style=none] (39) at (6.5, 2) {measure};
+		\node [style=none] (40) at (6.5, 0) {CNOT};
+		\node [style=none] (41) at (6.5, -2) {$|0\rangle$};
+		\node [style=none] (42) at (-4.5, 1) {encode};
+		\node [style=none] (44) at (-4.5, -1) {measure};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=bold line] (1.center) to (0);
+		\draw [style=bold line] (2) to (4.center);
+		\draw [style=bold line] (9.center) to (11);
+		\draw [style=bold line] (11) to (10);
+		\draw [style=bold line] (10) to (12);
+		\draw [style=bold line] (8) to (10);
+		\draw [style=bold line] (11) to (14.center);
+		\draw [style=dashed line] (15.center) to (16.center);
+		\draw [style=dashed line] (16.center) to (17.center);
+		\draw [style=dashed line] (17.center) to (18.center);
+		\draw [style=dashed line] (18.center) to (15.center);
+		\draw [style=dashed line] (22.center) to (21.center);
+		\draw [style=dashed line] (21.center) to (20.center);
+		\draw [style=dashed line] (20.center) to (19.center);
+		\draw [style=dashed line] (19.center) to (22.center);
+		\draw [style=dashed line] (34.center) to (33.center);
+		\draw [style=dashed line] (33.center) to (32.center);
+		\draw [style=dashed line] (32.center) to (31.center);
+		\draw [style=dashed line] (31.center) to (34.center);
+		\draw [style=dashed line] (23.center) to (24.center);
+		\draw [style=dashed line] (24.center) to (25.center);
+		\draw [style=dashed line] (25.center) to (26.center);
+		\draw [style=dashed line] (26.center) to (23.center);
+		\draw [style=dashed line] (35.center) to (36.center);
+		\draw [style=dashed line] (36.center) to (37.center);
+		\draw [style=dashed line] (37.center) to (38.center);
+		\draw [style=dashed line] (38.center) to (35.center);
+		\draw [style=line] (2) to (0);
+	\end{pgfonlayer}
+\end{tikzpicture}
