@@ -45,26 +45,31 @@
 		\draw [style=bold line] (10) to (12);
 		\draw [style=bold line] (8) to (10);
 		\draw [style=bold line] (11) to (14.center);
-		\draw [style=dashed line] (15.center) to (16.center);
-		\draw [style=dashed line] (16.center) to (17.center);
-		\draw [style=dashed line] (17.center) to (18.center);
-		\draw [style=dashed line] (18.center) to (15.center);
-		\draw [style=dashed line] (22.center) to (21.center);
-		\draw [style=dashed line] (21.center) to (20.center);
-		\draw [style=dashed line] (20.center) to (19.center);
-		\draw [style=dashed line] (19.center) to (22.center);
-		\draw [style=dashed line] (34.center) to (33.center);
-		\draw [style=dashed line] (33.center) to (32.center);
-		\draw [style=dashed line] (32.center) to (31.center);
-		\draw [style=dashed line] (31.center) to (34.center);
-		\draw [style=dashed line] (23.center) to (24.center);
-		\draw [style=dashed line] (24.center) to (25.center);
-		\draw [style=dashed line] (25.center) to (26.center);
-		\draw [style=dashed line] (26.center) to (23.center);
-		\draw [style=dashed line] (35.center) to (36.center);
-		\draw [style=dashed line] (36.center) to (37.center);
-		\draw [style=dashed line] (37.center) to (38.center);
-		\draw [style=dashed line] (38.center) to (35.center);
+		\draw [style=dashed line] (16.center)
+			 to (17.center)
+			 to (18.center)
+			 to (15.center)
+			 to cycle;
+		\draw [style=dashed line] (20.center)
+			 to (19.center)
+			 to (22.center)
+			 to (21.center)
+			 to cycle;
+		\draw [style=dashed line] (31.center)
+			 to (34.center)
+			 to (33.center)
+			 to (32.center)
+			 to cycle;
+		\draw [style=dashed line] (23.center)
+			 to (24.center)
+			 to (25.center)
+			 to (26.center)
+			 to cycle;
+		\draw [style=dashed line] (37.center)
+			 to (38.center)
+			 to (35.center)
+			 to (36.center)
+			 to cycle;
 		\draw [style=line] (2) to (0);
 	\end{pgfonlayer}
 \end{tikzpicture}
