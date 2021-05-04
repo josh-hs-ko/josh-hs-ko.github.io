@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Getting hold of the Bloch sphere — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="A small exercise about the Bloch sphere and ZX-calculus, which involves a bit of fun with trigonometry.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600|Fira+Code|Noto+Sans+TC:400,700&display=swap&subset=chinese-traditional" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script type="text/javascript" id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0020
+</div>
+<h2>Getting hold of the Bloch sphere</h2>
+<div class="post-time">Posted at 17:50 on 4 May 2021</div>
+<p>The <a href="https://en.wikipedia.org/wiki/Bloch_sphere">Bloch sphere</a> is a highly convenient geometric representation of qubit states and operations on them: for states, pure ones are points on the sphere and mixed ones are points inside the sphere; for operations, unitaries are rotations and measurements are projections to an axis.
+Although the Bloch sphere is useful when working with individual qubits, one defining characteristic of quantum systems is that composite systems cannot be understood in terms of the component systems, and in particular, a system of multiple qubits cannot be visualised as multiple Bloch spheres, so I’m still not sure how useful the Bloch sphere actually is for general quantum programming.
+But it seems to be the best thing we’ve got for the moment, and I suppose it doesn’t hurt to get familiar with it as long as I don’t commit to it too hastily.</p>
+<p>Borrowing the picture of the Bloch sphere on Wikipedia,</p>
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg"><img class="displayed-figure" src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Bloch_sphere.svg" alt="The Bloch sphere"/></a></p>
+<p>every pure state $|\psi\rangle$ modulo the global phase (which is useless information for quantum systems) can be written uniquely as</p>
+<p>$$ |\psi\rangle = \cos\frac{\theta}{2} |0\rangle + \sin\frac{\theta}{2} e^{i\phi} |1\rangle $$</p>
+<p>where $0 \leq \theta \leq \pi$ and $0 \leq \phi &lt; 2\pi$.
+A standard exercise is giving $\theta$ and $\phi$ for particular states and thus identifying them on the sphere — for example, set $\theta \defeq \pi/2$ and $\phi \defeq 0$ and we get  $|+\rangle = (|0\rangle + |1\rangle) /\sqrt 2$, the first element of the X-basis (visualised as the X-axis).
+One can do the exercise by trigonometric calculations, of course, but it’s best to be able to do it intuitively, especially for those working in <a href="https://en.wikipedia.org/wiki/ZX-calculus">ZX-calculus</a>, where <em>phase</em>, rather than linear combination, is the primitive notion.
+More precisely, the exercise relevant to ZX-calculus is a similar but different one:
+To express an arbitrary state in ZX-calculus, we start from a phase state, which is a point lying on the equator with respect to, for example, the X-axis and carrying an X-phase, and then add a Z-phase to rotate it with respect to the Z-axis to where we want it to be.
+The state can thus be determined by the two phases, and the first exercise I set for myself is to find the two phases given $\theta$ and $\phi$.</p>
+<p>The exercise is not entirely trivial because the two phases do not correspond exactly to $\theta$ and $\phi$.
+I don’t know whether this in general is a feature or a bug of ZX-calculus, although for the common basis states it’s definitely a feature, because they are all Z- or X-phase states and readily expressible.
+For example, the X-basis states lie on the equator with respect to the Z-axis and carry the phases $0$ and $\pi$ respectively (directly corresponding to the $\phi$ angles of the two states), so $|+\rangle$ is just $1/\sqrt 2 \cdot Z(0)—$, which is the Z-spider with one output (multiplied by $1/\sqrt 2$), and the other X-basis state $|-\rangle$ is $1/\sqrt 2 \cdot Z(\pi)—$.
+(I won’t need spiders that have more than one input or output, so will just use the crappy notation, which goes from left to right, instead of full string diagrams.)
+Likewise, the Z-basis states are $|0\rangle = 1/\sqrt 2 \cdot X(0)—$ and $|1\rangle = 1/\sqrt{2} \cdot X(\pi)—$.</p>
+<p>So how do we represent $|\psi\rangle$ in ZX-calculus?
+If we start from an X-phase state, the natural phase to use is $\theta$ — that is, we start from $1/\sqrt 2 \cdot X(\theta)—$.
+This is the state obtained by rotating $|0\rangle$ counter-clockwise by $\theta$.
+(In general, the direction of rotation can be remembered with the help of the <a href="https://en.wikipedia.org/wiki/Right-hand_rule">right-hand rule</a> — point your right thumb towards the direction of the axis with respect to which the rotation is performed (the X-axis in this case), and the rest of the fingers will give you the right direction of rotation.)
+$X(\theta)—$ carries a Z-phase of $-\pi/2$ however (which should be clear on the Bloch sphere), so we should add a Z-phase of $\pi/2 + \phi$ to bring the state to the right place.
+That is, we end up with $1/\sqrt 2 \cdot X(\theta)—Z(\pi/2 + \phi)—$.</p>
+<p>To be absolutely sure about what we’re doing, let’s expand the ‘diagram’ to its ‘matrix’ form (relative to the computational Z-basis) and verify that it matches the ‘matrix’ form of $|\psi\rangle$.
+Start with $1/\sqrt 2 \cdot X(\theta)—$, which by definition is $1/\sqrt 2 \cdot \left(|+\rangle + e^{i\theta} |-\rangle\right)$.
+Expand this with respect to the Z-basis:</p>
+<p>\begin{align*}
+&amp; \frac{1}{\sqrt 2} \left(|+\rangle + e^{i\theta} |-\rangle\right) \\
+={}&amp; \frac{1}{\sqrt 2} \left(\frac{1}{\sqrt 2}\left(|0\rangle + |1\rangle\right) + \frac{e^{i\theta}}{\sqrt 2} \left(|0\rangle - |1\rangle\right)\right) \\
+={}&amp; \frac{1 + e^{i\theta}}{2} |0\rangle + \frac{1 - e^{i\theta}}{2} |1\rangle \\
+={}&amp; \frac{1 + \cos \theta + i \sin \theta}{2} |0\rangle + \frac{1 - \cos \theta - i \sin \theta}{2} |1\rangle
+\end{align*}</p>
+<p>Hmm, this looks scary.
+But since we’re expecting something like $\cos (\theta/2)$, let’s look up the <a href="https://en.wikipedia.org/wiki/List_of_trigonometric_identities#Double-angle_formulae">Wikipedia page of trigonometric identities</a>.
+This particular formula</p>
+<p>$$ \cos (2\theta) = 2 \cos^2 \theta - 1 $$</p>
+<p>looks promising since the $-1$ will help us get rid of the $1$ in the amplitude of $|0\rangle$.
+This one</p>
+<p>$$ \sin (2\theta) = 2 \sin \theta \cos \theta $$</p>
+<p>looks promising too because the $2$ will probably cancel out the denominator.
+So we calculate:</p>
+<p>\begin{align*}
+&amp; \frac{1 + \cos \theta + i \sin \theta}{2} \\
+={}&amp; \frac{1}{2} \left( 1 + (2 \cos^2 \frac{\theta}{2} - 1) + i \cdot 2 \sin \frac{\theta}{2} \cos \frac{\theta}{2} \right) \\
+={}&amp; \cos \frac{\theta}{2} \left( \cos \frac{\theta}{2} + i \sin \frac{\theta}{2} \right) \\
+={}&amp; \cos \frac{\theta}{2} e^{i\theta/2}
+\end{align*}</p>
+<p>Not bad!
+An $e^{i\theta/2}$ emerges, but it may just be a global phase, so if this also appears in the result of simplifying the amplitude of $|1\rangle$ then it can be ignored.
+This time we should probably use another $\cos(2\theta)$ formula</p>
+<p>$$ \cos (2\theta) = 1 - 2 \sin^2 \theta $$</p>
+<p>in the hope of getting rid of the $1$:</p>
+<p>\begin{align*}
+&amp; \frac{1 - \cos \theta - i \sin \theta}{2} \\
+={}&amp; \frac{1}{2} \left( 1 - (1 - 2 \sin^2 \frac{\theta}{2}) - i \cdot 2 \sin \frac{\theta}{2} \cos \frac{\theta}{2} \right) \\
+={}&amp; \sin \frac{\theta}{2} \left( \sin \frac{\theta}{2} - i \cos \frac{\theta}{2} \right)
+\end{align*}</p>
+<p>The part in parentheses doesn’t seem to match $e^{i\theta/2}$ at first, but this is easily fixable by taking out $-i$, which is $e^{-i\pi/2}$:</p>
+<p>\begin{align*}
+&amp; \sin \frac{\theta}{2} \left( \sin \frac{\theta}{2} - i \cos \frac{\theta}{2} \right) \\
+={}&amp; -i \sin \frac{\theta}{2} \left( i \sin \frac{\theta}{2} + \cos \frac{\theta}{2} \right) \\
+={}&amp; e^{-i\pi/2} \sin \frac{\theta}{2} e^{i\theta/2}
+\end{align*}</p>
+<p>So we get</p>
+<p>$$ \frac{1}{\sqrt 2} \cdot X(\theta)— ~=~ e^{i\theta/2} \left( \cos \frac{\theta}{2} |0\rangle + \sin \frac{\theta}{2} e^{-i\pi/2} |1\rangle \right) $$</p>
+<p>where $e^{i\theta/2}$ is a global phase and can be ignored.
+It remains to check what the Z-phase gate $—Z(\pi/2 + \phi)—$ does, but this one is easier, especially if we verify the general case: a Z-phase gate $—Z(\alpha)—$ expands to $|0\rangle\langle 0| + e^{i\alpha} |1\rangle\langle 1|$; given a state $x |0\rangle + y |1\rangle$, applying the gate to the state yields</p>
+<p>$$ \left( |0\rangle\langle 0| + e^{i\alpha} |1\rangle\langle 1| \right) \left( x |0\rangle + y |1\rangle \right) = x |0\rangle + e^{i\alpha} y |1\rangle $$</p>
+<p>Therefore what the gate does is simply multiplying the amplitude of $|1\rangle$ by $e^{i\alpha}$ (that is, adding a Z-phase of $\alpha$).
+So we arrive at</p>
+<p>$$ \frac{1}{\sqrt 2} \cdot X(\theta)—Z(\pi/2 + \phi)— ~=~ e^{i\theta/2} \left( \cos \frac{\theta}{2} |0\rangle + \sin \frac{\theta}{2} e^{i\phi} |1\rangle \right) $$</p>
+<p>as required.</p>
+<p>How to express $|\psi\rangle$ by applying an X-phase gate to a Z-phase state is less obvious, and the ZX-calculus doesn’t seem to shed a lot of light on this either — it’s not obvious to me how to rewrite $X(\theta)—Z(\pi/2 + \phi)—$ into $Z(\alpha)—X(\beta)—$ for some $\alpha$ and $\beta$ in ZX-calculus.
+This is perhaps related to the problems about making ZX-calculus complete, discussed for example by van de Wetering in Section 9.5 of his <a href="https://arxiv.org/abs/2012.13966v1">ZX-calculus survey</a>, where it is commented that in addition to the simpler (Clifford) ZX-calculus rules, we also need to somehow capture ‘the rotational structure of the Bloch sphere [to] retriev[e] a complete language for reasoning about qubit quantum computing’.
+I don’t really care about completeness though — it’s more important to be able to reason about interesting quantum algorithms with a reasonable amount of effort and bring out as much intuition as possible.
+If occasionally I need an equation that cannot be derived in ZX-calculus, I’d probably be happy to treat the equation as an axiom and revert/resort to matrix calculations to verify it.
+All these discussions are probably still premature though — I’ll have to work with some concrete quantum algorithms to see how things actually unfold, but it’ll take (quite some) time for me to get to that stage.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
