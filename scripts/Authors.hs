@@ -14,14 +14,6 @@ authorList =
       , authorURL  = "https://anthonyanjorin.github.io"
       }
   , Author
-      { authorName = "Thomas Buchmann"
-      , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Buchmann_Thomas/"
-      }
-  , Author
-      { authorName = "Yuan-Hao Chang"
-      , authorURL  = "https://www.iis.sinica.edu.tw/~johnson/"
-      }
-  , Author
       { authorName = "Yun-Sheng Chang"
       , authorURL  = "https://yunshengtw.github.io"
       }
@@ -34,16 +26,12 @@ authorList =
       , authorURL  = "http://www.cs.toronto.edu/~zdiskin/"
       }
   , Author
-      { authorName = "Romina Eramo"
-      , authorURL  = "http://people.disim.univaq.it/romina.eramo/"
-      }
-  , Author
       { authorName = "Jeremy Gibbons"
       , authorURL  = "http://www.cs.ox.ac.uk/jeremy.gibbons/"
       }
   , Author
-      { authorName = "Georg Hinkel"
-      , authorURL  = "https://sdq.ipd.kit.edu/people/georg_hinkel/"
+      { authorName = "Liye Guo"
+      , authorURL  = "https://ieeexplore.ieee.org/author/37086808544"
       }
   , Author
       { authorName = "Zhenjiang Hu"
@@ -58,17 +46,13 @@ authorList =
       , authorURL  = "http://www.cse.chalmers.se/~patrikj/"
       }
   , Author
-      { authorName = "Frédéric Jouault"
-      , authorURL  = "http://www.eseo.fr/annuaire-du-personnel/entry-5239-jouault-frederic.html"
+      { authorName = "Tzu-Chi Lin"
+      , authorURL  = "https://github.com/Zekt"
       }
   , Author
-      { authorName = "Erhan Leblebici"
-      , authorURL  = "http://www.es.tu-darmstadt.de/es/team/erhan-leblebici/"
-      }
---, Author
---    { authorName = "Pedro Martins"
---    , authorURL  = "https://isr.uci.edu/users/pedro-ribeiro-martins"
---    }
+    { authorName = "Pedro Martins"
+    , authorURL  = "https://dblp.org/pid/59/2784-1.html"
+    }
   , Author
       { authorName = "Jorge Mendes"
       , authorURL  = "http://wiki.di.uminho.pt/twiki/bin/view/Personal/JorgeMendes/WebHome"
@@ -78,24 +62,8 @@ authorList =
       , authorURL  = "https://scm.iis.sinica.edu.tw/home/"
       }
   , Author
-      { authorName = "Leila Samimi-Dehkordi"
-      , authorURL  = "http://lsamimi.ir/"
-      }
-  , Author
       { authorName = "João Saraiva"
       , authorURL  = "http://haslab.uminho.pt/jas/"
-      }
-  , Author
-      { authorName = "Che-Wei Tsao"
-      , authorURL  = "https://scholar.google.com/citations?user=nJiILWAAAAAJ"
-      }
-  , Author
-      { authorName = "Bernhard Westfechtel"
-      , authorURL  = "http://www.ai1.uni-bayreuth.de/en/team/Westfechtel_Bernhard/"
-      }
-  , Author
-      { authorName = "Chun-Feng Wu"
-      , authorURL  = "https://cfwu417.github.io"
       }
   , Author
       { authorName = "Zhixuan Yang"
@@ -116,9 +84,5 @@ authorList =
   , Author
       { authorName = "Zirun Zhu"
       , authorURL  = "https://ac.k331.one"
-      }
-  , Author
-      { authorName = "Albert Zündorf"
-      , authorURL  = "https://seblog.cs.uni-kassel.de/staff/albert-zundorf/"
       }
   ]
