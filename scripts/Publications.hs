@@ -29,7 +29,7 @@ publicationList =
                   , "Hsiang-Shang Ko"
                   , "Erhan Leblebici"
                   ]
-      , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2021:home", IncludeYear))
+      , venue   = Just ("International Workshop on Bidirectional Transformations (Bx)", Just ("http://bx-community.wikidot.com/bx2021:home", IncludeYear))
       , year    = 2021
       , types   = [ (Published, "Accepted")
                   ]
@@ -166,7 +166,7 @@ publicationList =
       , authors = [ "Anthony Anjorin"
                   , "Hsiang-Shang Ko"
                   ]
-      , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("https://2018.programming-conference.org/track/bx-2018-papers", IncludeYear))
+      , venue   = Just ("International Workshop on Bidirectional Transformations (Bx)", Just ("https://2018.programming-conference.org/track/bx-2018-papers", IncludeYear))
       , year    = 2018
       , types   = [ (Published, "Extended abstract")
                   ]
@@ -214,7 +214,7 @@ publicationList =
                   , ("Article", "41", Nothing)
                   , ("DOI", "10.1145/3158129", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
-                  , ("Related slides", "‘<a href=\"slides/BX18'.pdf\">Towards a general-purpose bidirectional language</a>’ at the <a href=\"https://2018.programmingconference.org/track/bx-2018-papers\">International Workshop on Bidirectional Transformations (BX) 2018</a>", Nothing)
+                  , ("Related slides", "‘<a href=\"slides/BX18'.pdf\">Towards a general-purpose bidirectional language</a>’ at the <a href=\"https://2018.programmingconference.org/track/bx-2018-papers\">International Workshop on Bidirectional Transformations (Bx) 2018</a>", Nothing)
                   , ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al.’s [2007] asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are based on a declarative programming model, and only allow the programmer to describe a consistency specification with ad hoc and/or awkward control over the consistency restoration behaviour. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must have the ability to fully control and reason about the consistency restoration behaviour. The putback-based approach to bidirectional programming aims to provide exactly this ability, and this paper strengthens the putback-based position by proposing the first fully fledged reasoning framework for a bidirectional language — a Hoare-style logic for Ko et al.’s [2016] putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                   ]
       }
@@ -246,7 +246,7 @@ publicationList =
                   , "Erhan Leblebici"
                   , "Bernhard Westfechtel"
                   ]
-      , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
+      , venue   = Just ("International Workshop on Bidirectional Transformations (Bx)", Just ("http://bx-community.wikidot.com/bx2017:home", IncludeYear))
       , year    = 2017
       , types   = [ (Warning, "Superseded")
                   ]
@@ -325,7 +325,7 @@ publicationList =
 --                , "Hsiang-Shang Ko"
 --                , "Zhenjiang Hu"
 --                ]
---    , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
+--    , venue   = Just ("International Workshop on Bidirectional Transformations (Bx)", Just ("http://bx-community.wikidot.com/bx2016:home", IncludeYear))
 --    , year    = 2016
 --    , types   = []
 --    , links   = [ ("PDF", Nothing, "http://ceur-ws.org/Vol-1571/paper_3.pdf")
@@ -365,7 +365,7 @@ publicationList =
                   , "João Saraiva"
                   , "Zhenjiang Hu"
                   ]
-      , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2015:home", IncludeYear))
+      , venue   = Just ("International Workshop on Bidirectional Transformations (Bx)", Just ("http://bx-community.wikidot.com/bx2015:home", IncludeYear))
       , year    = 2015
       , types   = [ (Published, "Tool paper")
                   ]
