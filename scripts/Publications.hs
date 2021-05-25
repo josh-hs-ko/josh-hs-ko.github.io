@@ -24,6 +24,20 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "C-lenses explained: Bx foundations for the rest of us"
+      , authors = [ "Anthony Anjorin"
+                  , "Hsiang-Shang Ko"
+                  , "Erhan Leblebici"
+                  ]
+      , venue   = Just ("International Workshop on Bidirectional Transformations (BX)", Just ("http://bx-community.wikidot.com/bx2021:home", IncludeYear))
+      , year    = 2021
+      , types   = [ (Published, "Accepted")
+                  ]
+      , links   = []
+      , info    = [ ("Abstract", "Bidirectional transformations (bx) are mechanisms for maintaining the consistency of multiple artefacts. Some of the challenges bx research aims to address include answering fundamental questions such as how best to precisely characterise consistency, “good” consistency maintainers, and the required input and assumptions to guarantee this good behaviour.</p><p>While substantial progress has been made towards unifying the different (variants of) formal frameworks for bx, many of these formal results are not yet easily accessible to more practically-oriented bx researchers, often due to a missing background in (advanced) category theory. This is an unfortunate situation, as many bx tools are developed and maintained by practically-oriented bx researchers, who would but currently cannot fully profit from formal results and insights. In particular, we are not aware of any practical implementation of C-lenses, not even preliminary discussions about its relevance to practical bx. We believe this is because of the inaccessibility of the categorical language, and write this paper to decipher C-lenses for bx researchers without any substantial background in category theory. Our goal is to spark broader interest in C-lenses and in discussions on their usefulness in practice and potential for improving existing, and inspiring new bx tools.</p><p>We start by reviewing the well-known state-based bx framework, already accessible to a broad audience due to its simplicity. We then explain how this framework can be elegantly generalised to the richer, delta-based setting of C-lenses using multiple examples and illustrative diagrams.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Programming metamorphic algorithms: An experiment in type-driven algorithm design"
       , authors = [ "Hsiang-Shang Ko"
                   ]
