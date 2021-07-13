@@ -18,6 +18,10 @@ authorList =
       , authorURL  = "https://yunshengtw.github.io"
       }
   , Author
+      { authorName = "Liang-Ting Chen"
+      , authorURL  = "https://l-tchen.github.io"
+      }
+  , Author
       { authorName = "Yu-Fang Chen"
       , authorURL  = "http://bull.iis.sinica.edu.tw/yfc/doku.php"
       }
