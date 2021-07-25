@@ -7,14 +7,14 @@ import PermVenues
 import Publications
 
 import Prelude hiding ((<>))
-import Control.Arrow ((***))
+import Control.Arrow (first)
 import Control.Monad
-import Data.Function
-import Data.Char
-import Data.List
-import Data.List.Utils (split)
-import Data.Digest.Pure.MD5 (md5)
 import qualified Data.ByteString.Lazy.Char8 as ByteString
+import Data.Char
+import Data.Function
+import Data.IORef
+import Data.List
+import Data.Maybe
 import qualified Data.Text as Text
 import Data.Time.Clock
 import Data.Time.Calendar
@@ -24,98 +24,41 @@ import System.Directory
 import System.Environment
 import System.Process
 import System.IO
-import System.IO.Strict as Strict
-import CMark
 
+import Data.List.Utils (split)                -- MissingH
+import Data.Digest.Pure.MD5 (md5)             -- pureMD5
+import System.IO.Strict as Strict (readFile)  -- strict
+import CMark                                  -- cmark
 
 main :: IO ()
 main = do
   args <- getArgs
-  guard (length args > 0)
-  case args !! 0 of
+  guard (not (null args))
+  case head args of
     "--publications" -> do
       let indexFile = "../index.html"
-      writeFile indexFile =<<
+      writeFile indexFile .
         replaceRange "PUBLICATIONS"
-          (renderPublications authorList permVenueList publicationList) <$>
+          (renderPublications authorList permVenueList publicationList) =<<
           Strict.readFile indexFile
       spawnProcess "open" [indexFile]
       return ()
     "--post" -> do
       guard (length args > 1)
-      generatePost (read (args !! 1))
-
-generatePost :: Int -> IO ()
-generatePost postNumber = do
-  let postNumberStr = fillZeros 4 postNumber
-      postListFile  = "post-list.txt"
-      templateFile  = "post-template.html"
-      postDirectory = "../blog/" ++ postNumberStr ++ "/"
-      postFile      = postDirectory ++ postNumberStr ++ ".md"
-      htmlFile      = postDirectory ++ "index.html"
-      blogIndexFile = "../blog/index.html"
-      indexFile     = "../index.html"
-  modTime <- utcToLocalTime <$> getCurrentTimeZone
-                            <*> getModificationTime postFile
-  postList <- read <$> Strict.readFile postListFile
-  (title, teaser, post) <-
-    extractHeader . commonmarkToNode [] . Text.pack <$>
-      Strict.readFile postFile
-  let (entryExists, postTime, mRevTime, newPostList) =
-        let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
-            entry      = head ps1
-        in  (not (null ps1) && entryNumber entry == postNumber,
-             if entryExists then entryTime entry else modTime,
-             if postTime /= modTime then Just modTime else Nothing,
-             ps0 ++ PostEntry postNumber postTime title teaser :
-             if entryExists then tail ps1 else ps1)
-  let post' = insertPostNumber postNumber .
-              insertTime postTime mRevTime .
-              transformDisplayedImage .
-              transformRemark $ post
-  writeFile htmlFile =<<
-    replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post'))) .
-    replaceRange "METADATA" (postMetadata title teaser) <$>
-      Strict.readFile templateFile
-  writeFile blogIndexFile =<<
-    replaceRange "POST LIST" (postIndex newPostList) <$>
-      Strict.readFile blogIndexFile
-  writeFile indexFile =<<
-    replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 newPostList)) <$>
-      Strict.readFile indexFile
-  spawnProcess "open" [indexFile, blogIndexFile, htmlFile]
-  regenerate <- getYesOrNo True "Regenerate?"
-  if regenerate
-  then generatePost postNumber
-  else do commit <- if entryExists then return True
-                                   else getYesOrNo False "Commit?"
-          when commit (writeFile postListFile (show newPostList))
-
-getYesOrNo :: Bool -> String -> IO Bool
-getYesOrNo defaultResult prompt = do
-  putStr (prompt ++ if defaultResult then " (YES/no) " else " (yes/NO) ")
-  hFlush stdout
-  response <- getLine
-  case map toLower response of
-    ""    -> return defaultResult
-    "yes" -> return True
-    "no"  -> return False
-    _     -> getYesOrNo defaultResult prompt
-
-replaceRange :: String -> Doc -> String -> String
-replaceRange key doc str =
-  let start = "<!-- " ++ key ++ " -->"
-      end = "<!-- END OF " ++ key ++ " -->"
-      ls = lines str
-      (ls0, startLine:ls') = break ((== start) . dropWhile (== ' ')) ls
-      indent = length (takeWhile (== ' ') startLine)
-      (_, _:ls1) = break ((== end) . dropWhile (== ' ')) ls'
-  in  unlines ls0 ++
-      render (nest indent $
-                text start $+$
-                doc $+$
-                text end) ++ "\n" ++
-      unlines ls1
+      postList <- read <$> Strict.readFile postListFile
+      generatePostInteractively postList (read (args !! 1))
+    "--regenerate-posts" -> do
+      postList <- read <$> Strict.readFile postListFile
+      rPostList <- newIORef postList
+      forM_ postList $ \postEntry -> do
+        post <- processPost <$> readIORef rPostList
+                            <*> getRawPost (entryNumber postEntry)
+        writeHtmlFile post
+        maybe (return ()) (writeIORef rPostList) (mNewPostList post)
+      postList' <- readIORef rPostList
+      writeIndexFiles postList'
+      writeFile postListFile (show postList')
+    _ -> return ()
 
 
 --------
@@ -139,6 +82,21 @@ blockElement name attrs d = element name attrs (nest 2 d) ($+$)
 hyperlink :: String -> Doc -> Doc
 hyperlink link = inlineElement "a" [("href", [link])]
 
+replaceRange :: String -> Doc -> String -> String
+replaceRange key doc str =
+  let start = "<!-- " ++ key ++ " -->"
+      end = "<!-- END OF " ++ key ++ " -->"
+      ls = lines str
+      (ls0, startLine:ls') = break ((== start) . dropWhile (== ' ')) ls
+      indent = length (takeWhile (== ' ') startLine)
+      (_, _:ls1) = break ((== end) . dropWhile (== ' ')) ls'
+  in  unlines ls0 ++
+      render (nest indent $
+                text start $+$
+                doc $+$
+                text end) ++ "\n" ++
+      unlines ls1
+
 
 --------
 -- Publication rendering
@@ -152,7 +110,7 @@ oxfordList (d:ds)       = d <> comma <+> oxfordList ds
 
 renderAuthor :: [Author] -> String -> Doc
 renderAuthor as n = maybe id (hyperlink . authorURL) (find ((== n) . authorName) as)
-                      (text (concat (map (\c -> if isSpace c then "&nbsp;" else [c]) n)))
+                      (text (concatMap (\c -> if isSpace c then "&nbsp;" else [c]) n))
 
 renderVenueAndYear :: [PermVenue] -> Maybe (String, Maybe (String, HyperlinkYear)) -> Int -> Doc
 renderVenueAndYear pvs Nothing       y = int y
@@ -214,7 +172,7 @@ renderPublication as pvs p =
     processInfoEntry ((== "arXiv") -> True) c _ = hyperlink ("https://arxiv.org/abs/" ++ c) (text c)
     processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ =
       foldr (<+>) empty (punctuate (char ',') [ hyperlink ("/blog/" ++ n ++ "/") (text n) | n <- split ", " c ])
-    processInfoEntry _ c@(((== "arXiv:") *** id) . splitAt 6 -> (True, arXivNum)) _ =
+    processInfoEntry _ c@(first (== "arXiv:") . splitAt 6 -> (True, arXivNum)) _ =
       hyperlink ("https://arxiv.org/abs/" ++ arXivNum) (text c)
     processInfoEntry _ c@(("http" `isPrefixOf`) -> True) _ = hyperlink c (text c)
     processInfoEntry _ c _ = text c
@@ -230,6 +188,116 @@ renderPublications as pvs =
                 blockElement "div" [("class", ["col-sm-9"])]
                   (foldr ($+$) empty (map (renderPublication as pvs) ps))) .
   groupBy ((==) `on` year)
+
+
+--------
+-- Blog post IO
+
+postListFile, templateFile, blogIndexFile, indexFile :: FilePath
+postListFile = "post-list.txt"
+templateFile = "post-template.html"
+blogIndexFile = "../blog/index.html"
+indexFile     = "../index.html"
+
+data RawPost = RawPost
+  { postNumber  :: Int
+  , postContent :: String
+  , modTime     :: LocalTime
+  , targetFile  :: FilePath
+  }
+
+data ProcessedPost = ProcessedPost
+  { postNode     :: Node
+  , postTitle    :: String
+  , postTeaser   :: String
+  , htmlFile     :: FilePath
+  , mNewPostList :: Maybe [PostEntry]
+  , entryExists  :: Bool
+  }
+
+data PostEntry = PostEntry
+  { entryNumber :: Int
+  , entryTime   :: LocalTime
+  , entryTitle  :: String
+  , entryTeaser :: String
+  } deriving (Eq, Show, Read)
+
+getRawPost :: Int -> IO RawPost
+getRawPost postNumber = do
+  let postNumberStr = fillZeros 4 postNumber
+      postDirectory = "../blog/" ++ postNumberStr ++ "/"
+      postFile      = postDirectory ++ postNumberStr ++ ".md"
+      targetFile    = postDirectory ++ "index.html"
+  modTime <- utcToLocalTime <$> getCurrentTimeZone
+                            <*> getModificationTime postFile
+  postContent <- Strict.readFile postFile
+  return (RawPost postNumber postContent modTime targetFile)
+
+processPost :: [PostEntry] -> RawPost -> ProcessedPost
+processPost postList (RawPost postNumber postContent modTime targetFile) =
+  let (title, teaser, post) =
+        extractHeader . commonmarkToNode [] . Text.pack $ postContent
+      (entryExists, postTime, mRevTime, mPostList') =
+        let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
+            entry      = head ps1
+        in  (not (null ps1) && entryNumber entry == postNumber,
+             if entryExists then entryTime entry else modTime,
+             if diffLocalTime modTime postTime >= 60 then Just modTime else Nothing,
+             let newEntry = PostEntry postNumber postTime title teaser
+             in  if entryExists && isNothing mRevTime
+                 then Nothing
+                 else Just (ps0 ++ newEntry :
+                            if entryExists then tail ps1 else ps1))
+      post' = insertPostNumber postNumber .
+              insertTime postTime mRevTime .
+              transformDisplayedImage .
+              transformRemark $ post
+  in  ProcessedPost post' title teaser targetFile mPostList' entryExists
+
+generatePostInteractively :: [PostEntry] -> Int -> IO ()
+generatePostInteractively postList postNumber = do
+  rawPost <- getRawPost postNumber
+  let post' = processPost postList rawPost
+  writeHtmlFile post'
+  maybe (return ()) writeIndexFiles (mNewPostList post')
+  spawnProcess "open" [indexFile, blogIndexFile, htmlFile post']
+  regenerate <- getYesOrNo True "Regenerate?"
+  if regenerate
+  then generatePostInteractively postList postNumber
+  else do commit <- if entryExists post'
+                    then return True
+                    else getYesOrNo False "Commit?"
+          case mNewPostList post' of
+            Nothing -> return ()
+            Just postList' ->
+              when commit (writeFile postListFile (show postList'))
+
+getYesOrNo :: Bool -> String -> IO Bool
+getYesOrNo defaultResult prompt = do
+  putStr (prompt ++ if defaultResult then " (YES/no) " else " (yes/NO) ")
+  hFlush stdout
+  response <- getLine
+  case map toLower response of
+    ""    -> return defaultResult
+    "yes" -> return True
+    "no"  -> return False
+    _     -> getYesOrNo defaultResult prompt
+
+writeHtmlFile :: ProcessedPost -> IO ()
+writeHtmlFile (ProcessedPost post title teaser htmlFile _ _) =
+  writeFile htmlFile .
+    replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post))) .
+    replaceRange "METADATA" (postMetadata title teaser) =<<
+      Strict.readFile templateFile
+
+writeIndexFiles :: [PostEntry] -> IO ()
+writeIndexFiles postList = do
+  writeFile blogIndexFile .
+    replaceRange "POST LIST" (postIndex postList) =<<
+      Strict.readFile blogIndexFile
+  writeFile indexFile .
+    replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 postList)) =<<
+      Strict.readFile indexFile
 
 
 --------
@@ -311,13 +379,6 @@ postMetadata title teaser =
         " — The trek goes on (Josh Ko’s blog)</title>") $+$
   text ("<meta name=\"description\" content=\"" ++
         concatMap (\c -> case c of '"' -> "\""; _ -> [c]) teaser ++ "\">")
-
-data PostEntry = PostEntry
-  { entryNumber :: Int
-  , entryTime   :: LocalTime
-  , entryTitle  :: String
-  , entryTeaser :: String
-  } deriving (Show, Read)
 
 cmarkNoNewline :: String -> String
 cmarkNoNewline =
