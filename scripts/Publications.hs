@@ -111,7 +111,7 @@ publicationList =
       , types   = []
       , links   = [ ("PDF", Just "accepted version", "manuscripts/NGCO20.pdf")
                   , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/b3SAc")
-                  , ("Demo site", Nothing, "https://biyacc.k331.one")
+                --   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("Volume", "38", Nothing)
                   , ("Pages", "423–476", Nothing)
@@ -309,7 +309,7 @@ publicationList =
       , types   = [ (Warning, "Superseded")
                   ]
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2997364.2997369?cid=81488664395")
-                  , ("Demo site", Nothing, "https://biyacc.k331.one")
+                --   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("Pages", "2–14", Nothing)
                   , ("DOI", "10.1145/2997364.2997369", Nothing)
@@ -387,7 +387,7 @@ publicationList =
       , types   = [ (Published, "Tool paper")
                   ]
       , links   = [ ("PDF", Nothing, "http://ceur-ws.org/Vol-1396/p43-zhu.pdf")
-                  , ("Demo site", Nothing, "https://biyacc.k331.one")
+                --   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("Pages", "43–50", Nothing)
                   , ("URL", "http://ceur-ws.org/Vol-1396/p43-zhu.pdf", Nothing)
