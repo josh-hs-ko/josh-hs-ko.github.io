@@ -150,9 +150,9 @@ code {
 }
 
 p > code {
-  margin-left: .15em;
-  margin-right: .15em;
-  letter-spacing: -1px;
+  word-spacing: -0.2em;
+  margin-left: .1em;
+  margin-right: .1em;
 }
 
 blockquote {
@@ -557,4 +557,3 @@ hr {
   font-size: 12px;
   margin-bottom: 4ex;
 }
-

@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Environmentally friendly syntax tree traversal — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="I played a bit with (a simplified version of) Allais et al’s traversal operator for syntax trees with λ-style binders and variables as de Bruijn indices — which translates terms to functions taking an environment as input and manages the environment for the user — and experimented with a corresponding induction operator (not really successfully).">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#2d89ef">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="../../">Josh Ko</a>’s <a href="../">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0022
+</div>
+<h2>Environmentally friendly syntax tree traversal</h2>
+<div class="post-time">Posted at 20:30 on 10 August 2021</div>
+<p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing the Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
+The proof is built upon the ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a versatile traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
+My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">this CPP ’17 paper</a>.
+Even simpler than what’s presented in the paper, I’ll just experiment with the <em>most</em> simply typed λ-calculus:</p>
+<pre><code>data _∋_ {A : Set} : List A → A → Set where
+  zero : {x   : A} {xs : List A} →          x ∷ xs ∋ x
+  suc  : {x y : A} {xs : List A} → xs ∋ x → y ∷ xs ∋ x
+
+data Ty : Set where
+  ι   : Ty
+  _⇒_ : Ty → Ty → Ty
+
+Cxt : Set
+Cxt = List Ty
+
+data _⊢_ : Cxt → Ty → Set where
+
+  `_  : Γ ∋ τ
+      → -----
+        Γ ⊢ τ
+
+  _·_ : Γ ⊢ σ ⇒ τ
+      → Γ ⊢ σ
+      → ---------
+        Γ ⊢     τ
+
+  ƛ_  : σ ∷ Γ ⊢ τ
+      → -------------
+            Γ ⊢ σ ⇒ τ
+</code></pre>
+<p>The traversal operator was generalised from renaming and substitution, which we should take a close look at before attempting the generalisation.
+First we look at renaming:</p>
+<pre><code>ren : Γ ⊢ τ → (∀ {σ} → Γ ∋ σ → Δ ∋ σ) → Δ ⊢ τ
+ren (` i  ) ρ = ` ρ i
+ren (t · u) ρ = ren t ρ · ren u ρ
+ren (ƛ t  ) ρ = ƛ ren t λ { zero → zero; (suc i) → suc (ρ i) }
+</code></pre>
+<p>The function <code>ren</code> first takes a term of type <code>τ</code> whose free variables are drawn from the context <code>Γ</code>.
+Its second argument is an environment that maps every such free variable (of type <code>Γ ∋ σ</code>) to another free variable (of type <code>Δ ∋ σ</code>) drawn from a possibly different context <code>Δ</code>.
+The function then replaces every <code>Γ</code>-variable in the input term by the corresponding <code>Δ</code>-variable, thereby producing a term also of type <code>τ</code> but now under the context <code>Δ</code>.
+The <code>ƛ</code> case deserves particular attention:
+It goes under the binder and processes the sub-term <code>t : σ ∷ Γ ⊢ τ</code> recursively, whose context is extended by one variable of type <code>σ</code>, and the resulting sub-term is also under an extended context <code>σ ∷ Δ</code>.
+The second argument of the recursive call thus needs to be an extended environment where the new variable <code>zero : σ ∷ Γ ∋ σ</code> is mapped to ‘itself’ <code>zero : σ ∷ Δ ∋ σ</code> (because the new variable doesn’t need to be renamed), while the rest of the variables (of the form <code>suc i</code>) are still mapped to the corresponding variables <code>ρ i</code> according to the input environment <code>ρ</code>, except that <code>ρ i</code> — which is a de Bruijn index — should be incremented (because it is outside the newly introduced binder) and become a variable under an extended environment <code>σ ∷ Δ</code> rather than <code>Δ</code>, as required by the target type <code>σ ∷ Δ ⊢ τ</code> of the recursive call.</p>
+<p>Substitution follows a similar pattern:</p>
+<pre><code>sub : Γ ⊢ τ → (∀ {σ} → Γ ∋ σ → Δ ⊢ σ) → Δ ⊢ τ
+sub (` i  ) ρ = ρ i
+sub (t · u) ρ = sub t ρ · sub u ρ
+sub (ƛ t  ) ρ = ƛ sub t λ { zero → ` zero; (suc i) → ren (ρ i) suc }
+</code></pre>
+<p>The environment now contains terms rather than variables, although the terms are still indexed by <code>Δ</code> and <code>σ</code> — the contents of the environment will later be generalised to arbitrary values whose types are indexed by <code>Δ</code> and <code>σ</code>.
+The most interesting case is still the <code>ƛ</code> case, which proceeds in roughly the same way, except that the value for the new variable <code>zero</code> in the extended environment is now the variable term <code> ` zero</code>, and the way of updating a value/term of type <code>Δ ⊢ τ</code> to one of type <code>σ ∷ Δ ⊢ τ</code> (with an extended environment) is incrementing all the free variables in the term by <code>λ t → ren t suc</code>.</p>
+<p>We can now generalise the pattern to a traversal operator</p>
+<pre><code>sem : (S : Semantics) → Γ ⊢ τ → Env Γ (S .Val) Δ → S .Com Δ τ
+</code></pre>
+<p>which translates a term of type <code>Γ ⊢ τ</code> to a function from an environment for <code>Γ</code> containing values of type <code>Val</code> to something of type <code>Com</code> (module the indices).
+More precisely, <code>Val</code> and <code>Com</code> are type families indexed by <code>Cxt</code> and <code>Ty</code>, for which we define a type:</p>
+<pre><code>Model : Set₁
+Model = Cxt → Ty → Set
+</code></pre>
+<p><code>Env</code> is just a record type wrapping the function type for environments to aid type inference in Agda:</p>
+<pre><code>record Env (Γ : Cxt) (M : Model) (Δ : Cxt) : Set where
+  constructor env
+  field
+    lookup : Γ ∋ τ → M Δ τ
+</code></pre>
+<p><code>Val</code> and <code>Com</code> are part of a record <code>S</code> of type <code>Semantics</code>, whose other fields prove that <code>Val</code> and <code>Com</code> satisfy some necessary requirements for the traversal to work.
+The record type is defined as</p>
+<pre><code>record Semantics : Set₁ where
+  field
+    Val : Model
+    thV : Val Δ τ → Val (σ ∷ Δ) τ
+    Com : Model
+    var : Val Δ τ → Com Δ τ
+    app : Com Δ (σ ⇒ τ) → Com Δ σ → Com Δ τ
+    lam : (Val (σ ∷ Δ) σ → Com (σ ∷ Δ) τ) → Com Δ (σ ⇒ τ)
+</code></pre>
+<p>On <code>Val</code> we require that the type can be ‘thinned’ (by <code>thV</code>), that is, the context in the type can be expanded; this is used when we go under a binder and need to adapt the environment.
+Then for each term constructor we need a corresponding case specifying how to compute the semantics inductively.
+The <code>var</code> case takes the result of looking up a variable in the environment, which has type <code>Val Δ τ</code>, and should specify how to turn it into a <code>Com Δ τ</code>.
+The corresponding case of <code>sem</code> is</p>
+<pre><code>sem S (` i) ρ = S .var (lookup ρ i)
+</code></pre>
+<p>The <code>app</code> case assumes that the semantics (of types <code>Com Δ (σ ⇒ τ)</code> and <code>Com Δ σ</code>) have been computed inductively from the two sub-terms of an application, and should specify how to compute the semantics of the whole term (of type <code>Com Δ τ</code>).
+The corresponding case of <code>sem</code> is</p>
+<pre><code>sem S (t · u) ρ = S .app (sem S t ρ) (sem S u ρ)
+</code></pre>
+<p>The <code>lam</code> case works on an abstraction and basically assumes that the semantics of the body (of type <code>Com (σ ∷ Δ) τ</code>) has been inductively computed; this semantics in fact depends on the <code>Val (σ ∷ Δ) σ</code> to which the newly introduced variable is mapped by the extended environment, so what’s inductively computed from the body is a function from <code>Val (σ ∷ Δ) σ</code> to <code>Com (σ ∷ Δ) τ</code>.
+From this function we should then be able to compute the semantics of the abstraction (of type <code>Com Δ (σ ⇒ τ)</code>).
+The corresponding case of <code>sem</code> applies <code>lam</code> to the function that computes the semantics of the body inductively with the environment extended with the function’s input after its original contents are thinned,</p>
+<pre><code>sem S (ƛ t) ρ = S .lam λ v → sem S t (v ▸ env (S .thV ∘ lookup ρ))
+</code></pre>
+<p>where environment extension can be defined by copattern matching:</p>
+<pre><code>_▸_ : {M : Model} → M Δ τ → Env Γ M Δ → Env (τ ∷ Γ) M Δ
+lookup (m ▸ ρ) zero    = m
+lookup (m ▸ ρ) (suc x) = lookup ρ x
+</code></pre>
+<p>Renaming and substitution are now easily implemented as instances of <code>Semantics</code>:</p>
+<pre><code>ren : Semantics
+ren .Val Δ τ = Δ ∋ τ
+ren .thV     = suc
+ren .Com Δ τ = Δ ⊢ τ
+ren .var i   = ` i
+ren .app t u = t · u
+ren .lam f   = ƛ f zero
+
+sub : Semantics
+sub .Val Δ τ = Δ ⊢ τ
+sub .thV t   = sem ren t (env suc)
+sub .Com Δ τ = Δ ⊢ τ
+sub .var i   = i
+sub .app t u = t · u
+sub .lam f   = ƛ f (` zero)
+</code></pre>
+<p>Notably, environment management is entirely abstracted away from the user of the traversal operator (i.e., the provider of a <code>Semantics</code>), which I believe is the essence of the operator.</p>
+<p>For a differently flavoured but probably also illuminating example, we can implement a rudimentary term printer which interprets terms as strings in a state monad where the state is a string of single-character fresh names; the environment is used to store strings to which variables are printed.
+Notably, the <code>lam</code> case is quite natural: we extract a fresh <code>varName</code> from the state and apply the assumed function <code>f</code> to <code>varName</code> to get the string for the body, in which the occurrences of the new variable are printed to <code>varName</code>.</p>
+<pre><code>printer : Semantics
+printer .Val Δ τ   = Char
+printer .thV c     = c
+printer .Com Δ τ   = State String String
+printer .var c     = return (fromChar c)
+printer .app ms mt = do
+  s ← ms
+  t ← mt
+  return (&quot;(&quot; ++ s ++ t ++ &quot;)&quot;)
+printer .lam f     = do
+  fresh ← get
+  let (varName , fresh') = split fresh
+  put fresh'
+  body ← f varName
+  put fresh
+  return (&quot;(λ&quot; ++ fromChar varName ++ &quot;.&quot; ++ body ++ &quot;)&quot;)
+  where
+    split : String → Char × String
+    split s with toList s
+    split s | []     = ' ' , &quot;&quot;
+    split s | x ∷ xs = x   , fromList xs
+</code></pre>
+<p>As a test case, the term</p>
+<pre><code>testTerm : [] ⊢ ((ι ⇒ ι) ⇒ (ι ⇒ ι) ⇒ ι ⇒ ι) ⇒ ι ⇒ ι
+testTerm = ƛ (ƛ ` suc zero · ` zero · ` zero) · (ƛ ` zero)
+</code></pre>
+<p>can be printed as</p>
+<pre><code>proj₁ (sem {Δ = []} printer test (env λ ()) &quot;abcdefg&quot;)
+  = &quot;(λa.((λb.((ab)b))(λb.b)))&quot;
+</code></pre>
+<p>(with excessive parentheses which I don’t bother to optimise away).</p>
+<p><em>Remark.</em> In the CPP ’17 paper, the antecedent of <code>lam</code> (and similarly for <code>thV</code>) is a stronger Kripke-style function:</p>
+<pre><code>lam : (∀ Δ' → Δ ⊆ Δ' → Val Δ' σ → Com Δ' τ) → Com Δ (σ ⇒ τ)
+</code></pre>
+<p>I suspect that this is needed only in their example on normalisation by evaluation, which I didn’t try, although I imagine that being able to inductively assume a Kripke-style function in the <code>lam</code> case is another selling point of (the full version of) the traversal operator. (<em>End of remark.</em>)</p>
+<h3>An induction operator?</h3>
+<p>The CPP ’17 paper culminates with some theorems about the traversal operator, one of which is simulation of semantics, which abstracts logical relation proofs. As a typical example, I decide to try and prove the <a href="https://doi.org/10.1145/99370.99404">free theorems</a> for terms interpreted as polymorphic functions.
+This <code>Semantics</code> is fairly standard.
+At type level, we can interpret a <code>Ty</code> as an Agda function type where all the occurrences of <code>ι</code> become a given Agda type <code>X : Set</code>:</p>
+<pre><code>PolyTy : Ty → Set → Set
+PolyTy ι       X = X
+PolyTy (σ ⇒ τ) X = PolyTy σ X → PolyTy τ X
+</code></pre>
+<p>This is then extended to contexts and judgements:</p>
+<pre><code>PolyCxt : Cxt → Set → Set
+PolyCxt []      X = ⊤
+PolyCxt (σ ∷ Γ) X = PolyCxt Γ X × PolyTy σ X
+
+PolyJdg : Cxt → Ty → Set → Set
+PolyJdg Γ τ X = PolyCxt Γ X → PolyTy τ X
+</code></pre>
+<p>By using <code>PolyJdg</code> as the models, we can define a functional <code>Semantics</code> to interpret terms as functions.
+In particular, variables are interpreted as projections, as we’ll see in the <code>lam</code> and <code>thV</code> cases below: initially a newly introduced variable of type <code>σ ∷ Δ ∋ σ</code> is assigned the second projection <code>proj₂ : PolyCxt Δ X × PolyTy σ X → PolyTy σ X</code> in the environment; as the environment is pushed under binders, the projections are thinned by pre-composing <code>proj₁</code>.
+The rest of the <code>Semantics</code> is straightforward.</p>
+<pre><code>fun : Set → Semantics
+fun X .Val Δ τ     = PolyJdg Δ τ X
+fun X .thV f       = f ∘ proj₁
+fun X .Com Δ τ     = PolyJdg Δ τ X
+fun X .var         = id
+fun X .app mf mx r = (mf r) (mx r)
+fun X .lam f       = curry (f proj₂)
+</code></pre>
+<p>Given a function <code>f : X → Y</code>, we say that two values <code>x : X</code> and <code>y : Y</code> are related exactly when <code>f x ≡ y</code>, and that two functions are related exactly when they map related inputs to related outputs.
+We can formalise this definition of relatedness for <code>Ty</code>, contexts, and judgements:</p>
+<pre><code>PolyTyR : {X Y : Set} (f : X → Y) → PolyTy τ X → PolyTy τ Y → Set
+PolyTyR {τ = ι    }                 f x y = f x ≡ y
+PolyTyR {τ = σ ⇒ τ} {X = X} {Y = Y} f g h =
+  {x : PolyTy σ X} {y : PolyTy σ Y} → PolyTyR f x y → PolyTyR f (g x) (h y)
+
+PolyCxtR : {X Y : Set} (f : X → Y) → PolyCxt Γ X → PolyCxt Γ Y → Set
+PolyCxtR {Γ = []   } f tt      tt        = ⊤
+PolyCxtR {Γ = σ ∷ Γ} f (p , q) (p' , q') = PolyCxtR f p p' × PolyTyR f q q'
+
+PolyJdgR : {X Y : Set} (f : X → Y) → PolyJdg Γ τ X → PolyJdg Γ τ Y → Set
+PolyJdgR {Γ = Γ} {X = X} {Y = Y} f g h =
+  {x : PolyCxt Γ X} {y : PolyCxt Γ Y} → PolyCxtR f x y
+                                      → PolyTyR f (g x) (h y)
+</code></pre>
+<p>A free theorem then states that the functions <code>sem (fun X) t ρX</code> and <code>sem (fun Y) t ρY</code> are related (satisfy the relation <code>PolyJdgR f</code>) whenever <code>ρX</code> and <code>ρY</code> are pointwise related.
+The following is a concrete example of a free theorem,</p>
+<pre><code>(t : [] ⊢ ι ⇒ ι) (X Y : Set) (f : X → Y)
+  → let g = sem (fun X) t (env λ ()) tt
+        h = sem (fun Y) t (env λ ()) tt
+    in  (x : X) → f (g x) ≡ h (f x)
+</code></pre>
+<p>from which one can further deduce that the functional semantics of any <code>t : [] ⊢ ι ⇒ ι</code> can only be the identity function.</p>
+<p>It is possible to establish a general theorem stating that if two semantics are in simulation — that is, all the cases preserve some specified relations on the models — then the traversals of a term using the two semantics are related whenever the environments are pointwise related.
+Free theorems then become a special case.
+The theorem is pasted below but only for archival purposes — I don’t intend to go into the details:</p>
+<pre><code>record Sim (S S' : Semantics) : Set₁ where
+  field
+    RVal : S .Val Γ τ → S' .Val Γ τ → Set
+    thRV : {v : S .Val Γ τ} {v' : S' .Val Γ τ}
+         → RVal v v' → RVal {Γ = σ ∷ Γ} (S .thV v) (S' .thV v')
+    RCom : S .Com Γ τ → S' .Com Γ τ → Set
+    var  : {v : S .Val Γ τ} {v' : S' .Val Γ τ}
+         → RVal v v' → RCom (S .var v) (S' .var v')
+    app  : {c  : S  .Com Γ (σ ⇒ τ)} {d  : S  .Com Γ σ}
+           {c' : S' .Com Γ (σ ⇒ τ)} {d' : S' .Com Γ σ}
+         → RCom c c' → RCom d d' → RCom (S .app c d) (S' .app c' d')
+    lam  : {f  : S  .Val (σ ∷ Γ) σ → S  .Com (σ ∷ Γ) τ}
+           {f' : S' .Val (σ ∷ Γ) σ → S' .Com (σ ∷ Γ) τ}
+         → ((v : S .Val (σ ∷ Γ) σ) (v' : S' .Val (σ ∷ Γ) σ)
+           → RVal v v' → RCom (f v) (f' v'))
+         → RCom (S .lam f) (S' .lam f')
+
+record REnv {M M' : Model} (R : ∀ {Δ τ} → M Δ τ → M' Δ τ → Set)
+            {Γ Δ : Cxt} (ρ : Env Γ M Δ) (ρ' : Env Γ M' Δ) : Set where
+  constructor renv
+  field
+    lookup : (x : Γ ∋ τ) → R (lookup ρ x) (lookup ρ' x)
+
+_▸ᴿ_ : {M M' : Model} {R : ∀ {Δ τ} → M Δ τ → M' Δ τ → Set}
+     → {v : M Δ τ} {v' : M' Δ τ} → R v v'
+     → {ρ : Env Γ M Δ} {ρ' : Env Γ M' Δ} → REnv R ρ ρ' → REnv R (v ▸ ρ) (v' ▸ ρ')
+lookup (vr ▸ᴿ ρr) zero    = vr
+lookup (vr ▸ᴿ ρr) (suc i) = lookup ρr i
+
+sim : (S S' : Semantics) (R : Sim S S') → (t : Γ ⊢ τ)
+    → (ρ : Env Γ (S .Val) Δ) (ρ' : Env Γ (S' .Val) Δ)
+    → REnv (R .RVal) ρ ρ' → R .RCom (sem S t ρ) (sem S' t ρ')
+sim S S' R (` i  ) ρ ρ' ρr = R .var (lookup ρr i)
+sim S S' R (t · u) ρ ρ' ρr = R .app (sim S S' R t ρ ρ' ρr) (sim S S' R u ρ ρ' ρr)
+sim S S' R (ƛ t  ) ρ ρ' ρr =
+  R .lam λ v v' vr → sim S S' R t (v  ▸  env  (S  .thV ∘ lookup ρ ))
+                                  (v' ▸  env  (S' .thV ∘ lookup ρ'))
+                                  (vr ▸ᴿ renv (R .thRV ∘ lookup ρr))
+</code></pre>
+<p>The only observation I intend to make is that <code>sim</code> is computationally the same as <code>sem</code> if we see <code>ρ</code>, <code>ρ'</code>, and <code>ρr</code> as a single environment storing a pair of related semantics for every variable.
+The type of <code>sem</code> is too weak to subsume <code>sim</code> though: right now <code>sem</code> is more like a fold operator, but what we need here is more like an induction operator, whose result type can depend on the input term and environment.
+Here is my attempt at formulating the induction operator, but again I won’t go into the details, for the reasons that I’ll give at the end of this post:</p>
+<pre><code>record Semantics : Set₁ where
+  field
+    VM  : Model
+    thV : VM Δ τ → VM (σ ∷ Δ) τ
+    TM  : Γ ⊢ τ → Env Γ VM Δ → Set
+    var : (i : Γ ∋ τ) (ρ : Env Γ VM Δ) → TM (` i) ρ
+    app : {t : Γ ⊢ σ ⇒ τ} {u : Γ ⊢ σ} {ρ : Env Γ VM Δ}
+        → TM t ρ → TM u ρ → TM (t · u) ρ
+    lam : {t : σ ∷ Γ ⊢ τ} {ρ : Env Γ VM Δ}
+        → ((v : VM (σ ∷ Δ) σ) → TM t (v ▸ modify ext ρ)) → TM (ƛ t) ρ
+
+sem' : (S : Semantics') (t : Γ ⊢ τ) (ρ : Env Γ (S .VM) Δ) → S .TM t ρ
+sem' S (` i  ) ρ = S .var i ρ
+sem' S (t · u) ρ = S .app (sem S t ρ) (sem S u ρ)
+sem' S (ƛ t  ) ρ = S .lam λ v → sem S t (v ▸ env (S .thV ∘ lookup ρ))
+</code></pre>
+<p>It is possible to write everything we’ve seen so far with this induction operator, in particular the simulation theorem, although some non-trivial type transportation starts to show up, which involves function extensionality because it’s about equating different ways of extending environments, which are functional by nature (but fortunately we now have Cubical Agda, where function extensionality is naturally provable).
+It quickly becomes obvious that this operator isn’t general enough though.
+The CPP ’17 paper goes on to discuss fusion of semantics, so that for example we can prove that two renamings can be fused into one, which can be proved with <code>sem'</code> as follows (again the details aren’t important, and in fact the <code>lam</code> case isn’t completely shown):</p>
+<pre><code>compose : {M : Model} → Env Γ _∋_ Δ → Env Δ M Θ → Env Γ M Θ
+lookup (compose ρ ρ') i = lookup ρ' (lookup ρ i)
+
+renren : Semantics'
+renren .VM Δ τ = Δ ∋ τ
+renren .thV = suc
+renren .TM {Δ = Δ} t ρ =
+  {Θ : Cxt} (ρ' : Env Δ (ren .VM) Θ)
+  → sem' ren (sem' ren t ρ) ρ' ≡ sem' ren t (compose ρ ρ')
+renren .var i ρ ρ' = refl
+renren .app mteq mueq ρ' = cong₂ _·_ (mteq ρ') (mueq ρ')
+renren .lam {t = t} f ρ' =
+  cong ƛ_ (f zero (zero ▸ env (suc ∘ lookup ρ')) ∙ cong (sem ren t) ?)
+</code></pre>
+<p>Note that, in the motive <code>TM</code>, besides the environment <code>ρ</code> provided by the induction operator, we also need another environment <code>ρ'</code> for the second renaming, and have to manually introduce a universal quantification.
+Subsequently we have to manage <code>ρ'</code> manually, notably in the <code>lam</code> case, where we even have to thin and extend <code>ρ'</code> ourselves, which should have been taken care of by the operator.
+Maybe the induction operator can be further parametrised by environments it should manage, but it starts to look ad hoc.
+Even though my first instinct as a dependently typed programmer is to construct an induction operator so as to deal with both computation and proof in one go, it’s in fact not that obvious how to promote traversal to a natural and sufficiently powerful form of induction — no wonder that the paper merely presented the traversal operator and proved its properties separately.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
