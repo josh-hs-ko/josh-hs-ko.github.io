@@ -64,10 +64,10 @@
 0022
 </div>
 <h2>Environmentally friendly syntax tree traversal</h2>
-<div class="post-time">Posted at 20:30 on 10 August 2021</div>
-<p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing the Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
-The proof is built upon the ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a versatile traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
-My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">this CPP ’17 paper</a>.
+<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 20:59 on 10 August 2021</div>
+<p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing Allais’s Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
+The proof is built upon Allais et al’s ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
+My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">their CPP ’17 paper</a>.
 Even simpler than what’s presented in the paper, I’ll just experiment with the <em>most</em> simply typed λ-calculus:</p>
 <pre><code>data _∋_ {A : Set} : List A → A → Set where
   zero : {x   : A} {xs : List A} →          x ∷ xs ∋ x
@@ -141,7 +141,7 @@ The record type is defined as</p>
     app : Com Δ (σ ⇒ τ) → Com Δ σ → Com Δ τ
     lam : (Val (σ ∷ Δ) σ → Com (σ ∷ Δ) τ) → Com Δ (σ ⇒ τ)
 </code></pre>
-<p>On <code>Val</code> we require that the type can be ‘thinned’ (by <code>thV</code>), that is, the context in the type can be expanded; this is used when we go under a binder and need to adapt the environment.
+<p>On <code>Val</code> we require that the type can be ‘thinned’ (by <code>thV</code>), that is, the context in the type can be extended; this is used when we go under a binder and need to adapt the environment.
 Then for each term constructor we need a corresponding case specifying how to compute the semantics inductively.
 The <code>var</code> case takes the result of looking up a variable in the environment, which has type <code>Val Δ τ</code>, and should specify how to turn it into a <code>Com Δ τ</code>.
 The corresponding case of <code>sem</code> is</p>
@@ -154,10 +154,14 @@ The corresponding case of <code>sem</code> is</p>
 <p>The <code>lam</code> case works on an abstraction and basically assumes that the semantics of the body (of type <code>Com (σ ∷ Δ) τ</code>) has been inductively computed; this semantics in fact depends on the <code>Val (σ ∷ Δ) σ</code> to which the newly introduced variable is mapped by the extended environment, so what’s inductively computed from the body is a function from <code>Val (σ ∷ Δ) σ</code> to <code>Com (σ ∷ Δ) τ</code>.
 From this function we should then be able to compute the semantics of the abstraction (of type <code>Com Δ (σ ⇒ τ)</code>).
 The corresponding case of <code>sem</code> applies <code>lam</code> to the function that computes the semantics of the body inductively with the environment extended with the function’s input after its original contents are thinned,</p>
-<pre><code>sem S (ƛ t) ρ = S .lam λ v → sem S t (v ▸ env (S .thV ∘ lookup ρ))
+<pre><code>sem S (ƛ t) ρ = S .lam λ v → sem S t (v ▸ modify (S .thV) ρ)
 </code></pre>
-<p>where environment extension can be defined by copattern matching:</p>
-<pre><code>_▸_ : {M : Model} → M Δ τ → Env Γ M Δ → Env (τ ∷ Γ) M Δ
+<p>where environment thinning is done with the helper function</p>
+<pre><code>modify : {M M' : Model} → (∀ {τ} → M Δ τ → M' Δ' τ) → Env Γ M Δ → Env Γ M' Δ'
+lookup (modify f ρ) i = f (lookup ρ i)
+</code></pre>
+<p>and environment extension is defined by</p>
+<pre><code>_▸_ : {M : Model} → M Δ σ → Env Γ M Δ → Env (σ ∷ Γ) M Δ
 lookup (m ▸ ρ) zero    = m
 lookup (m ▸ ρ) (suc x) = lookup ρ x
 </code></pre>
@@ -178,9 +182,9 @@ sub .var i   = i
 sub .app t u = t · u
 sub .lam f   = ƛ f (` zero)
 </code></pre>
-<p>Notably, environment management is entirely abstracted away from the user of the traversal operator (i.e., the provider of a <code>Semantics</code>), which I believe is the essence of the operator.</p>
+<p>Notably, environment management is entirely hidden from the user of the traversal operator (i.e., the provider of a <code>Semantics</code>), which I believe is the essence of the operator.</p>
 <p>For a differently flavoured but probably also illuminating example, we can implement a rudimentary term printer which interprets terms as strings in a state monad where the state is a string of single-character fresh names; the environment is used to store strings to which variables are printed.
-Notably, the <code>lam</code> case is quite natural: we extract a fresh <code>varName</code> from the state and apply the assumed function <code>f</code> to <code>varName</code> to get the string for the body, in which the occurrences of the new variable are printed to <code>varName</code>.</p>
+Notably, the <code>lam</code> case is quite natural: we extract a fresh <code>varName</code> from the state and apply the inductively assumed function <code>f</code> to <code>varName</code> to get the string for the body, in which the occurrences of the new variable are printed to <code>varName</code>.</p>
 <pre><code>printer : Semantics
 printer .Val Δ τ   = Char
 printer .thV c     = c
@@ -208,7 +212,7 @@ printer .lam f     = do
 testTerm = ƛ (ƛ ` suc zero · ` zero · ` zero) · (ƛ ` zero)
 </code></pre>
 <p>can be printed as</p>
-<pre><code>proj₁ (sem {Δ = []} printer test (env λ ()) &quot;abcdefg&quot;)
+<pre><code>proj₁ (sem {Δ = []} printer testTerm (env λ ()) &quot;abcdefg&quot;)
   = &quot;(λa.((λb.((ab)b))(λb.b)))&quot;
 </code></pre>
 <p>(with excessive parentheses which I don’t bother to optimise away).</p>
@@ -295,7 +299,8 @@ record REnv {M M' : Model} (R : ∀ {Δ τ} → M Δ τ → M' Δ τ → Set)
 
 _▸ᴿ_ : {M M' : Model} {R : ∀ {Δ τ} → M Δ τ → M' Δ τ → Set}
      → {v : M Δ τ} {v' : M' Δ τ} → R v v'
-     → {ρ : Env Γ M Δ} {ρ' : Env Γ M' Δ} → REnv R ρ ρ' → REnv R (v ▸ ρ) (v' ▸ ρ')
+     → {ρ : Env Γ M Δ} {ρ' : Env Γ M' Δ}
+     → REnv R ρ ρ' → REnv R (v ▸ ρ) (v' ▸ ρ')
 lookup (vr ▸ᴿ ρr) zero    = vr
 lookup (vr ▸ᴿ ρr) (suc i) = lookup ρr i
 
@@ -303,16 +308,18 @@ sim : (S S' : Semantics) (R : Sim S S') → (t : Γ ⊢ τ)
     → (ρ : Env Γ (S .Val) Δ) (ρ' : Env Γ (S' .Val) Δ)
     → REnv (R .RVal) ρ ρ' → R .RCom (sem S t ρ) (sem S' t ρ')
 sim S S' R (` i  ) ρ ρ' ρr = R .var (lookup ρr i)
-sim S S' R (t · u) ρ ρ' ρr = R .app (sim S S' R t ρ ρ' ρr) (sim S S' R u ρ ρ' ρr)
+sim S S' R (t · u) ρ ρ' ρr = R .app (sim S S' R t ρ ρ' ρr)
+                                    (sim S S' R u ρ ρ' ρr)
 sim S S' R (ƛ t  ) ρ ρ' ρr =
   R .lam λ v v' vr → sim S S' R t (v  ▸  env  (S  .thV ∘ lookup ρ ))
+                                      -- modify (S .thV) ρ
                                   (v' ▸  env  (S' .thV ∘ lookup ρ'))
                                   (vr ▸ᴿ renv (R .thRV ∘ lookup ρr))
 </code></pre>
 <p>The only observation I intend to make is that <code>sim</code> is computationally the same as <code>sem</code> if we see <code>ρ</code>, <code>ρ'</code>, and <code>ρr</code> as a single environment storing a pair of related semantics for every variable.
 The type of <code>sem</code> is too weak to subsume <code>sim</code> though: right now <code>sem</code> is more like a fold operator, but what we need here is more like an induction operator, whose result type can depend on the input term and environment.
 Here is my attempt at formulating the induction operator, but again I won’t go into the details, for the reasons that I’ll give at the end of this post:</p>
-<pre><code>record Semantics : Set₁ where
+<pre><code>record Semantics' : Set₁ where
   field
     VM  : Model
     thV : VM Δ τ → VM (σ ∷ Δ) τ
@@ -321,12 +328,12 @@ Here is my attempt at formulating the induction operator, but again I won’t go
     app : {t : Γ ⊢ σ ⇒ τ} {u : Γ ⊢ σ} {ρ : Env Γ VM Δ}
         → TM t ρ → TM u ρ → TM (t · u) ρ
     lam : {t : σ ∷ Γ ⊢ τ} {ρ : Env Γ VM Δ}
-        → ((v : VM (σ ∷ Δ) σ) → TM t (v ▸ modify ext ρ)) → TM (ƛ t) ρ
+        → ((v : VM (σ ∷ Δ) σ) → TM t (v ▸ modify thV ρ)) → TM (ƛ t) ρ
 
 sem' : (S : Semantics') (t : Γ ⊢ τ) (ρ : Env Γ (S .VM) Δ) → S .TM t ρ
 sem' S (` i  ) ρ = S .var i ρ
 sem' S (t · u) ρ = S .app (sem S t ρ) (sem S u ρ)
-sem' S (ƛ t  ) ρ = S .lam λ v → sem S t (v ▸ env (S .thV ∘ lookup ρ))
+sem' S (ƛ t  ) ρ = S .lam λ v → sem S t (v ▸ modify (S .thV) ρ)
 </code></pre>
 <p>It is possible to write everything we’ve seen so far with this induction operator, in particular the simulation theorem, although some non-trivial type transportation starts to show up, which involves function extensionality because it’s about equating different ways of extending environments, which are functional by nature (but fortunately we now have Cubical Agda, where function extensionality is naturally provable).
 It quickly becomes obvious that this operator isn’t general enough though.
@@ -343,7 +350,7 @@ renren .TM {Δ = Δ} t ρ =
 renren .var i ρ ρ' = refl
 renren .app mteq mueq ρ' = cong₂ _·_ (mteq ρ') (mueq ρ')
 renren .lam {t = t} f ρ' =
-  cong ƛ_ (f zero (zero ▸ env (suc ∘ lookup ρ')) ∙ cong (sem ren t) ?)
+  cong ƛ_ (f zero (zero ▸ modify suc ρ') ∙ cong (sem ren t) ?)
 </code></pre>
 <p>Note that, in the motive <code>TM</code>, besides the environment <code>ρ</code> provided by the induction operator, we also need another environment <code>ρ'</code> for the second renaming, and have to manually introduce a universal quantification.
 Subsequently we have to manage <code>ρ'</code> manually, notably in the <code>lam</code> case, where we even have to thin and extend <code>ρ'</code> ourselves, which should have been taken care of by the operator.
