@@ -64,7 +64,7 @@
 0022
 </div>
 <h2>Environmentally friendly syntax tree traversal</h2>
-<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 12:51 on 11 August 2021</div>
+<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 22:40 on 11 August 2021</div>
 <p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing Allais’s Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
 The proof is built upon Allais et al’s ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
 My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">their CPP ’17 paper</a>.
@@ -275,7 +275,7 @@ The following is a concrete example of a free theorem,</p>
 <p>from which one can further deduce that the functional semantics of any <code>t : [] ⊢ ι ⇒ ι</code> can only be the identity function.</p>
 <p>It is possible to establish a general theorem stating that if two semantics are in simulation — that is, all the cases preserve some specified relations on the models — then the traversals of a term using the two semantics are related whenever the environments are pointwise related.
 Free theorems then become a special case.
-The theorem is pasted below but only for archival purposes — I don’t intend to go into the details:</p>
+The simulation theorem is pasted below but only for archival purposes — I don’t intend to go into the details:</p>
 <pre><code>record Sim (S S' : Semantics) : Set₁ where
   field
     RVal : S .Val Γ τ → S' .Val Γ τ → Set
@@ -334,8 +334,8 @@ Here is my attempt at formulating the induction operator, but again I won’t go
 
 sem' : (S : Semantics') (t : Γ ⊢ τ) (ρ : Env Γ (S .VM) Δ) → S .TM t ρ
 sem' S (` i  ) ρ = S .var i ρ
-sem' S (t · u) ρ = S .app (sem S t ρ) (sem S u ρ)
-sem' S (ƛ t  ) ρ = S .lam λ v → sem S t (v ▸ modify (S .thV) ρ)
+sem' S (t · u) ρ = S .app (sem' S t ρ) (sem' S u ρ)
+sem' S (ƛ t  ) ρ = S .lam λ v → sem' S t (v ▸ modify (S .thV) ρ)
 </code></pre>
 <p>It is possible to write everything we’ve seen so far with this induction operator, in particular the simulation theorem, although some non-trivial type transportation starts to show up, which involves function extensionality because it’s about equating different ways of extending environments, which are functional by nature (but fortunately we now have Cubical Agda, where function extensionality is naturally provable).
 It quickly becomes obvious that this operator isn’t general enough though.
@@ -352,7 +352,7 @@ renren .TM {Δ = Δ} t ρ =
 renren .var i ρ ρ' = refl
 renren .app mteq mueq ρ' = cong₂ _·_ (mteq ρ') (mueq ρ')
 renren .lam {t = t} f ρ' =
-  cong ƛ_ (f zero (zero ▸ modify suc ρ') ∙ cong (sem ren t) ?)
+  cong ƛ_ (f zero (zero ▸ modify suc ρ') ∙ cong (sem' ren t) ?)
 </code></pre>
 <p>Note that, in the motive <code>TM</code>, besides the environment <code>ρ</code> provided by the induction operator, we also need another environment <code>ρ'</code> for the second renaming, and have to manually introduce a universal quantification.
 Subsequently we have to manage <code>ρ'</code> manually, notably in the <code>lam</code> case, where we even have to thin and extend <code>ρ'</code> ourselves, which should have been taken care of by the operator.
