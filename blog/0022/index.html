@@ -64,7 +64,7 @@
 0022
 </div>
 <h2>Environmentally friendly syntax tree traversal</h2>
-<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 20:59 on 10 August 2021</div>
+<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 12:51 on 11 August 2021</div>
 <p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing Allais’s Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
 The proof is built upon Allais et al’s ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
 My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">their CPP ’17 paper</a>.
@@ -142,6 +142,8 @@ The record type is defined as</p>
     lam : (Val (σ ∷ Δ) σ → Com (σ ∷ Δ) τ) → Com Δ (σ ⇒ τ)
 </code></pre>
 <p>On <code>Val</code> we require that the type can be ‘thinned’ (by <code>thV</code>), that is, the context in the type can be extended; this is used when we go under a binder and need to adapt the environment.
+Note that thinning isn’t needed for <code>Com</code>, and this offers one justification for the separation of <code>Val</code> and <code>Com</code>: if we also stored <code>Com</code> in the environment, then we’d have to do thinning on <code>Com</code>, which may be harder.
+(For example, if we store terms rather than variables in the environment during renaming, then we’d have to do thinning on terms, which would be renaming itself.)
 Then for each term constructor we need a corresponding case specifying how to compute the semantics inductively.
 The <code>var</code> case takes the result of looking up a variable in the environment, which has type <code>Val Δ τ</code>, and should specify how to turn it into a <code>Com Δ τ</code>.
 The corresponding case of <code>sem</code> is</p>
@@ -354,8 +356,8 @@ renren .lam {t = t} f ρ' =
 </code></pre>
 <p>Note that, in the motive <code>TM</code>, besides the environment <code>ρ</code> provided by the induction operator, we also need another environment <code>ρ'</code> for the second renaming, and have to manually introduce a universal quantification.
 Subsequently we have to manage <code>ρ'</code> manually, notably in the <code>lam</code> case, where we even have to thin and extend <code>ρ'</code> ourselves, which should have been taken care of by the operator.
-Maybe the induction operator can be further parametrised by environments it should manage, but it starts to look ad hoc.
-Even though my first instinct as a dependently typed programmer is to construct an induction operator so as to deal with both computation and proof in one go, it’s in fact not that obvious how to promote traversal to a natural and sufficiently powerful form of induction — no wonder that the paper merely presented the traversal operator and proved its properties separately.</p>
+Maybe the induction operator can be further generalised to manage multiple environments, but it starts to look ad hoc.
+Therefore, even though my first instinct as a dependently typed programmer is to construct an induction operator so as to deal with both computation and proof in one go, it’s in fact not that obvious how to promote traversal to a natural and sufficiently powerful form of induction — no wonder that the paper merely presented the traversal operator and proved its properties separately.</p>
 
 <!-- END OF POST -->
 
