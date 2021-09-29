@@ -28,11 +28,11 @@ publicationList =
       , authors = [ "Liang-Ting Chen"
                   , "Hsiang-Shang Ko"
                   ]
-      , venue   = Nothing
-      , year    = 2021
-      , types   = [ (Unpublished, "Submitted")
+      , venue   = Just ("Conference on Computer Science Logic (CSL)", Just ("https://csl2022.uni-goettingen.de", IncludeYear))
+      , year    = 2022
+      , types   = [ (Published, "Accepted")
                   ]
-      , links   = [ ("PDF", Nothing, "https://github.com/L-TChen/provability/raw/master/provability.pdf")
+      , links   = [ ("PDF", Just "draft", "https://github.com/L-TChen/provability/raw/master/provability.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/L-TChen/provability")
                   ]
       , info    = [ ("Related blog post", "0013", Nothing)
