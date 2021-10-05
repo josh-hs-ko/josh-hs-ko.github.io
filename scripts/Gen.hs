@@ -7,7 +7,7 @@ import PermVenues
 import Publications
 
 import Prelude hiding ((<>))
-import Control.Arrow (first)
+import Control.Arrow (first, (&&&))
 import Control.Monad
 import qualified Data.ByteString.Lazy.Char8 as ByteString
 import Data.Char
@@ -37,9 +37,10 @@ main = do
   case head args of
     "--publications" -> do
       let indexFile = "../index.html"
+      postList <- read <$> Strict.readFile postListFile
       writeFile indexFile .
         replaceRange "PUBLICATIONS"
-          (renderPublications authorList permVenueList publicationList) =<<
+          (renderPublications authorList permVenueList postList publicationList) =<<
           Strict.readFile indexFile
       spawnProcess "open" [indexFile]
       return ()
@@ -120,8 +121,8 @@ renderVenueAndYear pvs (Just (n, m)) y =
         IncludeYear -> addLink (text n <> text "&ensp; " <> int y)
         ExcludeYear -> addLink (text n) <> text "&ensp; " <> int y
 
-renderPublication :: [Author] -> [PermVenue] -> Publication -> Doc
-renderPublication as pvs p =
+renderPublication :: [Author] -> [PermVenue] -> [PostEntry] -> Publication -> Doc
+renderPublication as pvs postList p =
   let str    = title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p)
       md5sum = take 8 . show . md5 . ByteString.pack $ str
       pubId  = "publication-"      ++ md5sum
@@ -163,30 +164,36 @@ renderPublication as pvs p =
                            blockElement "div" [("class", ["row"])] $
                              blockElement "div" [("class", ["col-sm-2", "publication-info-title"])] (text n) $+$
                              (blockElement "div" [("class", ["col-sm-10"])] $
-                               inlineElement "p" [] (processInfoEntry n c ml)))
+                               inlineElement "p" [] (processInfoEntry n c ml postList)))
                         (info p))
   where
-    processInfoEntry :: String -> String -> Maybe String -> Doc
-    processInfoEntry _ c (Just url) = hyperlink url (text c)
-    processInfoEntry ((== "DOI") -> True) c _ = hyperlink ("https://doi.org/" ++ c) (text c)
-    processInfoEntry ((== "arXiv") -> True) c _ = hyperlink ("https://arxiv.org/abs/" ++ c) (text c)
-    processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ =
-      foldr (<+>) empty (punctuate (char ',') [ hyperlink ("/blog/" ++ n ++ "/") (text n) | n <- split ", " c ])
-    processInfoEntry _ c@(first (== "arXiv:") . splitAt 6 -> (True, arXivNum)) _ =
+    processInfoEntry :: String -> String -> Maybe String -> [PostEntry] -> Doc
+    processInfoEntry _ c (Just url) _ = hyperlink url (text c)
+    processInfoEntry ((== "DOI") -> True) c _ _ = hyperlink ("https://doi.org/" ++ c) (text c)
+    processInfoEntry ((== "arXiv") -> True) c _ _ = hyperlink ("https://arxiv.org/abs/" ++ c) (text c)
+    processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ postList =
+      foldr (<+>) empty $
+      punctuate (char ',') $
+      map (\(n, t) -> let numStr = fillZeros 4 n
+                      in  hyperlink ("/blog/" ++ numStr ++ "/") (text numStr <+> parens (text t))) $
+      reverse $
+      filter ((`elem` [ read n | n <- split ", " c ]) . fst) $
+      map (entryNumber &&& entryTitle) postList
+    processInfoEntry _ c@(first (== "arXiv:") . splitAt 6 -> (True, arXivNum)) _ _ =
       hyperlink ("https://arxiv.org/abs/" ++ arXivNum) (text c)
-    processInfoEntry _ c@(("http" `isPrefixOf`) -> True) _ = hyperlink c (text c)
-    processInfoEntry _ c _ = text c
+    processInfoEntry _ c@(("http" `isPrefixOf`) -> True) _ _ = hyperlink c (text c)
+    processInfoEntry _ c _ _ = text c
 
 
-renderPublications :: [Author] -> [PermVenue] -> [Publication] -> Doc
-renderPublications as pvs =
+renderPublications :: [Author] -> [PermVenue] -> [PostEntry] -> [Publication] -> Doc
+renderPublications as pvs postList =
   foldr ($+$) empty .
   map (\ps -> blockElement "div" [("class",["row"])] $
                 (blockElement "div" [("class", ["col-sm-3"])] $
                    inlineElement "h3" [("class", ["year-group"])] (int (year (head ps))) $+$
                    inlineElement "div" [("class", ["after-section-title"])] empty) $+$
                 blockElement "div" [("class", ["col-sm-9"])]
-                  (foldr ($+$) empty (map (renderPublication as pvs) ps))) .
+                  (foldr ($+$) empty (map (renderPublication as pvs postList) ps))) .
   groupBy ((==) `on` year)
 
 
