@@ -57,7 +57,7 @@ main = do
         maybe (return ()) (writeIORef rPostList) (mNewPostList post)
       postList' <- readIORef rPostList
       writeIndexFiles postList'
-      writeFile postListFile (show postList')
+      writePostListFile postList'
     _ -> return ()
 
 
@@ -270,7 +270,7 @@ generatePostInteractively postList postNumber = do
           case mNewPostList post' of
             Nothing -> return ()
             Just postList' ->
-              when commit (writeFile postListFile (show postList'))
+              when commit (writePostListFile postList')
 
 getYesOrNo :: Bool -> String -> IO Bool
 getYesOrNo defaultResult prompt = do
@@ -298,6 +298,10 @@ writeIndexFiles postList = do
   writeFile indexFile .
     replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 postList)) =<<
       Strict.readFile indexFile
+
+writePostListFile :: [PostEntry] -> IO ()
+writePostListFile []     = writeFile postListFile "[]"
+writePostListFile (x:xs) = writeFile postListFile (unlines (('[' : show x) : map ((',' :) . show) xs ++ ["]"]))
 
 
 --------
