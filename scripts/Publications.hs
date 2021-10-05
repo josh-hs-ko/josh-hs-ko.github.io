@@ -40,6 +40,23 @@ publicationList =
                   ]
       }
   , Publication
+      { title   = "Weakly durable high-performance transactions"
+      , authors = [ "Yun-Sheng Chang"
+                  , "Yu-Fang Chen"
+                  , "Hsiang-Shang Ko"
+                  ]
+      , venue   = Nothing
+      , year    = 2021
+      , types   = [ (Unpublished, "Manuscript")
+                  ]
+      , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2110.01465")
+                  ]
+      , info    = [ ("arXiv", "2110.01465", Nothing)
+                  , ("Related blog post", "0019", Nothing)
+                  , ("Abstract", "Existing disk-based database systems largely fall into two categories—they either provide very high performance but few guarantees, or expose the transaction abstraction satisfying the full ACID guarantees at the cost of lower performance. In this paper, we present an alternative that achieves the best of both worlds, namely good performance and transactional properties. Our key observation is that, because of the frequent use of synchronization primitives, systems with strong durability can hardly utilize the extremely high parallelism granted by modern storage devices. Thus, we explore the notion of weakly durable transactions, and discuss how to safely relax durability without compromising other transactional properties. We present AciKV, a transactional system whose design is centered around weak durability. AciKV exposes to users the normal transactional interface, but what sets it apart from others is a new “persist” primitive that decouples durability from commit. AciKV is a middle ground between systems that perform fast atomic operations, and ones that support transactions; this middle ground is useful as it provides similar performance to the former, while prevents isolation and consistency anomalies like the latter. Our evaluation using the YCSB benchmark shows that AciKV, under workloads that involve write requests, exhibits more than two orders of magnitude higher throughput than existing strongly durable systems.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "C-lenses explained: Bx foundations for the rest of us"
       , authors = [ "Anthony Anjorin"
                   , "Hsiang-Shang Ko"
@@ -63,7 +80,7 @@ publicationList =
       , types   = []
       , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2010.16302v3")
                   , ("Agda code", Just "Zenodo", "https://doi.org/10.5281/zenodo.4030101")
-                  , ("Agda code", Just "HTML", "Agda/Programming21/MetamorphismsInAgda.html")
+                  , ("Agda code", Just "HTML", "/Agda/Programming21/MetamorphismsInAgda.html")
                   ]
       , info    = [ ("Volume",  "5", Nothing)
                   , ("Issue" ,  "2", Nothing)
@@ -109,7 +126,7 @@ publicationList =
       , venue   = Just ("New Generation Computing", Nothing)
       , year    = 2020
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/NGCO20.pdf")
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/NGCO20.pdf")
                   , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/b3SAc")
                 --   , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
@@ -134,7 +151,7 @@ publicationList =
       , venue   = Just ("Software and Systems Modeling", Nothing)
       , year    = 2020
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/SoSyM20.pdf")
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/SoSyM20.pdf")
                   , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
                   , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
                   ]
@@ -173,7 +190,7 @@ publicationList =
       , year    = 2019
       , types   = [ (Published, "Short paper")
                   ]
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/SFDI19.pdf") ]
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/SFDI19.pdf") ]
       , info    = [ ("DOI", "10.1109/BIGCOMP.2019.8679265", Nothing)
                   , ("Abstract", "Session types are a type discipline for eliminating communication errors in concurrent computing. These types can be thought of as a representation of communication protocols implemented by communicating processes. One application scenario that can be naturally supported by session types is semantics-preserving transformation of processes in response to protocol changes due to optimization, evolution, refactoring, etc. Such transformation can be seen as a particular kind of synchronization problem that has long been studied by the bidirectional transformations (BX) community. This short paper offers a preliminary analysis of the process–type synchronization problem in terms of BX, describing the prospects and challenges.", Nothing)
                   ]
@@ -188,7 +205,7 @@ publicationList =
       , types   = [ (Published, "Extended abstract")
                   ]
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/3191697.3191719?cid=81488664395")
-                  , ("Slides", Just "PDF", "slides/BX18.pdf")
+                  , ("Slides", Just "PDF", "/slides/BX18.pdf")
                   ]
       , info    = [ ("Pages", "33–35", Nothing)
                   , ("DOI", "10.1145/3191697.3191719", Nothing)
@@ -203,7 +220,7 @@ publicationList =
       , venue   = Just ("International Summer School on Bidirectional Transformations (Oxford, UK, 25–29 July 2016)", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/SSBX16.pdf")
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/SSBX16.pdf")
                   , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
                   ]
       , info    = [ ("LNCS", "9715", Nothing)
@@ -223,15 +240,15 @@ publicationList =
       , types   = []
       , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129?download=true")
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip")
-                  , ("Agda code", Just "HTML", "Agda/POPL18/Everything.html")
-                  , ("Slides", Just "PDF", "slides/POPL18.pdf")
+                  , ("Agda code", Just "HTML", "/Agda/POPL18/Everything.html")
+                  , ("Slides", Just "PDF", "/slides/POPL18.pdf")
                   , ("Video", Just "YouTube", "https://www.youtube.com/watch?v=-dNgQmRTYKg")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
                   , ("DOI", "10.1145/3158129", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
-                  , ("Related slides", "‘<a href=\"slides/BX18'.pdf\">Towards a general-purpose bidirectional language</a>’ at the <a href=\"https://2018.programmingconference.org/track/bx-2018-papers\">International Workshop on Bidirectional Transformations (Bx) 2018</a>", Nothing)
+                  , ("Related slides", "‘<a href=\"/slides/BX18'.pdf\">Towards a general-purpose bidirectional language</a>’ at the <a href=\"https://2018.programmingconference.org/track/bx-2018-papers\">International Workshop on Bidirectional Transformations (Bx) 2018</a>", Nothing)
                   , ("Abstract", "Among the frameworks of bidirectional transformations proposed for addressing various synchronisation (consistency maintenance) problems, Foster et al.’s [2007] asymmetric lenses have influenced the design of a generation of bidirectional programming languages. Most of these languages are based on a declarative programming model, and only allow the programmer to describe a consistency specification with ad hoc and/or awkward control over the consistency restoration behaviour. However, synchronisation problems are diverse and require vastly different consistency restoration strategies, and to cope with the diversity, the programmer must have the ability to fully control and reason about the consistency restoration behaviour. The putback-based approach to bidirectional programming aims to provide exactly this ability, and this paper strengthens the putback-based position by proposing the first fully fledged reasoning framework for a bidirectional language — a Hoare-style logic for Ko et al.’s [2016] putback-based language BiGUL. The Hoare-style logic lets the BiGUL programmer precisely characterise the bidirectional behaviour of their programs by reasoning solely in the putback direction, thereby offering a unidirectional programming abstraction that is reasonably straightforward to work with and yet provides full control not achieved by previous approaches. The theory has been formalised and checked in Agda, but this paper presents the Hoare-style logic in a semi-formal way to make it easily understood and usable by the working BiGUL programmer.", Nothing)
                   ]
       }
@@ -244,7 +261,7 @@ publicationList =
       , venue   = Just ("Asian Symposium on Programming Languages and Systems (APLAS)", Just ("https://www-aplas.github.io", IncludeYear))
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/APLAS17.pdf")
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/APLAS17.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
                   ]
       , info    = [ ("LNCS", "10695", Nothing)
@@ -284,9 +301,9 @@ publicationList =
       , venue   = Just ("Journal of Functional Programming", Nothing)
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "manuscripts/JFP17.pdf")
+      , links   = [ ("PDF", Just "accepted version", "/manuscripts/JFP17.pdf")
                   , ("Agda code", Just "zip", "https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0956796816000307/resource/name/S0956796816000307sup001.zip")
-                  , ("Agda code", Just "HTML", "Agda/JFP17/Everything.html")
+                  , ("Agda code", Just "HTML", "/Agda/JFP17/Everything.html")
                   ]
       , info    = [ ("Volume", "27", Nothing)
                   , ("Number", "e2", Nothing)
@@ -327,7 +344,7 @@ publicationList =
 --    , year    = 2016
 --    , types   = [ (Unpublished, "Technical report")
 --                ]
---    , links   = [ ("PDF", Just "revised version", "manuscripts/BiGUL-delta-alignment.pdf")
+--    , links   = [ ("PDF", Just "revised version", "/manuscripts/BiGUL-delta-alignment.pdf")
 --                ]
 --    , info    = [ ("Number", "GRACE-TR 2016-03", Nothing)
 --                , ("URL", "http://grace-center.jp/wp-content/uploads/2016/04/GRACE-TR-2016-03.pdf", Nothing)
@@ -363,8 +380,8 @@ publicationList =
       , types   = []
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2847538.2847544?cid=81488664395")
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2847538.2847544&file=p61-ko-s.zip")
-                  , ("Agda code", Just "HTML", "Agda/PEPM16/BiGUL.Everything.html")
-                  , ("Slides", Just "PDF", "slides/PEPM16.pdf")
+                  , ("Agda code", Just "HTML", "/Agda/PEPM16/BiGUL.Everything.html")
+                  , ("Slides", Just "PDF", "/slides/PEPM16.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
                   ]
       , info    = [ ("Pages", "61–72", Nothing)
@@ -405,7 +422,7 @@ publicationList =
                   ]
       , links   = [ ("PDF", Just "revised version", "https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf")
                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/Thesis")
-                  , ("Agda code", Just "HTML", "Agda/Thesis/Everything.html")
+                  , ("Agda code", Just "HTML", "/Agda/Thesis/Everything.html")
                   ]
       , info    = [ ("URL", "https://ora.ox.ac.uk/objects/ora:9019", Nothing)
                   , ("Repository", "https://github.com/josh-hs-ko/dissertation", Nothing)
@@ -424,7 +441,7 @@ publicationList =
       , types    = []
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2502409.2502413?cid=81488664395")
                    , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2502409.2502413&file=dtp04.zip")
-                   , ("Slides", Just "PDF", "slides/DTP13.pdf")
+                   , ("Slides", Just "PDF", "/slides/DTP13.pdf")
                    ]
       , info     = [ ("Pages", "37–48", Nothing)
                    , ("DOI", "10.1145/2502409.2502413", Nothing)
@@ -442,8 +459,8 @@ publicationList =
       , year     = 2013
       , types    = []
       , links    = [ ("PDF", Nothing, "http://www.nii.ac.jp/pi/n10/10_65.pdf")
-                   , ("Agda code", Just "zip", "Agda/PI13/PI13.zip")
-                   , ("Agda code", Just "HTML", "Agda/PI13/Everything.html")
+                   , ("Agda code", Just "zip", "/Agda/PI13/PI13.zip")
+                   , ("Agda code", Just "HTML", "/Agda/PI13/Everything.html")
                    ]
       , info     = [ ("Number", "10", Nothing)
                    , ("Pages", "65–88", Nothing)
@@ -462,12 +479,12 @@ publicationList =
       , types    = [ (Warning, "Superseded")
                    ]
       , links    = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2036918.2036921?cid=81488664395")
-                   , ("Agda code", Just "HTML", "Agda/WGP11/OAOAOO.html")
-                   , ("Slides", Just "PDF", "slides/WGP11.pdf")
+                   , ("Agda code", Just "HTML", "/Agda/WGP11/OAOAOO.html")
+                   , ("Slides", Just "PDF", "/slides/WGP11.pdf")
                    ]
       , info     = [ ("Pages", "13–24", Nothing)
                    , ("DOI", "10.1145/2036918.2036921", Nothing)
-                   , ("Related slides", "Same topic at the <a href=\"slides/DTP11.pdf\">Workshop on Dependently Typed Programming (DTP) 2011</a>, and ‘numerical representations à la ornamentation’ at <a href=\"slides/FitA12.pdf\">Fun in the Afternoon 2012</a>", Nothing)
+                   , ("Related slides", "Same topic at the <a href=\"/slides/DTP11.pdf\">Workshop on Dependently Typed Programming (DTP) 2011</a>, and ‘numerical representations à la ornamentation’ at <a href=\"/slides/FitA12.pdf\">Fun in the Afternoon 2012</a>", Nothing)
                    , ("Note", "This paper has been superseded by an <a href=\"#publication-685cb02c\">extended version in <em>Progress in Informatics</em></a>.", Nothing)
                    , ("Abstract", "Dependently typed programmers are encouraged to use inductive families to integrate constraints with data construction. Different constraints are used in different contexts, leading to different versions of datatypes for the same data structure. Modular implementation of common operations for these structurally similar datatypes has been a longstanding problem. We propose a datatype-generic solution based on McBride’s datatype ornaments, exploiting an isomorphism whose interpretation borrows ideas from realisability. Relevant properties of the operations are separately proven for each constraint, and after the programmer selects several constraints to impose on a basic datatype and synthesises an inductive family incorporating those constraints, the operations can be routinely upgraded to work with the synthesised inductive family.", Nothing)
                    ]
@@ -481,7 +498,7 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , types    = []
-      , links    = [ ("PDF", Just "accepted version", "manuscripts/JFP09.pdf")
+      , links    = [ ("PDF", Just "accepted version", "/manuscripts/JFP09.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
@@ -501,7 +518,7 @@ publicationList =
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF", Just "accepted version", "manuscripts/MPC08.pdf")
+      , links    = [ ("PDF", Just "accepted version", "/manuscripts/MPC08.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)

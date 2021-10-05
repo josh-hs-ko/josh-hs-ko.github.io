@@ -262,6 +262,52 @@ Reasoning about the traced state monad is elementary but inherently extensional,
           <div class="after-section-title"></div>
         </div>
         <div class="col-sm-9">
+          <div class="publication" id="publication-9cc8467e">
+            <div class="publication-entry">
+              <div class="publication-title">
+                <a href="#publication-9cc8467e">Weakly durable high-performance transactions</a>
+              </div>
+              <div class="publication-authors">
+                <a href="https://yunshengtw.github.io">Yun-Sheng&nbsp;Chang</a>, <a href="http://bull.iis.sinica.edu.tw/yfc/doku.php">Yu-Fang&nbsp;Chen</a>, and Hsiang-Shang&nbsp;Ko
+              </div>
+              <div class="publication-venue">
+                2021
+              </div>
+              <div class="publication-links">
+                <span class="publication-link-outer"><span class="publication-type type-unpublished">Manuscript</span></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://arxiv.org/pdf/2110.01465">PDF</a></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-9cc8467e">More info</span></span>
+              </div>
+            </div>
+            <div class="panel panel-publication-info collapse" id="publication-info-9cc8467e">
+              <div class="panel-body publication-info">
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    arXiv
+                  </div>
+                  <div class="col-sm-10">
+                    <p><a href="https://arxiv.org/abs/2110.01465">2110.01465</a></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Related blog post
+                  </div>
+                  <div class="col-sm-10">
+                    <p><a href="/blog/0019/">0019</a></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Abstract
+                  </div>
+                  <div class="col-sm-10">
+                    <p>Existing disk-based database systems largely fall into two categories—they either provide very high performance but few guarantees, or expose the transaction abstraction satisfying the full ACID guarantees at the cost of lower performance. In this paper, we present an alternative that achieves the best of both worlds, namely good performance and transactional properties. Our key observation is that, because of the frequent use of synchronization primitives, systems with strong durability can hardly utilize the extremely high parallelism granted by modern storage devices. Thus, we explore the notion of weakly durable transactions, and discuss how to safely relax durability without compromising other transactional properties. We present AciKV, a transactional system whose design is centered around weak durability. AciKV exposes to users the normal transactional interface, but what sets it apart from others is a new “persist” primitive that decouples durability from commit. AciKV is a middle ground between systems that perform fast atomic operations, and ones that support transactions; this middle ground is useful as it provides similar performance to the former, while prevents isolation and consistency anomalies like the latter. Our evaluation using the YCSB benchmark shows that AciKV, under workloads that involve write requests, exhibits more than two orders of magnitude higher throughput than existing strongly durable systems.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="publication" id="publication-40e6e53f">
             <div class="publication-entry">
               <div class="publication-title">
@@ -306,7 +352,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="https://arxiv.org/pdf/2010.16302v3">PDF</a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://doi.org/10.5281/zenodo.4030101">Agda code<span class="link-note">(Zenodo)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/Programming21/MetamorphismsInAgda.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/Programming21/MetamorphismsInAgda.html">Agda code<span class="link-note">(HTML)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-9f9adfcc">More info</span></span>
               </div>
             </div>
@@ -445,7 +491,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="https://www.springer.com/journal/354">New Generation Computing</a>&ensp; 2020
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/NGCO20.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/NGCO20.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://rdcu.be/b3SAc">Definitive version<span class="link-note">(Springer Nature SharedIt)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-5b02d923">More info</span></span>
               </div>
@@ -499,7 +545,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="http://www.sosym.org">Software and Systems Modeling</a>&ensp; 2020
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/SoSyM20.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/SoSyM20.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://rdcu.be/bQZ4q">Definitive version<span class="link-note">(Springer Nature SharedIt)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/eMoflon/benchmarx">Repository<span class="link-note">(GitHub)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-cb9d73cc">More info</span></span>
@@ -601,7 +647,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               </div>
               <div class="publication-links">
                 <span class="publication-link-outer"><span class="publication-type type-published">Short paper</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/SFDI19.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/SFDI19.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-a4924a0c">More info</span></span>
               </div>
             </div>
@@ -648,7 +694,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><span class="publication-type type-published">Extended abstract</span></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/doi/10.1145/3191697.3191719?cid=81488664395">PDF<span class="link-note">(ACM Author-Izer)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="slides/BX18.pdf">Slides<span class="link-note">(PDF)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/slides/BX18.pdf">Slides<span class="link-note">(PDF)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-fea7a8cd">More info</span></span>
               </div>
             </div>
@@ -693,7 +739,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/">International Summer School on Bidirectional Transformations (Oxford, UK, 25–29 July 2016)</a>&ensp; 2018
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/SSBX16.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/SSBX16.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip">Haskell code<span class="link-note">(zip)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-56ab7bca">More info</span></span>
               </div>
@@ -757,8 +803,8 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/doi/pdf/10.1145/3158129?download=true">PDF</a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip">Agda code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/POPL18/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="slides/POPL18.pdf">Slides<span class="link-note">(PDF)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/POPL18/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/slides/POPL18.pdf">Slides<span class="link-note">(PDF)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://www.youtube.com/watch?v=-dNgQmRTYKg">Video<span class="link-note">(YouTube)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-e124d6a0">More info</span></span>
               </div>
@@ -802,7 +848,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                     Related slides
                   </div>
                   <div class="col-sm-10">
-                    <p>‘<a href="slides/BX18'.pdf">Towards a general-purpose bidirectional language</a>’ at the <a href="https://2018.programmingconference.org/track/bx-2018-papers">International Workshop on Bidirectional Transformations (Bx) 2018</a></p>
+                    <p>‘<a href="/slides/BX18'.pdf">Towards a general-purpose bidirectional language</a>’ at the <a href="https://2018.programmingconference.org/track/bx-2018-papers">International Workshop on Bidirectional Transformations (Bx) 2018</a></p>
                   </div>
                 </div>
                 <div class="row">
@@ -836,7 +882,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="https://www-aplas.github.io">Asian Symposium on Programming Languages and Systems (APLAS)&ensp; 2017</a>
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/APLAS17.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/APLAS17.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/zyz915/palgol">Repository<span class="link-note">(Bitbucket)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-551b3a6e">More info</span></span>
               </div>
@@ -953,9 +999,9 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="https://www.cambridge.org/core/journals/journal-of-functional-programming">Journal of Functional Programming</a>&ensp; 2017
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/JFP17.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/JFP17.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0956796816000307/resource/name/S0956796816000307sup001.zip">Agda code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/JFP17/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/JFP17/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-696aedff">More info</span></span>
               </div>
             </div>
@@ -1080,8 +1126,8 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/doi/10.1145/2847538.2847544?cid=81488664395">PDF<span class="link-note">(ACM Author-Izer)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2847538.2847544&file=p61-ko-s.zip">Agda code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/PEPM16/BiGUL.Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="slides/PEPM16.pdf">Slides<span class="link-note">(PDF)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/PEPM16/BiGUL.Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/slides/PEPM16.pdf">Slides<span class="link-note">(PDF)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://bitbucket.org/prl_tokyo/bigul">Repository<span class="link-note">(Bitbucket)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-c48b059c">More info</span></span>
               </div>
@@ -1216,7 +1262,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <span class="publication-link-outer"><span class="publication-type type-published">DPhil dissertation</span></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/josh-hs-ko/dissertation/raw/master/dissertation.pdf">PDF<span class="link-note">(revised version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/josh-hs-ko/Thesis">Agda code<span class="link-note">(GitHub)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/Thesis/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/Thesis/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-9c9a95f3">More info</span></span>
               </div>
             </div>
@@ -1287,7 +1333,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/doi/10.1145/2502409.2502413?cid=81488664395">PDF<span class="link-note">(ACM Author-Izer)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2502409.2502413&file=dtp04.zip">Agda code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="slides/DTP13.pdf">Slides<span class="link-note">(PDF)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/slides/DTP13.pdf">Slides<span class="link-note">(PDF)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-d146668e">More info</span></span>
               </div>
             </div>
@@ -1349,8 +1395,8 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               </div>
               <div class="publication-links">
                 <span class="publication-link-outer"><a class="publication-link" href="http://www.nii.ac.jp/pi/n10/10_65.pdf">PDF</a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/PI13/PI13.zip">Agda code<span class="link-note">(zip)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/PI13/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/PI13/PI13.zip">Agda code<span class="link-note">(zip)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/PI13/Everything.html">Agda code<span class="link-note">(HTML)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-685cb02c">More info</span></span>
               </div>
             </div>
@@ -1421,8 +1467,8 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               <div class="publication-links">
                 <span class="publication-link-outer"><span class="publication-type type-warning">Superseded</span></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://dl.acm.org/doi/10.1145/2036918.2036921?cid=81488664395">PDF<span class="link-note">(ACM Author-Izer)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="Agda/WGP11/OAOAOO.html">Agda code<span class="link-note">(HTML)</span></a></span>
-                <span class="publication-link-outer"><a class="publication-link" href="slides/WGP11.pdf">Slides<span class="link-note">(PDF)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/Agda/WGP11/OAOAOO.html">Agda code<span class="link-note">(HTML)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/slides/WGP11.pdf">Slides<span class="link-note">(PDF)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-29d07bfb">More info</span></span>
               </div>
             </div>
@@ -1449,7 +1495,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                     Related slides
                   </div>
                   <div class="col-sm-10">
-                    <p>Same topic at the <a href="slides/DTP11.pdf">Workshop on Dependently Typed Programming (DTP) 2011</a>, and ‘numerical representations à la ornamentation’ at <a href="slides/FitA12.pdf">Fun in the Afternoon 2012</a></p>
+                    <p>Same topic at the <a href="/slides/DTP11.pdf">Workshop on Dependently Typed Programming (DTP) 2011</a>, and ‘numerical representations à la ornamentation’ at <a href="/slides/FitA12.pdf">Fun in the Afternoon 2012</a></p>
                   </div>
                 </div>
                 <div class="row">
@@ -1491,7 +1537,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
                 <a href="https://www.cambridge.org/core/journals/journal-of-functional-programming">Journal of Functional Programming</a>&ensp; 2009
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/JFP09.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/JFP09.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/scmu/aopa">Repository<span class="link-note">(GitHub)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-41007bea">More info</span></span>
               </div>
@@ -1562,7 +1608,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
               </div>
               <div class="publication-links">
                 <span class="publication-link-outer"><span class="publication-type type-warning">Superseded</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="manuscripts/MPC08.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="/manuscripts/MPC08.pdf">PDF<span class="link-note">(accepted version)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/scmu/aopa">Repository<span class="link-note">(GitHub)</span></a></span>
                 <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-f99491ca">More info</span></span>
               </div>
