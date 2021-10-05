@@ -85,6 +85,7 @@ publicationList =
       , info    = [ ("Volume",  "5", Nothing)
                   , ("Issue" ,  "2", Nothing)
                   , ("Article", "7", Nothing)
+                  , ("Pages", "1–34", Nothing)
                   , ("DOI", "10.22152/programming-journal.org/2021/5/7", Nothing)
                   , ("Agda version", "2.6.1 with Standard Library version 1.3", Nothing)
                   , ("Related blog post", "0003", Nothing)
@@ -246,6 +247,7 @@ publicationList =
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
+                  , ("Pages", "1–29", Nothing)
                   , ("DOI", "10.1145/3158129", Nothing)
                   , ("Agda version", "2.5.2 with Standard Library version 0.13", Nothing)
                   , ("Related slides", "‘<a href=\"/slides/BX18'.pdf\">Towards a general-purpose bidirectional language</a>’ at the <a href=\"https://2018.programmingconference.org/track/bx-2018-papers\">International Workshop on Bidirectional Transformations (Bx) 2018</a>", Nothing)
@@ -306,7 +308,8 @@ publicationList =
                   , ("Agda code", Just "HTML", "/Agda/JFP17/Everything.html")
                   ]
       , info    = [ ("Volume", "27", Nothing)
-                  , ("Number", "e2", Nothing)
+                  , ("Article", "e2", Nothing)
+                  , ("Pages", "1–43", Nothing)
                   , ("DOI", "10.1017/S0956796816000307", Nothing)
                   , ("Agda version", "2.5.1.1 with Standard Library version 0.12", Nothing)
                   , ("Abstract", "Dependently typed programming advocates the use of various indexed versions of the same shape of data, but the formal relationship amongst these structurally similar datatypes usually needs to be established manually and tediously. Ornaments have been proposed as a formal mechanism to manage the relationships between such datatype variants. In this paper, we conduct a case study under an ornament framework; the case study concerns programming binomial heaps and their operations — including insertion and minimum extraction — by viewing them as lifted versions of binary numbers and numeric operations. We show how current dependently typed programming technology can lead to a clean treatment of the binomial heap constraints when implementing heap operations. We also identify some gaps between the current technology and an ideal dependently typed programming language that we would wish to have for our development.", Nothing)
