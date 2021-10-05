@@ -392,7 +392,7 @@ postIndex :: [PostEntry] -> Doc
 postIndex postList =
   foldr ($+$) empty
     [ let postNumberStr = fillZeros 4 (entryNumber entry)
-          postUrl       = postNumberStr ++ "/"
+          postUrl       = "/blog/" ++ postNumberStr ++ "/"
       in  blockElement "div" [("class", ["row"])] $
             (inlineElement "div" [("class", ["col-sm-2"])] $
                hyperlink postUrl (text postNumberStr) <>
