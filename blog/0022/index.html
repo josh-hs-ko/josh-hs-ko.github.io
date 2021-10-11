@@ -63,7 +63,7 @@
 0022
 </div>
 <h2>Environmentally friendly syntax tree traversal</h2>
-<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 22:40 on 11 August 2021</div>
+<div class="post-time">Posted at 20:30 on 10 August 2021, and revised at 16:23 on 11 October 2021</div>
 <p>The last wave of reviewing has just subsided, and I set myself a task of understanding and reproducing Allais’s Agda strong normalisation proof included as part of the ‘<a href="https://poplmark-reloaded.github.io">POPLmark reloaded</a>’ project.
 The proof is built upon Allais et al’s ‘<a href="https://doi.org/10.1145/3236785">generic syntax</a>’ library, whose core is a traversal operator defined datatype-generically for syntax trees with the standard λ-style binders and variables as de Bruijn indices.
 My first step is to study an earlier, not yet datatype-generic version of the traversal operator reported in <a href="https://doi.org/10.1145/3018610.3018613">their CPP ’17 paper</a>.
@@ -357,6 +357,7 @@ renren .lam {t = t} f ρ' =
 Subsequently we have to manage <code>ρ'</code> manually, notably in the <code>lam</code> case, where we even have to thin and extend <code>ρ'</code> ourselves, which should have been taken care of by the operator.
 Maybe the induction operator can be further generalised to manage multiple environments, but it starts to look ad hoc.
 Therefore, even though my first instinct as a dependently typed programmer is to construct an induction operator so as to deal with both computation and proof in one go, it’s in fact not that obvious how to promote traversal to a natural and sufficiently powerful form of induction — no wonder that the paper merely presented the traversal operator and proved its properties separately.</p>
+<p><strong>Agda file:</strong> <a href="Kit.agda">Kit.agda</a></p>
 
 <!-- END OF POST -->
 

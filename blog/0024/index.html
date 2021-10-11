@@ -63,7 +63,7 @@
 0024
 </div>
 <h2>Productivity and the traced state monad</h2>
-<div class="post-time">Posted at 10:31 on 11 October 2021</div>
+<div class="post-time">Posted at 10:31 on 11 October 2021, and revised at 16:14 on 11 October 2021</div>
 <p>Missing in <a href="/blog/0023/">0023</a> was an application of the traced state monad.
 Here we play with a simple one: the left fold on lists, which in Haskell is defined by</p>
 <pre><code>foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b
@@ -106,7 +106,7 @@ scanl₀ f as with decon as
 ... | []      = return tt
 ... | a ∷ as' = mark &gt;&gt; modify (flip f a) &gt;&gt; scanl₀ f as'
 </code></pre>
-<p>This definition doesn’t pass Agda’s termination/productivity check, however.
+<p>This definition doesn’t pass Agda’s productivity/termination check, however.
 By contrast, Agda would happily accept the manually expanded definition:</p>
 <pre><code>scanl₁ : (S → A → S) → Colist A → States S Unit
 force (scanl₁ f as s) with decon as
@@ -198,8 +198,8 @@ scanl f as = eval (synScanl f as)
 
   evalTP : Trace S B → (B → Productive S A) → Trace S A
   force (evalTP tb f) with force tb
-  force (evalTP tb f) | ret b s   = force (evalP (f b) s)
-  force (evalTP tb f) | int s tb' = int s (evalTP tb' f)
+  ... | ret b s   = force (evalP (f b) s)
+  ... | int s tb' = int s (evalTP tb' f)
 
   evalM : Marked S A → States S A
   evalM (corec sa) = eval sa
@@ -207,8 +207,8 @@ scanl f as = eval (synScanl f as)
 
   evalTM : Trace S B → (B → Marked S A) → Trace S A
   force (evalTM tb f) with force tb
-  force (evalTM tb f) | ret b s   = force (evalM (f b) s)
-  force (evalTM tb f) | int s tb' = int s (evalTM tb' f)
+  ... | ret b s   = force (evalM (f b) s)
+  ... | int s tb' = int s (evalTM tb' f)
 </code></pre>
 <p>The termination argument for this set of definitions is slightly more involved: for example, <code>force (evalP (mb &gt;== f) s)</code> reduces to <code>force (evalTP (mb s) f)</code>, which still leaves the <code>force</code> request unhandled; depending on the result of <code>force tb</code>, <code>force (evalTP tb f)</code> may either loop back to <code>force (evalP (f b) s)</code>, where the <code>force</code> request is still unhandled but the first argument <code>f b</code> of <code>evalP</code> is smaller than the original argument <code>mb &gt;== f</code>, or produce <code>int s (evalTP tb' f)</code>, where the <code>force</code> request is handled and disappears.
 I have to turn on the pragma <code>--termination-depth=2</code> for Agda to check more carefully and accept this set of definitions, probably because of the mutual recursion between <code>evalP</code> and <code>evalTP</code> (and similarly between <code>evalM</code> and <code>evalTM</code>).</p>
@@ -230,6 +230,7 @@ Here is my speculation:
 Corecursive functions can be regarded as corresponding to state machines, with the states being the arguments of the functions, and applying a deconstructor triggers a state transition.
 Traversing a list-like structure corecursively (like <code>Marked</code>) is easier, because when we are in the middle of the traversal, the state is still a list, whereas traversing a tree-like structure corecursively (like <code>Marked'</code>) requires a zipper-like state to record the rest of the tree to be traversed, which is of course more complicated.
 Maybe this is one reason that we more often see lists rather than trees as examples of corecursive programming?</p>
+<p><strong>Agda file:</strong> <a href="TracedState.agda">TracedState.agda</a></p>
 <hr />
 <div class="remark">
 Another post that was harder to write than it seemed…
