@@ -64,7 +64,7 @@ Reasoning about the traced state monad is elementary but inherently extensional,
 0023
 </div>
 <h2>The traced state monad</h2>
-<div class="post-time">Posted at 16:10 on 1 October 2021</div>
+<div class="post-time">Posted at 16:10 on 1 October 2021, and revised at 10:33 on 11 October 2021</div>
 <p>The covid outbreak that started in May is now suppressed, and life is gradually going back to normal (modulo mask-wearing).
 Coincidentally, Tchaikovsky’s violin concerto and fifth symphony marked the beginning and end of the outbreak: these two works were performed in both the last and first concerts I went to before and after the outbreak (respectively by the <a href="https://www.opentix.life/event/eternal/1348601188381421573">Taipei Symphony Orchestra</a> and <a href="https://www.opentix.life/event/eternal/1423540208800935938">Taiwan Philharmonic</a>).
 I was also able to visit my parents’ place during the Mid-Autumn holidays, relieving some stress accumulated during the four months; the holidays, however, caused a long delay in writing this post, and I shouldn’t delay any more.</p>
@@ -108,15 +108,15 @@ join mma s = joinTrace (mma s)
 <p>It calls <code>joinTrace</code> to concatenate <code>mma s : Trace S (States S A)</code> — which essentially consists of two traces — into a single trace:</p>
 <pre><code>joinTrace : Trace S (States S A) → Trace S A
 force (joinTrace tma) with force tma
-... | ret ma s = force (ma s)
-... | int s  t = int s (joinTrace t)
+... | ret ma s   = force (ma s)
+... | int s tma' = int s (joinTrace tma')
 </code></pre>
 <p>When <code>joinTrace tma</code> is forced, we should force <code>tma</code> to see whether we have reached the end of the first trace: if <code>force tma = ret ma s</code>, the first trace is depleted, and we continue to force the second trace <code>ma s</code>; otherwise <code>force tma = int s tma'</code>, in which case we emit the intermediate state <code>s</code> and call <code>joinTrace</code> corecursively.</p>
 <p>The <code>fmap</code> operation for <code>States</code> also follows the same pattern, where the real work is done by <code>fmapTrace</code>, which skips over all the intermediate states in a trace and applies the given function to the result at the end of the trace:</p>
 <pre><code>fmapTrace : (A → B) → Trace S A → Trace S B
 force (fmapTrace f ta) with force ta
-... | ret a s = ret (f a) s
-... | int s t = int s (fmapTrace f t)
+... | ret a s   = ret (f a) s
+... | int s ta' = int s (fmapTrace f ta')
 
 fmap : (A → B) → States S A → States S B
 fmap f ma s = fmapTrace f (ma s)
@@ -124,6 +124,9 @@ fmap f ma s = fmapTrace f (ma s)
 <p>Bind can then be defined in the standard way:</p>
 <pre><code>_&gt;&gt;=_ : States S A → (A → States S B) → States S B
 ma &gt;&gt;= f = join (fmap f ma)
+
+_&gt;&gt;_ : States S A → States S B → States S B
+ma &gt;&gt; mb = ma &gt;&gt;= λ _ → mb
 </code></pre>
 <p>It’s also easy to define the state-manipulating operations, which I’ll just dump below:</p>
 <pre><code>get : States S S
@@ -175,10 +178,7 @@ At the second goal, the goal boundaries are <code>int s (joinTrace (fmapTrace re
 </code></pre>
 <p>This proof can be verified manually by substituting <code>i0</code> and <code>i1</code> for <code>i</code> and checking case by case whether the results are equal to those of <code>joinTrace ∘ fmapTrace return</code> and <code>id</code>.
 The proof is admittedly elementary (as are the proofs for all the other laws, which are therefore omitted), but correspondingly it uses only basic features of Cubical Agda, which is nice — extensional equalities, even elementary ones, used to be awkward and tedious to deal with, but with modern technologies like Cubical Agda, they can finally be established with practically no formalisation overhead.</p>
-<hr />
-<div class="remark">
-To be continued…
-</div>
+<p><strong>Follow-up:</strong> <a href="/blog/0024/">0024 (Productivity and the traced state monad)</a></p>
 
 <!-- END OF POST -->
 

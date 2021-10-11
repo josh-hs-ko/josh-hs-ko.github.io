@@ -307,8 +307,7 @@ writeIndexFiles postList = do
       Strict.readFile indexFile
 
 writePostListFile :: [PostEntry] -> IO ()
-writePostListFile []     = writeFile postListFile "[]"
-writePostListFile (x:xs) = writeFile postListFile (unlines (('[' : show x) : map ((',' :) . show) xs ++ ["]"]))
+writePostListFile xs = writeFile postListFile (unlines ("[" : intersperse "," (map show xs) ++ ["]"]))
 
 
 --------

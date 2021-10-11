@@ -83,10 +83,10 @@
         <div class="col-sm-9">
 
           <!-- LATEST BLOG POSTS -->
+          <p><span class="paragraph-title"><a href="/blog/0024/">Productivity and the traced state monad</a></span>We take a look at the left scan as a simple application of the traced state monad, which gives us an opportunity to revisit productivity checking and Danielsson’s embedded language technique.<span class="blog-entry-stamp">—&nbsp;<a href="/blog/0024/">0024</a>&nbsp;·&nbsp;<span class="blog-entry-date">11&nbsp;Oct&nbsp;’21</span></span></p>
           <p><span class="paragraph-title"><a href="/blog/0023/">The traced state monad</a></span>The traced state monad is useful for revealing intermediate states even when computation does not terminate and reach a final result.
 Reasoning about the traced state monad is elementary but inherently extensional, which used to be a problem for proof assistants, but Cubical Agda changes all that.<span class="blog-entry-stamp">—&nbsp;<a href="/blog/0023/">0023</a>&nbsp;·&nbsp;<span class="blog-entry-date">1&nbsp;Oct&nbsp;’21</span></span></p>
           <p><span class="paragraph-title"><a href="/blog/0022/">Environmentally friendly syntax tree traversal</a></span>I played a bit with (a simplified version of) Allais et al’s traversal operator for syntax trees with λ-style binders and variables as de Bruijn indices — which translates terms to functions taking an environment as input and manages the environment for the user — and experimented with a corresponding induction operator (not really successfully).<span class="blog-entry-stamp">—&nbsp;<a href="/blog/0022/">0022</a>&nbsp;·&nbsp;<span class="blog-entry-date">10&nbsp;Aug&nbsp;’21</span></span></p>
-          <p><span class="paragraph-title"><a href="/blog/0021/">Tea bars</a></span>This year more people started to join me for tea, and I decided to set up a ‘tea bar’ with which I can hold a nice ‘tea party’ in my office anytime I like.<span class="blog-entry-stamp">—&nbsp;<a href="/blog/0021/">0021</a>&nbsp;·&nbsp;<span class="blog-entry-date">22&nbsp;Jun&nbsp;’21</span></span></p>
           <!-- END OF LATEST BLOG POSTS -->
 
           <div class="paragraph-title"><a href="/blog/">All blog posts…</a></div>
@@ -111,9 +111,23 @@ Reasoning about the traced state monad is elementary but inherently extensional,
             <span class="expertise">Type Theory</span>
           </div>
 
-          <p>I am interested in the discovery of mathematical and logical structures of computation so that they can be manifested in programming languages and effectively guide the programmer. I approach problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em>, which substantially overlaps with <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>. For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.</p>
-          <p>I have been exploring the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into types and programs, and mechanically verified by type-checking. More interestingly, with an interactive development environment (like the <a href="https://agda.readthedocs.io/en/latest/tools/emacs-mode.html">Emacs mode offered by Agda</a>) that provides semantic hints in the form of type information, the programmer can gain better ‘<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>’ regarding the meaning of the program being constructed. (See, for example, my <a href="#publication-9f9adfcc">paper on programming metamorphic algorithms</a>.) This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families. I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and contributed to <a href="#publication-41007bea">its dependently typed formalisation</a>.</p>
-          <p>I have also worked on <em><a href="https://www.cs.ox.ac.uk/publications/publication11924-abstract.html">bidirectional transformations</a></em> for solving consistency maintenance (synchronisation) problems. More specifically, my focus was on <em>bidirectional programming</em>, which is largely synonymous with the construction of <em><a href="https://doi.org/10.1145/1232420.1232424">lenses</a></em>. My main results in this area were built around a small ‘putback-based’ bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there were an <a href="#publication-c48b059c">Agda formalisation</a>, a <a href="https://hackage.haskell.org/package/BiGUL">Haskell port</a>, and <a href="#publication-e124d6a0">an axiomatic semantics</a> that helps to explain how to think about bidirectional programs unidirectionally.</p>
+          <p>
+            I am interested in the discovery of mathematical and logical structures of computation so that they can be manifested in programming languages and effectively guide the programmer.
+            I approach problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em>, which substantially overlaps with <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>.
+            For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.
+          </p>
+          <p>
+            I have been exploring the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into types and programs, and mechanically verified by type-checking.
+            More interestingly, with an interactive development environment (like the <a href="https://agda.readthedocs.io/en/latest/tools/emacs-mode.html">Emacs mode offered by Agda</a>) that provides semantic hints in the form of type information, the programmer can gain better ‘<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>’ regarding the meaning of the program being constructed.
+            (See, for example, my paper on <a href="#publication-9f9adfcc">programming metamorphic algorithms</a>.)
+            This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for improving usability and reusability of inductive families.
+            I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (a.k.a. <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em> or <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>) and contributed to <a href="#publication-41007bea">its dependently typed formalisation</a>.
+          </p>
+          <p>
+            I have also worked on <em><a href="https://www.cs.ox.ac.uk/publications/publication11924-abstract.html">bidirectional transformations</a></em> for solving consistency maintenance (synchronisation) problems.
+            More specifically, my focus was on <em>bidirectional programming</em>, which is largely synonymous with the construction of <em><a href="https://doi.org/10.1145/1232420.1232424">lenses</a></em>.
+            My main results in this area were built around a small ‘putback-based’ bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there were an <a href="#publication-c48b059c">Agda formalisation</a>, a <a href="https://hackage.haskell.org/package/BiGUL">Haskell port</a>, and <a href="#publication-e124d6a0">an axiomatic semantics</a> that helps to explain how to think about bidirectional programs unidirectionally.
+          </p>
 
         </div>
       </div>
@@ -125,15 +139,33 @@ Reasoning about the traced state monad is elementary but inherently extensional,
         </div>
         <div class="col-sm-9">
 
-          <p><span class="paragraph-title">Employment</span>Starting from the end of 2019 I am an assistant research fellow (which is equivalent to the rank of assistant professor) at the <a href="https://www.iis.sinica.edu.tw">Institute of Information Science (IIS)</a>, <a href="https://www.sinica.edu.tw">Academia Sinica</a>, Taiwan, and a member of the <a href="https://www.iis.sinica.edu.tw/page/ResearchGroup/ProgrammingLanguagesandFormalMethods.html">Programming Languages and Formal Methods Group</a> within IIS. Previously I was a postdoctoral researcher under <a href="http://sei.pku.edu.cn/~hu/">Zhenjiang Hu</a> at the <a href="https://www.nii.ac.jp">National Institute of Informatics</a>, Japan during 2014–2019. I also worked as a research assistant of <a href="https://scm.iis.sinica.edu.tw/home/">Shin-Cheng Mu</a> at IIS during 2007–2009 (part-time) and briefly in 2010 (full-time).</p>
+          <p>
+            <span class="paragraph-title">Employment</span>Starting from the end of 2019 I am an assistant research fellow (which is equivalent to the rank of assistant professor) at the <a href="https://www.iis.sinica.edu.tw">Institute of Information Science (IIS)</a>, <a href="https://www.sinica.edu.tw">Academia Sinica</a>, Taiwan, and a member of the <a href="https://www.iis.sinica.edu.tw/page/ResearchGroup/ProgrammingLanguagesandFormalMethods.html">Programming Languages and Formal Methods Group</a> within IIS.
+            Previously I was a postdoctoral researcher under <a href="http://sei.pku.edu.cn/~hu/">Zhenjiang Hu</a> at the <a href="https://www.nii.ac.jp">National Institute of Informatics</a>, Japan during 2014–2019.
+            I also worked as a research assistant of <a href="https://scm.iis.sinica.edu.tw/home/">Shin-Cheng Mu</a> at IIS during 2007–2009 (part-time) and briefly in 2010 (full-time).
+          </p>
 
-          <p><span class="paragraph-title">Education</span>I was born and grew up in <a href="https://en.wikipedia.org/wiki/Changhua">Changhua</a>, <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a>. I did my BS in Computer Science and Information Engineering with a minor in Mathematics at <a href="https://www.ntu.edu.tw">National Taiwan University</a>, Taiwan during 2005–2009. After finishing my one-year compulsory substitute service, I went to the <a href="https://www.ox.ac.uk">University of Oxford</a>, UK in 2010 for a DPhil in Computer Science supervised by <a href="http://www.cs.ox.ac.uk/jeremy.gibbons/">Jeremy Gibbons</a>, and was admitted to the degree in 2014.</p>
+          <p>
+            <span class="paragraph-title">Education</span>I was born and grew up in <a href="https://en.wikipedia.org/wiki/Changhua">Changhua</a>, <a href="https://en.wikipedia.org/wiki/Taiwan">Taiwan</a>.
+            I did my BS in Computer Science and Information Engineering with a minor in Mathematics at <a href="https://www.ntu.edu.tw">National Taiwan University</a>, Taiwan during 2005–2009.
+            After finishing my one-year compulsory substitute service, I went to the <a href="https://www.ox.ac.uk">University of Oxford</a>, UK in 2010 for a DPhil in Computer Science supervised by <a href="http://www.cs.ox.ac.uk/jeremy.gibbons/">Jeremy Gibbons</a>, and was admitted to the degree in 2014.
+          </p>
 
-          <p>My Chinese name 向上 (Hsiang-Shang), which I publish under, means ‘upwards’ and is an unusual one; sadly, it’s impossible to approximate its pronunciation acceptably accurately in English. On the other hand, ‘Josh’ is a name I’ve used for years (since 1996, to be precise), so I am perfectly happy (in fact happier) to be called by the name in English. Even in a Chinese-speaking environment, using an English name can be helpful in avoiding the strictly hierarchical and somewhat distant way of addressing people in East Asia and thus breaking one of the mental barriers to equality.</p>
+          <p>
+            My Chinese name 向上 (Hsiang-Shang), which I publish under, means ‘upwards’ and is an unusual one; sadly, it’s impossible to approximate its pronunciation acceptably accurately in English.
+            On the other hand, ‘Josh’ is a name I’ve used for years (since 1996, to be precise), so I am perfectly happy (in fact happier) to be called by the name in English.
+            Even in a Chinese-speaking environment, using an English name can be helpful in avoiding the strictly hierarchical and somewhat distant way of addressing people in East Asia and thus breaking one of the mental barriers to equality.
+          </p>
 
-          <p>I listen to classical music (mainly from the Romantic period) and play the piano — I own a <a href="images/N1X.jpg">Yamaha AvantGrand N1X</a> and strive to practise daily. For piano music, I feel closest to <a href="https://en.wikipedia.org/wiki/Barcarolle_(Chopin)">Chopin</a>, and I’m getting to know <a href="https://en.wikipedia.org/wiki/Piano_Sonata_No._23_(Beethoven)">Beethoven</a> and <a href="https://en.wikipedia.org/wiki/Impromptus_(Schubert)#Four_Impromptus,_D._899_(Op._90)">Schubert</a>. More broadly, I also admire <a href="https://en.wikipedia.org/wiki/Violin_Concerto_(Brahms)">Brahms</a>’s and <a href="https://en.wikipedia.org/wiki/Symphony_No._6_(Tchaikovsky)">Tchaikovsky</a>’s work, and start to appreciate <a href="https://en.wikipedia.org/wiki/Symphony_No._9_(Mahler)">Mahler’s symphonies</a> and even a bit of <a href="https://en.wikipedia.org/wiki/The_Rite_of_Spring">Stravinsky</a>.</p>
+          <p>
+            I listen to classical music (mainly from the Romantic period) and play the piano — I own a <a href="images/N1X.jpg">Yamaha AvantGrand N1X</a> and strive to practise daily.
+            For piano music, I feel closest to <a href="https://en.wikipedia.org/wiki/Barcarolle_(Chopin)">Chopin</a>, and I’m getting to know <a href="https://en.wikipedia.org/wiki/Piano_Sonata_No._23_(Beethoven)">Beethoven</a> and <a href="https://en.wikipedia.org/wiki/Impromptus_(Schubert)#Four_Impromptus,_D._899_(Op._90)">Schubert</a>.
+            More broadly, I also admire <a href="https://en.wikipedia.org/wiki/Violin_Concerto_(Brahms)">Brahms</a>’s and <a href="https://en.wikipedia.org/wiki/Symphony_No._6_(Tchaikovsky)">Tchaikovsky</a>’s work, and start to appreciate <a href="https://en.wikipedia.org/wiki/Symphony_No._9_(Mahler)">Mahler’s symphonies</a> and even a bit of <a href="https://en.wikipedia.org/wiki/The_Rite_of_Spring">Stravinsky</a>.
+          </p>
 
-          <p>I’m attracted to <a href="http://www.airliners.net/forum/viewforum.php?f=5">technical and operational aspects of civil aviation</a>; I collect <a href="https://www.facebook.com/Josh.HS.Ko/photos/1416158791769987">1/200 and 1/400 airliner models</a>, and I’m learning to fly the <a href="https://en.wikipedia.org/wiki/Boeing_777">Boeing 777</a> in <a href="http://www.x-plane.com">X-Plane</a>.</p>
+          <p>
+            I’m attracted to <a href="http://www.airliners.net/forum/viewforum.php?f=5">technical and operational aspects of civil aviation</a>; I collect <a href="https://www.facebook.com/Josh.HS.Ko/photos/1416158791769987">1/200 and 1/400 airliner models</a>, and I’m learning to fly the <a href="https://en.wikipedia.org/wiki/Boeing_777">Boeing 777</a> in <a href="http://www.x-plane.com">X-Plane</a>.
+          </p>
 
         </div>
       </div>
@@ -235,6 +267,14 @@ Reasoning about the traced state monad is elementary but inherently extensional,
             </div>
             <div class="panel panel-publication-info collapse" id="publication-info-6219e92b">
               <div class="panel-body publication-info">
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    LIPIcs
+                  </div>
+                  <div class="col-sm-10">
+                    <p>216</p>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-sm-2 publication-info-title">
                     Related blog post

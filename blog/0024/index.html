@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Productivity and the traced state monad — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="We take a look at the left scan as a simple application of the traced state monad, which gives us an opportunity to revisit productivity checking and Danielsson’s embedded language technique.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0024
+</div>
+<h2>Productivity and the traced state monad</h2>
+<div class="post-time">Posted at 10:31 on 11 October 2021</div>
+<p>Missing in <a href="/blog/0023/">0023</a> was an application of the traced state monad.
+Here we play with a simple one: the left fold on lists, which in Haskell is defined by</p>
+<pre><code>foldl :: (b -&gt; a -&gt; b) -&gt; b -&gt; [a] -&gt; b
+foldl f e []     = e
+foldl f e (a:as) = foldl f (f e a) as
+</code></pre>
+<p>An important observation is that <code>foldl</code> is really a <em>stateful</em> traversal of a <em>colist</em>, updating a state while deconstructing the colist — in Haskell we could write</p>
+<pre><code>foldlS :: MonadState b m =&gt; (b -&gt; a -&gt; b) -&gt; [a] -&gt; m ()
+foldlS f []     = return ()
+foldlS f (a:as) = modify (flip f a) &gt;&gt; foldlS f as
+</code></pre>
+<p>and re-define <code>foldl</code> in terms of <code>foldlS</code>:</p>
+<pre><code>foldl f e as = execState (foldlS f as) e
+</code></pre>
+<p>(where <code>execState :: State s a -&gt; s -&gt; s</code>, with <code>State s</code> being an instance of <code>MonadState s</code>).
+It is then no wonder that <code>foldl</code> doesn’t produce anything for an infinite list, since the stateful computation never reaches the end.
+But this is exactly the problem which the traced state monad can help to solve: we can mark all the intermediate states so that the computation is guaranteed to be productive even on infinite lists.
+The resulting computation becomes the left scan:</p>
+<pre><code>scanlTS :: (MonadTrace m, MonadState b m) =&gt; (b -&gt; a -&gt; b) -&gt; [a] -&gt; m ()
+scanlTS f []     = return ()
+scanlTS f (a:as) = mark &gt;&gt; modify (flip f a) &gt;&gt; scanlTS f as
+</code></pre>
+<p>where the type class <code>MonadTrace m</code> extends <code>Monad m</code> with the operation <code>mark :: m ()</code>.
+(See <a href="https://doi.org/10.4204/eptcs.76.8">Maciej and Jeremy’s MSFP ’12 paper</a> for a full treatment in Haskell.)</p>
+<p>Porting the left scan back to our Agda development in <a href="/blog/0023/">0023</a>, we need a definition of colists,</p>
+<pre><code>data ListF (A X : Type) : Type where
+  []  : ListF A X
+  _∷_ : A → X → ListF A X
+
+record Colist (A : Type) : Type where
+  coinductive
+  field
+    decon : ListF A (Colist A)
+
+open Colist
+</code></pre>
+<p>and a first attempt is</p>
+<pre><code>scanl₀ : (S → A → S) → Colist A → States S Unit
+scanl₀ f as with decon as
+... | []      = return tt
+... | a ∷ as' = mark &gt;&gt; modify (flip f a) &gt;&gt; scanl₀ f as'
+</code></pre>
+<p>This definition doesn’t pass Agda’s termination/productivity check, however.
+By contrast, Agda would happily accept the manually expanded definition:</p>
+<pre><code>scanl₁ : (S → A → S) → Colist A → States S Unit
+force (scanl₁ f as s) with decon as
+... | []      = ret tt s
+... | a ∷ as' = int s (scanl₁ f as' (f s a))
+</code></pre>
+<p>But this definition breaks abstraction: we are forced to abandon the traced state monad operations and work with the underlying representation.
+We should definitely look for an alternative.</p>
+<h3>Productivity is termination</h3>
+<p>But before we move on, let us take the opportunity to reconstruct what it takes to check the productivity of codata definitions, which is <a href="https://doi.org/10.1145/2544174.2500591">unified with termination checking</a> when codata are defined by copattern matching.
+We are more familiar with termination of functions defined on inductive data by pattern matching: such functions terminate when arguments of recursive calls are strictly smaller, i.e., have less constructors than the input patterns.
+For example, a function <code>f</code> on natural numbers terminates if its inductive clause looks like</p>
+<pre><code>f (suc n) = … f n …
+</code></pre>
+<p>If a recursive call is not syntactically directly performed on a smaller argument but on the result of another function applied to the argument, e.g.,</p>
+<pre><code>f (suc n) = … f (g n) …
+</code></pre>
+<p>then it could be the case that <code>g</code> makes <code>n</code> bigger (e.g., by re-applying <code>suc</code> to <code>n</code>), causing non-termination; less diligent termination checkers (like Agda’s) would simply refuse to accept dubious definitions like this.
+In short, Agda’s termination checker needs to see syntactically that pattern size strictly decreases with recursive calls.</p>
+<p>Turn this around and we get productivity checking as part of termination checking: the termination checker also needs to see syntactically that copattern size strictly decreases with corecursive calls.
+Think of codata as black boxes that, upon deconstruction (which could be visualised as opening the box or pushing a button on the box), produce some results and possibly new black boxes, which can be further deconstructed.
+Also think of applying a deconstructor as sending a deconstruction request to a black box, and defining codata by copattern matching as specifying how requests are handled.
+For example, <code>scanl₁ f as s : Trace S Unit</code> is like a black box which doesn’t move until a <code>force</code> request comes in, at which point the black box (by the definition of <code>scanl₁</code>) reacts by sending a <code>decon</code> request to another black box <code>as : Colist A</code> and deciding which <code>TraceStep</code> (<code>ret</code> or <code>int</code>) to produce depending on what <code>as</code> produces in response to the <code>decon</code> request.
+However a request is handled, it should be done in finite time, ending with just results and black boxes not handling requests, so that even though we may continue sending more requests indefinitely, we don’t have to wait indefinitely for the requests to be handled, and the whole process is under our control — this is the definition of productivity, which is just termination of deconstruction.
+To ensure termination of deconstruction, requests/deconstructors should get strictly fewer in corecursive calls so that they are guaranteed to be handled and disappear eventually, which is analogous to the situation where constructors should get strictly fewer in recursive calls.
+For example, we may abstract the definition of <code>scanl₁</code> as</p>
+<pre><code>force (scanl₁ f as s) = … scanl₁ f as' (f s a) …
+</code></pre>
+<p>There is no deconstructor outside the corecursive call on the right-hand side, which has fewer deconstructors than the left-hand side, so Agda deems the definition productive/terminating.
+On the other hand, the definition of <code>scanl₀</code> may be abstracted as</p>
+<pre><code>scanl₀ f as =  … h (scanl₀ f as') …
+</code></pre>
+<p>with <code>h</code> standing for the monadic operations outside the corecursive call.
+If taken as a computation rule, the definition would expand forever by itself, so it’s perfectly reasonable that the termination checker rejects the definition.
+Even if the left-hand side were <code>force (scanl₀ f as)</code>, it would still be sensible to prohibit corecursive calls from being enclosed in arbitrary functions (like <code>h</code> here), because those functions may apply deconstructors to the corecursive calls and cause non-termination — this is analogous to the reason for prohibiting recursive calls of the form <code>f (g n)</code> from the discussion of inductive definitions.
+Constructors outside corecursive calls (e.g., the <code>a ∷ as'</code> case of <code>scanl₁</code>) are fine, however, since it’s easy to see that they’re not deconstructors.</p>
+<h3>The embedded language technique</h3>
+<p>Back to our problem: can we somehow write a definition in the style of <code>scanl₀</code> that is accepted by Agda’s termination checker?
+If we want to stay with copatterns rather than switch to a different formalism like <a href="https://doi.org/10.1145/3372885.3373814">guarded type theory</a>, then it seems the only way out is to use <a href="https://doi.org/10.4204/EPTCS.43.3">Danielsson’s embedded language technique</a>.
+The idea is to define an embedded language whose (potentially infinite) programs consist of the operations that the definition uses, and rewrite the definition to produce, upon deconstruction, some program fragment of the language; Agda can then straightforwardly see that the new definition is productive, emitting program fragments upon deconstruction.
+To actually compute what the original definition computes, we write an interpreter of the language, which amounts to a proof that the specific forms of program fragment emitted by the new definition do give rise to productive codata.
+Concretely, for the left scan, the key to its productivity is the invocation of <code>mark</code> before the corecursive call: forcing the left scan (applied to an initial state) should produce a <code>TraceStep</code>, which has to be an <code>int</code> for a corecursive call to be possible, which means that an intermediate state is needed as the first argument of <code>int</code>, and the presence of <code>mark</code> guarantees the existence of this intermediate state.
+(By contrast, the left fold does not invoke <code>mark</code> and indeed is not productive.)
+The embedded language we use will be defined such that every program fragment containing a corecursive call also contains at least an invocation of <code>mark</code> before the corecursive call, and then we will be able to write a productive interpreter for this language.</p>
+<p>The actual definition of the language consists of two inner inductive types defining the forms of program fragment described above and an outer coinductive type allowing such program fragments to unfold indefinitely:</p>
+<pre><code>mutual
+
+  record SynStates (S A : Type) : Type₁ where
+    coinductive
+    field
+      force : Productive S A
+
+  data Productive (S : Type) : Type → Type₁ where
+    norec   : States S A → Productive S A
+    mark&gt;&gt;_ : Marked S A → Productive S A
+    _&gt;==_   : States S B → (B → Productive S A) → Productive S A
+
+  data Marked (S : Type) : Type → Type₁ where
+    corec : SynStates S A → Marked S A
+    _&gt;==_ : States S B → (B → Marked S A) → Marked S A
+</code></pre>
+<p><code>SynStates S A</code> is a type of syntactic representations of <code>States S A</code> — later we will define an interpreter of type</p>
+<pre><code>eval : SynStates S A → States S A
+</code></pre>
+<p>When the <code>force</code> deconstructor is applied to a <code>SynStates S A</code>, the emitted program fragment has type <code>Productive S A</code>, and can contain either no corecursive calls, in which case we can directly use any <code>States S A</code> (wrapped in the <code>norec</code> constructor), or a <code>mark</code> followed by another program fragment of type <code>Marked S A</code> (explained below); in the latter case, to allow <code>States</code> operations to be performed before the invocation of <code>mark</code> so as to make the language more general-purpose, <code>Productive S A</code> also includes a bind operator/constructor <code>_&gt;==_</code>.
+For a program fragment of type <code>Marked S A</code>, since it is preceded by at least a <code>mark</code>, it can freely make corecursive calls (wrapped in the <code>corec</code> constructor) and perform arbitrary <code>States</code> operations before the corecursive calls (using the <code>_&gt;==_</code> operator/constructor).
+The left scan can then be syntactically expressed in this language,</p>
+<pre><code>synScanl : (S → A → S) → Colist A → SynStates S Unit
+force (synScanl f as) with decon as
+... | []      = norec (return tt)
+... | a ∷ as' = mark&gt;&gt;
+                modify (flip f a) &gt;== λ _ →
+                corec (synScanl f as')
+</code></pre>
+<p>and the actual left scan can be obtained by evaluating <code>SynStates</code>:</p>
+<pre><code>scanl : (S → A → S) → Colist A → States S Unit
+scanl f as = eval (synScanl f as)
+</code></pre>
+<p>It remains to define <code>eval</code>, which is one of several mutually recursive functions, each interpreting one layer of the definition of <code>SynStates</code>:</p>
+<pre><code>mutual
+
+  eval : SynStates S A → States S A
+  eval sa = evalP (force sa)
+
+  evalP : Productive S A → States S A
+  force (evalP (norec ma)  s) = force (ma s)
+  force (evalP (mark&gt;&gt; ka) s) = int s (evalM ka s)
+  force (evalP (mb &gt;== f)  s) = force (evalTP (mb s) f)
+
+  evalTP : Trace S B → (B → Productive S A) → Trace S A
+  force (evalTP tb f) with force tb
+  force (evalTP tb f) | ret b s   = force (evalP (f b) s)
+  force (evalTP tb f) | int s tb' = int s (evalTP tb' f)
+
+  evalM : Marked S A → States S A
+  evalM (corec sa) = eval sa
+  evalM (mb &gt;== f) = λ s → evalTM (mb s) f
+
+  evalTM : Trace S B → (B → Marked S A) → Trace S A
+  force (evalTM tb f) with force tb
+  force (evalTM tb f) | ret b s   = force (evalM (f b) s)
+  force (evalTM tb f) | int s tb' = int s (evalTM tb' f)
+</code></pre>
+<p>The termination argument for this set of definitions is slightly more involved: for example, <code>force (evalP (mb &gt;== f) s)</code> reduces to <code>force (evalTP (mb s) f)</code>, which still leaves the <code>force</code> request unhandled; depending on the result of <code>force tb</code>, <code>force (evalTP tb f)</code> may either loop back to <code>force (evalP (f b) s)</code>, where the <code>force</code> request is still unhandled but the first argument <code>f b</code> of <code>evalP</code> is smaller than the original argument <code>mb &gt;== f</code>, or produce <code>int s (evalTP tb' f)</code>, where the <code>force</code> request is handled and disappears.
+I have to turn on the pragma <code>--termination-depth=2</code> for Agda to check more carefully and accept this set of definitions, probably because of the mutual recursion between <code>evalP</code> and <code>evalTP</code> (and similarly between <code>evalM</code> and <code>evalTM</code>).</p>
+<p>Again it is interesting to make a comparison with the inductive setting, where the counterpart of Danielsson’s embedded language technique should be the <a href="https://doi.org/10.1017/S0960129505004822">Bove–Capretta method</a>.
+If a function makes recursive calls whose arguments do not get syntactically smaller, Bove and Capretta tell us that we can build an accessibility relation relating the arguments before and after the recursive calls and do induction on the accessibility proof instead; separately from the definition of the function, we then prove that all possible inputs are accessible, that is, the argument changes are well-founded.
+The method is general but not scalable by itself because we have to craft an accessibility relation for every function, so it’ll be more useful if we can prepare a set of well-founded (accessibility) relations from which we can build the ones required by the Bove–Capretta method more easily.
+This is structurally the same as Danielsson’s technique: we first build a syntactic structure to satisfy the termination checker, and then separately prove that the decreasing of patterns/copatterns in the syntactic structure is well-founded.
+To make Danielsson’s technique more useful, we should not craft a new embedded language for every function, but should design a versatile language that provides enough operations for defining most functions or can be extended with operations as long as they satisfy certain properties.</p>
+<p>Regarding versatility, the presented <code>SynStates</code> language isn’t too satisfactory:
+First, <code>mark</code> isn’t the only operation that guarantees productivity — we should allow any operation to guard corecursive calls as long as it necessarily emits an intermediate state, with <code>mark</code> being a special case.
+Second, <code>Marked</code> should have allowed corecursive calls to appear anywhere — that is, we should have used this version:</p>
+<pre><code>data Marked' (S : Type) : Type → Type₁ where
+  corec : SynStates S A → Marked' S A
+  embed :    States S A → Marked' S A
+  _&gt;==_ : Marked' S B → (B → Marked' S A) → Marked' S A
+</code></pre>
+<p>But for this version it seems much harder to write a productive interpreter acceptable to Agda.
+Here is my speculation:
+Corecursive functions can be regarded as corresponding to state machines, with the states being the arguments of the functions, and applying a deconstructor triggers a state transition.
+Traversing a list-like structure corecursively (like <code>Marked</code>) is easier, because when we are in the middle of the traversal, the state is still a list, whereas traversing a tree-like structure corecursively (like <code>Marked'</code>) requires a zipper-like state to record the rest of the tree to be traversed, which is of course more complicated.
+Maybe this is one reason that we more often see lists rather than trees as examples of corecursive programming?</p>
+<hr />
+<div class="remark">
+Another post that was harder to write than it seemed…
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
