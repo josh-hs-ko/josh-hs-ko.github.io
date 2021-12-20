@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Termination as type casting — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="If we model computation as generating a potentially infinite colist of states, then termination is the ability to cast this colist into a finite list.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0025
+</div>
+<h2>Termination as type casting</h2>
+<div class="post-time">Posted at 22:44 on 20 December 2021</div>
+<p>There is a reduction in blogging frequency because I have been working with <a href="https://twitter.com/ltchen_tw">Liang-Ting</a> and <a href="https://twitter.com/viktor_lin">Victor</a> on a datatype-generic library that specialises to native Agda programs using reflection.
+We aim to submit a paper about this to <a href="https://icfp22.sigplan.org">ICFP ’22</a> (whose deadline is somewhat earlier than expected), and we’re going as fast as we can without getting overstretched.
+I’m taking a small break by writing this post (which is therefore a bit rushed) about an Agda exercise I finished a while ago.</p>
+<hr />
+<p>I mentioned in <a href="/blog/0023/">0023</a> that Zong-You and I have been playing with tree traversals; it began with Conor McBride’s ‘<a href="https://doi.org/10.1145/1328438.1328474">clowns and jokers</a>’ paper, which presented a stack machine for computing folds (which I don’t suppose was new, but the technique for deriving the type of stack elements using dissection was).
+Later we found out that Carlos Tomé Cortiñas and Wouter Swierstra did a <a href="https://doi.org/10.1145/3240719.3241787">complete Agda formalisation of the construction</a>, in particular making the termination of machine execution evident to Agda.
+The formalisation looks unsatisfactory to me for two reasons: (i) it’s still a function that goes directly from input to output rather than allowing suspension and resumption in the middle of the computation, which is one key benefit of using the stack machine instead of the original fold function, and (ii) termination is made evident by heavily altering and complicating the definition, which looks more like a necessary evil (due to Agda’s insistence on totality).</p>
+<p>To allow suspension and resumption, we should model the stack machine computation as a state transition function, which can then be invoked as many or few times as one wants, stopping at various points of interest during the computation.
+More specifically, the user gets and traverses a colist of states computed iteratively by the state transition function.
+This colist can be truly infinite in general: an observation here is that the stack machine works by gradually decomposing the input tree, and decomposition is the <em>coinductive</em> view, so the stack machine in fact works on codata, which can be infinite, in which case the computation is infinite too.
+This also explains why termination wasn’t evident for the original definition, simply because the original definition is in general non-terminating.
+On the other hand, if the input tree is finite, then the computation should terminate, which, for the colist formulation, means that we can cast the potentially infinite colist into a finite list, from which the last state containing the final result can be drawn.
+The rest of this post formalises these ideas.</p>
+<p>First, a brief recap on the fold machine.
+Suppose that we are folding internally labelled binary trees, whose shape is defined by the base functor</p>
+<pre><code>data ITreeF (A X : Set) : Set where
+  leaf : ITreeF A X
+  node : A → X → X → ITreeF A X
+</code></pre>
+<p>of which we can take the least and greatest fixed points,</p>
+<pre><code>data μITree (A : Set) : Set where
+  con : ITreeF A (μITree A) → μITree A
+
+record νITree (A : Set) : Set where
+  coinductive
+  field decon : ITreeF A (νITree A)
+
+open νITree
+</code></pre>
+<p>and we can convert the least fixed point to the greatest fixed point,</p>
+<pre><code>toνITree : μITree A → νITree A
+decon (toνITree (con  leaf       )) = leaf
+decon (toνITree (con (node a t u))) = node a (toνITree t) (toνITree u)
+</code></pre>
+<p>although we’ll only be working on the greatest fixed point for now.
+The machine state type is parametrised by the tree element/label type <code>A</code> and a result type <code>B</code>, and each state consists of a focus and a stack (whose type is just a renamed version of the standard library list type):</p>
+<pre><code>record MachineState (A B : Set) : Set where
+  constructor ⟨_,_⟩
+  field
+    focus : Focus A B
+    stack : Stack (∂ITree A B)
+</code></pre>
+<p>The content of the focus depends on the direction in which the machine is travelling: if the machine is travelling downwards, then it is decomposing the input tree, in which case the focus is on a sub-tree to be decomposed; if the machine is travelling upwards, then it has finished processing a sub-tree, in which case the focus stores the sub-result computed from the sub-tree.</p>
+<pre><code>data Focus (A B : Set) : Set where
+  ↓_ : νITree A → Focus A B
+  ↑_ : B        → Focus A B
+</code></pre>
+<p>The stack stores contents that are out of focus:
+When the machine focuses on a sub-tree, the right sub-tree is stored in the stack so that it can be popped out and traversed after the sub-tree in focus is processed.
+Since we’re computing a fold, an algebra of type <code>A → B → B → B</code> is used at each <code>node</code> to combine the results computed from the sub-trees into the result for the node.
+I choose to partially apply the algebra as soon as the machine sees a node and its label or the result computed from the left sub-tree, and store the rest of the algebra in the stack too.</p>
+<pre><code>data ∂ITree (A B : Set) : Set where
+  ○-⟨_,_⟩ : νITree A → (B → B → B) → ∂ITree A B
+  ⟨_⟩-○   :                (B → B) → ∂ITree A B
+</code></pre>
+<p>To traverse a tree, we prepare an initial state where the focus contains the tree and the stack is empty.
+Then we run the machine by repeatedly invoking the state transition function:</p>
+<pre><code>step : B → (A → B → B → B) → MachineState A B → Maybe (MachineState A B)
+step b f ⟨ ↓ t , stk ⟩ with νITree.decon t
+... | leaf       = just ⟨ ↑ b ,                 stk ⟩
+... | node a t u = just ⟨ ↓ t , ○-⟨ u , f a ⟩ ∷ stk ⟩
+step _ _ ⟨ ↑ b , [] ⟩ = nothing
+step _ _ ⟨ ↑ b , ○-⟨ u , f₁ ⟩ ∷ stk ⟩ = just ⟨ ↓ u    , ⟨ f₁ b ⟩-○ ∷ stk ⟩
+step _ _ ⟨ ↑ b , ⟨ f₂ ⟩-○     ∷ stk ⟩ = just ⟨ ↑ f₂ b ,              stk ⟩
+</code></pre>
+<p>When travelling downwards, if the focussed tree is a <code>leaf</code>, we return the base value <code>b : B</code> upwards; if the tree is a <code>node</code>, we go downwards into the left sub-tree and put the right sub-tree along with the algebra <code>f</code> partially applied to the node label in the stack for later processing.
+When travelling upwards, if there are nothing else to process in the stack, the machine halts; otherwise we pop out a sub-tree (if any) to continue processing and a partially applied algebra to apply to the result in focus.</p>
+<p>To run the machine, we unfold a colist of states with <code>step</code>.
+Again start with the base functor for lists</p>
+<pre><code>data ListF (A X : Set) : Set where
+  []  : ListF A X
+  _∷_ : A → X → ListF A X
+</code></pre>
+<p>and its least and greatest fixed points</p>
+<pre><code>data μList (A : Set) : Set where
+  con : ListF A (μList A) → μList A
+
+record νList (A : Set) : Set where
+  coinductive
+  field decon : ListF A (νList A)
+
+open νList
+</code></pre>
+<p>also with conversion from the former to the latter:</p>
+<pre><code>toνList : μList A → νList A
+decon (toνList (con []      )) = []
+decon (toνList (con (x ∷ xs))) = x ∷ toνList xs
+
+</code></pre>
+<p>We can define the standard unfold operator on colists,</p>
+<pre><code>unfoldr : (B → ListF A B) → B → νList A
+decon (unfoldr f b) with f b
+... | []     = []
+... | a ∷ b' = a ∷ unfoldr f b'
+</code></pre>
+<p>using which we can then define a function that can be used to apply <code>step</code> iteratively to an initial state and unfold a colist of states:</p>
+<pre><code>iterateMaybe : (A → Maybe A) → Maybe A → νList A
+iterateMaybe f = unfoldr (maybe (λ a → a ∷ f a) [])
+</code></pre>
+<p>(Incidentally, this seems to be a less known but more natural and general version of <code>iterateMaybe</code> than the version of type <code>(A → Maybe A) → A → νList A</code>, which can only produce non-empty colists.)
+Now the function</p>
+<pre><code>run : B → (A → B → B → B) → νITree A → νList (MachineState A B)
+run b f t = iterateMaybe (step b f) (just ⟨ ↓ t , [] ⟩)
+</code></pre>
+<p>gives the colist of states produced by the machine.</p>
+<p>Our goal is to show that the <code>νList</code> above is in fact finite by casting it to a <code>μList</code>.
+While it is always possible to cast a <code>μList</code> to a <code>νList</code>, as witnessed by <code>toνList</code>, the opposite direction requires some condition.
+The condition I come up with is that the <code>νList</code> being cast should be <em>simulated</em> by a <em>finite</em> <code>νList</code> of the form <code>toνList xs</code> where <code>xs</code> is some <code>μList</code>.
+Let <code>A ~ B = A → B → Set</code> be the type of binary relations on <code>A</code> and <code>B : Set</code>.
+When I say that a colist <code>as : νList A</code> is simulated by another colist <code>bs : νList A</code>’ with respect to some relation <code>R : A ~ B</code>, I mean that whenever <code>as</code> deconstructs to a head <code>a</code> and a tail <code>as'</code>, <code>bs</code> also deconstructs to a head <code>b</code> and a tail <code>bs'</code> such that <code>R a b</code> holds and <code>as'</code> is again simulated by <code>bs'</code> with respect to <code>R</code>.
+Intuitively, if <code>as</code> is simulated by <code>bs</code>, then the length of <code>as</code> is bounded by the length of <code>bs</code> (and a binary relation holds for their corresponding elements), so if we know <code>bs</code> is finite, then <code>as</code> has to be finite as well, and we can successfully cast <code>as</code> to a <code>μList</code>.
+Writing all these down formally:</p>
+<pre><code>data ListSimF (R : A ~ B) (S : X ~ Y) : ListF A X ~ ListF B Y where
+  []  : {bs : ListF B Y} → ListSimF R S [] bs
+  _∷_ : {a : A} {b : B} → R a b →
+        {x : X} {y : Y} → S x y → ListSimF R S (a ∷ x) (b ∷ y)
+
+record νListSim (R : A ~ B) (as : νList A) (bs : νList B) : Set where
+  coinductive
+  field decon : ListSimF R (νListSim R) (decon as) (decon bs)
+
+open νListSim
+
+toμList : {R : A ~ B} (as : νList A) (bs : μList B)
+        → νListSim R as (toνList bs) → μList A
+toμList as _           sim with decon as | decon sim
+toμList _  _             _ | []     | _       = con []
+toμList _ (con (_ ∷ bs)) _ | a ∷ as | _ ∷ sim = con (a ∷ toμList as bs sim)
+</code></pre>
+<p>Which list are we going to use to bound the length of <code>run b f (toνITree t)</code> given some <code>t : μITree A</code>?
+The simplest possible: a list of units whose length is the number of steps we know the machine will take before it halts.
+But we can only count the steps if we know that all the trees in the machine states have finite sizes (or otherwise the machine doesn’t terminate).
+Our strategy is to construct an abstract version of the machine where all the trees in the states are finite, and show that it simulates the original machine when running on a finite tree; we will also show that the colist of states produced by the abstract version of the machine is simulated by the aforementioned list of units, so by transitivity the colist of states produced by the original machine is also simulated by the list of units, and then we will have shown that the original machine terminates on a finite tree.</p>
+<p>The abstract machine is structurally the same as the original one but missing some contents since we don’t care about computing the results:</p>
+<pre><code>record MachineState' (A : Set) : Set where
+  constructor ⟨_,_⟩'
+  field
+    focus : Maybe (μITree A)
+    stack : Stack (Maybe (μITree A))
+
+step' : MachineState' A → Maybe (MachineState' A)
+step' ⟨ just (con  leaf       ) , stk ⟩' = just ⟨ nothing ,          stk ⟩'
+step' ⟨ just (con (node a t u)) , stk ⟩' = just ⟨ just t ,  just u ∷ stk ⟩'
+step' ⟨ nothing ,                 []  ⟩' = nothing
+step' ⟨ nothing ,       just u  ∷ stk ⟩' = just ⟨ just u , nothing ∷ stk ⟩'
+step' ⟨ nothing ,       nothing ∷ stk ⟩' = just ⟨ nothing ,          stk ⟩'
+</code></pre>
+<p>All the trees in a <code>MachineState'</code> are finite, and we can calculate the precise number of steps that the machine will take before it halts with these functions:</p>
+<pre><code>countTreeSteps : μITree A → ℕ → ℕ
+countTreeSteps (con  leaf       ) = suc
+countTreeSteps (con (node a t u)) =
+  suc ∘ countTreeSteps t ∘ suc ∘ countTreeSteps u ∘ suc
+
+countStackSteps : Stack (Maybe (μITree A)) → ℕ
+countStackSteps            []   = zero
+countStackSteps (just t  ∷ stk) =
+           suc (countTreeSteps t (suc (countStackSteps stk)))
+countStackSteps (nothing ∷ stk) = suc (countStackSteps stk)
+
+countSteps : MachineState' A → ℕ
+countSteps ⟨ just t  , stk ⟩' = countTreeSteps t (countStackSteps stk)
+countSteps ⟨ nothing , stk ⟩' =                   countStackSteps stk
+</code></pre>
+<p><code>countTreeSteps</code> calculates the number of steps (in the form of ‘difference natural numbers’ of type <code>ℕ → ℕ</code> to avoid associativity issues in later proofs) the machine will take to reduce a focussed tree to a result:
+if the tree is a leaf, then it takes one step (from focussing on the leaf (and going downwards) to focussing on the result for the leaf (and going upwards)); if it is a node, then there are</p>
+<ul>
+<li>one step for focussing on the left sub-tree,</li>
+<li>several steps for reducing the left sub-tree to a sub-result,</li>
+<li>one step for switching the focus to the right sub-tree,</li>
+<li>several steps for reducing the right sub-tree to a sub-result, and</li>
+<li>one final step for combining the two sub-results.</li>
+</ul>
+<p>Similarly, <code>countStackSteps</code> calculates the number of steps for eliminating the stack: for example, in the <code>just t ∷ stk</code> case, there are</p>
+<ul>
+<li>one step for popping out <code>t</code> (which is a right sub-tree) and putting it in focus,</li>
+<li>several steps for reducing <code>t</code> to a sub-result,</li>
+<li>one step for combining the result with the sub-result for some left sub-tree, and</li>
+<li>several steps for eliminating the rest of the stack.</li>
+</ul>
+<p>Finally, <code>countSteps</code> calculates the number of steps to reach the final state from the given state by summing the numbers of steps it will take to eliminate the focus and the stack.
+Then it is straightforward to establish the simulation by basically instructing Agda to look into the definitions:</p>
+<pre><code>terminationSim :
+    (ms' : MachineState' A)
+  → νListSim (λ _ _ → ⊤) (iterateMaybe step' (just ms'))
+                         (toνList (replicate (suc (countSteps ms')) tt))
+decon (terminationSim ⟨ just (con leaf        ) , stk ⟩') =
+  tt ∷ terminationSim _
+decon (terminationSim ⟨ just (con (node a t u)) , stk ⟩') =
+  tt ∷ terminationSim _
+decon (terminationSim ⟨ nothing ,                 []  ⟩') =
+  tt ∷ record { decon = [] }
+decon (terminationSim ⟨ nothing ,        just u ∷ stk ⟩') =
+  tt ∷ terminationSim _
+decon (terminationSim ⟨ nothing ,       nothing ∷ stk ⟩') =
+  tt ∷ terminationSim _
+</code></pre>
+<p>where <code>replicate : ℕ → A → μList A</code> produces a list of the specified length consisting of the given element.</p>
+<p>The other simulation requires setting up an abstraction relation for relating an original state and an abstract state, saying that they’re basically the same except that the potentially infinite trees in the original state are actually the necessarily finite trees in the abstract state.
+I’ll just dump the definitions, where the <code>Pointwise</code> relations from the standard library are helpful.</p>
+<pre><code>funR : (A → B) → (A ~ B)
+funR f x y = f x ≡ y
+
+from∂ITree : ∂ITree A B → Maybe (νITree A)
+from∂ITree ○-⟨ t , _ ⟩ = just t
+from∂ITree ⟨ _ ⟩-○     = nothing
+
+fromFocus : Focus A B → Maybe (νITree A)
+fromFocus (↓ t) = just t
+fromFocus (↑ _) = nothing
+
+abstractionR : MachineState A B → MachineState' A → Set
+abstractionR ⟨ focus , stack ⟩ ⟨ focus' , stack' ⟩' =
+  Maybe.Pointwise (funR toνITree) focus' (fromFocus focus) ×
+  Stack.Pointwise (Maybe.Pointwise (funR toνITree))
+                                  stack' (Stack-map from∂ITree stack)
+  -- Stack-map : (A → B) → Stack A → Stack B
+</code></pre>
+<p>Then the simulation proof proceeds similarly by instructing Agda to look into the definitions; it’s kind of difficult to typeset, so I’ll just leave it in the source code (link at the end).</p>
+<pre><code>abstractionSim :
+    (b : B) (f : A → B → B → B)
+    (ms : MachineState A B) (ms' : MachineState' A) → abstractionR ms ms'
+  → νListSim abstractionR (iterateMaybe (step b f) (just ms ))
+                          (iterateMaybe  step'     (just ms'))
+</code></pre>
+<p>Finally, transitivity of simulation gives us the simulation that can be used to turn the colist <code>run b f (toνITree t)</code> of states into a finite list.</p>
+<pre><code>fullTerminationSim :
+    (b : B) (f : A → B → B → B) (t : μITree A)
+  → νListSim (λ _ _ → ⊤)
+             (iterateMaybe (step b f) (just ⟨ ↓ (toνITree t) , [] ⟩))
+             (toνList (replicate (suc (countTreeSteps t zero)) tt))
+fullTerminationSim b f t =
+  νListSim-map (λ _ → tt)
+    (νListSim-trans (abstractionSim b f (⟨ ↓ (toνITree t) , [] ⟩ )
+                                        (⟨ just        t  , [] ⟩')
+                                        (  just      refl , []   ))
+                    (terminationSim     (⟨ just        t  , [] ⟩')))
+</code></pre>
+<p>Check the source code for the full details.</p>
+<p><strong>Agda file:</strong> <a href="FoldMachineTermination.agda">FoldMachineTermination.agda</a></p>
+<hr />
+<div class="remark">
+Back to work…
+</div>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
