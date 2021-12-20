@@ -63,7 +63,7 @@
 0025
 </div>
 <h2>Termination as type casting</h2>
-<div class="post-time">Posted at 22:44 on 20 December 2021</div>
+<div class="post-time">Posted at 22:44 on 20 December 2021, and revised at 22:59 on 20 December 2021</div>
 <p>There is a reduction in blogging frequency because I have been working with <a href="https://twitter.com/ltchen_tw">Liang-Ting</a> and <a href="https://twitter.com/viktor_lin">Victor</a> on a datatype-generic library that specialises to native Agda programs using reflection.
 We aim to submit a paper about this to <a href="https://icfp22.sigplan.org">ICFP ’22</a> (whose deadline is somewhat earlier than expected), and we’re going as fast as we can without getting overstretched.
 I’m taking a small break by writing this post (which is therefore a bit rushed) about an Agda exercise I finished a while ago.</p>
@@ -151,7 +151,6 @@ open νList
 <pre><code>toνList : μList A → νList A
 decon (toνList (con []      )) = []
 decon (toνList (con (x ∷ xs))) = x ∷ toνList xs
-
 </code></pre>
 <p>We can define the standard unfold operator on colists,</p>
 <pre><code>unfoldr : (B → ListF A B) → B → νList A
