@@ -63,7 +63,7 @@
 0025
 </div>
 <h2>Termination as type casting</h2>
-<div class="post-time">Posted at 22:44 on 20 December 2021, and revised at 22:59 on 20 December 2021</div>
+<div class="post-time">Posted at 22:44 on 20 December 2021, and revised at 23:01 on 20 December 2021</div>
 <p>There is a reduction in blogging frequency because I have been working with <a href="https://twitter.com/ltchen_tw">Liang-Ting</a> and <a href="https://twitter.com/viktor_lin">Victor</a> on a datatype-generic library that specialises to native Agda programs using reflection.
 We aim to submit a paper about this to <a href="https://icfp22.sigplan.org">ICFP ’22</a> (whose deadline is somewhat earlier than expected), and we’re going as fast as we can without getting overstretched.
 I’m taking a small break by writing this post (which is therefore a bit rushed) about an Agda exercise I finished a while ago.</p>
@@ -260,7 +260,7 @@ decon (terminationSim ⟨ nothing ,       nothing ∷ stk ⟩') =
   tt ∷ terminationSim _
 </code></pre>
 <p>where <code>replicate : ℕ → A → μList A</code> produces a list of the specified length consisting of the given element.</p>
-<p>The other simulation requires setting up an abstraction relation for relating an original state and an abstract state, saying that they’re basically the same except that the potentially infinite trees in the original state are actually the necessarily finite trees in the abstract state.
+<p>The other simulation requires setting up an abstraction relation for relating an original state and an abstract state, saying that they’re basically the same; in particular, the potentially infinite trees in the original state are actually the necessarily finite trees in the abstract state.
 I’ll just dump the definitions, where the <code>Pointwise</code> relations from the standard library are helpful.</p>
 <pre><code>funR : (A → B) → (A ~ B)
 funR f x y = f x ≡ y
