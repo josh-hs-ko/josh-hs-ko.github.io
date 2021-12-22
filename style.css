@@ -155,6 +155,10 @@ p > code {
   margin-right: .1em;
 }
 
+pre > code {
+  white-space: pre;
+}
+
 blockquote {
   border-width: 0;
   font-size: 100%;
