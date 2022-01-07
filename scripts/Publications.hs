@@ -308,7 +308,7 @@ publicationList =
       , venue   = Just ("Journal of Functional Programming", Nothing)
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "/manuscripts/JFP17.pdf")
+      , links   = [ ("PDF", Nothing, "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/97C63D7C90556ACD2EC1482E63026A74/S0956796816000307a.pdf/programming-with-ornaments.pdf")
                   , ("Agda code", Just "zip", "https://static.cambridge.org/content/id/urn:cambridge.org:id:article:S0956796816000307/resource/name/S0956796816000307sup001.zip")
                   , ("Agda code", Just "HTML", "/Agda/JFP17/Everything.html")
                   ]
@@ -506,7 +506,7 @@ publicationList =
       , venue    = Just ("Journal of Functional Programming", Nothing)
       , year     = 2009
       , types    = []
-      , links    = [ ("PDF", Just "accepted version", "/manuscripts/JFP09.pdf")
+      , links    = [ ("PDF", Nothing, "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/ACA0C08F29621A892FB0C0B745254D15/S0956796809007345a.pdf/algebra-of-programming-in-agda-dependent-types-for-relational-program-derivation.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("Volume", "19", Nothing)
