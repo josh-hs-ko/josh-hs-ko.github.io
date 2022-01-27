@@ -30,8 +30,7 @@ publicationList =
                   ]
       , venue   = Just ("Conference on Computer Science Logic (CSL)", Just ("https://csl2022.uni-goettingen.de", IncludeYear))
       , year    = 2022
-      , types   = [ (Published, "Accepted")
-                  ]
+      , types   = []
       , links   = [ ("PDF", Nothing, "https://drops.dagstuhl.de/opus/volltexte/2022/15734/pdf/LIPIcs-CSL-2022-14.pdf")
                   , ("Source code", Just "Zenodo", "https://doi.org/10.5281/zenodo.5602771")
                   ]
