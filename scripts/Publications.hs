@@ -131,9 +131,9 @@ publicationList =
       , venue   = Just ("New Generation Computing", Nothing)
       , year    = 2020
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "/manuscripts/NGCO20.pdf")
-                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/b3SAc")
-                --   , ("Demo site", Nothing, "https://biyacc.k331.one")
+      , links   = [ ("PDF", Nothing, "https://link.springer.com/content/pdf/10.1007/s00354-019-00082-y.pdf")
+               -- , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/b3SAc")
+               -- , ("Demo site", Nothing, "https://biyacc.k331.one")
                   ]
       , info    = [ ("Volume", "38", Nothing)
                   , ("Pages", "423–476", Nothing)
@@ -156,8 +156,8 @@ publicationList =
       , venue   = Just ("Software and Systems Modeling", Nothing)
       , year    = 2020
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "/manuscripts/SoSyM20.pdf")
-                  , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
+      , links   = [ ("PDF", Nothing, "https://link.springer.com/content/pdf/10.1007/s10270-019-00752-x.pdf")
+               -- , ("Definitive version", Just "Springer Nature SharedIt", "https://rdcu.be/bQZ4q")
                   , ("Repository", Just "GitHub", "https://github.com/eMoflon/benchmarx")
                   ]
       , info    = [ ("Volume", "19", Nothing)
@@ -225,7 +225,7 @@ publicationList =
       , venue   = Just ("International Summer School on Bidirectional Transformations (Oxford, UK, 25–29 July 2016)", Just ("https://www.cs.ox.ac.uk/projects/tlcbx/ssbx/", ExcludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "/manuscripts/SSBX16.pdf")
+      , links   = [ ("PDF", Nothing, "https://link.springer.com/content/pdf/10.1007/978-3-319-79108-1_4.pdf")
                   , ("Haskell code", Just "zip", "https://bitbucket.org/prl_tokyo/bigul/src/master/SSBX16/SSBX16-BiGUL-code.zip")
                   ]
       , info    = [ ("LNCS", "9715", Nothing)
@@ -267,7 +267,7 @@ publicationList =
       , venue   = Just ("Asian Symposium on Programming Languages and Systems (APLAS)", Just ("https://www-aplas.github.io", IncludeYear))
       , year    = 2017
       , types   = []
-      , links   = [ ("PDF", Just "accepted version", "/manuscripts/APLAS17.pdf")
+      , links   = [ ("PDF", Nothing, "https://link.springer.com/content/pdf/10.1007/978-3-319-71237-6_15.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/zyz915/palgol")
                   ]
       , info    = [ ("LNCS", "10695", Nothing)
@@ -525,7 +525,7 @@ publicationList =
       , year     = 2008
       , types    = [ (Warning, "Superseded")
                    ]
-      , links    = [ ("PDF", Just "accepted version", "/manuscripts/MPC08.pdf")
+      , links    = [ ("PDF", Nothing, "https://link.springer.com/content/pdf/10.1007/978-3-540-70594-9_15.pdf")
                    , ("Repository", Just "GitHub", "https://github.com/scmu/aopa")
                    ]
       , info     = [ ("LNCS", "5133", Nothing)
