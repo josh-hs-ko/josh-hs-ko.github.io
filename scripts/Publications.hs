@@ -31,7 +31,7 @@ publicationList =
                   ]
       , venue   = Nothing
       , year    = 2022
-      , types   = [ (Unpublished, "Manuscript")
+      , types   = [ (Unpublished, "Submitted")
                   ]
       , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
