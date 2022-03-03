@@ -24,6 +24,22 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Datatype-generic programming meets elaborator reflection"
+      , authors = [ "Hsiang-Shang Ko"
+                  , "Liang-Ting Chen"
+                  , "Tzu-Chi Lin"
+                  ]
+      , venue   = Nothing
+      , year    = 2022
+      , types   = [ (Unpublished, "Manuscript")
+                  ]
+      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
+                  , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
+                  ]
+      , info    = [ ("Abstract", "Datatype-generic programming is natural and useful in dependently typed languages such as Agda. However, datatype-generic libraries in Agda are not reused as much as they should be, because traditionally they work only on datatypes decoded from a library's own version of datatype descriptions; this means that different generic libraries cannot be used together, and they do not work on native datatypes, which are preferred by the practical Agda programmer for better language support and access to other libraries. This paper presents a framework using Agda's elaborator reflection to instantiate datatype-generic programs as, and for, a useful range of native datatypes and functions —including universe-polymorphic ones— in programmer-friendly and customisable forms. Thanks to the power of elaborator reflection, generic programs do not need to be drastically rewritten compared to their traditional forms, making it easy to adapt existing generic libraries and develop new ones. We expect that datatype-generic libraries built with our framework —being interoperable with native entities— will finally be suitable for the toolbox of the practical Agda programmer.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Realising intensional S4 and GL modalities"
       , authors = [ "Liang-Ting Chen"
                   , "Hsiang-Shang Ko"
