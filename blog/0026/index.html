@@ -63,7 +63,7 @@
 0026
 </div>
 <h2>In-place pointer programs from functional programs</h2>
-<div class="post-time">Posted at 21:56 on 31 March 2022</div>
+<div class="post-time">Posted at 21:56 on 31 March 2022, and revised at 22:18 on 31 March 2022</div>
 <p>In-place pointer algorithms, which transform linked data structures by adjusting the pointers and without moving the data or allocating new space, are intriguing because their manipulation of pointers is often obscure and yet performs the intended task correctly and efficiently.
 The classical example is list reversal:
 defining singly linked lists in C++ (which I haven’t written for years!) by</p>
@@ -143,7 +143,7 @@ interleave (y:ys, zs) = y : interleave (zs, ys)
 </code></pre>
 <p>should solve the problem.
 Then we calculate a tail-recursive version of the function and compile it to an in-place imperative program with loops.
-I find that I’m pretty bad at deriving tail-recursive programs though; the best I can do is do a straightforward fusion and get</p>
+I find that I’m pretty bad at deriving tail-recursive programs though; the best I can do is a straightforward fusion producing</p>
 <pre><code>isep :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
 isep p [] = []
 isep p (x:xs) | p x       = x : isep (not . p) xs
@@ -175,8 +175,8 @@ safeTail []     = []
 safeTail (_:xs) = xs
 </code></pre>
 <p>and the tests do succeed.
-I think what the unexpected behaviour of <code>isep</code> demonstrates is that recursion is far more expressive than looping, which corresponds to just a very restricted form of recursion, namely tail recursion — imagine what kind of program with loops is needed to achieve <code>isep</code>’s same behaviour.
-The general message may be that the right way to write imperative programs (not limited to in-place ones) is to move to the more liberal domain of functional programs, transforming functional programs with verified behaviour to tail-recursive programs, which are then translated to imperative programs by some mechanical and even cosmetic procedure.</p>
+I think what the unexpected behaviour of <code>isep</code> demonstrates is that recursion is far more expressive than looping, which corresponds to just a very restricted form of recursion, namely tail recursion — imagine what kind of program with loops is needed to replicate <code>isep</code>’s behaviour.
+The general message may be that a better way to write imperative programs (not limited to in-place ones) is to move to the more liberal domain of functional programs for better reasoning facilities, and transform functional programs with verified behaviour to tail-recursive programs, which are then translated to imperative programs by some mechanical and even cosmetic procedure.</p>
 <p>Back to Kaldewaij’s problem, we can still attempt to write tail-recursive programs by hand.
 The first —not yet tail-recursive— version I write is</p>
 <pre><code>direct :: (a -&gt; Bool) -&gt; [a] -&gt; [a]
