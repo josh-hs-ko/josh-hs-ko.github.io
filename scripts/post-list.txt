@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 26, entryTime = 2022-03-31 21:56:05.542997089, entryTitle = "In-place pointer programs from functional programs", entryTeaser = "A rudimentary experiment in writing imperative programs functionally."}
+,
 PostEntry {entryNumber = 25, entryTime = 2021-12-20 22:44:13.419557052, entryTitle = "Termination as type casting", entryTeaser = "If we model computation as generating a potentially infinite colist of states, then termination is the ability to cast this colist into a finite list."}
 ,
 PostEntry {entryNumber = 24, entryTime = 2021-10-11 10:31:30.292548435, entryTitle = "Productivity and the traced state monad", entryTeaser = "We take a look at the left scan as a simple application of the traced state monad, which gives us an opportunity to revisit productivity checking and Danielsson\8217s embedded language technique."}
