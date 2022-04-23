@@ -1,4 +1,4 @@
-{-# OPTIONS -XViewPatterns #-}
+{-# LANGUAGE ViewPatterns #-}
 
 module Gen where
 
@@ -25,7 +25,6 @@ import System.Environment
 import System.Process
 import System.IO
 
-import Data.List.Utils (split)                -- MissingH
 import Data.Digest.Pure.MD5 (md5)             -- pureMD5
 import System.IO.Strict as Strict (readFile)  -- strict
 import CMark                                  -- cmark
@@ -433,3 +432,30 @@ latestIndex postList =
                inlineElement "span" [("class", ["blog-entry-date"])]
                  (text (shortDate (localDay (entryTime entry)))))
     | entry <- postList ]
+
+
+--------
+-- List processing utilities from MissingH
+
+spanList :: ([a] -> Bool) -> [a] -> ([a], [a])
+spanList _ [] = ([],[])
+spanList func list@(x:xs) =
+    if func list
+       then (x:ys,zs)
+       else ([],list)
+    where (ys,zs) = spanList func xs
+
+breakList :: ([a] -> Bool) -> [a] -> ([a], [a])
+breakList func = spanList (not . func)
+
+split :: Eq a => [a] -> [a] -> [[a]]
+split _ [] = []
+split delim str =
+    let (firstline, remainder) = breakList (isPrefixOf delim) str
+        in
+        firstline : case remainder of
+                                   [] -> []
+                                   x -> if x == delim
+                                        then [] : []
+                                        else split delim
+                                                 (drop (length delim) x)
