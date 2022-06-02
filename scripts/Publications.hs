@@ -40,6 +40,22 @@ publicationList =
                   ]
       }
   , Publication
+      { title   = "Syntax-Generic Operations, Reflectively Reified"
+      , authors = [ "Tzu-Chi Lin"
+                  , "Hsiang-Shang Ko"
+                  ]
+      , venue   = Nothing
+      , year    = 2022
+      , types   = [ (Unpublished, "Submitted")
+                  , (Published, "Extended abstract")
+                  ]
+      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
+                  , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
+                  ]
+      , info    = [ ("Abstract", "Libraries of generic operations on syntax trees with binders are emerging, and one of these is Allais et al.’s [2021] datatype-generic library in Agda, which provides syntax-generic constructions but not in a conventional form preferred by programmers. We port a core part of Allais et al.’s library to our new datatype-generic framework, which uses Agda's elaborator reflection to reify generic constructions to programs close to what programmers would write by hand. We hope that this work will make syntax-generic libraries such as Allais et al.’s more attractive, and stimulate discussion on the development of generic libraries.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Realising intensional S4 and GL modalities"
       , authors = [ "Liang-Ting Chen"
                   , "Hsiang-Shang Ko"
