@@ -40,7 +40,7 @@ publicationList =
                   ]
       }
   , Publication
-      { title   = "Syntax-Generic Operations, Reflectively Reified"
+      { title   = "Syntax-generic operations, reflectively reified"
       , authors = [ "Tzu-Chi Lin"
                   , "Hsiang-Shang Ko"
                   ]
