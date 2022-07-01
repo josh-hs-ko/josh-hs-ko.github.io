@@ -29,11 +29,11 @@ publicationList =
                   , "Liang-Ting Chen"
                   , "Tzu-Chi Lin"
                   ]
-      , venue   = Nothing
+      , venue   = Just ("International Conference on Functional Programming (ICFP)", Just ("https://icfp22.sigplan.org", IncludeYear))
       , year    = 2022
-      , types   = [ (Unpublished, "Submitted")
+      , types   = [ (Published, "Accepted")
                   ]
-      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
+      , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
                   ]
       , info    = [ ("Abstract", "Datatype-generic programming is natural and useful in dependently typed languages such as Agda. However, datatype-generic libraries in Agda are not reused as much as they should be, because traditionally they work only on datatypes decoded from a library’s own version of datatype descriptions; this means that different generic libraries cannot be used together, and they do not work on native datatypes, which are preferred by the practical Agda programmer for better language support and access to other libraries. Based on elaborator reflection, we present a framework in Agda featuring a set of general metaprograms for instantiating datatype-generic programs as, and for, a useful range of native datatypes and functions —including universe-polymorphic ones— in programmer-friendly and customisable forms. We expect that datatype-generic libraries built with our framework will be more attractive to the practical Agda programmer. As the elaborator reflection features used by our framework become more widespread, our design can be ported to other languages too.", Nothing)
@@ -52,7 +52,8 @@ publicationList =
       , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
                   ]
-      , info    = [ ("Abstract", "Libraries of generic operations on syntax trees with binders are emerging, and one of these is Allais et al.’s [2021] datatype-generic library in Agda, which provides syntax-generic constructions but not in a conventional form preferred by programmers. We port a core part of Allais et al.’s library to our new datatype-generic framework, which uses Agda's elaborator reflection to reify generic constructions to programs close to what programmers would write by hand. We hope that this work will make syntax-generic libraries such as Allais et al.’s more attractive, and stimulate discussion on the development of generic libraries.", Nothing)
+      , info    = [ ("Related blog post", "0022", Nothing)
+                  , ("Abstract", "Libraries of generic operations on syntax trees with binders are emerging, and one of these is Allais et al.’s [2021] datatype-generic library in Agda, which provides syntax-generic constructions but not in a conventional form preferred by programmers. We port a core part of Allais et al.’s library to our new datatype-generic framework, which uses Agda's elaborator reflection to reify generic constructions to programs close to what programmers would write by hand. We hope that this work will make syntax-generic libraries such as Allais et al.’s more attractive, and stimulate discussion on the development of generic libraries.", Nothing)
                   ]
       }
   , Publication
