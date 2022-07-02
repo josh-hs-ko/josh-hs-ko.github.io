@@ -44,12 +44,12 @@ publicationList =
       , authors = [ "Tzu-Chi Lin"
                   , "Hsiang-Shang Ko"
                   ]
-      , venue   = Nothing
+      , venue   = Just ("Workshop on Type-Driven Development (TyDe)", Just ("https://icfp22.sigplan.org/home/tyde-2022", IncludeYear))
       , year    = 2022
-      , types   = [ (Unpublished, "Submitted")
+      , types   = [ (Published, "Accepted")
                   , (Published, "Extended abstract")
                   ]
-      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
+      , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
                   ]
       , info    = [ ("Related blog post", "0022", Nothing)
