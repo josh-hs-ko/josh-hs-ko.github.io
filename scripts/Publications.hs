@@ -36,7 +36,11 @@ publicationList =
       , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
                   ]
-      , info    = [ ("Abstract", "Datatype-generic programming is natural and useful in dependently typed languages such as Agda. However, datatype-generic libraries in Agda are not reused as much as they should be, because traditionally they work only on datatypes decoded from a library’s own version of datatype descriptions; this means that different generic libraries cannot be used together, and they do not work on native datatypes, which are preferred by the practical Agda programmer for better language support and access to other libraries. Based on elaborator reflection, we present a framework in Agda featuring a set of general metaprograms for instantiating datatype-generic programs as, and for, a useful range of native datatypes and functions —including universe-polymorphic ones— in programmer-friendly and customisable forms. We expect that datatype-generic libraries built with our framework will be more attractive to the practical Agda programmer. As the elaborator reflection features used by our framework become more widespread, our design can be ported to other languages too.", Nothing)
+      , info    = [ ("PACMPL", "6 (ICFP)", Nothing)
+                  , ("Article", "98", Nothing)
+                  , ("Pages", "1–29", Nothing)
+                  , ("DOI", "10.1145/3547629", Nothing)
+                  , ("Abstract", "Datatype-generic programming is natural and useful in dependently typed languages such as Agda. However, datatype-generic libraries in Agda are not reused as much as they should be, because traditionally they work only on datatypes decoded from a library’s own version of datatype descriptions; this means that different generic libraries cannot be used together, and they do not work on native datatypes, which are preferred by the practical Agda programmer for better language support and access to other libraries. Based on elaborator reflection, we present a framework in Agda featuring a set of general metaprograms for instantiating datatype-generic programs as, and for, a useful range of native datatypes and functions —including universe-polymorphic ones— in programmer-friendly and customisable forms. We expect that datatype-generic libraries built with our framework will be more attractive to the practical Agda programmer. As the elaborator reflection features used by our framework become more widespread, our design can be ported to other languages too.", Nothing)
                   ]
       }
   , Publication
@@ -46,10 +50,9 @@ publicationList =
                   ]
       , venue   = Just ("Workshop on Type-Driven Development (TyDe)", Just ("https://icfp22.sigplan.org/home/tyde-2022", IncludeYear))
       , year    = 2022
-      , types   = [ (Published, "Accepted")
-                  , (Published, "Extended abstract")
+      , types   = [ (Published, "Extended abstract")
                   ]
-      , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
+      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
                   ]
       , info    = [ ("Related blog post", "0022", Nothing)
