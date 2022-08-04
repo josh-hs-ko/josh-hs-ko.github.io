@@ -34,6 +34,8 @@ publicationList =
       , types   = [ (Published, "Accepted")
                   ]
       , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
+                  , ("Artefact", Just "Zenodo", "https://doi.org/10.5281/zenodo.6603498")
+                  , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
                   ]
       , info    = [ ("PACMPL", "6 (ICFP)", Nothing)
