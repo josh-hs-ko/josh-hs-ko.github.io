@@ -31,8 +31,7 @@ publicationList =
                   ]
       , venue   = Just ("International Conference on Functional Programming (ICFP)", Just ("https://icfp22.sigplan.org", IncludeYear))
       , year    = 2022
-      , types   = [ (Published, "Accepted")
-                  ]
+      , types   = []
       , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3547629")
                   , ("Artefact", Just "Zenodo", "https://doi.org/10.5281/zenodo.6603498")
                   , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
