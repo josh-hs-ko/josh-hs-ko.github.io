@@ -33,7 +33,7 @@ publicationList =
       , year    = 2022
       , types   = [ (Published, "Accepted")
                   ]
-      , links   = [ ("PDF", Just "draft", "https://github.com/Zekt/Type-Embellishment/raw/master/tex/ICFP22/NDGP.pdf")
+      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3547629")
                   , ("Artefact", Just "Zenodo", "https://doi.org/10.5281/zenodo.6603498")
                   , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
