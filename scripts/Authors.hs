@@ -39,7 +39,7 @@ authorList =
       }
   , Author
       { authorName = "Zhenjiang Hu"
-      , authorURL  = "http://sei.pku.edu.cn/~hu/"
+      , authorURL  = "https://zhenjiang888.github.io"
       }
   , Author
       { authorName = "Keigo Imai"
