@@ -36,6 +36,7 @@ publicationList =
                   , ("Artefact", Just "Zenodo", "https://doi.org/10.5281/zenodo.6603498")
                   , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
+                  , ("Slides", Just "PDF", "/slides/ICFP22.pdf")
                   ]
       , info    = [ ("PACMPL", "6 (ICFP)", Nothing)
                   , ("Article", "98", Nothing)
@@ -425,8 +426,8 @@ publicationList =
       , links   = [ ("PDF", Just "ACM Author-Izer", "https://dl.acm.org/doi/10.1145/2847538.2847544?cid=81488664395")
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F2847538.2847544&file=p61-ko-s.zip")
                   , ("Agda code", Just "HTML", "/Agda/PEPM16/BiGUL.Everything.html")
-                  , ("Slides", Just "PDF", "/slides/PEPM16.pdf")
                   , ("Repository", Just "Bitbucket", "https://bitbucket.org/prl_tokyo/bigul")
+                  , ("Slides", Just "PDF", "/slides/PEPM16.pdf")
                   ]
       , info    = [ ("Pages", "61–72", Nothing)
                   , ("DOI", "10.1145/2847538.2847544", Nothing)
