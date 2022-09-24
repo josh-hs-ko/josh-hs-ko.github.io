@@ -1,5 +1,5 @@
 [
-PostEntry {entryNumber = 27, entryTime = 2022-09-24 22:12:12.070637635, entryTitle = "Understanding the Deutsch\8211Jozsa algorithm", entryTeaser = "The Deutsch\8211Jozsa algorithm is one of the simplest quantum algorithms, although the traditional presentation is still rather obscure (at least to beginners).\nwith the help of the ZX-calculus, we can actually see that the algorithm is no more than a twisted form of a simple computation."}
+PostEntry {entryNumber = 27, entryTime = 2022-09-24 22:12:12.070637635, entryTitle = "Understanding the Deutsch\8211Jozsa algorithm", entryTeaser = "The Deutsch\8211Jozsa algorithm is one of the simplest quantum algorithms, although the traditional presentation is still rather obscure (at least to beginners).\nWith the help of the ZX-calculus, we can actually see that the algorithm is no more than a twisted form of a simple computation."}
 ,
 PostEntry {entryNumber = 26, entryTime = 2022-03-31 21:56:05.542997089, entryTitle = "In-place pointer programs from functional programs", entryTeaser = "A rudimentary experiment in writing imperative programs functionally."}
 ,
