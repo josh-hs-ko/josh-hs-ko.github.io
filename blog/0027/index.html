@@ -64,7 +64,7 @@ With the help of the ZX-calculus, we can actually see that the algorithm is no m
 0027
 </div>
 <h2>Understanding the Deutsch–Jozsa algorithm</h2>
-<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 00:23 on 26 September 2022</div>
+<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 00:54 on 26 September 2022</div>
 <p>I started to write this post at the end of <a href="https://icfp22.sigplan.org">ICFP 2022</a> in Ljubljana, Slovenia, where I presented the paper ‘<a href="/#publication-81a792a1">Datatype-generic programming meets elaborator reflection</a>’, which is the result of a team effort with <a href="https://l-tchen.github.io">Liang-Ting</a> and <a href="https://github.com/Zekt">Tzu-Chi</a>.
 Hopefully this will be the start of a series of papers that revitalise dependently typed datatype-generic programming (in particular <a href="/#publication-696aedff">ornamentation</a>, of which I’m disappointed to see that there has been no satisfactory subsequent development while I was away and working on <a href="/#publication-e124d6a0">bidirectional programming</a>), and eventually lead to a generic library that the practical Agda programmer will be happy to use.
 After all these years, I’m still uncomfortable with chatting with random strangers, and did so only a few times at the conference (incidentally, this may have helped to reduce the risk of getting covid), but I can now chat pretty comfortably with people who I know at least to some extent, which is probably enough.</p>
@@ -106,37 +106,32 @@ But this is not the only basis of the vector space $\mathbf{2}^2$ — another ty
 <p>are the X-basis of the vector space $\mathbf{2}$.
 The uniform superposition of all possible inputs is exactly $|{++}\rangle$, which is distinct from all the other X-basis elements in the sense that all the others have exactly the same number of plus and minus signs.
 The behaviour of $f$ can be investigated with respect to the X-basis as well.</p>
-<p>The Deutsch–Jozsa problem is (artificially) designed to make the sums in the X-basis useful: assuming that $f$ is either <em>constant</em> (always producing the same output) or <em>balanced</em> (producing two $|0\rangle$ and two $|1\rangle$ as the outputs — in general the same numbers of $|0\rangle$ and $|1\rangle$), the aim is to decide which is the case.
-It is immediately clear that a constant $f$ —let’s write this as $f_{\mathsf c}$— behaves very differently when applied to $|{++}\rangle$ compared to the other X-basis elements.
-In a ‘pseudo-pattern-matching’ notation:</p>
-<p>$$ \begin{array}{lcl}
-f_{\mathsf c}\;|{++}\rangle &amp;\approx&amp; |0\rangle \mathrel{\text{or}} |1\rangle \\
-f_{\mathsf c}\;\_ &amp;=&amp; 0
-\end{array} $$</p>
-<p>That is, $f_{\mathsf c}$ produces $|0\rangle$ or $|1\rangle$ (multiplied by $4$, which is omitted) if applied to $|{++}\rangle$ (depending on the output of $f_{\mathsf c}$), or fails to produce anything if applied to any other X-basis element (because the numbers of plus and minus signs are equal and everything is cancelled out).
-Note that the length of the state $|0\rangle$ is $1$, whereas the length of the state $0$ is $0$; the former is a perfectly normal state corresponding to the bit $0$, whereas the latter is an impossible state.</p>
-<p>What about a balanced $f$ — let’s call it $f_{\mathsf b}$?
-For $|{++}\rangle$, since the outputs consist of exactly two $|0\rangle$ and two $|1\rangle$, we have</p>
-<p>$$ \begin{array}{lcl}
-f_{\mathsf b}\;|{++}\rangle &amp;\approx&amp; |+\rangle
-\end{array} $$</p>
-<p>For the other X-basis elements:
-Applying $f_{\mathsf b}$ produces a $\pm 1$-weighted sum of two $|0\rangle$ and two $|1\rangle$.
-If the two $|0\rangle$ get the same sign, the two $|1\rangle$ will both get the opposite sign, so the sum will essentially be $|-\rangle$; otherwise, everything is cancelled out.
-So</p>
-<p>$$ \begin{array}{lcl}
-f_{\mathsf b}\;\_ &amp;\approx&amp; |-\rangle \mathrel{\text{or}} 0
-\end{array} $$</p>
-<p>That is, applying $f_{\mathsf b}$ to any X-basis element other than $|{++}\rangle$ will produce either $|-\rangle$ or nothing.</p>
+<p>The Deutsch–Jozsa problem is (artificially) designed to make the sums useful: assuming that $f$ is either <em>constant</em> (always producing the same output) or <em>balanced</em> (producing two $|0\rangle$ and two $|1\rangle$ as the outputs — in general the same numbers of $|0\rangle$ and $|1\rangle$), the aim is to decide which is the case.
+It is immediately clear that a constant $f$ —let’s write this as $f_{\mathsf c}$— behaves very differently from a balanced $f$ —let’s write this as $f_{\mathsf b}$— when applied to $|{++}\rangle$:</p>
+<p>\begin{align*}
+f_{\mathsf c}\;|{++}\rangle &amp;\approx |0\rangle \mathrel{\text{or}} |1\rangle \\
+f_{\mathsf b}\;|{++}\rangle &amp;\approx |+\rangle
+\end{align*}</p>
+<p>That is, when applied to $|{++}\rangle$, $f_{\mathsf c}$ produces $|0\rangle$ or $|1\rangle$ (multiplied by $4$, which is omitted); for $f_{\mathsf b}$, the output sum consists of exactly two $|0\rangle$ and two $|1\rangle$, and is essentially $|+\rangle$.</p>
 <p>Mathematically, it’s actually easy to decide whether $f$ is $f_{\mathsf c}$ or $f_{\mathsf b}$ by asking this question: if we apply $f$ to $|{++}\rangle$, will the output ‘contain’ $|-\rangle$?
 Here a state $|\varphi\rangle$ ‘contains’ another state $|\psi\rangle$ exactly when their inner product $\langle\psi|\varphi\rangle$ is non-zero.
 (Think of $\langle\psi|\varphi\rangle$ as the result of some kind of test that detects the ‘amount’ of $|\psi\rangle$ in $|\varphi\rangle$ by projecting the latter onto the former, which is the geometric intuition of the inner product.)
 So the answer can be computed simply by checking whether $\langle-|f|{++}\rangle$ is non-zero or not.
 If $f$ is $f_{\mathsf c}$, then the output —be it $|0\rangle$ or $|1\rangle$— will contain $|-\rangle$; otherwise, if $f$ is $f_{\mathsf b}$, then the output will be $|+\rangle$, which does not contain $|-\rangle$.
-It’s kind of expensive to compute this number classically though (especially when the domain of $f$ is generalised from $\mathbf 2^2$ to $\mathbf 2^n$).</p>
-<p>To solve the problem efficiently with a quantum computer, the Deutsch–Jozsa algorithm asks a similar and clever question, which involves some kind of <em>backward evaluation</em> of $f$ on the X-basis: what is a possible input (among the X-basis elements) that allows $f$ to produce an output that contains $|-\rangle$?
+It’s kind of expensive to compute this number classically though (especially when the domain of $f$ is generalised from $\mathbf 2^2$ to $\mathbf 2^n$), and we want a more efficient quantum solution.</p>
+<p>To proceed, we need a bit more analysis of $f$ with respect to the whole X-basis, not just $|{++}\rangle$.
+For $f_{\mathsf c}$, its behaviour is very different when applied to the X-basis elements other than $|{++}\rangle$ — because the numbers of plus and minus signs are equal and everything is cancelled out, the output simply vanishes!
+(Note that the length of the state $|0\rangle$ is $1$, whereas the length of the state $0$ is $0$; the former is a perfectly normal state corresponding to the bit $0$, whereas the latter is an impossible state.)
+In a ‘pseudo-pattern-matching’ notation:</p>
+<p>$$ f_{\mathsf c}\;\_ = 0 $$</p>
+<p>For $f_{\mathsf b}$, applying it to the other X-basis elements produces a $\pm 1$-weighted sum of two $|0\rangle$ and two $|1\rangle$.
+If the two $|0\rangle$ get the same sign, the two $|1\rangle$ will both get the opposite sign, so the sum will essentially be $|-\rangle$; otherwise, everything is cancelled out.
+So</p>
+<p>$$ f_{\mathsf b}\;\_ \approx |-\rangle \mathrel{\text{or}} 0 $$</p>
+<p>That is, applying $f_{\mathsf b}$ to any X-basis element other than $|{++}\rangle$ will produce either $|-\rangle$ or nothing.</p>
+<p>To solve the Deutsch–Jozsa problem efficiently with a quantum computer, the Deutsch–Jozsa algorithm asks a clever question, which is similar to the previous one but involves some kind of <em>backward evaluation</em> of $f$: among the X-basis elements, what is a possible input that allows $f$ to produce an output that contains $|-\rangle$?
 If $f$ is $f_{\mathsf c}$, then the only possible input that produces any output is $|{++}\rangle$, and that output —be it $|0\rangle$ or $|1\rangle$— always contains $|-\rangle$, so the answer will be $|{++}\rangle$.
-On the other hand, if $f$ is $f_{\mathsf b}$, then the answer cannot be $|{++}\rangle$, since the corresponding output $|+\rangle$ does <em>not</em> contain $|-\rangle$ — the answer will be something other than $|{++}\rangle$.
+On the other hand, if $f$ is $f_{\mathsf b}$, then the answer cannot be $|{++}\rangle$, since the corresponding output $|+\rangle$ does not contain $|-\rangle$ — the answer will be something other than $|{++}\rangle$.
 So by getting an answer to the question and checking whether it is $|{++}\rangle$ or not, we’ll be able to decide whether $f$ is $f_{\mathsf c}$ or $f_{\mathsf b}$.
 The target state $|-\rangle$ is chosen so as to exclude $|{++}\rangle$ from the domain of $f_{\mathsf b}$, which then becomes disjoint from the domain of $f_{\mathsf c}$.</p>
 <p>The backward question may be a bit surprising because it doesn’t seem very natural, and it doesn’t seem easy to find an answer either.
