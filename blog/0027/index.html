@@ -64,7 +64,7 @@ With the help of the ZX-calculus, we can actually see that the algorithm is no m
 0027
 </div>
 <h2>Understanding the Deutsch–Jozsa algorithm</h2>
-<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 00:54 on 26 September 2022</div>
+<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 01:00 on 26 September 2022</div>
 <p>I started to write this post at the end of <a href="https://icfp22.sigplan.org">ICFP 2022</a> in Ljubljana, Slovenia, where I presented the paper ‘<a href="/#publication-81a792a1">Datatype-generic programming meets elaborator reflection</a>’, which is the result of a team effort with <a href="https://l-tchen.github.io">Liang-Ting</a> and <a href="https://github.com/Zekt">Tzu-Chi</a>.
 Hopefully this will be the start of a series of papers that revitalise dependently typed datatype-generic programming (in particular <a href="/#publication-696aedff">ornamentation</a>, of which I’m disappointed to see that there has been no satisfactory subsequent development while I was away and working on <a href="/#publication-e124d6a0">bidirectional programming</a>), and eventually lead to a generic library that the practical Agda programmer will be happy to use.
 After all these years, I’m still uncomfortable with chatting with random strangers, and did so only a few times at the conference (incidentally, this may have helped to reduce the risk of getting covid), but I can now chat pretty comfortably with people who I know at least to some extent, which is probably enough.</p>
@@ -121,10 +121,10 @@ If $f$ is $f_{\mathsf c}$, then the output —be it $|0\rangle$ or $|1\rangle$�
 It’s kind of expensive to compute this number classically though (especially when the domain of $f$ is generalised from $\mathbf 2^2$ to $\mathbf 2^n$), and we want a more efficient quantum solution.</p>
 <p>To proceed, we need a bit more analysis of $f$ with respect to the whole X-basis, not just $|{++}\rangle$.
 For $f_{\mathsf c}$, its behaviour is very different when applied to the X-basis elements other than $|{++}\rangle$ — because the numbers of plus and minus signs are equal and everything is cancelled out, the output simply vanishes!
-(Note that the length of the state $|0\rangle$ is $1$, whereas the length of the state $0$ is $0$; the former is a perfectly normal state corresponding to the bit $0$, whereas the latter is an impossible state.)
 In a ‘pseudo-pattern-matching’ notation:</p>
 <p>$$ f_{\mathsf c}\;\_ = 0 $$</p>
-<p>For $f_{\mathsf b}$, applying it to the other X-basis elements produces a $\pm 1$-weighted sum of two $|0\rangle$ and two $|1\rangle$.
+<p>(Note that the length of the state $|0\rangle$ is $1$, whereas the length of the state $0$ is $0$; the former is a perfectly normal state corresponding to the bit $0$, whereas the latter is an impossible state.)
+For $f_{\mathsf b}$, applying it to the other X-basis elements produces a $\pm 1$-weighted sum of two $|0\rangle$ and two $|1\rangle$.
 If the two $|0\rangle$ get the same sign, the two $|1\rangle$ will both get the opposite sign, so the sum will essentially be $|-\rangle$; otherwise, everything is cancelled out.
 So</p>
 <p>$$ f_{\mathsf b}\;\_ \approx |-\rangle \mathrel{\text{or}} 0 $$</p>
@@ -155,7 +155,7 @@ This specification can be directly transcribed into ZX-calculus:</p>
 <p>where some input, intermediate, and output states are annotated in green to show the correspondence with the specification.
 Note that this is merely a mathematical specification and not a quantum circuit, but the construction does give a legitimate quantum circuit with equivalent behaviour.</p>
 <p><em>Remark.</em>
-The way in which the backward question is phrased may have depended on this particular form of oracle; if another form of oracle is used, we may have to ask a different question.
+The way in which the backward question is phrased may have depended on this particular form of oracle; if a different form of oracle is used, we may have to ask a different question.
 (<em>End of remark.</em>)</p>
 <p>Now the remaining problem is how we can extend the oracle diagram (that is, use the oracle as a black box) to express the application of the transpose.
 Here is, I believe, where ZX-calculus shines.
