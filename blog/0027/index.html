@@ -64,7 +64,7 @@ With the help of the ZX-calculus, we can actually see that the algorithm is no m
 0027
 </div>
 <h2>Understanding the Deutsch–Jozsa algorithm</h2>
-<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 16:52 on 28 September 2022</div>
+<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 10:34 on 1 October 2022</div>
 <p>I started to write this post at the end of <a href="https://icfp22.sigplan.org">ICFP 2022</a> in Ljubljana, Slovenia, where I presented the paper ‘<a href="/#publication-81a792a1">Datatype-generic programming meets elaborator reflection</a>’, which is the result of a team effort with <a href="https://l-tchen.github.io">Liang-Ting</a> and <a href="https://github.com/Zekt">Tzu-Chi</a>.
 Hopefully this will be the start of a series of papers that revitalise dependently typed datatype-generic programming (in particular <a href="/#publication-696aedff">ornamentation</a>, of which I’m disappointed to see that there has been no satisfactory subsequent development while I was away and working on <a href="/#publication-e124d6a0">bidirectional programming</a>), and eventually lead to a generic library that the practical Agda programmer will be happy to use.
 After all these years, I’m still uncomfortable with chatting with random strangers, and did so only a few times at the conference (incidentally, this may have helped to reduce the risk of getting covid), but I can now chat pretty comfortably with people who I know at least to some extent, which is probably enough.</p>
@@ -82,10 +82,10 @@ Given a classical function $f : \mathbf{2}^2 \to \mathbf{2}$ (where $\mathbf{2} 
 <p>$$ \bar f(|\mathtt{00}\rangle + |\mathtt{01}\rangle + |\mathtt{10}\rangle + |\mathtt{11}\rangle) $$</p>
 <p>and (due to linearity) get the uniform superposition of all the outputs, as if we’re evaluating $f$ on all the possible inputs in parallel:</p>
 <p>$$ |f(\mathtt{00})\rangle + |f(\mathtt{01})\rangle + |f(\mathtt{10})\rangle + |f(\mathtt{11})\rangle $$</p>
-<p>Different from parallel computation, though, is that the evaluation results are summed together and not available separately — if we directly measure this state, we’ll get one of the results in random, which is not too useful.
+<p>Different from parallel computation, though, is that the evaluation results are summed together and not available separately — if we directly measure this state, we’ll get one of the results with equal probability, which is not too useful.
 A quantum algorithm has to make clever use of this sum somehow.</p>
 <p><em>Technical remarks.</em>
-As per standard notation, we wrap vectors in ‘kets’ $|\cdot\rangle$, and $|\mathtt{00}\rangle$ etc coincides with the tensor product $|\mathtt 0\rangle \otimes |\mathtt 0\rangle$ etc.
+As per standard notation, we wrap vectors in ‘kets’ $|\cdot\rangle$ and their adjoints in ‘bras’ $\langle\cdot|$ (think of them as column and row vectors if it helps), and $|\mathtt{00}\rangle$ etc coincides with the tensor product $|\mathtt 0\rangle \otimes |\mathtt 0\rangle$ etc.
 In this post we will only care about whether a state is possible or not (that is, whether its length is non-zero), and not about the exact probabilities, so we will not bother to normalise our states (that is, make their length $1$), and sometimes use equalities ‘$\approx$’ that are up to multiplication of a non-zero scalar to one side.
 (<em>End of technical remarks.</em>)</p>
 <p>In fact, we have more forms of sums at our disposal.
@@ -119,35 +119,43 @@ Here a state $|\varphi\rangle$ ‘contains’ another state $|\psi\rangle$ exact
 So the answer can be computed simply by checking whether $\langle\texttt-|\bar f|\texttt{++}\rangle$ is non-zero or not.
 If $f$ is $f_{\mathsf c}$, then the output —be it $|\mathtt 0\rangle$ or $|\mathtt 1\rangle$— will contain $|\texttt-\rangle$; otherwise, if $f$ is $f_{\mathsf b}$, then the output will be $|\texttt+\rangle$, which does not contain $|\texttt-\rangle$.
 It’s kind of expensive to compute $\langle\texttt-|\bar f|\texttt{++}\rangle$ classically though (especially when the domain of $f$ is generalised from $\mathbf 2^2$ to $\mathbf 2^n$), and we want a more efficient quantum solution.</p>
-<p>To proceed, we need a bit more analysis of $\bar f$ with respect to the whole X-basis, not just $|\texttt{++}\rangle$.
+<p>One valuable intuition offered by PQP is the close relationships between quantum computation and various other theories, among which the closest one is linear algebra.
+In this case, the linear-algebraic expression $\langle\texttt-|\bar f|\texttt{++}\rangle$ could be ‘implemented’ in quantum theory by replacing $\langle\texttt-|$ with a measurement with respect to the X-basis, which produces either $|\texttt+\rangle$ or $|\texttt-\rangle$ probabilistically (with probabilities dictated by a postulate of quantum theory).
+However, even if this solution could ultimately be implemented as a quantum circuit, it is not satisfactory: we’ll get $|\texttt+\rangle$ or $|\texttt-\rangle$ with equal probability if $f$ is $f_{\mathsf c}$, or get $|\texttt+\rangle$ if $f$ is $f_{\mathsf b}$, and cannot perfectly distinguish the two cases.
+But surprisingly, if we transpose $\langle\texttt-|\bar f|\texttt{++}\rangle$ to $\langle\texttt{++}|\bar f^{\mathrm T}|\texttt-\rangle$ and ‘implement’ the latter as measuring the result of evaluating $\bar f$ <em>backwards</em>, we’ll be able to distinguish the two cases perfectly.
+The backward evaluation may be somewhat surprising because it may not seem very natural and easy to compute.
+Here the PQP intuition may help again: quantum maps are somewhat ‘directionless’ and reminiscent of relational programming, whose characteristic feature is that programs can be evaluated in any direction.</p>
+<p>To see why backward evaluation works, we need a bit more analysis of $\bar f$ with respect to the whole X-basis, not just $|\texttt{++}\rangle$.
 For $\bar f_{\mathsf c}$, its behaviour is very different when applied to the X-basis elements other than $|\texttt{++}\rangle$ — because the numbers of plus and minus signs are equal and everything is cancelled out, the output simply vanishes!
-In a ‘pseudo-pattern-matching’ notation:</p>
-<p>$$ \bar f_{\mathsf c}\;\_ = 0 $$</p>
+I cannot resist the temptation to express the behaviour of $\bar f_{\mathsf c}$ on the X-basis in a ‘pseudo-pattern-matching’ notation:</p>
+<p>\begin{align*}
+&amp; \bar f_{\mathsf c}\;|\texttt{++}\rangle \approx |\mathtt 0\rangle \mathrel{\text{or}} |\mathtt 1\rangle \\
+&amp; \awa{\bar f_{\mathsf c}\;|\texttt{++}\rangle}{\bar f_{\mathsf c}\;\_} = 0
+\end{align*}</p>
 <p>(Note that the length of the state $|\mathtt 0\rangle$ is $1$, whereas the length of the state $0$ is $0$; the former is a perfectly normal state corresponding to the bit $\mathtt 0$, whereas the latter is an impossible state.)
 For $\bar f_{\mathsf b}$, applying it to the other X-basis elements produces a $\pm 1$-weighted sum of two $|\mathtt 0\rangle$ and two $|\mathtt 1\rangle$.
 If the two $|\mathtt 0\rangle$ get the same sign, the two $|\mathtt 1\rangle$ will both get the opposite sign, so the sum will essentially be $|\texttt-\rangle$; otherwise, everything is cancelled out.
 So</p>
-<p>$$ \bar f_{\mathsf b}\;\_ \approx |\texttt-\rangle \mathrel{\text{or}} 0 $$</p>
+<p>\begin{align*}
+&amp; \bar f_{\mathsf b}\;|\texttt{++}\rangle \approx |\texttt+\rangle \\
+&amp; \awa{\bar f_{\mathsf b}\;|\texttt{++}\rangle}{\bar f_{\mathsf b}\;\_} \approx |\texttt-\rangle \mathrel{\text{or}} 0
+\end{align*}</p>
 <p>That is, applying $\bar f_{\mathsf b}$ to any X-basis element other than $|\texttt{++}\rangle$ will produce either $|\texttt-\rangle$ or nothing.</p>
-<p>To solve Deutsch’s problem efficiently with a quantum computer, the Deutsch–Jozsa algorithm asks a clever question, which is similar to the previous one but involves some kind of <em>backward evaluation</em> of $\bar f$: among the X-basis elements, what is a possible input that allows $\bar f$ to produce an output that contains $|\texttt-\rangle$?
+<p>Now we ask the backward question: among the X-basis elements, what is a possible input that allows $\bar f$ to produce an output that contains $|\texttt-\rangle$?
 If $f$ is $f_{\mathsf c}$, then the only possible input that produces any output is $|\texttt{++}\rangle$, and that output —be it $|\mathtt 0\rangle$ or $|\mathtt 1\rangle$— always contains $|\texttt-\rangle$, so the answer will be $|\texttt{++}\rangle$.
 On the other hand, if $f$ is $f_{\mathsf b}$, then the answer cannot be $|\texttt{++}\rangle$, since the corresponding output $|\texttt+\rangle$ does not contain $|\texttt-\rangle$ — the answer will be something other than $|\texttt{++}\rangle$.
 So by getting an answer to the question and checking whether it is $|\texttt{++}\rangle$ or not, we’ll be able to decide whether $f$ is $f_{\mathsf c}$ or $f_{\mathsf b}$.
 The target state $|\texttt-\rangle$ is chosen so as to exclude $|\texttt{++}\rangle$ from the domain of $\bar f_{\mathsf b}$, which then becomes disjoint from the domain of $\bar f_{\mathsf c}$.</p>
-<p>The backward question may be somewhat surprising because it doesn’t seem very natural, and it doesn’t seem easy to find an answer either.
-This is where the insight from the ZX-calculus starts to come in: quantum maps are somewhat ‘directionless’ (which is reminiscent of relational programming), so backward evaluation is sometimes possible.
-Even without knowing the ZX-calculus, we know that linear maps (or matrices) can be transposed, thereby switching their domain and codomain, so we can transpose the number $\langle\texttt-|\bar f|\texttt{++}\rangle$ to $\langle\texttt{++}|\bar f^{\mathrm T}|\texttt-\rangle$ and interpret the latter as answering ‘whether $\bar f^{\mathrm T}|\texttt-\rangle$ contains $|\texttt{++}\rangle$’.
-Below we develop this idea into a quantum map in ZX-calculus (mainly in the style of PQP).
+<p>We can then write a quantum map in ZX-calculus to answer the question.
+(The ZX-diagrams below are in the style of PQP, where the direction of computation is from bottom to top, and quantum systems coexist with classical ones through the doubling construction.)
 First, the quantum map $\hat f$ and its transpose are drawn as</p>
 <p><a href="f.svg"><img class="displayed-figure" src="f.svg" alt="The pure quantum map f"/></a></p>
-<p>For $\hat f$, its two inputs flow in from the bottom through the two (thick) quantum wires, and its output goes out from the top wire; the transpose of $\hat f$ is the original diagram rotated by 180 degrees, with a twist to keep the outputs in the original order.
+<p>For $\hat f$, its two inputs flow in from the bottom through the two (‘thick’) quantum wires, and its output goes out from the top wire; the transpose of $\hat f$ is the original diagram rotated by 180 degrees, with a twist to keep the outputs in the original order.
 (I’m skipping a lot of details about the ZX-calculus, and in fact I’ve invented my own graphical notations to make ZX-diagrams easier to draw, but hopefully the high-level intuition is still recognisable.)
 Applying the transpose to $|\texttt-\rangle$ (represented as a one-output Z-spider with phase $\pi$ below) gives us a quantum state representing the possible inputs that are mapped to $|\texttt-\rangle$ by $\bar f$.
-Then we want to check whether this state contains $|\texttt{++}\rangle$, but in quantum computing, we have to measure this state with respect to the X-basis (performed by two bastard X-spiders below) before we can check whether the result is $\texttt{++}$ or something else.
-In ZX-calculus:</p>
+Then we measure this state with respect to the X-basis (performed by two bastard X-spiders below), so that we can check whether the result is $\texttt{++}$ or something else.
+As a ZX-diagram (which does not include the last check):</p>
 <p><a href="answer.svg"><img class="displayed-figure" src="answer.svg" alt="Answering the question"/></a></p>
-<p>In general, if a state contains $|\texttt{++}\rangle$, we’ll get $\texttt{++}$ as the result of the measurement only with some probability.
-However, our analysis has shown that we’ll definitely get $\texttt{++}$ in the setting of the algorithm, so the algorithm is deterministic even though measurement is probabilistic in general.</p>
 <p>This is not something we can run on a quantum computer yet: the input state $|\texttt-\rangle$ and the measurement can be readily implemented as part of a quantum circuit, but the transposed $\hat f$ —and even just $\hat f$ itself— cannot.
 We have to retrofit a classical function such as $f$ as an invertible/reversible function and encode it as a quantum circuit, which serves as the input to the algorithm — traditionally this is called an oracle.
 The standard oracle construction gives us a circuit $U_f$ such that</p>
@@ -163,28 +171,29 @@ The way in which the backward question is phrased may have depended on this part
 <p>Now the remaining task is extending the oracle diagram (that is, use the oracle as a black box) to express the application of the transpose.
 Here is, I believe, where ZX-calculus shines.
 We want the left part of the diagram to be just two wires connected to the outputs of the transpose of $\hat f$ —which are just the inputs of $\hat f$ because of the ‘directionlessness’— and it’s instinctive for a ZX-calculus user to plug in two one-output Z-spiders (which are in red below, and represent $|\texttt+\rangle$)</p>
-<p><a href="before-fusion.svg"><img class="displayed-figure" src="before-fusion.svg"/></a></p>
+<p><a href="before-fusion.svg"><img class="displayed-figure" src="before-fusion.svg" alt="Before fusion"/></a></p>
 <p>so as to trigger the spider fusion rule and get</p>
-<p><a href="after-fusion.svg"><img class="displayed-figure" src="after-fusion.svg"/></a></p>
+<p><a href="after-fusion.svg"><img class="displayed-figure" src="after-fusion.svg" alt="After fusion"/></a></p>
 <p>We’re free to rearrange ZX-diagrams as long as connectivity doesn’t change, so we can directly rearrange the above diagram into a form that’s close to what we want:</p>
-<p><a href="transpose.svg"><img class="displayed-figure" src="transpose.svg"/></a></p>
+<p><a href="transpose.svg"><img class="displayed-figure" src="transpose.svg" alt="Transpose"/></a></p>
 <p>Now we want the input to the transpose of $\hat f$ to be $|\texttt-\rangle$.
 This is again easy for a ZX-calculus user — the one-input, two-output X-spider copies X-basis elements, so we can directly plug in $|\texttt-\rangle$:</p>
-<p><a href="before-copy.svg"><img class="displayed-figure" src="before-copy.svg"/></a></p>
+<p><a href="before-copying.svg"><img class="displayed-figure" src="before-copying.svg" alt="Before copying"/></a></p>
 <p>The state is then copied by the X-spider, and we discard the extra one.</p>
-<p><a href="after-copy.svg"><img class="displayed-figure" src="after-copy.svg"/></a></p>
+<p><a href="after-copying.svg"><img class="displayed-figure" src="after-copying.svg" alt="After copying"/></a></p>
 <p>So we have found out how we can use the oracle to compute the application of the transpose.
 To conform to the standard quantum circuit model, qubits should start with $|\mathtt 0\rangle$ and measurements should be performed with respect to the Z-basis.
 But this is easy to fix by inserting Hadamards (represented as boxes) to switch between Z- and X-spiders.
 In summary, the algorithm can be implemented as follows, by putting the red parts around the oracle:</p>
-<p><a href="final.svg"><img class="displayed-figure" src="final.svg"/></a></p>
-<p>I should confess that this derivation was worked out backwards from the solution given by PQP, although I think my derivation makes more sense than PQP’s.
+<p><a href="final.svg"><img class="displayed-figure" src="final.svg" alt="Final algorithm"/></a></p>
+<p>I should confess that this derivation was worked out backwards from the solution given in PQP, although I think my derivation makes more sense than PQP’s.
 And I do prefer my derivation to the traditional presentation, which directly gives the final circuit and verifies what happens at each point of interest in the circuit.
 To see why Deutsch’s problem can be solved with just one superposition query, apart from a little bit of basic knowledge about quantum computing, all one needs are just the change to the X-basis and the revelation that backward evaluation is possible, and the rest is standard maths.
 After figuring out what to compute mathematically, we then use the ZX-calculus to derive, quite straightforwardly, how to use the oracle to carry out that computation, so there is a clean separation between the analysis of the problem and the implementation of the solution as a quantum circuit, which is just a twisted form of a simple computation.
 Most importantly, all the techniques including change of basis, backward evaluation, and the oracle encoding are general and intuitive enough that there is prospect to reuse them to understand old algorithms and invent new ones.
 On the other hand, the Deutsch–Jozsa algorithm is pretty basic, and I’ll have to work on more realistic problems —in particular ones that involve probabilities— to make sure that what I’m doing is scalable.
 But I’m happy that for a basic algorithm I have a correspondingly basic explanation now, which should be a good start.</p>
+<p>(Thanks to <a href="https://yangzhixuan.github.io">Zhixuan Yang</a> for feedback on this post.)</p>
 
 <!-- END OF POST -->
 
