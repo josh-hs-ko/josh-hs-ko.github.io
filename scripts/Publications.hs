@@ -37,6 +37,7 @@ publicationList =
                   , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
                   , ("Slides", Just "PDF", "/slides/ICFP22.pdf")
+                  , ("Video", Just "YouTube", "https://youtu.be/daJdoJGpsns")
                   ]
       , info    = [ ("PACMPL", "6 (ICFP)", Nothing)
                   , ("Article", "98", Nothing)
@@ -285,7 +286,7 @@ publicationList =
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip")
                   , ("Agda code", Just "HTML", "/Agda/POPL18/Everything.html")
                   , ("Slides", Just "PDF", "/slides/POPL18.pdf")
-                  , ("Video", Just "YouTube", "https://www.youtube.com/watch?v=-dNgQmRTYKg")
+                  , ("Video", Just "YouTube", "https://youtu.be/-dNgQmRTYKg")
                   ]
       , info    = [ ("PACMPL", "2 (POPL)", Nothing)
                   , ("Article", "41", Nothing)
