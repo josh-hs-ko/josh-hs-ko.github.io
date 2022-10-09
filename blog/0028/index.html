@@ -63,7 +63,7 @@
 0028
 </div>
 <h2>Understanding the Bernstein–Vazirani algorithm</h2>
-<div class="post-time">Posted at 23:13 on 9 October 2022</div>
+<div class="post-time">Posted at 23:13 on 9 October 2022, and revised at 23:21 on 9 October 2022</div>
 <p>After writing <a href="/blog/0027/">0027</a>, which discussed the Deutsch–Jozsa algorithm, I saw a closely related <a href="https://en.wikipedia.org/wiki/Bernstein%E2%80%93Vazirani_algorithm"><em>Bernstein-Vazirani algorithm</em></a> in <a href="https://doi.org/10.4204/EPTCS.343.10">Carette et al’s QPL 2021 paper</a>.
 (By the way, this paper appears to be the most recent and complete development in graphical approaches to quantum algorithms.
 In particular, the paper treats <a href="https://en.wikipedia.org/wiki/Grover&#x27;s_algorithm">Grover’s algorithm</a> in full, with a graphical representation of iterations and probabilistic reasoning — I’ll have to catch up.)
@@ -101,18 +101,18 @@ If we (somewhat informally) use $H$ to denote the conversion(s) between $\mathtt
 <p>The Bernstein–Vazirani algorithm can be understood as preparing a superposition state in Equation \ref{eq:encoding}, measure this state with respect to the X-basis, and apply $H$ to convert the resulting string of $\texttt +$ and $\texttt -$ back to a string of $\mathtt 0$ and $\mathtt 1$, which is $s$.
 Since such a state is necessarily one of the X-basis elements, which can be perfectly distinguished from the rest of the X-basis, the measurement will return that element with certainty.
 To a beginner, it may be surprising that we should prepare the superposition state in Equation \ref{eq:encoding}, which seems difficult to handle, but in this case the measurement with respect to the X-basis acts as a powerful pattern-matching operation that recognises such superposition states and decodes them back to a string, so there is no difficulty.</p>
-<p>It turns out that, in general, we can encode a function $f : \mathbf 2^n \to \mathbf 2$ in phases quite easily using the transpose of $\bar f^{\mathrm T}$.
+<p>It turns out that, in general, we can encode a function $f : \mathbf 2^n \to \mathbf 2$ in phases quite easily using $\bar f^{\mathrm T}$.
 The lifting of $f$ to $\bar f$ can be defined by</p>
 <p>$$ \bar f \defeq \sum_{x \in \mathbf 2^n} | f(x) \rangle \langle x | $$</p>
 <p>whose transpose is</p>
-<p>$$ \bar f^{\mathrm T} \defeq \sum_{x \in \mathbf 2^n} | x \rangle \langle f(x) | $$</p>
+<p>$$ \bar f^{\mathrm T} = \sum_{x \in \mathbf 2^n} | x \rangle \langle f(x) | $$</p>
 <p>Now, if we apply $\bar f^{\mathrm T}$ to $|\mathtt 0\rangle$, we can select all the summands where $f(x) = \mathtt 0$; we can also apply $\bar f^{\mathrm T}$ to $|\mathtt 1\rangle$ to select all the summands where $f(x) = \mathtt 1$, and put a minus sign in the front.
 And the sum of the two applications —which is the same as just one application to $|\texttt-\rangle$— is the state we want!</p>
 <p>$$ \bar f^{\mathrm T}|\texttt-\rangle
 = \bar f^{\mathrm T}|\mathtt 0\rangle - \bar f^{\mathrm T}|\mathtt 1\rangle
 = \left(\sum_{x \in \mathbf 2^n \mathrel\wedge f(x) = 0} |x\rangle\right) - \left(\sum_{x \in \mathbf 2^n \mathrel\wedge f(x) = 1} |x\rangle\right) \\
 = \sum_{x \in \mathbf 2^n} (-1)^{f(x)}|x\rangle $$</p>
-<p>So actually what we need to do in the quantum part of the algorithm is exactly the same as Deutsch–Jozsa; the rest of the development is exactly the same as in <a href="/blog/0027/">0027</a>.</p>
+<p>So actually what we need to do in the quantum part of the algorithm is exactly the same as Deutsch–Jozsa; the rest of the development is the same as in <a href="/blog/0027/">0027</a>.</p>
 
 <!-- END OF POST -->
 
