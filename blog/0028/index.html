@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Understanding the Bernstein–Vazirani algorithm — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="The Bernstein-Vazirani algorithm is closely related to Deutsch–Jozsa, but I have to fall back to the conventional understanding of the oracle construction —encoding function outputs as phases— to deal with this one.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0028
+</div>
+<h2>Understanding the Bernstein–Vazirani algorithm</h2>
+<div class="post-time">Posted at 23:13 on 9 October 2022</div>
+<p>After writing <a href="/blog/0027/">0027</a>, which discussed the Deutsch–Jozsa algorithm, I saw a closely related <a href="https://en.wikipedia.org/wiki/Bernstein%E2%80%93Vazirani_algorithm"><em>Bernstein-Vazirani algorithm</em></a> in <a href="https://doi.org/10.4204/EPTCS.343.10">Carette et al’s QPL 2021 paper</a>.
+(By the way, this paper appears to be the most recent and complete development in graphical approaches to quantum algorithms.
+In particular, the paper treats <a href="https://en.wikipedia.org/wiki/Grover&#x27;s_algorithm">Grover’s algorithm</a> in full, with a graphical representation of iterations and probabilistic reasoning — I’ll have to catch up.)
+The Bernstein–Vazirani problem gives us an oracle corresponding to the function $(\cdot s) : \mathbf 2^n \to \mathbf 2$, where $(\cdot)$ is dot product:
+given an input $x = x_1 x_2 \cdots x_n \in \mathbf 2^n$ where each $x_i \in \mathbf 2$,</p>
+<p>$$ (\cdot s)(x) \defeq x \cdot s \defeq (x_1 \mathop\wedge s_1) \oplus (x_2 \mathop\wedge s_2) \oplus \cdots \oplus (x_n \mathop\wedge s_n) $$</p>
+<p>The secret $s \in \mathbf 2^n$ is unknown to us, and we are required to recover $s$.
+Following the approach taken in <a href="/blog/0027/">0027</a>, I tried to lift $(\cdot s)$ to a linear map $\overline{(\cdot s)}$ and evaluate it on the X-basis, but this time it was rather difficult, and eventually I had to fall back on the more conventional understanding of the oracle construction, which is about encoding function outputs as phases.
+It’s still easier to talk about this encoding purely in linear algebra though.</p>
+<p>First, let us recap how the X-basis elements are expressed relative to the Z-basis, for example,</p>
+<p>\begin{equation}
+|\texttt{-+-}\rangle = |\mathtt{000}\rangle - |\mathtt{001}\rangle + |\mathtt{010}\rangle - |\mathtt{011}\rangle - |\mathtt{100}\rangle + |\mathtt{101}\rangle - |\mathtt{110}\rangle + |\mathtt{111}\rangle
+\label{eq:after-expansion}
+\end{equation}</p>
+<p>This is expanded from</p>
+<p>\begin{equation}
+|\texttt{-+-}\rangle = (|\mathtt 0\rangle - |\mathtt 1\rangle) \otimes (|\mathtt 0\rangle + |\mathtt 1\rangle) \otimes (|\mathtt 0\rangle - |\mathtt 1\rangle)
+\label{eq:before-expansion}
+\end{equation}</p>
+<p>using the linearity of tensor product, so, for example, the term $-|\mathtt{001}\rangle$ in Equation \ref{eq:after-expansion} comes from $|\mathtt 0\rangle \otimes |\mathtt 0\rangle \otimes -|\mathtt 1\rangle$ (drawing a summand from each of the three terms in Equation \ref{eq:before-expansion}), and $|\mathtt{111}\rangle$ from $-|\mathtt 1\rangle \otimes |\mathtt 1\rangle \otimes -|\mathtt 1\rangle$.
+Think of $\texttt{-+-}$ as selecting the first and third bits to participate in the decision of the sign of a term; to actually decide the sign of a term $|x_1 x_2 x_3\rangle$ in $|\texttt{-+-}\rangle$, we count the number of $\mathtt 1$ among the selected bits $x_1$ and $x_3$: if it’s even, that means we multiply an even number of $-1$, and the term is positive; otherwise, the term is negative.
+As a formula:</p>
+<p>$$ |\texttt{-+-}\rangle = \sum_{x_1, x_2, x_3 \in \mathbf 2} (-1)^{x_1 \oplus x_3} |x_1 x_2 x_3\rangle $$</p>
+<p>Note the correspondence between $\texttt{-+-}$ and the exponent $x_1 \oplus x_3$, where $x_1$ and $x_3$ are turned ‘on’ (participating in the decision of the sign) by $\texttt-$, and $x_2$ is turned ‘off’ by $\texttt+$.
+This turning on and off can be expressed more generally as a dot product</p>
+<p>$$ x_1 \oplus x_3 = (x_1 \mathop\wedge s_1) \oplus (x_2 \mathop\wedge s_2) \oplus (x_3 \mathop\wedge s_3) = x \cdot s $$</p>
+<p>where $s_1 \defeq \mathtt 1$, $s_2 \defeq \mathtt 0$, and $s_3 \defeq \mathtt 1$.
+If we (somewhat informally) use $H$ to denote the conversion(s) between $\mathtt 0$/$\mathtt 1$ and $\texttt +$/$\texttt -$ and generalise, we can write</p>
+<p>\begin{equation}
+|H(s)\rangle = \sum_{x \in \mathbf 2^n} (-1)^{x \cdot s} |x\rangle
+\label{eq:encoding}
+\end{equation}</p>
+<p>where all the outputs of $(\cdot s)$ are encoded in the coefficients, which are called ‘phases’ in quantum theory.
+(Now we know where the function $(\cdot s)$ in the Bernstein–Vazirani problem comes from, and see that the problem is actually no less artificial, but perhaps more intricately designed, than Deutsch’s problem.)</p>
+<p>The Bernstein–Vazirani algorithm can be understood as preparing a superposition state in Equation \ref{eq:encoding}, measure this state with respect to the X-basis, and apply $H$ to convert the resulting string of $\texttt +$ and $\texttt -$ back to a string of $\mathtt 0$ and $\mathtt 1$, which is $s$.
+Since such a state is necessarily one of the X-basis elements, which can be perfectly distinguished from the rest of the X-basis, the measurement will return that element with certainty.
+To a beginner, it may be surprising that we should prepare the superposition state in Equation \ref{eq:encoding}, which seems difficult to handle, but in this case the measurement with respect to the X-basis acts as a powerful pattern-matching operation that recognises such superposition states and decodes them back to a string, so there is no difficulty.</p>
+<p>It turns out that, in general, we can encode a function $f : \mathbf 2^n \to \mathbf 2$ in phases quite easily using the transpose of $\bar f^{\mathrm T}$.
+The lifting of $f$ to $\bar f$ can be defined by</p>
+<p>$$ \bar f \defeq \sum_{x \in \mathbf 2^n} | f(x) \rangle \langle x | $$</p>
+<p>whose transpose is</p>
+<p>$$ \bar f^{\mathrm T} \defeq \sum_{x \in \mathbf 2^n} | x \rangle \langle f(x) | $$</p>
+<p>Now, if we apply $\bar f^{\mathrm T}$ to $|\mathtt 0\rangle$, we can select all the summands where $f(x) = \mathtt 0$; we can also apply $\bar f^{\mathrm T}$ to $|\mathtt 1\rangle$ to select all the summands where $f(x) = \mathtt 1$, and put a minus sign in the front.
+And the sum of the two applications —which is the same as just one application to $|\texttt-\rangle$— is the state we want!</p>
+<p>$$ \bar f^{\mathrm T}|\texttt-\rangle
+= \bar f^{\mathrm T}|\mathtt 0\rangle - \bar f^{\mathrm T}|\mathtt 1\rangle
+= \left(\sum_{x \in \mathbf 2^n \mathrel\wedge f(x) = 0} |x\rangle\right) - \left(\sum_{x \in \mathbf 2^n \mathrel\wedge f(x) = 1} |x\rangle\right) \\
+= \sum_{x \in \mathbf 2^n} (-1)^{f(x)}|x\rangle $$</p>
+<p>So actually what we need to do in the quantum part of the algorithm is exactly the same as Deutsch–Jozsa; the rest of the development is exactly the same as in <a href="/blog/0027/">0027</a>.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
