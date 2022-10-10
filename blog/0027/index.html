@@ -64,7 +64,7 @@ With the help of the ZX-calculus, we can actually see that the algorithm is no m
 0027
 </div>
 <h2>Understanding the Deutsch–Jozsa algorithm</h2>
-<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 23:04 on 9 October 2022</div>
+<div class="post-time">Posted at 22:12 on 24 September 2022, and revised at 15:16 on 10 October 2022</div>
 <p>I started to write this post at the end of <a href="https://icfp22.sigplan.org">ICFP 2022</a> in Ljubljana, Slovenia, where I presented the paper ‘<a href="/#publication-81a792a1">Datatype-generic programming meets elaborator reflection</a>’, which is the result of a team effort with <a href="https://l-tchen.github.io">Liang-Ting</a> and <a href="https://github.com/Zekt">Tzu-Chi</a>.
 Hopefully this will be the start of a series of papers that revitalise dependently typed datatype-generic programming (in particular <a href="/#publication-696aedff">ornamentation</a>, of which I’m disappointed to see that there has been no satisfactory subsequent development while I was away and working on <a href="/#publication-e124d6a0">bidirectional programming</a>), and eventually lead to a generic library that the practical Agda programmer will be happy to use.
 After all these years, I’m still uncomfortable with chatting with random strangers, and did so only a few times at the conference (incidentally, this may have helped to reduce the risk of getting covid), but I can now chat pretty comfortably with people who I know at least to some extent, which is probably enough.</p>
@@ -159,7 +159,7 @@ As a ZX-diagram (which does not include the last check):</p>
 <p>This is not something we can run on a quantum computer yet: the input state $|\texttt-\rangle$ and the measurement can be readily implemented as part of a quantum circuit, but the transposed $\hat f$ —and even just $\hat f$ itself— cannot.
 We have to retrofit a classical function such as $f$ as an invertible/reversible function and encode it as a quantum circuit, which serves as the input to the algorithm — traditionally this is called an oracle.
 The standard oracle construction gives us a circuit $U_f$ such that</p>
-<p>$$ U_f(|x\rangle \otimes |y\rangle) = |x\rangle \otimes |f(x) \oplus y\rangle  \qquad \forall x \in \mathbf 2^2, y \in \mathbf 2$$</p>
+<p>$$ U_f(|x\rangle \otimes |y\rangle) = |x\rangle \otimes |f(x) \oplus y\rangle  \qquad \forall x : \mathbf 2^2, y : \mathbf 2$$</p>
 <p>where ‘$\oplus$’ is the exclusive-or operation on bits.
 This specification can be directly transcribed into ZX-calculus:</p>
 <p><a href="oracle.svg"><img class="displayed-figure" src="oracle.svg" alt="Quantum oracle"/></a></p>
