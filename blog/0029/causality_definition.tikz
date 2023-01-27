@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Process (quantum)}] (0) at (-2.5, 0) {};
+		\node [style=none] (1) at (-2.5, -0.5) {};
+		\node [style=none] (2) at (-2.5, 0.5) {};
+		\node [style=none] (4) at (-2.5, -1.5) {};
+		\node [style={Spider (classical)}] (5) at (-2.5, 1.5) {};
+		\node [style=none] (6) at (0.5, 0) {$=$};
+		\node [style=none] (7) at (2.25, -1.5) {};
+		\node [style={Spider (classical)}] (8) at (2.25, -0.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (1.center) to (4.center);
+		\draw [style={Wire (quantum)}] (5) to (2.center);
+		\draw [style={Wire (quantum)}] (8) to (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

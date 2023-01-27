@@ -1,0 +1,89 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Process (quantum)}] (0) at (-3, 0) {};
+		\node [style=none] (1) at (-3.5, 0.5) {};
+		\node [style=none] (2) at (-2.5, 0.5) {};
+		\node [style=none] (3) at (-2.5, -0.5) {};
+		\node [style=none] (4) at (-2.5, -1.5) {};
+		\node [style={Spider (classical)}] (6) at (-2.5, 2.5) {};
+		\node [style={Spider (classical)}] (7) at (-3.5, 2.5) {};
+		\node [style={Spider (classical)}] (8) at (-3.5, 1.5) {};
+		\node [style=none] (9) at (-3, 0) {~$\hat U$};
+		\node [style=none] (10) at (0, 0) {$=$};
+		\node [style={Conjugate (classical)}] (11) at (3, 0) {};
+		\node [style={Process (classical)}] (12) at (5.5, 0) {};
+		\node [style=none] (13) at (6, -0.5) {};
+		\node [style=none] (14) at (2.5, -0.5) {};
+		\node [style=none] (15) at (2.5, -1.5) {};
+		\node [style=none] (16) at (6, -1.5) {};
+		\node [style=none] (17) at (3.5, 0.5) {};
+		\node [style=none] (18) at (5, 0.5) {};
+		\node [style=none] (19) at (3.5, 1) {};
+		\node [style=none] (20) at (5, 1) {};
+		\node [style=none] (21) at (2.5, 0.5) {};
+		\node [style=none] (22) at (2.5, 1) {};
+		\node [style=none] (23) at (6, 1) {};
+		\node [style=none] (24) at (6, 0.5) {};
+		\node [style=none] (25) at (5.5, 0) {~$U$};
+		\node [style=none] (26) at (3, 0) {$U$~\null};
+		\node [style=none] (27) at (8.5, 0) {$=$};
+		\node [style=none] (28) at (13, 2.5) {};
+		\node [style=none] (29) at (13, -0.5) {};
+		\node [style=none] (30) at (12, 0.5) {};
+		\node [style=none] (31) at (13, 0.5) {};
+		\node [style=none] (32) at (13, -2) {};
+		\node [style=none] (33) at (12, 2.5) {};
+		\node [style={Process (classical)}] (34) at (12.5, 0) {~$U$};
+		\node [style={Adjoint (classical)}] (35) at (12.5, 3) {~$U$};
+		\node [style={Spider (classical)}] (36) at (12, 1.5) {};
+		\node [style=none] (37) at (13, 3.5) {};
+		\node [style=none] (38) at (13, 4) {};
+		\node [style=none] (39) at (10, 4) {};
+		\node [style=none] (40) at (10, -2) {};
+		\node [style={Spider (classical)}] (41) at (11, 1.5) {};
+		\node [style=none] (42) at (15.5, 0) {$=$};
+		\node [style=none] (47) at (20, -2) {};
+		\node [style={Spider (classical)}] (51) at (19, 1.5) {};
+		\node [style=none] (53) at (20, 4) {};
+		\node [style=none] (54) at (17, 4) {};
+		\node [style=none] (55) at (17, -2) {};
+		\node [style={Spider (classical)}] (56) at (18, 1.5) {};
+		\node [style=none] (57) at (21.5, 0) {$=$};
+		\node [style={Spider (classical)}] (58) at (23.5, -0.5) {};
+		\node [style=none] (59) at (23.5, -2) {};
+		\node [style=none] (60) at (-4.25, 2) {};
+		\node [style=none] (61) at (-1.25, 2) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (2.center) to (6);
+		\draw [style={Wire (quantum)}] (3.center) to (4.center);
+		\draw [style={Wire (quantum)}] (8) to (1.center);
+		\draw [style={Wire (classical)}] (8) to (7);
+		\draw [style={Wire (classical)}] (15.center) to (14.center);
+		\draw [style={Wire (classical)}] (13.center) to (16.center);
+		\draw [style={Wire (classical)}] (21.center)
+			 to (22.center)
+			 to [bend left=90] (23.center)
+			 to (24.center);
+		\draw [style={Wire (classical)}] (18.center)
+			 to (20.center)
+			 to [bend left=270, looseness=0.75] (19.center)
+			 to (17.center);
+		\draw [style={Wire (classical)}] (29.center) to (32.center);
+		\draw [style={Wire (classical)}] (28.center) to (31.center);
+		\draw [style={Wire (classical)}] (33.center) to (36);
+		\draw [style={Wire (classical)}] (36) to (30.center);
+		\draw [style={Wire (classical)}] (40.center)
+			 to (39.center)
+			 to [bend left=90, looseness=0.75] (38.center)
+			 to (37.center);
+		\draw [style={Wire (classical)}] (41) to (36);
+		\draw [style={Wire (classical)}] (55.center)
+			 to (54.center)
+			 to [bend left=90, looseness=0.75] (53.center)
+			 to (47.center);
+		\draw [style={Wire (classical)}] (56) to (51);
+		\draw [style={Wire (quantum)}] (59.center) to (58);
+		\draw [style=dashed line] (61.center) to (60.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

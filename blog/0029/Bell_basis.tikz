@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Z (quantum)}] (0) at (0, 1) {};
+		\node [style={X (quantum)}] (1) at (1, 1) {};
+		\node [style={X (classical)}] (2) at (0, 0) {};
+		\node [style={Z (classical)}] (3) at (1, 0) {};
+		\node [style=none] (4) at (0, 2) {};
+		\node [style=none] (5) at (1, 2) {};
+		\node [style=none] (6) at (0, -1) {};
+		\node [style=none] (7) at (1, -1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (0) to (1);
+		\draw [style={Wire (quantum)}] (1) to (3);
+		\draw [style={Wire (quantum)}] (0) to (2);
+		\draw [style={Wire (quantum)}] (0) to (4.center);
+		\draw [style={Wire (quantum)}] (1) to (5.center);
+		\draw [style={Wire (classical)}] (2) to (6.center);
+		\draw [style={Wire (classical)}] (3) to (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,35 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (-2.5, 1) {};
+		\node [style=none] (2) at (-2.5, -2) {};
+		\node [style=none] (3) at (-3.5, -1) {};
+		\node [style=none] (4) at (-2.5, -1) {};
+		\node [style=none] (5) at (-2.5, -3.5) {};
+		\node [style=none] (6) at (-3.5, 1) {};
+		\node [style={Process (classical)}] (8) at (-3, -1.5) {~$U$};
+		\node [style={Adjoint (classical)}] (9) at (-3, 1.5) {~$U$};
+		\node [style={Spider (classical)}] (10) at (-3.5, 0) {};
+		\node [style=none] (11) at (-2.5, 2) {};
+		\node [style=none] (12) at (-2.5, 3.5) {};
+		\node [style=none] (13) at (-4.5, -0.5) {};
+		\node [style=none] (14) at (-4.5, -3.5) {};
+		\node [style=none] (15) at (-4, 0) {};
+		\node [style=none] (30) at (0, 0) {$=$};
+		\node [style=none] (31) at (1.5, -3.5) {};
+		\node [style={Spider (classical)}] (32) at (1.5, -2) {};
+		\node [style=none] (33) at (3.5, -3.5) {};
+		\node [style=none] (34) at (3.5, 3.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (classical)}] (2.center) to (5.center);
+		\draw [style={Wire (classical)}] (1.center) to (4.center);
+		\draw [style={Wire (classical)}] (6.center) to (10);
+		\draw [style={Wire (classical)}] (10) to (3.center);
+		\draw [style={Wire (classical)}] (12.center) to (11.center);
+		\draw [style={Wire (classical)}] (14.center) to (13.center);
+		\draw [style={Wire (classical)}] (10) to (15.center);
+		\draw [style={Wire (classical)}, bend right=45] (15.center) to (13.center);
+		\draw [style={Wire (classical)}] (32) to (31.center);
+		\draw [style={Wire (classical)}] (34.center) to (33.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

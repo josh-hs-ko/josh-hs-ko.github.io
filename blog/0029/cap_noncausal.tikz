@@ -1,0 +1,21 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (0) at (-3.5, 0) {};
+		\node [style=none] (1) at (-1.5, 0) {};
+		\node [style=none] (2) at (-1.5, -1) {};
+		\node [style=none] (3) at (-3.5, -1) {};
+		\node [style=none] (4) at (0, 0) {$\neq$};
+		\node [style={Spider (classical)}] (5) at (1.5, 0) {};
+		\node [style={Spider (classical)}] (6) at (3.5, 0) {};
+		\node [style=none] (7) at (3.5, -1) {};
+		\node [style=none] (8) at (1.5, -1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (3.center)
+			 to (0.center)
+			 to [bend left=90, looseness=1.25] (1.center)
+			 to (2.center);
+		\draw [style={Wire (quantum)}] (5) to (8.center);
+		\draw [style={Wire (quantum)}] (6) to (7.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

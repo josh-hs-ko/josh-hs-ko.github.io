@@ -1,0 +1,18 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Process (classical)}] (0) at (0, 0) {};
+		\node [style=none] (1) at (-0.5, 0.5) {};
+		\node [style=none] (2) at (0.5, 0.5) {};
+		\node [style=none] (3) at (0.5, -0.5) {};
+		\node [style=none] (4) at (0.5, -1.5) {};
+		\node [style=none] (5) at (0.5, 2.5) {};
+		\node [style={Effect (classical & self-conjugate)}] (7) at (-0.5, 1.5) {};
+		\node [style=none] (8) at (-0.5, 1.5) {\footnotesize$k$};
+		\node [style=none] (9) at (0, 0) {~$U$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (classical)}] (2.center) to (5.center);
+		\draw [style={Wire (classical)}] (3.center) to (4.center);
+		\draw [style={Wire (classical)}] (1.center) to (7);
+	\end{pgfonlayer}
+\end{tikzpicture}

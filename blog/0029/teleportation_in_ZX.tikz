@@ -1,0 +1,62 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none] (1) at (0, 0) {};
+		\node [style={Z (quantum)}] (2) at (-4, 1) {};
+		\node [style={X (quantum)}] (3) at (-3, 1) {};
+		\node [style={X (classical)}] (4) at (-4, 2) {};
+		\node [style={Z (classical)}] (5) at (-3, 2) {};
+		\node [style=none] (6) at (-4, -2) {};
+		\node [style=none] (7) at (-3, 0) {};
+		\node [style={X (quantum)}] (8) at (0, 4) {};
+		\node [style={Z (quantum)}] (9) at (0, 5) {};
+		\node [style={Z (classical)}] (10) at (-1, 4) {};
+		\node [style={X (classical)}] (11) at (-1, 5) {};
+		\node [style=none] (12) at (0, 7) {};
+		\node [style=none] (13) at (-4.5, 2.5) {};
+		\node [style=none] (14) at (-2.5, 2.5) {};
+		\node [style=none] (15) at (-2.5, 0.5) {};
+		\node [style=none] (16) at (-4.5, 0.5) {};
+		\node [style=none] (17) at (-1.5, 5.5) {};
+		\node [style=none] (18) at (0.5, 5.5) {};
+		\node [style=none] (19) at (0.5, 3.5) {};
+		\node [style=none] (20) at (-1.5, 3.5) {};
+		\node [style=none] (21) at (-3.5, 0.25) {};
+		\node [style=none] (22) at (0.5, 0.25) {};
+		\node [style=none] (23) at (0.5, -1.25) {};
+		\node [style=none] (24) at (-3.5, -1.25) {};
+		\node [style=none, label={right:Bell-basis measurement (Alice)}] (25) at (0.75, 1.5) {};
+		\node [style=none, label={right:Bell map (Bob)}] (26) at (0.75, 4.5) {};
+		\node [style=none, label={right:EPR pair (shared)}] (27) at (0.75, -0.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (2) to (3);
+		\draw [style={Wire (quantum)}] (2) to (4);
+		\draw [style={Wire (quantum)}] (3) to (5);
+		\draw [style={Wire (quantum)}] (2) to (6.center);
+		\draw [style={Wire (quantum)}] (3)
+			 to (7.center)
+			 to [bend right=90] (1.center)
+			 to (8);
+		\draw [style={Wire (quantum)}] (11) to (9);
+		\draw [style={Wire (quantum)}] (10) to (8);
+		\draw [style={Wire (quantum)}] (8) to (9);
+		\draw [style={Wire (quantum)}] (9) to (12.center);
+		\draw [style={Wire (classical)}, bend left=45] (5) to (10);
+		\draw [style={Wire (classical)}, bend right=45] (11) to (4);
+		\draw [style=dashed line] (15.center)
+			 to (16.center)
+			 to (13.center)
+			 to (14.center)
+			 to cycle;
+		\draw [style=dashed line] (19.center)
+			 to (20.center)
+			 to (17.center)
+			 to (18.center)
+			 to cycle;
+		\draw [style=dashed line] (23.center)
+			 to (24.center)
+			 to (21.center)
+			 to (22.center)
+			 to cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

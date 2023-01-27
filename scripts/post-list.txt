@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 29, entryTime = 2023-01-27 18:09:37.06849351, entryTitle = "Quantum teleportation, graphically", entryTeaser = "Two graphical presentations of quantum teleportation are given, one directly working with concrete definitions in ZX-calculus, and the other developing a higher-level structure."}
+,
 PostEntry {entryNumber = 28, entryTime = 2022-10-09 23:13:19.345210929, entryTitle = "Understanding the Bernstein\8211Vazirani algorithm", entryTeaser = "The Bernstein-Vazirani algorithm is closely related to Deutsch\8211Jozsa, but I have to fall back to the conventional understanding of the oracle construction \8212encoding function outputs as phases\8212 to deal with this one."}
 ,
 PostEntry {entryNumber = 27, entryTime = 2022-09-24 22:12:12.070637635, entryTitle = "Understanding the Deutsch\8211Jozsa algorithm", entryTeaser = "The Deutsch\8211Jozsa algorithm is one of the simplest quantum algorithms, although the traditional presentation is still rather obscure (at least to beginners).\nWith the help of the ZX-calculus, we can actually see that the algorithm is no more than a twisted form of a simple computation."}
