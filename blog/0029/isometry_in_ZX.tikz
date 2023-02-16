@@ -1,128 +1,110 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style={Z (quantum)}] (0) at (0, -2) {};
-		\node [style={X (quantum)}] (1) at (1, -2) {};
-		\node [style={X (classical)}] (2) at (0, -1) {};
-		\node [style={Z (classical)}] (3) at (1, -1) {};
-		\node [style=none] (4) at (0, -3) {};
-		\node [style={Z (quantum)}] (8) at (0, 2) {};
-		\node [style={X (quantum)}] (9) at (1, 2) {};
-		\node [style={X (classical)}] (10) at (0, 1) {};
-		\node [style={Z (classical)}] (11) at (1, 1) {};
-		\node [style=none] (12) at (0, 3) {};
-		\node [style=none] (13) at (0, 0) {};
-		\node [style=none] (14) at (1, 0) {};
-		\node [style=none] (16) at (2.5, 0) {};
-		\node [style=none] (17) at (-0.5, 0) {};
-		\node [style=none] (18) at (3.5, 0) {$=$};
-		\node [style={Z (quantum)}] (19) at (5, -2) {};
-		\node [style=none] (23) at (5, -3) {};
-		\node [style={Z (quantum)}] (24) at (5, 2) {};
-		\node [style={X (quantum)}] (25) at (7, 0) {};
-		\node [style={X (classical)}] (26) at (5, 1) {};
-		\node [style={Z (classical)}] (27) at (6, 0) {};
-		\node [style=none] (28) at (5, 3) {};
-		\node [style=none] (29) at (6, 2) {};
-		\node [style=none] (30) at (6, -2) {};
-		\node [style=none] (31) at (7, 1) {};
-		\node [style=none] (32) at (7, -1) {};
-		\node [style=none] (33) at (8.5, 0) {$=$};
-		\node [style={Z (quantum)}] (34) at (10, -2) {};
-		\node [style=none] (35) at (10, -3) {};
-		\node [style={Z (quantum)}] (36) at (10, 2) {};
-		\node [style={X (quantum)}] (37) at (12, 0) {};
-		\node [style={X (classical)}] (38) at (10, 1) {};
-		\node [style={Z (classical)}] (39) at (11, 0) {};
-		\node [style=none] (40) at (10, 3) {};
-		\node [style=none] (41) at (11, 2) {};
-		\node [style=none] (42) at (11, -2) {};
-		\node [style=none] (43) at (12, 1) {};
-		\node [style=none] (44) at (12, -1) {};
-		\node [style=none] (45) at (13.5, 0) {$=$};
-		\node [style={Z (quantum)}] (46) at (15, -2) {};
-		\node [style=none] (47) at (15, -3) {};
-		\node [style={Z (quantum)}] (48) at (15, 2) {};
-		\node [style={X (classical)}] (50) at (15, 1) {};
-		\node [style=none] (52) at (15, 3) {};
-		\node [style=none] (54) at (17.5, 0) {$=$};
-		\node [style=none] (56) at (20, -3) {};
-		\node [style={Z (quantum)}] (57) at (20, 0) {};
-		\node [style={X (classical)}] (58) at (19, 0) {};
-		\node [style=none] (59) at (20, 3) {};
-		\node [style=none] (60) at (21.5, 0) {$=$};
-		\node [style=none] (61) at (23, -3) {};
-		\node [style=none] (64) at (23, 3) {};
-		\node [style=none] (65) at (1, 2) {};
-		\node [style=none] (66) at (2, 1) {};
-		\node [style=none] (67) at (1, -2) {};
-		\node [style=none] (68) at (2, -1) {};
-		\node [style=none] (69) at (15, 2) {};
-		\node [style=none] (70) at (16, 1) {};
-		\node [style=none] (71) at (15, -2) {};
-		\node [style=none] (72) at (16, -1) {};
-		\node [style={X (classical)}] (73) at (5, -1) {};
-		\node [style={X (classical)}] (74) at (10, -1) {};
-		\node [style={X (classical)}] (75) at (15, -1) {};
+		\node [style={Z (quantum)}] (0) at (-8, -2) {};
+		\node [style={Z (classical)}] (1) at (-9, -1) {};
+		\node [style={X (classical)}] (2) at (-9, -2) {};
+		\node [style={X (quantum)}] (3) at (-8, -1) {};
+		\node [style=none] (7) at (-8, -3) {};
+		\node [style={Z (quantum)}] (8) at (-8, 2) {};
+		\node [style={Z (classical)}] (9) at (-9, 1) {};
+		\node [style={X (classical)}] (10) at (-9, 2) {};
+		\node [style={X (quantum)}] (11) at (-8, 1) {};
+		\node [style=none] (15) at (-8, 3) {};
+		\node [style=none] (16) at (-10, 1) {};
+		\node [style=none] (17) at (-10, -1) {};
+		\node [style=none] (18) at (-9, 2) {};
+		\node [style=none] (19) at (-9, -2) {};
+		\node [style=none] (20) at (-6.5, 0) {$=$};
+		\node [style={Z (quantum)}] (21) at (-3, -2) {};
+		\node [style={X (classical)}] (23) at (-4, -2) {};
+		\node [style=none] (25) at (-3, -3) {};
+		\node [style={Z (quantum)}] (26) at (-3, 2) {};
+		\node [style={Z (classical)}] (27) at (-4, 0) {};
+		\node [style={X (classical)}] (28) at (-4, 2) {};
+		\node [style={X (quantum)}] (29) at (-3, 0) {};
+		\node [style=none] (30) at (-3, 3) {};
+		\node [style=none] (31) at (-5, 1) {};
+		\node [style=none] (32) at (-5, -1) {};
+		\node [style=none] (33) at (-4, 2) {};
+		\node [style=none] (34) at (-4, -2) {};
+		\node [style=none] (35) at (-7.5, 0) {};
+		\node [style=none] (36) at (-10.5, 0) {};
+		\node [style=none] (37) at (-1.5, 0) {$=$};
+		\node [style={Z (quantum)}] (38) at (2, -2) {};
+		\node [style={X (classical)}] (39) at (1, -2) {};
+		\node [style=none] (40) at (2, -3) {};
+		\node [style={Z (quantum)}] (41) at (2, 2) {};
+		\node [style={Z (classical)}] (42) at (1, 0) {};
+		\node [style={X (classical)}] (43) at (1, 2) {};
+		\node [style={X (quantum)}] (44) at (2, 0) {};
+		\node [style=none] (45) at (2, 3) {};
+		\node [style=none] (46) at (0, 1) {};
+		\node [style=none] (47) at (0, -1) {};
+		\node [style=none] (48) at (1, 2) {};
+		\node [style=none] (49) at (1, -2) {};
+		\node [style=none] (50) at (3.5, 0) {$=$};
+		\node [style={Z (quantum)}] (51) at (6, -2) {};
+		\node [style={X (classical)}] (52) at (5, -2) {};
+		\node [style=none] (53) at (6, -3) {};
+		\node [style={Z (quantum)}] (54) at (6, 2) {};
+		\node [style={X (classical)}] (56) at (5, 2) {};
+		\node [style=none] (58) at (6, 3) {};
+		\node [style=none] (59) at (7.5, 0) {$=$};
+		\node [style=none] (62) at (10, -3) {};
+		\node [style={Z (quantum)}] (63) at (10, 0) {};
+		\node [style={X (classical)}] (64) at (9, 0) {};
+		\node [style=none] (65) at (10, 3) {};
+		\node [style=none] (66) at (11.5, 0) {$=$};
+		\node [style=none] (67) at (13, -3) {};
+		\node [style=none] (70) at (13, 3) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
-		\draw [style={Wire (quantum)}] (0) to (1);
 		\draw [style={Wire (quantum)}] (1) to (3);
+		\draw [style={Wire (quantum)}] (3) to (0);
 		\draw [style={Wire (quantum)}] (0) to (2);
-		\draw [style={Wire (quantum)}] (0) to (4.center);
-		\draw [style={Wire (quantum)}] (8) to (9);
+		\draw [style={Wire (quantum)}] (7.center) to (0);
 		\draw [style={Wire (quantum)}] (9) to (11);
+		\draw [style={Wire (quantum)}] (11) to (8);
 		\draw [style={Wire (quantum)}] (8) to (10);
-		\draw [style={Wire (quantum)}] (8) to (12.center);
-		\draw [style={Wire (classical)}] (10) to (13.center);
-		\draw [style={Wire (classical)}] (11) to (14.center);
-		\draw [style={Wire (classical)}] (2) to (13.center);
-		\draw [style={Wire (classical)}] (3) to (14.center);
-		\draw [style=dashed line] (17.center) to (16.center);
-		\draw [style={Wire (quantum)}] (19) to (23.center);
-		\draw [style={Wire (quantum)}, bend left=315, looseness=1.25] (25) to (27);
-		\draw [style={Wire (quantum)}] (24) to (26);
-		\draw [style={Wire (quantum)}] (24) to (28.center);
-		\draw [style={Wire (quantum)}, bend right=45, looseness=1.25] (27) to (25);
-		\draw [style={Wire (quantum)}] (19)
-			 to (30.center)
-			 to [bend right=45] (32.center)
-			 to (25);
-		\draw [style={Wire (quantum)}] (24)
-			 to (29.center)
-			 to [bend left=45] (31.center)
-			 to (25);
-		\draw [style={Wire (quantum)}] (34) to (35.center);
-		\draw [style={Wire (quantum)}] (36) to (38);
-		\draw [style={Wire (quantum)}] (36) to (40.center);
-		\draw [style={Wire (quantum)}] (37)
-			 to (44.center)
-			 to [bend left=45] (42.center)
-			 to (34);
-		\draw [style={Wire (quantum)}] (36)
-			 to (41.center)
-			 to [bend left=45] (43.center)
-			 to (37);
-		\draw [style={Wire (quantum)}] (46) to (47.center);
-		\draw [style={Wire (quantum)}] (48) to (50);
-		\draw [style={Wire (quantum)}] (48) to (52.center);
-		\draw [style={Wire (quantum)}, bend left=315, looseness=1.25] (57) to (58);
-		\draw [style={Wire (quantum)}] (57) to (59.center);
-		\draw [style={Wire (quantum)}] (57) to (56.center);
-		\draw [style={Wire (quantum)}, bend right=45, looseness=1.25] (58) to (57);
-		\draw [style={Wire (quantum)}] (64.center) to (61.center);
-		\draw [style={Wire (quantum)}] (67.center)
-			 to [bend right=45, looseness=1.25] (68.center)
-			 to (66.center)
-			 to [bend right=45, looseness=1.25] (65.center);
-		\draw [style={Wire (quantum)}] (71.center)
-			 to [bend right=45, looseness=1.25] (72.center)
-			 to (70.center)
-			 to [bend right=45, looseness=1.25] (69.center);
-		\draw [style={Wire (quantum)}] (19) to (73);
-		\draw [style={Wire (classical)}] (73) to (26);
-		\draw [style={Wire (classical)}] (74) to (38);
-		\draw [style={Wire (quantum)}] (34) to (74);
-		\draw [style={Wire (quantum)}] (75) to (71.center);
-		\draw [style={Wire (classical)}] (75) to (50);
+		\draw [style={Wire (quantum)}] (15.center) to (8);
+		\draw [style={Wire (classical)}] (1) to (9);
+		\draw [style={Wire (quantum)}] (3) to (11);
+		\draw [style={Wire (classical)}] (18.center)
+			 to [bend left=315, looseness=1.25] (16.center)
+			 to (17.center)
+			 to [bend right=45, looseness=1.25] (19.center);
+		\draw [style={Wire (quantum)}] (21) to (23);
+		\draw [style={Wire (quantum)}] (25.center) to (21);
+		\draw [style={Wire (quantum)}, bend left=45, looseness=1.25] (27) to (29);
+		\draw [style={Wire (quantum)}] (29) to (26);
+		\draw [style={Wire (quantum)}] (26) to (28);
+		\draw [style={Wire (quantum)}] (30.center) to (26);
+		\draw [style={Wire (classical)}] (33.center)
+			 to [bend left=315, looseness=1.25] (31.center)
+			 to (32.center)
+			 to [bend right=45, looseness=1.25] (34.center);
+		\draw [style={Wire (quantum)}] (21) to (29);
+		\draw [style=dashed line] (36.center) to (35.center);
+		\draw [style={Wire (quantum)}, bend right=45, looseness=1.25] (27) to (29);
+		\draw [style={Wire (quantum)}] (38) to (39);
+		\draw [style={Wire (quantum)}] (40.center) to (38);
+		\draw [style={Wire (quantum)}] (44) to (41);
+		\draw [style={Wire (quantum)}] (41) to (43);
+		\draw [style={Wire (quantum)}] (45.center) to (41);
+		\draw [style={Wire (classical)}, bend left=315, looseness=1.25] (48.center) to (46.center);
+		\draw [style={Wire (classical)}] (46.center) to (47.center);
+		\draw [style={Wire (classical)}, bend right=45, looseness=1.25] (47.center) to (49.center);
+		\draw [style={Wire (quantum)}] (38) to (44);
+		\draw [style={Wire (quantum)}] (51) to (52);
+		\draw [style={Wire (quantum)}] (53.center) to (51);
+		\draw [style={Wire (quantum)}] (54) to (56);
+		\draw [style={Wire (quantum)}] (58.center) to (54);
+		\draw [style={Wire (quantum)}] (54) to (51);
+		\draw [style={Wire (classical)}] (56) to (52);
+		\draw [style={Wire (quantum)}, bend left=315, looseness=1.25] (63) to (64);
+		\draw [style={Wire (quantum)}] (65.center) to (63);
+		\draw [style={Wire (quantum)}] (63) to (62.center);
+		\draw [style={Wire (quantum)}, bend right=45, looseness=1.25] (64) to (63);
+		\draw [style={Wire (quantum)}] (70.center) to (67.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

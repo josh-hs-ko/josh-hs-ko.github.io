@@ -1,17 +1,17 @@
 \begin{tikzpicture}
 	\begin{pgfonlayer}{nodelayer}
-		\node [style={Z (classical)}] (0) at (-1, 0) {};
-		\node [style={X (classical)}] (1) at (0, 0) {};
+		\node [style={Z (classical)}] (0) at (1, -1) {};
+		\node [style={X (classical)}] (1) at (1, 0) {};
 		\node [style=none] (2) at (-1, 1) {};
 		\node [style=none] (3) at (0, 1) {};
 		\node [style=none] (4) at (1, 1) {};
-		\node [style=none] (5) at (-1, -1) {};
+		\node [style=none] (5) at (1, -2) {};
 	\end{pgfonlayer}
 	\begin{pgfonlayer}{edgelayer}
 		\draw [style={Wire (classical)}] (5.center) to (0);
 		\draw [style={Wire (classical)}] (0) to (1);
-		\draw [style={Wire (classical)}] (1) to (3.center);
-		\draw [style={Wire (classical)}] (0) to (2.center);
-		\draw [style={Wire (classical)}, in=-90, out=0] (1) to (4.center);
+		\draw [style={Wire (classical)}, in=270, out=180, looseness=1.25] (1) to (3.center);
+		\draw [style={Wire (classical)}, in=270, out=180, looseness=1.25] (0) to (2.center);
+		\draw [style={Wire (classical)}] (1) to (4.center);
 	\end{pgfonlayer}
 \end{tikzpicture}

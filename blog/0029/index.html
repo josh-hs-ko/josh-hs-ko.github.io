@@ -63,7 +63,7 @@
 0029
 </div>
 <h2>Quantum teleportation, graphically</h2>
-<div class="post-time">Posted at 18:09 on 27 January 2023</div>
+<div class="post-time">Posted at 18:09 on 27 January 2023, and revised at 18:31 on 16 February 2023</div>
 <p>In <a href="https://www.cambridge.org/gb/pqp">PQP</a>, <a href="https://en.wikipedia.org/wiki/Quantum_teleportation">quantum teleportation</a> —where Alice sends a qubit to Bob using a shared EPR pair and two bits of classical communication— is used as a running example that gets developed in several stages together with the graphical quantum theory, culminating in a rather pleasing diagram in <a href="https://zxcalculus.com">ZX-calculus</a>:</p>
 <p><a href="teleportation_in_ZX.svg"><img class="displayed-figure" src="teleportation_in_ZX.svg" alt="Teleportation in ZX-calculus"/></a></p>
 <p><em>Convention.</em>
@@ -92,7 +92,7 @@ It is easy to verify that marshalling is inverted by unmarshalling (using spider
 Even just aiming at giving concrete definitions, what we need to conjure out of thin air is just the Bell basis, from which we can derive all the components of teleportation.
 The derivations make full use of the ‘directionlessness’ and the finer-grained nature of ZX-diagrams (using spiders rather than gates as the basic building blocks):
 The EPR pair is no more than a (horizontal) identity wire, and we can re-orient and break up the Bell basis diagram in different ways to see how marshalling and unmarshalling can be implemented.
-In particular, it is immediately clear that CNOT and conditional X- and Z-rotations are the same process in different directions, which isn’t obvious in traditional presentations.
+In particular, it is immediately clear that CNOT is intimately related to X- and Z-rotations, which isn’t obvious in traditional presentations.
 Finally, the isometry calculation is very clean, and yet readily proves the full correctness of teleportation.
 By contrast, <a href="https://doi.org/10.48550/arXiv.1907.09415">de Wolf’s lecture notes</a>, for example, do not bother to give a complete calculation.
 Moreover, de Wolf mentions that</p>
@@ -144,10 +144,10 @@ We could even verify that the marshalling process is causal:</p>
 The causality of the measurement is indeed stronger and needs to be separately verified: this causality is about whether the collection of unitaries fully constitutes a measurement, rather than the invertibility of each individual unitary.</p>
 <p>To get back to the concrete definitions, we can verify that the choice of $U$ corresponding to the Bell basis</p>
 <p><a href="marshalling_unitary.svg"><img class="displayed-figure" src="marshalling_unitary.svg" alt="Pure core of marshalling"/></a></p>
-<p>does satisfy the unitarity laws:</p>
-<p><a href="unitarity_I_verification.svg"><img class="displayed-figure" src="unitarity_I_verification.svg" alt="Verification of the first unitarity"/></a></p>
-<p><a href="unitarity_II_verification.svg"><img class="displayed-figure" src="unitarity_II_verification.svg" alt="Verification of the second unitarity"/></a></p>
-<p>And of course we can verify that the Bell-basis measurement is causal:</p>
+<p>does satisfy the unitarity laws: the first law is verified by</p>
+<p><a href="unitarity_verification.svg"><img class="displayed-figure" src="unitarity_verification.svg" alt="Verification of the first unitarity"/></a></p>
+<p>and the second law is exactly its colour-inverted version.
+And of course we can verify that the Bell-basis measurement is causal:</p>
 <p><a href="measurement_causal.svg"><img class="displayed-figure" src="measurement_causal.svg" alt="Causality of Alice’s measurement"/></a></p>
 <h3>Concluding remarks</h3>
 <p>Teleportation does work nicely as a representative example of the graphical quantum theory (much like the role of maximum segment sum in program derivation), demonstrating the power and elegance of the graphical approach really well.
