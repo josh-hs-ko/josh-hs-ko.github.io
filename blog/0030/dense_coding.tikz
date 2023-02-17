@@ -1,0 +1,76 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={X (quantum)}] (0) at (-1, -2) {};
+		\node [style={Z (quantum)}] (1) at (-1, -1) {};
+		\node [style={Z (classical)}] (2) at (-2, -2) {};
+		\node [style={X (classical)}] (3) at (-2, -1) {};
+		\node [style={Z (quantum)}] (4) at (1, 1) {};
+		\node [style={X (quantum)}] (5) at (2, 1) {};
+		\node [style={X (classical)}] (6) at (1, 2) {};
+		\node [style={Z (classical)}] (7) at (2, 2) {};
+		\node [style=none] (8) at (1, 3) {};
+		\node [style=none] (9) at (2, 3) {};
+		\node [style=none] (10) at (-2, -3.5) {};
+		\node [style=none] (11) at (-3, -3.5) {};
+		\node [style=none] (12) at (-1, -3) {};
+		\node [style=none] (13) at (2, -3) {};
+		\node [style=none] (14) at (0.5, 1.5) {};
+		\node [style=none] (15) at (1.5, 1.5) {};
+		\node [style=none] (16) at (2.5, 1.5) {};
+		\node [style=none] (17) at (2.5, 0.5) {};
+		\node [style=none] (18) at (0.5, 0.5) {};
+		\node [style=none] (19) at (0.5, 2.5) {};
+		\node [style=none] (20) at (2.5, 2.5) {};
+		\node [style=none] (21) at (1.5, 2.5) {};
+		\node [style=none] (22) at (-2.5, -0.5) {};
+		\node [style=none] (23) at (-2.5, -1.5) {};
+		\node [style=none] (24) at (-0.5, -1.5) {};
+		\node [style=none] (25) at (-0.5, -0.5) {};
+		\node [style=none] (26) at (-0.5, -2.5) {};
+		\node [style=none] (27) at (-2.5, -2.5) {};
+		\node [style=none] (28) at (-1.5, -2.75) {};
+		\node [style=none] (29) at (2.5, -2.75) {};
+		\node [style=none] (30) at (2.5, -4.25) {};
+		\node [style=none] (31) at (-1.5, -4.25) {};
+		\node [style=none, label={right:Measurements in the X- and Z-bases}] (32) at (3, 2) {};
+		\node [style=none, label={right:CNOT (Bob)}] (33) at (3, 1) {};
+		\node [style=none, label={right:conditional \rlap{Z}\phantom{X}-rotation}] (34) at (3, -1) {};
+		\node [style=none, label={right:conditional X-rotation (Alice)}] (35) at (3, -2) {};
+		\node [style=none, label={right:EPR pair (shared)}] (36) at (3, -3.5) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (classical)}] (10.center) to (2);
+		\draw [style={Wire (classical)}, in=-180, out=90, looseness=0.75] (11.center) to (3);
+		\draw [style={Wire (quantum)}] (1) to (0);
+		\draw [style={Wire (quantum)}] (0)
+			 to (12.center)
+			 to [bend right=90] (13.center)
+			 to (5);
+		\draw [style={Wire (quantum)}] (5) to (7);
+		\draw [style={Wire (quantum)}] (6) to (4);
+		\draw [style={Wire (quantum)}] (4) to (5);
+		\draw [style={Wire (quantum)}, in=-90, out=90] (1) to (4);
+		\draw [style={Wire (classical)}] (6) to (8.center);
+		\draw [style={Wire (classical)}] (7) to (9.center);
+		\draw [style=dashed line] (17.center)
+			 to (18.center)
+			 to (19.center)
+			 to (20.center)
+			 to cycle;
+		\draw [style=dashed line] (14.center) to (16.center);
+		\draw [style=dashed line] (21.center) to (15.center);
+		\draw [style=dashed line] (22.center)
+			 to (27.center)
+			 to (26.center)
+			 to (25.center)
+			 to cycle;
+		\draw [style=dashed line] (23.center) to (24.center);
+		\draw [style=dashed line] (30.center)
+			 to (29.center)
+			 to (28.center)
+			 to (31.center)
+			 to cycle;
+		\draw [style={Wire (quantum)}] (3) to (1);
+		\draw [style={Wire (quantum)}] (0) to (2);
+	\end{pgfonlayer}
+\end{tikzpicture}

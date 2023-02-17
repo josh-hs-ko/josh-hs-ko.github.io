@@ -1,0 +1,76 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={X (quantum)}] (0) at (-7, -1) {};
+		\node [style={Z (quantum)}] (1) at (-8, -1) {};
+		\node [style={Z (classical)}] (2) at (-7, -2) {};
+		\node [style={X (classical)}] (3) at (-8, -2) {};
+		\node [style={Z (quantum)}] (4) at (-8, 1) {};
+		\node [style={X (quantum)}] (5) at (-7, 1) {};
+		\node [style={X (classical)}] (6) at (-8, 2) {};
+		\node [style={Z (classical)}] (7) at (-7, 2) {};
+		\node [style=none] (8) at (-8, 3) {};
+		\node [style=none] (9) at (-7, 3) {};
+		\node [style=none] (10) at (-8, -3) {};
+		\node [style=none] (11) at (-7, -3) {};
+		\node [style=none] (12) at (-5.5, 0) {$=$};
+		\node [style=none] (13) at (4, 3) {};
+		\node [style=none] (14) at (4, -3) {};
+		\node [style=none] (15) at (5, -3) {};
+		\node [style=none] (16) at (5, 3) {};
+		\node [style=none] (17) at (-6.5, 0) {};
+		\node [style=none] (18) at (-8.5, 0) {};
+		\node [style={Z (classical)}] (21) at (-3, -2) {};
+		\node [style={X (classical)}] (22) at (-4, -2) {};
+		\node [style={Z (quantum)}] (23) at (-4, 0) {};
+		\node [style={X (quantum)}] (24) at (-3, 0) {};
+		\node [style={X (classical)}] (25) at (-4, 2) {};
+		\node [style={Z (classical)}] (26) at (-3, 2) {};
+		\node [style=none] (27) at (-4, 3) {};
+		\node [style=none] (28) at (-3, 3) {};
+		\node [style=none] (29) at (-4, -3) {};
+		\node [style=none] (30) at (-3, -3) {};
+		\node [style=none] (31) at (-1.5, 0) {$=$};
+		\node [style={Z (classical)}] (32) at (1, -2) {};
+		\node [style={X (classical)}] (33) at (0, -2) {};
+		\node [style={X (classical)}] (36) at (0, 2) {};
+		\node [style={Z (classical)}] (37) at (1, 2) {};
+		\node [style=none] (38) at (0, 3) {};
+		\node [style=none] (39) at (1, 3) {};
+		\node [style=none] (40) at (0, -3) {};
+		\node [style=none] (41) at (1, -3) {};
+		\node [style=none] (42) at (2.5, 0) {$=$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (1) to (0);
+		\draw [style={Wire (quantum)}] (5) to (7);
+		\draw [style={Wire (quantum)}] (6) to (4);
+		\draw [style={Wire (quantum)}] (4) to (5);
+		\draw [style={Wire (classical)}] (6) to (8.center);
+		\draw [style={Wire (classical)}] (7) to (9.center);
+		\draw [style={Wire (classical)}] (2) to (11.center);
+		\draw [style={Wire (classical)}] (3) to (10.center);
+		\draw [style={Wire (quantum)}] (1) to (4);
+		\draw [style={Wire (quantum)}] (5) to (0);
+		\draw [style={Wire (classical)}] (13.center) to (14.center);
+		\draw [style={Wire (classical)}] (15.center) to (16.center);
+		\draw [style=dashed line] (18.center) to (17.center);
+		\draw [style={Wire (quantum)}] (24) to (26);
+		\draw [style={Wire (quantum)}] (25) to (23);
+		\draw [style={Wire (quantum)}, bend left=45, looseness=1.25] (23) to (24);
+		\draw [style={Wire (classical)}] (25) to (27.center);
+		\draw [style={Wire (classical)}] (26) to (28.center);
+		\draw [style={Wire (classical)}] (21) to (30.center);
+		\draw [style={Wire (classical)}] (22) to (29.center);
+		\draw [style={Wire (quantum)}] (0) to (2);
+		\draw [style={Wire (quantum)}] (3) to (1);
+		\draw [style={Wire (quantum)}] (23) to (22);
+		\draw [style={Wire (quantum)}] (24) to (21);
+		\draw [style={Wire (quantum)}, bend right=45, looseness=1.25] (23) to (24);
+		\draw [style={Wire (classical)}] (36) to (38.center);
+		\draw [style={Wire (classical)}] (37) to (39.center);
+		\draw [style={Wire (classical)}] (32) to (41.center);
+		\draw [style={Wire (classical)}] (33) to (40.center);
+		\draw [style={Wire (quantum)}] (36) to (33);
+		\draw [style={Wire (quantum)}] (32) to (37);
+	\end{pgfonlayer}
+\end{tikzpicture}
