@@ -1,7 +1,9 @@
 [
-PostEntry {entryNumber = 30, entryTime = 2023-02-17 16:38:56.333976357, entryTitle = "Dense coding, graphically", entryTeaser = "Another popular example that makes use of the Bell basis is dense coding, which is a name I find misleading though."}
+PostEntry {entryNumber = 31, entryTime = 2023-02-24 16:47:57.086359935, entryTitle = "Fun with the Bell basis: Entanglement swapping, graphically", entryTeaser = "To complete the Bell basis trilogy, we also look at entanglement swapping, which, though more complex, can be presented naturally in ZX-calculus."}
 ,
-PostEntry {entryNumber = 29, entryTime = 2023-01-27 18:09:37.06849351, entryTitle = "Quantum teleportation, graphically", entryTeaser = "Two graphical presentations of quantum teleportation are given, one directly working with concrete definitions in ZX-calculus, and the other developing a higher-level structure."}
+PostEntry {entryNumber = 30, entryTime = 2023-02-17 16:38:56.333976357, entryTitle = "Fun with the Bell basis: Dense coding, graphically", entryTeaser = "Another popular example that makes use of the Bell basis is dense coding, which is a name I find misleading though."}
+,
+PostEntry {entryNumber = 29, entryTime = 2023-01-27 18:09:37.06849351, entryTitle = "Fun with the Bell basis: Quantum teleportation, graphically", entryTeaser = "Two graphical presentations of quantum teleportation are given, one directly working with concrete definitions in ZX-calculus, and the other developing a higher-level structure."}
 ,
 PostEntry {entryNumber = 28, entryTime = 2022-10-09 23:13:19.345210929, entryTitle = "Understanding the Bernstein\8211Vazirani algorithm", entryTeaser = "The Bernstein-Vazirani algorithm is closely related to Deutsch\8211Jozsa, but I have to fall back to the conventional understanding of the oracle construction \8212encoding function outputs as phases\8212 to deal with this one."}
 ,
