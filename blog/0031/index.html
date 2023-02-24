@@ -63,7 +63,7 @@
 0031
 </div>
 <h2>Fun with the Bell basis: Entanglement swapping, graphically</h2>
-<div class="post-time">Posted at 16:47 on 24 February 2023</div>
+<div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 00:10 on 25 February 2023</div>
 <p>Continuing <a href="/blog/0029/">0029</a> and <a href="/blog/0030/">0030</a>, it is also fairly straightforward to deal with <a href="https://en.wikipedia.org/wiki/Quantum_teleportation#Entanglement_swapping">entanglement swapping</a>, which can be seen as a more complex version of teleportation.
 The problem is specified as follows: given two EPR pairs between Alice and Charlie and between Charlie and Bob, find a way to entangle Alice’s and Bob’s qubits, and leave an EPR pair for Charlie.</p>
 <p><a href="entanglement_swapping_problem.svg"><img class="displayed-figure" src="entanglement_swapping_problem.svg" alt="The entanglement swapping problem"/></a></p>
@@ -72,7 +72,7 @@ However, we should switch to the ‘non-demolition’ kind of measurement that l
 <p><a href="Charlie_measurement.svg"><img class="displayed-figure" src="Charlie_measurement.svg" alt="Charlie performs a non-demolition Bell-basis measurement."/></a></p>
 <p>This non-demolition Bell-basis measurement is represented as the composition of the demolition version with its adjoint, with the measurement result retained.
 The representation corresponds to an operational understanding: to measure a (bipartite) state in the Bell basis, we rotate the state to align with the computational basis (modulo a Hadamard) and reduce the measurement to a standard one; the measurement result (which is classical data) is then re-encoded as a quantum state, which is a pure computational basis state, and is ultimately rotated back to a Bell-basis state.
-Now Charlie copies the measurement result and send it to Bob so that Bob can perform the same correction as in teleportation:</p>
+Now Charlie copies the measurement result and sends it to Bob so that Bob can perform the same correction as in teleportation:</p>
 <p><a href="Bob_correction.svg"><img class="displayed-figure" src="Bob_correction.svg" alt="Bob performs the Bell map."/></a></p>
 <p>And Charlie needs to perform his own correction (depending on the same measurement result) to restore his two qubits to an EPR pair:</p>
 <p><a href="Charlie_correction.svg"><img class="displayed-figure" src="Charlie_correction.svg" alt="Charlie performs the Bell map."/></a></p>
