@@ -63,7 +63,7 @@
 0031
 </div>
 <h2>Fun with the Bell basis: Entanglement swapping, graphically</h2>
-<div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 00:10 on 25 February 2023</div>
+<div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 10:18 on 25 February 2023</div>
 <p>Continuing <a href="/blog/0029/">0029</a> and <a href="/blog/0030/">0030</a>, it is also fairly straightforward to deal with <a href="https://en.wikipedia.org/wiki/Quantum_teleportation#Entanglement_swapping">entanglement swapping</a>, which can be seen as a more complex version of teleportation.
 The problem is specified as follows: given two EPR pairs between Alice and Charlie and between Charlie and Bob, find a way to entangle Alice’s and Bob’s qubits, and leave an EPR pair for Charlie.</p>
 <p><a href="entanglement_swapping_problem.svg"><img class="displayed-figure" src="entanglement_swapping_problem.svg" alt="The entanglement swapping problem"/></a></p>
@@ -77,7 +77,7 @@ Now Charlie copies the measurement result and sends it to Bob so that Bob can pe
 <p>And Charlie needs to perform his own correction (depending on the same measurement result) to restore his two qubits to an EPR pair:</p>
 <p><a href="Charlie_correction.svg"><img class="displayed-figure" src="Charlie_correction.svg" alt="Charlie performs the Bell map."/></a></p>
 <p>And that’s it!
-The whole diagram may look slightly intimidating, but it should be clear that we have constructed two paths going through rotations that are classically controlled to cancel out each other, forming the two required EPR pairs:</p>
+The whole diagram may look slightly intimidating, but as marked below, it should be clear that we have constructed two paths going through rotations that are classically controlled (by the boxed part) to cancel out all the effects, forming the two required EPR pairs:</p>
 <p><a href="entanglement_swapping_solution.svg"><img class="displayed-figure" src="entanglement_swapping_solution.svg" alt="Entanglement swapping"/></a></p>
 <p>As a small exercise, if we want to obfuscate it a bit more, we can use the deferred measurement principle (<a href="/blog/0018/">0018</a>) and turn Charlie’s process into a whole piece of quantum circuit, pulling the measurements to the top:</p>
 <p><a href="applying_deferred_measurement.svg"><img class="displayed-figure" src="applying_deferred_measurement.svg" alt="Entanglement swapping with deferred measurement"/></a></p>
