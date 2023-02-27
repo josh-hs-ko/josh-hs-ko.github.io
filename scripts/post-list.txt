@@ -1,5 +1,5 @@
 [
-PostEntry {entryNumber = 31, entryTime = 2023-02-24 16:47:57.086359935, entryTitle = "Fun with the Bell basis: Entanglement swapping, graphically", entryTeaser = "To complete the Bell basis trilogy, we also look at entanglement swapping, which, though more complex, can be presented naturally in ZX-calculus."}
+PostEntry {entryNumber = 31, entryTime = 2023-02-24 16:47:57.086359935, entryTitle = "Fun with the Bell basis: Entanglement swapping, graphically", entryTeaser = "To complete the Bell basis trilogy, we also look at entanglement swapping, which, though slightly more complex, can be presented naturally in ZX-calculus."}
 ,
 PostEntry {entryNumber = 30, entryTime = 2023-02-17 16:38:56.333976357, entryTitle = "Fun with the Bell basis: Dense coding, graphically", entryTeaser = "Another popular example that makes use of the Bell basis is dense coding, which is a name I find misleading though."}
 ,
