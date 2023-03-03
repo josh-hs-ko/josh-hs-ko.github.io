@@ -63,7 +63,7 @@
 0031
 </div>
 <h2>Fun with the Bell basis: Entanglement swapping, graphically</h2>
-<div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 16:06 on 27 February 2023</div>
+<div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 07:30 on 4 March 2023</div>
 <p>Continuing <a href="/blog/0029/">0029</a> and <a href="/blog/0030/">0030</a>, it is also fairly straightforward to deal with <a href="https://en.wikipedia.org/wiki/Quantum_teleportation#Entanglement_swapping">entanglement swapping</a>, which can be seen as a spiced-up version of teleportation.
 The problem is specified as follows: given two EPR pairs between Alice and Charlie and between Charlie and Bob, find a way to entangle Alice’s and Bob’s qubits, and leave an EPR pair for Charlie.</p>
 <p><a href="entanglement_swapping_problem.svg"><img class="displayed-figure" src="entanglement_swapping_problem.svg" alt="The entanglement swapping problem"/></a></p>
@@ -85,7 +85,12 @@ The whole diagram may look slightly intimidating, but as marked below, it should
 <p>The correctness of this process should be evident by construction.
 If we want to be absolutely sure, we can also do a brute-force but perfectly manageable calculation, which is just a lot of spider fusion and complementarity:</p>
 <p><a href="verification.svg"><img class="displayed-figure" src="verification.svg" alt="Verification of entanglement swapping"/></a></p>
-<p>I can’t imagine how messy the construction and the calculation would be in the traditional linear-algebraic language. 😰</p>
+<p>We can also explore a few simple variations.
+The corrections can be performed by Alice instead of Bob, or even distributed among Alice and Bob, as long as the paths go through rotations in the right order.
+Independently, Charlie can also choose to perform his corrections on his left qubit or both qubits.
+Here’s the fully symmetric version, and Charlie’s part can again be rewritten as a circuit:</p>
+<p><a href="symmetric_version.svg"><img class="displayed-figure" src="symmetric_version.svg" alt="Symmetric version of entanglement swapping"/></a></p>
+<p>I can’t imagine how messy the constructions and calculations would be in the traditional linear-algebraic language. 😰</p>
 
 <!-- END OF POST -->
 
