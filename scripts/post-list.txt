@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 32, entryTime = 2023-03-20 22:04:02.121790775, entryTitle = "The uniform measurement principle", entryTeaser = "If the result of a measurement is a uniform distribution, then no quantum information is lost.\nIt turns out that this intuition can be straightforwardly formulated in the graphical quantum theory."}
+,
 PostEntry {entryNumber = 31, entryTime = 2023-02-24 16:47:57.086359935, entryTitle = "Fun with the Bell basis: Entanglement swapping, graphically", entryTeaser = "To complete the Bell basis trilogy, we also look at entanglement swapping, which, though slightly more complex, can be presented naturally in ZX-calculus."}
 ,
 PostEntry {entryNumber = 30, entryTime = 2023-02-17 16:38:56.333976357, entryTitle = "Fun with the Bell basis: Dense coding, graphically", entryTeaser = "Another popular example that makes use of the Bell basis is dense coding, which is a name I find misleading though."}

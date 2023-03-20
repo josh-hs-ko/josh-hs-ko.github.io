@@ -1,0 +1,53 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Process (quantum)}] (0) at (-3, 0) {};
+		\node [style=none] (1) at (-3, -0.5) {};
+		\node [style=none] (2) at (-3.5, 0.5) {};
+		\node [style=none] (3) at (-2.5, 0.5) {};
+		\node [style=none] (4) at (-3, 0) {$\Phi$};
+		\node [style={Spider (classical)}] (5) at (-3.5, 1.5) {};
+		\node [style=none] (6) at (-3.5, 3) {};
+		\node [style=none] (7) at (-2.5, 3) {};
+		\node [style=none] (8) at (-3, -3) {};
+		\node [style={Process (quantum)}] (9) at (4, 0) {};
+		\node [style=none] (10) at (4, -0.5) {};
+		\node [style=none] (11) at (3.5, 0.5) {};
+		\node [style=none] (12) at (4.5, 0.5) {};
+		\node [style=none] (13) at (4, 0) {$\Phi$};
+		\node [style={Spider (classical)}] (14) at (3.5, 1.5) {};
+		\node [style=none] (15) at (1.5, 3) {};
+		\node [style=none] (16) at (4.5, 3) {};
+		\node [style=none] (17) at (4, -3) {};
+		\node [style={Spider (classical)}] (18) at (1.5, -2.5) {};
+		\node [style=none] (22) at (3.5, 2) {};
+		\node [style=none] (23) at (2.5, 2) {};
+		\node [style={Spider (classical)}] (24) at (1.5, -1.5) {};
+		\node [style=none] (25) at (2.5, -1) {};
+		\node [style=none] (26) at (2, -1) {};
+		\node [style=none] (27) at (6, -1) {};
+		\node [style=none] (28) at (2, 2.5) {};
+		\node [style=none] (29) at (6, 2.5) {};
+		\node [style=none] (30) at (0, 0) {$=$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (quantum)}] (2.center) to (5);
+		\draw [style={Wire (quantum)}] (3.center) to (7.center);
+		\draw [style={Wire (classical)}] (5) to (6.center);
+		\draw [style={Wire (quantum)}] (1.center) to (8.center);
+		\draw [style={Wire (quantum)}] (11.center) to (14);
+		\draw [style={Wire (quantum)}] (12.center) to (16.center);
+		\draw [style={Wire (quantum)}] (10.center) to (17.center);
+		\draw [style={Wire (classical)}] (14)
+			 to (22.center)
+			 to [bend left=270] (23.center)
+			 to (25.center)
+			 to [in=0, out=-90] (24);
+		\draw [style={Wire (classical)}] (24) to (15.center);
+		\draw [style={Wire (classical)}] (24) to (18);
+		\draw [style=dashed line] (28.center)
+			 to (29.center)
+			 to (27.center)
+			 to (26.center)
+			 to cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>The uniform measurement principle — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="If the result of a measurement is a uniform distribution, then no quantum information is lost.
+It turns out that this intuition can be straightforwardly formulated in the graphical quantum theory.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0032
+</div>
+<h2>The uniform measurement principle</h2>
+<div class="post-time">Posted at 22:04 on 20 March 2023</div>
+<p>I spent the last two Friday afternoons introducing a substantial amount of ZX-calculus and the graphical presentation of teleportation (<a href="/blog/0029/">0029</a>) to a few quantum computing specialists, including <a href="https://www.iis.sinica.edu.tw/%7Ekmchung/">Kai-Min Chung</a>.
+When we reached the marshalling process, Kai-Min was baffled at first (by the quantum copying process, and in fact so was I, because the exact behaviour of quantum copying is still mysterious to me), but he quickly made sense of the process after I rewrote it to both a mixed form and a conventional quantum circuit (by expanding an ‘arm’ of quantum copying to a CNOT and an ancilla qubit).
+Kai-Min reasoned informally that, since the results of the measurements are uniform distributions, they don’t extract information and make quantum states collapse like general measurements do; instead, the process should be thought of as applying one of the four sets of rotations uniformly randomly.
+This reasoning is swiftly performed in ZX-calculus by pulling the bastard spiders downwards and turning them into uniform distributions whose results are copied and used to control the rotations:</p>
+<p><a href="uniformly_randomly_controlled_rotations.svg"><img class="displayed-figure" src="uniformly_randomly_controlled_rotations.svg" alt="Uniformly randomly controlled rotations"/></a></p>
+<p>This pulling can be done for any measurement, but it’s not the case that all measurement results are uniform, so there must be some condition satisfied by the marshalling process that makes this pulling physically meaningful, and the condition should be formulated as a general principle.
+Abstractly, given a quantum process $\Phi$ with a part of its output measured (as depicted on the left-hand side of the equation below, where the dimensions of all the wires are arbitrary), we can always pull the measurement downwards and create a uniform distribution:</p>
+<p><a href="process_with_measurement.svg"><img class="displayed-figure" src="process_with_measurement.svg" alt="From measurement to uniformly random control"/></a></p>
+<p>Mathematically we can immediately see the problem: the boxed part on the right —let’s call it ‘controlled $\Phi$’— is not necessarily causal because the cap is not causal, which is why the pulling doesn’t always work.
+More generally, while mathematically we can freely pull wires downwards or upwards and switch their roles to input or output, the resulting process is not necessarily physical unless we can verify its causality, which puts restrictions on what is actually possible in quantum computing.
+Now a gentle twist shows that the causality of the controlled $\Phi$ is equivalent to saying that the measurement result of $\Phi$ is uniform:</p>
+<p><a href="uniform_measurement.svg"><img class="displayed-figure" src="uniform_measurement.svg" alt="The uniform measurement principle"/></a></p>
+<p>More precisely speaking, the right-hand side says that if we focus on the measurement result (classical output) by ignoring/discarding the quantum output, then the result will be a uniform distribution regardless of the input, which is discarded.
+Mathematically the equivalence is no more than a gentle twist, but what’s interesting is its quantum-theoretic interpretation:
+Kai-Min’s intuition is manifested in the right-to-left direction, which says that a classical wire which looks like a measurement but produces a uniform distribution is really a control wire that carries a classical input selecting which quantum process to perform.
+Moreover, if $\Phi$ is pure, then the causality of the controlled $\Phi$ is equivalent to saying that the family of underlying linear maps indexed by the basis states of the control wire are all isometries (or even unitaries when the dimensions of the quantum input and output are the same), matching the intuition that quantum information is retained.
+Conversely (from left to right), if the controlled $\Phi$ is causal, then (by discarding the classical output in the equation on the right) we know that $\Phi$ will be causal —that is, we can turn the control wire into a measurement— and the measurement result will be uniform.</p>
+<p>Again, the graphical formulation of this principle benefits from the finer granularity and the directionlessness of ZX-calculus: spiders are so versatile that they can represent both measurement and uniform distribution, and wires can freely take the role of input or output before causality kicks in.
+When I wrote <a href="/blog/0029/">0029</a>, I was indeed confused about whether the classical wires in the marshalling process should be primarily considered input or output.
+Now I think the full answer is something like this: mathematically the direction can be set arbitrarily, but physically whether a wire makes sense as input or output is subject to causality.
+In the case of the marshalling process, causality allows the classical wires to work in either role (control or measurement), which made it confusing, but this strange phenomenon can in fact be formulated as a general principle.</p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
