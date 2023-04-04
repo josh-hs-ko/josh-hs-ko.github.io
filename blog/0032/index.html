@@ -64,19 +64,19 @@ It turns out that this intuition can be straightforwardly formulated in the grap
 0032
 </div>
 <h2>The uniform measurement principle</h2>
-<div class="post-time">Posted at 22:04 on 20 March 2023</div>
+<div class="post-time">Posted at 22:04 on 20 March 2023, and revised at 23:03 on 20 March 2023</div>
 <p>I spent the last two Friday afternoons introducing a substantial amount of ZX-calculus and the graphical presentation of teleportation (<a href="/blog/0029/">0029</a>) to a few quantum computing specialists, including <a href="https://www.iis.sinica.edu.tw/%7Ekmchung/">Kai-Min Chung</a>.
 When we reached the marshalling process, Kai-Min was baffled at first (by the quantum copying process, and in fact so was I, because the exact behaviour of quantum copying is still mysterious to me), but he quickly made sense of the process after I rewrote it to both a mixed form and a conventional quantum circuit (by expanding an ‘arm’ of quantum copying to a CNOT and an ancilla qubit).
 Kai-Min reasoned informally that, since the results of the measurements are uniform distributions, they don’t extract information and make quantum states collapse like general measurements do; instead, the process should be thought of as applying one of the four sets of rotations uniformly randomly.
 This reasoning is swiftly performed in ZX-calculus by pulling the bastard spiders downwards and turning them into uniform distributions whose results are copied and used to control the rotations:</p>
-<p><a href="uniformly_randomly_controlled_rotations.svg"><img class="displayed-figure" src="uniformly_randomly_controlled_rotations.svg" alt="Uniformly randomly controlled rotations"/></a></p>
+<p class="image-paragraph"><a href="uniformly_randomly_controlled_rotations.svg"><img class="displayed-figure" src="uniformly_randomly_controlled_rotations.svg" alt="Uniformly randomly controlled rotations"/></a></p>
 <p>This pulling can be done for any measurement, but it’s not the case that all measurement results are uniform, so there must be some condition satisfied by the marshalling process that makes this pulling physically meaningful, and the condition should be formulated as a general principle.
 Abstractly, given a quantum process $\Phi$ with a part of its output measured (as depicted on the left-hand side of the equation below, where the dimensions of all the wires are arbitrary), we can always pull the measurement downwards and create a uniform distribution:</p>
-<p><a href="process_with_measurement.svg"><img class="displayed-figure" src="process_with_measurement.svg" alt="From measurement to uniformly random control"/></a></p>
+<p class="image-paragraph"><a href="process_with_measurement.svg"><img class="displayed-figure" src="process_with_measurement.svg" alt="From measurement to uniformly random control"/></a></p>
 <p>Mathematically we can immediately see the problem: the boxed part on the right —let’s call it ‘controlled $\Phi$’— is not necessarily causal because the cap is not causal, which is why the pulling doesn’t always work.
 More generally, while mathematically we can freely pull wires downwards or upwards and switch their roles to input or output, the resulting process is not necessarily physical unless we can verify its causality, which puts restrictions on what is actually possible in quantum computing.
 Now a gentle twist shows that the causality of the controlled $\Phi$ is equivalent to saying that the measurement result of $\Phi$ is uniform:</p>
-<p><a href="uniform_measurement.svg"><img class="displayed-figure" src="uniform_measurement.svg" alt="The uniform measurement principle"/></a></p>
+<p class="image-paragraph"><a href="uniform_measurement.svg"><img class="displayed-figure" src="uniform_measurement.svg" alt="The uniform measurement principle"/></a></p>
 <p>More precisely speaking, the right-hand side says that if we focus on the measurement result (classical output) by ignoring/discarding the quantum output, then the result will be a uniform distribution regardless of the input, which is discarded.
 Mathematically the equivalence is no more than a gentle twist, but what’s interesting is its quantum-theoretic interpretation:
 Kai-Min’s intuition is manifested in the right-to-left direction, which says that a classical wire which looks like a measurement but produces a uniform distribution is really a control wire that carries a classical input selecting which quantum process to perform.

@@ -149,20 +149,20 @@ The target state $|\texttt-\rangle$ is chosen so as to exclude $|\texttt{++}\ran
 <p>We can then write a quantum map in ZX-calculus to answer the question.
 (The ZX-diagrams below are in the style of PQP, where the direction of computation is from bottom to top, and quantum systems coexist with classical ones through the doubling construction.)
 First, the quantum map $\hat f$ and its transpose are drawn as</p>
-<p><a href="f.svg"><img class="displayed-figure" src="f.svg" alt="The pure quantum map f"/></a></p>
+<p class="image-paragraph"><a href="f.svg"><img class="displayed-figure" src="f.svg" alt="The pure quantum map f"/></a></p>
 <p>For $\hat f$, its two inputs flow in from the bottom through the two (‘thick’) quantum wires, and its output goes out from the top wire; the transpose of $\hat f$ is the original diagram rotated by 180 degrees, with a twist to keep the outputs in the original order.
 (I’m skipping a lot of details about the ZX-calculus, and in fact I’ve invented my own graphical notations to make ZX-diagrams easier to draw, but hopefully the high-level intuition is still recognisable.)
 Applying the transpose to $|\texttt-\rangle$ (represented as a one-output Z-spider with phase $\pi$ below) gives us a quantum state representing the possible inputs that are mapped to $|\texttt-\rangle$ by $\bar f$.
 Then we measure this state with respect to the X-basis (performed by two bastard X-spiders below), so that we can check whether the result is $\texttt{++}$ or something else.
 As a ZX-diagram (which does not include the last check):</p>
-<p><a href="answer.svg"><img class="displayed-figure" src="answer.svg" alt="Answering the question"/></a></p>
+<p class="image-paragraph"><a href="answer.svg"><img class="displayed-figure" src="answer.svg" alt="Answering the question"/></a></p>
 <p>This is not something we can run on a quantum computer yet: the input state $|\texttt-\rangle$ and the measurement can be readily implemented as part of a quantum circuit, but the transposed $\hat f$ —and even just $\hat f$ itself— cannot.
 We have to retrofit a classical function such as $f$ as an invertible/reversible function and encode it as a quantum circuit, which serves as the input to the algorithm — traditionally this is called an oracle.
 The standard oracle construction gives us a circuit $U_f$ such that</p>
 <p>$$ U_f(|x\rangle \otimes |y\rangle) = |x\rangle \otimes |f(x) \oplus y\rangle  \qquad \forall x : \mathbf 2^2, y : \mathbf 2$$</p>
 <p>where ‘$\oplus$’ is the exclusive-or operation on bits.
 This specification can be directly transcribed into ZX-calculus:</p>
-<p><a href="oracle.svg"><img class="displayed-figure" src="oracle.svg" alt="Quantum oracle"/></a></p>
+<p class="image-paragraph"><a href="oracle.svg"><img class="displayed-figure" src="oracle.svg" alt="Quantum oracle"/></a></p>
 <p>where some input, intermediate, and output states are annotated in green to show the correspondence with the specification.
 Note that this is merely a mathematical specification and not a quantum circuit, but the $U_f$ construction does give a legitimate quantum circuit with equivalent behaviour.</p>
 <p><em>Remark.</em>
@@ -171,21 +171,21 @@ The way in which the backward question is phrased may have depended on this part
 <p>Now the remaining task is extending the oracle diagram (that is, use the oracle as a black box) to express the application of the transpose.
 Here is, I believe, where ZX-calculus shines.
 We want the left part of the diagram to be just two wires connected to the outputs of the transpose of $\hat f$ —which are just the inputs of $\hat f$ because of the ‘directionlessness’— and it’s instinctive for a ZX-calculus user to plug in two one-output Z-spiders (which are in red below, and represent $|\texttt+\rangle$)</p>
-<p><a href="before-fusion.svg"><img class="displayed-figure" src="before-fusion.svg" alt="Before fusion"/></a></p>
+<p class="image-paragraph"><a href="before-fusion.svg"><img class="displayed-figure" src="before-fusion.svg" alt="Before fusion"/></a></p>
 <p>so as to trigger the spider fusion rule and get</p>
-<p><a href="after-fusion.svg"><img class="displayed-figure" src="after-fusion.svg" alt="After fusion"/></a></p>
+<p class="image-paragraph"><a href="after-fusion.svg"><img class="displayed-figure" src="after-fusion.svg" alt="After fusion"/></a></p>
 <p>We’re free to rearrange ZX-diagrams as long as connectivity doesn’t change, so we can directly rearrange the above diagram into a form that’s close to what we want:</p>
-<p><a href="transpose.svg"><img class="displayed-figure" src="transpose.svg" alt="Transpose"/></a></p>
+<p class="image-paragraph"><a href="transpose.svg"><img class="displayed-figure" src="transpose.svg" alt="Transpose"/></a></p>
 <p>Now we want the input to the transpose of $\hat f$ to be $|\texttt-\rangle$.
 This is again easy for a ZX-calculus user — the one-input, two-output X-spider copies X-basis elements, so we can directly plug in $|\texttt-\rangle$:</p>
-<p><a href="before-copying.svg"><img class="displayed-figure" src="before-copying.svg" alt="Before copying"/></a></p>
+<p class="image-paragraph"><a href="before-copying.svg"><img class="displayed-figure" src="before-copying.svg" alt="Before copying"/></a></p>
 <p>The state is then copied by the X-spider, and we discard the extra one.</p>
-<p><a href="after-copying.svg"><img class="displayed-figure" src="after-copying.svg" alt="After copying"/></a></p>
+<p class="image-paragraph"><a href="after-copying.svg"><img class="displayed-figure" src="after-copying.svg" alt="After copying"/></a></p>
 <p>So we have found out how we can use the oracle to compute the application of the transpose.
 To conform to the standard quantum circuit model, qubits should start with $|\mathtt 0\rangle$ and measurements should be performed with respect to the Z-basis.
 But this is easy to fix by inserting Hadamards (represented as boxes) to switch between Z- and X-spiders.
 In summary, the algorithm can be implemented as follows, by putting the red parts around the oracle:</p>
-<p><a href="final.svg"><img class="displayed-figure" src="final.svg" alt="Final algorithm"/></a></p>
+<p class="image-paragraph"><a href="final.svg"><img class="displayed-figure" src="final.svg" alt="Final algorithm"/></a></p>
 <p>I should confess that this derivation was worked out backwards from the solution given in PQP, although I think my derivation makes more sense than PQP’s.
 And I do prefer my derivation to the traditional presentation, which directly gives the final circuit and verifies what happens at each point of interest in the circuit.
 To see why Deutsch’s problem can be solved with just one superposition query, apart from a little bit of basic knowledge about quantum computing, all one needs are just the change to the X-basis and the revelation that backward evaluation is possible, and the rest is standard maths.

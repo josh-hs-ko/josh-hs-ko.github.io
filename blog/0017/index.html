@@ -76,7 +76,7 @@ We won’t be relying essentially on the specifics of $\Delta$ below, so formall
 <h3>From universality to natural isomorphism</h3>
 <p><a href="/blog/0015/">0015</a> has already shown that the universality statement can be seen as a family of isomorphisms in disguise, so what’s missing in this direction is just the naturality.
 The intuition for a natural transformation $\alpha : \forall X.\ \mathsf F X \to \mathsf G X$ is that $\alpha$ operates on a two-level structure, namely the object $X$ from a base category and the functor $\mathsf F$, and the effect of $\alpha$ is entirely at the functor level (transforming $\mathsf F$ to $\mathsf G$) and doesn’t depend on $X$; consequently, if there is some transformation $f : X \to Y$ to be applied at the base level alongside $\alpha$, it doesn’t matter in which order the two transformations are applied:</p>
-<p><a href="natural-transformations.svg"><img class="displayed-figure" src="natural-transformations.svg" alt="Natural transformations"/></a></p>
+<p class="image-paragraph"><a href="natural-transformations.svg"><img class="displayed-figure" src="natural-transformations.svg" alt="Natural transformations"/></a></p>
 <p>Starting from $\mathsf F X$, we can either</p>
 <ul>
 <li>apply the base-level transformation $f$ under $\mathsf F$, i.e., $\mathsf F f$, to get $\mathsf F Y$, and then apply the functor-level transformation $\alpha_Y$ to get $\mathsf G Y$, or</li>
@@ -85,7 +85,7 @@ The intuition for a natural transformation $\alpha : \forall X.\ \mathsf F X \to
 <p>and either route gives us the same result.
 That is, we use the commutativity to capture the intuition that $\alpha$ and $f$ operate independently at two levels.</p>
 <p>For $\mathsf{pack}$, the naturality we want to establish is</p>
-<p><a href="naturality.svg"><img class="displayed-figure" src="naturality.svg" alt="The naturality"/></a></p>
+<p class="image-paragraph"><a href="naturality.svg"><img class="displayed-figure" src="naturality.svg" alt="The naturality"/></a></p>
 <p>The functor $\mathsf G$ for $\mathsf{pack}$ is the contravariant hom-functor $\mathbb C (\text_, A \times B)$, which maps a source object $X$ to the set of morphisms of type $X \to A \times B$; a base transformation $f : X \to Y$ under this functor transforms (contravariantly) a morphism of type $Y \to A \times B$ to one of type $X \to A \times B$ which ‘preprocesses’ its input with $f$ before invoking the original morphism.
 The functor $\mathsf F$ for $\mathsf{pack}$ is similar, so a base transformation under the functor is also some kind of preprocessing, although in this case we also have to duplicate the source change with $\Delta$.
 The naturality can then be interpreted as saying that the two operations ‘$\mathsf{pack}$-ing morphism pairs into one’ and ‘preprocessing the morphism source’ are commutative.</p>
@@ -95,7 +95,7 @@ What’s interesting about this particular canonical form is that adding preproc
 <p>So, to compute the canonical form of $p \cdot \Delta f$, we don’t need to insist that preprocessing be added to the morphism before it’s $\mathsf{pack}$-ed into its core, because we can always add preprocessing to the $\mathsf{pack}$-ed core later — canonicity/universality guarantees that adding preprocessing afterwards will get us the same core as adding preprocessing beforehand.
 Therefore it doesn’t matter in which order we do $\mathsf{pack}$-ing and preprocessing, which is exactly the naturality of $\mathsf{pack}$.</p>
 <p>More formally:</p>
-<p><a href="canonical-forms.svg"><img class="displayed-figure" src="canonical-forms.svg" alt="Rewriting into canonical forms"/></a></p>
+<p class="image-paragraph"><a href="canonical-forms.svg"><img class="displayed-figure" src="canonical-forms.svg" alt="Rewriting into canonical forms"/></a></p>
 <p>To rewrite $p \cdot \Delta f$ into its canonical form, we can either directly $\mathsf{pack}$ the entire morphism, arriving at $(\pi_\ell, \pi_r) \cdot \Delta(\mathsf{pack}(p \cdot \Delta f))$, or $\mathsf{pack}$ only $p$ and then add preprocessing $f$ to the core $\mathsf{pack}\ p$, arriving at $(\pi_\ell, \pi_r) \cdot \Delta(\mathsf{pack}\ p \cdot f)$.
 In either way we end up with a canonical form, and the cores of the two canonical forms, namely $\mathsf{pack}(p \cdot \Delta f)$ and $\mathsf{pack}\ p \cdot f$, must be equal.</p>
 <h3>From natural isomorphism to universality</h3>

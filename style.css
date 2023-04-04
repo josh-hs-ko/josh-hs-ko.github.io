@@ -183,6 +183,10 @@ ol {
   font-weight: 600;
 }
 
+.image-paragraph {
+  overflow: auto;
+}
+
 .main {
   font-family: 'Open Sans', 'Noto Sans TC', sans-serif;
   font-size: 16px;

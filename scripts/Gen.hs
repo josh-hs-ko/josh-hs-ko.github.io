@@ -328,15 +328,16 @@ transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
     processAlt (Node _ (CODE t) _ : ns) = (Just (Text.unpack t), processAlt' ns)
     processAlt ns                       = (Nothing             , processAlt' ns)
     f :: Node -> Node
-    f (Node mp0 PARAGRAPH [Node mp1 (IMAGE srcText _) ns]) =
+    f (Node mp PARAGRAPH [Node _ (IMAGE srcText _) ns]) =
       let src = Text.unpack srcText
           (mc, ma) = processAlt ns
-          img = "<a href=\"" ++ src ++ "\"><img " ++
+          new = "<p class=\"image-paragraph\">" ++
+                "<a href=\"" ++ src ++ "\"><img " ++
                 maybe "class=\"displayed-figure\"" id mc ++
                 " src=\"" ++ src ++ "\"" ++
                 maybe "" (\s -> " alt=\"" ++ s ++ "\"") ma ++
-                "/></a>"
-      in  Node mp0 PARAGRAPH [Node mp1 (HTML_INLINE (Text.pack img)) []]
+                "/></a></p>"
+      in  Node mp (HTML_BLOCK (Text.pack new)) []
     f n = n
 
 transformRemark :: Node -> Node

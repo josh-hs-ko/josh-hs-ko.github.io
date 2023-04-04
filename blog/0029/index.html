@@ -65,7 +65,7 @@
 <h2>Fun with the Bell basis: Quantum teleportation, graphically</h2>
 <div class="post-time">Posted at 18:09 on 27 January 2023, and revised at 09:48 on 24 February 2023</div>
 <p>In <a href="https://www.cambridge.org/gb/pqp">PQP</a>, <a href="https://en.wikipedia.org/wiki/Quantum_teleportation">quantum teleportation</a> —where Alice sends a qubit to Bob using a shared EPR pair and two bits of classical communication— is used as a running example that gets developed in several stages together with the graphical quantum theory, culminating in a rather pleasing diagram in <a href="https://zxcalculus.com">ZX-calculus</a>:</p>
-<p><a href="teleportation_in_ZX.svg"><img class="displayed-figure" src="teleportation_in_ZX.svg" alt="Teleportation in ZX-calculus"/></a></p>
+<p class="image-paragraph"><a href="teleportation_in_ZX.svg"><img class="displayed-figure" src="teleportation_in_ZX.svg" alt="Teleportation in ZX-calculus"/></a></p>
 <p><em>Convention.</em>
 Here I’m following the bottom-up convention of PQP, and I’m drawing quantum wires as double lines (rather than thick lines as in PQP) at <a href="https://yangzhixuan.github.io">Zhixuan</a>’s suggestion.
 This reverses the notations for quantum and classical wires in traditional quantum circuits, but makes more sense intuitively (quantum wires carry more information) and mathematically (the doubling construction) when mixing quantum and classical processes. (<em>End of convention.</em>)</p>
@@ -74,19 +74,19 @@ Teleportation can then be seen simply <em>and precisely</em> as Alice performing
 I’ll expand this to the level of detail corresponding to traditional presentations —which give concrete definitions and resort to informal proses and low-level calculations to show that the definitions work— and then again but with some higher-level structure.</p>
 <h3>Concrete definitions</h3>
 <p>The measurement performed by Alice is in the Bell basis, which has a nice graphical representation in ZX-calculus:</p>
-<p><a href="Bell_basis.svg"><img class="displayed-figure" src="Bell_basis.svg" alt="The Bell basis"/></a></p>
+<p class="image-paragraph"><a href="Bell_basis.svg"><img class="displayed-figure" src="Bell_basis.svg" alt="The Bell basis"/></a></p>
 <p>This is a function that produces one of the four Bell basis states when given two classical bits encoding the choice.
 Take its adjoint by flipping the diagram vertically, and we get the Bell-basis measurement:</p>
-<p><a href="Bell_measurement.svg"><img class="displayed-figure" src="Bell_measurement.svg" alt="Bell-basis measurement"/></a></p>
+<p class="image-paragraph"><a href="Bell_measurement.svg"><img class="displayed-figure" src="Bell_measurement.svg" alt="Bell-basis measurement"/></a></p>
 <p>The diagram can be broken up to show how the measurement is implemented: as a CNOT followed by measurements in the X- and Z-bases.
 Alice applies this measurement to the qubit to be sent and her half of the EPR pair, and the whole ‘marshalling’ process takes a qubit and turns it into two classical bits and a possibly altered qubit (now on Bob’s side):</p>
-<p><a href="Bell_marshalling.svg"><img class="displayed-figure" src="Bell_marshalling.svg" alt="Marshalling"/></a></p>
+<p class="image-paragraph"><a href="Bell_marshalling.svg"><img class="displayed-figure" src="Bell_marshalling.svg" alt="Marshalling"/></a></p>
 <p>This marshalling process is an isometry — that is, it can be inverted by its adjoint.
 So we flip the diagram and pull the quantum wire straight to get the ‘unmarshalling’ process performed by Bob:</p>
-<p><a href="Bell_unmarshalling.svg"><img class="displayed-figure" src="Bell_unmarshalling.svg" alt="Unmarshalling"/></a></p>
+<p class="image-paragraph"><a href="Bell_unmarshalling.svg"><img class="displayed-figure" src="Bell_unmarshalling.svg" alt="Unmarshalling"/></a></p>
 <p>Again we can break up the diagram and see that the unmarshalling process can be implemented as conditional X- and Z-rotations depending on the result of Alice’s measurement.
 It is easy to verify that marshalling is inverted by unmarshalling (using spider fusion and complementarity):</p>
-<p><a href="isometry_in_ZX.svg"><img class="displayed-figure" src="isometry_in_ZX.svg" alt="Isometry calculation"/></a></p>
+<p class="image-paragraph"><a href="isometry_in_ZX.svg"><img class="displayed-figure" src="isometry_in_ZX.svg" alt="Isometry calculation"/></a></p>
 <p>Summarising the entire diagram operationally: the measurement performed by Alice potentially changes the qubit Bob gets by non-deterministically applying Z- and X-rotations to the original qubit; whether any of the two rotations actually happens can be determined from the two classical bits resulting from the measurement, which should be sent to Bob so that he can undo the change by performing the counter-rotations.</p>
 <p>This presentation helps to show the advantages of the graphical approach compared to traditional presentations.
 Even just aiming at giving concrete definitions, what we need to conjure out of thin air is just the Bell basis, from which we can derive all the components of teleportation.
@@ -107,49 +107,49 @@ These mathematical structures constitute an expressive language for us to talk a
 For teleportation, instead of just saying that ‘the Bell basis does the job’, we can talk about ‘why the Bell basis does the job’ by discussing more abstractly what are the key properties that make teleportation work.</p>
 <p>Start again from the shared EPR pair (a ‘cup’ graphically), which is capable of transporting a qubit from Alice’s side to Bob’s.
 To push the qubit from the left end of the EPR pair, a first instinct is for Alice to use a ‘cap’ and invoke the yanking equation:</p>
-<p><a href="yanking.svg"><img class="displayed-figure" src="yanking.svg" alt="The yanking equation"/></a></p>
+<p class="image-paragraph"><a href="yanking.svg"><img class="displayed-figure" src="yanking.svg" alt="The yanking equation"/></a></p>
 <p>This ‘cap’ is a purely mathematical entity and not physically realisable though.
 At this abstraction level, a process is physically realisable if it is ‘causal’:</p>
-<p><a href="causality_definition.svg"><img class="displayed-figure" src="causality_definition.svg" alt="Causality"/></a></p>
+<p class="image-paragraph"><a href="causality_definition.svg"><img class="displayed-figure" src="causality_definition.svg" alt="Causality"/></a></p>
 <p>I find PQP’s discussion of causality not particularly enlightening, and choose to understand it simply in terms of its literal mathematical meaning, which is probability preservation:
 Since quantum theory (in particular the notion of measurement) is probabilistic in nature, theoretically we can associate every state with a probability so that it is easier to keep track of all probabilities (see <a href="/blog/0014/">0014</a> for more detail).
 The discarding process on the right computes the probability of its input, so the definition of causality says that the output probability of the process is equal to the input probability.
 In general a quantum process is non-deterministic, and can be thought of as a collection of processes that may happen with certain probabilities; mathematically, each of these component processes decreases the probability of an input state (because each process doesn’t happen with certainty), but jointly the output probabilities should sum to the input probability, meaning that all the possible outcomes have been considered, and the description of the whole process is complete.
 Once a process is shown to be causal, there are then ‘dilation’ theorems that essentially implement the process as a unitary, linking back to the first postulate of quantum computing.</p>
 <p>Back to what Alice can do: the cap is not causal because its causality would imply its separability, which would make the whole theory trivial in the sense that every process is constant (but quantum theory is non-trivial).</p>
-<p><a href="cap_noncausal.svg"><img class="displayed-figure" src="cap_noncausal.svg" alt="Cap is not causal"/></a></p>
+<p class="image-paragraph"><a href="cap_noncausal.svg"><img class="displayed-figure" src="cap_noncausal.svg" alt="Cap is not causal"/></a></p>
 <p>Instead, Alice should perform some kind of measurement $\hat M$ (there is no other choice).
 Let us think about what this measurement should do.
 It should transport the qubit on its left to its right, which may transform the qubit somehow, but the possible transformations should be invertible so that Bob can get back the original qubit.
 In quantum computing pretty much everything is (at least at the core) unitary (which is invertibility guaranteed by the adjoint operation), so it’s kind of safe to surmise that the transformations are unitaries, except that these are ‘sideways’ unitaries, which we can express with the help of a cap (only for mathematical purposes):</p>
-<p><a href="measurement_as_sideways_unitaries.svg"><img class="displayed-figure" src="measurement_as_sideways_unitaries.svg" alt="Alice’s measurement as sideways unitaries"/></a></p>
+<p class="image-paragraph"><a href="measurement_as_sideways_unitaries.svg"><img class="displayed-figure" src="measurement_as_sideways_unitaries.svg" alt="Alice’s measurement as sideways unitaries"/></a></p>
 <p>Here $\hat U$ is the marshalling process above.
 Its pure ingredient $U$ is a collection of unitaries with the first output acting as the index — by plugging in a basis state $k$, we get the $k$-th unitary $U_k$ in this collection:</p>
-<p><a href="individual_unitary.svg"><img class="displayed-figure" src="individual_unitary.svg" alt="The k-th unitary"/></a></p>
+<p class="image-paragraph"><a href="individual_unitary.svg"><img class="displayed-figure" src="individual_unitary.svg" alt="The k-th unitary"/></a></p>
 <p>Each of the unitaries should satisfy the usual unitarity laws, which can be expressed as two point-free equations</p>
-<p><a href="unitarity_I.svg"><img class="displayed-figure" src="unitarity_I.svg" alt="First unitarity law"/></a></p>
+<p class="image-paragraph"><a href="unitarity_I.svg"><img class="displayed-figure" src="unitarity_I.svg" alt="First unitarity law"/></a></p>
 <p>and</p>
-<p><a href="unitarity_II.svg"><img class="displayed-figure" src="unitarity_II.svg" alt="Second unitarity law"/></a></p>
+<p class="image-paragraph"><a href="unitarity_II.svg"><img class="displayed-figure" src="unitarity_II.svg" alt="Second unitarity law"/></a></p>
 <p>That is, for each unitary in the collection, its adjoint works as its left and right inverses.</p>
 <p>The (sideways) unitarity turns out to be almost enough for what we want, and is therefore the key property.
 First we can establish the correctness of teleportation, that is, the marshalling process is an isometry:</p>
-<p><a href="isometry_from_unitarity.svg"><img class="displayed-figure" src="isometry_from_unitarity.svg" alt="Isometry from unitarity"/></a></p>
+<p class="image-paragraph"><a href="isometry_from_unitarity.svg"><img class="displayed-figure" src="isometry_from_unitarity.svg" alt="Isometry from unitarity"/></a></p>
 <p>We can also establish that unmarshalling (the adjoint of marshalling) is causal (and thus physically realisable):</p>
-<p><a href="unmarshalling_causal.svg"><img class="displayed-figure" src="unmarshalling_causal.svg" alt="Causality of unmarshalling"/></a></p>
+<p class="image-paragraph"><a href="unmarshalling_causal.svg"><img class="displayed-figure" src="unmarshalling_causal.svg" alt="Causality of unmarshalling"/></a></p>
 <p>Note that we didn’t check the causality of Bob’s process in the previous presentation, where we simply examined what that process was made up of and saw that the components were familiar ones known to be physically realisable (which we didn’t actually verify).
 Here we don’t have a concrete definition, but we can still verify the causality from what we think are reasonable properties that should be satisfied by Alice’s measurement.
 We could even verify that the marshalling process is causal:</p>
-<p><a href="marshalling_causal.svg"><img class="displayed-figure" src="marshalling_causal.svg" alt="Causality of marshalling"/></a></p>
+<p class="image-paragraph"><a href="marshalling_causal.svg"><img class="displayed-figure" src="marshalling_causal.svg" alt="Causality of marshalling"/></a></p>
 <p>But this is not important for teleportation because what Alice performs is the measurement, which is only a part of marshalling, and it is the measurement that we need to verify to be causal.
 The causality of the measurement is indeed stronger and needs to be separately verified: this causality is about whether the collection of unitaries fully constitutes a measurement, rather than the invertibility of each individual unitary.</p>
 <p>To get back to the concrete definitions, we can verify that the choice of $U$ corresponding to the Bell basis</p>
-<p><a href="marshalling_unitary.svg"><img class="displayed-figure" src="marshalling_unitary.svg" alt="Pure core of marshalling"/></a></p>
+<p class="image-paragraph"><a href="marshalling_unitary.svg"><img class="displayed-figure" src="marshalling_unitary.svg" alt="Pure core of marshalling"/></a></p>
 <p>does satisfy the unitarity laws: the first law is verified by</p>
-<p><a href="unitarity_verification.svg"><img class="displayed-figure" src="unitarity_verification.svg" alt="Verification of the first unitarity"/></a></p>
+<p class="image-paragraph"><a href="unitarity_verification.svg"><img class="displayed-figure" src="unitarity_verification.svg" alt="Verification of the first unitarity"/></a></p>
 <p>and the second law is exactly its colour-inverted version.
 (More generally, the second law should follow from the first because an isometry with the same domain and codomain is necessarily a unitary.)
 And of course we can verify that the Bell-basis measurement is causal:</p>
-<p><a href="measurement_causal.svg"><img class="displayed-figure" src="measurement_causal.svg" alt="Causality of Alice’s measurement"/></a></p>
+<p class="image-paragraph"><a href="measurement_causal.svg"><img class="displayed-figure" src="measurement_causal.svg" alt="Causality of Alice’s measurement"/></a></p>
 <h3>Concluding remarks</h3>
 <p>Teleportation does work nicely as a representative example of the graphical quantum theory (much like the role of maximum segment sum in program derivation), demonstrating the power and elegance of the graphical approach really well.
 On the other hand, teleportation is often used as a first and simplest example of quantum computing, and seems to be dismissed by quantum algorithmics people, whose work, I suspect, relies on a somewhat different set of quantum idioms, for example the ability to perform measurements in non-standard bases (see <a href="/blog/0027/">0027</a> and <a href="/blog/0028/">0028</a>), as opposed to the ‘directionlessness’ crucial to teleportation.

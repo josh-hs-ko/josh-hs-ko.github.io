@@ -67,7 +67,7 @@
 <p>During the meeting of our quantum reading group last Thursday, a question about <a href="https://en.wikipedia.org/wiki/Deferred_Measurement_Principle">deferred measurement</a> was brought up, and <a href="https://homepage.iis.sinica.edu.tw/%7Ekmchung/">Kai-Min</a> provided a construction explaining how it is done.
 As a small exercise, this post describes the construction in the <a href="https://en.wikipedia.org/wiki/ZX-calculus">ZX-calculus</a>.
 In fact, since the exercise is quite straightforward, this is more like an opportunity for me to typeset my first string diagram (using <a href="https://tikzit.github.io">TikZiT</a>), and here’s the result (which follows the convention of <a href="https://www.cambridge.org/gb/pqp">PQP</a>):</p>
-<p><a href="deferred-measurement.svg"><img class="displayed-figure" src="deferred-measurement.svg" alt="Correctness of deferred measurement"/></a></p>
+<p class="image-paragraph"><a href="deferred-measurement.svg"><img class="displayed-figure" src="deferred-measurement.svg" alt="Correctness of deferred measurement"/></a></p>
 <p>On the left is the <a href="https://en.wikipedia.org/wiki/Quantum_decoherence">decoherence</a> process, which performs a measurement, destroying the ‘quantumness’, but encodes the classical measurement outcome back into a qubit for later computation.
 Interestingly, this measurement can be taken off the wire as shown on the right:
 Introduce an ancilla qubit and set it to $|0\rangle$ initially.
@@ -80,7 +80,7 @@ Mathematically, this commutativity is manifested clearly in the fact that we can
 This observation was the key to answering the question brought up at the meeting.)</p>
 <p>One surprise for me was the use of CNOT, which I probably wouldn’t think of if I was asked to create the entanglement.
 (To a native ZX-calculus user) a possibly more natural process to use here is the quantum copy spider, for which we can show (again easily by spider fusion) that measuring either of the two outputs yields the same result, which is the crux of the construction above:</p>
-<p><a href="perfectly-correlated-entanglement.svg"><img class="displayed-figure" src="perfectly-correlated-entanglement.svg" alt="Measuring perfectly correlated entanglement"/></a></p>
+<p class="image-paragraph"><a href="perfectly-correlated-entanglement.svg"><img class="displayed-figure" src="perfectly-correlated-entanglement.svg" alt="Measuring perfectly correlated entanglement"/></a></p>
 <p>The general problem here is the need of a compiler: given a ZX-diagram, can we find an equivalent one that is made up of physically realisable quantum gates?
 (Alternatively, can we build a quantum computer that uses the ZX generators as primitives?
 I have absolutely no idea about the answer though.)

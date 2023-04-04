@@ -66,30 +66,30 @@
 <div class="post-time">Posted at 16:47 on 24 February 2023, and revised at 07:30 on 4 March 2023</div>
 <p>Continuing <a href="/blog/0029/">0029</a> and <a href="/blog/0030/">0030</a>, it is also fairly straightforward to deal with <a href="https://en.wikipedia.org/wiki/Quantum_teleportation#Entanglement_swapping">entanglement swapping</a>, which can be seen as a spiced-up version of teleportation.
 The problem is specified as follows: given two EPR pairs between Alice and Charlie and between Charlie and Bob, find a way to entangle Alice’s and Bob’s qubits, and leave an EPR pair for Charlie.</p>
-<p><a href="entanglement_swapping_problem.svg"><img class="displayed-figure" src="entanglement_swapping_problem.svg" alt="The entanglement swapping problem"/></a></p>
+<p class="image-paragraph"><a href="entanglement_swapping_problem.svg"><img class="displayed-figure" src="entanglement_swapping_problem.svg" alt="The entanglement swapping problem"/></a></p>
 <p>The instinctive first step is for Charlie to use the Bell-basis measurement to connect the two given EPR pairs sideways.
 However, we should switch to the ‘non-demolition’ kind of measurement that leaves Charlie with his two qubits, so that it is possible to restore them to an EPR pair:</p>
-<p><a href="Charlie_measurement.svg"><img class="displayed-figure" src="Charlie_measurement.svg" alt="Charlie performs a non-demolition Bell-basis measurement."/></a></p>
+<p class="image-paragraph"><a href="Charlie_measurement.svg"><img class="displayed-figure" src="Charlie_measurement.svg" alt="Charlie performs a non-demolition Bell-basis measurement."/></a></p>
 <p>This non-demolition Bell-basis measurement is represented as the composition of the demolition version with its adjoint, with the measurement result retained.
 The representation corresponds to an operational understanding: to measure a (bipartite) state in the Bell basis, we rotate the state to align with the computational basis (modulo a Hadamard) and reduce the measurement to a standard one; the measurement result (which is classical data) is then re-encoded as a quantum state, which is a pure computational basis state, and is ultimately rotated back to a Bell-basis state.
 Now Charlie copies the measurement result and sends it to Bob so that Bob can perform the same correction as in teleportation:</p>
-<p><a href="Bob_correction.svg"><img class="displayed-figure" src="Bob_correction.svg" alt="Bob performs the Bell map."/></a></p>
+<p class="image-paragraph"><a href="Bob_correction.svg"><img class="displayed-figure" src="Bob_correction.svg" alt="Bob performs the Bell map."/></a></p>
 <p>And Charlie needs to perform his own correction (depending on the same measurement result) to restore his two qubits to an EPR pair:</p>
-<p><a href="Charlie_correction.svg"><img class="displayed-figure" src="Charlie_correction.svg" alt="Charlie performs the Bell map."/></a></p>
+<p class="image-paragraph"><a href="Charlie_correction.svg"><img class="displayed-figure" src="Charlie_correction.svg" alt="Charlie performs the Bell map."/></a></p>
 <p>(Another way to think about this is that any Bell-basis state is just a couple of rotations away from another, in particular the EPR pair.)
 And that’s it!
 The whole diagram may look slightly intimidating, but as marked below, it should be clear that we have constructed two paths going through rotations that are classically controlled (by the boxed part) to cancel out all the effects, forming the two required EPR pairs:</p>
-<p><a href="entanglement_swapping_solution.svg"><img class="displayed-figure" src="entanglement_swapping_solution.svg" alt="Entanglement swapping"/></a></p>
+<p class="image-paragraph"><a href="entanglement_swapping_solution.svg"><img class="displayed-figure" src="entanglement_swapping_solution.svg" alt="Entanglement swapping"/></a></p>
 <p>As a small exercise, if we want to obfuscate it a bit more, we can use the deferred measurement principle (<a href="/blog/0018/">0018</a>) and turn Charlie’s process into a whole piece of quantum circuit, pulling the measurements to the top:</p>
-<p><a href="applying_deferred_measurement.svg"><img class="displayed-figure" src="applying_deferred_measurement.svg" alt="Entanglement swapping with deferred measurement"/></a></p>
+<p class="image-paragraph"><a href="applying_deferred_measurement.svg"><img class="displayed-figure" src="applying_deferred_measurement.svg" alt="Entanglement swapping with deferred measurement"/></a></p>
 <p>The correctness of this process should be evident by construction.
 If we want to be absolutely sure, we can also do a brute-force but perfectly manageable calculation, which is just a lot of spider fusion and complementarity:</p>
-<p><a href="verification.svg"><img class="displayed-figure" src="verification.svg" alt="Verification of entanglement swapping"/></a></p>
+<p class="image-paragraph"><a href="verification.svg"><img class="displayed-figure" src="verification.svg" alt="Verification of entanglement swapping"/></a></p>
 <p>We can also explore a few simple variations.
 The corrections can be performed by Alice instead of Bob, or even distributed among Alice and Bob, as long as the paths go through rotations in the right order.
 Independently, Charlie can also choose to perform his corrections on his left qubit or both qubits.
 Here’s the fully symmetric version, and Charlie’s part can again be rewritten as a circuit:</p>
-<p><a href="symmetric_version.svg"><img class="displayed-figure" src="symmetric_version.svg" alt="Symmetric version of entanglement swapping"/></a></p>
+<p class="image-paragraph"><a href="symmetric_version.svg"><img class="displayed-figure" src="symmetric_version.svg" alt="Symmetric version of entanglement swapping"/></a></p>
 <p>I can’t imagine how messy the constructions and calculations would be in the traditional linear-algebraic language. 😰</p>
 
 <!-- END OF POST -->

@@ -66,14 +66,14 @@
 <div class="post-time">Posted at 16:38 on 17 February 2023, and revised at 16:59 on 4 March 2023</div>
 <p>Following up <a href="/blog/0029/">0029</a>, another popular example that makes use of the Bell basis is <a href="https://en.wikipedia.org/wiki/Superdense_coding">dense coding</a>, which is usually advertised as Alice transmitting two classical bits to Bob by sending just one qubit, as if the qubit carried two classical bits of information (hence the name ‘dense coding’).
 I find this description misleading though, which I’ll discuss after giving a graphical presentation of dense coding.</p>
-<p><a href="dense_coding.svg"><img class="displayed-figure" src="dense_coding.svg" alt="Dense coding"/></a></p>
+<p class="image-paragraph"><a href="dense_coding.svg"><img class="displayed-figure" src="dense_coding.svg" alt="Dense coding"/></a></p>
 <p>Like in teleportation, Alice and Bob share an EPR pair, and each of them uses the Bell basis in some way to send information through the EPR pair.
 Different from teleportation, in this case Alice wants to send two classical bits, and the only way of using the Bell basis to do that is to apply it sideways as the Bell map (which is what Bob uses in teleportation) to Alice’s half of the EPR pair.
 Alice then sends the resulting qubit to Bob, who inverts the Bell map using the Bell-basis measurement (which is what Alice uses in teleportation).</p>
 <p>Dense coding is usually described as dual to teleportation because the roles of quantum and classical data are reversed (transmitting classical/quantum data by sending quantum/classical data).
 Here we see that the duality goes further: the operations used by Alice and Bob are reversed as well (although this should already be apparent in the traditional presentation).
 That is probably as far as duality goes though — when it comes to the correctness of dense coding, it is just a twisted version of the orthogonality of the Bell basis,</p>
-<p><a href="Bell_basis.svg"><img class="displayed-figure" src="Bell_basis.svg" alt="Bell basis"/></a></p>
+<p class="image-paragraph"><a href="Bell_basis.svg"><img class="displayed-figure" src="Bell_basis.svg" alt="Bell basis"/></a></p>
 <p>and has nothing to do with the sideways unitarity of the Bell basis, which is the key property in teleportation.
 (The sideways unitarity is still essential though, since Alice needs to be able to use the Bell basis sideways, and therefore requires the causality of the sideways process, which is unitarity in disguise.)
 Therefore what ‘dense coding’ really does is encode two classical bits in two qubits as one of the four Bell states and then decode them by measuring in the Bell basis, which is not surprising at all.

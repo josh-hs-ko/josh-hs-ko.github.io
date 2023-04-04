@@ -69,7 +69,7 @@ Yes of course!</p>
 <p>Starting with a reference circuit $R$, we may want to construct a more optimised implementation circuit $I$ and verify that its behaviour agrees with $R$.
 The way Chih-Sheng did the verification was to construct a larger ‘tester’ circuit that passes the input bits to both $R$ and $I$ and compares their corresponding output bits.
 This is illustrated in the following diagram, where the comparisons are performed using XNOR gates (which output $1$ if and only if the two input bits are the same).</p>
-<p><a href="tester.svg"><img class="displayed-figure" src="tester.svg" alt="The tester circuit"/></a></p>
+<p class="image-paragraph"><a href="tester.svg"><img class="displayed-figure" src="tester.svg" alt="The tester circuit"/></a></p>
 <p>Now $R$ and $I$ exhibit the same behaviour if and only if the output bits of the tester circuit are always $1$ for all inputs.
 The latter condition can be verified by employing the standard <a href="https://en.wikipedia.org/wiki/Tseitin_transformation">Tseitin transformation</a> to turn the tester circuit into a boolean formula $F(\vec x, \vec y, \vec z)$ (in conjunctive normal form) where $\vec x$ are the variables representing the inputs, $\vec y$ the outputs, and $\vec z$ some intermediate values, and then checking that the formula $F(\vec x, \vec y, \vec z) \wedge \bigvee \neg \vec y$ — which says that the tester circuit maps input $\vec x$ to output $\vec y$ and that some of the output bits are false, indicating disagreement between $R$ and $I$ — is unsatisfiable by SAT solving (which means that there is no disagreement).</p>
 <p>There is a twist, however.
