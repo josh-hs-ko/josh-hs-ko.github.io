@@ -25,9 +25,9 @@ import System.Environment
 import System.Process
 import System.IO
 
-import Data.Digest.Pure.MD5 (md5)             -- pureMD5
-import System.IO.Strict as Strict (readFile)  -- strict
-import CMark                                  -- cmark
+import Data.Digest.Pure.MD5 (md5)             -- pureMD5 (AQK4LY6LP)
+import System.IO.Strict as Strict (readFile)  -- strict  (3CT3RKDVQ)
+import CMark                                  -- cmark   (6QWR7XER)
 
 main :: IO ()
 main = do
@@ -435,7 +435,7 @@ latestIndex postList =
 
 
 --------
--- List processing utilities from MissingH
+-- List processing utilities from MissingH (H2V2R74K)
 
 spanList :: ([a] -> Bool) -> [a] -> ([a], [a])
 spanList _ [] = ([],[])

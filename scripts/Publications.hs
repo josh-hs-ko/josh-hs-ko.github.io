@@ -284,7 +284,7 @@ publicationList =
       , venue   = Just ("Symposium on Principles of Programming Languages (POPL)", Just ("https://popl18.sigplan.org", IncludeYear))
       , year    = 2018
       , types   = []
-      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129?download=true")
+      , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3158129")
                   , ("Agda code", Just "zip", "https://dl.acm.org/action/downloadSupplement?doi=10.1145%2F3158129&file=popl18-p3-aux.zip")
                   , ("Agda code", Just "HTML", "/Agda/POPL18/Everything.html")
                   , ("Slides", Just "PDF", "/slides/POPL18.pdf")
