@@ -43,6 +43,7 @@ publicationList =
                   , ("Article", "98", Nothing)
                   , ("Pages", "1–29", Nothing)
                   , ("DOI", "10.1145/3547629", Nothing)
+                  , ("Agda version", "2.6.3", Nothing)
                   , ("Abstract", "Datatype-generic programming is natural and useful in dependently typed languages such as Agda. However, datatype-generic libraries in Agda are not reused as much as they should be, because traditionally they work only on datatypes decoded from a library’s own version of datatype descriptions; this means that different generic libraries cannot be used together, and they do not work on native datatypes, which are preferred by the practical Agda programmer for better language support and access to other libraries. Based on elaborator reflection, we present a framework in Agda featuring a set of general metaprograms for instantiating datatype-generic programs as, and for, a useful range of native datatypes and functions —including universe-polymorphic ones— in programmer-friendly and customisable forms. We expect that datatype-generic libraries built with our framework will be more attractive to the practical Agda programmer. As the elaborator reflection features used by our framework become more widespread, our design can be ported to other languages too.", Nothing)
                   ]
       }
