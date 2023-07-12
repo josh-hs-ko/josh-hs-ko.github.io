@@ -24,6 +24,18 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "A theory of bidirectional type synthesis for simple types"
+      , authors = [ "Liang-Ting Chen"
+                  , "Hsiang-Shang Ko"
+                  ]
+      , venue   = Nothing
+      , year    = 2023
+      , types   = [(Unpublished, "Submitted")]
+      , links   = []
+      , info    = [ ("Abstract", "There has been much progress in designing bidirectional type systems and associated type synthesis algorithms, but only on a case-by-case basis. This situation is in stark contrast to parsing, for which there have been general theories and widely applicable tools such as parser generators. To remedy the situation, this paper develops a first theory of bidirectional type synthesis. The whole theory works as a verified type-synthesiser generator for syntax-directed simple type systems: From a signature that specifies a simply typed language with a bidirectional type system, the theory produces a type synthesiser that decides whether an input abstract syntax tree has a typing derivation or reports that the input does not have enough type annotations. Within the theory, we formally define soundness, completeness, and mode-correctness, which are sufficient conditions for deriving a correct type synthesiser. We also propose a preprocessing step called ‘mode decoration’, which helps the user to deal with missing type annotations and streamlines the theory. The entire theory is formulated constructively and has been formalised in the proof assistant Agda with Axiom K.", Nothing)
+                  ]
+      }
+   , Publication
       { title   = "Datatype-generic programming meets elaborator reflection"
       , authors = [ "Hsiang-Shang Ko"
                   , "Liang-Ting Chen"
