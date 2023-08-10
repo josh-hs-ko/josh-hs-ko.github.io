@@ -47,7 +47,7 @@ authorList =
       }
   , Author
       { authorName = "Patrik Jansson"
-      , authorURL  = "http://www.cse.chalmers.se/~patrikj/"
+      , authorURL  = "https://patrikja.owlstown.net"
       }
   , Author
       { authorName = "Tzu-Chi Lin"

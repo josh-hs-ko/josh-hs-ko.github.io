@@ -1,6 +1,5 @@
 module Publications where
 
-
 data PublicationType = Published | Warning | Unpublished
 
 publicationType :: a -> a -> a -> PublicationType -> a
