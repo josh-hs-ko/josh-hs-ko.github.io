@@ -20,7 +20,9 @@ window.MathJax = {
       or: '\\mathrel{\\thinspace\\vee\\thinspace}',
       Order: '\\mathcal{O}',
       reason: ['\\quad \\{ \\thinspace \\text{#1} \\thinspace \\}', 1],
-      sem: ['[\\![#1]\\!]', 1]
+      sem: ['[\\![#1]\\!]', 1],
+      ket: ['|#1\\rangle', 1],
+      bra: ['\\langle#1|', 1]
     }
   },
   chtml: {

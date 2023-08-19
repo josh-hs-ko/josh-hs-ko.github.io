@@ -227,6 +227,10 @@ ol {
   text-indent: -1em;
 }
 
+.social {
+  margin-top: .75ex;
+}
+
 .photo {
   margin-top: 4ex;
   float: right;
