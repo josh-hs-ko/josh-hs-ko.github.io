@@ -228,65 +228,50 @@ ol {
 }
 
 .web-presence {
-  margin-top: .75ex;
+  height: 24px;
+  margin-top: 8px;
+  margin-right: 8px;
+}
+
+.web-presence:hover {
+  -webkit-transition: all .2s ease-in-out;
+     -moz-transition: all .2s ease-in-out;
+      -ms-transition: all .2s ease-in-out;
+       -o-transition: all .2s ease-in-out;
+          transition: all .2s ease-in-out;
 }
 
 .web-presence-GitHub {
-  height: 24px;
-  filter: opacity(.5);
+  filter: opacity(.4);
 }
 
 .web-presence-GitHub:hover {
   filter: opacity(1);
-  -webkit-transition: all .2s ease-in-out;
-     -moz-transition: all .2s ease-in-out;
-      -ms-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
 }
 
 .web-presence-Mastodon-Facebook {
-  height: 24px;
-  filter: grayscale(1) opacity(.6);
+  filter: grayscale(1) opacity(.5);
 }
 
 .web-presence-Mastodon-Facebook:hover {
   filter: grayscale(0) opacity(1);
-  -webkit-transition: all .2s ease-in-out;
-     -moz-transition: all .2s ease-in-out;
-      -ms-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
 }
 
 .web-presence-ORCID {
-  height: 24px;
   filter: grayscale(1);
 }
 
 .web-presence-ORCID:hover {
   filter: grayscale(0);
-  -webkit-transition: all .2s ease-in-out;
-     -moz-transition: all .2s ease-in-out;
-      -ms-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
 }
 
 .web-presence-dblp-GS {
-  height: 24px;
-  filter: grayscale(1) opacity(.75);
+  filter: grayscale(1) opacity(.6);
 }
 
 .web-presence-dblp-GS:hover {
   filter: grayscale(0) opacity(1);
-  -webkit-transition: all .2s ease-in-out;
-     -moz-transition: all .2s ease-in-out;
-      -ms-transition: all .2s ease-in-out;
-       -o-transition: all .2s ease-in-out;
-          transition: all .2s ease-in-out;
 }
-
 
 .photo {
   margin-top: 4ex;
