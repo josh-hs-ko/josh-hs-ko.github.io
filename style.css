@@ -231,9 +231,6 @@ ol {
   height: 24px;
   margin-top: 8px;
   margin-right: 8px;
-}
-
-.web-presence:hover {
   -webkit-transition: all .2s ease-in-out;
      -moz-transition: all .2s ease-in-out;
       -ms-transition: all .2s ease-in-out;
