@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 33, entryTime = 2023-08-20 10:40:15.267542832, entryTitle = "From amplitude amplification to Jordan\8217s lemma", entryTeaser = "Some rough notes about amplitude amplification and Jordan\8217s lemma, with some extrapolations about what we should have in a high-level quantum-algorithmic language from what I\8217ve seen."}
+,
 PostEntry {entryNumber = 32, entryTime = 2023-03-20 22:04:02.121790775, entryTitle = "The uniform measurement principle", entryTeaser = "If the result of a measurement is a uniform distribution, then no quantum information is lost.\nIt turns out that this intuition can be straightforwardly formulated in the graphical quantum theory."}
 ,
 PostEntry {entryNumber = 31, entryTime = 2023-02-24 16:47:57.086359935, entryTitle = "Fun with the Bell basis: Entanglement swapping, graphically", entryTeaser = "To complete the Bell basis trilogy, we also look at entanglement swapping, which, though slightly more complex, can be presented naturally in ZX-calculus."}

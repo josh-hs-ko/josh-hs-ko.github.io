@@ -258,11 +258,11 @@ ol {
 }
 
 .web-presence-ORCID {
-  filter: grayscale(1);
+  filter: grayscale(1) sepia(.1);
 }
 
 .web-presence-ORCID:hover {
-  filter: grayscale(0);
+  filter: grayscale(0) sepia(0);
 }
 
 .web-presence-dblp-GS {
