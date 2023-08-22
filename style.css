@@ -246,11 +246,11 @@ ol {
   filter: opacity(1);
 }
 
-.web-presence-Mastodon-Facebook {
+.web-presence-Mastodon {
   filter: grayscale(1) opacity(.5);
 }
 
-.web-presence-Mastodon-Facebook:hover {
+.web-presence-Mastodon:hover {
   filter: grayscale(0) opacity(1);
 }
 
