@@ -46,7 +46,7 @@ publicationList =
       , links   = [ ("PDF", Nothing, "https://dl.acm.org/doi/pdf/10.1145/3547629")
                   , ("Artefact", Just "Zenodo", "https://doi.org/10.5281/zenodo.6603498")
                   , ("Agda code", Just "HTML", "/Agda/ICFP22/Everything.html")
-                  , ("Repository", Just "GitHub", "https://github.com/Zekt/Type-Embellishment")
+                  , ("Repository", Just "GitHub", "https://github.com/josh-hs-ko/NDGP")
                   , ("Slides", Just "PDF", "/slides/ICFP22.pdf")
                   , ("Video", Just "YouTube", "https://youtu.be/daJdoJGpsns")
                   ]
