@@ -63,7 +63,7 @@
 0034
 </div>
 <h2>The power and joy of abstraction</h2>
-<div class="post-time">Posted at 16:29 on 1 October 2023</div>
+<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 23:20 on 1 October 2023</div>
 <p>A while ago <a href="https://homepage.iis.sinica.edu.tw/pages/scm/">Shin</a> dug up a mysterious program left by Richard Bird in his paper ‘<a href="https://doi.org/10.1007/978-3-540-70594-9_7">Zippy tabulations of recursive functions</a>’ at MPC 2008 (where <a href="/#publication-f99491ca">my very first paper</a> appeared!), which was about implementing a generic top-down specification of divide-and-conquer computation using a bottom-up algorithm.
 There’s a lot to talk about the problem and its treatment, but I’ll focus on only the parts that I reformulated using dependent types and string diagrams, and make notes of some possible future work.
 The story here is therefore deliberately incomplete, and we’re hoping to tell a better story with a full-length paper.</p>
@@ -223,9 +223,9 @@ If we introduce a natural transformation</p>
 <p class="image-paragraph"><a href="upgrade.svg"><img class="displayed-figure" src="upgrade.svg"/></a></p>
 <p>which satisfies this associativity-like equation</p>
 <p class="image-paragraph"><a href="associativity.svg"><img class="displayed-figure" src="associativity.svg" alt="Associativity-like equation"/></a></p>
-<p>we can rewrite <code>td g {3}</code> into</p>
+<p>we can rewrite the spawning part of <code>td g {3}</code> into a left-leaning tree (where the <code>unTip</code> will be explained below):</p>
 <p class="image-paragraph"><a href="bu.svg"><img class="displayed-figure" src="bu.svg"/></a></p>
-<p>which is a special case of the bottom-up algorithm!
+<p>And this is a special case of the bottom-up algorithm!
 First we initialise by creating a <code>BT 4 1 S</code> using <code>choose 4 1</code> and <code>head</code> — that is, solutions for all the length-1 sub-lists.
 Then we use <code>upgrade</code> to create a <code>BT 4 2</code> tree that will later store length-2 solutions, but for now we are storing only <code>BT 2 1 S</code>’s, which collect exactly those length-1 solutions that will be used to compute a length-2 solution.
 (The definition of <code>upgrade</code> is the one left unexplained in Richard’s paper; it’s somewhat complex and omitted here.)
