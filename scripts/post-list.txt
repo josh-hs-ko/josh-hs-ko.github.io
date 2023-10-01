@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 34, entryTime = 2023-10-01 16:29:59.307614936, entryTitle = "The power and joy of abstraction", entryTeaser = "A derivation from a generic top-down specification of divide-and-conquer computation to a bottom-up implementation is reformulated and clarified using dependent types, category theory, and string diagrams."}
+,
 PostEntry {entryNumber = 33, entryTime = 2023-08-20 10:40:15.267542832, entryTitle = "From amplitude amplification to Jordan\8217s lemma", entryTeaser = "Some rough notes about amplitude amplification and Jordan\8217s lemma, with some extrapolations about what we should have in a high-level quantum-algorithmic language from what I\8217ve seen."}
 ,
 PostEntry {entryNumber = 32, entryTime = 2023-03-20 22:04:02.121790775, entryTitle = "The uniform measurement principle", entryTeaser = "If the result of a measurement is a uniform distribution, then no quantum information is lost.\nIt turns out that this intuition can be straightforwardly formulated in the graphical quantum theory."}

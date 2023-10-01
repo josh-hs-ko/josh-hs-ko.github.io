@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=none, label={above:$\smash{\mathsf{BT}^n_k}$}] (0) at (-1, 1) {};
+		\node [style=none, label={above:$\mathsf{All}$}] (1) at (1, 1) {};
+		\node [style=none, label={below:$\mathsf{All}$}] (2) at (0, -1) {};
+		\node [style=Natural transformation] (3) at (0, 0) {};
+		\node [style=none, label={right:$\mathsf{choose}^n_k$ ($n \geq k$)}] (4) at (1, 0) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=Wire, bend right=45] (0.center) to (3);
+		\draw [style=Wire, bend right=45] (3) to (1.center);
+		\draw [style=Wire] (3) to (2.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

@@ -1,0 +1,48 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Natural transformation] (0) at (0, 0) {};
+		\node [style=none] (1) at (-3, -3) {};
+		\node [style=none] (2) at (3, -3) {};
+		\node [style=none] (3) at (0, 3) {};
+		\node [style=none] (4) at (-3, -3) {};
+		\node [style=none] (5) at (-3, -3.5) {$\mathsf{All}$};
+		\node [style=none] (6) at (3, -3.5) {$S \circ [\_\kern.75pt]$};
+		\node [style=none] (7) at (0, 3.5) {$S$};
+		\node [style=none] (8) at (3, 0) {$\mathsf{head}$};
+		\node [style=none] (9) at (1.5, 1.5) {$?$};
+		\node [style=none] (10) at (1, 2) {};
+		\node [style=none] (11) at (2, 2) {};
+		\node [style=none] (12) at (2, 1) {};
+		\node [style=none] (13) at (1, 1) {};
+		\node [style=none] (14) at (0, -2) {$A$};
+		\node [style=none] (15) at (-0.5, -1.5) {};
+		\node [style=none] (16) at (0.5, -1.5) {};
+		\node [style=none] (17) at (0.5, -2.5) {};
+		\node [style=none] (18) at (-0.5, -2.5) {};
+		\node [style=none] (19) at (-2.5, 1.5) {$\mathsf{Vec}\;A\;1$};
+		\node [style=none] (20) at (-1, 2) {};
+		\node [style=none] (21) at (-4, 2) {};
+		\node [style=none] (22) at (-4, 1) {};
+		\node [style=none] (23) at (-1, 1) {};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=Wire] (3.center) to (0);
+		\draw [style=Wire, bend left=45] (4.center) to (0);
+		\draw [style=Wire, bend left=45] (0) to (2.center);
+		\draw [style=dashed line] (10.center)
+			 to (13.center)
+			 to (12.center)
+			 to (11.center)
+			 to cycle;
+		\draw [style=dashed line] (15.center)
+			 to (18.center)
+			 to (17.center)
+			 to (16.center)
+			 to cycle;
+		\draw [style=dashed line] (20.center)
+			 to (23.center)
+			 to (22.center)
+			 to (21.center)
+			 to cycle;
+	\end{pgfonlayer}
+\end{tikzpicture}

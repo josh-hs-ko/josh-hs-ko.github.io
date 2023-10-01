@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Natural transformation] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1.5) {};
+		\node [style=none] (2) at (-1.5, 1.5) {};
+		\node [style=none] (3) at (1.5, 1.5) {};
+		\node [style=none, label={right:$\mathsf{upgrade}$ ($n > k$)}] (4) at (1, 0) {};
+		\node [style=none] (5) at (-1, 2) {$\vphantom{^{1+k}_k}\mathsf{BT}^n_{1+k}$};
+		\node [style=none] (6) at (2, 2) {$\mathsf{BT}^{1+k}_k$};
+		\node [style=none] (7) at (0.25, -2) {$\mathsf{BT}^n_k$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [bend left=45] (0) to (2.center);
+		\draw [bend right=45] (0) to (3.center);
+		\draw (0) to (1.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

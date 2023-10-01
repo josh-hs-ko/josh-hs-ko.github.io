@@ -1,0 +1,30 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Natural transformation] (0) at (0, 0) {};
+		\node [style=none] (1) at (0, -1.5) {};
+		\node [style=none] (2) at (-1.5, 1.5) {};
+		\node [style=none] (3) at (1.5, 1.5) {};
+		\node [style=none] (4) at (-2.5, 0) {$\mathsf{upgrade}$};
+		\node [style=none] (5) at (-1, 2) {$\mathsf{BT}^{1+n}_{1+n}$};
+		\node [style=none] (6) at (2, 4.5) {$\mathsf{BT}^{1+n}_n$};
+		\node [style=none] (7) at (0.5, -2) {$\mathsf{BT}^{1+n}_n$};
+		\node [style=none] (8) at (-1.5, 2.5) {};
+		\node [style=Natural transformation] (9) at (-1.5, 3.5) {};
+		\node [style=none] (10) at (-3, 3.5) {$\mathsf{unTip}$};
+		\node [style=none] (11) at (1.5, 4) {};
+		\node [style=none] (12) at (3.5, 1.5) {$=$};
+		\node [style=none] (13) at (5.5, 4) {};
+		\node [style=none] (14) at (5.5, -1.5) {};
+		\node [style=none] (15) at (6, 4.5) {$\mathsf{BT}^{1+n}_n$};
+		\node [style=none] (16) at (6, -2) {$\mathsf{BT}^{1+n}_n$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [bend left=45] (0) to (2.center);
+		\draw (0)
+			 to [bend right=45] (3.center)
+			 to (11.center);
+		\draw (0) to (1.center);
+		\draw [style=Wire] (9) to (8.center);
+		\draw [style=Wire] (14.center) to (13.center);
+	\end{pgfonlayer}
+\end{tikzpicture}

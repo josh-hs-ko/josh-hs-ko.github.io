@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>The power and joy of abstraction — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="A derivation from a generic top-down specification of divide-and-conquer computation to a bottom-up implementation is reformulated and clarified using dependent types, category theory, and string diagrams.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0034
+</div>
+<h2>The power and joy of abstraction</h2>
+<div class="post-time">Posted at 16:29 on 1 October 2023</div>
+<p>A while ago <a href="https://homepage.iis.sinica.edu.tw/pages/scm/">Shin</a> dug up a mysterious program left by Richard Bird in his paper ‘<a href="https://doi.org/10.1007/978-3-540-70594-9_7">Zippy tabulations of recursive functions</a>’ at MPC 2008 (where <a href="/#publication-f99491ca">my very first paper</a> appeared!), which was about implementing a generic top-down specification of divide-and-conquer computation using a bottom-up algorithm.
+There’s a lot to talk about the problem and its treatment, but I’ll focus on only the parts that I reformulated using dependent types and string diagrams, and make notes of some possible future work.
+The story here is therefore deliberately incomplete, and we’re hoping to tell a better story with a full-length paper.</p>
+<p>The generic divide-and-conquer problem aims to compute a solution from a list recursively from its immediate sub-lists — for example, given a (non-empty) list <code>&quot;abcd&quot;</code>, we’d compute its four immediate sub-lists <code>&quot;abc&quot;</code>, <code>&quot;abd&quot;</code>, <code>&quot;acd&quot;</code>, and <code>&quot;bcd&quot;</code>, recursively solve the problem on these four sub-lists, and combine the four sub-solutions into a solution for the whole list using a given function <code>g</code>; if the input list is a singleton, that’s a base case and we use another given function <code>f</code> to compute a solution directly.
+Here’s a simply typed program expressing this divide-and-conquer strategy (vectors should count as simple types now, right?):</p>
+<pre><code>td₀ : {A S : Set} (f : A → S) (g : List S → S)
+      {n : ℕ} → Vec A (suc n) → S
+td₀ f g {zero } = f ∘ head
+td₀ f g {suc n} = g ∘ map (td₀ f g {n}) ∘ choose₀ (2 + n) (1 + n) 2+n≥1+n
+  where 2+n≥1+n = ≤′-step ≤′-refl
+</code></pre>
+<p>The function <code>choose₀</code> computes, in general, all the length-<code>k</code> sub-lists of a length-<code>n</code> list:</p>
+<pre><code>choose₀ : (n k : ℕ) → n ≥′ k → Vec A n → List (Vec A k)
+choose₀ _        zero    _                   _   = [ [] ]
+choose₀ (suc k) (suc k)  ≤′-refl             xs  = [ xs ]
+choose₀ (suc n) (suc k) (≤′-step n≥1+k) (x ∷ xs) =
+  choose₀ n (suc k) n≥1+k xs ++ map (x ∷_) (choose₀ n k n≥k xs)
+  where n≥k = ≤′-trans (≤′-step ≤′-refl) n≥1+k
+</code></pre>
+<p>Richard introduced a data structure called <em>binomial trees</em> (not to be confused with <a href="/#publication-696aedff">the kind of binomial tree used in binomial heaps</a>), which Shin observed can be used to store the results of <code>choose₀</code> while retaining the recursive computation structure by replacing the list-constructing functions <code>[_]</code> and <code>_++_</code> in the three cases with different tree constructors, as done in <code>choose₁</code> below.</p>
+<pre><code>data BT₁ (A : Set) : ℕ → ℕ → Set where
+  tipL : A                           → BT₁ A      n       0
+  tipR : A                           → BT₁ A (suc n) (suc n)
+  bin  : BT₁ A n (suc k) → BT₁ A n k → BT₁ A (suc n) (suc k)
+
+choose₁ : (n k : ℕ) → n ≥′ k → Vec A n → BT₁ (Vec A k) n k
+choose₁ _        zero    _                   _   = tipL []
+choose₁ (suc k) (suc k)  ≤′-refl             xs  = tipR xs
+choose₁ (suc n) (suc k) (≤′-step n≥1+k) (x ∷ xs) =
+  bin (choose₁ n (suc k) n≥1+k xs) (map (x ∷_) (choose₁ n k n≥k xs))
+  where n≥k = ≤′-trans (≤′-step ≤′-refl) n≥1+k
+</code></pre>
+<p>The <code>map</code> function used in <code>choose₁</code> is now the version for binomial trees:</p>
+<pre><code>map : (A → B) → BT₁ A n k → BT₁ B n k
+map f (tipL x)  = tipL (f x)
+map f (tipR x)  = tipR (f x)
+map f (bin t u) = bin (map f t) (map f u)
+</code></pre>
+<p>As we introduce more dependent types, we can make our programs more precise.
+With <code>BT₁</code>, for example, we can now indicate (slightly) more precisely that <code>g</code> takes sub-solutions for the immediate sub-lists.</p>
+<pre><code>td₁ : {A S : Set} (f : A → S) (g : {k : ℕ} → BT₁ S (2 + k) (1 + k) → S)
+      {n : ℕ} → Vec A (suc n) → S
+td₁ f g {zero } = f ∘ head
+td₁ f g {suc n} = g ∘ map (td₁ f g {n}) ∘ choose₁ (2 + n) (1 + n) 2+n≥1+n
+  where 2+n≥1+n = ≤′-step ≤′-refl
+</code></pre>
+<p>That’s a step towards the right direction, but not far enough.
+If we really want to say precisely what <code>g</code> does, we should index the solutions with the problems they solve by refining <code>S</code> into a type family <code>{k : ℕ} → Vec A (suc k) → Set</code>, such that <code>S xs</code> means the type of solutions for the list <code>xs</code>.
+We should also refine binomial trees so that they can be used to store solutions with types that have the right indices:</p>
+<pre><code>data BT : (n k : ℕ) (P : Vec A k → Set) → Vec A n → Set where
+
+  tipL : P [] → BT      n       0  P xs
+  tipR : P xs → BT (suc n) (suc n) P xs
+
+  bin  : BT      n  (suc k)        P           xs
+       → BT      n       k (λ ys → P (x ∷ ys)) xs
+       → BT (suc n) (suc k)        P      (x ∷ xs)
+</code></pre>
+<p>This is like fusing the computation of <code>choose</code> into <code>BT</code> in a continuation-passing style at type level (or in logic programming if we think of indexed datatypes as logic programs) with <code>P</code> being the continuation, such that <code>BT n k P xs</code> stores <code>P ys</code> for every length-<code>k</code> sub-list <code>ys</code> of <code>xs</code>:
+In the <code>tipL</code> and <code>tipR</code> cases, the results are <code>[]</code> and <code>xs</code>, and we ‘return’ the results by ‘calling’ <code>P</code> on <code>[]</code> and <code>xs</code>, that is, storing values of types <code>P []</code> and <code>P xs</code>.
+In the <code>bin</code> case, the input list is <code>x ∷ xs</code>, and we should return its length-(<code>1 + k</code>) sub-lists.
+The left sub-tree calls <code>P</code> on all the length-(<code>1 + k</code>) sub-lists of <code>xs</code> (that do not include <code>x</code>).
+The right sub-tree calls <code>λ ys → P (x ∷ ys)</code> on all the length-<code>k</code> sub-lists of <code>xs</code>, or equivalently, calls <code>P</code> on all the length-(<code>1 + k</code>) sub-lists <code>x ∷ ys</code> (that include <code>x</code>) where <code>ys</code> ranges over all the length-<code>k</code> sub-lists of <code>xs</code>.
+That’s a very interesting datatype design pattern, which should be generalised and studied in more detail.
+With <code>BT</code>, we can precisely specify the behaviour of <code>g</code> by giving it the type</p>
+<pre><code>g : {k : ℕ} {xs : Vec A (2 + k)} → BT (2 + k) (1 + k) S xs → S xs
+</code></pre>
+<p>We also have a <code>map</code> function for <code>BT</code>:</p>
+<pre><code>map : (∀ {xs} → P xs → Q xs) → ∀ {xs} → BT n k P xs → BT n k Q xs
+map f (tipL p)  = tipL (f p)
+map f (tipR p)  = tipR (f p)
+map f (bin t u) = bin (map f t) (map f u)
+</code></pre>
+<p>The indexing starts to get overwhelming, but fortunately we can introduce categorical abstractions to manage and suppress the details.
+Rather than working in the category of types and functions, we can switch to the categories of families of types and functions with a fixed type of indices.
+Such a category is parametrised by an index type <code>A : Set</code> and has objects of type <code>A → Set</code> and morphisms between <code>P</code> and <code>Q : A → Set</code> of type <code>{x : A} → P x → Q x</code>.
+To facilitate working at the level of abstraction offered by this kind of category, we can define some notations:</p>
+<pre><code>_⇉_ : (A → Set) → (A → Set) → (A → Set)
+(P ⇉ Q) x = P x → Q x
+
+∀[_] : (A → Set) → Set
+∀[ P ] = ∀ {x} → P x
+</code></pre>
+<p>With these, we can rewrite the type of <code>g</code> as</p>
+<pre><code>g : {k : ℕ} → ∀[ BT (2 + k) (1 + k) S ⇉ S ]
+</code></pre>
+<p>and the type of <code>map</code> for <code>BT</code> as</p>
+<pre><code>map : ∀[ P ⇉ Q ] → ∀[ BT n k P ⇉ BT n k Q ]
+</code></pre>
+<p>To fully understand the types, we probably still need to expand the notational definitions, but the notations encourage us to read the types also at a more abstract level as if they were simple types.
+For example, <code>g</code> simply takes a <code>BT</code>-tree of <code>S</code>’s to an <code>S</code>, and <code>map</code> applies a function from <code>P</code> to <code>Q</code> to a <code>BT</code>-tree of <code>P</code>’s and returns a <code>BT</code>-tree of <code>Q</code>’s, parametrically in <code>P</code> and <code>Q</code>.</p>
+<p>We can perform a similar translation on <code>choose₁</code>, which, abstractly speaking, takes a list to a tree of lists.
+What’s a list in the categories of indexed types and functions?
+One natural answer is the <code>All</code> datatype, which is a predicate on lists that holds when a given predicate <code>P</code> holds for all the elements of a list:</p>
+<pre><code>data All {A : Set} (P : A → Set) : ∀ {n} → Vec A n → Set where
+  []  :                  All P []
+  _∷_ : P x → All P xs → All P (x ∷ xs)
+</code></pre>
+<p>We can then give <code>choose</code> a richer type, which strictly generalises the type of <code>choose₁</code>, while keeping the same function definition:</p>
+<pre><code>choose : (n k : ℕ) → n ≥′ k → ∀[ All P ⇉ BT n k (All P) ]
+choose _        zero    _                   _   = tipL []
+choose (suc k) (suc k)  ≤′-refl             ps  = tipR ps
+choose (suc n) (suc k) (≤′-step n≥1+k) (p ∷ ps) =
+  bin (choose n (suc k) n≥1+k ps) (map (p ∷_) (choose n k n≥k ps))
+  where n≥k = ≤′-trans (≤′-step ≤′-refl) n≥1+k
+</code></pre>
+<p>And this works for <code>td</code> too:</p>
+<pre><code>td : {A : Set} {S : ∀ {k} → Vec A (suc k) → Set}
+   → (g : ∀ {k} → ∀[ BT (2 + k) (1 + k) S ⇉ S ])
+   → ∀ {n} → ∀⟨ Vec A (suc n) ⟩[ All (S ∘ [_]) ⇉ S ]
+td g {zero } = head
+td g {suc n} = g ∘ map (td g {n}) ∘ choose (2 + n) (1 + n) 2+n≥1+n
+  where 2+n≥1+n = ≤′-step ≤′-refl
+</code></pre>
+<p>where <code>head</code> is defined by</p>
+<pre><code>head : ∀⟨ Vec A 1 ⟩[ All (S ∘ [_]) ⇉ S ]
+head (s ∷ []) = s
+</code></pre>
+<p>with the help of a version of the <code>∀[_]</code> notation for specifying the index type:</p>
+<pre><code>∀⟨_⟩[_] : (A : Set) → (A → Set) → Set
+∀⟨ A ⟩[ P ] = {x : A} → P x
+</code></pre>
+<p>Note that <code>f</code> is omitted in this final definition of <code>td</code> because the solutions for the singleton sub-lists of an input list <code>xs : Vec A (suc n)</code> are now given in the list of type <code>All (S ∘ [_]) xs</code>.</p>
+<p>I think the lesson here is that the programs you write are probably more general than you think — and this should probably be one of the slogans for selling category theory to the (functional) programmer.
+In general it seems that we should be able to mechanise category switching along the line of Conal Elliott’s ‘<a href="https://doi.org/10.1145/3110271">Compiling to categories</a>’, although I don’t know (yet) how straightforward it is when the target category is indexed types and functions, and when indexed datatypes are involved.</p>
+<p>When we generalised <code>choose</code>, what we have also secretly accomplished is to make it a natural transformation from <code>All</code> to <code>BT n k ∘ All</code>.
+We have thus ascended to the even more abstract realm of the monoidal categories of functors and natural transformations with functor composition as the monoidal product, and can enjoy the convenience of reasoning with string diagrams.
+(Cue the modulation to D major in the fourth movement of Mahler’s first symphony.)
+As a (bottom-up) string diagram, the type of <code>choose</code> is</p>
+<p class="image-paragraph"><a href="choose.svg"><img class="displayed-figure" src="choose.svg"/></a></p>
+<p>At this level of abstraction, we view and manipulate layers of type structures such as <code>BT n k</code> and <code>All</code> as if they are tuples of elements — for example, here we simply think of <code>choose</code> as turning an <code>All</code> into a pair of <code>BT n k</code> and <code>All</code>.
+Similarly, we can draw the type of <code>g</code> as</p>
+<p class="image-paragraph"><a href="g.svg"><img class="displayed-figure" src="g.svg"/></a></p>
+<p><code>S</code> should in fact be lifted to a constant functor <code>const S</code> to fit into the diagrams (that is, the functor categories).
+Now we can draw a special case <code>td g {3}</code> as a pleasing diagram:</p>
+<p class="image-paragraph"><a href="td.svg"><img class="displayed-figure" src="td.svg" alt="Top-down specification as a diagram"/></a></p>
+<p>From the <code>All</code> at the bottom we spawn three layers of <code>BT</code> to split the problem recursively and reach the base case, where we can extract an <code>S</code> and then consume the layers (that is, solve the sub-problems) using <code>g</code>.
+Note that we can only apply <code>head</code> and start consuming after spawning the three layers — it might be tempting to apply <code>head</code> to an earlier <code>All</code> in the diagram, but that’s actually prohibited:
+The elements we are working with are functors, which can be composed only when they have matching types.
+These types —or more precisely speaking, the categories between which the functors operate on— correspond to the planes.
+For example, in the diagram of <code>choose n k</code>,</p>
+<p class="image-paragraph"><a href="choose_with_types.svg"><img class="displayed-figure" src="choose_with_types.svg"/></a></p>
+<p>the bottom <code>All</code> is a functor from the category of families with index type <code>A</code> to the category of families with index type <code>Vec A n</code>; since we are dealing with categories of families exclusively, we put only the index types on the right and left planes, which correspond to the two categories.
+More interestingly, the top-right <code>All</code> goes from index type <code>A</code> to index type <code>Vec A k</code>, while the top-left <code>BT n k</code> goes from <code>Vec A k</code> to <code>Vec A n</code>, so the two functors can be composed, and the composed functor has the same type as the bottom <code>All</code>, making <code>choose n k</code> a type-correct natural transformation.
+Similarly, the full diagram of <code>head</code> is</p>
+<p class="image-paragraph"><a href="head_with_types.svg"><img class="displayed-figure" src="head_with_types.svg"/></a></p>
+<p>where the right plane can have any index type (indicated by an Agda hole ‘<code>?</code>’) because <code>S</code> and <code>S ∘ [_]</code> actually denote constant functors, and the left plane is restricted to the index type <code>Vec A 1</code>.
+Now we can check that the innermost <code>choose 2 1</code> and <code>head</code> in the diagram of <code>td g {3}</code> are indeed well typed,</p>
+<p class="image-paragraph"><a href="typing.svg"><img class="displayed-figure" src="typing.svg"/></a></p>
+<p>whereas if we replace <code>choose 2 1</code> with <code>choose 4 3</code>, for example, then the diagram becomes type-incorrect because the U-shaped plane cannot have both <code>Vec A 3</code> (required by <code>choose 4 3</code>) and <code>Vec A 1</code> (required by <code>head</code>) as its index type.</p>
+<p>Now the bottom-up algorithm is not too far away.
+The spawning part of the <code>td g {3}</code> diagram is a right-leaning tree.
+If we introduce a natural transformation</p>
+<pre><code>upgrade : n &gt; k → ∀[ BT n k P ⇉ BT n (suc k) (BT (suc k) k P) ]
+</code></pre>
+<p>or diagrammatically</p>
+<p class="image-paragraph"><a href="upgrade.svg"><img class="displayed-figure" src="upgrade.svg"/></a></p>
+<p>which satisfies this associativity-like equation</p>
+<p class="image-paragraph"><a href="associativity.svg"><img class="displayed-figure" src="associativity.svg" alt="Associativity-like equation"/></a></p>
+<p>we can rewrite <code>td g {3}</code> into</p>
+<p class="image-paragraph"><a href="bu.svg"><img class="displayed-figure" src="bu.svg"/></a></p>
+<p>which is a special case of the bottom-up algorithm!
+First we initialise by creating a <code>BT 4 1 S</code> using <code>choose 4 1</code> and <code>head</code> — that is, solutions for all the length-1 sub-lists.
+Then we use <code>upgrade</code> to create a <code>BT 4 2</code> tree that will later store length-2 solutions, but for now we are storing only <code>BT 2 1 S</code>’s, which collect exactly those length-1 solutions that will be used to compute a length-2 solution.
+(The definition of <code>upgrade</code> is the one left unexplained in Richard’s paper; it’s somewhat complex and omitted here.)
+Apply <code>g</code> to all these <code>BT 2 1 S</code>’s and we get solutions for all the length-2 sub-lists.
+Going upwards iteratively, we get a length-4 solution wrapped in a <code>BT 4 4</code> tree, which we can rip away using <code>unTip : ∀[ BT n n P ⇉ P ]</code> that satisfies the unitality-like equation:</p>
+<p class="image-paragraph"><a href="unitality.svg"><img class="displayed-figure" src="unitality.svg" alt="Unitality-like equation"/></a></p>
+<p>In general, the bottom-up algorithm has the same type as <code>td</code> and is defined as follows:</p>
+<pre><code>bu : {A : Set} {S : ∀ {k} → Vec A (suc k) → Set}
+   → (g : ∀ {k} → ∀[ BT (2 + k) (1 + k) S ⇉ S ])
+   → ∀ {n} → ∀⟨ Vec A (suc n) ⟩[ All (S ∘ [_]) ⇉ S ]
+bu g = unTip ∘ loop (≤⇒≤‴ z≤n) ∘ map head ∘ choose _ 1 (≤⇒≤′ (s≤s z≤n))
+  where
+    loop : n ≥‴ k → ∀[ BT (suc n) (suc k) S ⇉ BT (suc n) (suc n) S ]
+    loop  ≤‴-refl        = id
+    loop (≤‴-step n≥1+k) = loop n≥1+k ∘ map g ∘ upgrade (s≤s (≤‴⇒≤ n≥1+k))
+</code></pre>
+<p>The bottom-up computation is preferred to the top-down one for the standard reason: <code>td</code> solves overlapping sub-problems multiple times, whereas <code>bu</code> solves each sub-problem just once.
+(On the other hand, <code>td</code> is more suitable as a specification.)
+Both kinds of computation (in particular the bottom-up tabulation of solutions) is organised inductively and cleverly using binomial trees, whose structure can be neatly expressed, managed, and traced using dependent types and string diagrams.</p>
+<p>The starting point of Shin and I was actually <code>upgrade</code>: Shin wanted to understand Richard’s definition, and eventually came up with a version of the associativity-like equation as its specification, from which Richard’s definition can be calculated.
+When contemplating how dependent types can help to derive <code>upgrade</code> from the specification, the <code>BT</code> datatype came to me unexpectedly as a way of encoding the computation of <code>choose</code> at type level.
+I believe that the use of <code>BT</code> in the type of <code>upgrade</code> characterises its behaviour completely, and we should be able to derive the associativity- and unitality-like equations from the type, possibly using parametricity.
+While the reformulation looks neat, now I think some part of it over-generalises and doesn’t work nicely from an algorithmic point of view:
+the generalisation from lists to <code>All</code> is not necessary, and sort of forces the base cases to be singleton lists rather than the empty list, which I think is more natural (putting less restrictions on the lengths and eliminating most of the <code>(1 +_)</code>’s and <code>(2 +_)</code>’s in the indices).
+Well, I think the lesson here is that category theory, string diagrams, etc are not magic bullets; rather, they are tools that are indeed powerful but should be used wisely like any other tools.
+On the other hand, if we decide to do a more complex mental exercise anyway, category theory and string diagrams do help to manage the complexity effectively.</p>
+<p><strong>Agda file:</strong> <a href="BT.agda">BT.agda</a></p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="stamp-blog"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>

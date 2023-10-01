@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style=Natural transformation] (0) at (0, 0) {};
+		\node [style=none] (1) at (-1.5, -1.5) {};
+		\node [style=none] (2) at (1.5, -1.5) {};
+		\node [style=none] (3) at (0, 1.5) {};
+		\node [style=none, label={right:$g$}] (4) at (1, 0) {};
+		\node [style=none] (5) at (-1, -2) {$\mathsf{BT}^{2+k}_{1+k}$};
+		\node [style=none] (6) at (1.5, -2) {$S$};
+		\node [style=none] (7) at (0, 2) {$S$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style=Wire] (3.center) to (0);
+		\draw [style=Wire, bend right=45] (0) to (1.center);
+		\draw [style=Wire, bend left=45] (0) to (2.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
