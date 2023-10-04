@@ -63,7 +63,7 @@
 0034
 </div>
 <h2>The power and joy of abstraction</h2>
-<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 08:15 on 4 October 2023</div>
+<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 23:01 on 4 October 2023</div>
 <p>A while ago <a href="https://homepage.iis.sinica.edu.tw/pages/scm/">Shin</a> dug up a mysterious program left by Richard Bird in his paper ‘<a href="https://doi.org/10.1007/978-3-540-70594-9_7">Zippy tabulations of recursive functions</a>’ at MPC 2008 (where <a href="/#publication-f99491ca">my very first paper</a> appeared!), which was about implementing a generic top-down specification of divide-and-conquer computation using a bottom-up algorithm.
 There’s a lot to talk about the problem and its treatment, but I’ll focus on only the parts that I reformulated using dependent types and string diagrams, and make notes of some possible future work.
 The story here is therefore deliberately incomplete, and we’re hoping to tell a better story with a full-length paper.</p>
@@ -244,8 +244,7 @@ bu g = unTip ∘ loop (≤⇒≤‴ z≤n) ∘ map head ∘ choose _ 1 (≤⇒�
 </code></pre>
 <p>At the abstraction level of type structure we don’t really see why we should use the bottom-up algorithm though — to see that, we have to go back to the more concrete level of computation.
 The bottom-up computation is preferred to the top-down one for the standard reason: <code>td</code> solves overlapping sub-problems multiple times, whereas <code>bu</code> solves each sub-problem just once.
-(On the other hand, <code>td</code> is more suitable as a specification.)
-Both kinds of computation (in particular the bottom-up tabulation of solutions) is organised inductively and cleverly using binomial trees, whose structure can be neatly expressed, managed, and traced using dependent types and string diagrams.</p>
+(On the other hand, <code>td</code> is more suitable as a specification.)</p>
 <p>The starting point of Shin and I was actually <code>upgrade</code>: Shin wanted to understand Richard’s definition, and eventually came up with a version of the associativity-like equation as its specification, from which Richard’s definition can be calculated.
 When contemplating how dependent types can help to derive <code>upgrade</code> from the specification, the <code>BT</code> datatype came to me unexpectedly as a way of encoding the computation of <code>choose</code> at type level.
 I believe that the use of <code>BT</code> in the type of <code>upgrade</code> characterises its behaviour completely, and we should be able to derive the associativity- and unitality-like equations from the type, possibly using parametricity.
