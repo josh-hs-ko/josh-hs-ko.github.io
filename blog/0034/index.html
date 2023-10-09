@@ -63,7 +63,7 @@
 0034
 </div>
 <h2>The power and joy of abstraction</h2>
-<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 23:01 on 4 October 2023</div>
+<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 23:26 on 9 October 2023</div>
 <p>A while ago <a href="https://homepage.iis.sinica.edu.tw/pages/scm/">Shin</a> dug up a mysterious program left by Richard Bird in his paper ‘<a href="https://doi.org/10.1007/978-3-540-70594-9_7">Zippy tabulations of recursive functions</a>’ at MPC 2008 (where <a href="/#publication-f99491ca">my very first paper</a> appeared!), which was about implementing a generic top-down specification of divide-and-conquer computation using a bottom-up algorithm.
 There’s a lot to talk about the problem and its treatment, but I’ll focus on only the parts that I reformulated using dependent types and string diagrams, and make notes of some possible future work.
 The story here is therefore deliberately incomplete, and we’re hoping to tell a better story with a full-length paper.</p>
@@ -110,7 +110,7 @@ td₁ f g {zero } = f ∘ head
 td₁ f g {suc n} = g ∘ map (td₁ f g {n}) ∘ choose₁ (2 + n) (1 + n) 2+n≥1+n
   where 2+n≥1+n = ≤′-step ≤′-refl
 </code></pre>
-<p>That’s a step towards the right direction, but not far enough.
+<p>That’s a step towards the right direction, but is only a very small step.
 If we really want to say precisely what <code>g</code> does, we should index the solutions with the problems they solve by refining <code>S</code> into a type family <code>{k : ℕ} → Vec A (suc k) → Set</code>, such that <code>S xs</code> means the type of solutions for the list <code>xs</code>.
 We should also refine binomial trees so that they can be used to store solutions with types that have the right indices:</p>
 <pre><code>data BT : (n k : ℕ) (P : Vec A k → Set) → Vec A n → Set where
@@ -122,16 +122,18 @@ We should also refine binomial trees so that they can be used to store solutions
        → BT      n       k (λ ys → P (x ∷ ys)) xs
        → BT (suc n) (suc k)        P      (x ∷ xs)
 </code></pre>
-<p>This is like fusing the computation of <code>choose</code> into <code>BT</code> in a continuation-passing style at type level (or in logic programming if we think of indexed datatypes as logic programs) with <code>P</code> being the continuation, such that <code>BT n k P xs</code> stores <code>P ys</code> for every length-<code>k</code> sub-list <code>ys</code> of <code>xs</code>:
+<p>Extensionally, <code>BT n k P xs</code> means that <code>P</code> holds for all the length-<code>k</code> sub-lists of <code>xs</code>, or more precisely, a proof of <code>BT n k P xs</code> consists of a collection of proofs <code>P ys</code> where <code>ys</code> ranges over all the length-<code>k</code> sub-lists of <code>xs</code>.
+Intensionally, this is like fusing the computation of <code>choose</code> into <code>BT</code> in a continuation-passing style at type level (or in logic programming if we think of indexed datatypes as logic programs) with <code>P</code> being the continuation, such that <code>BT n k P xs</code> stores <code>P ys</code> for every length-<code>k</code> sub-list <code>ys</code> of <code>xs</code>:
 In the <code>tipL</code> and <code>tipR</code> cases, the results are <code>[]</code> and <code>xs</code>, and we ‘return’ the results by ‘calling’ <code>P</code> on <code>[]</code> and <code>xs</code>, that is, storing values of types <code>P []</code> and <code>P xs</code>.
 In the <code>bin</code> case, the input list is <code>x ∷ xs</code>, and we should return its length-(<code>1 + k</code>) sub-lists.
 The left sub-tree calls <code>P</code> on all the length-(<code>1 + k</code>) sub-lists of <code>xs</code> (that do not include <code>x</code>).
 The right sub-tree calls <code>λ ys → P (x ∷ ys)</code> on all the length-<code>k</code> sub-lists of <code>xs</code>, or equivalently, calls <code>P</code> on all the length-(<code>1 + k</code>) sub-lists <code>x ∷ ys</code> (that include <code>x</code>) where <code>ys</code> ranges over all the length-<code>k</code> sub-lists of <code>xs</code>.
-That’s a very interesting datatype design pattern, which should be generalised and studied in more detail.
+This is a very interesting datatype design pattern, which should be generalised and studied in more detail — see the remark near the <code>All</code> datatype below.
 With <code>BT</code>, we can precisely specify the behaviour of <code>g</code> by giving it the type</p>
 <pre><code>g : {k : ℕ} {xs : Vec A (2 + k)} → BT (2 + k) (1 + k) S xs → S xs
 </code></pre>
-<p>We also have a <code>map</code> function for <code>BT</code>:</p>
+<p>where the premise is a <code>BT</code>-tree that contains solutions of type <code>S ys</code> for all the immediate sub-lists <code>ys</code> of <code>xs</code>, and from the premise we can compute a solution of type <code>S xs</code>.
+We also have a <code>map</code> function for <code>BT</code>:</p>
 <pre><code>map : (∀ {xs} → P xs → Q xs) → ∀ {xs} → BT n k P xs → BT n k Q xs
 map f (tipL p)  = tipL (f p)
 map f (tipR p)  = tipR (f p)
@@ -162,6 +164,11 @@ One natural answer is the <code>All</code> datatype, which is a predicate on lis
   []  :                  All P []
   _∷_ : P x → All P xs → All P (x ∷ xs)
 </code></pre>
+<p><em>Remark.</em>
+<code>BT</code> generalises <code>All</code> in the sense that <code>BT _ 1 (P ∘ head)</code> is isomorphic to <code>All P</code>.
+Moreover, observe that both <code>BT</code> and <code>All</code> say that a predicate <code>P</code> holds for all the results of a non-deterministic function, which in the case of <code>BT</code> is <code>choose</code>, and in the case of <code>All</code> is the function that non-deterministically chooses one element (which is a specialised version of <code>choose</code>).
+This suggests that we could construct similar datatypes from non-deterministic functions (or relations, or logic programs) in general, although it’s not immediately clear how useful that construction will be.
+(<em>End of remark.</em>)</p>
 <p>We can then give <code>choose</code> a richer type, which strictly generalises the type of <code>choose₁</code>, while keeping the same function definition:</p>
 <pre><code>choose : (n k : ℕ) → n ≥′ k → ∀[ All P ⇉ BT n k (All P) ]
 choose _        zero    _                   _   = tipL []
