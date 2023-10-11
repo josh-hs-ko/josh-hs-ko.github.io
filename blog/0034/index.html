@@ -63,7 +63,7 @@
 0034
 </div>
 <h2>The power and joy of abstraction</h2>
-<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 23:26 on 9 October 2023</div>
+<div class="post-time">Posted at 16:29 on 1 October 2023, and revised at 03:56 on 12 October 2023</div>
 <p>A while ago <a href="https://homepage.iis.sinica.edu.tw/pages/scm/">Shin</a> dug up a mysterious program left by Richard Bird in his paper ‘<a href="https://doi.org/10.1007/978-3-540-70594-9_7">Zippy tabulations of recursive functions</a>’ at MPC 2008 (where <a href="/#publication-f99491ca">my very first paper</a> appeared!), which was about implementing a generic top-down specification of divide-and-conquer computation using a bottom-up algorithm.
 There’s a lot to talk about the problem and its treatment, but I’ll focus on only the parts that I reformulated using dependent types and string diagrams, and make notes of some possible future work.
 The story here is therefore deliberately incomplete, and we’re hoping to tell a better story with a full-length paper.</p>
@@ -197,7 +197,7 @@ head (s ∷ []) = s
 <p>I think the lesson here is that the programs you write are probably more general than you think — and this should probably be one of the slogans for selling category theory to the (functional) programmer.
 In general it seems that we should be able to mechanise category switching along the line of Conal Elliott’s ‘<a href="https://doi.org/10.1145/3110271">Compiling to categories</a>’, although I don’t know (yet) how straightforward it is when the target category is indexed types and functions, and when indexed datatypes are involved.</p>
 <p>When we generalised <code>choose</code>, what we have also secretly accomplished is to make it a natural transformation from <code>All</code> to <code>BT n k ∘ All</code>.
-We have thus ascended to the even more abstract realm of the monoidal categories of functors and natural transformations with functor composition as the monoidal product, and can enjoy the convenience of reasoning with string diagrams.
+We have thus ascended to the even more abstract realm of the 2-category of categories, functors, and natural transformations, and can enjoy the convenience of reasoning with string diagrams.
 (Cue the modulation to D major in the fourth movement of Mahler’s first symphony.)
 As a (bottom-up) string diagram, the type of <code>choose</code> is</p>
 <p class="image-paragraph"><a href="choose.svg"><img class="displayed-figure" src="choose.svg"/></a></p>
