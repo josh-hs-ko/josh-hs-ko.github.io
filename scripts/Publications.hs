@@ -29,7 +29,7 @@ publicationList =
                   ]
       , venue   = Just ("European Symposium on Programming (ESOP)", Just ("https://etaps.org/2024/conferences/esop/", IncludeYear))
       , year    = 2024
-      , types   = []
+      , types   = [(Published, "Accepted")]
       , links   = [ ("PDF", Just "draft", "https://github.com/L-TChen/BiSig/raw/master/tex/ESOP24/submitted/BiSig.pdf")
                   , ("Agda code", Just "HTML", "https://l-tchen.github.io/BiSig/README.html")
                   , ("Repository", Just "GitHub", "https://github.com/L-TChen/BiSig")
