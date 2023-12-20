@@ -168,7 +168,8 @@ It turns out that this intuition can be straightforwardly formulated in the grap
           </p>
 
           <p>
-            I enjoy <a href="https://en.wikipedia.org/wiki/Taiwanese_tea">Taiwanese tea</a>, and there is a ‘<a href="/blog/0021/">tea bar</a>’ in my office for holding ‘tea parties’ or casual tea sessions with my colleagues and guests.
+            I enjoy <a href="https://en.wikipedia.org/wiki/Taiwanese_tea">Taiwanese tea</a>.
+            I name my office ‘Constructive <a href="/blog/0021/">Tea Bar</a>’, where I try and make it a rule that every meeting happens with tea, from research discussions to casual chats.
             Ask for tea if you visit me!
           </p>
 
@@ -275,37 +276,36 @@ It turns out that this intuition can be straightforwardly formulated in the grap
       <!-- PUBLICATIONS -->
       <div class="row">
         <div class="col-sm-3">
-          <h3 class="year-group">2023</h3>
+          <h3 class="year-group">2024</h3>
           <div class="after-section-title"></div>
         </div>
         <div class="col-sm-9">
-          <div class="publication" id="publication-9c6eccf5">
+          <div class="publication" id="publication-5400bd0c">
             <div class="publication-entry">
               <div class="publication-title">
-                <a href="#publication-9c6eccf5">A theory of bidirectional type synthesis for simple types</a>
+                <a href="#publication-5400bd0c">A formal treatment of bidirectional typing</a>
               </div>
               <div class="publication-authors">
                 <a href="https://l-tchen.github.io">Liang-Ting&nbsp;Chen</a> and Hsiang-Shang&nbsp;Ko
               </div>
               <div class="publication-venue">
-                2023
+                <a href="https://etaps.org/2024/conferences/esop/">European Symposium on Programming (ESOP)&ensp; 2024</a>
               </div>
               <div class="publication-links">
-                <span class="publication-link-outer"><span class="publication-type type-unpublished">Manuscript</span></span>
-                <span class="publication-link-outer"><a class="publication-link" href="https://github.com/L-TChen/BiSig/raw/master/tex/POPL24/BiSig.pdf">PDF</a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://github.com/L-TChen/BiSig/raw/master/tex/ESOP24/submitted/BiSig.pdf">PDF<span class="link-note">(draft)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://l-tchen.github.io/BiSig/README.html">Agda code<span class="link-note">(HTML)</span></a></span>
                 <span class="publication-link-outer"><a class="publication-link" href="https://github.com/L-TChen/BiSig">Repository<span class="link-note">(GitHub)</span></a></span>
-                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-9c6eccf5">More info</span></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-5400bd0c">More info</span></span>
               </div>
             </div>
-            <div class="panel panel-publication-info collapse" id="publication-info-9c6eccf5">
+            <div class="panel panel-publication-info collapse" id="publication-info-5400bd0c">
               <div class="panel-body publication-info">
                 <div class="row">
                   <div class="col-sm-2 publication-info-title">
                     Abstract
                   </div>
                   <div class="col-sm-10">
-                    <p>There has been much progress in designing bidirectional type systems and associated type synthesis algorithms, but only on a case-by-case basis. This situation is in stark contrast to parsing, for which there have been general theories and widely applicable tools such as parser generators. To remedy the situation, this paper develops a first theory of bidirectional type synthesis. The whole theory works as a verified type-synthesiser generator for syntax-directed simple type systems: From a signature that specifies a simply typed language with a bidirectional type system, the theory produces a type synthesiser that decides whether an input abstract syntax tree has a typing derivation or reports that the input does not have enough type annotations. Within the theory, we formally define soundness, completeness, and mode-correctness, which are sufficient conditions for deriving a correct type synthesiser. We also propose a preprocessing step called ‘mode decoration’, which helps the user to deal with missing type annotations and streamlines the theory. The entire theory is formulated constructively and has been formalised in the proof assistant Agda with Axiom K.</p>
+                    <p>There has been much progress in designing bidirectional type systems and associated type synthesis algorithms, but mainly on a case-by-case basis. To remedy the situation, this paper develops a <em>general</em> and <em>formal</em> theory of bidirectional typing, and, as a by-product of our formalism, provides a <em>verified</em> generator of <em>proof-relevant</em> type synthesisers for simply typed languages: For every signature that specifies a mode-correct bidirectionally typed language, there exists a proof-relevant type synthesiser that for an input abstract syntax tree constructs a typing derivation if any, gives its refutation if not, or reports that the input does not have enough type annotations. Soundness, completeness, and mode-correctness are studied universally for all signatures, which are sufficient conditions for deriving a type synthesiser. We propose a preprocessing step called <em>mode decoration</em>, which helps the user to deal with missing type annotations in a given abstract syntax tree. The entire development is formalised in Agda and can be further integrated with other language-formalisation frameworks.</p>
                   </div>
                 </div>
               </div>

@@ -23,18 +23,18 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
-      { title   = "A theory of bidirectional type synthesis for simple types"
+      { title   = "A formal treatment of bidirectional typing"
       , authors = [ "Liang-Ting Chen"
                   , "Hsiang-Shang Ko"
                   ]
-      , venue   = Nothing
-      , year    = 2023
-      , types   = [(Unpublished, "Manuscript")]
-      , links   = [ ("PDF", Nothing, "https://github.com/L-TChen/BiSig/raw/master/tex/POPL24/BiSig.pdf")
+      , venue   = Just ("European Symposium on Programming (ESOP)", Just ("https://etaps.org/2024/conferences/esop/", IncludeYear))
+      , year    = 2024
+      , types   = []
+      , links   = [ ("PDF", Just "draft", "https://github.com/L-TChen/BiSig/raw/master/tex/ESOP24/submitted/BiSig.pdf")
                   , ("Agda code", Just "HTML", "https://l-tchen.github.io/BiSig/README.html")
                   , ("Repository", Just "GitHub", "https://github.com/L-TChen/BiSig")
                   ]
-      , info    = [ ("Abstract", "There has been much progress in designing bidirectional type systems and associated type synthesis algorithms, but only on a case-by-case basis. This situation is in stark contrast to parsing, for which there have been general theories and widely applicable tools such as parser generators. To remedy the situation, this paper develops a first theory of bidirectional type synthesis. The whole theory works as a verified type-synthesiser generator for syntax-directed simple type systems: From a signature that specifies a simply typed language with a bidirectional type system, the theory produces a type synthesiser that decides whether an input abstract syntax tree has a typing derivation or reports that the input does not have enough type annotations. Within the theory, we formally define soundness, completeness, and mode-correctness, which are sufficient conditions for deriving a correct type synthesiser. We also propose a preprocessing step called ‘mode decoration’, which helps the user to deal with missing type annotations and streamlines the theory. The entire theory is formulated constructively and has been formalised in the proof assistant Agda with Axiom K.", Nothing)
+      , info    = [ ("Abstract", "There has been much progress in designing bidirectional type systems and associated type synthesis algorithms, but mainly on a case-by-case basis. To remedy the situation, this paper develops a <em>general</em> and <em>formal</em> theory of bidirectional typing, and, as a by-product of our formalism, provides a <em>verified</em> generator of <em>proof-relevant</em> type synthesisers for simply typed languages: For every signature that specifies a mode-correct bidirectionally typed language, there exists a proof-relevant type synthesiser that for an input abstract syntax tree constructs a typing derivation if any, gives its refutation if not, or reports that the input does not have enough type annotations. Soundness, completeness, and mode-correctness are studied universally for all signatures, which are sufficient conditions for deriving a type synthesiser. We propose a preprocessing step called <em>mode decoration</em>, which helps the user to deal with missing type annotations in a given abstract syntax tree. The entire development is formalised in Agda and can be further integrated with other language-formalisation frameworks.", Nothing)
                   ]
       }
    , Publication
