@@ -63,7 +63,7 @@
 0036
 </div>
 <h2>Induction principles are propositions</h2>
-<div class="post-time">Posted at 00:20 on 5 January 2024</div>
+<div class="post-time">Posted at 00:20 on 5 January 2024, and revised at 00:46 on 5 January 2024</div>
 <p>I’ve had a chance to play with parametricity for dependent types, and one exercise is to prove that the extensional behaviour of an induction principle is uniquely determined by the parametricity of the type of the principle — that is, the type of an induction principle is a proposition.
 Take the standard induction principle for natural numbers for example:</p>
 <pre><code>Ind : Set₁
@@ -81,14 +81,14 @@ ind P pz ps (suc n) = ps (ind P pz ps n)
 <p>To prove that <code>Ind</code> is uniquely inhabited, one way is to use its unary parametricity:</p>
 <pre><code>Ind-unary-parametricity : Ind → Set₁
 Ind-unary-parametricity f =
-    (P : ℕ → Set) (Q : ∀ {n} → P n → Set)
+    (P : ℕ → Set)                  (Q : ∀ {n} → P n → Set)
   → (pz : P zero)                  (qz : Q pz)
   → (ps : ∀ {n} → P n → P (suc n)) (qz : (∀ {n} {p : P n} → Q p → Q (ps p))
   → (n : ℕ) → Q (f P pz ps n)
 </code></pre>
 <p>Externally, through <a href="https://doi.org/10.1017/S0956796812000056">Bernardy et al’s translation</a>, every program <code>f : Ind</code> induces a program of type <code>Ind-unary-parametricity f</code>, which performs essentially the same computation as <code>f</code>.
-The intuition is that programs cannot peek into parametrically quantified types (like <code>P</code> above), so we can sneak extra stuff into those types, for example some extra proof (like <code>Q</code> above), and the programs will have to pass around and eventually return some of the original data still bundled with the extra stuff, not being able to separate them.
-In the induced programs, parametrically typed arguments (like <code>pz</code> above) should all be supplemented with some extra stuff (like <code>qz</code> above), and higher-order arguments (like <code>ps</code> above) should preserve the extra stuff (like <code>qs</code> above), so that the extra stuff is kept throughout the computation and gets out at the end.
+I’d like to think that a program cannot peek into parametrically quantified types (like <code>P</code> above), so we can sneak extra stuff into those types, for example some extra proof (like <code>Q</code> above), and the program will have to process the original data and the bundled extra stuff in exactly the same way, not being able to separate them.
+As an external observer, we can make a copy of the program that focuses on only the extra stuff, and that’s the induced program.
 We can do the translation manually for <code>ind</code>, and can in fact reuse <code>ind</code> to make it clear that it’s the same computation:</p>
 <pre><code>ind-parametric : Ind-unary-parametricity ind
 ind-parametric P Q pz qz ps qs = ind (Q ∘ ind P pz ps) qz qs
