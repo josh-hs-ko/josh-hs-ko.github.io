@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Induction principles are propositions — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="Parametricity is used to prove that the types of both the standard induction principle for natural numbers and the immediate sub-list induction principle are uniquely inhabited (up to extensional equality).">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0036
+</div>
+<h2>Induction principles are propositions</h2>
+<div class="post-time">Posted at 00:20 on 5 January 2024</div>
+<p>I’ve had a chance to play with parametricity for dependent types, and one exercise is to prove that the extensional behaviour of an induction principle is uniquely determined by the parametricity of the type of the principle — that is, the type of an induction principle is a proposition.
+Take the standard induction principle for natural numbers for example:</p>
+<pre><code>Ind : Set₁
+Ind = (P : ℕ → Set)
+    → (pz : P zero)
+    → (ps : ∀ {n} → P n → P (suc n))
+    → (n : ℕ) → P n
+</code></pre>
+<p>Intuitively, since <code>P</code> is parametrically quantified, a function inhabiting <code>Ind</code> can do nothing but use the arguments <code>pz</code> and <code>ps</code> to construct any required <code>P n</code>, and moreover, there is only one way to do that, namely applying <code>ps</code> to <code>pz</code> exactly <code>n</code> times.
+We certainly know how to write one such function:</p>
+<pre><code>ind : Ind
+ind P pz ps  zero   = pz
+ind P pz ps (suc n) = ps (ind P pz ps n)
+</code></pre>
+<p>To prove that <code>Ind</code> is uniquely inhabited, one way is to use its unary parametricity:</p>
+<pre><code>Ind-unary-parametricity : Ind → Set₁
+Ind-unary-parametricity f =
+    (P : ℕ → Set) (Q : ∀ {n} → P n → Set)
+  → (pz : P zero)                  (qz : Q pz)
+  → (ps : ∀ {n} → P n → P (suc n)) (qz : (∀ {n} {p : P n} → Q p → Q (ps p))
+  → (n : ℕ) → Q (f P pz ps n)
+</code></pre>
+<p>Externally, through <a href="https://doi.org/10.1017/S0956796812000056">Bernardy et al’s translation</a>, every program <code>f : Ind</code> induces a program of type <code>Ind-unary-parametricity f</code>, which performs essentially the same computation as <code>f</code>.
+The intuition is that programs cannot peek into parametrically quantified types (like <code>P</code> above), so we can sneak extra stuff into those types, for example some extra proof (like <code>Q</code> above), and the programs will have to pass around and eventually return some of the original data still bundled with the extra stuff, not being able to separate them.
+In the induced programs, parametrically typed arguments (like <code>pz</code> above) should all be supplemented with some extra stuff (like <code>qz</code> above), and higher-order arguments (like <code>ps</code> above) should preserve the extra stuff (like <code>qs</code> above), so that the extra stuff is kept throughout the computation and gets out at the end.
+We can do the translation manually for <code>ind</code>, and can in fact reuse <code>ind</code> to make it clear that it’s the same computation:</p>
+<pre><code>ind-parametric : Ind-unary-parametricity ind
+ind-parametric P Q pz qz ps qs = ind (Q ∘ ind P pz ps) qz qs
+</code></pre>
+<p>Logically, <code>Q</code> is an additional invariant that we can impose on <code>P</code>-values.
+If the invariant holds for <code>pz</code> and is preserved by <code>ps</code>, then it has to hold for any outcome.
+Which invariant should we choose?
+We know that actually any <code>p : P n</code> can only be <code>ind P pz ps n</code>, so let <code>Q {n} p = (p ≡ ind P pz ps n)</code>, and we’re done.</p>
+<pre><code>uniqueness :
+    (f : Ind) → Ind-unary-parametricity f
+  → (P : ℕ → Set) (pz : P zero) (ps : ∀ {n} → P n → P (suc n))
+  → (n : ℕ) → f P pz ps n ≡ ind P pz ps n
+uniqueness f param P pz ps n =
+  param P (λ {n} p → p ≡ ind P pz ps n) pz refl ps (cong ps) n
+</code></pre>
+<p>What’s more interesting is that essentially the same proof works for the immediate sub-list induction principle discussed in <a href="/blog/0034/">0034</a>.
+This induction principle can be implemented using a top-down algorithm or a bottom-up one.
+<a href="/blog/0034/">0034</a> used string diagrams to compare the two algorithms and proved that they have the same extensional behaviour, but the equality proof can actually be done more simply by noting that both algorithms have the same type, which is uniquely inhabited.
+The proof (for a slightly generalised version of the induction principle) is included in the supplementary Agda file.</p>
+<p><strong>Agda file:</strong> <a href="UniquenessOfInductionPrinciples.agda">UniquenessOfInductionPrinciples.agda</a></p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
