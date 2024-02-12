@@ -68,7 +68,7 @@ publicationList =
                   ]
       , venue   = Just ("Workshop on Type-Driven Development (TyDe)", Just ("https://icfp22.sigplan.org/home/tyde-2022", IncludeYear))
       , year    = 2022
-      , types   = [ (Published, "Extended abstract")
+      , types   = [ (Unpublished, "Extended abstract")
                   ]
       , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
