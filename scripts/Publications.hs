@@ -91,7 +91,7 @@ publicationList =
       , year    = 2022
       , types   = [ (Unpublished, "Extended abstract")
                   ]
-      , links   = [ ("PDF", Nothing, "https://github.com/Zekt/Generic-Scoped-Syntax/raw/main/tex/NGS.pdf")
+      , links   = [ ("PDF", Nothing, "https://tydeworkshop.org/2022-abstracts/paper10.pdf")
                   , ("Repository", Just "GitHub", "https://github.com/Zekt/Generic-Scoped-Syntax")
                   ]
       , info    = [ ("Related blog post", "0022", Nothing)
