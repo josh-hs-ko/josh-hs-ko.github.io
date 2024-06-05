@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 38, entryTime = 2024-06-05 16:10:05.399006718, entryTitle = "Always inhabited binomial trees", entryTeaser = "A variation of the binomial tree datatype, and some more thoughts on a theory of datatype integration."}
+,
 PostEntry {entryNumber = 37, entryTime = 2024-04-24 23:07:43.730351741, entryTitle = "Binomial trees as containers", entryTeaser = "The immediate sublist induction problem seems to point towards some general theory about datatype and program integration."}
 ,
 PostEntry {entryNumber = 36, entryTime = 2024-01-05 00:20:58.360253655, entryTitle = "Induction principles are propositions", entryTeaser = "Parametricity is used to prove that the types of both the standard induction principle for natural numbers and the immediate sub-list induction principle are uniquely inhabited (up to extensional equality)."}

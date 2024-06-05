@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Always inhabited binomial trees — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="A variation of the binomial tree datatype, and some more thoughts on a theory of datatype integration.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+
+<!-- POST -->
+<div class="post-number">
+0038
+</div>
+<h2>Always inhabited binomial trees</h2>
+<div class="post-time">Posted at 16:10 on 5 June 2024</div>
+<p>Continuing <a href="/blog/0037/">0037</a>, one immediately noticeable difference between <code>upgrade</code>, which works on the <code>Forall-sublists</code> representation, and <code>retabulate</code>, which is the name we use in the <a href="/#publication-09685a99">short-story paper</a> for the version that works on the <code>BT</code> datatype, is that <code>upgrade</code> doesn’t need a side condition <code>k &lt; n</code>.
+This side condition helps to exclude the case where the input has shape <code>BT n n</code>, i.e., a tip; this is the top level of the sublist lattice, above which there is no level, and correspondingly the output shape <code>BT n (suc n)</code> is uninhabited.
+However, the <code>Forall-sublists</code> representation is always inhabited because universal quantification over an empty domain (such as ‘for all 1-sublists of an empty list...’) is vacuously true.
+If we are looking for a closer correspondence between the two representations, then <code>BT n k</code> should get a <code>nil</code> constructor when <code>n &lt; k</code>, making <code>BT n k</code> always inhabited but possibly with no elements.
+(That is, all the upper levels are actually still there, but invisible.)</p>
+<p>The always inhabited version of <code>BT</code> is</p>
+<pre><code>data BT : (n k : ℕ) → (Vec a k → Set) → Vec a n → Set where
+  tipZ : p []                        → BT n        zero   p xs
+  nil  : .{{n &lt; suc k}}              → BT n       (suc k) p xs
+  tipS : p xs                        → BT (suc k) (suc k) p xs
+  bin  : .{{n &gt; k}}
+       → BT n (suc k) p           xs
+       → BT n      k (p ∘ (x ∷_)) xs → BT (suc n) (suc k) p (x ∷ xs)
+</code></pre>
+<p>This datatype definition can be seen as being translated from the following definition of <code>choose</code> that computes a sublist nondeterministically (using <code>List</code> and its Alternative combinators to represent the nondeterminism effect):</p>
+<pre><code>choose : (n k : ℕ) → Vec a n → List (Vec a k)
+choose n        zero   xs       = pure []
+choose n       (suc k) xs       with &lt;-cmp n (suc k)
+choose n       (suc k) xs       | tri&lt; n&lt;sk _ _      = empty
+choose (suc k) (suc k) xs       | tri≈ _ refl _      = pure xs
+choose (suc n) (suc k) (x ∷ xs) | tri&gt; _ _ (s≤s n&gt;k) = choose n (suc k) xs
+                                             &lt;|&gt; ((x ∷_) &lt;$&gt; choose n k xs)
+</code></pre>
+<p>Notably, <code>empty</code> translates to the <code>nil</code> constructor, which can be used when we’re choosing more elements than there are, as witnessed by the inequality proof <code>n &lt; suc k</code>; this inequality proof is produced by the <code>with</code>-matching in <code>choose</code>, and turns into an argument of the constructor.
+Similarly, <code>bin</code> also gets an inequality argument, which makes the indices determine the constructor more directly than the original <code>BT</code>.</p>
+<p>Since the indices determine the constructor, the possible cases of <code>zipBTWith</code> are exactly those with matching constructors:</p>
+<pre><code>zipBTWith : (∀ {ys} → p ys → q ys → r ys)
+          →  ∀ {xs} → BT n k p xs → BT n k q xs → BT n k r xs
+zipBTWith f (tipZ z)   (tipZ w)   = tipZ (f z w)
+zipBTWith f  nil        nil       = nil
+zipBTWith f (tipS z)   (tipS w)   = tipS (f z w)
+zipBTWith f (bin t t') (bin u u') = bin (zipBTWith f t  u )
+                                        (zipBTWith f t' u')
+-- impossible cases
+zipBTWith f  nil       (tipS _)   = ⊥-elim (&lt;-irrefl refl it)
+zipBTWith f  nil       (bin _ _)  = ⊥-elim (≤⇒≯ (&lt;⇒≤ (≤-pred it)) it)
+zipBTWith f (tipS _)    nil       = ⊥-elim (&lt;-irrefl refl it)
+zipBTWith f (tipS _)   (bin _ _)  = ⊥-elim (1+n≰n it)
+zipBTWith f (bin _ _)   nil       = ⊥-elim (≤⇒≯ (&lt;⇒≤ it) (≤-pred it))
+zipBTWith f (bin _ _)  (tipS _)   = ⊥-elim (1+n≰n it)
+</code></pre>
+<p>Thanks to the use of instance arguments, there is no need to supply the inequality proofs in the <code>nil</code> and <code>bin</code> cases.
+There is a minor technical complication though: instance resolution requires an instance to be the unique one with the right type in the context, but for example in the <code>nil</code> case, the inequality proof required by the <code>nil</code> on the right-hand side can come from the first <code>nil</code> on the left-hand side or the second.
+Luckily, by marking the inequality argument of <code>nil</code> as irrelevant, Agda is fine with having more than one type-correct instance in the context.
+This looks good at first, but if we think a bit more about this use of instance arguments, here they are really used as a poor man’s proof automation to deal with inequality proofs, which scales badly — for example, all the impossible cases need to be refuted by manually writing inequality proofs, which should be trivial to an SMT solver.
+Maybe it’s time to seriously integrate SMT solving into dependently typed languages so that, for example, the definition of <code>zipBTWith</code> in the surface language consists of just the first four clauses, and then the elaborator takes the certificates produced by the SMT solver and <em>reconstructs</em> the proofs in the impossible cases, which the core still sees and checks.</p>
+<p>Moving on to <code>retabulate</code> without a side condition:</p>
+<pre><code>_∷ᴮᵀ_ : p xs → BT (1 + k) k (p ∘ (x ∷_)) xs → BT (2 + k) (1 + k) p (x ∷ xs)
+y ∷ᴮᵀ t = bin (tipS y) t
+
+retabulate : BT n k p xs → BT n (1 + k) (BT (1 + k) k p) xs
+retabulate                   nil           = nil {{m≤n⇒m≤1+n it}}
+retabulate {xs = []       } (tipZ y)       = nil
+retabulate {xs = _ ∷ []   } (tipZ y)       = tipS (tipZ y)
+retabulate {xs = _ ∷ _ ∷ _} (tipZ y)       = bin {{s≤s z≤n}} (retabulate (tipZ y)) (tipZ (tipZ y))
+retabulate                  (tipS y)       = nil
+retabulate (bin   (tipS y)    u          ) = tipS (y ∷ᴮᵀ u)
+retabulate (bin t@(bin _ _)     (tipZ z) ) = bin {{s≤s it}} (retabulate t) (mapBT (_∷ᴮᵀ (tipZ z)) t)
+retabulate (bin t@(bin _ _)   u@(bin _ _)) = bin {{s≤s it}} (retabulate t) (zipBTWith _∷ᴮᵀ_ t (retabulate u))
+-- impossible cases
+retabulate (bin   (nil {{l}}) u          ) = ⊥-elim (1+n≰n (≤-trans l it))
+retabulate (bin t@(bin _ _)     (tipS _) ) = ⊥-elim (1+n≰n it)
+retabulate (bin t@(bin _ _)      nil     ) = ⊥-elim (≤⇒≯ (&lt;⇒≤ it) it)
+</code></pre>
+<p>We need a few new cases to deal with <code>nil</code>, but overall it’s straightforward to finish the definition especially when we know the original one — as before, intrinsic typing helps to avoid most of the traditional proofs.
+(If the idea of integrating SMT solving was implemented, we would be able to skip all the inequality proofs too, and the program would look almost like a simply typed one.)</p>
+<p>I talked about this in a group meeting, where we then continued to discuss the idea of converting between a datatype <code>D</code> and a family <code>P</code> of datatypes of paths pointing to sub-structures in the inhabitants of <code>D</code>, which I argued to be closely related to differentiation and integration.
+The differentiation direction from <code>D</code> to <code>P</code> has been known for some time, but the integration direction from <code>P</code> to <code>D</code> seems to be unexplored.
+If we want to make datatype integration a general theory, then we should be able to integrate any datatype.
+In a simply typed setting, the theory can quickly go ‘out of bounds’.
+For example, if natural numbers are regarded as paths in an inhabitant of some datatype, what should that datatype be?
+Well, it’s not actually a datatype but the <em>codatatype</em> of infinite lists — the possible element positions in an infinite list are all the natural numbers.
+And what should the result of integrating the codatatype of infinite lists be?</p>
+<p>And, if any datatype can be integrated, what about those with inhabitants that don’t look like paths, such as binary trees?
+The <a href="http://strictlypositive.org/diff.pdf">widely accepted definition of datatype derivatives</a> does not produce binary trees, mainly due to the rule for differentiating a product of functors:
+$$ \partial_x (S \times T) \mathrel\mapsto \partial_x S \times T + S \times \partial_x T $$
+Since this rule is the same with the one in infinitesimal calculus, (I think) it’s never questioned in the literature, although it’s never been explained why the two rules have the same form either.
+Now I think it’s merely a coincidence: Conor wanted one-hole contexts, so the rule digs a hole in either $S$ or $T$, but if we don’t insist on having just one hole, then we should be allowed to dig holes in both $S$ and $T$ — that is, in general the rule can have a third summand $\partial_x S \times \partial_x T$.
+And the third summand is indeed there if we look into the lesser-known <em>finite</em> calculus (covered, for example, in Section 2.6 of Graham, Knuth, and Patashnik’s <em>Concrete Mathematics</em>), where the rule for differentiating a product of functions is
+$$ \Delta (f \times g) = \Delta f \times g + f \times \Delta g + \Delta f \times \Delta g $$
+Intuitively: a change in $f \times g$ can result from a change in $f$, a change in $g$, or a change in <em>both</em> $f$ and $g$.
+(And we can give a geometric argument by visualising $f \times g$ as the area of a rectangle whose width is $f$ and whose height is $g$.)
+This is in a more direct correspondence with the datatype story, where things are finite (and there is no role for infinitesimals).
+Back to the question of integrating the datatype of binary trees, I imagine the result should be the codatatype of infinite binary trees, although the notion of path should be changed to ‘fringe’ in the sense that a fringe for an infinite binary tree is a finite binary tree that indicates a finite portion of the infinite tree to be retained, while all the infinite sub-trees outside the fringe are left out — that is, we’re allowed to use only the third summand of the product differentiation rule.
+This suggests that we may need to consider different modes of differentiation, which do sound reasonable for a general theory (but also make things complicated).</p>
+<p>But things get much more interesting when we start to think about indexed datatypes too.
+Shin suggested looking again at the sublist relation:</p>
+<pre><code>data _⊆_ {a : Set} : List a → List a → Set where
+  nil  :               [] ⊆ []
+  keep : ys ⊆ xs → x ∷ ys ⊆ x ∷ xs
+  drop : ys ⊆ xs →     ys ⊆ x ∷ xs
+</code></pre>
+<p>We can integrate this datatype in two ways.
+If for every <code>xs</code> we want to collect elements of all the types <code>p ys</code> such that <code>ys ⊆ xs</code>, we get a <code>BT</code>-like datatype that tabulates all the sublists of <code>xs</code>:</p>
+<pre><code>data BT' : (List a → Set) → List a → Set where
+  tip : p []                → BT' p []
+  bin : BT' (p ∘ (x ∷_)) xs
+      → BT'  p           xs → BT' p (x ∷ xs)
+</code></pre>
+<p>Conversely, if for every <code>ys</code> we want elements of all the types <code>p xs</code> such that <code>ys ⊆ xs</code>, we get a codatatype that tabulates all the <em>superlists</em> of <code>ys</code>, of which there are infinitely many:</p>
+<pre><code>mutual
+
+  record ST (p : List a → Set) (ys : List a) : Set where
+    coinductive
+    field
+      decon : STF p ys
+
+  data STF : (List a → Set) → List a → Set where
+    nil  : p []
+         → ST (p ∘ (x ∷_)) []        → STF p []
+    cons : ST (p ∘ (y ∷_))      ys
+         → ST (p ∘ (x ∷_)) (y ∷ ys)  → STF p (y ∷ ys)
+</code></pre>
+<p>To derive this codatatype we need to read the sublist relation from left to right: if <code>ys</code> is empty, then in the sublist relation we can choose <code>nil</code> or <code>drop</code>, which translate to the two arguments of <code>nil</code> in <code>STF</code>; otherwise, we can choose <code>keep</code> or <code>drop</code>, which translate to <code>cons</code> in <code>STF</code>.</p>
+<p>All these are pointing to a general theory, but we can probably only hope to develop a very specialised form first, more for the purpose of delivering a preliminary form of the idea.
+Both definitions of <code>_⊆_</code> and <code>BT'</code> stem from the sublist computation, which might be described by</p>
+<pre><code>sublist : List a → List (List a)
+sublist []       = pure []
+sublist (x ∷ xs) = ((x ∷_) &lt;$&gt; sublist xs) &lt;|&gt; sublist xs
+</code></pre>
+<p>From (a suitable representation of) <code>sublist</code>, we should be able to derive <code>BT' p xs</code> and <code>_⊆_</code>, which is the ‘position’ component in the <a href="https://doi.org/10.1017/s095679681500009x">(indexed) container</a> representation of <code>BT'</code> (that maps positions to elements): <code>∀ ys → ys ⊆ xs → p ys</code>.
+Naturally, there should be an isomorphism between the aggregate datatype <code>BT'</code> and its container representation, but this is only half of the story.
+What’s interesting is that we should be able to specify some computation in terms of the container representation and then implement the computation on the aggregate datatype.
+For this to be interesting, the specification should be clean and easy to write, while the implementation should exploit the fact that we are computing all the results to improve efficiency, for example by dynamic programming or incremental techniques.
+If it’s too difficult to derive the implementation, at least there should be a framework similar to the fundamental theorem of (finite) calculus that simplifies the verification.</p>
+<p><strong>Agda file:</strong> <a href="AlwaysInhabited.agda">AlwaysInhabited.agda</a></p>
+
+<!-- END OF POST -->
+
+        </div>
+      </div>
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+    <script>
+      var sc_project=11306427;
+      var sc_invisible=1;
+      var sc_security="8a5e32af";
+      var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
+      document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
+    </script>
+    <noscript>
+      <div class="statcounter">
+        <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
+      </div>
+    </noscript>
+
+  </body>
+
+</html>
