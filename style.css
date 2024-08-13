@@ -270,6 +270,14 @@ ol {
   filter: grayscale(0) opacity(1);
 }
 
+.web-presence-IIS {
+  filter: grayscale(1) opacity(.4);
+}
+
+.web-presence-IIS:hover {
+  filter: grayscale(0) opacity(1);
+}
+
 .photo {
   margin-top: 4ex;
   float: right;
