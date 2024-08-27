@@ -405,7 +405,7 @@ ol {
   margin-bottom: 2.5ex;
 }
 
-.publication:target {
+.publication:target, #Opportunities:target {
   margin-top: -.75ex;
   padding-top: .5ex;
   margin-bottom: 1.25ex;
