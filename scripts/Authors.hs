@@ -35,7 +35,7 @@ authorList =
       }
   , Author
       { authorName = "Liye Guo"
-      , authorURL  = "https://ieeexplore.ieee.org/author/37086808544"
+      , authorURL  = "https://dblp.org/pid/161/4679.html"
       }
   , Author
       { authorName = "Zhenjiang Hu"

@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 39, entryTime = 2024-09-09 22:30:07.223958624, entryTitle = "My fleet of model aircraft", entryTeaser = "I collect model aircraft mainly to remember some of my flights and the people and stories associated with them."}
+,
 PostEntry {entryNumber = 38, entryTime = 2024-06-05 16:10:05.399006718, entryTitle = "Always inhabited binomial trees", entryTeaser = "A variation of the binomial tree datatype, and some more thoughts on a theory of datatype integration."}
 ,
 PostEntry {entryNumber = 37, entryTime = 2024-04-24 23:07:43.730351741, entryTitle = "Binomial trees as containers", entryTeaser = "The immediate sublist induction problem seems to point towards some general theory about datatype and program integration."}
