@@ -79,7 +79,7 @@ authorList =
       }
   , Author
       { authorName = "Tao Zan"
-      , authorURL  = "http://www.prg.nii.ac.jp/members/stefanzan/"
+      , authorURL  = "https://dblp.org/pid/16/10445.html"
       }
   , Author
       { authorName = "Yongzhe Zhang"
