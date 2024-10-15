@@ -46,6 +46,9 @@ main = do
           readFile' indexFile
       spawnProcess "open" [indexFile]
       return ()
+    "--key" -> do
+      guard (length args > 1)
+      createKeyFile (read (args !! 1))
     "--post" -> do
       guard (length args > 1)
       postList <- read <$> readFile' postListFile
@@ -195,6 +198,26 @@ renderPublications as pvs postList =
                 blockElement "div" [("class", ["col-sm-9"])]
                   (foldr ($+$) empty (map (renderPublication as pvs postList) ps))) .
   groupBy ((==) `on` year)
+
+
+--------
+-- Blog encryption
+
+keyFile :: Int -> FilePath
+keyFile pn = postDir pn ++ "DECRYPTED.txt"
+
+ifKeyExists :: Int -> IO a -> IO a -> IO a
+ifKeyExists pn mt me = do
+  b <- doesFileExist (keyFile pn)
+  if b then mt else me
+
+createKeyFile :: Int -> IO ()
+createKeyFile pn =
+  ifKeyExists pn
+    (putStrLn $ "A key already exists for post " ++ postNumberString pn ++ ".")
+    (do createDirectoryIfMissing False (postDir pn)
+        key <- getRandomBytes 32
+        writeFile (keyFile pn) (concatMap (printf "%02x") (ByteString.unpack key)))
 
 
 --------
