@@ -55,10 +55,9 @@
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-12">
-
 <!-- POST -->
+<div class="row">
+<div class="col-sm-12">
 <div class="post-number">
 0033
 </div>
@@ -68,7 +67,7 @@
 From mid-September to early December I’ll be busy reviewing papers for <a href="https://popl24.sigplan.org/home/CPP-2024">CPP</a>, <a href="https://etaps.org/2024/conferences/esop/">ESOP</a>, and <a href="https://trendsfp.github.io">TFP</a>, and organising <a href="https://conf.researchr.org/track/aplas-2023/src-and-posters">APLAS’s student research competition and poster session</a> (again 🤞 but from the other side), to be held at IIS, while <a href="https://conf.researchr.org/home/aplas-2023/aim-xxxvii">AIM</a> will also take place at IIS the week before APLAS.
 Until then, I have about two months to do a bit of my own research (as well as some less interesting tasks such as preparing reports to conclude my first project funded by the <a href="https://www.nstc.gov.tw">National Science and Technology Council</a>).</p>
 <hr />
-<p>For quantum algorithms, <a href="https://homepage.iis.sinica.edu.tw/%7Ekmchung/">Kai-Min</a> has mentioned a few times that Jordan’s lemma offers a unified view of various generalisations of amplitude amplification (the key idea underlying the famous Grover search algorithm) to higher dimensions.
+<p>For quantum algorithms, <a href="https://homepage.iis.sinica.edu.tw/~kmchung/">Kai-Min</a> has mentioned a few times that Jordan’s lemma offers a unified view of various generalisations of amplitude amplification (the key idea underlying the famous Grover search algorithm) to higher dimensions.
 I’ve been stuck with quantum Fourier transform for quite a while, and eager to see some new quantum ideas.
 The view offered by Jordan’s lemma doesn’t disappoint, but there are quite a few conceptual and technical gaps that I’ll need to fill in myself.
 Before then, I need to make some rough (and possibly incorrect) notes to record what I saw and thought about.</p>
@@ -116,11 +115,10 @@ For example, we should be able to support orthogonal decomposition (rewriting a 
 It turns out that the <code>rphase</code> construct of the <a href="https://doi.org/10.1145/3571225">Qunity language</a> does natively support orthogonal decomposition followed by the inducing of different relative phases in the parallel and orthogonal components; this seems to be on the right direction (and proves that my reasoning isn’t too far-fetched), but are we restricted to inducing relative phases?
 Another thing that I’ll have to think about is a derivation from a spec that doesn’t say anything about rotation to an algorithm that uses rotation, and eventually to a program that uses the superposition-manipulating primitive (or some other more suitable primitive).
 A quantum-algorithmic language or reasoning framework should be rich enough for expressing the whole derivation, which reflects the thought process for (re-)inventing amplitude amplification.</p>
+</div>
+</div>
 
 <!-- END OF POST -->
-
-        </div>
-      </div>
 
       <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
 

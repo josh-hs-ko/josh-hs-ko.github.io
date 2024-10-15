@@ -1,4 +1,4 @@
-{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE TypeApplications, ViewPatterns #-}
 
 module Gen where
 
@@ -9,25 +9,28 @@ import Publications
 import Prelude hiding ((<>))
 import Control.Arrow (first, (&&&))
 import Control.Monad
-import qualified Data.ByteString.Lazy.Char8 as ByteString
+import qualified Data.ByteString as ByteString
 import Data.Char
 import Data.Function
 import Data.IORef
 import Data.List
 import Data.Maybe
 import qualified Data.Text as Text
+import Data.String
 import Data.Time.Clock
 import Data.Time.Calendar
 import Data.Time.LocalTime
 import Text.PrettyPrint
+import Text.Printf
 import System.Directory
 import System.Environment
 import System.Process
 import System.IO
 
-import Data.Digest.Pure.MD5 (md5)             -- pureMD5 (AQK4LY6LP)
-import System.IO.Strict as Strict (readFile)  -- strict  (3CT3RKDVQ)
-import CMark                                  -- cmark   (6QWR7XER)
+import CMark        -- cmark (ACJ5RH83EBH)
+import Crypto.Hash  -- crypton (3PD3GBCXTKX)
+import Crypto.Random.Types
+
 
 main :: IO ()
 main = do
@@ -36,19 +39,19 @@ main = do
   case head args of
     "--publications" -> do
       let indexFile = "../index.html"
-      postList <- read <$> Strict.readFile postListFile
+      postList <- read <$> readFile' postListFile
       writeFile indexFile .
         replaceRange "PUBLICATIONS"
           (renderPublications authorList permVenueList postList publicationList) =<<
-          Strict.readFile indexFile
+          readFile' indexFile
       spawnProcess "open" [indexFile]
       return ()
     "--post" -> do
       guard (length args > 1)
-      postList <- read <$> Strict.readFile postListFile
+      postList <- read <$> readFile' postListFile
       generatePostInteractively postList (read (args !! 1))
     "--regenerate-posts" -> do
-      postList <- read <$> Strict.readFile postListFile
+      postList <- read <$> readFile' postListFile
       rPostList <- newIORef postList
       forM_ postList $ \postEntry -> do
         post <- processPost <$> readIORef rPostList
@@ -123,7 +126,7 @@ renderVenueAndYear pvs (Just (n, m)) y =
 renderPublication :: [Author] -> [PermVenue] -> [PostEntry] -> Publication -> Doc
 renderPublication as pvs postList p =
   let str    = title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p)
-      md5sum = take 8 . show . md5 . ByteString.pack $ str
+      md5sum = take 8 . show @(Digest MD5) . hash . fromString @ByteString.ByteString $ str
       pubId  = "publication-"      ++ md5sum
       infoId = "publication-info-" ++ md5sum
   in  blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
@@ -173,8 +176,7 @@ renderPublication as pvs postList p =
     processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ postList =
       foldr (<+>) empty $
       punctuate (char ',') $
-      map (\(n, t) -> let numStr = fillZeros 4 n
-                      in  hyperlink ("/blog/" ++ numStr ++ "/") (text numStr <+> parens (text t))) $
+      map (\(n, t) -> hyperlink (postUrl n) (text (postNumberString n) <+> parens (text t))) $
       reverse $
       filter ((`elem` [ read n | n <- split ", " c ]) . fst) $
       map (entryNumber &&& entryTitle) postList
@@ -182,7 +184,6 @@ renderPublication as pvs postList p =
       hyperlink ("https://arxiv.org/abs/" ++ arXivNum) (text c)
     processInfoEntry _ c@(("http" `isPrefixOf`) -> True) _ _ = hyperlink c (text c)
     processInfoEntry _ c _ _ = text c
-
 
 renderPublications :: [Author] -> [PermVenue] -> [PostEntry] -> [Publication] -> Doc
 renderPublications as pvs postList =
@@ -228,15 +229,22 @@ data PostEntry = PostEntry
   , entryTeaser :: String
   } deriving (Eq, Show, Read)
 
+postNumberString :: Int -> String
+postNumberString = printf "%04d"
+
+postUrl :: Int -> String
+postUrl pn = "/blog/" ++ postNumberString pn ++ "/"
+
+postDir :: Int -> String
+postDir pn = ".." ++ postUrl pn
+
 getRawPost :: Int -> IO RawPost
 getRawPost postNumber = do
-  let postNumberStr = fillZeros 4 postNumber
-      postDirectory = "../blog/" ++ postNumberStr ++ "/"
-      postFile      = postDirectory ++ postNumberStr ++ ".md"
-      targetFile    = postDirectory ++ "index.html"
+  let postFile   = postDir postNumber ++ postNumberString postNumber ++ ".md"
+      targetFile = postDir postNumber ++ "index.html"
   modTime <- utcToLocalTime <$> getCurrentTimeZone
                             <*> getModificationTime postFile
-  postContent <- Strict.readFile postFile
+  postContent <- readFile' postFile
   return (RawPost postNumber postContent modTime targetFile)
 
 processPost :: [PostEntry] -> RawPost -> ProcessedPost
@@ -254,7 +262,8 @@ processPost postList (RawPost postNumber postContent modTime targetFile) =
                  then Nothing
                  else Just (ps0 ++ newEntry :
                             if entryExists then tail ps1 else ps1))
-      post' = insertPostNumber postNumber .
+      post' = insertBootstrapRow .
+              insertPostNumber postNumber .
               insertTime postTime mRevTime .
               transformDisplayedImage .
               transformRemark $ post
@@ -294,16 +303,16 @@ writeHtmlFile (ProcessedPost post title teaser htmlFile _ _) =
   writeFile htmlFile .
     replaceRange "POST" (text (Text.unpack (nodeToHtml [optUnsafe] post))) .
     replaceRange "METADATA" (postMetadata title teaser) =<<
-      Strict.readFile templateFile
+      readFile' templateFile
 
 writeIndexFiles :: [PostEntry] -> IO ()
 writeIndexFiles postList = do
   writeFile blogIndexFile .
     replaceRange "POST LIST" (postIndex postList) =<<
-      Strict.readFile blogIndexFile
+      readFile' blogIndexFile
   writeFile indexFile .
     replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 postList)) =<<
-      Strict.readFile indexFile
+      readFile' indexFile
 
 writePostListFile :: [PostEntry] -> IO ()
 writePostListFile xs = writeFile postListFile (unlines ("[" : intersperse "," (map show xs) ++ ["]"]))
@@ -354,13 +363,10 @@ showMonth m =
   ["January", "February", "March", "April", "May", "June", "July", "August",
    "September", "October", "November", "December"] !! (m - 1)
 
-fillZeros :: Int -> Int -> String
-fillZeros d n = let s = show n in replicate (d - length s) '0' ++ s
-
 longTime :: LocalTime -> String
 longTime (LocalTime d (TimeOfDay hour min _)) =
   let (year, month, day) = toGregorian d
-  in  "at " ++ fillZeros 2 hour ++ ":" ++ fillZeros 2 min ++
+  in  "at " ++ printf "%02d" hour ++ ":" ++ printf "%02d" min ++
       " on " ++ show day ++ " " ++ showMonth month ++ " " ++ show year
 
 shortDate :: Day -> String
@@ -375,13 +381,19 @@ insertPostNumber pn (Node mp DOCUMENT ns) =
     Node Nothing
       (CUSTOM_BLOCK (Text.pack "<div class=\"post-number\">")
                     (Text.pack "</div>"))
-      [Node Nothing (TEXT (Text.pack (fillZeros 4 pn))) []] : ns
+      [Node Nothing (TEXT (Text.pack (postNumberString pn))) []] : ns
 
 insertTime :: LocalTime -> Maybe LocalTime -> Node -> Node
 insertTime tp mtr (Node mp DOCUMENT (nh : ns)) =
   let t = "<div class=\"post-time\">Posted " ++ longTime tp ++
           maybe [] ((", and revised " ++) . longTime) mtr ++ "</div>\n"
   in  Node mp DOCUMENT (nh : Node Nothing (HTML_BLOCK (Text.pack t)) [] : ns)
+
+insertBootstrapRow :: Node -> Node
+insertBootstrapRow (Node mp DOCUMENT ns) =
+  Node mp DOCUMENT
+    [Node Nothing (CUSTOM_BLOCK (Text.pack "<div class=\"row\">") (Text.pack "</div>"))
+       [Node Nothing (CUSTOM_BLOCK (Text.pack "<div class=\"col-sm-12\">") (Text.pack "</div>")) ns]]
 
 postMetadata :: String -> String -> Doc
 postMetadata title teaser =
@@ -401,17 +413,16 @@ cmarkNoPara =
 postIndex :: [PostEntry] -> Doc
 postIndex postList =
   foldr ($+$) empty
-    [ let postNumberStr = fillZeros 4 (entryNumber entry)
-          postUrl       = "/blog/" ++ postNumberStr ++ "/"
+    [ let pn = entryNumber entry
       in  blockElement "div" [("class", ["row"])] $
             (inlineElement "div" [("class", ["col-sm-2"])] $
-               hyperlink postUrl (text postNumberStr) <>
+               hyperlink (postUrl pn) (text (postNumberString pn)) <>
                text "&nbsp;·&nbsp;" <>
                inlineElement "span" [("class", ["blog-entry-date"])]
                  (text (shortDate (localDay (entryTime entry))))) $+$
             (inlineElement "div" [("class", ["col-sm-3"])] $
                inlineElement "div" [("class", ["blog-entry"])] $
-                 hyperlink postUrl $
+                 hyperlink (postUrl pn) $
                    text (cmarkNoPara (entryTitle entry))) $+$
             (inlineElement "div" [("class", ["col-sm-7"])] $
                text (cmarkNoNewline (entryTeaser entry)))
@@ -420,15 +431,14 @@ postIndex postList =
 latestIndex :: [PostEntry] -> Doc
 latestIndex postList =
   foldr ($+$) empty
-    [ let postNumberStr = fillZeros 4 (entryNumber entry)
-          postUrl       = "/blog/" ++ postNumberStr ++ "/"
+    [ let pn = entryNumber entry
       in  inlineElement "p" [] $
             (inlineElement "span" [("class", ["paragraph-title"])] $
-               hyperlink postUrl (text (cmarkNoPara (entryTitle entry)))) <>
+               hyperlink (postUrl pn) (text (cmarkNoPara (entryTitle entry)))) <>
             text (cmarkNoPara (entryTeaser entry)) <>
             (inlineElement "span" [("class", ["blog-entry-stamp"])] $
                text "—&nbsp;" <>
-               hyperlink postUrl (text postNumberStr) <>
+               hyperlink (postUrl pn) (text (postNumberString pn)) <>
                text "&nbsp;·&nbsp;" <>
                inlineElement "span" [("class", ["blog-entry-date"])]
                  (text (shortDate (localDay (entryTime entry)))))
@@ -436,7 +446,7 @@ latestIndex postList =
 
 
 --------
--- List processing utilities from MissingH (H2V2R74K)
+-- List processing utilities from MissingH (AP9ELLBS2QHQ)
 
 spanList :: ([a] -> Bool) -> [a] -> ([a], [a])
 spanList _ [] = ([],[])
