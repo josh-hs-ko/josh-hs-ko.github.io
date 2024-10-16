@@ -64,7 +64,7 @@ main = do
       postList' <- readIORef rPostList
       writeIndexFiles postList'
       writePostListFile postList'
-    _ -> return ()
+    _ -> putStrLn "Unrecognised option."
 
 
 --------
@@ -204,20 +204,17 @@ renderPublications as pvs postList =
 -- Blog encryption
 
 keyFile :: Int -> FilePath
-keyFile pn = postDir pn ++ "DECRYPTED.txt"
-
-ifKeyExists :: Int -> IO a -> IO a -> IO a
-ifKeyExists pn mt me = do
-  b <- doesFileExist (keyFile pn)
-  if b then mt else me
+keyFile pn = postDir pn ++ "PLAINTEXT.txt"
 
 createKeyFile :: Int -> IO ()
-createKeyFile pn =
-  ifKeyExists pn
-    (putStrLn $ "A key already exists for post " ++ postNumberString pn ++ ".")
-    (do createDirectoryIfMissing False (postDir pn)
-        key <- getRandomBytes 32
-        writeFile (keyFile pn) (concatMap (printf "%02x") (ByteString.unpack key)))
+createKeyFile pn = do
+  b <- doesFileExist (keyFile pn)
+  if b
+  then putStrLn $ "A key already exists for post " ++ postNumberString pn ++ "."
+  else do
+    createDirectoryIfMissing False (postDir pn)
+    key <- getRandomBytes 32
+    writeFile (keyFile pn) (concatMap (printf "%02x") (ByteString.unpack key))
 
 
 --------
@@ -233,7 +230,7 @@ data RawPost = RawPost
   { postNumber  :: Int
   , postContent :: String
   , modTime     :: LocalTime
-  , targetFile  :: FilePath
+  , isEncrypted :: Bool
   }
 
 data ProcessedPost = ProcessedPost
@@ -249,7 +246,7 @@ data PostEntry = PostEntry
   { entryNumber :: Int
   , entryTime   :: LocalTime
   , entryTitle  :: String
-  , entryTeaser :: String
+  , entryTeaser :: Maybe String
   } deriving (Eq, Show, Read)
 
 postNumberString :: Int -> String
@@ -261,17 +258,24 @@ postUrl pn = "/blog/" ++ postNumberString pn ++ "/"
 postDir :: Int -> String
 postDir pn = ".." ++ postUrl pn
 
+postSourceFile :: Int -> Bool -> String
+postSourceFile pn encrypted =
+  postDir pn ++ (if encrypted then "PLAINTEXT" else postNumberString pn) ++ ".md"
+
+postTargetFile :: Int -> Bool -> String
+postTargetFile pn encrypted =
+  postDir pn ++ (if encrypted then "PLAINTEXT" else "index") ++ ".html"
+
 getRawPost :: Int -> IO RawPost
 getRawPost postNumber = do
-  let postFile   = postDir postNumber ++ postNumberString postNumber ++ ".md"
-      targetFile = postDir postNumber ++ "index.html"
+  encrypted <- doesFileExist (keyFile postNumber)
   modTime <- utcToLocalTime <$> getCurrentTimeZone
-                            <*> getModificationTime postFile
-  postContent <- readFile' postFile
-  return (RawPost postNumber postContent modTime targetFile)
+                            <*> getModificationTime (postSourceFile postNumber encrypted)
+  postContent <- readFile' (postSourceFile postNumber encrypted)
+  return (RawPost postNumber postContent modTime encrypted)
 
 processPost :: [PostEntry] -> RawPost -> ProcessedPost
-processPost postList (RawPost postNumber postContent modTime targetFile) =
+processPost postList (RawPost postNumber postContent modTime encrypted) =
   let (title, teaser, post) =
         extractHeader . commonmarkToNode [] . Text.pack $ postContent
       (entryExists, postTime, mRevTime, mPostList') =
@@ -280,7 +284,7 @@ processPost postList (RawPost postNumber postContent modTime targetFile) =
         in  (not (null ps1) && entryNumber entry == postNumber,
              if entryExists then entryTime entry else modTime,
              if diffLocalTime modTime postTime >= 60 then Just modTime else Nothing,
-             let newEntry = PostEntry postNumber postTime title teaser
+             let newEntry = PostEntry postNumber postTime title (if encrypted then Nothing else Just teaser)
              in  if entryExists && isNothing mRevTime
                  then Nothing
                  else Just (ps0 ++ newEntry :
@@ -289,7 +293,7 @@ processPost postList (RawPost postNumber postContent modTime targetFile) =
               insertTime postTime mRevTime .
               transformDisplayedImage .
               transformRemark $ post
-  in  ProcessedPost post' title teaser targetFile mPostList' entryExists
+  in  ProcessedPost post' title teaser (postTargetFile postNumber encrypted) mPostList' entryExists
 
 generatePostInteractively :: [PostEntry] -> Int -> IO ()
 generatePostInteractively postList postNumber = do
@@ -333,7 +337,7 @@ writeIndexFiles postList = do
     replaceRange "POST LIST" (postIndex postList) =<<
       readFile' blogIndexFile
   writeFile indexFile .
-    replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 postList)) =<<
+    replaceRange "LATEST BLOG POSTS" (latestIndex (take 3 (filter (isJust . entryTeaser) postList))) =<<
       readFile' indexFile
 
 writePostListFile :: [PostEntry] -> IO ()
@@ -343,11 +347,18 @@ writePostListFile xs = writeFile postListFile (unlines ("[" : intersperse "," (m
 --------
 -- Blog post processing
 
+toCMark :: Node -> String
+toCMark = Text.unpack . Text.dropWhileEnd isSpace . nodeToCommonmark [] Nothing
+
+removeHeadingMarking :: String -> String
+removeHeadingMarking = dropWhile isSpace . dropWhile (== '#') . dropWhile isSpace
+
 extractHeader :: Node -> (String, String, Node)
-extractHeader (Node mp DOCUMENT (ne : ns@(nt : _))) =
-  let c = Text.unpack . Text.dropWhileEnd isSpace . nodeToCommonmark [] Nothing
-      r = dropWhile isSpace . dropWhile (== '#') . dropWhile isSpace
-  in  (r (c nt), c ne, Node mp DOCUMENT ns)
+extractHeader n@(Node mp DOCUMENT (n0@(Node _ (HEADING _) _) : _)) =
+  (removeHeadingMarking (toCMark n0), "", n)
+extractHeader (Node mp DOCUMENT (n0@(Node _ PARAGRAPH _) : ns@(n1@(Node _ (HEADING _) _) : _))) =
+  (removeHeadingMarking (toCMark n1), toCMark n0, Node mp DOCUMENT ns)
+extractHeader n = ("", "", n)
 
 transformDisplayedImage :: Node -> Node
 transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
@@ -441,7 +452,7 @@ postIndex postList =
                  hyperlink (postUrl pn) $
                    text (cmarkNoPara (entryTitle entry))) $+$
             (inlineElement "div" [("class", ["col-sm-7"])] $
-               text (cmarkNoNewline (entryTeaser entry)))
+               text (maybe "&#128274;" cmarkNoNewline (entryTeaser entry)))
     | entry <- postList ]
 
 latestIndex :: [PostEntry] -> Doc
@@ -451,7 +462,7 @@ latestIndex postList =
       in  inlineElement "p" [] $
             (inlineElement "span" [("class", ["paragraph-title"])] $
                hyperlink (postUrl pn) (text (cmarkNoPara (entryTitle entry)))) <>
-            text (cmarkNoPara (entryTeaser entry)) <>
+            text (maybe undefined cmarkNoPara (entryTeaser entry)) <>
             (inlineElement "span" [("class", ["blog-entry-stamp"])] $
                text "—&nbsp;" <>
                hyperlink (postUrl pn) (text (postNumberString pn)) <>
