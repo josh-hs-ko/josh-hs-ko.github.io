@@ -285,8 +285,7 @@ processPost postList (RawPost postNumber postContent modTime targetFile) =
                  then Nothing
                  else Just (ps0 ++ newEntry :
                             if entryExists then tail ps1 else ps1))
-      post' = insertBootstrapRow .
-              insertPostNumber postNumber .
+      post' = insertPostNumber postNumber .
               insertTime postTime mRevTime .
               transformDisplayedImage .
               transformRemark $ post
@@ -411,12 +410,6 @@ insertTime tp mtr (Node mp DOCUMENT (nh : ns)) =
   let t = "<div class=\"post-time\">Posted " ++ longTime tp ++
           maybe [] ((", and revised " ++) . longTime) mtr ++ "</div>\n"
   in  Node mp DOCUMENT (nh : Node Nothing (HTML_BLOCK (Text.pack t)) [] : ns)
-
-insertBootstrapRow :: Node -> Node
-insertBootstrapRow (Node mp DOCUMENT ns) =
-  Node mp DOCUMENT
-    [Node Nothing (CUSTOM_BLOCK (Text.pack "<div class=\"row\">") (Text.pack "</div>"))
-       [Node Nothing (CUSTOM_BLOCK (Text.pack "<div class=\"col-sm-12\">") (Text.pack "</div>")) ns]]
 
 postMetadata :: String -> String -> Doc
 postMetadata title teaser =
