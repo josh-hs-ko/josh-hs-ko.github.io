@@ -504,7 +504,7 @@ decryptionPage iv ciphertext =
   "  <div class=\"container decryption\">\n" ++
   "    <form onsubmit=\"decryptPage(); return false\">\n" ++
   "      <div class=\"form-group\">\n" ++
-  "        <input type=\"password\" id=\"postKey\" class=\"form-control\" required autofocus>\n" ++
+  "        <input type=\"password\" id=\"postKey\" class=\"form-control\" autofocus>\n" ++
   "      </div>\n" ++
   "      <div class=\"form-group\">\n" ++
   -- "        <input type=\"submit\" value=\"Decrypt\" class=\"btn btn-primary btn-block\">\n" ++
@@ -543,25 +543,25 @@ writeEncryptedFiles :: [PostEntry] -> Int -> RawPost -> IO ()
 writeEncryptedFiles postList postNumber rawPost =
   when (isEncrypted rawPost) $ do
     postKey <- fromHexString <$> readFile' (postKeyFile postNumber)
-    (iv, ciphertext) <- encryptPost postNumber postKey (postContent rawPost)
+    (postIV, ciphertext) <- encryptPost postNumber postKey (postContent rawPost)
     let post' = processPost postList rawPost
-                  (Just [Node Nothing (HTML_BLOCK (Text.pack (decryptionPage iv ciphertext))) []])
+                  (Just [Node Nothing (HTML_BLOCK (Text.pack (decryptionPage postIV ciphertext))) []])
     postBytes <- ByteString.readFile (postSourceFile postNumber True)
     let encData = postKey `ByteString.append` postBytes
     CryptoPassed (blogKey :: AES256) <- cipherInit . fromHexString <$> readFile' blogKeyFile
-    ivBytes <- getRandomBytes 16
-    let Just iv = makeIV ivBytes
+    epIVBytes <- getRandomBytes 16
+    let Just epIV = makeIV epIVBytes
     writeHtmlFile post'
     ByteString.writeFile (encryptedPostFile postNumber)
-      (ivBytes `ByteString.append` cbcEncrypt blogKey iv (pad (PKCS7 16) encData))
+      (epIVBytes `ByteString.append` cbcEncrypt blogKey epIV (pad (PKCS7 16) encData))
 
 restorePlaintext :: Int -> IO ()
 restorePlaintext pn = do
   ep <- ByteString.readFile (encryptedPostFile pn)
   let (ivBytes, ciphertext) = ByteString.splitAt 16 ep
-  CryptoPassed (key :: AES256) <- cipherInit . fromHexString <$> readFile' blogKeyFile
+  CryptoPassed (blogKey :: AES256) <- cipherInit . fromHexString <$> readFile' blogKeyFile
   let Just iv = makeIV ivBytes
-  let Just encData = unpad (PKCS7 16) (cbcDecrypt key iv ciphertext)
+  let Just encData = unpad (PKCS7 16) (cbcDecrypt blogKey iv ciphertext)
   let (postKeyBytes, postBytes) = ByteString.splitAt 32 encData
   writeFile (postKeyFile pn) (toHexString postKeyBytes)
   ByteString.writeFile (postSourceFile pn True) postBytes
