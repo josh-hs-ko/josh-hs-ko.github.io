@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeApplications, ViewPatterns #-}
+{-# LANGUAGE ViewPatterns #-}
 
 module Gen where
 
@@ -9,6 +9,7 @@ import Publications
 import Prelude hiding ((<>))
 import Control.Arrow (first, (&&&))
 import Control.Monad
+import Data.ByteString (ByteString)
 import qualified Data.ByteString as ByteString
 import Data.Char
 import Data.Function
@@ -16,6 +17,7 @@ import Data.IORef
 import Data.List
 import Data.Maybe
 import qualified Data.Text as Text
+import qualified Data.Text.Encoding as Text
 import Data.String
 import Data.Time.Clock
 import Data.Time.Calendar
@@ -30,6 +32,10 @@ import System.IO
 import CMark        -- cmark (ACJ5RH83EBH)
 import Crypto.Hash  -- crypton (3PD3GBCXTKX)
 import Crypto.Random.Types
+import Crypto.Cipher.Types
+import Crypto.Cipher.AES
+import Crypto.Error
+import Crypto.Data.Padding
 
 
 main :: IO ()
@@ -46,24 +52,42 @@ main = do
           readFile' indexFile
       spawnProcess "open" [indexFile]
       return ()
-    "--key" -> do
-      guard (length args > 1)
-      createKeyFile (read (args !! 1))
     "--post" -> do
       guard (length args > 1)
       postList <- read <$> readFile' postListFile
       generatePostInteractively postList (read (args !! 1))
+    "--encrypt" -> do
+      guard (length args > 1)
+      let pn = read (args !! 1)
+      encrypted <- doesFileExist (postKeyFile pn)
+      if encrypted
+      then putStrLn $ "A key already exists for post " ++ postNumberString pn ++ "."
+      else do
+        createDirectoryIfMissing False (postDir pn)
+        writeFile (postKeyFile pn) . toHexString =<< getRandomBytes 32
+        sourceExists <- doesFileExist (postSourceFile pn False)
+        when sourceExists (renameFile (postSourceFile pn False) (postSourceFile pn True))
+        targetExists <- doesFileExist (postTargetFile pn False)
+        when targetExists (renameFile (postTargetFile pn False) (postTargetFile pn True))
+    "--decrypt" -> do
+      guard (length args > 1)
+      restorePlaintext (read (args !! 1))
     "--regenerate-posts" -> do
       postList <- read <$> readFile' postListFile
       rPostList <- newIORef postList
       forM_ postList $ \postEntry -> do
-        post <- processPost <$> readIORef rPostList
-                            <*> getRawPost (entryNumber postEntry)
-        writeHtmlFile post
-        maybe (return ()) (writeIORef rPostList) (mNewPostList post)
-      postList' <- readIORef rPostList
-      writeIndexFiles postList'
-      writePostListFile postList'
+        postList' <- readIORef rPostList
+        rawPost <- getRawPost (entryNumber postEntry)
+        if isEncrypted rawPost
+        then do
+          let post = processPost postList' rawPost Nothing
+          writeHtmlFile post
+          maybe (return ()) (writeIORef rPostList) (mNewPostList post)
+        else
+          writeEncryptedFiles postList' (entryNumber postEntry) rawPost
+      finalPostList <- readIORef rPostList
+      writeIndexFiles finalPostList
+      writePostListFile finalPostList
     _ -> putStrLn "Unrecognised option."
 
 
@@ -128,10 +152,12 @@ renderVenueAndYear pvs (Just (n, m)) y =
 
 renderPublication :: [Author] -> [PermVenue] -> [PostEntry] -> Publication -> Doc
 renderPublication as pvs postList p =
-  let str    = title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p)
-      md5sum = take 8 . show @(Digest MD5) . hash . fromString @ByteString.ByteString $ str
-      pubId  = "publication-"      ++ md5sum
-      infoId = "publication-info-" ++ md5sum
+  let bytes :: ByteString =
+        Text.encodeUtf8 . Text.pack $ title p ++ concat (authors p) ++ maybe "" fst (venue p) ++ show (year p)
+      md5sum :: Digest MD5 = hash bytes
+      md5str = take 8 (show md5sum)
+      pubId  = "publication-"      ++ md5str
+      infoId = "publication-info-" ++ md5str
   in  blockElement "div" [("class", ["publication"]), ("id", [pubId])] $
         (blockElement "div" [("class", ["publication-entry"])] $
            blockElement "div" [("class", ["publication-title"])] (hyperlink ('#':pubId) (text (title p))) $+$
@@ -201,23 +227,6 @@ renderPublications as pvs postList =
 
 
 --------
--- Blog encryption
-
-keyFile :: Int -> FilePath
-keyFile pn = postDir pn ++ "PLAINTEXT.txt"
-
-createKeyFile :: Int -> IO ()
-createKeyFile pn = do
-  b <- doesFileExist (keyFile pn)
-  if b
-  then putStrLn $ "A key already exists for post " ++ postNumberString pn ++ "."
-  else do
-    createDirectoryIfMissing False (postDir pn)
-    key <- getRandomBytes 32
-    writeFile (keyFile pn) (concatMap (printf "%02x") (ByteString.unpack key))
-
-
---------
 -- Blog post IO
 
 postListFile, templateFile, blogIndexFile, indexFile :: FilePath
@@ -258,25 +267,25 @@ postUrl pn = "/blog/" ++ postNumberString pn ++ "/"
 postDir :: Int -> String
 postDir pn = ".." ++ postUrl pn
 
-postSourceFile :: Int -> Bool -> String
+postSourceFile :: Int -> Bool -> FilePath
 postSourceFile pn encrypted =
   postDir pn ++ (if encrypted then "PLAINTEXT" else postNumberString pn) ++ ".md"
 
-postTargetFile :: Int -> Bool -> String
+postTargetFile :: Int -> Bool -> FilePath
 postTargetFile pn encrypted =
   postDir pn ++ (if encrypted then "PLAINTEXT" else "index") ++ ".html"
 
 getRawPost :: Int -> IO RawPost
 getRawPost postNumber = do
-  encrypted <- doesFileExist (keyFile postNumber)
+  encrypted <- doesFileExist (postKeyFile postNumber)
   modTime <- utcToLocalTime <$> getCurrentTimeZone
                             <*> getModificationTime (postSourceFile postNumber encrypted)
   postContent <- readFile' (postSourceFile postNumber encrypted)
   return (RawPost postNumber postContent modTime encrypted)
 
-processPost :: [PostEntry] -> RawPost -> ProcessedPost
-processPost postList (RawPost postNumber postContent modTime encrypted) =
-  let (title, teaser, post) =
+processPost :: [PostEntry] -> RawPost -> Maybe [Node] -> ProcessedPost
+processPost postList (RawPost postNumber postContent modTime encrypted) mns =
+  let (title, teaser, postHeader, postBody) =
         extractHeader . commonmarkToNode [] . Text.pack $ postContent
       (entryExists, postTime, mRevTime, mPostList') =
         let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
@@ -284,7 +293,8 @@ processPost postList (RawPost postNumber postContent modTime encrypted) =
         in  (not (null ps1) && entryNumber entry == postNumber,
              if entryExists then entryTime entry else modTime,
              if diffLocalTime modTime postTime >= 60 then Just modTime else Nothing,
-             let newEntry = PostEntry postNumber postTime title (if encrypted then Nothing else Just teaser)
+             let newEntry = PostEntry postNumber postTime title
+                              (if encrypted then Nothing else Just teaser)
              in  if entryExists && isNothing mRevTime
                  then Nothing
                  else Just (ps0 ++ newEntry :
@@ -292,26 +302,31 @@ processPost postList (RawPost postNumber postContent modTime encrypted) =
       post' = insertPostNumber postNumber .
               insertTime postTime mRevTime .
               transformDisplayedImage .
-              transformRemark $ post
-  in  ProcessedPost post' title teaser (postTargetFile postNumber encrypted) mPostList' entryExists
+              transformRemark $ postHeader (fromMaybe postBody mns)
+  in  ProcessedPost post' title (if isNothing mns then teaser else "🔒")
+        (postTargetFile postNumber (isNothing mns && encrypted)) mPostList' entryExists
 
 generatePostInteractively :: [PostEntry] -> Int -> IO ()
 generatePostInteractively postList postNumber = do
   rawPost <- getRawPost postNumber
-  let post' = processPost postList rawPost
+  let post' = processPost postList rawPost Nothing
   writeHtmlFile post'
   maybe (return ()) writeIndexFiles (mNewPostList post')
   spawnProcess "open" [indexFile, blogIndexFile, htmlFile post']
   regenerate <- getYesOrNo True "Regenerate?"
   if regenerate
   then generatePostInteractively postList postNumber
-  else do commit <- if entryExists post'
-                    then return True
-                    else getYesOrNo False "Commit?"
-          case mNewPostList post' of
-            Nothing -> return ()
-            Just postList' ->
-              when commit (writePostListFile postList')
+  else do
+    commit <- if entryExists post'
+              then return True
+              else getYesOrNo False "Commit?"
+    when commit $
+      case mNewPostList post' of
+        Nothing ->
+          writeEncryptedFiles postList postNumber rawPost
+        Just newPostList -> do
+          writePostListFile newPostList
+          writeEncryptedFiles newPostList postNumber rawPost
 
 getYesOrNo :: Bool -> String -> IO Bool
 getYesOrNo defaultResult prompt = do
@@ -353,12 +368,11 @@ toCMark = Text.unpack . Text.dropWhileEnd isSpace . nodeToCommonmark [] Nothing
 removeHeadingMarking :: String -> String
 removeHeadingMarking = dropWhile isSpace . dropWhile (== '#') . dropWhile isSpace
 
-extractHeader :: Node -> (String, String, Node)
-extractHeader n@(Node mp DOCUMENT (n0@(Node _ (HEADING _) _) : _)) =
-  (removeHeadingMarking (toCMark n0), "", n)
-extractHeader (Node mp DOCUMENT (n0@(Node _ PARAGRAPH _) : ns@(n1@(Node _ (HEADING _) _) : _))) =
-  (removeHeadingMarking (toCMark n1), toCMark n0, Node mp DOCUMENT ns)
-extractHeader n = ("", "", n)
+extractHeader :: Node -> (String, String, [Node] -> Node, [Node])
+extractHeader (Node mp DOCUMENT (n0@(Node _ (HEADING _) _) : ns)) =
+  (removeHeadingMarking (toCMark n0), "", \ns' -> Node mp DOCUMENT (n0 : ns'), ns)
+extractHeader (Node mp DOCUMENT (n0@(Node _ PARAGRAPH _) : n1@(Node _ (HEADING _) _) : ns)) =
+  (removeHeadingMarking (toCMark n1), toCMark n0, \ns' -> Node mp DOCUMENT (n0 : n1 : ns'), ns)
 
 transformDisplayedImage :: Node -> Node
 transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
@@ -452,7 +466,7 @@ postIndex postList =
                  hyperlink (postUrl pn) $
                    text (cmarkNoPara (entryTitle entry))) $+$
             (inlineElement "div" [("class", ["col-sm-7"])] $
-               text (maybe "&#128274;" cmarkNoNewline (entryTeaser entry)))
+               text (maybe "🔒" cmarkNoNewline (entryTeaser entry)))
     | entry <- postList ]
 
 latestIndex :: [PostEntry] -> Doc
@@ -470,6 +484,95 @@ latestIndex postList =
                inlineElement "span" [("class", ["blog-entry-date"])]
                  (text (shortDate (localDay (entryTime entry)))))
     | entry <- postList ]
+
+
+--------
+-- Blog encryption
+
+blogKeyFile :: FilePath
+blogKeyFile = "PLAINTEXT.txt"
+
+postKeyFile :: Int -> FilePath
+postKeyFile pn = postDir pn ++ "PLAINTEXT.txt"
+
+encryptedPostFile :: Int -> FilePath
+encryptedPostFile pn = postDir pn ++ postNumberString pn ++ ".ep"
+
+decryptionPage :: ByteString -> ByteString -> String
+decryptionPage iv ciphertext =
+  "<div id=\"postContent\">\n" ++
+  "  <div class=\"container decryption\">\n" ++
+  "    <form onsubmit=\"decryptPage(); return false\">\n" ++
+  "      <div class=\"form-group\">\n" ++
+  "        <input type=\"password\" id=\"postKey\" class=\"form-control\" required autofocus>\n" ++
+  "      </div>\n" ++
+  "      <div class=\"form-group\">\n" ++
+  -- "        <input type=\"submit\" value=\"Decrypt\" class=\"btn btn-primary btn-block\">\n" ++
+  "        <button class=\"btn btn-primary btn-block\">Decrypt</button>\n" ++
+  "      </div>\n" ++
+  "    </form>\n" ++
+  "  </div>\n" ++
+  "  <script>\n" ++
+  "    async function decryptPage() {\n" ++
+  "      var iv = \"" ++ toHexString iv ++ "\";\n" ++
+  "      var ciphertext = \"" ++ toHexString ciphertext ++ "\";\n" ++
+  "      var key = await window.crypto.subtle.importKey(\"raw\", fromHexString(document.getElementById(\"postKey\").value), {name: \"AES-CBC\", length: 256}, false, [\"decrypt\"]);\n" ++
+  "      var plaintext = await window.crypto.subtle.decrypt({name: \"AES-CBC\", iv: fromHexString(iv)}, key, fromHexString(ciphertext));\n" ++
+  "      document.getElementById(\"postContent\").innerHTML = new TextDecoder(\"UTF-8\").decode(plaintext);\n" ++
+  "    }\n" ++
+  "    function fromHexString(s) {\n" ++
+  "      var r = new Uint8Array(s.length/2);\n" ++
+  "      for (var i = 0, j = 0; i < r.length; ++i, j+=2) {\n" ++
+  "          r[i] = parseInt(s.substring(j, j+2), 16);\n" ++
+  "      }\n" ++
+  "      return r;\n" ++
+  "    }\n" ++
+  "  </script>\n" ++
+  "</div>"
+
+encryptPost :: Int -> ByteString -> String -> IO (ByteString, ByteString)
+encryptPost pn keyBytes post = do
+  let CryptoPassed (key :: AES256) = cipherInit keyBytes
+  ivBytes <- getRandomBytes 16
+  let Just iv = makeIV ivBytes
+  let (_, _, _, ns) = extractHeader (commonmarkToNode [] (Text.pack post))
+  let plaintext = pad (PKCS7 16) (Text.encodeUtf8 (nodeToHtml [optUnsafe] (Node Nothing DOCUMENT ns)))
+  return (ivBytes, cbcEncrypt key iv plaintext)
+
+writeEncryptedFiles :: [PostEntry] -> Int -> RawPost -> IO ()
+writeEncryptedFiles postList postNumber rawPost =
+  when (isEncrypted rawPost) $ do
+    postKey <- fromHexString <$> readFile' (postKeyFile postNumber)
+    (iv, ciphertext) <- encryptPost postNumber postKey (postContent rawPost)
+    let post' = processPost postList rawPost
+                  (Just [Node Nothing (HTML_BLOCK (Text.pack (decryptionPage iv ciphertext))) []])
+    postBytes <- ByteString.readFile (postSourceFile postNumber True)
+    let encData = postKey `ByteString.append` postBytes
+    CryptoPassed (blogKey :: AES256) <- cipherInit . fromHexString <$> readFile' blogKeyFile
+    ivBytes <- getRandomBytes 16
+    let Just iv = makeIV ivBytes
+    writeHtmlFile post'
+    ByteString.writeFile (encryptedPostFile postNumber)
+      (ivBytes `ByteString.append` cbcEncrypt blogKey iv (pad (PKCS7 16) encData))
+
+restorePlaintext :: Int -> IO ()
+restorePlaintext pn = do
+  ep <- ByteString.readFile (encryptedPostFile pn)
+  let (ivBytes, ciphertext) = ByteString.splitAt 16 ep
+  CryptoPassed (key :: AES256) <- cipherInit . fromHexString <$> readFile' blogKeyFile
+  let Just iv = makeIV ivBytes
+  let Just encData = unpad (PKCS7 16) (cbcDecrypt key iv ciphertext)
+  let (postKeyBytes, postBytes) = ByteString.splitAt 32 encData
+  writeFile (postKeyFile pn) (toHexString postKeyBytes)
+  ByteString.writeFile (postSourceFile pn True) postBytes
+
+toHexString :: ByteString -> String
+toHexString = concatMap (printf "%02x") . ByteString.unpack
+
+fromHexString :: String -> ByteString
+fromHexString =
+  ByteString.pack .
+  unfoldr (\cs -> if null cs then Nothing else Just (read ("0x" ++ take 2 cs), drop 2 cs))
 
 
 --------

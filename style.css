@@ -205,6 +205,10 @@ ol {
   padding-bottom: 1.25ex;
 }
 
+.decryption {
+  max-width: 480px;
+}
+
 .blog {
   max-width: 780px;
 }
