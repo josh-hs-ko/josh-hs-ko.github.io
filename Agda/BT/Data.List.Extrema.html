@@ -246,17 +246,4 @@
 <a id="max-mono-⊆"></a><a id="9137" href="Data.List.Extrema.html#9137" class="Function">max-mono-⊆</a> <a id="9148" class="Symbol">:</a> <a id="9150" class="Symbol">∀</a> <a id="9152" class="Symbol">{</a><a id="9153" href="Data.List.Extrema.html#9153" class="Bound">⊥₁</a> <a id="9156" href="Data.List.Extrema.html#9156" class="Bound">⊥₂</a> <a id="9159" href="Data.List.Extrema.html#9159" class="Bound">xs</a> <a id="9162" href="Data.List.Extrema.html#9162" class="Bound">ys</a><a id="9164" class="Symbol">}</a> <a id="9166" class="Symbol">→</a> <a id="9168" href="Data.List.Extrema.html#9153" class="Bound">⊥₁</a> <a id="9171" href="Relation.Binary.Bundles.html#6598" class="Field Operator">≤</a> <a id="9173" href="Data.List.Extrema.html#9156" class="Bound">⊥₂</a> <a id="9176" class="Symbol">→</a> <a id="9178" href="Data.List.Extrema.html#9159" class="Bound">xs</a> <a id="9181" href="Data.List.Relation.Binary.Subset.Setoid.html#825" class="Function Operator">⊆</a> <a id="9183" href="Data.List.Extrema.html#9162" class="Bound">ys</a> <a id="9186" class="Symbol">→</a> <a id="9188" href="Data.List.Extrema.html#1941" class="Function">max</a> <a id="9192" href="Data.List.Extrema.html#9153" class="Bound">⊥₁</a> <a id="9195" href="Data.List.Extrema.html#9159" class="Bound">xs</a> <a id="9198" href="Relation.Binary.Bundles.html#6598" class="Field Operator">≤</a> <a id="9200" href="Data.List.Extrema.html#1941" class="Function">max</a> <a id="9204" href="Data.List.Extrema.html#9156" class="Bound">⊥₂</a> <a id="9207" href="Data.List.Extrema.html#9162" class="Bound">ys</a>
 <a id="9210" href="Data.List.Extrema.html#9137" class="Function">max-mono-⊆</a> <a id="9221" href="Data.List.Extrema.html#9221" class="Bound">⊥₁≤⊥₂</a> <a id="9227" href="Data.List.Extrema.html#9227" class="Bound">xs⊆ys</a> <a id="9233" class="Symbol">=</a> <a id="9235" href="Data.List.Extrema.html#8719" class="Function">max[xs]≤max[ys]⁺</a> <a id="9252" class="Symbol">_</a> <a id="9254" class="Symbol">_</a> <a id="9256" class="Symbol">(</a><a id="9257" href="Data.Sum.Base.html#675" class="InductiveConstructor">inj₁</a> <a id="9262" href="Data.List.Extrema.html#9221" class="Bound">⊥₁≤⊥₂</a><a id="9267" class="Symbol">)</a>
   <a id="9271" class="Symbol">(</a><a id="9272" href="Data.List.Relation.Unary.All.html#3911" class="Function">tabulate</a> <a id="9281" class="Symbol">(</a><a id="9282" href="Data.Sum.Base.html#700" class="InductiveConstructor">inj₂</a> <a id="9287" href="Function.Base.html#1115" class="Function Operator">∘</a> <a id="9289" href="Data.List.Relation.Unary.Any.html#1650" class="Function">Any.map</a> <a id="9297" class="Symbol">(λ</a> <a id="9300" class="Symbol">{</a><a id="9301" href="Data.List.Extrema.html#1325" class="InductiveConstructor">≡-refl</a> <a id="9308" class="Symbol">→</a> <a id="9310" href="Relation.Binary.Structures.html#2466" class="Function">refl</a><a id="9314" class="Symbol">})</a> <a id="9317" href="Function.Base.html#1115" class="Function Operator">∘</a> <a id="9319" href="Data.List.Extrema.html#9227" class="Bound">xs⊆ys</a><a id="9324" class="Symbol">))</a>
-</pre>
-<script type="text/javascript">
-  var sc_project=11306427;
-  var sc_invisible=1;
-  var sc_security="8a5e32af";
-  var scJsHost = (("https:" == document.location.protocol) ? "https://secure." : "http://www.");
-  document.write("<sc"+"ript type='text/javascript' src='" + scJsHost + "statcounter.com/counter/counter.js'></"+"script>");
-</script>
-<noscript>
-  <div class="statcounter">
-    <a title="web counter" href="http://statcounter.com/" target="_blank"><img class="statcounter" src="//c.statcounter.com/11306427/0/8a5e32af/1/" alt="web counter"></a>
-  </div>
-</noscript>
-</body></html>
+</pre></body></html>

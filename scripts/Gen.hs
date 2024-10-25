@@ -79,12 +79,12 @@ main = do
         postList' <- readIORef rPostList
         rawPost <- getRawPost (entryNumber postEntry)
         if isEncrypted rawPost
-        then do
+        then
+          writeEncryptedFiles postList' (entryNumber postEntry) rawPost
+        else do
           let post = processPost postList' rawPost Nothing
           writeHtmlFile post
           maybe (return ()) (writeIORef rPostList) (mNewPostList post)
-        else
-          writeEncryptedFiles postList' (entryNumber postEntry) rawPost
       finalPostList <- readIORef rPostList
       writeIndexFiles finalPostList
       writePostListFile finalPostList
@@ -372,7 +372,7 @@ extractHeader :: Node -> (String, String, [Node] -> Node, [Node])
 extractHeader (Node mp DOCUMENT (n0@(Node _ (HEADING _) _) : ns)) =
   (removeHeadingMarking (toCMark n0), "", \ns' -> Node mp DOCUMENT (n0 : ns'), ns)
 extractHeader (Node mp DOCUMENT (n0@(Node _ PARAGRAPH _) : n1@(Node _ (HEADING _) _) : ns)) =
-  (removeHeadingMarking (toCMark n1), toCMark n0, \ns' -> Node mp DOCUMENT (n0 : n1 : ns'), ns)
+  (removeHeadingMarking (toCMark n1), toCMark n0, \ns' -> Node mp DOCUMENT (n1 : ns'), ns)
 
 transformDisplayedImage :: Node -> Node
 transformDisplayedImage (Node mp DOCUMENT ns) = Node mp DOCUMENT (map f ns)
@@ -516,7 +516,7 @@ decryptionPage iv ciphertext =
   "    async function decryptPage() {\n" ++
   "      var iv = \"" ++ toHexString iv ++ "\";\n" ++
   "      var ciphertext = \"" ++ toHexString ciphertext ++ "\";\n" ++
-  "      var key = await window.crypto.subtle.importKey(\"raw\", fromHexString(document.getElementById(\"postKey\").value), {name: \"AES-CBC\", length: 256}, false, [\"decrypt\"]);\n" ++
+  "      var key = await window.crypto.subtle.importKey(\"raw\", fromHexString(document.getElementById(\"postKey\").value), {name: \"AES-CBC\"}, false, [\"decrypt\"]);\n" ++
   "      var plaintext = await window.crypto.subtle.decrypt({name: \"AES-CBC\", iv: fromHexString(iv)}, key, fromHexString(ciphertext));\n" ++
   "      document.getElementById(\"postContent\").innerHTML = new TextDecoder(\"UTF-8\").decode(plaintext);\n" ++
   "    }\n" ++
