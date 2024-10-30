@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 41, entryTime = 2024-10-30 17:21:52.513804, entryTitle = "\37325\35370\26481\20140", entryTeaser = Nothing}
+,
 PostEntry {entryNumber = 40, entryTime = 2024-10-11 16:43:29.591830825, entryTitle = "What is intrinsically typed programming?", entryTeaser = Just "To answer the question, one way may be moving to a more primitive setting that\8217s closer to logic programming, to see more clearly what happens when checking intrinsically typed programs."}
 ,
 PostEntry {entryNumber = 39, entryTime = 2024-09-09 22:30:07.223958624, entryTitle = "My fleet of model aircraft", entryTeaser = Just "I collect model aircraft mainly to remember some of my flights and the people and stories associated with them."}

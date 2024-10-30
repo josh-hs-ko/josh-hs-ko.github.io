@@ -507,18 +507,19 @@ decryptionPage iv ciphertext =
   "        <input type=\"password\" id=\"postKey\" class=\"form-control\" autofocus>\n" ++
   "      </div>\n" ++
   "      <div class=\"form-group\">\n" ++
-  -- "        <input type=\"submit\" value=\"Decrypt\" class=\"btn btn-primary btn-block\">\n" ++
   "        <button class=\"btn btn-primary btn-block\">Decrypt</button>\n" ++
   "      </div>\n" ++
   "    </form>\n" ++
   "  </div>\n" ++
   "  <script>\n" ++
   "    async function decryptPage() {\n" ++
-  "      var iv = \"" ++ toHexString iv ++ "\";\n" ++
-  "      var ciphertext = \"" ++ toHexString ciphertext ++ "\";\n" ++
-  "      var key = await window.crypto.subtle.importKey(\"raw\", fromHexString(document.getElementById(\"postKey\").value), {name: \"AES-CBC\"}, false, [\"decrypt\"]);\n" ++
-  "      var plaintext = await window.crypto.subtle.decrypt({name: \"AES-CBC\", iv: fromHexString(iv)}, key, fromHexString(ciphertext));\n" ++
-  "      document.getElementById(\"postContent\").innerHTML = new TextDecoder(\"UTF-8\").decode(plaintext);\n" ++
+  "      document.getElementById(\"postContent\").innerHTML = new TextDecoder(\"UTF-8\").decode(" ++
+          "await window.crypto.subtle.decrypt({name: \"AES-CBC\", " ++
+                                              "iv: fromHexString(\"" ++ toHexString iv ++ "\")}, " ++
+          "await window.crypto.subtle.importKey(" ++
+            "\"raw\", fromHexString(document.getElementById(\"postKey\").value), " ++
+            "{name: \"AES-CBC\"}, false, [\"decrypt\"]), " ++
+          "fromHexString(\"" ++ toHexString ciphertext ++ "\")));\n" ++
   "    }\n" ++
   "    function fromHexString(s) {\n" ++
   "      var r = new Uint8Array(s.length/2);\n" ++
