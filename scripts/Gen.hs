@@ -101,7 +101,7 @@ element name attrs d andThen =
      (text name :
       map (\(n, as) -> text n <> equals <> doubleQuotes (foldr (<+>) empty (map text as))) attrs) <>
    char '>')
-  `andThen` d `andThen` (text"</" <> text name <> char '>')
+  `andThen` d `andThen` (text "</" <> text name <> char '>')
 
 inlineElement :: String -> [(String, [String])] -> Doc -> Doc
 inlineElement name attrs d = element name attrs d (<>)
@@ -466,7 +466,7 @@ postIndex postList =
                  hyperlink (postUrl pn) $
                    text (cmarkNoPara (entryTitle entry))) $+$
             (inlineElement "div" [("class", ["col-sm-7"])] $
-               text (maybe "🔒" cmarkNoNewline (entryTeaser entry)))
+               text (cmarkNoNewline (fromMaybe "🔒" (entryTeaser entry))))
     | entry <- postList ]
 
 latestIndex :: [PostEntry] -> Doc
