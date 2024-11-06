@@ -507,7 +507,7 @@ decryptionPage iv ciphertext =
   "        <input type=\"password\" id=\"postKey\" class=\"form-control\" autofocus>\n" ++
   "      </div>\n" ++
   "      <div class=\"form-group\">\n" ++
-  "        <button class=\"btn btn-primary btn-block\">Decrypt</button>\n" ++
+  "        <button class=\"btn btn-primary btn-block\">Unlock</button>\n" ++
   "      </div>\n" ++
   "    </form>\n" ++
   "  </div>\n" ++
