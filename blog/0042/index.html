@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>No free (quantum) lunch — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="A naive and futile experiment in constructing a quantum program that I hoped to be easier to invent with the ZX-calculus.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0042
+</div>
+<h2>No free (quantum) lunch</h2>
+<div class="post-time">Posted at 17:30 on 18 December 2024</div>
+<p>As far as I can see, a unique characteristic of ZX-calculus is ‘directionlessness’, which I first noted in <a href="https://josh-hs-ko.github.io/blog/0027/">0027</a>.
+This ‘directionlessness’ is also a defining characteristic of relational/logic programming, and indeed, linear maps and relations have a lot of similarities (especially when looking through the abstraction of <a href="https://en.wikipedia.org/wiki/Compact_closed_category">compact closed categories</a>).
+I’ve wondered whether it’s possible to exploit this common characteristic and link logic programming with quantum computing.
+For example, in logic programming it is easy to specify the computation of a fixed point of a function (so, for instance, it is easy to <a href="https://doi.org/10.1145/3110252">generate quines</a>).
+Would it be possible to encode the function as a quantum oracle and then somehow augment it, in particular with entangled states, to express the constraint that specifies a fixed point?
+If that’s possible, then there may be hope to express more kinds of constraint, eventually leading to a compiler from logic programs to ZX-calculus.</p>
+<p>To specify the computation of a fixed point of a function $f$, we can connect the input and output of $f$, requiring them to be the same, and pull the value out of the loop:</p>
+<p class="image-paragraph"><a href="fixed_point.svg"><img class="displayed-figure" src="fixed_point.svg" alt="Fixed point"/></a></p>
+<p>It doesn’t seem possible to augment a standard quantum oracle $U_f$ to produce something close to this due to the different colours of the two spiders in $U_f$.
+However, if we could tweak $U_f$ to $U'_f$ by adding a Hadamard</p>
+<p class="image-paragraph"><a href="tweaked_oracle.svg"><img class="displayed-figure" src="tweaked_oracle.svg" alt="Tweaked oracle"/></a></p>
+<p>then we could augment $U'_f$ to produce something similar:</p>
+<p class="image-paragraph"><a href="augmenting_the_tweaked_oracle.svg"><img class="displayed-figure" src="augmenting_the_tweaked_oracle.svg" alt="Augmenting the tweaked oracle"/></a></p>
+<p>It’s easy to verify that the results of measuring the two outputs will be the same and will be a fixed point of $f$.</p>
+<p>Things are looking too good to be true, however.
+One thing that’s obviously suspicious and worth checking is the unitarity of the tweaked oracle $U'_f$.
+The unitarity of the standard $U_f$ is proved (graphically) in <a href="https://doi.org/10.1017/9781316219317">PQP</a> as Proposition 12.15.
+Here’s an excerpt of the proof (without doubling):</p>
+<p class="image-paragraph"><a href="standard_unitarity.svg"><img class="displayed-figure" src="standard_unitarity.svg" alt="Unitarity of the standard oracle"/></a></p>
+<p>The key step is the middle equality using complementarity.
+For the tweaked $U'_f$, the added Hadamard appears on the two wires that are supposed to cancel out:</p>
+<p class="image-paragraph"><a href="tweaked_unitarity.svg"><img class="displayed-figure" src="tweaked_unitarity.svg" alt="Attempt at the unitarity of the tweaked oracle"/></a></p>
+<p>This blocks the use of complementarity, and the proof no longer goes through.
+Intuitively at a formal level, the two spiders in $U_f$ having complementary colours is crucial in disentangling the two wires going out of $U_f^\dagger \circ U_f$ so that they become identity wires, whereas I need the two spiders to have the same colour to form the fixed-point loop.
+This suggests that the idea of fixed-point loop is not realisable.</p>
+<p>In fact, looking back, there have been signs along the way.
+The tweaked oracle $U'_f$ is not essentially different from</p>
+<p class="image-paragraph"><a href="fake_oracle.svg"><img class="displayed-figure" src="fake_oracle.svg" alt="‘Fake oracle’"/></a></p>
+<p>which is easily interconvertible with $U'_f$ by sliding Hadamards into the top and bottom of the rightmost wire.
+But this ‘fake oracle’ is obviously not causal (that is, it doesn’t account for all possibilities): the top-right Z-spider matches the output of $f$ and the input on the rightmost wire, and only produces a result when they are the same, which obviously isn’t always the case.
+Looking back further, the matching spider has already appeared in the fixed-point loop, which therefore isn’t causal.
+The whole attempt, sadly, has been naive and futile from the beginning.</p>
+<p>One way to salvage something from this attempt might be to somehow complete the fixed-point loop to a causal process, and if $f$ is guaranteed to have a fixed point, then there’s some probability that the process will compute a fixed point of $f$, and we may be able to apply amplitude amplification to boost that probability.
+On the other hand, instead of constructing the fixed-point loop using a cup and then completing it to a causal process and so on, why not just define the process <em>classically</em> as <code>λx. if f x == x then 1 else 0</code> and then apply Grover’s algorithm in the standard way?
+If we’re lucky, the fixed-point loop construction might still have some benefits, which I doubt are going to be obvious, however.</p>
+<p>So this is where I decide to stop, at least for now, and not just for this particular problem, but for my journey into ZX-calculus and quantum computing.
+My current conclusion is that the insights I’ve got from ZX-calculus don’t seem to be enough for quantum algorithmics.
+Thinking back, my attitude towards quantum computing has been somewhat sceptical, and it’s more like I’ve been evaluating whether it’s worthwhile to invest in quantum computing seriously.
+Now seems to be a good point to end the evaluation: the barrier to do something significant remains high, and I’m not sufficiently motivated to invest more to cross the barrier.</p>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>

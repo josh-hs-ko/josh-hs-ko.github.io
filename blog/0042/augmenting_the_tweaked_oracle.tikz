@@ -1,0 +1,76 @@
+\begin{tikzpicture}
+	\begin{pgfonlayer}{nodelayer}
+		\node [style={Process (classical)}] (0) at (-12, 0) {$f$};
+		\node [style=none] (1) at (-12, -0.5) {};
+		\node [style=none] (2) at (-12, -1) {};
+		\node [style=none] (3) at (-12, 0.5) {};
+		\node [style=none] (4) at (-14, -1) {};
+		\node [style=none] (5) at (-14, 4) {};
+		\node [style=none] (6) at (-10, 1) {};
+		\node [style=none] (7) at (-11, 4) {};
+		\node [style=none] (8) at (-13, -3) {};
+		\node [style=none] (9) at (-10, -3) {};
+		\node [style={X (classical)}] (10) at (-11, 2) {};
+		\node [style=none] (11) at (-11, 2) {};
+		\node [style={Z (classical)}] (12) at (-13, -2) {};
+		\node [style=none] (13) at (-13, -2) {};
+		\node [style={Hadamard (classical)}] (14) at (-12, 1.175) {};
+		\node [style=none] (15) at (-12, 1) {};
+		\node [style=none] (16) at (-11.5, -4.5) {};
+		\node [style={Hadamard (classical)}] (17) at (-10, -3.175) {};
+		\node [style={Hadamard (classical)}] (18) at (-11, 3.25) {};
+		\node [style=none] (19) at (-14.5, -2.75) {};
+		\node [style=none] (20) at (-9.5, -2.75) {};
+		\node [style=none] (21) at (-9.5, 2.75) {};
+		\node [style=none] (22) at (-14.5, 2.75) {};
+		\node [style={Process (classical)}] (23) at (-6.5, 0) {$f$};
+		\node [style=none] (24) at (-6.5, 0.5) {};
+		\node [style=none] (25) at (-6.5, -0.5) {};
+		\node [style=none] (26) at (-6.5, -1) {};
+		\node [style=none] (27) at (-6.5, 1) {};
+		\node [style=none] (28) at (-5.5, -2) {};
+		\node [style=none] (29) at (-4.5, -1) {};
+		\node [style=none] (30) at (-4.5, 1) {};
+		\node [style={Z (classical)}] (31) at (-5.5, 2) {};
+		\node [style=none] (32) at (-5.5, 2) {};
+		\node [style=none] (33) at (-6.5, 3) {};
+		\node [style=none] (34) at (-4.5, 3) {};
+		\node [style=none] (35) at (-6.5, 4) {};
+		\node [style=none] (36) at (-4.5, 4) {};
+		\node [style=none] (37) at (-8.5, 0) {$=$};
+	\end{pgfonlayer}
+	\begin{pgfonlayer}{edgelayer}
+		\draw [style={Wire (classical)}] (5.center)
+			 to (4.center)
+			 to [bend right=45] (13.center);
+		\draw [style={Wire (classical)}] (1.center)
+			 to (2.center)
+			 to [bend left=45] (13.center);
+		\draw [style={Wire (classical)}] (13.center)
+			 to (8.center)
+			 to [bend left=315] (16.center)
+			 to [bend right=45] (9.center)
+			 to (6.center)
+			 to [bend right=45] (11.center);
+		\draw [style={Wire (classical)}] (11.center) to (7.center);
+		\draw [style={Wire (classical)}] (3.center)
+			 to (15.center)
+			 to [bend left=45] (11.center);
+		\draw [style=dashed line] (22.center) to (21.center);
+		\draw [style=dashed line] (20.center) to (19.center);
+		\draw [style={Wire (classical)}] (25.center)
+			 to (26.center)
+			 to [bend right=45] (28.center)
+			 to [bend right=45] (29.center)
+			 to (30.center)
+			 to [bend right=45] (32.center)
+			 to [bend left=315] (27.center)
+			 to (24.center);
+		\draw [style={Wire (classical)}] (32.center)
+			 to [bend left=45] (33.center)
+			 to (35.center);
+		\draw [style={Wire (classical)}] (32.center)
+			 to [bend right=45] (34.center)
+			 to (36.center);
+	\end{pgfonlayer}
+\end{tikzpicture}
