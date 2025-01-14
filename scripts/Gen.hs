@@ -319,7 +319,11 @@ generatePostInteractively postList postNumber = do
   else do
     commit <- if entryExists post'
               then return True
-              else getYesOrNo False "Commit?"
+              else if null (postTeaser post') && not (isEncrypted rawPost)
+                   then do
+                    putStrLn "Reminder: there is no teaser yet."
+                    return False
+                   else getYesOrNo False "Commit?"
     when commit $
       case mNewPostList post' of
         Nothing ->

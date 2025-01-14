@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 43, entryTime = 2025-01-14 16:47:36.751448839, entryTitle = "Representations of execution traces", entryTeaser = Just "There are different ways of representing relations as datatypes.\nI wonder whether we can consciously exploit the connection and systematically derive intrinsic datatypes for algorithm design.\nAs an experiment, I revisit the maximum prefix sum problem.\nThe outcome is inconclusive though."}
+,
 PostEntry {entryNumber = 42, entryTime = 2024-12-18 17:30:44.571879738, entryTitle = "No free (quantum) lunch", entryTeaser = Just "A naive and futile experiment in constructing a quantum program that I hoped to be easier to invent with the ZX-calculus."}
 ,
 PostEntry {entryNumber = 41, entryTime = 2024-10-30 17:21:52.513804, entryTitle = "\37325\35370\26481\20140", entryTeaser = Nothing}
