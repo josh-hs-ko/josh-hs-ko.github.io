@@ -88,6 +88,16 @@ main = do
       finalPostList <- readIORef rPostList
       writeIndexFiles finalPostList
       writePostListFile finalPostList
+    "--reset-modification-time" -> do
+      guard (length args > 1)
+      let postNumber = read (args !! 1)
+      postList <- read <$> readFile' postListFile
+      let entry = head (filter ((== postNumber). entryNumber) postList)
+      let (time, encrypted) = case entryModificationTime entry of
+                                Nothing -> (entryCreationTime entry, False)
+                                Just t  -> (t, True)
+      setModificationTime (postSourceFile postNumber encrypted) .
+        flip localTimeToUTC time =<< getCurrentTimeZone
     _ -> putStrLn "Unrecognised option."
 
 
@@ -252,10 +262,11 @@ data ProcessedPost = ProcessedPost
   }
 
 data PostEntry = PostEntry
-  { entryNumber :: Int
-  , entryTime   :: LocalTime
-  , entryTitle  :: String
-  , entryTeaser :: Maybe String
+  { entryNumber           :: Int
+  , entryCreationTime     :: LocalTime
+  , entryModificationTime :: Maybe LocalTime
+  , entryTitle            :: String
+  , entryTeaser           :: Maybe String
   } deriving (Eq, Show, Read)
 
 postNumberString :: Int -> String
@@ -287,20 +298,20 @@ processPost :: [PostEntry] -> RawPost -> Maybe [Node] -> ProcessedPost
 processPost postList (RawPost postNumber postContent modTime encrypted) mns =
   let (title, teaser, postHeader, postBody) =
         extractHeader . commonmarkToNode [] . Text.pack $ postContent
-      (entryExists, postTime, mRevTime, mPostList') =
+      (entryExists, postCTime, mRevTime, mPostList') =
         let (ps0, ps1) = span ((> postNumber) . entryNumber) postList
             entry      = head ps1
         in  (not (null ps1) && entryNumber entry == postNumber,
-             if entryExists then entryTime entry else modTime,
-             if diffLocalTime modTime postTime >= 60 then Just modTime else Nothing,
-             let newEntry = PostEntry postNumber postTime title
+             if entryExists then entryCreationTime entry else modTime,
+             if diffLocalTime modTime postCTime >= 60 then Just modTime else Nothing,
+             let newEntry = PostEntry postNumber postCTime mRevTime title
                               (if encrypted then Nothing else Just teaser)
              in  if entryExists && isNothing mRevTime
                  then Nothing
                  else Just (ps0 ++ newEntry :
                             if entryExists then tail ps1 else ps1))
       post' = insertPostNumber postNumber .
-              insertTime postTime mRevTime .
+              insertTime postCTime mRevTime .
               transformDisplayedImage .
               transformRemark $ postHeader (fromMaybe postBody mns)
   in  ProcessedPost post' title (if isNothing mns then teaser else "🔒")
@@ -464,7 +475,7 @@ postIndex postList =
                hyperlink (postUrl pn) (text (postNumberString pn)) <>
                text "&nbsp;·&nbsp;" <>
                inlineElement "span" [("class", ["blog-entry-date"])]
-                 (text (shortDate (localDay (entryTime entry))))) $+$
+                 (text (shortDate (localDay (entryCreationTime entry))))) $+$
             (inlineElement "div" [("class", ["col-sm-3"])] $
                inlineElement "div" [("class", ["blog-entry"])] $
                  hyperlink (postUrl pn) $
@@ -486,7 +497,7 @@ latestIndex postList =
                hyperlink (postUrl pn) (text (postNumberString pn)) <>
                text "&nbsp;·&nbsp;" <>
                inlineElement "span" [("class", ["blog-entry-date"])]
-                 (text (shortDate (localDay (entryTime entry)))))
+                 (text (shortDate (localDay (entryCreationTime entry)))))
     | entry <- postList ]
 
 
