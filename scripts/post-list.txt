@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Nothing, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
+,
 PostEntry {entryNumber = 43, entryCreationTime = 2025-01-14 16:47:36.751448839, entryModificationTime = Nothing, entryTitle = "Representations of execution traces", entryTeaser = Just "There are different ways of representing relations as datatypes.\nI wonder whether we can consciously exploit the connection and systematically derive intrinsic datatypes for algorithm design.\nAs an experiment, I revisit the maximum prefix sum problem.\nThe outcome is inconclusive though."}
 ,
 PostEntry {entryNumber = 42, entryCreationTime = 2024-12-18 17:30:44.571879738, entryModificationTime = Nothing, entryTitle = "No free (quantum) lunch", entryTeaser = Just "A naive and futile experiment in constructing a quantum program that I hoped to be easier to invent with the ZX-calculus."}

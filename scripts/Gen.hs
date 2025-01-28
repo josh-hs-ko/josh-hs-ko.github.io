@@ -93,9 +93,8 @@ main = do
       let postNumber = read (args !! 1)
       postList <- read <$> readFile' postListFile
       let entry = head (filter ((== postNumber). entryNumber) postList)
-      let (time, encrypted) = case entryModificationTime entry of
-                                Nothing -> (entryCreationTime entry, False)
-                                Just t  -> (t, True)
+      let time = fromMaybe (entryCreationTime entry) (entryModificationTime entry)
+      encrypted <- doesFileExist (postKeyFile postNumber)
       setModificationTime (postSourceFile postNumber encrypted) .
         flip localTimeToUTC time =<< getCurrentTimeZone
     _ -> putStrLn "Unrecognised option."
