@@ -60,86 +60,92 @@
 0044
 </div>
 <h2>‘Induction principles are propositions’ revisited</h2>
-<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 11:28 on 29 January 2025</div>
+<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 17:13 on 11 February 2025</div>
 <p>The <a href="/#publication-09685a99">binomial tabulation story</a> turns out to be difficult to publish, and <a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and I are about to rewrite the first half about dependently typed programming into a functional pearl for JFP (in the short and traditional format that everyone expects).
 One revelation in the story was that two implementations of an induction principle may be proved to be extensionally equal using parametricity, which was briefly described in <a href="/blog/0036/">0036</a>.
-After some discussion with <a href="https://yangzhixuan.github.io">Zhixuan</a>, I think there’s a more accurate perspective, which will be described below as well as go into the pearl, but there are problems that we cannot resolve too.
+After some discussion with <a href="https://yangzhixuan.github.io">Zhixuan</a>, I think there’s a more accurate perspective, which will be described below (in terms of the induction principle on natural numbers) as well as go into the pearl (in terms of the immediate sublist induction principle), but there are problems that we cannot resolve too.
 I’m keeping a record of the problems here, and maybe someone will be able to shed light on them.</p>
 <p>The first thing Zhixuan pointed out was that the computation rules were a defining part of an induction principle too.
 For example, in addition to</p>
 <pre><code>IndType : Set₁
-IndType = (P : ℕ → Set) → P zero → (∀ {n} → P n → P (suc n))
+IndType = (P : ℕ → Set) (pz : P zero) (ps : ∀ {n} → P n → P (suc n))
         → (n : ℕ) → P n
 </code></pre>
 <p>which is <em>only the type</em> of the standard induction principle of natural numbers, we should also specify the computation rules</p>
 <pre><code>Comp : IndType → Set₁
 Comp f = (P : ℕ → Set) (pz : P zero) (ps : ∀ {n} → P n → P (suc n))
-       → f P pz ps zero ≡ pz
+       →          f P pz ps  zero   ≡ pz
        × (∀ {n} → f P pz ps (suc n) ≡ ps (f P pz ps n))
 </code></pre>
 <p>which complete the definition of the induction principle:</p>
 <pre><code>Ind : Set₁
 Ind = Σ IndType Comp
 </code></pre>
-<p>We can then prove that <code>Ind</code> is a proposition even when <code>ℕ : Set</code>, <code>zero : ℕ</code>, and <code>suc : ℕ → ℕ</code> are declared as (module) parameters about which we know nothing except their types (as opposed to an inductive type and its two constructors):</p>
-<pre><code>Ind-isProp : ((f , _) (g , _) : Ind)
+<p>We can then prove that <code>Ind</code> is a proposition even when <code>ℕ : Set</code>, <code>zero : ℕ</code>, and <code>suc : ℕ → ℕ</code> are declared as (module) parameters about which we know nothing except their types (as opposed to an inductive type and its two constructors).
+The essential part of the proof is</p>
+<pre><code>uniqueness : (f g : IndType) → Comp f → Comp g
            → (P : ℕ → Set) (pz : P zero) (ps : ∀ {n} → P n → P (suc n))
            → (n : ℕ) → f P pz ps n ≡ g P pz ps n
-Ind-isProp (f , f-comp) (g , g-comp) P pz ps =
+uniqueness f g f-comp g-comp P pz ps =
   f (λ n → f P pz ps n ≡ g P pz ps n)
     (begin
-       f P pz ps zero
-         ≡⟨ proj₁ (f-comp P pz ps) ⟩
-       pz
-         ≡⟨ proj₁ (g-comp P pz ps) ⟨
-       g P pz ps zero
-     ∎)
+        f P pz ps zero
+          ≡⟨ proj₁ (f-comp P pz ps) ⟩
+        pz
+          ≡⟨ proj₁ (g-comp P pz ps) ⟨
+        g P pz ps zero
+      ∎)
     (λ {n} eq →
-     begin
-       f P pz ps (suc n)
-         ≡⟨ proj₂ (f-comp P pz ps) ⟩
-       ps (f P pz ps n)
-         ≡⟨ cong ps eq ⟩
-       ps (g P pz ps n)
-         ≡⟨ proj₂ (g-comp P pz ps) ⟨
-       g P pz ps (suc n)
-     ∎)
+      begin
+        f P pz ps (suc n)
+          ≡⟨ proj₂ (f-comp P pz ps) ⟩
+        ps (f P pz ps n)
+          ≡⟨ cong ps eq ⟩
+        ps (g P pz ps n)
+          ≡⟨ proj₂ (g-comp P pz ps) ⟨
+        g P pz ps (suc n)
+      ∎)
 </code></pre>
-<p>The statement is incomplete but can be straightforwardly extended to <code>(i j : Ind) → i ≡ j</code> if we have function extensionality and know that <code>ℕ</code> is an h-set.
-The computation rules of both <code>f</code> and <code>g</code> are ignored in the statement but used in the proof.
-By including <code>Comp</code> in <code>Ind</code>, we characterise the notion uniquely and make the definition nice and tight.</p>
+<p>This can then be straightforwardly extended to <code>(i j : Ind) → i ≡ j</code> if we have function extensionality and know that <code>ℕ</code> is an h-set.
+Therefore, by including <code>Comp</code> in <code>Ind</code>, we characterise the notion uniquely and make the definition nice and tight.</p>
 <p>In relation to the above, which is standard knowledge, the revelation in the binomial tabulation story can be described as follows: one of <code>f</code> and <code>g</code> can be assumed to satisfy unary parametricity instead of the computation rules, and the proof will still go through.
 Concretely, define unary parametricity by</p>
 <pre><code>Param : IndType → Set₁
 Param g = {P  : ℕ → Set}                 (Q  : ∀ {n} → P n → Set)
           {pz : P zero}                  (qz : Q pz)
           {ps : ∀ {n} → P n → P (suc n)} (qs : ∀ {n} {p : P n} → Q p → Q (ps p))
-        → (n : ℕ) → Q (g P pz ps n)
+        → {n  : ℕ} → Q (g P pz ps n)
 </code></pre>
 <p>and we can prove</p>
-<pre><code>uniqueness : (f g : IndType) → Comp f → Param g
-           → (P : ℕ → Set) (pz : P zero) (ps : {n : ℕ} → P n → P (suc n))
-           → (n : ℕ) → f P pz ps n ≡ g P pz ps n
-uniqueness f g f-comp g-param P pz ps =
+<pre><code>uniqueness' : (f g : IndType) → Comp f → Param g
+            → (P : ℕ → Set) (pz : P zero) (ps : {n : ℕ} → P n → P (suc n))
+            → (n : ℕ) → f P pz ps n ≡ g P pz ps n
+uniqueness' f g f-comp g-param P pz ps n =
   g-param (λ {n} p → f P pz ps n ≡ p)
           (proj₁ (f-comp P pz ps))
-          (λ eq → trans (proj₂ (f-comp P pz ps)) (cong ps eq))
+          (λ { refl → proj₂ (f-comp P pz ps) })
 </code></pre>
-<p>This is useful when <code>f</code> is the standard implementation of the induction principle, which satisfies the computation rules even judgementally, and <code>g</code> is a non-standard one which cannot be easily proved to satisfy the computation rules — in the case of binomial tabulation, Shin needed to write <a href="https://doi.org/10.1017/S0956796824000145">an entire paper</a> to prove that.
+<p>This is useful when <code>f</code> is the standard implementation of the induction principle, which satisfies the computation rules even judgementally, and <code>g</code> is a non-standard one which cannot be easily proved to satisfy the computation rules (in the case of binomial tabulation, Shin needed to write <a href="https://doi.org/10.1017/S0956796824000145">an entire paper</a> to prove that).
 By contrast, proving parametricity is mechanical if not automatic, so we get to avoid a potentially difficult proof of the computation rules.
-Note that parametricity plays a crucial role: in a language where quantification over <code>Set</code> is not necessarily parametric, <code>g P pz ps</code> may for example be able to match <code>P</code> against a specific type family, and then use known operations other than <code>pz</code> and <code>ps</code> for that specific type family which, unlike <code>pz</code> and <code>ps</code>, do not preserve the invariant <code>λ {n} p → f P pz ps n ≡ p</code>.</p>
+Note that the second and third arguments of <code>g-param</code> are essentially just <code>f-comp</code>.
+This is no coincidence:
+The invariant we use, namely <code>λ {n} p → f P pz ps n ≡ p</code>, states that any <code>p : P n</code> (constructed within <code>g</code>) can only be the result computed by <code>f P pz ps n</code>.
+This invariant should hold for <code>pz : P zero</code>, that is, <code>f P pz ps zero</code> should compute to <code>pz</code>; it should also be preserved by <code>ps</code>, that is, whenever <code>f P pz ps n</code> computes to <code>p : P n</code>, <code>f P pz ps (suc n)</code> should compute to <code>ps p</code> — or equivalently, <code>f P pz ps (suc n)</code> computes to <code>ps (f P pz ps n)</code>.
+These together say that <code>f P pz ps</code> computes its results using <code>pz</code> and <code>ps</code>, and are exactly the computation rules of <code>f P pz ps</code>.
+Also note that parametricity plays a crucial role: in a language where quantification over <code>Set</code> is not necessarily parametric, <code>g P pz ps</code> may for example be able to match <code>P</code> against a specific type family, and then use known operations other than <code>pz</code> and <code>ps</code> for that specific type family, which, unlike <code>pz</code> and <code>ps</code>, may not preserve the invariant.</p>
 <p>Zhixuan suggested an alternative two-part proof: first derive the computation rules from parametricity,</p>
 <pre><code>Param→Comp : (g : IndType) → Param g → Comp g
 </code></pre>
-<p>and then just invoke <code>Ind-isProp</code> since both <code>f</code> and <code>g</code> satisfy the computation rules now.
+<p>and then just invoke <code>uniqueness</code> since both <code>f</code> and <code>g</code> satisfy the computation rules now.
 This looked plausible to me — intuitively, parametricity seems to imply that <code>g P pz ps</code> can only apply <code>ps</code> to <code>pz</code> exactly <code>n</code> times if it wants to produce something of type <code>P n</code>.
 But this intuition is based on the assumption that <code>ℕ</code> is an inductive type with <code>zero</code> and <code>suc</code> as its constructors, so that, for example, <code>∀ {n} → suc n ≢ n</code> — otherwise <code>suc</code> could well be <code>id</code>, and there would be no restriction on how many times <code>ps</code> is applied.
-Zhixuan’s proof of <code>Param→Comp</code> actually goes through <code>uniqueness</code> and hence assumes that the computation rules have been established, albeit for another induction function, and I don’t feel comfortable calling it a derivation of the computation rules from parametricity.
-In any case, <code>uniqueness</code> is more fundamental, and I’ll just use <code>uniqueness</code> in the JFP pearl.</p>
-<p>On the other hand, I still wonder whether we can obtain the computation rules from some weaker assumptions and parametricity (rather than inheriting them from another induction function).
-However, we prove <code>uniqueness</code> by invoking parametricity with the invariant ‘<code>p</code> is equal to the result of an induction function’, which we cannot even state if there’s no induction function yet.
+Zhixuan’s proof of <code>Param→Comp</code> actually goes through <code>uniqueness'</code> and hence assumes that the computation rules have been established, albeit for another induction function, and I don’t feel comfortable calling it a derivation of the computation rules from parametricity.
+In any case, <code>uniqueness'</code> is more fundamental, and I’ll just use <code>uniqueness'</code> in the JFP pearl.</p>
+<p>On the other hand, I still wonder whether we can obtain the computation rules from some weaker assumptions and parametricity, rather than inheriting them from another induction function.
+However, we prove <code>uniqueness'</code> by invoking parametricity with the invariant ‘<code>p</code> is equal to the result of an induction function’, which we cannot even state if there’s no induction function yet.
 I tried to define the induction function as a relation instead, but that relation would still be inductively defined, and programming with that relation may still be argued to be assuming (some more generic notion of) induction.
 And, without induction on natural numbers, it doesn’t seem possible to derive the computation rules from that relation (or I think equivalently, turn that relation into a function).
+In any case, as long as we’re using a variant of the invariant, we’d need to prove the computation rules to finish invoking parametricity.
 In the end I suspect that we have to assume something no weaker than the computation rules — that is, it might be possible to prove something like</p>
 <pre><code>   (P : IndType → Set₁)
 → ((f : IndType) → Param f → P f → Comp f)

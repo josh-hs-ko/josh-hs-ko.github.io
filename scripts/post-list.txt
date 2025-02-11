@@ -1,5 +1,5 @@
 [
-PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Just 2025-01-29 11:28:17.021717975, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
+PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Just 2025-02-11 17:13:18.192388598, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
 ,
 PostEntry {entryNumber = 43, entryCreationTime = 2025-01-14 16:47:36.751448839, entryModificationTime = Nothing, entryTitle = "Representations of execution traces", entryTeaser = Just "There are different ways of representing relations as datatypes.\nI wonder whether we can consciously exploit the connection and systematically derive intrinsic datatypes for algorithm design.\nAs an experiment, I revisit the maximum prefix sum problem.\nThe outcome is inconclusive though."}
 ,
