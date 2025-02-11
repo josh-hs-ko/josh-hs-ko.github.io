@@ -44,10 +44,11 @@ module InductionPropositional (ℕ : Set) (zero : ℕ) (suc : ℕ → ℕ) where
     where open ≡-Reasoning
 
   Param : IndType → Set₁
-  Param g = {P  : ℕ → Set}                 (Q  : ∀ {n} → P n → Set)
-            {pz : P zero}                  (qz : Q pz)
-            {ps : ∀ {n} → P n → P (suc n)} (qs : ∀ {n} {p : P n} → Q p → Q (ps p))
-          → {n  : ℕ} → Q (g P pz ps n)
+  Param g =
+    {P  : ℕ → Set}                 (Q  : ∀ {n} → P n → Set)
+    {pz : P zero}                  (qz : Q pz)
+    {ps : ∀ {n} → P n → P (suc n)} (qs : ∀ {n} {p : P n} → Q p → Q (ps p))
+    {n  : ℕ} → Q (g P pz ps n)
 
   uniqueness' : (f g : IndType) → Comp f → Param g
               → (P : ℕ → Set) (pz : P zero) (ps : {n : ℕ} → P n → P (suc n))

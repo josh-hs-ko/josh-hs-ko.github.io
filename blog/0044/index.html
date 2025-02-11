@@ -60,7 +60,7 @@
 0044
 </div>
 <h2>‘Induction principles are propositions’ revisited</h2>
-<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 17:13 on 11 February 2025</div>
+<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 20:39 on 11 February 2025</div>
 <p>The <a href="/#publication-09685a99">binomial tabulation story</a> turns out to be difficult to publish, and <a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and I are about to rewrite the first half about dependently typed programming into a functional pearl for JFP (in the short and traditional format that everyone expects).
 One revelation in the story was that two implementations of an induction principle may be proved to be extensionally equal using parametricity, which was briefly described in <a href="/blog/0036/">0036</a>.
 After some discussion with <a href="https://yangzhixuan.github.io">Zhixuan</a>, I think there’s a more accurate perspective, which will be described below (in terms of the induction principle on natural numbers) as well as go into the pearl (in terms of the immediate sublist induction principle), but there are problems that we cannot resolve too.
@@ -111,10 +111,11 @@ Therefore, by including <code>Comp</code> in <code>Ind</code>, we characterise t
 <p>In relation to the above, which is standard knowledge, the revelation in the binomial tabulation story can be described as follows: one of <code>f</code> and <code>g</code> can be assumed to satisfy unary parametricity instead of the computation rules, and the proof will still go through.
 Concretely, define unary parametricity by</p>
 <pre><code>Param : IndType → Set₁
-Param g = {P  : ℕ → Set}                 (Q  : ∀ {n} → P n → Set)
-          {pz : P zero}                  (qz : Q pz)
-          {ps : ∀ {n} → P n → P (suc n)} (qs : ∀ {n} {p : P n} → Q p → Q (ps p))
-        → {n  : ℕ} → Q (g P pz ps n)
+Param g =
+  {P  : ℕ → Set}                 (Q  : ∀ {n} → P n → Set)
+  {pz : P zero}                  (qz : Q pz)
+  {ps : ∀ {n} → P n → P (suc n)} (qs : ∀ {n} {p : P n} → Q p → Q (ps p))
+  {n  : ℕ} → Q (g P pz ps n)
 </code></pre>
 <p>and we can prove</p>
 <pre><code>uniqueness' : (f g : IndType) → Comp f → Param g
