@@ -60,7 +60,7 @@
 0044
 </div>
 <h2>‘Induction principles are propositions’ revisited</h2>
-<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 20:39 on 11 February 2025</div>
+<div class="post-time">Posted at 10:55 on 28 January 2025, and revised at 10:35 on 12 February 2025</div>
 <p>The <a href="/#publication-09685a99">binomial tabulation story</a> turns out to be difficult to publish, and <a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and I are about to rewrite the first half about dependently typed programming into a functional pearl for JFP (in the short and traditional format that everyone expects).
 One revelation in the story was that two implementations of an induction principle may be proved to be extensionally equal using parametricity, which was briefly described in <a href="/blog/0036/">0036</a>.
 After some discussion with <a href="https://yangzhixuan.github.io">Zhixuan</a>, I think there’s a more accurate perspective, which will be described below (in terms of the induction principle on natural numbers) as well as go into the pearl (in terms of the immediate sublist induction principle), but there are problems that we cannot resolve too.
@@ -89,26 +89,26 @@ The essential part of the proof is</p>
 uniqueness f g f-comp g-comp P pz ps =
   f (λ n → f P pz ps n ≡ g P pz ps n)
     (begin
-        f P pz ps zero
-          ≡⟨ proj₁ (f-comp P pz ps) ⟩
-        pz
-          ≡⟨ proj₁ (g-comp P pz ps) ⟨
-        g P pz ps zero
-      ∎)
+       f P pz ps zero
+         ≡⟨ proj₁ (f-comp P pz ps) ⟩
+       pz
+         ≡⟨ proj₁ (g-comp P pz ps) ⟨
+       g P pz ps zero
+     ∎)
     (λ {n} eq →
-      begin
-        f P pz ps (suc n)
-          ≡⟨ proj₂ (f-comp P pz ps) ⟩
-        ps (f P pz ps n)
-          ≡⟨ cong ps eq ⟩
-        ps (g P pz ps n)
-          ≡⟨ proj₂ (g-comp P pz ps) ⟨
-        g P pz ps (suc n)
-      ∎)
+     begin
+       f P pz ps (suc n)
+         ≡⟨ proj₂ (f-comp P pz ps) ⟩
+       ps (f P pz ps n)
+         ≡⟨ cong ps eq ⟩
+       ps (g P pz ps n)
+         ≡⟨ proj₂ (g-comp P pz ps) ⟨
+       g P pz ps (suc n)
+     ∎)
 </code></pre>
 <p>This can then be straightforwardly extended to <code>(i j : Ind) → i ≡ j</code> if we have function extensionality and know that <code>ℕ</code> is an h-set.
 Therefore, by including <code>Comp</code> in <code>Ind</code>, we characterise the notion uniquely and make the definition nice and tight.</p>
-<p>In relation to the above, which is standard knowledge, the revelation in the binomial tabulation story can be described as follows: one of <code>f</code> and <code>g</code> can be assumed to satisfy unary parametricity instead of the computation rules, and the proof will still go through.
+<p>In relation to the above, which is standard knowledge, the revelation in the binomial tabulation story can be described as follows: one of <code>f</code> and <code>g</code> can be assumed to satisfy unary parametricity instead of the computation rules, and we’ll still have a proof.
 Concretely, define unary parametricity by</p>
 <pre><code>Param : IndType → Set₁
 Param g =
