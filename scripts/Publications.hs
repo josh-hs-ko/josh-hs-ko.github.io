@@ -29,14 +29,16 @@ publicationList =
                   , "Jeremy Gibbons"
                   ]
       , venue   = Nothing
-      , year    = 2024
+      , year    = 2025
       , types   = [ (Unpublished, "Manuscript")
                   ]
-      , links   = [ ("PDF", Nothing, "/manuscripts/BT.pdf")
+      , links   = [ ("PDF", Nothing, "https://arxiv.org/pdf/2503.04001")
                   , ("Agda code", Just "HTML", "/Agda/BT/BinomialTabulation.html")
                   ]
-      , info    = [ ("Agda version", "2.6.4.3 with Standard Library 2.0", Nothing)
-                  , ("Related blog posts", "0034, 0036", Nothing)
+      , info    = [ ("arXiv", "2503.04001", Nothing)
+                  , ("DOI", "10.48550/arXiv.2503.04001", Nothing)
+                  , ("Agda version", "2.6.4.3 with Standard Library 2.0", Nothing)
+                  , ("Related blog posts", "0034, 0036, 0037, 0038, 0043, 0044", Nothing)
                   , ("Abstract", "We reconstruct some of the development in Richard Bird’s [2008] paper <i>Zippy Tabulations of Recursive Functions</i>, using dependent types and string diagrams rather than mere simple types. This paper serves as an intuitive introduction to and demonstration of these concepts for the curious functional programmer, who ideally already has some exposure to dependent types and category theory, is not put off by basic concepts like indexed types and functors, and wants to see a more practical example.</p><p>The paper is presented in the form of a short story, narrated from the perspective of a functional programmer trying to follow the development in Bird’s paper. The first section recaps the original simply typed presentation. The second section explores a series of refinements that can be made using dependent types. The third section uses string diagrams to simplify arguments involving functors and naturality. The short story ends there, but the paper concludes with a discussion and reflection in the afterword.", Nothing)
                   ]
       }

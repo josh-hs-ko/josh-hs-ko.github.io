@@ -1,7 +1,7 @@
 [
-PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Just 2025-02-12 10:35:12.346326835, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
+PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Just 2025-03-07 11:24:12.363733522, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
 ,
-PostEntry {entryNumber = 43, entryCreationTime = 2025-01-14 16:47:36.751448839, entryModificationTime = Nothing, entryTitle = "Representations of execution traces", entryTeaser = Just "There are different ways of representing relations as datatypes.\nI wonder whether we can consciously exploit the connection and systematically derive intrinsic datatypes for algorithm design.\nAs an experiment, I revisit the maximum prefix sum problem.\nThe outcome is inconclusive though."}
+PostEntry {entryNumber = 43, entryCreationTime = 2025-01-14 16:47:36.751448839, entryModificationTime = Just 2025-03-07 11:23:31.609268187, entryTitle = "Representations of execution traces", entryTeaser = Just "There are different ways of representing relations as datatypes.\nI wonder whether we can consciously exploit the connection and systematically derive intrinsic datatypes for algorithm design.\nAs an experiment, I revisit the maximum prefix sum problem.\nThe outcome is inconclusive though."}
 ,
 PostEntry {entryNumber = 42, entryCreationTime = 2024-12-18 17:30:44.571879738, entryModificationTime = Nothing, entryTitle = "No free (quantum) lunch", entryTeaser = Just "A naive and futile experiment in constructing a quantum program that I hoped to be easier to invent with the ZX-calculus."}
 ,
@@ -11,11 +11,11 @@ PostEntry {entryNumber = 40, entryCreationTime = 2024-10-11 16:43:29.591830825, 
 ,
 PostEntry {entryNumber = 39, entryCreationTime = 2024-09-09 22:30:07.223958624, entryModificationTime = Just 2024-12-16 19:46:37, entryTitle = "My fleet of model aircraft", entryTeaser = Just "I collect model aircraft mainly to remember some of my flights and the people and stories associated with them."}
 ,
-PostEntry {entryNumber = 38, entryCreationTime = 2024-06-05 16:10:05.399006718, entryModificationTime = Nothing, entryTitle = "Always inhabited binomial trees", entryTeaser = Just "A variation of the binomial tree datatype, and some more thoughts on a theory of datatype integration."}
+PostEntry {entryNumber = 38, entryCreationTime = 2024-06-05 16:10:05.399006718, entryModificationTime = Just 2025-03-07 11:22:11.352821031, entryTitle = "Always inhabited binomial trees", entryTeaser = Just "A variation of the binomial tree datatype, and some more thoughts on a theory of datatype integration."}
 ,
 PostEntry {entryNumber = 37, entryCreationTime = 2024-04-24 23:07:43.730351741, entryModificationTime = Just 2024-06-07 17:01:49, entryTitle = "Binomial trees as containers", entryTeaser = Just "The immediate sublist induction problem seems to point towards some general theory about datatype and program integration."}
 ,
-PostEntry {entryNumber = 36, entryCreationTime = 2024-01-05 00:20:58.360253655, entryModificationTime = Just 2024-01-05 00:46:07, entryTitle = "Induction principles are propositions", entryTeaser = Just "Parametricity is used to prove that the types of both the standard induction principle for natural numbers and the immediate sub-list induction principle are uniquely inhabited (up to extensional equality)."}
+PostEntry {entryNumber = 36, entryCreationTime = 2024-01-05 00:20:58.360253655, entryModificationTime = Just 2025-03-07 11:20:49.453744687, entryTitle = "Induction principles are propositions", entryTeaser = Just "Parametricity is used to prove that the types of both the standard induction principle for natural numbers and the immediate sub-list induction principle are uniquely inhabited (up to extensional equality)."}
 ,
 PostEntry {entryNumber = 35, entryCreationTime = 2023-12-22 17:03:32.136324781, entryModificationTime = Nothing, entryTitle = "APLAS 2023 Student Research Competition and Poster Session: Chair\8217s report", entryTeaser = Just "I chaired the APLAS 2023 student research competition and the associated poster session, and here\8217s a report, which may be useful to future SRC chairs."}
 ,

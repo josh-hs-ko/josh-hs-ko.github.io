@@ -60,8 +60,8 @@
 0038
 </div>
 <h2>Always inhabited binomial trees</h2>
-<div class="post-time">Posted at 16:10 on 5 June 2024</div>
-<p>Continuing <a href="/blog/0037/">0037</a>, one immediately noticeable difference between <code>upgrade</code>, which works on the <code>Forall-sublists</code> representation, and <code>retabulate</code>, which is the name we use in the <a href="/#publication-09685a99">short-story paper</a> for the version that works on the <code>BT</code> datatype, is that <code>upgrade</code> doesn’t need a side condition <code>k &lt; n</code>.
+<div class="post-time">Posted at 16:10 on 5 June 2024, and revised at 11:22 on 7 March 2025</div>
+<p>Continuing <a href="/blog/0037/">0037</a>, one immediately noticeable difference between <code>upgrade</code>, which works on the <code>Forall-sublists</code> representation, and <code>retabulate</code>, which is the name we use in the <a href="/#publication-8798a704">short-story paper</a> for the version that works on the <code>BT</code> datatype, is that <code>upgrade</code> doesn’t need a side condition <code>k &lt; n</code>.
 This side condition helps to exclude the case where the input has shape <code>BT n n</code>, i.e., a tip; this is the top level of the sublist lattice, above which there is no level, and correspondingly the output shape <code>BT n (suc n)</code> is uninhabited.
 However, the <code>Forall-sublists</code> representation is always inhabited because universal quantification over an empty domain (such as ‘for all 1-sublists of an empty list...’) is vacuously true.
 If we are looking for a closer correspondence between the two representations, then <code>BT n k</code> should get a <code>nil</code> constructor when <code>n &lt; k</code>, making <code>BT n k</code> always inhabited but possibly with no elements.
