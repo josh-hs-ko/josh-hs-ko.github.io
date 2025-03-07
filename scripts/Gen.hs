@@ -212,8 +212,8 @@ renderPublication as pvs postList p =
     processInfoEntry ((== "DOI") -> True) c _ _ = hyperlink ("https://doi.org/" ++ c) (text c)
     processInfoEntry ((== "arXiv") -> True) c _ _ = hyperlink ("https://arxiv.org/abs/" ++ c) (text c)
     processInfoEntry (("Related blog post" `isPrefixOf`) -> True) c _ postList =
-      foldr (<+>) empty $
-      punctuate (char ',') $
+      foldr ($+$) empty $
+      punctuate (text "<br>") $
       map (\(n, t) -> hyperlink (postUrl n) (text (postNumberString n) <+> parens (text t))) $
       reverse $
       filter ((`elem` [ read n | n <- split ", " c ]) . fst) $
