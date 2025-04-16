@@ -315,6 +315,56 @@ The outcome is inconclusive though.<span class="blog-entry-stamp">—&nbsp;<a hr
           <div class="after-section-title"></div>
         </div>
         <div class="col-sm-9">
+          <div class="publication" id="publication-5e2da9a2">
+            <div class="publication-entry">
+              <div class="publication-title">
+                <a href="#publication-5e2da9a2">Bottom-up computation using trees of sublists: A dependently typed approach</a>
+              </div>
+              <div class="publication-authors">
+                Hsiang-Shang&nbsp;Ko and <a href="https://scm.iis.sinica.edu.tw/home/">Shin-Cheng&nbsp;Mu</a>
+              </div>
+              <div class="publication-venue">
+                2025
+              </div>
+              <div class="publication-links">
+                <span class="publication-link-outer"><span class="publication-type type-unpublished">Submitted</span></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://raw.githubusercontent.com/josh-hs-ko/BT/refs/heads/main/JFP/BT.pdf">PDF</a></span>
+                <span class="publication-link-outer"><a class="publication-link" href="https://github.com/josh-hs-ko/BT/blob/main/JFP/BT.agda">Agda code<span class="link-note">(GitHub)</span></a></span>
+                <span class="publication-link-outer"><span class="publication-link publication-more-info" onclick="none()" data-toggle="collapse" data-target="#publication-info-5e2da9a2">More info</span></span>
+              </div>
+            </div>
+            <div class="panel panel-publication-info collapse" id="publication-info-5e2da9a2">
+              <div class="panel-body publication-info">
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Agda version
+                  </div>
+                  <div class="col-sm-10">
+                    <p>2.7.0.1 with Standard Library 2.2</p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Related blog posts
+                  </div>
+                  <div class="col-sm-10">
+                    <p><a href="/blog/0037/">0037 (Binomial trees as containers)</a><br>
+                       <a href="/blog/0038/">0038 (Always inhabited binomial trees)</a><br>
+                       <a href="/blog/0043/">0043 (Representations of execution traces)</a><br>
+                       <a href="/blog/0044/">0044 (‘Induction principles are propositions’ revisited)</a></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Abstract
+                  </div>
+                  <div class="col-sm-10">
+                    <p>We revisit the problem of implementing a recursion scheme over immediate sublists studied by Mu (2024), and provide a dependently typed solution in Agda. The recursion scheme can be implemented as either a top-down algorithm, which has a straightforward definition but results in lots of re-computation, or a bottom-up algorithm, which has a puzzling definition but avoids re-computation. We show that the types can be made precise to guide and understand the developments of the algorithms. In particular, a precisely typed version of the key data structure (binomial trees) can be derived from the problem specification. The precise types also allow us to prove that the two algorithms are extensionally equal using parametricity. Despite apparent dissimilarities, our proof can be compared to Mu's equational proof, and be understood as a more economical version of the latter.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="publication" id="publication-8798a704">
             <div class="publication-entry">
               <div class="publication-title">
@@ -365,11 +415,15 @@ The outcome is inconclusive though.<span class="blog-entry-stamp">—&nbsp;<a hr
                   </div>
                   <div class="col-sm-10">
                     <p><a href="/blog/0034/">0034 (The power and joy of abstraction)</a><br>
-                       <a href="/blog/0036/">0036 (Induction principles are propositions)</a><br>
-                       <a href="/blog/0037/">0037 (Binomial trees as containers)</a><br>
-                       <a href="/blog/0038/">0038 (Always inhabited binomial trees)</a><br>
-                       <a href="/blog/0043/">0043 (Representations of execution traces)</a><br>
-                       <a href="/blog/0044/">0044 (‘Induction principles are propositions’ revisited)</a></p>
+                       <a href="/blog/0036/">0036 (Induction principles are propositions)</a></p>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-2 publication-info-title">
+                    Note
+                  </div>
+                  <div class="col-sm-10">
+                    <p>Sections 1 and 2 of this paper are extracted, simplified, and rewritten as a <a href="#publication-5e2da9a2">functional pearl</a>.</p>
                   </div>
                 </div>
                 <div class="row">

@@ -23,6 +23,23 @@ data Publication = Publication
 publicationList :: [Publication]
 publicationList =
   [ Publication
+      { title   = "Bottom-up computation using trees of sublists: A dependently typed approach"
+      , authors = [ "Hsiang-Shang Ko"
+                  , "Shin-Cheng Mu"
+                  ]
+      , venue   = Nothing
+      , year    = 2025
+      , types   = [ (Unpublished, "Submitted")
+                  ]
+      , links   = [ ("PDF", Nothing, "https://raw.githubusercontent.com/josh-hs-ko/BT/refs/heads/main/JFP/BT.pdf")
+                  , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/BT/blob/main/JFP/BT.agda")
+                  ]
+      , info    = [ ("Agda version", "2.7.0.1 with Standard Library 2.2", Nothing)
+                  , ("Related blog posts", "0037, 0038, 0043, 0044", Nothing)
+                  , ("Abstract", "We revisit the problem of implementing a recursion scheme over immediate sublists studied by Mu (2024), and provide a dependently typed solution in Agda. The recursion scheme can be implemented as either a top-down algorithm, which has a straightforward definition but results in lots of re-computation, or a bottom-up algorithm, which has a puzzling definition but avoids re-computation. We show that the types can be made precise to guide and understand the developments of the algorithms. In particular, a precisely typed version of the key data structure (binomial trees) can be derived from the problem specification. The precise types also allow us to prove that the two algorithms are extensionally equal using parametricity. Despite apparent dissimilarities, our proof can be compared to Mu's equational proof, and be understood as a more economical version of the latter.", Nothing)
+                  ]
+      }
+  , Publication
       { title   = "Binomial tabulation: A short story"
       , authors = [ "Hsiang-Shang Ko"
                   , "Shin-Cheng Mu"
@@ -38,7 +55,8 @@ publicationList =
       , info    = [ ("arXiv", "2503.04001", Nothing)
                   , ("DOI", "10.48550/arXiv.2503.04001", Nothing)
                   , ("Agda version", "2.6.4.3 with Standard Library 2.0", Nothing)
-                  , ("Related blog posts", "0034, 0036, 0037, 0038, 0043, 0044", Nothing)
+                  , ("Related blog posts", "0034, 0036", Nothing)
+                  , ("Note", "Sections 1 and 2 of this paper are extracted, simplified, and rewritten as a <a href=\"#publication-5e2da9a2\">functional pearl</a>.", Nothing)
                   , ("Abstract", "We reconstruct some of the development in Richard Bird’s [2008] paper <i>Zippy Tabulations of Recursive Functions</i>, using dependent types and string diagrams rather than mere simple types. This paper serves as an intuitive introduction to and demonstration of these concepts for the curious functional programmer, who ideally already has some exposure to dependent types and category theory, is not put off by basic concepts like indexed types and functors, and wants to see a more practical example.</p><p>The paper is presented in the form of a short story, narrated from the perspective of a functional programmer trying to follow the development in Bird’s paper. The first section recaps the original simply typed presentation. The second section explores a series of refinements that can be made using dependent types. The third section uses string diagrams to simplify arguments involving functors and naturality. The short story ends there, but the paper concludes with a discussion and reflection in the afterword.", Nothing)
                   ]
       }
