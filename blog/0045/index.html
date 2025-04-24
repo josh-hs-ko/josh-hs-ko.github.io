@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Intrinsic typing and proof economy: Complex indices — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="To start developing theories that explain the kind of ‘proof economy’ achieved by features of intrinsic typing, I look at an example of a simplest feature that I can think of —indices that consist of complex expressions— and compare it with the equivalent formulation where indices are restricted to variables with which equality constraints are associated.
+It turns out that what the example shows isn’t quite what I expected, and the kind of proof economy achieved may have already been studied by the line of work on dependent pattern matching.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0045
+</div>
+<h2>Intrinsic typing and proof economy: Complex indices</h2>
+<div class="post-time">Posted at 16:51 on 24 April 2025</div>
+<p>Over the past few months, I worked with <a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> to extract and update a part of the <a href="/#publication-8798a704">short story on binomial tabulation</a> as a more ordinary <a href="/#publication-5e2da9a2">pearl for JFP</a>, and just submitted it.
+The original short story has been uploaded to arXiv, where I expect it to stay forever.
+Writing the short story was more like an experiment; I’m still very happy with the outcome (and go back to read and enjoy it myself from time to time), but as a test for whether my taste matches that of the general PL community, I now believe the result is negative.
+It is more important to produce stuff that advances science though, rather than stuff that’s optimised to leave good impressions on people in a limited amount of time.</p>
+<hr />
+<p>I started to ponder how to explain the kind of ‘proof economy’ that intrinsic typing can achieve in <a href="/blog/0040/">0040</a>.
+There I compared a few versions of vector append with different amounts of proof effort, and saw that the usual proof-free version (<code>append₀</code>) corresponds to a version (<code>append₁</code>) that handles a proof explicitly but in a simple way.
+What I think should be done is formalise such correspondence, so that it is clear what kind of proof is/can be hidden.
+More specifically, I want to compare (data) types that differ in only one feature, and then state how to convert programs from one type to the other, so as to explain how that feature affects how we write programs (and proofs).
+A simplest example is the technique of converting a complex target index in an inductive family, for example the final ‘<code>suc n</code>’ in</p>
+<pre><code>data Vec (A : Set) : ℕ → Set where
+  []  :               Vec A  zero
+  _∷_ : A → Vec A n → Vec A (suc n)
+</code></pre>
+<p>to a variable constrained by an equality, as in</p>
+<pre><code>data Vec' (A : Set) : ℕ → Set where
+  []   :                            Vec' A zero
+  cons : A → Vec' A n → suc n ≡ r → Vec' A r
+</code></pre>
+<p>Intuitively, wherever we write <code>x ∷ xs</code> with <code>Vec</code> we write <code>cons x xs refl</code> with <code>Vec'</code>, dealing with the equality proof explicitly in the latter case.
+The technique/conversion can also be applied backwards and interpreted as saying that what we gain by using the complex target index in <code>Vec</code> is the ability to omit the <code>refl</code> in <code>cons</code>.
+Note that the conversion is only applied to cons (and not to nil), so the difference between the data types is as localised as possible.
+Hopefully such conversions will compose, so that when we use multiple features we can deduce what the combined effect is.
+For example, apply the technique to both cons and nil to get</p>
+<pre><code>data Vec'' (A : Set) : ℕ → Set where
+  nil  :                 zero  ≡ r → Vec'' A r
+  cons : A → Vec'' A n → suc n ≡ r → Vec'' A r
+</code></pre>
+<p>and we’ll know that we’re exposing equality proofs in both constructors.</p>
+<p>When it comes to differences between data types, one thinks of ornaments.
+(Indeed, there are ornaments from <code>Vec</code> to <code>Vec''</code> and vice versa.)
+Moreover, ornamental isomorphisms do capture the idea of proof economy to some extent — for example, the isomorphism <code>Vec A n ≅ Σ[ xs ∈ List A ] length xs ≡ n</code> can be interpreted as saying that a vector has the same content as a pair of a list and a proof about its length (so manipulating the vector can be thought of as manipulating the pair simultaneously).
+In a similar vein, we could easily prove that <code>Vec A n ≅ Vec'' A n</code>, and inspecting the two-way conversions in the isomorphism will show that we’re adding or removing <code>refl</code>.
+But that’s not the full story.
+The isomorphism seems to suggest that <code>Vec</code> and <code>Vec''</code> are the same, but in fact they behave differently in practice, and we ought to capture that in a theory.
+For example, when we write a function like</p>
+<pre><code>f : Vec A (g m) → ⋯
+f []       = ?
+f (x ∷ xs) = ?
+</code></pre>
+<p>where the index <code>g m</code> in the type of the input vector is complex, the case splitting would fail because <code>g m</code> cannot be unified with <code>zero</code> or <code>suc n</code>.
+Switching to <code>Vec''</code> delays unification and allows case splitting:</p>
+<pre><code>f'' : Vec'' A (g m) → ⋯
+f'' (nil       eq) = {! ⋯ ⊣ eq : zero ≡ g m !}
+f'' (cons x xs eq) = {! ⋯ ⊣ x : A; xs : Vec'' A n; eq : suc n ≡ g m !}
+</code></pre>
+<p>The isomorphism doesn’t capture this difference.
+To see the difference, ultimately one would need to compare the two data types within the theory of dependent pattern matching, but that theory is rather complex.
+Instead, I hope that I can do the comparison in terms of elimination rules.</p>
+<p>It turns out that, in the more basic setting with only elimination rules, it’s fine to use the ordinary <code>Vec</code>.
+Recall that the elimination rule of <code>Vec</code> is</p>
+<pre><code>Vec-elim : {A : Set} (P : ∀ {n} → Vec A n → Set)
+         → P []
+         → (∀ x {n} (xs : Vec A n) → P xs → P (x ∷ xs))
+         → ∀ {n} (xs : Vec A n) → P xs
+</code></pre>
+<p>In the type of <code>f</code> we want to quantify over all indices of the form <code>g m</code>.
+To do that with <code>Vec-elim</code>, which lets us quantify over any <code>n</code>, we should restrict <code>n</code> to the form <code>g m</code> in the motive <code>P</code>.
+That is, using the elimination rule we should aim for this equivalent type</p>
+<pre><code>∀ {A n} → Vec A n → ∀ {m} → n ≡ g m → ⋯
+                    --------------------
+</code></pre>
+<p>and set the underlined part as the motive.
+Apply this function to <code>refl</code>, and we get back to the original type of <code>f</code>:</p>
+<pre><code>f : Vec A (g m) → ⋯
+f {A} xs₀ =
+  Vec-elim (λ {n} xs → ∀ {m} → n ≡ g m → Vec A (h m))
+           (λ         eq → {! ⋯ ⊣ eq : zero ≡ g m !})
+           (λ x xs ih eq → {! ⋯ ⊣ x  : A
+                                ; xs : Vec A n
+                                ; ih : ∀ {m} → n ≡ g m → ⋯
+                                ; eq : suc n ≡ g m !})
+           xs₀
+           refl
+</code></pre>
+<p>The holes correspond to those we get after doing case splitting in the definition of <code>f''</code>.
+In fact for the second hole the <code>Vec-elim</code> version may be preferable because an inductive call can be made by proving <code>n ≡ g m</code> for some <code>m</code>, whereas in the <code>f''</code> version we cannot apply <code>f''</code> to <code>xs</code> before we somehow unify <code>n</code> with some <code>g m</code>, which is a stricter requirement than exhibiting a proof of <code>n ≡ g m</code>.
+That is, the transformation from a complex index to a variable with an equality constraint should be applied outside the data type definition for maximum flexibility; whether the transformation is applied inside the data type definition doesn’t seem important.</p>
+<p>Hm, that doesn’t work as I expected.
+I wanted to explain how the index transformation affects the usability of <code>Vec</code> and <code>Vec''</code>, but actually the transformation isn’t inherently tied to data types, and can —or should— be applied elsewhere, and even to type families, not just inductive families.
+I think the example does show that the familiar Agda data type definitions and dependent pattern matching already help to hide a lot of equality proofs.
+I’ve never really dug into the translation from dependent pattern matching definitions to eliminators (<a href="https://doi.org/10.1007/11780274_27">with</a> or <a href="https://doi.org/10.1017/S0956796816000174">without</a> K), but I think I have a vague impression that equality types are crucially involved (and therefore having the K axiom or not leads to different treatments).
+It’ll probably be worthwhile to (seriously) study the translation and explain it more explicitly in terms of proof economy, but I suspect there won’t be much new stuff to develop.
+Hopefully, by going through a few more examples that I’ve already had in mind and will write about, I’ll be able to find new things to say.</p>
+<hr />
+<div class="remark">
+More generally, working with concrete examples proves to be really important once again…
+</div>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>
