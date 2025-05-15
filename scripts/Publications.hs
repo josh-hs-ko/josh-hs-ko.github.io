@@ -31,7 +31,7 @@ publicationList =
       , year    = 2025
       , types   = [ (Unpublished, "Submitted")
                   ]
-      , links   = [ ("PDF", Nothing, "https://raw.githubusercontent.com/josh-hs-ko/BT/refs/heads/main/JFP/BT.pdf")
+      , links   = [ ("PDF", Nothing, "https://github.com/josh-hs-ko/BT/raw/main/JFP/BT.pdf")
                   , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/BT/blob/main/JFP/BT.agda")
                   ]
       , info    = [ ("Agda version", "2.7.0.1 with Standard Library 2.2", Nothing)
