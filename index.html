@@ -108,33 +108,45 @@ The outcome is inconclusive though.<span class="blog-entry-stamp">—&nbsp;<a hr
           <div class="expertise-list">
             <span class="expertise">Dependently typed programming</span>
             <span class="expertise">Datatype-generic programming</span>
-            <span class="expertise">(Applied) type theory</span>
-            <span class="expertise">Bidirectional programming</span>
             <span class="expertise">Program derivation</span>
+            <span class="expertise">(Applied) type theory</span>
             <span class="expertise">Functional programming</span>
+            <span class="expertise">Bidirectional programming</span>
           </div>
 
           <p>
             I like tools for organising my own reasoning.
-            As a research-oriented programmer, I look for (i)&nbsp;mathematical and logical structures of computation that can help me to understand and develop correct programs, and (ii)&nbsp;expressive programming languages where such structures can be made explicit.
+            As a research-oriented programmer, I look for <em>mathematical and logical structures of computation</em> that can help me to understand and develop correct programs, and <em>expressive programming languages</em> where such structures can be made explicit.
             I approach programming problems mainly from the perspective of <em><a href="https://en.wikipedia.org/wiki/Intuitionistic_type_theory">intuitionistic type theory</a></em>, which substantially overlaps with <em><a href="https://en.wikipedia.org/wiki/Functional_programming">functional programming</a></em>.
             For theoretic modelling, my weapon of choice is <a href="http://wiki.portal.chalmers.se/agda/pmwiki.php">Agda</a>; for practical programming, I use <a href="https://www.haskell.org">Haskell</a>.
           </p>
           <p>
-            I have been exploring the potential of <em><a href="https://en.wikipedia.org/wiki/Dependent_type">dependently typed programming</a></em>, where sophisticated correctness properties and proofs can be integrated into types and programs, and mechanically verified by type-checking.
-            More interestingly, with an interactive development environment (like the <a href="https://agda.readthedocs.io/en/latest/tools/emacs-mode.html">Emacs mode offered by Agda</a>) that provides semantic hints in the form of type information, the programmer can gain better ‘<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>’ regarding the meaning of the program being constructed.
-            (See, for example, my paper on <a href="#publication-9f9adfcc">programming metamorphic algorithms</a>.)
-            This is made possible primarily because of <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em>, and my <a href="#publication-9c9a95f3">DPhil thesis</a> developed <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques based on <a href="#publication-696aedff">ornaments</a> for improving usability and reusability of inductive families.
-            Currently my aim is to develop datatype-generic libraries that are suitable for the toolbox of the practical Agda programmer, starting with a <a href="#publication-81a792a1">framework</a> (based on <a href="https://agda.readthedocs.io/en/latest/language/reflection.html">elaborator reflection</a>) where datatype-generic constructions can be instantiated as, and for, native datatypes and functions.
+            I believe that two features of type theory make it a useful tool for programming: (i)&nbsp;an expressive language of types for precise specification, abstraction, and modularisation, and (ii)&nbsp;formal and conceptual combination of programs and proofs.
+            My research has been driven towards developing theories and applications to explain and demonstrate how the two features are useful.
+          </p>
+          <hr>
+          <p>
+            I am most interested in <em>type-theoretic derivation of algorithms</em> (expressed in Agda), which demonstrates both features mentioned above.
+            A recent example is about top-down and bottom-up algorithms for implementing a recursion scheme:
+            (i)&nbsp;The type of the recursion scheme is made precise to the extent that it is uniquely inhabited under natural conditions, so we can see that the two algorithms compute the same results simply because they have the same type.
+            Inheriting the precision, the types of the algorithm components also faithfully describe what each component does and how they fit together, and thus greatly help to organise the development.
+            (ii)&nbsp;The ‘intrinsic’ datatypes used in the development allow traditionally non-trivial correctness proofs to be embedded implicitly in —and thus developed together with— the programs.
+            Formally, even though carrying proofs, these programs are as economical to write as corresponding Haskell programs; conceptually, they can be thought of as operating on meaningful data such as ‘all the results computed by the recursion scheme’ as opposed to merely a tree of values, better reflecting our intuitive reasoning.
+            (With my co-authors I wrote a <a href="#publication-8798a704">short story</a> and later a more conventional <a href="#publication-5e2da9a2">pearl</a> to give a few different treatments of the example.)
+            In such dependently typed developments, correctness considerations are manifested and managed as type information, so that, through interaction with the type checker, the programmer gets meaningful hints and gains better ‘<a href="https://en.wikipedia.org/wiki/Situation_awareness">situation awareness</a>’ regarding how to complete the programs — I wrote a paper on <a href="#publication-9f9adfcc">programming metamorphic algorithms</a> to recreate and demonstrate the interactive experience.
+            I am hoping to scale up along this line of research, in terms of both program size (requiring more careful design for abstraction and modularisation) and degree of algorithmic sophistication (dealing with more complex kinds of proof economically).
           </p>
           <p>
-            I also studied the <em><a href="https://books.google.com/books?id=P5NQAAAAMAAJ">Algebra of Programming</a></em> (which is a particular flavour of <em><a href="https://en.wikipedia.org/wiki/Bird–Meertens_formalism">Bird–Meertens formalism</a></em>, <em><a href="https://www.cs.ox.ac.uk/publications/publication2360-abstract.html">program calculation</a></em>, or <em><a href="https://en.wikipedia.org/wiki/Program_derivation">program derivation</a></em>) and contributed to <a href="#publication-41007bea">its dependently typed formalisation</a>.
+            I am most familiar with <em><a href="https://www.cs.ox.ac.uk/publications/publication1397-abstract.html">datatype-generic</a></em> techniques for developing theories that are parametrised over and work for a whole range of intrinsic datatypes, or <em><a href="https://ncatlab.org/nlab/show/inductive+family">inductive families</a></em> — my <a href="#publication-9c9a95f3">DPhil thesis</a> developed a datatype-generic theory based on ‘<a href="#publication-696aedff">ornaments</a>’ for improving usability and reusability of inductive families.
+            I also led a team to build a <a href="#publication-81a792a1">framework</a> in Agda (based on <a href="https://agda.readthedocs.io/en/latest/language/reflection.html">elaborator reflection</a>) where datatype-generic constructions can be instantiated as, and for, native datatypes and functions; within this framework, I hope to eventually develop datatype-generic libraries that are suitable for the toolbox of the practical Agda programmer, but that will require assembling a new team (which seems difficult) to collect reusable dependently typed programming patterns, program them as datatype-generic library components, and sort out engineering problems.
+            Now I am more keen to explain how dependently typed programming features and patterns help to reduce the burden of formal proof by developing both a <a href="https://en.wikipedia.org/wiki/Naive_set_theory#Method">naive theory</a> (aiming at the novice dependently typed programmer) and a formal version (which will likely be datatype-generic), but these are still at a very early stage.
           </p>
           <p>
             I have also worked on <em><a href="https://www.cs.ox.ac.uk/publications/publication11924-abstract.html">bidirectional transformations</a></em> for solving consistency maintenance (synchronisation) problems.
             More specifically, my focus was on <em>bidirectional programming</em>, which is largely synonymous with the construction of <em><a href="https://doi.org/10.1145/1232420.1232424">lenses</a></em>.
             My main results in this area were built around a small ‘putback-based’ bidirectional programming language <a href="https://bitbucket.org/prl_tokyo/bigul">BiGUL</a> (Bidirectional Generic Update Language), about which there were an <a href="#publication-c48b059c">Agda formalisation</a>, a <a href="https://hackage.haskell.org/package/BiGUL">Haskell port</a>, and <a href="#publication-e124d6a0">an axiomatic semantics</a> that helps to explain how to think about bidirectional programs unidirectionally.
           </p>
+          <hr>
           <p id="Opportunities">
             <span class="paragraph-title">徵才啟事</span>我有一些常備經費可聘請在學的兼任研究助理（發給獎補助金），歡迎有興趣探索程式語言研究領域的學生與我聯絡，洽談細節。預設會較廣泛地閱讀論文或教科書並報告、討論，注重訓練 Agda 程式（及證明）撰寫能力，並鼓勵動手嘗試不同作法和新構造。若有機緣發現特別有興趣的研究方向、題目，亦可選擇聚焦做出成果，甚至共同發表論文（但不強求）。進度無硬性規定，開會時間與型式（實體或視訊）亦可商量，因應學業壓力彈性調整。若想先自行探索對此研究領域有無興趣，最方便途徑是參加 <a href="https://flolac.iis.sinica.edu.tw">FLOLAC</a> 偶數年「型別原理」課程，或可略讀我的<a href="/#Publications-and-manuscripts">著作</a>和<a href="/blog/">網誌</a>（但大部份並非入門程度）。若興趣已較明確，但想先短期嘗試，可考慮申請<a href="https://www.iis.sinica.edu.tw/zh/page/Recruitment/SummerInterns/SummerInterns_2025.html">中研院資訊所暑期實習</a>。
           </p>

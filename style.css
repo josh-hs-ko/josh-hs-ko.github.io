@@ -341,7 +341,7 @@ ol {
 }
 
 .section {
-  margin-top: 3ex;
+  margin-top: 4ex;
 }
 
 .paragraph-title {
@@ -587,8 +587,8 @@ hr {
   height: 2px;
   border: none;
   background-color: var(--cs-header);
-  margin-top: 3ex;
-  margin-bottom: 3ex;
+  margin-top: 2ex;
+  margin-bottom: 2ex;
 }
 
 .remark {
