@@ -551,7 +551,7 @@ encryptPost pn keyBytes post = do
   ivBytes <- getRandomBytes 16
   let Just iv = makeIV ivBytes
   let (_, _, _, ns) = extractHeader (commonmarkToNode [] (Text.pack post))
-  let plaintext = pad (PKCS7 16) (Text.encodeUtf8 (nodeToHtml [optUnsafe] (Node Nothing DOCUMENT ns)))
+  let plaintext = pad (PKCS7 16) (Text.encodeUtf8 (nodeToHtml [optUnsafe] (transformRemark (Node Nothing DOCUMENT ns))))
   return (ivBytes, cbcEncrypt key iv plaintext)
 
 writeEncryptedFiles :: [PostEntry] -> Int -> RawPost -> IO ()

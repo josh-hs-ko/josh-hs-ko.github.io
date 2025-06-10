@@ -1,4 +1,6 @@
 [
+PostEntry {entryNumber = 46, entryCreationTime = 2025-06-10 18:28:16.442751524, entryModificationTime = Nothing, entryTitle = "\23567\22411\27665\20027\33258\27835\39636\30340\35477\29983", entryTeaser = Nothing}
+,
 PostEntry {entryNumber = 45, entryCreationTime = 2025-04-24 16:51:33.981891102, entryModificationTime = Nothing, entryTitle = "Intrinsic typing and proof economy: Complex indices", entryTeaser = Just "To start developing theories that explain the kind of \8216proof economy\8217 achieved by features of intrinsic typing, I look at an example of a simplest feature that I can think of \8212indices that consist of complex expressions\8212 and compare it with the equivalent formulation where indices are restricted to variables with which equality constraints are associated.\nIt turns out that what the example shows isn\8217t quite what I expected, and the kind of proof economy achieved may have already been studied by the line of work on dependent pattern matching."}
 ,
 PostEntry {entryNumber = 44, entryCreationTime = 2025-01-28 10:55:16.646984333, entryModificationTime = Just 2025-03-07 11:24:12.363733522, entryTitle = "\8216Induction principles are propositions\8217 revisited", entryTeaser = Just "A more accurate perspective on how parametricity helps to determine the extensional behaviour of an induction principle, and some unresolved problems."}
