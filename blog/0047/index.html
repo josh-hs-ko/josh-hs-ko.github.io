@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Specifying queue order using parametric types, concretely — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="An idea using parametric types to specify the full functional correctness of queues with minimal effort, and a bit of experiment using parametricity.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0047
+</div>
+<h2>Specifying queue order using parametric types, concretely</h2>
+<div class="post-time">Posted at 01:48 on 5 September 2025</div>
+<p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc
+They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
+It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
+I had a hunch that parametricity could lead to a very clean specification of queue order, and a bit of experiment showed that hunch is probably correct, although I didn’t expect that most of the techniques used turned out to be old and familiar ones.</p>
+<p>The first non-trivial example of a queue implementation is usually this two-list representation:</p>
+<pre><code>module _ (A : Set) where
+
+  State : Set
+  State = List A × List A
+
+  empty : State
+  empty = [] , []
+
+  push : A → State → State
+  push x (front , rear) = front , x ∷ rear
+
+  pop : State → Maybe (A × State)
+  pop ([]        , rear) with reverse rear
+  pop ([]        , rear) | []     = nothing
+  pop ([]        , rear) | x ∷ xs = just (x , (xs , []))
+  pop (x ∷ front , rear) = just (x , (front , rear))
+</code></pre>
+<p>The simple types do not prevent the programmer from writing, for example,</p>
+<pre><code>  wrongPop : State → Maybe (A × State)
+  wrongPop (front , rear) with reverse rear
+  wrongPop (front , rear) | []     = nothing
+                                    -- forget the front elements
+  wrongPop (front , rear) | x ∷ xs = just (x , (front ++ xs , []))
+                                    -- wrong order
+</code></pre>
+<p>where elements are accidentally forgotten or reordered.
+At this point people usually think of substructural type systems, but that implies drastic changes to the language, which I want to avoid.</p>
+<p>Another thing that people might think of is ordered data structures, which are standard examples of dependently typed programming.
+In particular, Conor McBride wrote an <a href="https://doi.org/10.1145/2628136.2628163">ICFP 2014 paper</a> on these, where, for example, the datatype of ordered lists is parametrised by both an element type <code>A : Set</code> and an ordering <code>R : A → A → Set</code>, and is indexed by a lower bound and an upper bound:</p>
+<pre><code>data OList (A : Set) (R : A → A → Set) : A → A → Set where
+  []  :           {{R l u}}                 → OList A R l u
+  _∷_ : (x : A) → {{R l x}} → OList A R x u → OList A R l u
+</code></pre>
+<p>An inhabitant of <code>OList A _≤_ l u</code> looks like <code>l ≤ x₀ ≤ x₁ ≤ x₂ ≤ x₃ ≤ u</code>, where ordering proofs are put between adjacent elements <code>xᵢ</code> and bounds.
+(These ordering proofs are declared as instance arguments so that the proofs can be automatically dealt with when defining functions on <code>OList</code> — we’ll see examples later.)
+This might not appear too relevant because queue order isn’t about ordering the elements themselves.
+But I realised that queue ordering is actually a special case:</p>
+<pre><code>Seq : Set → ℕ → ℕ → Set
+Seq A l u = OList (Maybe A × ℕ) (λ (_ , t) (_ , t') → t &lt; t')
+                  (nothing , l) (nothing , u)
+</code></pre>
+<p>That is, just use an element type like <code>Maybe A × ℕ</code> where the second component records the time when the element is inserted into the queue, and order the elements by their time of insertion; the two bounds are not real elements but can still be assigned a time of insertion, hence the <code>Maybe A</code>.
+So theoretically <code>OList</code> suffices, although we could achieve a cleaner separation of elements and their insertion time by putting the latter at the index level:</p>
+<pre><code>data Seq {Time : Set} (P : Time → Set) (R : Time → Time → Set)
+      : Time → Time → Set where
+  []  :       {{R l u}}               → Seq P R l u
+  _∷_ : P m → {{R l m}} → Seq P R m u → Seq P R l u
+</code></pre>
+<p>This was actually the first idea that came to me, but of course <code>OList</code> is easier, so we’ll just work with <code>OList</code> below.</p>
+<p>Conor’s <code>OList</code> can lead to awkward function definitions though.
+For example, to write the usual list append, we’d have to write some proofs manually:</p>
+<pre><code>_++_ : OList A R l m → OList A R m u → OList A R l u
+[]       ++ ys = {! ..., _ : R l m, ys : OList A R m u ⊢ OList A R l u !}
+(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+</code></pre>
+<p>In the inductive case, the proofs are automatically dealt with by instance resolution.
+But in the base case, we should produce an <code>OList A R l u</code>, whereas <code>ys</code> has a different type <code>OList A R m u</code>.
+We have a proof of <code>R l m</code> though (which is the instance argument of the <code>[]</code> constructor), so with some effort we should be able to fuse that proof into <code>ys</code> and fulfil the goal.
+Conor discussed this situation in their paper; they insisted on writing no proofs, and argued that the natural function to write is the following one, which puts <code>m</code> into the output list as well:</p>
+<pre><code>append' : (m : A) → OList A R l m → OList A R m u → OList A R l u
+append' m []       ys = m ∷ ys
+append' m (x ∷ xs) ys = x ∷ append' m xs ys
+</code></pre>
+<p>Intuitively, the two input lists look like <code>l ≤ x₀ ≤ x₁ ≤ m</code> and <code>m ≤ x₂ ≤ x₃ ≤ u</code>.
+If we append them in the usual way, we’d have to compress the middle <code>x₁ ≤ m ≤ x₂</code> into <code>x₁ ≤ x₂</code>, which requires transitivity; but if we also put <code>m</code> into the output list, then no proving is required.
+Luckily, <code>append'</code> sufficed for Conor’s use case, but the problem remains: with this representation, there are ordinary functions such as list append that we cannot define without writing proofs.
+We’ll fix this problem below by using a different representation.</p>
+<p>But before we get to that, there are lessons to be learned here: given the type <code>OList A R l m → OList A R m u → OList A R l u</code>, if we use/assume no laws of <code>R</code>, we are pretty much forced to write <code>append'</code>, so the type acts as a pretty tight specification.
+How tight?
+We can do a bit of experiment with a simpler type: how many inhabitants does the type <code>OList A R l u → OList A R l u</code> have?
+Let’s try and write a function of this type:</p>
+<pre><code>f : OList A R l u → OList A R l u
+f ([] {{R-l-u}})                         = [] {{R-l-u}}
+f (_∷_ x {{R-l-x}} ([] {{R-x-u}}))       = ?
+f (_∷_ x {{R-l-x}} (_∷_ y {{R-x-y}} xs)) = ?
+</code></pre>
+<p>The nil case has no other possibilities.
+In the singleton case, we cannot delete <code>x</code> and return <code>[]</code> because that would require us to prove <code>R l u</code>, which requires transitivity (which we don’t assume); and we cannot duplicate <code>x</code> and return <code>x ∷ x ∷ []</code> because that would require us to prove <code>R x x</code>, which requires reflexivity; so we have no choice but return <code>x ∷ []</code>.
+And of course, in the third case we cannot reorder <code>x</code> and <code>y</code>, which requires symmetry in particular.
+So <code>f</code> has to be the identity function.
+Intuitively, the elements of an input list of type <code>OList A R l u</code> are linked together by proofs of <code>R</code>, and since <code>R</code> is parametrically quantified and has no laws, in the output list of the same type <code>OList A R l u</code> we can only use the existing proofs to link the output elements, and the only way of forming links from <code>l</code> to <code>u</code> is going through exactly the same elements and proofs in the input list.
+If <code>R</code> has laws, then we’re allowed to do more: transitivity allows deletion, reflexivity allows (adjacent) copying, and symmetry allows reordering (with help from other laws).
+So there seems to be some kind of correspondence with substructural type systems, which may be interesting to explore — some time later.</p>
+<p>Getting back to the problem of awkward definitions, the solution that came to me is</p>
+<pre><code>data OList (A : Set) (R : A → A → Set) : A → A → Set where
+  []  :                                                   OList A R u u
+  _∷_ : (x : A) → {{R l x}} → {{R x m}} → OList A R m u → OList A R l u
+</code></pre>
+<p>An inhabitant of this new <code>OList</code> datatype looks like <code>l ≤ x₀ ≤ m₀ ≤ x₁ ≤ m₁ ≤ x₂ ≤ m₂ ≤ x₃ ≤ u</code>, where every element <code>xᵢ</code> is sandwiched between two separators (including the two bounds).
+This representation works nicely for list append:</p>
+<pre><code>_++_ : OList A R l m → OList A R m u → OList A R l u
+[]       ++ ys = ys
+(x ∷ xs) ++ ys = x ∷ (xs ++ ys)
+</code></pre>
+<p>If the two input lists are <code>l ≤ x₀ ≤ m₀ ≤ x₁ ≤ m</code> and <code>m ≤ x₂ ≤ m₂ ≤ x₃ ≤ u</code>, then there’s no problem producing <code>l ≤ x₀ ≤ m₀ ≤ x₁ ≤ m ≤ x₂ ≤ m₂ ≤ x₃ ≤ u</code>, where the mediating index <code>m</code> simply becomes the separator between <code>x₁</code> and <code>x₂</code>.
+We can also define the directly recursive and slow list reverse, whose type specifies that the function should map a chain of elements from <code>l</code> to <code>u</code> to a flipped chain from <code>u</code> to <code>l</code>:</p>
+<pre><code>slowReverse : OList A R l u → OList A (flip R) u l
+slowReverse []       = []
+slowReverse (x ∷ xs) = slowReverse xs ++ (x ∷ [])
+</code></pre>
+<p>(This happens to be naturally definable on Conor’s representation too, using <code>append'</code>.)
+The tail-recursive version <code>revcat</code> can be defined too, with the type describing the loop invariant that an input chain of elements from <code>l</code> to <code>u</code> is divided into two, where an initial part has already been reversed and goes from some <code>m</code> in the middle to <code>l</code>, and the remaining part goes from <code>m</code> to <code>u</code>:</p>
+<pre><code>revcat : OList A R m u → OList A (flip R) m l → OList A (flip R) u l
+revcat []       ys = ys
+revcat (x ∷ xs) ys = revcat xs (x ∷ ys)
+
+reverse : OList A R l u → OList A (flip R) u l
+reverse xs = revcat xs []
+</code></pre>
+<p>(I believe this tail-recursive version is awkward to define on Conor’s representation.)
+Along the same lines, we can implement two-list queues, with the type of <code>push</code> (or <code>pop</code>) saying that an element is pushed (or popped) along with the two links/proofs around it:</p>
+<pre><code>module TwoListQueue (A : Set) (R : A → A → Set) where
+
+  record State (l u : A) : Set where
+    constructor _,_
+    field
+      {mid} : A
+      front : OList A R l mid
+      rear  : OList A (flip R) u mid
+
+  empty : State u u
+  empty = [] , []
+
+  push : (x : A) → {{R u x}} → {{R x u'}} → State l u → State l u'
+  push x (front , rear) = front , x ∷ rear
+
+  data OListF (X : A → A → Set) : A → A → Set where
+    nil  :                                           OListF X u u
+    cons : (x : A) → {{R l x}} → {{R x m}} → X m u → OListF X l u
+
+  pop : State l u → OListF State l u
+  pop ([]        , rear) with reverse rear
+  pop ([]        , rear) | []     = nil
+  pop ([]        , rear) | x ∷ xs = cons x (xs , [])
+  pop (x ∷ front , rear) = cons x (front , rear)
+</code></pre>
+<p>All the function definitions are natural and, intuitively, have to be correct due to the precise types — for example, <code>wrongPop</code> would not type-check.
+And when we use the queue, we don’t actually need to find a non-trivial element ordering — just use <code>Maybe A</code> as the element type (so that we can supply <code>nothing</code> as separators) and specialise <code>R</code> to <code>λ _ _ → ⊤</code>, and the queue will essentially revert to the simply typed version, but guaranteed to work correctly.</p>
+<p>Of course, formally we need parametricity to prove the correctness claims.
+Here I’ll just do a simplest exercise: prove that the type of list reverse</p>
+<pre><code>ReverseType : Set₁
+ReverseType = {A : Set} {R : A → A → Set} {l u : A}
+            → OList A R l u → OList A (flip R) u l
+</code></pre>
+<p>is uniquely inhabited (up to extensional equality).
+Unique inhabitance doesn’t directly say how a function of this <code>ReverseType</code> behaves, but we know that, for example, <code>reverse</code> (or <code>slowReverse</code>) inhabits this type, so anything we know about the extensional behaviour of <code>reverse</code> will hold for all other functions of the same type.
+There should be other kinds of property that we can derive from the type, but it’s hard to tell which one is the most useful without knowing the specific scenario.
+My choice of unique inhabitance has the slight advantage of being generic and therefore having more potential for generalisation.</p>
+<p>In this post I’ll just give a proof sketch; a formal proof can be found in the Agda file attached at the end (which will be my ‘slides’ for talking about this at the upcoming WG 2.1 Meeting in Viana do Castelo, Portugal).
+I learned the proof idea from Janis Voigtländer’s <a href="https://doi.org/10.1145/1480881.1480904">Bidirectionalization for free!</a>, although I’m sure similar ideas are used elsewhere too.
+Long story short: it’s about determining the behaviour of a function <code>f : ∀ {A} → List A → List A</code> from one of its concrete instances.
+Given <code>xs : List A</code>, we</p>
+<ul>
+<li>associate each element of <code>xs</code> with a unique ID, say a natural number,</li>
+<li>collect those IDs in another list <code>ns : List ℕ</code>, and</li>
+<li>observe <code>f {ℕ} ns</code>, the output IDs, which have to be arranged in the same way as <code>f {A} xs</code> due to parametricity.</li>
+</ul>
+<p>More formally, the associations can be represented as a function <code>assoc : ℕ → A</code> such that <code>map assoc ns ≡ xs</code>, and parametricity (free theorem) will give us</p>
+<pre><code>map assoc (f {ℕ} ns) ≡ f {A} (map assoc ns) ≡ f {A} xs
+</code></pre>
+<p>In the case of <code>OList A R</code>, just think of <code>A</code> and <code>R</code> as two kinds of element type, and the idea still largely works: for any <code>rev</code>, <code>rev' : ReverseType</code> and <code>xs : OList A R l u</code>, find a list <code>ns</code> and functions <code>assocA</code> and <code>assocR</code> such that <code>mapAR assocA assocR ns ≡ xs</code> (where <code>mapAR</code> operates on both element types), and then</p>
+<pre><code>rev xs
+  ≡ {- specification of ns -}
+rev (mapAR assocA assocR ns)
+  ≡ {- free theorem -}
+mapAR assocA (flip assocR) (rev  ns)
+  ≡ {- see below -}
+mapAR assocA (flip assocR) (rev' ns)
+  ≡ {- free theorem -}
+rev' (mapAR assocA assocR ns)
+  ≡ {- specification of ns -}
+rev' xs
+</code></pre>
+<p>In the middle we need <code>rev ns</code> and <code>rev' ns</code> to be equal: when constructing <code>ns</code>, if we choose concrete types like <code>A = ℕ</code> and <code>R x y = (suc x ≡ y)</code>, requiring a chain of natural numbers linked by <code>R</code> to be consecutive (and proofs of <code>R x y</code> are unique since <code>ℕ</code> is an h-set), then the type <code>OList A R l u</code> will fully determine the elements in its inhabitant, so <code>rev ns</code> and <code>rev' ns</code> are equal simply because they have the same type.
+The actual Agda proof needs to be more precise, for example making <code>assocA</code> total by defining a finite domain (instead of <code>ℕ</code>) whose size depends on the length of <code>xs</code>, but the proof is essentially what’s sketched above.
+I think the reasoning pattern used here is that our intuition about how the function processes elements of abstract types <code>A</code> and <code>R</code> is faithfully captured in the behaviour of the function at the chosen concrete types, which we can determine because everything is concrete, and then parametricity says that the function must behave uniformly for all types, so our intuition is valid in general.
+I wonder if we can turn this reasoning pattern into some form of reusable theorem so that in the future we can simply say that unique inhabitance of <code>ReverseType</code> (or, for example, of the type of <code>retabulate</code> in the <a href="/#publication-5e2da9a2">binomial tabulation</a> development) is a corollary of the theorem (otherwise it’s not really science…).</p>
+<p>I believe that the types of <code>empty</code>, <code>push</code>, and <code>pop</code> can all be proved to be uniquely inhabited in the same way.
+On the other hand, as can be seen above, I don’t think there will be much new stuff in these proofs.
+A more interesting task would be proving that the <em>abstract</em> queue type</p>
+<pre><code>record Queue (A : Set) (R : A → A → Set) : Set₁ where
+  field
+    State : A → A → Set
+    empty : State u u
+    push  : (x : A) → {{R u x}} → {{R x u'}} → State l u → State l u'
+    pop   : State l u → OListF A R State l u
+</code></pre>
+<p>or more precisely, the parametrically quantified type <code>∀ {A R} → Queue A R</code> (so that parametricity can help), is uniquely inhabited up to bisimilarity, so that we can prove the correctness of all type-checked implementations once and for all: since the type is inhabited by, for example, this simplest one-list implementation, on which we can easily prove extensional properties we want,</p>
+<pre><code>oneListQueue : ∀ {A R} → Queue A R
+oneListQueue {A} {R} = record
+  { State = OList A R
+  ; empty = []
+  ; push  = λ x xs → xs ++ (x ∷ [])
+  ; pop   = λ { []       → nil
+              ; (x ∷ xs) → cons x xs } }
+</code></pre>
+<p>we’ll know that any other implementation, for example the two-list queue</p>
+<pre><code>twoListQueue : ∀ {A R} → Queue A R
+twoListQueue {A} {R} = record
+  { State = State
+  ; empty = empty
+  ; push  = push
+  ; pop   = pop }
+  where open TwoListQueue A R
+</code></pre>
+<p>has the same extensional behaviour and therefore satisfies the same properties.
+I think I have some vague ideas, and will try to devise a proof and write another post.
+And we should think about whether we can specify other kinds of ordering too — stack order and priority-queue order, for example.
+Priority-queue order is probably difficult; even stack order may not be as straightforward as it looks…</p>
+<p><strong>Agda file:</strong> <a href="WG21-Sep25.agda">WG21-Sep25.agda</a></p>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>
