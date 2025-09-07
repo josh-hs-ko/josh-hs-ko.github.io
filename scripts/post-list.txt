@@ -1,5 +1,5 @@
 [
-PostEntry {entryNumber = 47, entryCreationTime = 2025-09-05 01:48:09.918095025, entryModificationTime = Nothing, entryTitle = "Specifying queue order using parametric types, concretely", entryTeaser = Just "An idea using parametric types to specify the full functional correctness of queues with minimal effort, and a bit of experiment using parametricity."}
+PostEntry {entryNumber = 47, entryCreationTime = 2025-09-05 01:48:09.918095025, entryModificationTime = Just 2025-09-07 01:29:42.851842282, entryTitle = "Specifying queue order using parametric types, concretely", entryTeaser = Just "An idea using parametric types to specify the full functional correctness of queues with minimal effort, and a bit of experiment using parametricity."}
 ,
 PostEntry {entryNumber = 46, entryCreationTime = 2025-06-10 18:28:16.442751524, entryModificationTime = Nothing, entryTitle = "\23567\22411\27665\20027\33258\27835\39636\30340\35477\29983", entryTeaser = Nothing}
 ,

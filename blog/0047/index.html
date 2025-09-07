@@ -60,7 +60,7 @@
 0047
 </div>
 <h2>Specifying queue order using parametric types, concretely</h2>
-<div class="post-time">Posted at 01:48 on 5 September 2025</div>
+<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 01:29 on 7 September 2025</div>
 <p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc
 They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
 It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
@@ -118,7 +118,7 @@ So theoretically <code>OList</code> suffices, although we could achieve a cleane
 <p>Conor’s <code>OList</code> can lead to awkward function definitions though.
 For example, to write the usual list append, we’d have to write some proofs manually:</p>
 <pre><code>_++_ : OList A R l m → OList A R m u → OList A R l u
-[]       ++ ys = {! ..., _ : R l m, ys : OList A R m u ⊢ OList A R l u !}
+[]       ++ ys = {! …, _ : R l m, ys : OList A R m u ⊢ OList A R l u !}
 (x ∷ xs) ++ ys = x ∷ (xs ++ ys)
 </code></pre>
 <p>In the inductive case, the proofs are automatically dealt with by instance resolution.
@@ -138,9 +138,9 @@ How tight?
 We can do a bit of experiment with a simpler type: how many inhabitants does the type <code>OList A R l u → OList A R l u</code> have?
 Let’s try and write a function of this type:</p>
 <pre><code>f : OList A R l u → OList A R l u
-f ([] {{R-l-u}})                         = [] {{R-l-u}}
-f (_∷_ x {{R-l-x}} ([] {{R-x-u}}))       = ?
-f (_∷_ x {{R-l-x}} (_∷_ y {{R-x-y}} xs)) = ?
+f []           = []
+f (x ∷ [])     = {! …, _ : R l x, _ : R x u ⊢ OList A R l u !}
+f (x ∷ y ∷ xs) = {! …, _ : R l x, _ : R x y ⊢ OList A R l u !}
 </code></pre>
 <p>The nil case has no other possibilities.
 In the singleton case, we cannot delete <code>x</code> and return <code>[]</code> because that would require us to prove <code>R l u</code>, which requires transitivity (which we don’t assume); and we cannot duplicate <code>x</code> and return <code>x ∷ x ∷ []</code> because that would require us to prove <code>R x x</code>, which requires reflexivity; so we have no choice but return <code>x ∷ []</code>.
@@ -224,7 +224,7 @@ Given <code>xs : List A</code>, we</p>
 <li>observe <code>f {ℕ} ns</code>, the output IDs, which have to be arranged in the same way as <code>f {A} xs</code> due to parametricity.</li>
 </ul>
 <p>More formally, the associations can be represented as a function <code>assoc : ℕ → A</code> such that <code>map assoc ns ≡ xs</code>, and parametricity (free theorem) will give us</p>
-<pre><code>map assoc (f {ℕ} ns) ≡ f {A} (map assoc ns) ≡ f {A} xs
+<pre><code>f {A} xs ≡ f {A} (map assoc ns) ≡ map assoc (f {ℕ} ns).
 </code></pre>
 <p>In the case of <code>OList A R</code>, just think of <code>A</code> and <code>R</code> as two kinds of element type, and the idea still largely works: for any <code>rev</code>, <code>rev' : ReverseType</code> and <code>xs : OList A R l u</code>, find a list <code>ns</code> and functions <code>assocA</code> and <code>assocR</code> such that <code>mapAR assocA assocR ns ≡ xs</code> (where <code>mapAR</code> operates on both element types), and then</p>
 <pre><code>rev xs

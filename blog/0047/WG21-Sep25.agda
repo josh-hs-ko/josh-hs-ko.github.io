@@ -41,10 +41,11 @@ module SimplyTypedTwoListQueue (A : Set) where
   wrongPop (front , rear) | x ∷ xs = just (x , (front ++ xs , []))
                                      -- wrong order
 
-module McBride-ICFP14 where
+  -- Substructural typing?
+  -- Want a less drastic solution (in Agda)
 
-  open import Data.Maybe
-  open import Data.Nat
+module McBride-ICFP14 where
+  -- Includes a generic definition of ordered datatypes
 
   -- An inhabitant of OList A _≤_ l u looks like
   --   ‘l ≤ x₀ ≤ x₁ ≤ x₂ ≤ x₃ ≤ u’
@@ -53,6 +54,9 @@ module McBride-ICFP14 where
     _∷_ : (x : A) → ⦃ R l x ⦄ → OList A R x u → OList A R l u
 
   infixr 5 _∷_
+
+  open import Data.Maybe
+  open import Data.Nat
 
   -- First problem: don’t want to order the elements by their value
   -- Solution: order the elements by their time of insertion
@@ -77,16 +81,16 @@ module McBride-ICFP14 where
   --   sufficed for them.
   -- This is not a solution for us, but there are lessons to be learned:
   --   if we use/assume no laws of R, we are pretty much forced to write
-  --   this definition.
+  --   this definition — the type acts as a pretty tight specification.
   append' : (m : A) → OList A R l m → OList A R m u → OList A R l u
   append' m []       ys = m ∷ ys
   append' m (x ∷ xs) ys = x ∷ append' m xs ys
 
   -- How many inhabitants does this type have?
   -- f : OList A R l u → OList A R l u
-  -- f ([] ⦃ R-l-u ⦄)                         = [] ⦃ R-l-u ⦄
-  -- f (_∷_ x ⦃ R-l-x ⦄ ([] ⦃ R-x-u ⦄))       = {!   !}
-  -- f (_∷_ x ⦃ R-l-x ⦄ (_∷_ y ⦃ R-x-y ⦄ xs)) = {!   !}
+  -- f []           = []
+  -- f (x ∷ [])     = {!  !}
+  -- f (x ∷ y ∷ xs) = {!  !}
 
   -- Transitivity ~ deleting
   -- Reflexivity  ~ copying
@@ -192,7 +196,7 @@ ReverseType = {A : Set} {R : A → A → Set} {l u : A}
 -- assoc : ℕ → A such that map assoc ns ≡ xs, and parametricity
 -- (free theorem) will give us
 --
---   map assoc (f {ℕ} ns) ≡ f {A} (map assoc ns) ≡ f {A} xs.
+--   f {A} xs ≡ f {A} (map assoc ns) ≡ map assoc (f {ℕ} ns).
 
 -- In the case of OList A R, think of A and R as two kinds of element type,
 -- and the idea still largely works: for any rev, rev' : ReverseType and
@@ -215,8 +219,6 @@ ReverseType = {A : Set} {R : A → A → Set} {l u : A}
 -- if we choose concrete types like A = ℕ and R x y = (suc x ≡ y), then the
 -- type OList A R l u will fully determine the elements in its inhabitant,
 -- so rev ns and rev' ns are equal simply because they have the same type.
-
--- (General theorems?)
 
 module Uniqueness where
 
@@ -354,11 +356,10 @@ module Uniqueness where
     ∎
     where open ≡-Reasoning
 
--- Actual goal: unique inhabitance of the following abstract queue type
---              (parametrically quantified over A and R) up to bisimilarity
-
 open TwoListQueue using (OListF; nil; cons)
 
+-- Actual goal: unique inhabitance of the following abstract queue type
+--              (quantified over A and R) up to bisimilarity
 record Queue (A : Set) (R : A → A → Set) : Set₁ where
   field
     State : A → A → Set
@@ -383,5 +384,7 @@ twoListQueue {A} {R} = record
   ; push  = push
   ; pop   = pop }
   where open TwoListQueue A R
+
+  -- Still devising a proof
 
 -- Stack order? Priority-queue order?
