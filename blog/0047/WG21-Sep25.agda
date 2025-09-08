@@ -183,7 +183,7 @@ ReverseType = {A : Set} {R : A → A → Set} {l u : A}
 --   pages 165–176. ACM. https://doi.org/10.1145/1480881.1480904.
 --
 -- Long story short: how do we determine the behaviour of a function
--- f : {A : Set} → List A → List A from one of its concrete instances?
+-- f : ∀ {A} → List A → List A from one of its concrete instances?
 --
 -- Given xs : List A,
 --
