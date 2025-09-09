@@ -7,6 +7,9 @@ open import Data.Product
 open import Relation.Binary.PropositionalEquality
 
 module WG21-Sep25 where
+-- Specifying queue order using parametric types: some concrete experiments
+-- Josh Ko (Academia Sinica, Taiwan)
+-- Viana do Castelo, Portugal, 9 Sep 2025
 
 variable
   A B C      : Set
@@ -87,7 +90,7 @@ module McBride-ICFP14 where
   append' m (x ∷ xs) ys = x ∷ append' m xs ys
 
   -- How many inhabitants does this type have?
-  -- f : OList A R l u → OList A R l u
+  -- f : ∀ {A R} → OList A R l u → OList A R l u
   -- f []           = []
   -- f (x ∷ [])     = {!  !}
   -- f (x ∷ y ∷ xs) = {!  !}
@@ -98,6 +101,13 @@ module McBride-ICFP14 where
 
   -- Managing list elements as resources without a substructural type system
   -- More precise relationship to substructural typing? Another time, perhaps.
+  --
+  -- Zhixuan Yang (Imperial, soon Exeter 🎉) last night: directly working with
+  -- the monoidal model A → A → Set where the monoidal product is
+  --
+  --   (R □ S) a b = Σ[ c ∈ A ] R a c × S c b
+  --
+  -- with no symmetry, projection, or duplication
 
 module IndexedElementTypes where
 
@@ -243,13 +253,13 @@ module Uniqueness where
     rev {A} {R} (mapAR f g xs') ≡ mapAR f (flip g) (rev {B} {S} xs')
 
   data IndexA {A : Set} {R : A → A → Set} : {l u : A} → OList A R l u → Set where
-    zeroN     : {u : A}                                                             → IndexA ([] {u = u})
+    zeroN     : {u : A}                                                              → IndexA ([] {u = u})
     zeroC one : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x m ⦄ {xs : OList A R m u}             → IndexA (x ∷ xs)
     twoPlus   : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x m ⦄ {xs : OList A R m u} → IndexA xs → IndexA (x ∷ xs)
 
   data IndexR {A : Set} {R : A → A → Set} : {l u : A} {xs : OList A R l u} → IndexA xs → IndexA xs → Set where
     zeroC-one : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x m ⦄ {xs : OList A R m u}                                → IndexR  zeroC      (one {x = x} {xs})
-    one-twoN  : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x u ⦄                                                    → IndexR  one        (twoPlus (zeroN {u = u}))
+    one-twoN  : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x u ⦄                                                     → IndexR  one        (twoPlus (zeroN {u = u}))
     one-twoC  : {x y : A} ⦃ _ : R l x ⦄ ⦃ _ : R x m ⦄ ⦃ _ : R m y ⦄ ⦃ _ : R y n ⦄ {xs : OList A R n u}  → IndexR  one        (twoPlus (zeroC {x = y} {xs}))
     twoPlus   : {x : A} ⦃ _ : R l x ⦄ ⦃ _ : R x m ⦄ {xs : OList A R m u} {i j : IndexA xs} → IndexR i j → IndexR (twoPlus i) (twoPlus j)
 

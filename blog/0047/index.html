@@ -60,8 +60,8 @@
 0047
 </div>
 <h2>Specifying queue order using parametric types, concretely</h2>
-<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 01:29 on 7 September 2025</div>
-<p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc
+<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 20:58 on 8 September 2025</div>
+<p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc.
 They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
 It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
 I had a hunch that parametricity could lead to a very clean specification of queue order, and a bit of experiment showed that hunch is probably correct, although I didn’t expect that most of the techniques used turned out to be old and familiar ones.</p>
@@ -210,10 +210,10 @@ Here I’ll just do a simplest exercise: prove that the type of list reverse</p>
 ReverseType = {A : Set} {R : A → A → Set} {l u : A}
             → OList A R l u → OList A (flip R) u l
 </code></pre>
-<p>is uniquely inhabited (up to extensional equality).
+<p>is uniquely inhabited (up to extensional equality), demonstrating that the type is a tight specification.
 Unique inhabitance doesn’t directly say how a function of this <code>ReverseType</code> behaves, but we know that, for example, <code>reverse</code> (or <code>slowReverse</code>) inhabits this type, so anything we know about the extensional behaviour of <code>reverse</code> will hold for all other functions of the same type.
 There should be other kinds of property that we can derive from the type, but it’s hard to tell which one is the most useful without knowing the specific scenario.
-My choice of unique inhabitance has the slight advantage of being generic and therefore having more potential for generalisation.</p>
+My choice of unique inhabitance has the slight advantage of being generic and therefore having more potential for generalisation to other types.</p>
 <p>In this post I’ll just give a proof sketch; a formal proof can be found in the Agda file attached at the end (which will be my ‘slides’ for talking about this at the upcoming WG 2.1 Meeting in Viana do Castelo, Portugal).
 I learned the proof idea from Janis Voigtländer’s <a href="https://doi.org/10.1145/1480881.1480904">Bidirectionalization for free!</a>, although I’m sure similar ideas are used elsewhere too.
 Long story short: it’s about determining the behaviour of a function <code>f : ∀ {A} → List A → List A</code> from one of its concrete instances.
