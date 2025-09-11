@@ -60,7 +60,7 @@
 0047
 </div>
 <h2>Specifying queue order using parametric types, concretely</h2>
-<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 20:58 on 8 September 2025</div>
+<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 08:08 on 11 September 2025</div>
 <p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc.
 They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
 It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
@@ -149,6 +149,10 @@ So <code>f</code> has to be the identity function.
 Intuitively, the elements of an input list of type <code>OList A R l u</code> are linked together by proofs of <code>R</code>, and since <code>R</code> is parametrically quantified and has no laws, in the output list of the same type <code>OList A R l u</code> we can only use the existing proofs to link the output elements, and the only way of forming links from <code>l</code> to <code>u</code> is going through exactly the same elements and proofs in the input list.
 If <code>R</code> has laws, then we’re allowed to do more: transitivity allows deletion, reflexivity allows (adjacent) copying, and symmetry allows reordering (with help from other laws).
 So there seems to be some kind of correspondence with substructural type systems, which may be interesting to explore — some time later.</p>
+<p><em>Comment.</em>
+<a href="https://yangzhixuan.github.io">Zhixuan</a> commented that (as opposed to using a substructural type system) I’m directly working with the monoidal structure on <code>A → A → Set</code> where the monoidal product is <code>(R □ S) a b = Σ[ c ∈ A ] R a c × S c b</code>, with no symmetry, projection, or duplication.
+I think this is probably an important change of perspective: think about and work with <code>R</code>-proofs, and get intended behaviour on <code>A</code>-elements as a side effect.
+(<em>End of comment.</em>)</p>
 <p>Getting back to the problem of awkward definitions, the solution that came to me is</p>
 <pre><code>data OList (A : Set) (R : A → A → Set) : A → A → Set where
   []  :                                                   OList A R u u
