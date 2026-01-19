@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Specifying queue order using parametric types, abstractly — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="I’ve finally worked out a proof that any two implementations of a parametrically quantified abstract `Queue` type are bisimilar, so the type acts as a tight specification that fully determines the extensional behaviour.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0048
+</div>
+<h2>Specifying queue order using parametric types, abstractly</h2>
+<div class="post-time">Posted at 16:31 on 19 January 2026</div>
+<p>Continuing <a href="/blog/0047/">0047</a>, I’ve finally worked out a proof that any two implementations of a parametrically quantified abstract <code>Queue</code> type are bisimilar, so the type acts as a tight specification that fully determines the extensional behaviour.
+In the meantime I’ve changed the definition a couple of times.
+At one point I switched to the ‘time-indexed’ version:</p>
+<pre><code>data ListF (T : Set) (S : T → T → Set) (A : T → Set) (X : T → T → Set)
+       : T → T → Set where
+  nil  : ∀ {u}                                     → ListF T S A X u u
+  cons : ∀ {l m n u} → S l m → S m n → A m → X n u → ListF T S A X l u
+
+record Queue (T : Set) (S : T → T → Set) (A : T → Set) : Set₁ where
+  field
+    State : T → T → Set
+    empty : ∀ {u} → State u u
+    push  : ∀ {l u m v} → S u m → S m v → A m → State l u → State l v
+    pop   : ∀ {l u} → State l u → ListF T S A State l u
+</code></pre>
+<p>But applying the parametricity translation to this definition resulted in scarily complex definitions (and I had to write parametricity translation combinators to make the translation manageable), which slowed me down for a while.
+Then it came to me that I can actually simplify this definition: instead of always pushing or popping two <code>S</code>-proofs enclosing an element, with the whole thing having type <code>S u m × S m v × A m</code>, I can just fuse them into a single <code>R u v</code>, where <code>R</code> can be instantiated to store the element too.
+So the definition is changed to</p>
+<pre><code>data ListF (I : Set) (R : I → I → Set) (X : I → I → Set)
+       : I → I → Set where
+  nil  : ∀ {u}                     → ListF I R X u u
+  cons : ∀ {l m u} → R l m → X m u → ListF I R X l u
+
+record Queue (I : Set) (i₀ : I) (R : I → I → Set) : Set₁ where
+  field
+    State : I → I → Set
+    empty : State i₀ i₀
+    push  : ∀ {l u v} → R u v → State l u → State l v
+    pop   : ∀ {l u} → State l u → ListF I R State l u
+</code></pre>
+<p>Notably, the least fixed-point of <code>ListF I R</code> becomes the familiar definition of reflexive transitive closure.
+I rename the parameter <code>T</code> (short for ‘time’) to the more generic <code>I</code> since the time metaphor may be wrongly associated with the order in which pushes and pops happen — instead, the indices should be thought of as serial numbers assigned to elements as they come.
+A more substantial change (suggested by <a href="https://shhyou.github.io">Shu-Hung You</a>) is that <code>empty</code> starts from a fixed <code>i₀</code> — this helps to simplify the bisimilarity proof later.</p>
+<p>Our subject of study is the parametrically quantified type</p>
+<pre><code>PQueue : Set₁
+PQueue = ∀ I i₀ R → Queue I i₀ R
+</code></pre>
+<p>A queue implementation should have this type, but to actually use the implementation, we instantiate it to a type of ‘simple queues’ with elements having a given type <code>A : Set</code>:</p>
+<pre><code>SQueue : Set → Set₁
+SQueue A = Queue ⊤ tt (λ _ _ → A)
+
+inst : PQueue → (A : Set) → SQueue A
+inst Q A = Q ⊤ tt (λ _ _ → A)
+</code></pre>
+<p>For simplicity, I formulate bisimilarity (as existence of a bisimulation relation) only for <code>SQueue</code>:</p>
+<pre><code>data ListFᴿ {A : Set} {X X' : Set} (Xᴿ : X → X' → Set)
+        : ListF ⊤ (λ _ _ → A) (λ _ _ → X ) tt tt
+        → ListF ⊤ (λ _ _ → A) (λ _ _ → X') tt tt → Set where
+  nilᴿ  : fx ≡ nil      → fx' ≡ nil
+        → ListFᴿ Xᴿ fx fx'
+  consᴿ : fx ≡ cons a x → fx' ≡ cons a' x' → a ≡ a' → Xᴿ x x'
+        → ListFᴿ Xᴿ fx fx'
+
+record QueueBisim (q q' : SQueue A) : Set₁ where
+  field
+    Stateᴿ : q .State tt tt → q' .State tt tt → Set
+    emptyᴿ : Stateᴿ (q .empty) (q' .empty)
+    pushᴿ  : (a : A)
+           → Stateᴿ s s' → Stateᴿ (q .push a s) (q' .push a s')
+    popᴿ   : Stateᴿ s s' → ListFᴿ Stateᴿ (q .pop s) (q' .pop s')
+</code></pre>
+<p>And the theorem we’ll prove is</p>
+<pre><code>bisim : (Q Q' : PQueue) → Param Q → Param Q'
+      → (A : Set) → QueueBisim (inst Q A) (inst Q' A)
+</code></pre>
+<p>where <code>Param</code>, the (unary) parametricity of <code>PQueue</code>, is standard (and will be given later when we need it).
+Note that <code>QueueBisim</code> is a specialised result of applying the binary parametricity translation to <code>PQueue</code>, so an instantiation of any <code>Q : PQueue</code> will necessarily be related to itself due to (binary) parametricity, that is, <code>QueueBisim (inst Q A) (inst Q A)</code>; what’s interesting/non-trivial here is that <code>QueueBisim</code> holds even for instantiations of different <code>PQueue</code>s.</p>
+<p>As I surmised from the beginning, the proof idea is to instantiate the parameter <code>I</code> of a <code>PQueue</code> to <code>ℕ</code> to produce a ‘counting queue’ that assigns distinct serial numbers to element types, and relate this counting queue to the <code>SQueue</code> instantiated from the same <code>PQueue</code> by parametricity.
+To be concrete, consider</p>
+<pre><code>CQueue = (P : ℕ → Set) → Queue ℕ 0 (λ i j → suc i ≡ j × P i)
+</code></pre>
+<p>Even though <code>CQueue</code> is more concrete than <code>PQueue</code> in the sense that it abstracts over only the element types <code>P</code> (indexed by serial numbers) and can be derived by instantiating <code>PQueue</code>, our intuition about <code>PQueue</code> being a tight specification is preserved: <code>push</code> of <code>CQueue</code> has type</p>
+<pre><code>{l u v : ℕ} → suc u ≡ v × P u → State l u → State l v
+</code></pre>
+<p>so starting from <code>empty : State 0 0</code>, we are required to push elements of distinct types <code>P 0</code>, <code>P 1</code>, <code>P 2</code>, and so on in order — each push increments the second index in the state type to record the next available serial number.
+Subsequently we can pop from a <code>State 0 3</code>; the result cannot be <code>nil</code> since <code>0</code> is not <code>3</code>, so it has to be a <code>cons</code> with an element of type <code>P 0</code> and a new <code>State 1 3</code> — each successful pop increments the first index in the state type, which is the serial number (in the type) of the element to be popped next.
+Intuitively, since the elements previously pushed into the queue are assigned distinct serial numbers, specifying the serial number of the element to be popped should determine which element is popped.
+However, I went too far and made a wrong conjecture that the <code>ℕ</code> indices alone would completely determine the extensional behaviour of the counting queue regardless of the implementation detail — specifically, I couldn’t rule out the possibility that popping from some <code>State u u</code> might produce a <code>cons</code>.
+(The wrong conjecture got me stuck for a long time — I went as far as attempting to use transitivity of general bisimulations (which turned out to be very tedious to formulate) to concatenate the parametricity-induced bisimulations between the two <code>SQueue</code>s and their corresponding counting queues with a hand-crafted bisimulation between the counting queues in the middle, but that didn’t work.)</p>
+<p>Eventually I think the proof should be understood mainly as extending classic parametricity-based proofs, which we’ll revisit here as warm-up exercises.
+Suppose that we push two elements of types <code>P 0</code> and <code>P 1</code> into a <code>CQueue</code> and then pop an element, which has type <code>P 0</code> (if the pop is successful).
+This situation is comparable with a parametric function <code>f : {P : ℕ → Set} → P 0 → P 1 → P 0</code>, whose result can be uniquely determined using parametricity.
+What’s noteworthy is that the proof needs to invoke (unary) parametricity for every input:
+Suppose that the unary parametricity of <code>f</code> is established by a function</p>
+<pre><code>fᴾ : {P  : ℕ → Set} (Pᴾ : (n : ℕ) → P n → Set)
+   → {p₀ : P 0}    → Pᴾ 0 p₀
+   → {p₁ : P 1}    → Pᴾ 1 p₁
+                   → Pᴾ 0 (f p₀ p₁)
+</code></pre>
+<p>That is, any invariant <code>Pᴾ</code> on elements is preserved by <code>f</code>.
+Then for every <code>p₀ : P 0</code> and <code>p₁ : P 1</code>, choose the invariant</p>
+<pre><code>PMap : (n : ℕ) → P n → Set
+PMap  0     p  =  p ≡ p₀
+PMap  1     p  =  p ≡ p₁
+PMap (2+ _) _  =  ⊥
+</code></pre>
+<p>and we can construct <code>fᴾ PMap refl refl : f p₀ p₁ ≡ p₀</code>, that is, prove that <code>PMap</code> holds for the inputs <code>p₀</code> and <code>p₁</code> and conclude that <code>PMap</code> holds for the output <code>f p₀ p₁</code> too.
+The same invariant also works for determining the behaviour of <code>{P : ℕ → Set} → P 0 → P 1 → P 1</code>, which is comparable to a successful second pop.
+If we successfully popped a third time, the situation would be comparable to <code>g : {P : ℕ → Set} → P 0 → P 1 → P 2</code>, which we can prove to be non-existent by deriving a contradiction (so popping a third element is impossible): if <code>g</code> existed, there would be a proof <code>gᴾ</code> of its unary parametricity having almost the same type as <code>fᴾ</code> except ending with <code>Pᴾ 2 (g p₀ p₁)</code>, which is <code>⊥</code>, so <code>gᴾ PMap refl refl : ⊥</code>.
+(We could also prove more directly that a particular instance of <code>g</code> leads to contradiction by instantiating the parameter <code>P</code> to, for example, <code>_&lt; 2</code>.
+But reasoning with <code>gᴾ</code> works too.)</p>
+<p>Back to proving the <code>bisim</code> theorem.
+We’ll invoke parametricity for every input to a queue implementation, which is a sequence of operations that have been performed on the queue.
+Such an operation sequence arises naturally when using a <code>QueueBisim</code> proof, which says that two queue states are kept related whenever the same operation is performed on both states (and gives the same result if the operation produces something observable — the result of a pop in the case of queues).
+As more operations are performed on both queues, we get a operation sequence.
+In fact, we will define that two queue states are related exactly when they are obtained by performing the same operation sequence.
+First define a data type of operation sequences, parametrised by an element type <code>A</code> and indexed by the numbers of pops and pushes:</p>
+<pre><code>data OpSeq (A : Set) : ℕ → ℕ → Set where
+  emptyOp :                          OpSeq A  zero      zero
+  pushOp  : A → OpSeq A #pop #push → OpSeq A      #pop (suc #push)
+  popOp   :     OpSeq A #pop #push → OpSeq A (suc #pop)     #push
+</code></pre>
+<p>We can interpret an <code>OpSeq</code> as a predicate on states of an <code>SQueue</code>, whose proof is a sequence of state transition equalities witnessing that a state is reached by performing the operation sequence leftwards/outwards:</p>
+<pre><code>data RunOpSeq : OpSeq A #pop #push → (q : SQueue A)
+              → q .State tt tt → Set where
+  emptyOp : q .empty ≡ s
+          → RunOpSeq emptyOp q s
+  pushOp  : RunOpSeq ops q s' → q .push a s' ≡ s
+          → RunOpSeq (pushOp a ops) q s
+  popOp   : RunOpSeq ops q s' → q .pop s' ≡ cons a s
+          → RunOpSeq (popOp ops) q s
+</code></pre>
+<p>(<code>RunOpSeq</code> could also be defined as a function by induction on <code>OpSeq</code>, but the constructor syntax allows us to hide existentially quantified variables as implicit arguments.)
+Now we can write down the definition that two queue states <code>s</code> and <code>s'</code> are related exactly when there is an operation sequence which, when ran using respective queue implementations <code>q</code> and <code>q' : SQueue A</code>, leads to <code>s</code> and <code>s'</code>:</p>
+<pre><code>record BisimState (q q' : SQueue A)
+  (s : q .State tt tt) (s' : q' .State tt tt) : Set where
+  field
+    {#pop #push} : ℕ
+    ops  : OpSeq A #pop #push
+    run  : RunOpSeq ops q  s
+    run' : RunOpSeq ops q' s'
+</code></pre>
+<p>We can then start proving <code>bisim</code> by supplying <code>BisimState</code> above as the definition of <code>Stateᴿ</code>.
+The <code>emptyᴿ</code>/<code>pushᴿ</code> case simply starts/extends the operation sequence, whereas the <code>popᴿ</code> case is where the real work is done.</p>
+<pre><code>bisim : (Q Q' : PQueue) → Param Q → Param Q'
+      → (A : Set) → QueueBisim (inst Q A) (inst Q' A)
+bisim Q Q' param param' A = record
+  { Stateᴿ = BisimState q q'
+  ; emptyᴿ = record { ops  = emptyOp
+                    ; run  = emptyOp refl
+                    ; run' = emptyOp refl
+                    }
+  ; pushᴿ  = λ a sᴿ → record
+                    { ops  = pushOp a (sᴿ .ops )
+                    ; run  = pushOp   (sᴿ .run ) refl
+                    ; run' = pushOp   (sᴿ .run') refl
+                    }
+  ; popᴿ   = popᴿ-proof
+  }
+  where
+
+  q q' : SQueue A
+  q  = inst Q  A
+  q' = inst Q' A
+
+  popᴿ-proof : BisimState q q' s s'
+             → ListFᴿ (BisimState q q') (q .pop s) (q' .pop s')
+  popᴿ-proof sᴿ = ?
+</code></pre>
+<p>In <code>popᴿ-proof</code>, to fill the hole with either the <code>nilᴿ</code> or <code>consᴿ</code> constructor of <code>ListFᴿ</code>, we need to establish that <code>q .pop s</code> and <code>q' .pop s'</code> are both <code>nil</code> or both <code>cons</code>, and in the latter case the popped elements should be the same.
+A case analysis of the two <code>ListF</code>-values would be unhelpful since the type provides little information.
+Instead, we will perform a case analysis on a counting queue derived from <code>q</code>/<code>q'</code> using unary parametricity; the counting queue will be related to <code>q</code>/<code>q'</code>, so the case analysis will tell us how <code>q</code>/<code>q'</code> behaves as well.
+Below we’ll go through the counting queue argument more slowly.</p>
+<p>First of all, we need to use the parametricity translation to write down <code>Param</code>, the unary parametricity of <code>PQueue</code>:</p>
+<pre><code>data ListFᴾ {I : Set}         (Iᴾ : I → Set)
+            {R : I → I → Set} (Rᴾ : ∀ {i j} → Iᴾ i → Iᴾ j → R i j → Set)
+            {X : I → I → Set} (Xᴾ : ∀ {l u} → Iᴾ l → Iᴾ u → X l u → Set)
+        : ∀ {l u} → Iᴾ l → Iᴾ u → ListF I R X l u → Set where
+  nilᴾ  : ∀ {u fx} → {uᴾ : Iᴾ u}
+        → fx ≡ nil → ListFᴾ Iᴾ Rᴾ Xᴾ uᴾ uᴾ fx
+  consᴾ : ∀ {l m u r x fx} → {lᴾ : Iᴾ l} {mᴾ : Iᴾ m} {uᴾ : Iᴾ u}
+        → Rᴾ lᴾ mᴾ r → Xᴾ mᴾ uᴾ x → fx ≡ cons r x
+        → ListFᴾ Iᴾ Rᴾ Xᴾ lᴾ uᴾ fx
+
+record Queueᴾ
+  {I  : Set}         (Iᴾ  : I → Set)
+  {i₀ : I}           (i₀ᴾ : Iᴾ i₀)
+  {R  : I → I → Set} (Rᴾ  : ∀ {i j} → Iᴾ i → Iᴾ j → R i j → Set)
+  (q : Queue I i₀ R) : Set₁ where
+  field
+    Stateᴾ : ∀ {l u} → Iᴾ l → Iᴾ u → q .State l u → Set
+    emptyᴾ : Stateᴾ i₀ᴾ i₀ᴾ (q .empty)
+    pushᴾ  : ∀ {l u v r s} → {lᴾ : Iᴾ l} {uᴾ : Iᴾ u} {vᴾ : Iᴾ v}
+           → Rᴾ uᴾ vᴾ r → Stateᴾ lᴾ uᴾ s → Stateᴾ lᴾ vᴾ (q .push r s)
+    popᴾ   : ∀ {l u s} → {lᴾ : Iᴾ l} {uᴾ : Iᴾ u}
+           → Stateᴾ lᴾ uᴾ s → ListFᴾ Iᴾ Rᴾ Stateᴾ lᴾ uᴾ (q .pop s)
+
+Param : PQueue → Set₁
+Param Q = {I  : Set}         (Iᴾ  : I → Set)
+          {i₀ : I}           (i₀ᴾ : Iᴾ i₀)
+          {R  : I → I → Set} (Rᴾ  : ∀ {i j} → Iᴾ i → Iᴾ j → R i j → Set)
+                           → Queueᴾ Iᴾ i₀ᴾ Rᴾ (Q I i₀ R)
+</code></pre>
+<p><code>Param</code> says that for any queue <code>Q I i₀ R</code> instantiated from <code>Q : PQueue</code> we can derive a <code>Queueᴾ</code> related to it.
+We can think of the derived <code>Queueᴾ</code> as a queue itself, to/from which we push/pop additional information about <code>I</code>-indices and <code>R</code>-elements as we perform the same operations on the instantiated queue, with the additional information specified by the type families <code>Iᴾ</code> and <code>Rᴾ</code> — in short, we supplement every <code>I</code>/<code>R</code> by <code>Iᴾ</code>/<code>Rᴾ</code>, with the latter managed separately by the derived <code>Queueᴾ</code>.
+Take the type of <code>pushᴾ</code> as an example:
+with an instantiated queue <code>q : Queue I i₀ R</code>, if we push <code>r : R u v</code> into <code>s : q .State l u</code> and there is a derived queue state <code>sᴾ : Stateᴾ lᴾ uᴾ s</code>, where the type remembers that <code>sᴾ</code> is related to <code>s</code> (and <code>lᴾ : Iᴾ l</code>, <code>uᴾ : Iᴾ u</code> are additional information about <code>l</code> and <code>u</code> respectively), then we can invoke <code>pushᴾ</code> on <code>sᴾ</code> by supplying <code>vᴾ : Iᴾ v</code> (since <code>v</code> is a newly appeared index, we need to supply additional information about <code>v</code>) and an <code>Rᴾ uᴾ vᴾ r</code> (additional information about the pushed element <code>r</code> and the indices <code>u</code> and <code>v</code> in its type), and get a derived queue state of type <code>Stateᴾ lᴾ vᴾ (q .push r s)</code>, now related to the queue state <code>q .push r s</code> after the push.
+And <code>popᴾ</code> is similar: a <code>Queue</code> successfully pops an element if and only if a related <code>Queueᴾ</code> successfully pops additional information about the element.</p>
+<p><em>Remark.</em>
+<code>Iᴾ</code>/<code>Rᴾ</code> can be a predicate on <code>I</code>/<code>R</code> restricting which <code>I</code>/<code>R</code>-values may appear throughout the use of a queue, in which case <code>Param</code> can be thought of as an induction principle for all possible uses of a <code>Queue</code>.
+But we will also use <code>Iᴾ</code>/<code>Rᴾ</code> proof-relevantly to carry information that doesn’t count as proofs, so ‘additional information’ is a more encompassing intuition about <code>Iᴾ</code>/<code>Rᴾ</code>.
+The same can be said for induction principles in general though if we interpret ‘induction principles’ not just logically but also computationally.
+(<em>End of Remark.</em>)</p>
+<p>Back to <code>popᴿ-proof</code>, from <code>q = inst Q A : SQueue A</code> we can use <code>Param Q</code> to derive a related queue of type</p>
+<pre><code>CCQueue : SQueue A → OpSeq A #pop #push → Set₁
+CCQueue q ops = Queueᴾ (λ _ → ℕ)
+                       0
+                       (λ l u a → suc l ≡ u × PushMap ops l a)
+                       q
+</code></pre>
+<p>This derived queue ‘counts and checks’:
+It counts by supplementing every <code>⊤</code>-index with a natural number and requiring <code>suc l ≡ u</code> whenever <code>l</code> and <code>u</code> are the natural numbers supplementing the two indices of an element type.
+And it checks using the relation <code>PushMap</code>, which assigns distinct serial numbers to pushed elements in an operation sequence, and plays a similar role to <code>PMap</code> above:</p>
+<pre><code>data PushMap : OpSeq A #pop #push → ℕ → A → Set where
+  pushOp-here  : {ops : OpSeq A #pop #push}
+                                  → PushMap (pushOp a ops) #push a
+  pushOp-there : PushMap ops k a' → PushMap (pushOp a ops) k     a'
+  popOp        : PushMap ops k a' → PushMap (popOp    ops) k     a'
+</code></pre>
+<p>Take <code>opsₑₓ = pushOp a₁ (popOp (pushOp a₀ emptyOp))</code> as an example, where there are two pushed elements <code>a₁</code> and <code>a₀</code>, to which we expect to assign the serial numbers 1 and 0; indeed, we can construct <code>pushOp-here : PushMap opsₑₓ 1 a₁</code> and <code>pushOp-there (popOp pushOp-here) : PushMap opsₑₓ 0 a₀</code> but not anything else (for <code>opsₑₓ</code>).</p>
+<p>Now we will proceed in a way that’s similar to the <code>PMap</code> argument.
+Observe that the <code>PMap</code> argument proceeds in two stages for any given input: check that the input satisfies <code>PMap</code>, and then deduce what the output should be from the fact that it must also satisfy <code>PMap</code>.
+For a queue <code>q : SQueue A</code>, a given input is an operation sequence <code>ops</code>, which, when run on <code>q</code>, leads to a state <code>s</code> satisfying <code>RunOpSeq ops q s</code>.
+The first stage is to fast-forward a derived queue <code>qᴾ : CCQueue q ops</code> to a state related to <code>s</code>, checking all the <code>PushMap</code> constraints along the way:</p>
+<pre><code>simulate : {ops : OpSeq A #pop #push} → RunOpSeq ops q s
+         → (qᴾ : CCQueue q ops) → qᴾ .Stateᴾ #pop #push s
+</code></pre>
+<p>A concrete example may help.
+Again consider the operation sequence <code>opsₑₓ = pushOp a₁ (popOp (pushOp a₀ emptyOp))</code>.
+Start from the state <code>s₀ = q .empty</code>, to which the derived state <code>s₀ᴾ = qᴾ .emptyᴾ : qᴾ .Stateᴾ 0 0 s₀</code> is related.
+First push the element <code>a₀</code> and reach the state <code>s₁ = q .push a₀ s₀</code>.
+The related derived state is</p>
+<pre><code>s₁ᴾ = pushᴾ {! suc 0 ≡ 1 × PushMap opsₑₓ 0 a₀ ⊣ … !} (qᴾ .empty)
+    : qᴾ .Stateᴾ 0 1 s₁
+</code></pre>
+<p>In the hole (showing the goal type), the equality constraint forces the second index in the <code>Stateᴾ</code> type to increment, and we need to prove the <code>PushMap</code> constraint saying that the <code>0</code>th pushed element is <code>a₀</code>.
+Next we pop from <code>s₁</code>, which is guaranteed to be successful due to the given <code>RunOpSeq</code>, so let <code>cons a s₂ = q .pop s₁</code>.
+Since <code>s₁ᴾ</code> is related to <code>s₁</code>, popping from <code>s₁ᴾ</code> succeeds as well, and we get <code>consᴾ (ieq , m) s₂ᴾ _ = qᴾ .popᴾ s₁ᴾ</code> where <code>ieq : suc 0 ≡ 1</code> forces the first index in the type of</p>
+<pre><code>s₂ᴾ : qᴾ .Stateᴾ 1 1 s₂
+</code></pre>
+<p>to increment.
+(At this point, if we want, we can deduce <code>a ≡ a₀</code> from <code>m : PushMap opsₑₓ 0 a</code>.)
+Finally, push <code>a₁</code> and reach <code>s₂ = q .push a₁ s₁</code>, and similarly advance the related state to</p>
+<pre><code>s₂ᴾ = pushᴾ {! suc 1 ≡ 2 × PushMap opsₑₓ 1 a₁ ⊣ … !} (qᴾ .empty)
+    : qᴾ .Stateᴾ 1 2 s₂
+</code></pre>
+<p>where the <code>PushMap</code> constraint we prove this time says that the <code>1</code>st pushed element is <code>a₁</code>.
+(And if there’s a next pop, which will be numbered <code>1</code>, the popped proof of the constraint will let us deduce that the popped element is <code>a₁</code>.)
+This completes the first stage.
+Note that the natural number indices in the type of <code>s₂ᴾ</code> are exactly the indices in the type of <code>opsₑₓ : OpSeq A 1 2</code>, since in both <code>CCQueue</code> and <code>OpSeq</code> the indices are counts of pops and pushes; this holds in general and is stated in the type of <code>simulate</code>.</p>
+<p>Back to <code>popᴿ-proof</code>, to find out what happens when we pop from both <code>s</code> and <code>s'</code>, instead of popping from <code>s</code> and <code>s'</code> directly, we perform the above first-stage construction: derive <code>CCQueue</code>s <code>qᴾ</code> and <code>q'ᴾ</code>, fast-forward them to states related to <code>s</code> and <code>s'</code> (by invoking <code>simulate</code>), and pop from these states.</p>
+<pre><code>popᴿ-proof : BisimState q q' s s'
+           → ListFᴿ (BisimState q q') (q .pop s) (q' .pop s')
+popᴿ-proof sᴿ with qᴾ  ← CCQueue q  (sᴿ .ops) ∋ param  _ _ _
+                 | q'ᴾ ← CCQueue q' (sᴿ .ops) ∋ param' _ _ _
+    | qᴾ  .popᴾ (simulate (sᴿ .run ) qᴾ )
+    | q'ᴾ .popᴾ (simulate (sᴿ .run') q'ᴾ)
+... | fsᴾ | fs'ᴾ = ?
+</code></pre>
+<p>The result <code>fsᴾ</code> has type</p>
+<pre><code>ListFᴾ (λ _ → ℕ) (λ l u a → suc l ≡ u × PushMap (sᴿ .ops) l a)
+       (qᴾ .Stateᴾ) (sᴿ .#pop) (sᴿ .#push) (q .pop s)
+</code></pre>
+<p>and <code>fs'ᴾ</code> has the same type except that <code>q</code>, <code>qᴾ</code>, and <code>s</code> are the primed versions.
+Importantly, the two types include the same counts of pops and pushes.
+This helps us to rule out the cases where <code>fsᴾ</code> and <code>fs'ᴾ</code> match different constructors:
+when <code>fsᴾ</code> matches <code>nilᴾ</code>, the indices <code>sᴿ .#pop</code> and <code>sᴿ .#push</code> are unified, and the type of <code>fs'ᴾ</code> becomes</p>
+<pre><code>ListFᴾ (λ _ → ℕ) (λ l u a → suc l ≡ u × PushMap (sᴿ .ops) l a)
+       (q'ᴾ .Stateᴾ) (sᴿ .#push) (sᴿ .#push) (q' .pop s')
+</code></pre>
+<p>Now, if <code>fs'ᴾ</code> matched <code>consᴾ</code>, we’d get a proof</p>
+<pre><code>PushMap (sᴿ .ops) (sᴿ .#push) a
+</code></pre>
+<p>but <code>sᴿ .#push</code> is a serial number that’s yet to be assigned to any element, so this proof cannot possibly exist.
+Formally, we can prove</p>
+<pre><code>PushMap-domain-bounded :
+  {ops : OpSeq A #pop #push} → PushMap ops k a → k &lt; #push
+</code></pre>
+<p>and use this lemma to derive contradiction in the cases where the two values match different constructors:</p>
+<pre><code>popᴿ-proof : BisimState q q' s s'
+           → ListFᴿ (BisimState q q') (q .pop s) (q' .pop s')
+popᴿ-proof sᴿ with qᴾ  ← CCQueue q  (sᴿ .ops) ∋ param  _ _ _
+                 | q'ᴾ ← CCQueue q' (sᴿ .ops) ∋ param' _ _ _
+    | qᴾ  .popᴾ (simulate (sᴿ .run ) qᴾ )
+    | q'ᴾ .popᴾ (simulate (sᴿ .run') q'ᴾ)
+... | nilᴾ eq            | nilᴾ eq'             = {! ListFᴿ … ⊣ eq : q .pop s ≡ nil; eq' : q' .pop s' ≡ nil; … !}
+... | nilᴾ _             | consᴾ (_ , m') _ _   with () ← &lt;-irrefl refl (PushMap-domain-bounded m')
+... | consᴾ (_ , m) _ _  | nilᴾ _               with () ← &lt;-irrefl refl (PushMap-domain-bounded m )
+... | consᴾ (_ , m) _ eq | consᴾ (_ , m') _ eq' = {! ListFᴿ … ⊣ eq : q .pop s ≡ cons a t; eq' : q' .pop s' ≡ cons a' t'; … !}
+</code></pre>
+<p>In the remaining two cases, <code>eq</code> and <code>eq'</code> (whose types are shown in the holes) are the state transition equalities we need to invoke <code>nilᴿ</code> or <code>consᴿ</code>:</p>
+<pre><code>popᴿ-proof : BisimState q q' s s'
+           → ListFᴿ (BisimState q q') (q .pop s) (q' .pop s')
+popᴿ-proof sᴿ with qᴾ  ← CCQueue q  (sᴿ .ops) ∋ param  _ _ _
+                 | q'ᴾ ← CCQueue q' (sᴿ .ops) ∋ param' _ _ _
+    | qᴾ  .popᴾ (simulate (sᴿ .run ) qᴾ )
+    | q'ᴾ .popᴾ (simulate (sᴿ .run') q'ᴾ)
+... | nilᴾ eq            | nilᴾ eq'             = nilᴿ eq eq'
+... | nilᴾ _             | consᴾ (_ , m') _ _   with () ← &lt;-irrefl refl (PushMap-domain-bounded m')
+... | consᴾ (_ , m) _ _  | nilᴾ _               with () ← &lt;-irrefl refl (PushMap-domain-bounded m )
+... | consᴾ (_ , m) _ eq | consᴾ (_ , m') _ eq' = consᴿ eq eq' ? ?
+</code></pre>
+<p>For the <code>consᴿ</code>, we need to prove that the two elements <code>a</code> and <code>a'</code> popped respectively from <code>s</code> and <code>s'</code> are the same, which is true because we have <code>m : PushMap (sᴿ .ops) (sᴿ .#pop) a</code> and <code>m' : PushMap (sᴿ .ops) (sᴿ .#pop) a'</code> and can prove</p>
+<pre><code>PushMap-functional : PushMap ops k a → PushMap ops k a' → a ≡ a'
+</code></pre>
+<p>Finally we need to show that the new states (<code>t</code> and <code>t'</code>) are in bisimulation, which is done by extending the operation sequence stored in <code>sᴿ</code>.
+This completes the proof!</p>
+<pre><code>popᴿ-proof : BisimState q q' s s'
+           → ListFᴿ (BisimState q q') (q .pop s) (q' .pop s')
+popᴿ-proof sᴿ with qᴾ  ← CCQueue q  (sᴿ .ops) ∋ param  _ _ _
+                 | q'ᴾ ← CCQueue q' (sᴿ .ops) ∋ param' _ _ _
+    | qᴾ  .popᴾ (simulate (sᴿ .run ) qᴾ )
+    | q'ᴾ .popᴾ (simulate (sᴿ .run') q'ᴾ)
+... | nilᴾ eq            | nilᴾ eq'             = nilᴿ eq eq'
+... | nilᴾ _             | consᴾ (_ , m') _ _   with () ← &lt;-irrefl refl (PushMap-domain-bounded m')
+... | consᴾ (_ , m) _ _  | nilᴾ _               with () ← &lt;-irrefl refl (PushMap-domain-bounded m )
+... | consᴾ (_ , m) _ eq | consᴾ (_ , m') _ eq' =
+  consᴿ eq eq' (PushMap-functional m m') record
+    { ops  = popOp (sᴿ .ops )
+    ; run  = popOp (sᴿ .run ) eq
+    ; run' = popOp (sᴿ .run') eq'
+    }
+</code></pre>
+<p>An obvious next step is to adapt the proof for other data structure interfaces.
+Stacks and deques are probably worth working out:
+For queues it could be argued that the quantification over <code>I</code> in <code>PQueue</code> isn’t really necessary — we could use a more concrete interface, such as <code>CQueue</code>, to achieve uniqueness as well; but for the stack interface</p>
+<pre><code>data ListF (I : Set) (R : I → I → Set) (X : I → I → Set)
+       : I → I → Set where
+  nil  : ∀ {u}                     → ListF I R X u u
+  cons : ∀ {l m u} → R l m → X m u → ListF I R X l u
+
+record Stack (I : Set) (i₀ : I) (R : I → I → Set) : Set₁ where
+  field
+    State : I → I → Set
+    empty : State i₀ i₀
+    push  : ∀ {k l u} → R k l → State l u → State k u
+    pop   : ∀ {l u} → State l u → ListF I R State l u
+</code></pre>
+<p>(which is different from <code>Queue</code> only in the type of <code>push</code>), specialising it in the same way to a <code>CStack</code> is probably going to destroy uniqueness — my gut feeling is that <code>I</code> needs to be specialised to a more complex model than natural numbers.
+So for the stack interface, the parametric quantification will be able to hide more complexity.
+Deques will presumably need an even more complex model for <code>I</code>, but hopefully we’ll have more clues about how to construct that model after dealing with stacks.
+And deques are probably the most complex data structure interface we can specify using this indexing pattern, which I think expresses a consecutive list of elements that can be added or deleted from the ends; also there’s more variety in deque implementations, so it can be convincingly demonstrated how easily it has become to prove that all these implementations are extensionally equal.
+(I’m pessimistic about data structures beyond deques, such as random-access lists and priority queues, but who knows.)
+After I figure out how to prove ‘simple uniqueness’ for all the three interfaces, that is, only in terms of <code>SQueue</code>, <code>SStack</code>, and <code>SDeque</code>, for the sake of completeness I may need to generalise the proofs to <code>PQueue</code>, <code>PStack</code>, and <code>PDeque</code>, pushing and popping not the same but related elements and indices.
+Hopefully, these proofs will only be more tedious rather than require new ideas, and can be omitted in the paper that will follow to report all these developments.</p>
+<p>Uniqueness doesn’t tell us directly what the <code>PQueue</code> interface does — to actually prove something about <code>PQueue</code>, we can write a simple reference implementation having the type, prove (extensional) properties we need for that reference implementation, and then use uniqueness to say that those properties hold for all implementations.
+Alternatively, we should be able to prove properties of <code>PQueue</code> directly using parametricity.
+This in general is (conservatively) extending the interface, so we can consider adding new operations too.
+For example, we can extend the interface to include an operation <code>size : State l u → ℕ</code> and traditional equational laws such as <code>size empty ≡ 0</code>, <code>size (add a s) ≡ suc (size s)</code>, and how <code>size</code> interacts with <code>pop</code> (which I don’t bother to formulate here).</p>
+<p>Even though the proof ends up being not long or tedious, I find this post very difficult to write (and spend much more time than I anticipated), probably because I’ve been driven by my intuition and not some systematic theory (apart from the parametricity translation).
+I do believe there’s some intuitive principle that I can try to formulate and verify.
+For example, I think when we write parametric programs we actually have some concrete models in mind for the parametrically quantified stuff, and proofs about the behaviour of parametric programs are done by explicitly formulating those concrete models so that we can instantiate the parametric programs concretely and reason about their behaviour.
+On the other hand, principles are by their nature vague and not directly reusable, so I wonder whether I can extract a lemma or two from the proof I have.
+For example, <code>SQueue</code> by itself doesn’t give rise to uniqueness — only <code>SQueue</code>s instantiated from a <code>PQueue</code> are bisimilar.
+Maybe there’s some form of data that can help us remember that an <code>SQueue</code> is instantiated from a <code>PQueue</code> and prove that any parametricity-based constructions still work for the <code>SQueue</code>.
+And I suspect that <code>RunOpSeq</code> is an important part of that piece of data (saying that an <code>SQueue</code> has been manipulated only through the <code>PQueue</code> interface, so invariants established by parametricity haven’t been broken).</p>
+<p>Incidentally, I wonder whether indexed types are essential in this development — if I switch to a displayed style (using simple, non-indexed types and separately formulated constraints), will parametricity continue to work?
+I guess the answer is yes (so choosing between indexed vs displayed types is only a matter of convenience), but can’t really see what the displayed version will be like without actually writing something down.
+And, finally, Zhixuan’s previous observation about the relationship with substructural typing is still intriguing, although I don’t really see how to redo the proof in that setting (since my proof seems entirely parametricity-based) — this I’ll leave for some other people to figure out.</p>
+<p><strong>Agda file:</strong> <a href="QueueBisimilarity.agda">QueueBisimilarity.agda</a></p>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>

@@ -90,7 +90,7 @@ module McBride-ICFP14 where
   append' m (x ∷ xs) ys = x ∷ append' m xs ys
 
   -- How many inhabitants does this type have?
-  -- f : ∀ {A R} → OList A R l u → OList A R l u
+  -- f : OList A R l u → OList A R l u
   -- f []           = []
   -- f (x ∷ [])     = {!  !}
   -- f (x ∷ y ∷ xs) = {!  !}
