@@ -60,7 +60,7 @@
 0048
 </div>
 <h2>Specifying queue order using parametric types, abstractly</h2>
-<div class="post-time">Posted at 16:31 on 19 January 2026</div>
+<div class="post-time">Posted at 16:31 on 19 January 2026, and revised at 16:31 on 29 January 2026</div>
 <p>Continuing <a href="/blog/0047/">0047</a>, I’ve finally worked out a proof that any two implementations of a parametrically quantified abstract <code>Queue</code> type are bisimilar, so the type acts as a tight specification that fully determines the extensional behaviour.
 In the meantime I’ve changed the definition a couple of times.
 At one point I switched to the ‘time-indexed’ version:</p>
@@ -420,7 +420,8 @@ And I suspect that <code>RunOpSeq</code> is an important part of that piece of d
 <p>Incidentally, I wonder whether indexed types are essential in this development — if I switch to a displayed style (using simple, non-indexed types and separately formulated constraints), will parametricity continue to work?
 I guess the answer is yes (so choosing between indexed vs displayed types is only a matter of convenience), but can’t really see what the displayed version will be like without actually writing something down.
 And, finally, Zhixuan’s previous observation about the relationship with substructural typing is still intriguing, although I don’t really see how to redo the proof in that setting (since my proof seems entirely parametricity-based) — this I’ll leave for some other people to figure out.</p>
-<p><strong>Agda file:</strong> <a href="QueueBisimilarity.agda">QueueBisimilarity.agda</a></p>
+<p><strong>Agda file:</strong> <a href="QueueBisimilarity.agda">QueueBisimilarity.agda</a><br>
+<strong>Follow-up:</strong> <a href="/blog/0049/">0049 (Specifying stack order using parametric types)</a></p>
 
 <!-- END OF POST -->
 

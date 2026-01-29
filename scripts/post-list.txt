@@ -1,7 +1,9 @@
 [
-PostEntry {entryNumber = 48, entryCreationTime = 2026-01-19 16:31:50.15153047, entryModificationTime = Nothing, entryTitle = "Specifying queue order using parametric types, abstractly", entryTeaser = Just "I\8217ve finally worked out a proof that any two implementations of a parametrically quantified abstract `Queue` type are bisimilar, so the type acts as a tight specification that fully determines the extensional behaviour."}
+PostEntry {entryNumber = 49, entryCreationTime = 2026-01-29 16:29:03.070883691, entryModificationTime = Nothing, entryTitle = "Specifying stack order using parametric types", entryTeaser = Just "I\8217ve also proved that a parametric stack type completely determines the extensional behaviour of its implementations."}
 ,
-PostEntry {entryNumber = 47, entryCreationTime = 2025-09-05 01:48:09.918095025, entryModificationTime = Just 2025-09-11 08:08:46.681229351, entryTitle = "Specifying queue order using parametric types, concretely", entryTeaser = Just "An idea using parametric types to specify the full functional correctness of queues with minimal effort, and a bit of experiment using parametricity."}
+PostEntry {entryNumber = 48, entryCreationTime = 2026-01-19 16:31:50.15153047, entryModificationTime = Just 2026-01-29 16:31:11.077645407, entryTitle = "Specifying queue order using parametric types, abstractly", entryTeaser = Just "I\8217ve finally worked out a proof that any two implementations of a parametrically quantified abstract `Queue` type are bisimilar, so the type acts as a tight specification that fully determines the extensional behaviour."}
+,
+PostEntry {entryNumber = 47, entryCreationTime = 2025-09-05 01:48:09.918095025, entryModificationTime = Just 2026-01-29 16:28:50.75340544, entryTitle = "Specifying queue order using parametric types, concretely", entryTeaser = Just "An idea using parametric types to specify the full functional correctness of queues with minimal effort, and a bit of experiment using parametricity."}
 ,
 PostEntry {entryNumber = 46, entryCreationTime = 2025-06-10 18:28:16.442751524, entryModificationTime = Nothing, entryTitle = "\23567\22411\27665\20027\33258\27835\39636\30340\35477\29983", entryTeaser = Nothing}
 ,

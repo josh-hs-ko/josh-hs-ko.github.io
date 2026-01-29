@@ -1,3 +1,5 @@
+-- Checked with Agda 2.8.0 and Standard Library 2.3
+
 {-# OPTIONS --safe --large-indices --no-forced-argument-recursion #-}
 
 module QueueBisimilarity where

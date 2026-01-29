@@ -60,7 +60,7 @@
 0047
 </div>
 <h2>Specifying queue order using parametric types, concretely</h2>
-<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 08:08 on 11 September 2025</div>
+<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 16:28 on 29 January 2026</div>
 <p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc.
 They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
 It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
@@ -279,7 +279,8 @@ twoListQueue {A} {R} = record
 I think I have some vague ideas, and will try to devise a proof and write another post.
 And we should think about whether we can specify other kinds of ordering too — stack order and priority-queue order, for example.
 Priority-queue order is probably difficult; even stack order may not be as straightforward as it looks…</p>
-<p><strong>Agda file:</strong> <a href="WG21-Sep25.agda">WG21-Sep25.agda</a></p>
+<p><strong>Agda file:</strong> <a href="WG21-Sep25.agda">WG21-Sep25.agda</a><br>
+<strong>Follow-up:</strong> <a href="/blog/0048/">0048 (Specifying queue order using parametric types, abstractly)</a></p>
 
 <!-- END OF POST -->
 

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Specifying stack order using parametric types — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="I’ve also proved that a parametric stack type completely determines the extensional behaviour of its implementations.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0049
+</div>
+<h2>Specifying stack order using parametric types</h2>
+<div class="post-time">Posted at 16:29 on 29 January 2026</div>
+<p>Continuing <a href="/blog/0048/">0048</a>, soon I’ve successfully adapted the proof for stacks over the last weekend.
+Happily, my intuition proves correct: the key step is switching to a more complex concrete model for the indices.</p>
+<p>The main difference between the queue and stack interfaces is in the type of <code>push</code>.
+Recall that the <code>State</code> type family has two indices, which intuitively are the endpoints of a range.
+If we pop from the left —so a successful pop changes the left index in the state type— then we push into a queue from the right, changing the right index,</p>
+<pre><code>Queue.push : ∀ {i j k} → R j k → State i j → State i k
+</code></pre>
+<p>whereas we push into a stack from the left and change the left index:</p>
+<pre><code>Stack.push : ∀ {i j k} → R i j → State j k → State i k
+</code></pre>
+<p>It follows that the stack interface never changes the right index, so actually we can switch to a single-index state type family, keeping only the left index:</p>
+<pre><code>module _ (I : Set) (i₀ : I) (R : I → I → Set) where
+
+  data ListF (X : I → Set) : I → Set where
+    nil  :                         ListF X i₀
+    cons : ∀ {i j} → R i j → X j → ListF X i
+
+  record Stack : Set₁ where
+    field
+      State : I → Set
+      empty : State i₀
+      push  : ∀ {i j} → R i j → State j → State i
+      pop   : ∀ {i} → State i → ListF State i
+</code></pre>
+<p>In the two-index setting, the <code>nil</code> constructor of <code>ListF</code> has type <code>∀ {i} → ListF X i i</code>, but for stacks the right index is fixed at <code>i₀</code>, so in the single-index setting we should require the (originally left) index to be <code>i₀</code>.
+As before, we define</p>
+<pre><code>PStack : Set₁
+PStack = ∀ I i₀ R → Stack I i₀ R
+
+SStack : Set → Set₁
+SStack A = Stack ⊤ tt (λ _ _ → A)
+
+inst : PStack → (A : Set) → SStack A
+inst St A = St ⊤ tt (λ _ _ → A)
+</code></pre>
+<p>and formulate the bisimilarity theorem only for <code>SStacks</code> instantiated from <code>PStack</code>:</p>
+<pre><code>data ListFᴿ {A : Set} {X X' : Set} (Xᴿ : X → X' → Set)
+        : ListF ⊤ tt (λ _ _ → A) (λ _ → X ) tt
+        → ListF ⊤ tt (λ _ _ → A) (λ _ → X') tt → Set where
+  nilᴿ  :                    ListFᴿ Xᴿ  nil        nil
+  consᴿ : a ≡ a' → Xᴿ x x' → ListFᴿ Xᴿ (cons a x) (cons a' x')
+
+record Bisim {A : Set} (st st' : SStack A) : Set₁ where
+  field
+    Stateᴿ : st .State tt → st' .State tt → Set
+    emptyᴿ : Stateᴿ (st .empty) (st' .empty)
+    pushᴿ  : (a : A) → Stateᴿ s s'
+           → Ford² Stateᴿ (st .push a s) (st' .push a s')
+    popᴿ   : Stateᴿ s s'
+           → Ford² (ListFᴿ Stateᴿ) (st .pop s) (st' .pop s')
+
+bisim : (St St' : PStack) → Param St → Param St'
+      → (A : Set) → Bisim (inst St A) (inst St' A)
+</code></pre>
+<p>One minor difference from the queue version is that I decide to employ the principle that ‘Fording’ should be applied and only applied at places where the ‘unifiable-index’ rule is violated.
+The unifiable-index rule says that we should use only variables and constructors in indices to allow unification to succeed when performing pattern matching.
+If we need more complex indices, the usual solution is to apply Fording, internalising the index equality and delaying unification when performing pattern matching:</p>
+<pre><code>Ford : {I : Set} → (I → Set) → I → Set
+Ford P i₀ = ∀ {i} → i ≡ i₀ → P i
+</code></pre>
+<p>In the code above we use the two-index version (definable from the single-index version):</p>
+<pre><code>Ford² : {I J : Set} → (I → J → Set) → I → J → Set
+Ford² R i₀ j₀ = Ford (λ i → Ford (R i) j₀) i₀
+</code></pre>
+<p>In <a href="/blog/0048/">0048</a> Fording was applied in <code>ListFᴿ</code>, whereas here it’s applied in <code>Bisim</code>, where complex indices (the <code>push</code> and <code>pop</code> expressions) actually appear and Fording can be seen to be necessary.
+The principle is also applied in the definition of unary parametricity:</p>
+<pre><code>module _ {I  : Set}         (Iᴾ  : I → Set)
+         {i₀ : I}           (i₀ᴾ : Iᴾ i₀)
+         {R  : I → I → Set} (Rᴾ  : ∀ {i j} → Iᴾ i → Iᴾ j → R i j → Set)
+  where
+
+  data ListFᴾ {X : I → Set} (Xᴾ : ∀ {i} → Iᴾ i → X i → Set)
+          : ∀ {i} (iᴾ : Iᴾ i) → ListF I i₀ R X i → Set where
+    nilᴾ  : ListFᴾ Xᴾ i₀ᴾ nil
+    consᴾ : ∀ {i j} {r : R i j} {x : X j}
+          → {iᴾ : Iᴾ i} {jᴾ : Iᴾ j} → Rᴾ iᴾ jᴾ r → Xᴾ jᴾ x
+          → ListFᴾ Xᴾ iᴾ (cons r x)
+
+  record Stackᴾ (st : Stack I i₀ R) : Set₁ where
+    field
+      Stateᴾ : ∀ {i} → Iᴾ i → st .State i → Set
+      emptyᴾ : Stateᴾ i₀ᴾ (st .empty)
+      pushᴾ  : ∀ {i j} {r : R i j} {s : st .State j}
+             → {iᴾ : Iᴾ i} {jᴾ : Iᴾ j} → Rᴾ iᴾ jᴾ r → Stateᴾ jᴾ s
+             → Ford (Stateᴾ iᴾ) (st .push r s)
+      popᴾ   : ∀ {i} {s : st .State i}
+             → {iᴾ : Iᴾ i} → Stateᴾ iᴾ s
+             → Ford (ListFᴾ Stateᴾ iᴾ) (st .pop s)
+
+Param : PStack → Set₁
+Param St =
+  {I  : Set}         (Iᴾ  : I → Set)
+  {i₀ : I}           (i₀ᴾ : Iᴾ i₀)
+  {R  : I → I → Set} (Rᴾ  : ∀ {i j} → Iᴾ i → Iᴾ j → R i j → Set)
+                    → Stackᴾ Iᴾ i₀ᴾ Rᴾ (St I i₀ R)
+</code></pre>
+<p>Applying the principle does help to simplify a bit of code later.</p>
+<p><em>Remark.</em>
+In general, I’m hoping that someday we can formalise the principle as a theorem explaining the benefit of applying Fording systematically, a subject which <a href="/blog/0045/">0045</a> vaguely talked about.
+And incidentally, I don’t really like naming the programming pattern after Ford because it doesn’t follow the usual scientific naming convention with which we remember the right people to remember, namely the inventors.
+On the other hand, the name has become fairly standard, and you can’t possibly find a more convenient term than a single-syllable one…
+(<em>End of remark.</em>)</p>
+<p>The index in the state types looks like the height of a stack, and, following the reasoning about <code>CQueue</code> in <a href="/blog/0048/">0048</a>, one may think that substituting the natural numbers for the parameter <code>I</code> would lead to a more concrete interface that still completely specifies the extensional behaviour, for example</p>
+<pre><code>CStack : (ℕ → Set) → Set₁
+CStack P = Stack ℕ 0 (λ i j → i ≡ suc j × P i)
+</code></pre>
+<p>But this doesn’t work for stacks because the serial numbers may get reused.
+For example, let <code>st : CStack P</code> and consider the operation sequence</p>
+<pre><code>         s₀ = st .empty
+         s₁ = st .push x₁  s₀
+cons y₁  s₂ = st .pop      s₁
+         s₃ = st .push x₁' s₂
+cons y₁' s₄ = st .pop      s₃
+</code></pre>
+<p>where all of <code>x₁</code>, <code>x₁'</code>, <code>y₁</code>, and <code>y₁'</code> have type <code>P 1</code>.
+It’s possible to deduce that <code>y₁</code> has to be <code>x₁</code>, but <code>y₁'</code> doesn’t have to be <code>x₁'</code>: <code>pop</code> is only required to emit an element with a specified serial number; after pushing <code>x₁'</code>, the ‘stack’ has been given two elements with serial number <code>1</code>, and it could choose to cache and emit <code>x₁</code> for the pop from <code>s₃</code> rather than emit <code>x₁'</code>.</p>
+<p>So we should find a new model so that we can assign distinct serial numbers to pushed elements.
+One possibility I experimented with is to count the pushed elements in an operation sequence, which is still a natural number — for example in the sequence above, <code>x₁</code> would be numbered <code>1</code> (because it’s the first push), and <code>x₁'</code> would be numbered <code>2</code> (because it’s the second push).
+(We don’t assign <code>0</code> to any element, so that we can deduce that it’s impossible to pop an element from a state indexed <code>0</code>.)
+We also need to replace the predecessor relation <code>λ i j → i ≡ suc j</code> with a more complex one so that the new state produced by <code>pop</code> has the right index — in the example above we need a relation <code>Pred</code> such that <code>Pred 1 0</code> and <code>Pred 2 0</code>.
+However, the definition of this <code>Pred</code> depends on the operation sequence, and this dependence proved to be problematic.</p>
+<p>Eventually the model I use is <code>List ℕ</code>.
+There are two ways of thinking about this model.
+The first way is that it’s an abstraction of a stack state.
+Still using the example above:</p>
+<ul>
+<li>the <code>empty</code> state is indexed by an empty abstract stack <code>[]</code>;</li>
+<li>when we push <code>x₁</code>, we push <code>0</code> into the abstract stack and assign to <code>x₁</code> the ‘number’ <code>0 ∷ []</code>, which I interpret as saying that the element is the <code>0</code>-th element to be stored at this position of the stack;</li>
+<li>when popping from <code>s₁</code>, we also pop from the abstract stack, and <code>s₂</code> is again indexed by <code>[]</code>; at the same time we also push the popped <code>0</code> into an (initially empty) residual stack, so that</li>
+<li>when pushing <code>x₁'</code>, we can look into the residual stack and see that there have been other elements stored at this position, so we pop <code>0</code> from the residual stack, push its successor into the abstract stack, and assign to <code>x₁'</code> the ‘number’ <code>1 ∷ []</code>, meaning that it’s the <code>1</code>-st element at this position.</li>
+</ul>
+<p>We can define this ‘numbering scheme’ in the indices of the data type <code>OpSeq</code> of operation sequences,</p>
+<pre><code>data OpSeq (A : Set) : List ℕ → List ℕ → Set where
+
+  emptyOp :     OpSeq A           []        []
+
+  pushOp₀ : A → OpSeq A          stk        []
+              → OpSeq A (zero  ∷ stk)       []
+
+  pushOp₁ : A → OpSeq A          stk  (k ∷ res)
+              → OpSeq A (suc k ∷ stk)      res
+
+  popOp   :     OpSeq A (    k ∷ stk)      res
+              → OpSeq A          stk  (k ∷ res)
+</code></pre>
+<p>so that if <code>pushOpᵢ a ops : OpSeq A stk res</code> then <code>stk</code> is the ‘number’ we assign to <code>a</code>.
+Formally, the assignments are defined as a <code>PushMap</code> relation (similarly for queues),</p>
+<pre><code>data PushMap : OpSeq A stk res → List ℕ → A → Set where
+  pushOp₀-here  : {ops : OpSeq A stk []}
+                → PushMap (pushOp₀ a ops) (zero  ∷ stk) a
+  pushOp₁-here  : {ops : OpSeq A stk (k ∷ res)}
+                → PushMap (pushOp₁ a ops) (suc k ∷ stk) a
+  pushOp₀-there : PushMap ops ks a' → PushMap (pushOp₀ a ops) ks a'
+  pushOp₁-there : PushMap ops ks a' → PushMap (pushOp₁ a ops) ks a'
+  popOp         : PushMap ops ks a' → PushMap (popOp     ops) ks a'
+</code></pre>
+<p>and we can prove that the assignments are indeed distinct as a lemma saying that <code>PushMap</code> is a functional relation:</p>
+<pre><code>PushMap-functional : PushMap ops ks a → PushMap ops ks a' → a ≡ a'
+</code></pre>
+<p>Assigning abstract stacks is actually a refinement of our initial numbering scheme assigning heights since the length of the abstract stack is the stack height — so the second way of thinking about the refined numbering scheme is that we’re still numbering the elements with stack heights, but the <code>suc</code> constructors are suitably decorated (and become <code>_∷_</code> constructors) so that we never assign the same number twice.
+And note that the predecessor relation for these numbers is just <code>tail</code>, whose definition doesn’t depend on an operation sequence.</p>
+<p>The rest is largely the same as the queue proof.
+First define</p>
+<pre><code>record BisimState {A : Set} (st st' : SStack A)
+                  (s : st .State tt) (s' : st' .State tt) : Set where
+  constructor bisimState
+  field
+    {stk res} : List ℕ
+    ops  : OpSeq A stk res
+    run  : RunOpSeq ops st  s
+    run' : RunOpSeq ops st' s'
+</code></pre>
+<p>where</p>
+<pre><code>data RunOpSeq : OpSeq A stk res → (st : SStack A)
+              → st .State tt → Set where
+  emptyOp : st .empty ≡ s
+          → RunOpSeq emptyOp st s
+  pushOp₀ : RunOpSeq ops st s → st .push a s ≡ t
+          → RunOpSeq (pushOp₀ a ops) st t
+  pushOp₁ : RunOpSeq ops st s → st .push a s ≡ t
+          → RunOpSeq (pushOp₁ a ops) st t
+  popOp   : RunOpSeq ops st s → st .pop s ≡ cons a t
+          → RunOpSeq (popOp ops) st t
+</code></pre>
+<p>so that we can start filling in <code>bisim</code>, where again the <code>emptyᴿ</code>/<code>pushᴿ</code> case starts/extends the operation sequence in <code>BisimState</code>:</p>
+<pre><code>bisim : (St St' : PStack) → Param St → Param St'
+      → (A : Set) → Bisim (inst St A) (inst St' A)
+bisim St St' param param' A = record
+  { Stateᴿ = BisimState st st'
+  ; emptyᴿ = bisimState emptyOp
+                       (emptyOp refl)
+                       (emptyOp refl)
+  ; pushᴿ  = λ { a (bisimState {_} {[]} ops run run') refl refl →
+                    bisimState (pushOp₀ a ops)
+                               (pushOp₀ run  refl)
+                               (pushOp₀ run' refl)
+               ; a (bisimState {_} {k ∷ res} ops run run') refl refl →
+                    bisimState (pushOp₁ a ops)
+                               (pushOp₁ run  refl)
+                               (pushOp₁ run' refl)
+               }
+  ; popᴿ   = popᴿ-proof
+  }
+  where
+
+  st st' : SStack A
+  st  = inst St  A
+  st' = inst St' A
+
+  popᴿ-proof :
+      BisimState st st' s s'
+    → Ford² (ListFᴿ (BisimState st st')) (st .pop s) (st' .pop s')
+  popᴿ-proof (bisimState ops run run') eq eq' = ?
+</code></pre>
+<p>In <code>popᴿ-proof</code> we invoke unary parametricity proofs <code>param</code> and <code>param'</code> to create <code>CCStack</code>s defined by</p>
+<pre><code>CCStack : SStack A → OpSeq A stk res → Set₁
+CCStack st ops = Stackᴾ (λ _ → List ℕ)
+                        []
+                        (λ ks ks' a → (∃ λ k → ks ≡ k ∷ ks')
+                                    × PushMap ops ks a)
+                        st
+
+</code></pre>
+<p>fast-forward their states using</p>
+<pre><code>simulate : {ops : OpSeq A stk res} → RunOpSeq ops st s
+         → (stᴾ : CCStack st ops) → stᴾ .Stateᴾ stk s
+</code></pre>
+<p>and then pop from the resulting states, on which we perform a case analysis:</p>
+<pre><code>popᴿ-proof :
+    BisimState st st' s s'
+  → Ford² (ListFᴿ (BisimState st st')) (st .pop s) (st' .pop s')
+popᴿ-proof (bisimState ops run run') eq eq'
+  with stᴾ  ← CCStack st  ops ∋ param  _ _ _
+     | st'ᴾ ← CCStack st' ops ∋ param' _ _ _
+     | stᴾ  .popᴾ (simulate run  stᴾ ) eq
+     | st'ᴾ .popᴾ (simulate run' st'ᴾ) eq'
+...  | nilᴾ                     | nilᴾ                      = ?
+...  | nilᴾ                     | consᴾ ((_ , kseq) , m') _ = ?
+...  | consᴾ ((_ , kseq) , m) _ | nilᴾ                      = ?
+...  | consᴾ ((_ , refl) , m) _ | consᴾ ((_ , refl) , m') _ = ?
+</code></pre>
+<p>When invoking <code>popᴾ</code>, since we Forded the type of <code>popᴾ</code> instead of <code>nilᴾ</code> and <code>consᴾ</code>, a single equality constraint <code>eq</code> is prepared outside and passed in as an argument as opposed to letting the <code>nilᴾ</code> and <code>consᴾ</code> patterns below carry their own equality proofs (as in the queue proof), which looks messier.
+Moreover, <code>eq : i ≡ st .pop s</code> arises from the type of <code>popᴿ</code>, where the complex index <code>st .pop s</code> first appears and is Forded; as the constraint gets passed into <code>popᴾ</code> and unified, it’s the variable <code>i</code> introduced by Fording the type of <code>popᴿ</code> that’s unified, so, for example, in the <code>nilᴾ</code>-<code>nilᴾ</code> case the type of <code>eq</code> specialises to <code>nil ≡ st .pop s</code> —and similarly for <code>eq'</code>— and the goal type becomes <code>ListFᴿ (BisimState st st') nil nil</code>, which we can directly discharge with <code>nilᴿ</code>.
+That is, we Ford the goal type, obtaining some equality constraints about the indices, which then get sufficiently specialised by unification so that the goal type becomes dischargeable.</p>
+<p>In the cases where one state matches <code>nilᴾ</code> and the other matches <code>consᴾ</code>, since the indices (that is, the decorated heights) of the two states are the same (as guaranteed by <code>simulate</code>), matching one state with <code>nilᴾ</code> means that the shared index is <code>[]</code>, so from the other state we somehow successfully pops an element numbered <code>[]</code>, but this is impossible because we don’t assign <code>[]</code> to any element —that is, the type of <code>m</code>/<code>m'</code> has form <code>PushMap ops [] a</code>, which can be proved to be uninhabited— or more simply, any number we assign should have a predecessor but <code>[]</code> has no predecessor — that is, the type of <code>kseq</code> has form <code>[] ≡ k ∷ ks</code>, which is obviously uninhabited.</p>
+<p>The <code>consᴾ</code>-<code>consᴾ</code> case is the same as the queue proof: both sides pop elements with the same number, and then <code>PushMap-functional m m'</code> proves that the two elements are equal; finally we extend the operation sequence in <code>BisimState</code> to relate the two new states.</p>
+<pre><code>popᴿ-proof :
+    BisimState st st' s s'
+  → Ford² (ListFᴿ (BisimState st st')) (st .pop s) (st' .pop s')
+popᴿ-proof (bisimState ops run run') eq eq'
+  with stᴾ  ← CCStack st  ops ∋ param  _ _ _
+     | st'ᴾ ← CCStack st' ops ∋ param' _ _ _
+     | stᴾ  .popᴾ (simulate run  stᴾ ) eq
+     | st'ᴾ .popᴾ (simulate run' st'ᴾ) eq'
+...  | nilᴾ                     | nilᴾ                      = nilᴿ
+...  | nilᴾ                     | consᴾ ((_ , ()  ) , _ ) _
+...  | consᴾ ((_ , ()  ) , _) _ | nilᴾ
+...  | consᴾ ((_ , refl) , m) _ | consᴾ ((_ , refl) , m') _ =
+  consᴿ (PushMap-functional m m')
+        (bisimState (popOp ops)
+                    (popOp run  (sym eq ))
+                    (popOp run' (sym eq')))
+</code></pre>
+<p>Even though the stack proof is more complex (some of the complexity is not shown in this post — for example, <code>PushMap-functional</code> is more difficult to prove than for queues), it’s actually less useful than the queue proof because the stack interface is easily and optimally implementable using lists in a functional setting, and we don’t seem to need to consider other implementations.
+I think the role of this proof is to pave the way for a deque proof, which will probably be significantly harder but also more useful, covering more implementations.
+But I really have to get back to revising my unloved paper with Shin for (the soon-to-be-reborn) JFP.</p>
+<p><em>Acknowledgements.</em>
+I’ve been writing Agda in VS Code for several years, but in recent months the Agda input method has become so broken (with the cursor drifting uncontrollably) that I started to consider switching back to emacs.
+Just when I had that thought, my former assistant Zong-You Shih ported the Agda input method to macOS as a native input method called <a href="https://github.com/vic0103520/unicorn-macOS">Unicorn</a>, with which the Agda programs behind this post are happily written (and the cursor feels stable again).
+A big thanks to Zong-You as well as all the Agda developers, who have made and kept programming in Agda a joy.
+(<em>End of acknowledgements.</em>)</p>
+<p><strong>Agda file:</strong> <a href="Stack.agda">Stack.agda</a></p>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>
