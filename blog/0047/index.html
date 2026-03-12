@@ -60,7 +60,7 @@
 0047
 </div>
 <h2>Specifying queue order using parametric types, concretely</h2>
-<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 16:28 on 29 January 2026</div>
+<div class="post-time">Posted at 01:48 on 5 September 2025, and revised at 16:31 on 12 March 2026</div>
 <p><a href="https://scm.iis.sinica.edu.tw/home/">Shin</a> and his summer intern student did a survey of Okasaki’s numerical representations idea for designing concrete sequence representations that can be used (abstractly) as queues, stacks, random-access lists, etc.
 They wrote a series of Agda programs, where they followed <a href="/#publication-696aedff">my old recipe</a> of indexing the types of data structures and operations with their underlying numerical structure.
 It’s all well and good, but is still far from the usual functional correctness that we want for our (for example) queues, namely enforcing the first-in-first-out (FIFO) order, which I’ll call ‘queue order’ for short.
@@ -246,7 +246,7 @@ rev' xs
 <p>In the middle we need <code>rev ns</code> and <code>rev' ns</code> to be equal: when constructing <code>ns</code>, if we choose concrete types like <code>A = ℕ</code> and <code>R x y = (suc x ≡ y)</code>, requiring a chain of natural numbers linked by <code>R</code> to be consecutive (and proofs of <code>R x y</code> are unique since <code>ℕ</code> is an h-set), then the type <code>OList A R l u</code> will fully determine the elements in its inhabitant, so <code>rev ns</code> and <code>rev' ns</code> are equal simply because they have the same type.
 The actual Agda proof needs to be more precise, for example making <code>assocA</code> total by defining a finite domain (instead of <code>ℕ</code>) whose size depends on the length of <code>xs</code>, but the proof is essentially what’s sketched above.
 I think the reasoning pattern used here is that our intuition about how the function processes elements of abstract types <code>A</code> and <code>R</code> is faithfully captured in the behaviour of the function at the chosen concrete types, which we can determine because everything is concrete, and then parametricity says that the function must behave uniformly for all types, so our intuition is valid in general.
-I wonder if we can turn this reasoning pattern into some form of reusable theorem so that in the future we can simply say that unique inhabitance of <code>ReverseType</code> (or, for example, of the type of <code>retabulate</code> in the <a href="/#publication-5e2da9a2">binomial tabulation</a> development) is a corollary of the theorem (otherwise it’s not really science…).</p>
+I wonder if we can turn this reasoning pattern into some form of reusable theorem so that in the future we can simply say that unique inhabitance of <code>ReverseType</code> (or, for example, of the type of <code>retabulate</code> in the <a href="/#publication-1c6f4237">binomial tabulation</a> development) is a corollary of the theorem (otherwise it’s not really science…).</p>
 <p>I believe that the types of <code>empty</code>, <code>push</code>, and <code>pop</code> can all be proved to be uniquely inhabited in the same way.
 On the other hand, as can be seen above, I don’t think there will be much new stuff in these proofs.
 A more interesting task would be proving that the <em>abstract</em> queue type</p>
