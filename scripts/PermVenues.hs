@@ -23,7 +23,7 @@ permVenueList =
       }
   , PermVenue
       { permVenueName = "Journal of Functional Programming"
-      , permVenueURL  = "https://www.cambridge.org/core/journals/journal-of-functional-programming"
+      , permVenueURL  = "https://jfp.episciences.org"
       }
   , PermVenue
       { permVenueName = "New Generation Computing"
