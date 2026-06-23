@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>Dependently typed program transformations — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="To transform one pattern-matching program to another (which may have a simpler case analysis structure), we found that one way is to translate the programs to a lower-level language of Goguen et al’s *basic analysis* operators, on which we can state equational laws.
+The translation and the resulting programs are quite tedious though.
+But then we discovered that, with Fording, the transformations may be performed directly on pattern-matching programs.
+*This post is jointly written with my assistant Shu-Ting Hsu.*">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0050
+</div>
+<h2>Dependently typed program transformations</h2>
+<div class="post-time">Posted at 16:44 on 23 June 2026</div>
+<p><em>This post is jointly written with my assistant Shu-Ting Hsu.</em></p>
+<p>When writing Agda programs, applying different pattern matching strategies to the same function leads to different program structures corresponding to different ways of performing case analyses.
+One common situation that arises when working with an indexed data type is that a beginner may analyse the indices first but end up with a more complex program, and then they are usually taught that it can be more straightforward to analyse the data.
+For example, consider this definition of <code>_≤_</code> (which is a renamed version of <code>_≤′_</code> from the standard library),</p>
+<pre><code>data _≤_ : ℕ → ℕ → Set where
+  base : m ≡ n → m ≤ n
+  step : m ≤ n → m ≤ suc n
+</code></pre>
+<p>and suppose that we want to weaken <code>suc m ≤ n</code> (that is, <code>m &lt; n</code>) to <code>m ≤ n</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m .(suc m) (base refl)    = step (base refl)
+wk m .(suc n) (step {n} m&lt;n) = step (wk m n m&lt;n)
+</code></pre>
+<p>This definition performs a case analysis on the proof of <code>suc m ≤ n</code>.
+To emphasise that the pattern matching on the second argument is not performed by the programmer but forced by unification, we use dot patterns explicitly (and therefore need to bind <code>n</code> explicitly in the <code>step</code> constructor in the second clause).
+A beginner might be unfamiliar with the idea of induction on proofs though, and write the following version that analyses the indices <code>m</code> and <code>n</code> first:</p>
+<pre><code>wk' : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk'  zero    zero           m&lt;n        = base refl
+wk'  zero   (suc .zero)    (base refl) = step (base refl)
+wk'  zero   (suc n)        (step m&lt;n)  = step (wk' zero n m&lt;n)
+wk' (suc m)  zero          (base ())
+wk' (suc m) (suc .(suc m)) (base refl) = step (base refl)
+wk' (suc m) (suc n)        (step m&lt;n)  = step (wk' (suc m) n m&lt;n)
+</code></pre>
+<p>Here <code>wk'</code> is finished with six cases, and is more complex than <code>wk</code>.
+In all the cases except the first one, the shapes of <code>m</code> and <code>n</code> determine the constructor of <code>suc m ≤ n</code>, but we still need to match the proof with that constructor explicitly — note the absence of dots before the <code>base</code> and <code>step</code> patterns.
+The first case is more interesting because the right-hand side is something we didn’t see in <code>wk</code>.
+Alternatively, we could complete the clause by matching <code>m&lt;n : suc zero ≤ zero</code> with <code>base ()</code> and make <code>wk'</code> less different from <code>wk</code>, but we will keep the <code>base refl</code> definition to help with our discussion below (and it’s actually natural for a beginner to fill in <code>base refl</code> upon seeing the goal type <code>zero ≤ zero</code>).</p>
+<p>So <code>wk'</code> performs two layers of pattern matching on the indices and then the data, whereas <code>wk</code> performs only one layer of pattern matching on the data directly.
+What is the connection between <code>wk</code> and <code>wk'</code>?
+We suspect that <code>wk'</code> can be transformed into <code>wk</code> step by step, and carry out an experiment.</p>
+<h3>Transforming <code>wk'</code> to <code>wk</code>, take 1</h3>
+<p>Our first step is to fully expand the two layers of case analyses in every clause.
+For <code>wk'</code>, only the first clause still needs to be expanded:</p>
+<pre><code>  wk₁ : (m n : ℕ) → suc m ≤ n → m ≤ n
+  wk₁  zero    zero          (base _)    = base refl
+  wk₁  zero   (suc .zero)    (base refl) = step (base refl)
+  wk₁  zero   (suc n)        (step m&lt;n)  = step (wk₁ zero n m&lt;n)
+  wk₁ (suc m)  zero          (base ())
+  wk₁ (suc m) (suc .(suc m)) (base refl) = step (base refl)
+  wk₁ (suc m) (suc n)        (step m&lt;n)  = step (wk₁ (suc m) n m&lt;n)
+</code></pre>
+<p>Next, we reorder the clauses so that the clauses with the same patterns for the proof of <code>suc m ≤ n</code> are grouped together, to indicate that the case analysis on the indexed data <code>suc m ≤ n</code> is now performed first (although the case tree generated by Agda won’t reflect that):</p>
+<pre><code>  wk₂ : (m n : ℕ) → suc m ≤ n → m ≤ n
+  wk₂  zero    zero          (base _)    = base refl
+  wk₂  zero   (suc .zero)    (base refl) = step (base refl)
+  wk₂ (suc m)  zero          (base ())
+  wk₂ (suc m) (suc .(suc m)) (base refl) = step (base refl)
+  wk₂  zero   (suc n)        (step m&lt;n)  = step (wk₂  zero   n m&lt;n)
+  wk₂ (suc m) (suc n)        (step m&lt;n)  = step (wk₂ (suc m) n m&lt;n)
+</code></pre>
+<p>In the <code>step</code> clauses, the results on the right-hand sides are actually essentially the same: the difference is only in the first arguments of the recursive calls, but what they both do is copying the first argument, regardless of whether that’s <code>zero</code> or <code>suc m</code>.
+The two clauses can therefore be merged into a single one:</p>
+<pre><code>  wk₃ : (m n : ℕ) → suc m ≤ n → m ≤ n
+  wk₃  zero    zero          (base _)    = base refl
+  wk₃  zero   (suc .zero)    (base refl) = step (base refl)
+  wk₃ (suc m)  zero          (base ())
+  wk₃ (suc m) (suc .(suc m)) (base refl) = step (base refl)
+  wk₃ m       (suc n)        (step m&lt;n)  = step (wk₃ m n m&lt;n)
+</code></pre>
+<p>The first four <code>base</code> clauses do not admit the same simplification.
+The second and fourth clauses look mergeable because they share the same result, but the first and third clauses do not.
+The third clause is an impossible branch, but its empty domain makes its result extensionally irrelevant, so the mismatch may not be problematic; on the other hand, if we insist on rewriting it into the same form syntactically, there doesn’t seem to be a way of doing that.
+The first clause presents a more problematic mismatch, since <code>base refl</code> and <code>step (base refl)</code> have visibly different constructor forms.
+It appears that we’re stuck.</p>
+<h3>Basic analyses</h3>
+<p>It turns out that we can make more progress if we first translate pattern-matching programs into the corresponding eliminators, as in Goguen, McBride, and McKinna’s <a href="https://doi.org/10.1007/11780274_27"><em>Eliminating dependent pattern matching</em></a>.
+For example, the eliminator for <code>_≤_</code> is</p>
+<pre><code>  elim-≤ : (P : (m n : ℕ) → m ≤ n → Set)
+         → ({m n : ℕ} {m≡n : m ≡ n} → P m n (base m≡n))
+         → ({m n : ℕ} {m≤n : m ≤ n} → P m n m≤n → P m (suc n) (step m≤n))
+         → (m n : ℕ) (m≤n : m ≤ n) → P m n m≤n
+  elim-≤ P pb ps m .m       (base refl) = pb
+  elim-≤ P pb ps m .(suc _) (step m≤n)  = ps (elim-≤ P pb ps m _ m≤n)
+</code></pre>
+<p>Actually, instead of translating directly to eliminators, Goguen et al chose to introduce an intermediate language of <em>basic analysis</em>; pattern-matching programs are translated to basic analyses, which can be defined in terms of eliminators.
+These basic analysis operators can be thought of as a semantics of Epigram.
+For example, Section 2 of Conor’s <a href="https://doi.org/10.1007/11546382_3"><em>Epigram: Practical programming with dependent types</em></a> gave this standard example:</p>
+<pre><code>plus x y ⇐ rec x {
+  plus x y ⇐ case x {
+    plus  zero   y ⇒ y
+    plus (suc x) y ⇒ suc (plus x y) } }
+</code></pre>
+<p>There are two things to observe here: (i) Conor chose to separate <em>recursion</em> and <em>case analysis</em>; (ii) the target to be recursed over or analysed (<code>x</code> in the example above) may be part of a larger input (<code>x</code> and <code>y</code> above).
+By contrast, eliminators mix recursion and case analysis, and assume that the proof and its indices are the only things in the input — for example, <code>elim-≤</code> ends with <code>(m n : ℕ) (m≤n : m ≤ n) → P m n m≤n</code> instead of a general dependent function type <code>(δ : Δ) → T δ</code>.
+The rest of this section explains in more detail what basic analysis operators are and how to define them from eliminators.</p>
+<h4>Basic case-analysis operators</h4>
+<p>We’ll look at case analysis first.
+The following <code>case-≤</code> operator is the same as <code>elim-≤</code> except that the induction hypothesis in the <code>step</code> method is dropped, so the <code>case-≤</code> operator only performs a case analysis on a proof of <code>m ≤ n</code>.</p>
+<pre><code>case-≤ : (P : ∀ m n → m ≤ n → Set)
+       → ((m n : ℕ) (m≡n : m ≡ n) → P m n (base m≡n))
+       → ((m n : ℕ) (m≤n : m ≤ n) → P m (suc n) (step m≤n))
+       → (m n : ℕ) (m≤n : m ≤ n) → P m n m≤n
+case-≤ P pb ps = elim-≤ P
+                   (λ {m₀ n₀ m₀≡n₀} → pb m₀ n₀ m₀≡n₀)
+                   (λ {m₀ n₀ m₀≤n₀} _ → ps m₀ n₀ m₀≤n₀)
+</code></pre>
+<p>Like <code>elim-≤</code>, the type of <code>case-≤</code> ends with <code>(m n : ℕ) (m≤n : m ≤ n) → P m n m≤n</code>, but we want to change that to a general dependent function type <code>(δ : Δ) → T δ</code>:</p>
+<pre><code>basic-case-≤ : (Δ : Set) (T : Δ → Set) (t : Δ → Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] (m ≤ n))
+             → ((δ : Δ) (m n : ℕ) (m≡n : m ≡ n) → (m , n , base m≡n) ≡ t δ → T δ)
+             → ((δ : Δ) (m n : ℕ) (m≤n : m ≤ n) → (m , suc n , step m≤n) ≡ t δ → T δ)
+             → (δ : Δ) → T δ
+basic-case-≤ Δ T t m₁ m₂ δ =
+  let (m , n , m≤n) = t δ
+  in  case-≤ (λ m n m≤n → (δ : Δ) → (m , n , m≤n) ≡ t δ → T δ)
+        (λ m n m≡n δ → m₁ δ m n m≡n)
+        (λ m n m≤n δ → m₂ δ m n m≤n)
+        m n m≤n δ refl
+</code></pre>
+<p>This is the basic analysis derived from <code>case-≤</code>, hence the name <code>basic-case-≤</code>.
+The first two arguments of <code>basic-case-≤</code> specify what <code>Δ</code> and <code>T</code> are.
+The next argument <code>t</code> extracts the proof and its indices from an input <code>δ : Δ</code> to be analysed.
+In the two methods, we add equality constraints stating that the extracted proof and its indices are specialised to <code>base</code> and <code>step</code> between the input <code>δ : Δ</code> and the output <code>T δ</code>.
+So when we use <code>basic-case-≤</code> to write a function <code>(δ : Δ) → T δ</code> that analyses <code>t δ</code>, we split the programming problem into two cases; in each case, we still write a function from <code>δ : Δ</code> to <code>T δ</code> but can assume an additional equality constraint that <code>t δ</code> has a more specialised form.
+The derivation of <code>basic-case-≤</code> from <code>case-≤</code> is actually a general construction given by Goguen et al (which derives basic analysis operators from ‘elimination operators’), but we won’t go into the details here.</p>
+<h4>Basic recursion operators</h4>
+<p>Now, we move on to recursion.
+For case analysis, the methods add constraints on the immediate constructor shape of the proof being analysed.
+For recursion, the methods should be able to make recursive calls on structurally smaller proofs (or data).
+Goguen et al chose to define strong induction principles: the methods are supplied with an additional argument for making recursive calls on <em>all</em> the smaller proofs, not only for the immediate predecessor.</p>
+<p>To represent these recursive calls, we first introduce an iterated tuple type <code>Below-≤ P m n m≤n</code> which, for a predicate <code>P</code> on the proofs, states that <code>P</code> holds for all the proofs structurally smaller than the given proof <code>m≤n</code>:</p>
+<pre><code>Below-≤ : (P : ∀ m n → m ≤ n → Set) → ∀ m n → m ≤ n → Set
+Below-≤ P m .m       (base refl) = ⊤
+Below-≤ P m .(suc _) (step m≤n)  = Below-≤ P m _ m≤n × P m _ m≤n
+</code></pre>
+<p>In the <code>base</code> case, there is no smaller proof, so the tuple is trivial.
+In the <code>step</code> case, the proof contains a predecessor proof <code>m≤n</code>, so the tuple contains both the recursive information below that predecessor and the result of <code>P</code> for the predecessor itself.</p>
+<p>Then we can define the type of the recursion operator, where we use <code>Below-≤</code> as the type of the induction hypotheses:</p>
+<pre><code>rec-≤ : (P : ∀ m n → m ≤ n → Set)
+      → (∀ m n → (m≤n : m ≤ n) → Below-≤ P m n m≤n → P m n m≤n)
+      →  ∀ m n → (m≤n : m ≤ n) → P m n m≤n
+</code></pre>
+<p>The operational intuition of strong induction is to never forget previous results and accumulate them in a tuple instead, which is used as the strengthened induction hypotheses.
+A clean way of implementing <code>rec-≤</code> is to write a function constructing such tuples first:</p>
+<pre><code>below-≤ : (P : ∀ m n → m ≤ n → Set)
+        → (p : ∀ m n → (m≤n : m ≤ n) → Below-≤ P m n m≤n → P m n m≤n)
+        → ∀ m n → (m≤n : m ≤ n) → Below-≤ P m n m≤n
+below-≤ P p m .m       (base refl) = tt
+below-≤ P p m .(suc _) (step m≤n)  = let b = below-≤ P p m _ m≤n
+                                     in (b , p m _ m≤n b)
+</code></pre>
+<p>The type of <code>below-≤</code> is the same as that of <code>rec-≤</code> except that the result type is the <code>Below</code> tuple type.
+In the <code>base</code> case, there are no smaller proofs, so the tuple is just <code>tt</code>.
+In the <code>step</code> case, we first build the tuple <code>b</code> below <code>m≤n</code> recursively (which are the strengthened hypotheses), and then extend the tuple with the result for <code>m≤n</code> itself, obtained by applying the method <code>p</code> to <code>b</code> (the strengthened induction hypotheses).
+Then all it takes to get from <code>below-≤</code> to <code>rec-≤</code> is a final application of <code>p</code>:</p>
+<pre><code>rec-≤ : (P : ∀ m n → m ≤ n → Set)
+      → (∀ m n → (m≤n : m ≤ n) → Below-≤ P m n m≤n → P m n m≤n)
+      →  ∀ m n → (m≤n : m ≤ n) → P m n m≤n
+rec-≤ P p m n m≤n = p m n m≤n (below-≤ P p m n m≤n)
+</code></pre>
+<p>Same as <code>case-≤</code>, we want <code>rec-≤</code> to end with a general dependent function type <code>(δ : Δ) → T δ</code>, so we apply Goguen et al’s general construction to <code>rec-≤</code> and get</p>
+<pre><code>basic-rec-≤ : (Δ : Set) (T : Δ → Set) (t : (δ : Δ) → Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] (m ≤ n))
+            → ((δ : Δ) (m n : ℕ) (m≤n : m ≤ n) → (b : Below-≤ (λ m' n' m≤n' → (δ : Δ) → (m' , n' , m≤n') ≡ t δ → T δ) m n m≤n) → (m , n , m≤n) ≡ t δ → T δ)
+            →  (δ : Δ) → T δ
+basic-rec-≤ Δ T t p δ =
+  let (m , n , m≤n) = t δ
+  in  rec-≤ (λ m' n' m≤n' → (δ : Δ) → (m' , n' , m≤n') ≡ t δ → T δ)
+        (λ m n m≤n b δ → p δ m n m≤n b)
+        m n m≤n δ refl
+</code></pre>
+<p>When we use <code>basic-rec-≤</code> to write a function <code>(δ : Δ) → T δ</code> that recurses on <code>t δ</code>, first we specify <code>Δ</code>, <code>T</code>, and <code>t</code>, and then we write a function with the same input and output but extended with additional arguments.
+The first three additional arguments <code>m</code>, <code>n</code>, and <code>m≤n</code> can be thought of as the results of pattern-matching <code>t δ</code> with a tuple because there is an equality constraint <code>(m , n , m≤n) ≡ t δ</code> near the end.
+Then we get a <code>Below-≤</code> argument that allows us to make recursive calls as long as the <code>m≤n</code> proof gets structurally smaller.
+Such a recursive call can change the input <code>δ</code> as needed (to something larger or even unrelated), but the <code>m≤n</code> part of <code>δ</code> should get smaller for the recursive call to be legitimate.
+So the <code>Below-≤</code> argument contains functions of type <code>(δ : Δ) → (m' , n' , m≤n') ≡ t δ → T δ</code> for all <code>(m' , n' , m≤n')</code> that are smaller than <code>(m , n , m≤n)</code>.</p>
+<h4>Deriving basic analysis operators from other eliminators</h4>
+<p>In the next section we will see concrete examples of translating pattern-matching programs to basic analysis, namely <code>wk</code> and <code>wk₁</code> (which is close to <code>wk'</code>).
+Before moving forward to the translation, we need to apply the above techniques to another datatype <code>ℕPair = ℕ × ℕ</code>, since <code>wk₁</code>’s first pattern-matching target is its pair of natural-number arguments.
+The eliminator we start with matches both natural numbers with <code>zero</code> or <code>suc</code>, and allows recursion whenever one or both numbers get structurally smaller:</p>
+<pre><code>elim-ℕPair : (P : ℕ × ℕ → Set)
+           → P (zero , zero)
+           → ({n : ℕ} → P (zero , n) → P (zero , suc n))
+           → ({m : ℕ} → P (m , zero) → P (suc m , zero))
+           → ({m n : ℕ} → P (m , n) → P (suc m , n) → P (m , suc n) → P (suc m , suc n))
+           → ((m , n) : ℕ × ℕ) → P (m , n)
+elim-ℕPair p pz psₙ psₘ ps (zero  , zero)  = pz
+elim-ℕPair p pz psₙ psₘ ps (zero  , suc n) = psₙ (elim-ℕPair p pz psₙ psₘ ps (zero , n))
+elim-ℕPair p pz psₙ psₘ ps (suc m , zero ) = psₘ (elim-ℕPair p pz psₙ psₘ ps (m , zero))
+elim-ℕPair p pz psₙ psₘ ps (suc m , suc n) = ps  (elim-ℕPair p pz psₙ psₘ ps (m , n)) (elim-ℕPair p pz psₙ psₘ ps (suc m , n)) (elim-ℕPair p pz psₙ psₘ ps (m , suc n))
+</code></pre>
+<p>In the last case, it allows recursive access to the three smaller pairs: <code>(m , n)</code>, <code>(suc m , n)</code>, and <code>(m , suc n)</code>.
+Next, we split <code>elim-ℕPair</code> into two operators, <code>case-ℕPair</code> for case analysis,</p>
+<pre><code>case-ℕPair : (P : ℕ × ℕ → Set)
+           → P (zero , zero)
+           → ((n : ℕ) → P (zero , suc n))
+           → ((m : ℕ) → P (suc m , zero))
+           → ((m n : ℕ) → P (suc m , suc n))
+           → (m n : ℕ) → P (m , n)
+ case-ℕPair P pz pn pm ps  zero    zero   = pz
+ case-ℕPair P pz pn pm ps  zero   (suc n) = pn n
+ case-ℕPair P pz pn pm ps (suc m)  zero   = pm m
+ case-ℕPair P pz pn pm ps (suc m) (suc n) = ps m n
+</code></pre>
+<p>and <code>rec-ℕPair</code> for recursive call, following the same recipe as above:</p>
+<pre><code>Below-ℕPair : (P : ℕ × ℕ → Set) → ℕ → ℕ → Set
+Below-ℕPair P  zero    zero   = ⊤
+Below-ℕPair P  zero   (suc n) = Below-ℕPair P zero n × P (zero , n)
+Below-ℕPair P (suc m)  zero   = Below-ℕPair P m zero × P (m , zero)
+Below-ℕPair P (suc m) (suc n) = (Below-ℕPair P m       n × P (m ,     n))
+                              × (Below-ℕPair P (suc m) n × P (suc m , n))
+                              × (Below-ℕPair P m (suc n) × P (m , suc n))
+
+below-ℕPair : (P : ℕ × ℕ → Set)
+            → (p : (m n : ℕ) → Below-ℕPair P m n → P (m , n))
+            → (m n : ℕ) → Below-ℕPair P m n
+below-ℕPair P p  zero    zero   = tt
+below-ℕPair P p  zero   (suc n) = let b = below-ℕPair P p zero n
+                                  in (b , p zero n b)
+below-ℕPair P p (suc m)  zero   = let b = below-ℕPair P p m zero
+                                  in (b , p m zero b)
+below-ℕPair P p (suc m) (suc n) = let b  = below-ℕPair P p m n
+                                      bₙ = below-ℕPair P p (suc m) n
+                                      bₘ = below-ℕPair P p m (suc n)
+                                  in ((b  , p m n b) ,
+                                      (bₙ , p (suc m) n bₙ) ,
+                                      (bₘ , p m (suc n) bₘ))
+
+rec-ℕPair : (P : ℕ × ℕ → Set)
+          → ((m n : ℕ) → Below-ℕPair P m n → P (m , n))
+          → (m n : ℕ) → P (m , n)
+rec-ℕPair P p m n = p m n (below-ℕPair P p m n)
+</code></pre>
+<p>(Shin noted in a group meeting that the top-down problem-splitting strategy of <code>elim-ℕPair</code> leads to overlapping sub-problems, and there is an opportunity to derive a bottom-up <code>rec-ℕPair</code> to avoid solving the same sub-problems repeatedly, in the same spirit as our binomial tabulation papers.)
+Finally, we apply the basic analysis construction on <code>case-ℕPair</code> and <code>rec-ℕPair</code>, respectively:</p>
+<pre><code>basic-case-ℕPair : (Δ : Set) (T : Δ → Set) (t : Δ → ℕ × ℕ)
+                 → ((δ : Δ) → (zero , zero) ≡ t δ → T δ)
+                 → ((δ : Δ) (n : ℕ) → (zero , suc n) ≡ t δ → T δ)
+                 → ((δ : Δ) (m : ℕ) → (suc m , zero) ≡ t δ → T δ)
+                 → ((δ : Δ) (m n : ℕ) → (suc m , suc n) ≡ t δ → T δ)
+                 → (δ : Δ) → T δ
+basic-case-ℕPair Δ T t p₁ p₂ p₃ p₄ δ = let (m , n) = t δ in case-ℕPair (λ (m , n) → (δ : Δ) → (m , n) ≡ t δ → T δ) p₁ (λ n δ → p₂ δ n) (λ m δ → p₃ δ m) (λ m n δ → p₄ δ m n) m n δ refl
+
+basic-rec-ℕPair : (Δ : Set) (T : Δ → Set) (t : (δ : Δ) → ℕ × ℕ)
+                → ((δ : Δ) (m n : ℕ) → (b : Below-ℕPair (λ (m , n) → (δ : Δ) → (m , n) ≡ t δ → T δ) m n) → (m , n) ≡ t δ → T δ)
+                → (δ : Δ) → T δ
+basic-rec-ℕPair Δ T t p δ = let (m , n) = t δ in rec-ℕPair (λ (m , n) → (δ : Δ) → (m , n) ≡ t δ → T δ) (λ m n b δ → p δ m n b) m n δ refl
+</code></pre>
+<p><em>Remark.</em>
+There are more than one ways of performing pattern matching on pairs of natural numbers.
+For example, the following alternative eliminator also matches both numbers with <code>zero</code> or <code>suc</code>, but allows recursion only when both numbers are structurally smaller:</p>
+<pre><code>elim-ℕPair' : (P : ℕ × ℕ → Set)
+            → P (zero , zero)
+            → ((n : ℕ) → P (zero , suc n))
+            → ((m : ℕ) → P (suc m , zero))
+            → ((m n : ℕ) → P (m , n) → P (suc m , suc n))
+            → ((m , n) : ℕ × ℕ) → P (m , n)
+elim-ℕPair' p pz psₙ psₘ ps (zero  , zero ) = pz
+elim-ℕPair' p pz psₙ psₘ ps (zero  , suc n) = psₙ n
+elim-ℕPair' p pz psₙ psₘ ps (suc m , zero ) = psₘ m
+elim-ℕPair' p pz psₙ psₘ ps (suc m , suc n) = ps m n (elim-ℕPair' p pz psₙ psₘ ps (m , n))
+</code></pre>
+<p>This corresponds more closely to the recursion performed on <code>(m , n) : ℕPair</code> such that <code>m ≤' n</code> where</p>
+<pre><code>data _≤'_ : ℕ → ℕ → Set where
+  base :          zero  ≤' n
+  step : m ≤' n → suc m ≤' suc n
+</code></pre>
+<p>The same can be said for natural numbers — for example, here is a possible alternative eliminator (that have two base cases for 0 and 1):</p>
+<pre><code>elim-ℕ' : (P : ℕ → Set)
+        → P zero
+        → P (suc zero)
+        → ((n : ℕ) → P n → P (suc (suc n)))
+        → (n : ℕ) → P n
+elim-ℕ' P p₀ p₁ ps  zero         = p₀
+elim-ℕ' P p₀ p₁ ps (suc  zero)   = p₁
+elim-ℕ' P p₀ p₁ ps (suc (suc n)) = ps n (elim-ℕ' P p₀ p₁ ps n)
+</code></pre>
+<p>This emphasises the importance of having a general mechanism of deriving basic analysis operators from <em>eliminators</em>: one may want to derive a fixed set of basic analysis operators from a datatype definition, but the above examples of alternative eliminators show that the programmer can choose among different eliminators —and even craft their own— to derive the basic analyses they need.
+(<em>End of remark.</em>)</p>
+<h4>Summary</h4>
+<p>Basic analysis is a higher-level language than eliminators.
+It separates case analysis from recursion, so constructor inspection and recursive calls are handled by distinct basic analysis operators.
+These operators are also generalised for arbitrary input contexts and output types, and introduce assumptions about some targeted data (extracted from the inputs) into the contexts.
+A basic case-analysis operator introduces, for each constructor branch, an equality constraint stating that the targeted data should start with that constructor (as well as arguments of that constructor).
+A basic recursion operator introduces recursive calls that can be made on inputs where the targeted data become structurally smaller.</p>
+<h3>Translation to basic analyses</h3>
+<p>We now illustrate the translation to basic analyses using <code>wk</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m .(suc m) (base refl)    = step (base refl)
+wk m .(suc n) (step {n} m&lt;n) = step (wk m n m&lt;n)
+</code></pre>
+<p>The function takes three inputs: <code>m : ℕ</code>, <code>n : ℕ</code>, and <code>m&lt;n : suc m ≤ n</code>.
+In the Agda definition, case analysis is more discernible, but the first step of the translation is to invoke a basic recursion operator.
+In this case, the target on which the function recurses is <code>m&lt;n</code>, so we use <code>basic-rec-≤</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n m&lt;n = basic-rec-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _  ) → m ≤ n) (λ (m , n , m&lt;n) → (suc m , n , m&lt;n))
+  (λ { (m , n , m&lt;n) .(suc m) .n .m&lt;n b refl → {! !} })
+  (m , n , m&lt;n)
+</code></pre>
+<p>In the translation, we package the three inputs into a triple <code>(m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n</code> (whose type is given as the first argument to <code>basic-rec-≤</code>) and pass the triple into the operator as the last argument.
+The output type of the function is specified by the second argument <code>λ (m , n , _  ) → m ≤ n</code>.
+The third argument specifies the target on which to perform recursion, which belongs to the indexed datatype <code>_≤_</code>, so the extraction function returns the <code>_≤_</code> data along with its surrounding indices: <code>(suc m , n , m&lt;n)</code>.
+What remains is the method; its inputs, after some simplification, are the original three plus a <code>Below</code>-value <code>b</code>, which makes recursive calls available.</p>
+<p>All the inputs —including <code>b</code>— are then passed to the next basic analysis operator, which should be <code>basic-case-≤</code> applied to <code>m&lt;n</code> and its type indices.
+This splits the function we’re defining into the two constructor cases of <code>_≤_</code> (<code>base</code> and <code>step</code>):</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n m&lt;n =
+  let P : (m n : ℕ) → m ≤ n → Set
+      P = λ Dm Dn Dm&lt;n → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn , Dm&lt;n) ≡ (suc m , n , m&lt;n) → m ≤ n
+  in  basic-rec-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n) → (suc m , n , m&lt;n))
+        (λ { (m , n , m&lt;n) .(suc m) .n .m&lt;n b refl →
+             basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-≤ P (suc m) n m&lt;n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+               (λ { (m , n , m&lt;n , b) m₀ n₀ m₀≡n₀ r₀ → {! m ≤ n ⊣ r₀ : (m₀ , n₀ , base m₀≡n₀) ≡ (suc m , n , m&lt;n); … !} })
+               (λ { (m , n , m&lt;n , b) m₀ n₀ m₀≤n₀ r₀ → {! m ≤ n ⊣ r₀ : (m₀ , suc n₀ , step m₀≤n₀) ≡ (suc m , n , m&lt;n); … !} })
+               (m , n , m&lt;n , b) })
+        (m , n , m&lt;n)
+</code></pre>
+<p>We can see the variable <code>r₀</code> in both methods; however, as shown in the two holes above, <code>r₀</code> represents different equality constraints in the two methods, restricting <code>m&lt;n</code> to <code>base</code> or <code>step</code> cases; the arguments of the constructors mentioned by the constraints are also introduced as fresh variables, all given names with suffix <code>₀</code>.
+In order to specialise the inputs and correspondingly the output type, we match <code>r₀</code> with <code>refl</code>.
+This invokes unification and allows us to specialise the inputs <code>m</code>, <code>n</code>, and <code>m&lt;n</code> according to the equality constraints:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n m&lt;n =
+  let P : (m n : ℕ) → m ≤ n → Set
+      P = λ Dm Dn Dm&lt;n → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn , Dm&lt;n) ≡ (suc m , n , m&lt;n) → m ≤ n
+  in  basic-rec-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n) → (suc m , n , m&lt;n))
+        (λ { (m , n , m&lt;n) .(suc m) .n .m&lt;n b refl →
+             basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-≤ P (suc m) n m&lt;n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+               (λ {(m , n     , base m≡n , b) .(suc m) .n .m≡n refl → {! !} })
+               (λ {(m , suc n , step m≤n , b) .(suc m) .n .m≤n refl → {! !} })
+              (m , n , m&lt;n , b) })
+        (m , n , m&lt;n)
+</code></pre>
+<p>In the first method, <code>(m , n , m&lt;n)</code> is specialised to <code>(m , n , base m≡n)</code>, and in the second method, it is specialised to <code>(m , suc n , step m≤n)</code> — this is the same specialisation that occurs when we perform case-splitting on <code>m&lt;n</code> in the pattern-matching version of <code>wk</code>!</p>
+<p>In general:
+Given a pattern-matching program, Agda performs unification internally to determine which constructor branches are possible and how the variables in those branches should be specialised.
+In a basic-analysis program, the corresponding constraints are represented explicitly by equality arguments such as <code>r₀</code>, and matching them with <code>refl</code> invokes the same unification process — so these equality arguments represent the unification constraints solved by Agda.
+We illustrate this using two versions of the function that returns the first element of a non-empty vector.
+Consider the pattern-matching definition <code>head</code>,</p>
+<pre><code>head : ∀ n → Vec A (suc n) → A
+head n (x ∷ xs) = x
+</code></pre>
+<p>and the corresponding basic-analysis definition <code>head'</code>:</p>
+<pre><code>head' : ∀ n → Vec A (suc n) → A
+head' {A} n xs =
+  let P : ∀ n → Vec A n → Set
+      P = λ Dn Dxs → ((n , xs) : Σ[ n ∈ ℕ ] Vec A (suc n)) → (Dn , Dxs) ≡ (suc n , xs) → A
+  in basic-rec-Vec (Σ[ n ∈ ℕ ] Vec A (suc n)) (λ _ → A) (λ (n , xs) → (suc n , xs))
+       (λ { (n , xs) .(suc n) .xs b refl →
+            basic-case-Vec (Σ[ n ∈ ℕ ] Σ[ xs ∈ Vec A (suc n) ] Below-Vec P (suc n) xs) (λ (n , _) → A) (λ (n , xs , _) → (suc n , xs))
+              (λ { (n ,  xs      , b)           () })
+              (λ { (n , (x ∷ xs) , b) .n .x .xs refl → x })
+            (n , xs , b) })
+       (n , xs)
+</code></pre>
+<p>Comparing <code>head</code> and <code>head'</code>, the <code>[]</code> case appears in <code>head'</code> and is closed by matching the unification constraint introduced by <code>basic-rec-Vec</code> with the absurd pattern <code>()</code>, whereas it does not appear in <code>head</code> since <code>[]</code> does not match the required type <code>Vec A (suc n)</code>.
+This illustrates what happens implicitly during pattern matching in Agda: unification determines which branches are possible, and branches where unification succeeds negatively are omitted.
+On the other hand, in basic-analysis definitions, the unification constraints are explicit, so unification must be triggered manually by matching them with <code>refl</code>, specialising the inputs and constructor arguments.</p>
+<p>Back to the translation of <code>wk</code>, after the unification, we complete the two branches.
+In the <code>base</code> case, using the same strategy as in the pattern-matching version, we match <code>m≡n</code> so that the goal can be fulfilled directly with <code>step (base refl)</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n m&lt;n =
+  let P : (m n : ℕ) → m ≤ n → Set
+      P = λ Dm Dn Dm&lt;n → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn , Dm&lt;n) ≡ (suc m , n , m&lt;n) → m ≤ n
+  in  basic-rec-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n) → (suc m , n , m&lt;n))
+        (λ { (m , n , m&lt;n) .(suc m) .n .m&lt;n b refl →
+             basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-≤ P (suc m) n m&lt;n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+               (λ { (m , n     , base refl , b) .(suc m) .n .refl refl → step (base refl) })
+               (λ { (m , suc n , step m≤n  , b) .(suc m) .n .m≤n  refl → {! !} })
+               (m , n , m&lt;n , b) })
+        (m , n , m&lt;n)
+</code></pre>
+<p>In the <code>step</code> case, unification changes the goal to <code>m ≤ suc n</code>.
+At the same time, because the analysed proof is a <code>step</code> constructor, the corresponding <code>Below</code> value is also expanded according to the <code>step</code> case  in the definition of <code>Below-≤</code>.
+Thus, <code>b</code> has the form <code>(_ , b')</code>: the first component contains the recursive calls for smaller proofs, while <code>b'</code> is the recursive call that we can make on the immediate predecessor proof <code>m≤n</code>.
+To actually make the recursive call, we write <code>b' (m , n , m≤n) refl</code>, where the final argument is an equality proof confirming that the supplied input <code>m≤n</code> is the one allowed by <code>b'</code>, which is again <code>m≤n</code>, so <code>refl</code> suffices.
+The recursive call produces a proof of <code>m ≤ n</code>; applying <code>step</code> then yields the required proof of <code>m ≤ suc n</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n m&lt;n =
+  let P : (m n : ℕ) → m ≤ n → Set
+      P = λ Dm Dn Dm&lt;n → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn , Dm&lt;n) ≡ (suc m , n , m&lt;n) → m ≤ n
+  in  basic-rec-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n) → (suc m , n , m&lt;n))
+        (λ { (m , n , m&lt;n) .(suc m) .n .m&lt;n b refl →
+             basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-≤ P (suc m) n m&lt;n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+               (λ { (m , n     , base refl , b) .(suc m) .n .refl refl → step (base refl) })
+               (λ { (m , suc n , step m≤n  , b) .(suc m) .n .m≤n  refl → let (_ , b') = b in step (b' (m , n , m≤n) refl) })
+               (m , n , m&lt;n , b) })
+        (m , n , m&lt;n)
+</code></pre>
+<p>This completes the basic-analysis definition of <code>wk</code>.</p>
+<h4>Summary</h4>
+<p>The translation to basic analysis for a recursive function follows a general rule: basic recursion operators are applied as the outermost layers, so that the required <code>Below</code> arguments are introduced before any case analysis takes place.
+These <code>Below</code> arguments are then passed to the subsequent basic case-analysis operators, which split the targeted data into constructor cases, allowing us to break these arguments into tuples of recursive calls that we can actually make.
+Within each branch generated by a basic case-analysis, the unification constraints are made explicit and can be matched with <code>refl</code> to specialise the inputs and local constructor arguments.</p>
+<h3>Laws on basic analyses</h3>
+<p>Below we will return to the unfinished transformation from <code>wk'</code> to <code>wk</code>, this time translating them to basic analyses first.
+Before that, let us formulate some laws on basic analyses used in the transformation.
+(From <code>wk₂</code> to <code>wk₃</code>) we tried to remove the redundant case analyses, which succeeded for the <code>step</code> branches but failed for the <code>base</code> branches.
+This removal may be formulated as an equational law (informally in Epigram syntax):</p>
+<pre><code>   lhs ⇒ rhs
+=  lhs ⇐ case x {
+     x₀ ⇒ rhs[x₀/x]
+     x₁ ⇒ rhs[x₁/x] }
+</code></pre>
+<p>Initially <code>lhs</code> contains an input <code>x</code>, and the result is <code>rhs</code> (which may refer to <code>x</code>).
+Equivalently, we can perform a redundant case analysis on <code>x</code>, specialising <code>x</code> to, for example, <code>x₀</code> or <code>x₁</code>; in both branches we still want to give <code>rhs</code> as the result, which, however, needs to be specialised correspondingly to <code>rhs[x₀/x]</code> and <code>rhs[x₁/x]</code>.
+Interestingly, when the law is reformulated in terms of basic case-analyses, it becomes conceptually cleaner and easy to justify (although the form gets more ugly, and we’ll skip writing it formally): since basic case-analyses merely introduce equality constraints in the methods while leaving the original input and output unchanged, we can simply copy <code>rhs</code> into the methods of a redundant basic case-analysis while ignoring the constraints.</p>
+<p>Another law we need (for going from <code>wk₁</code> to <code>wk₂</code>) is the case-swapping law:</p>
+<pre><code>  case x {
+     x₀ ⇒ case y { y₀ ⇒ rhs₀
+                   y₁ ⇒ rhs₁ }
+     x₁ ⇒ case y { y₀ ⇒ rhs₂
+                   y₁ ⇒ rhs₃ } }
+= case y {
+     y₀ ⇒ case x { x₀ ⇒ rhs₀
+                   x₁ ⇒ rhs₂ }
+     y₁ ⇒ case x { x₀ ⇒ rhs₁
+                   x₁ ⇒ rhs₃ } }
+</code></pre>
+<p>This law allows us to swap two nested layers of case analyses, and correspondingly the middle two branches <code>rhs₁</code> and <code>rhs₂</code> (while <code>rhs₀</code> and <code>rhs₃</code> stay where they are).
+Again it is conceptually easier (but syntactically messier) to justify this law in terms of basic case-analyses: each layer of basic case-analysis introduces an equality constraint; it doesn’t matter in which order we introduce the constraints, so it’s okay to swap the layers.</p>
+<p>Incidentally, the separation of case analysis and recursion helps us to formulate these laws — for eliminators it’s harder to imagine what the laws would look like.</p>
+<h3>Transforming <code>wk'</code> to <code>wk</code>, take 2: translating to basic analyses</h3>
+<p>Now we’re ready to try to transform the basic-analysis version of <code>wk'</code> to that of <code>wk</code>.
+If we want to be thorough, we should start from <code>wk'</code> and translate it to basic analyses, but for brevity let’s skip to <code>wk₁</code> (copied here for easy reference):</p>
+<pre><code>wk₁ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₁  zero    zero          (base _)    = base refl
+wk₁  zero   (suc .zero)    (base refl) = step (base refl)
+wk₁  zero   (suc n)        (step m&lt;n)  = step (wk₁ zero n m&lt;n)
+wk₁ (suc m)  zero          (base ())
+wk₁ (suc m) (suc .(suc m)) (base refl) = step (base refl)
+wk₁ (suc m) (suc n)        (step m&lt;n)  = step (wk₁ (suc m) n m&lt;n)
+</code></pre>
+<p><code>wk₁</code> only slightly expands <code>wk'</code> to two full layers of pattern matching, analysing both the pair of natural numbers <code>m</code> and <code>n</code> and the proof of <code>suc m ≤ n</code>.
+Translation of <code>wk₁</code> applies <code>basic-rec-ℕPair</code> and <code>basic-case-ℕPair</code> (the first layer), and then inserts <code>basic-case-≤</code> (the second layer) into each of the four branches:</p>
+<pre><code>wk₁ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₁ m n m&lt;n =
+  let P = λ (Dm , Dn) → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn) ≡ (suc m , n) → m ≤ n
+  in  basic-rec-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (suc m , n))
+        (λ { (m , n , m&lt;n) .(suc m) .n b refl →
+             basic-case-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-ℕPair P (suc m) n) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (m , n))
+               (λ { (.zero , .zero , m&lt;n , b) refl →
+                    basic-case-≤ (suc zero ≤ zero × Below-ℕPair P (suc zero) zero) (λ _ → zero ≤ zero) (λ (m&lt;n , _) → (suc zero , zero , m&lt;n))
+                      (λ { (.(base _) , b) m₀ n₀ _     refl → base refl })
+                      (λ { (m&lt;n       , b) m₀ n₀ m₀≤n₀ () })
+                      (m&lt;n , b) })
+               (λ { (.zero , .(suc nₚ) , m&lt;n , b) nₚ refl →
+                    basic-case-≤ (Σ[ nₚ ∈ ℕ ] suc zero ≤ suc nₚ × Below-ℕPair P (suc zero) (suc nₚ)) (λ (nₚ , _) → zero ≤ suc nₚ) (λ (nₚ , m&lt;n , _) → (suc zero , suc nₚ , m&lt;n))
+                      (λ { (.zero , .(base refl)  , b) m₀ n₀ refl  refl → step (base refl) })
+                      (λ { (nₚ    , .(step m₀≤n₀) , b) m₀ n₀ m₀≤n₀ refl → let ((_ , b') , _) = b in step (b' (zero , nₚ , m₀≤n₀) refl) })
+                      (nₚ , m&lt;n , b) })
+               (λ { (.(suc mₚ) , .zero , m&lt;n , b) mₚ refl →
+                    basic-case-≤ (Σ[ mₚ ∈ ℕ ] suc (suc mₚ) ≤ zero × Below-ℕPair P (suc (suc mₚ)) zero) (λ (mₚ , _) → suc mₚ ≤ zero) (λ (mₚ , m&lt;n , _) → (suc (suc mₚ) , zero , m&lt;n))
+                      (λ { (mₚ , base () , b) m₀ n₀ m₀≡n₀ refl })
+                      (λ { (mₚ , m&lt;n     , b) m₀ n₀ m₀≤n₀ () })
+                      (mₚ , m&lt;n , b) })
+               (λ { (.(suc mₚ) , .(suc nₚ) , m&lt;n , b) mₚ nₚ refl →
+                    basic-case-≤ (Σ[ mₚ ∈ ℕ ] Σ[ nₚ ∈ ℕ ] suc (suc mₚ) ≤ suc nₚ × Below-ℕPair P (suc (suc mₚ)) (suc nₚ)) (λ (mₚ , nₚ , _) → suc mₚ ≤ suc nₚ) (λ (mₚ , nₚ , m&lt;n , _) → (suc (suc mₚ) , suc nₚ , m&lt;n))
+                      (λ { (mₚ , .(suc mₚ) , .(base refl)  , b) m₀ n₀ refl  refl → step (base refl) })
+                      (λ { (mₚ , nₚ        , .(step m₀≤n₀) , b) m₀ n₀ m₀≤n₀ refl → let ((_ , b') , _) = b in step (b' (suc mₚ , nₚ , m₀≤n₀) refl) })
+                      (mₚ , nₚ , m&lt;n , b) })
+               (m , n , m&lt;n , b)})
+        (m , n , m&lt;n)
+</code></pre>
+<p>Different from the Agda version, this definition ends up with eight branches instead of six:
+We are allowed to omit the second and the sixth branches in the Agda version because index unification succeeds negatively, whereas in the basic-analysis version we need to prove negative success explicitly (by matching the manifested unification constraint with the absurd pattern).</p>
+<p>Next, to evolve into <code>wk₂</code>, we need to switch the order of applying <code>basic-case-ℕPair</code> and <code>basic-case-≤</code> (ignoring the outermost <code>basic-rec-ℕPair</code> for now), so we try to use the case-swapping law.
+However, looking closer at the inner layer <code>basic-case-≤</code>, we see that the law cannot be applied because the four invocations of <code>basic-case-≤</code> are not in the same form: the methods look rather different, and even the result types <code>T δ</code> and the extracted data <code>t δ</code> are different — that is, the four <code>basic-case-≤</code> do case analysis on different <code>≤</code>-proofs.
+The reason is that, before invoking <code>basic-case-≤</code>, the unification constraints generated by <code>basic-case-ℕPair</code> have already been solved, specialising the input to different shapes:</p>
+<pre><code>wk₁ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₁ m n m&lt;n =
+  ...
+    basic-case-ℕPair ...
+        (λ { (.zero     , .zero     , m&lt;n , b)       refl → basic-case-≤ ... (λ _ → zero ≤ zero) (λ (m&lt;n , _) → (suc zero , zero , m&lt;n)) ... })
+        (λ { (.zero     , .(suc nₚ) , m&lt;n , b)    nₚ refl → basic-case-≤ ... (λ (nₚ , _) → zero ≤ suc nₚ) (λ (nₚ , m&lt;n , _) → (suc zero , suc nₚ , m&lt;n)) ... })
+        (λ { (.(suc mₚ) , .zero     , m&lt;n , b) mₚ    refl → basic-case-≤ ... (λ (mₚ , _) → suc mₚ ≤ zero) (λ (mₚ , m&lt;n , _) → (suc (suc mₚ) , zero , m&lt;n)) ... })
+        (λ { (.(suc mₚ) , .(suc nₚ) , m&lt;n , b) mₚ nₚ refl → basic-case-≤ ... (λ (mₚ , nₚ , _) → suc mₚ ≤ suc nₚ) (λ (mₚ , nₚ , m&lt;n , _) → (suc (suc mₚ) , suc nₚ , m&lt;n)) ... })
+        ...
+</code></pre>
+<p>Think back to how we justified the case-swapping law: the law holds when we gather constraints generated at both the outer and inner layers, and then the constraints can be dealt with in any order, whereas here the translation chooses to solve the outer constraints eagerly and kills the possibility of swapping.
+So we should delay solving the outer constraints; instead, we keep them as input to the inner <code>basic-case-≤</code>:</p>
+<pre><code>wk₁．₄ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₁．₄ m n m&lt;n =
+  let P = λ (Dm , Dn) → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn) ≡ (suc m , n) → m ≤ n
+  in  basic-rec-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (suc m , n))
+        (λ { (m , n , m&lt;n) .(suc m) .n b refl →
+             basic-case-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (m , n))
+               (λ { (m , n , m&lt;n , b) r →
+                    basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n × (zero , zero) ≡ (m , n)) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+                      (λ { (m , n , m&lt;n , b , refl) m₀ n₀ m₀≡n₀ refl → base refl })
+                      (λ { (m , n , m&lt;n , b , refl) m₀ n₀ m₀≤n₀ () })
+                      (m , n , m&lt;n , b , r) })
+               (λ { (m , n , m&lt;n , b) nₚ r →
+                    basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n × Σ[ nₚ ∈ ℕ ] (zero , suc nₚ) ≡ (m , n)) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+                      (λ { (m , n , m&lt;n , b , nₚ , refl) m₀ n₀ refl  refl → step (base refl) })
+                      (λ { (m , n , m&lt;n , b , nₚ , refl) m₀ n₀ m₀≤n₀ refl → let ((_ , b') , _) = b in step (b' (zero , nₚ , m₀≤n₀) refl) })
+                      (m , n , m&lt;n , b , nₚ , r) })
+               (λ { (m , n , m&lt;n , b) mₚ r →
+                    basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n × Σ[ mₚ ∈ ℕ ] (suc mₚ , zero) ≡ (m , n)) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+                      (λ { (m , n , m&lt;n , b , mₚ , refl) m₀ n₀ ()    refl })
+                      (λ { (m , n , m&lt;n , b , mₚ , refl) m₀ n₀ m₀≤n₀ ()   })
+                      (m , n , m&lt;n , b , mₚ , r)})
+               (λ { (m , n , m&lt;n , b) mₚ nₚ r →
+                    basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n × Σ[ mₚ ∈ ℕ ] Σ[ nₚ ∈ ℕ ] (suc mₚ , suc nₚ) ≡ (m , n)) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+                      (λ { (m , n , m&lt;n , b , mₚ , nₚ , refl) m₀ n₀ refl  refl → step (base refl) })
+                      (λ { (m , n , m&lt;n , b , mₚ , nₚ , refl) m₀ n₀ m₀≤n₀ refl → let ((_ , b') , _) = b in step (b' (suc mₚ , nₚ , m₀≤n₀) refl) })
+                      (m , n , m&lt;n , b , mₚ , nₚ , r) })
+               (m , n , m&lt;n , b) })
+        (m , n , m&lt;n)
+</code></pre>
+<p>In each branch of <code>wk₁．₄</code>, the unification constraint introduced by <code>basic-case-ℕPair</code>, together with all the related arguments (which are originally unified away before <code>basic-case-≤</code> is applied), is left unsolved and passed into the inner case-analysis layer.
+As a result, all of the four <code>basic-case-≤</code> applications now have a uniform form: they perform case analysis on the same <code>≤</code>-proof <code>suc m ≤ n</code> with the general result type <code>m ≤ n</code>:</p>
+<pre><code>wk₁．₄ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₁．₄ m n m&lt;n =
+  ...
+  basic-case-ℕPair ...
+    (λ { (m , n , m&lt;n , b)       r →
+         basic-case-≤ ... (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n)) ...})
+    (λ { (m , n , m&lt;n , b)    nₚ r →
+         basic-case-≤ ... (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n)) ...})
+    (λ { (m , n , m&lt;n , b) mₚ    r →
+         basic-case-≤ ... (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n)) ...})
+    (λ { (m , n , m&lt;n , b) mₚ nₚ r →
+         basic-case-≤ ... (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n)) ...})
+    ...
+</code></pre>
+<p>Now that we have reached the form required for applying the case-swapping law, we can swap the order of <code>basic-case-ℕPair</code> and <code>basic-case-≤</code>:</p>
+<pre><code>  wk₁．₅ : (m n : ℕ) → suc m ≤ n → m ≤ n
+  wk₁．₅ m n m&lt;n =
+    let P = λ (Dm , Dn) → ((m , n , m&lt;n) : Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) → (Dm , Dn) ≡ (suc m , n) → m ≤ n
+    in  basic-rec-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (suc m , n))
+          (λ { (m , n , m&lt;n) .(suc m) .n b refl →
+               basic-case-≤ (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] suc m ≤ n × Below-ℕPair P (suc m) n) (λ (m , n , _) → m ≤ n) (λ (m , n , m&lt;n , _) → (suc m , n , m&lt;n))
+                 (λ { (m , n , m&lt;n , b) m₀ n₀ m₀≡n₀ r₀ →
+                      basic-case-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-ℕPair P (suc m) n × Σ[ m₀ ∈ ℕ ] Σ[ n₀ ∈ ℕ ] Σ[ m₀≡n₀ ∈ m₀ ≡ n₀ ] (m₀ , n₀ , base m₀≡n₀) ≡ (suc m , n , m&lt;n)) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (m , n))
+                        (λ {(m , n , m&lt;n , b , m₀ , n₀ , m₀≡n₀ , refl)       refl → base refl})
+                        (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl  , refl)    nₚ refl → step (base refl)})
+                        (λ {(m , n , m&lt;n , b , m₀ , n₀ , ()    , refl) mₚ    refl})
+                        (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl  , refl) mₚ nₚ refl → step (base refl)})
+                        (m , n , m&lt;n , b , m₀ , n₀ , m₀≡n₀ , r₀)})
+                 (λ { (m , n , m&lt;n , b) m₀ n₀ m₀≤n₀ r₀ →
+                      basic-case-ℕPair (Σ[ m ∈ ℕ ] Σ[ n ∈ ℕ ] Σ[ m&lt;n ∈ suc m ≤ n ] Below-ℕPair P (suc m) n × Σ[ m₀ ∈ ℕ ] Σ[ n₀ ∈ ℕ ] Σ[ m₀≤n₀ ∈ m₀ ≤ n₀ ] (m₀ , suc n₀ , step m₀≤n₀) ≡ (suc m , n , m&lt;n)) (λ (m , n , _) → m ≤ n) (λ (m , n , _) → (m , n))
+                        (λ { (m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , ()  )       refl })
+                        (λ { (m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl)    nₚ refl → let ((_ , b') , _) = b in step (b' (zero , nₚ , m₀≤n₀) refl) })
+                        (λ { (m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , ()  ) mₚ    refl })
+                        (λ { (m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl) mₚ nₚ refl → let ((_ , b') , _) = b in step (b' (suc mₚ , nₚ , m₀≤n₀) refl) })
+                        (m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , r₀) })
+                 (m , n , m&lt;n , b)})
+          (m , n , m&lt;n)
+</code></pre>
+<p>At this point, we can individually rewrite the methods of the first and the second <code>basic-case-ℕPair</code> applications, so that within each application the methods become the same, allowing us to remove the <code>base-case-≤</code> using the redundant-case-analysis law.
+Like in our initial experiment, the methods in the second application of <code>basic-case-ℕPair</code> are more obviously the same, <em>modulo substitution</em>; unlike in the initial experiment, in this basic-analysis version we can make the methods exactly the same by choosing to solve the first unification constraint (generated by <code>basic-case-≤</code>) but not the second (generated by <code>basic-case-ℕPair</code>):</p>
+<pre><code>basic-case-ℕPair ...
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl)       r → let ((_ , b') , _) = b in step (b' (m , n₀ , m₀≤n₀) refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl)    nₚ r → let ((_ , b') , _) = b in step (b' (m , n₀ , m₀≤n₀) refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl) mₚ    r → let ((_ , b') , _) = b in step (b' (m , n₀ , m₀≤n₀) refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , m₀≤n₀ , refl) mₚ nₚ r → let ((_ , b') , _) = b in step (b' (m , n₀ , m₀≤n₀) refl)})
+  ...
+</code></pre>
+<p>The methods in the first application of <code>basic-base-ℕPair</code> correspond to where we got stuck in the initial experiment.
+But here, using the same trick of selectively solving unification constraints, we can rewrite the methods to the same form too:</p>
+<pre><code>basic-case-ℕPair ...
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl , refl)       r → step (base refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl , refl)    nₚ r → step (base refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl , refl) mₚ    r → step (base refl)})
+  (λ {(m , n , m&lt;n , b , m₀ , n₀ , refl , refl) mₚ nₚ r → step (base refl)})
+  ...
+</code></pre>
+<p>Then we can remove these two <code>basic-case-ℕPair</code> applications using the redundant-case-analysis law, and almost reach the basic-analysis version of <code>wk</code>.
+It’s only ‘almost’, because we haven’t transformed the outermost <code>basic-rec-ℕ-Pair</code> to <code>basic-rec-≤</code>; this requires law(s) that we won’t formulate this time, although we suspect that it’s about switching to use a different but related termination measure.</p>
+<p>We can now explain the transformation from <code>wk'</code> to <code>wk</code> more precisely:</p>
+<ol>
+<li>
+<p>Whereas (Agda’s) dependent pattern matching implicitly includes a unification step, the basic-analysis translation lets us make the unification step explicit and separate from case analysis.
+This is crucial for completing the transformations from <code>wk'</code> to <code>wk</code>, because we can then control where unification takes place, which allows the programs to be rewritten to required forms.</p>
+</li>
+<li>
+<p>In our initial experiment with pattern-matching definitions, the merging of redundant cases in the <code>step</code> branches succeeds only accidentally:
+Since Agda allows us to omit the impossible branches, we only see the two surviving <code>step</code> clauses, and these can be merged after reordering.
+In the basic-analysis version, the omitted branches reappear as branches closed by contradiction, and further transformations are required to make all the branches the same.</p>
+</li>
+</ol>
+<h3>Transforming <code>wk'</code> to <code>wk</code>, take 3: Fording</h3>
+<p>The direction looks promising, but a serious drawback is that the laws hold at the level of basic-analysis operators, not directly at the surface level of pattern-matching programs, so the laws can only be applied to translated programs, which are rather tedious though.
+In particular, the delayed-constraint transformation (that got us to <code>wk₁．₄</code>) requires exposing unification constraints, which are implicit in pattern-matching programs.
+However, if we think a bit more, the way in which basic analyses expose constraints can be thought of as some kind of Fording, which we should be able to perform on pattern-matching programs directly!</p>
+<p>Let’s go back to <code>wk₃</code> (where we got stuck in the initial experiment):</p>
+<pre><code>wk₃ : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk₃  zero    zero          (base _)    = base refl
+wk₃  zero   (suc .zero)    (base refl) = step (base refl)
+wk₃ (suc m)  zero          (base ())
+wk₃ (suc m) (suc .(suc m)) (base refl) = step (base refl)
+wk₃ m       (suc n)        (step m&lt;n)  = step (wk₃ m n m&lt;n)
+</code></pre>
+<p>Instead of matching and specialising <code>m</code> and <code>n</code>, we can introduce ‘Ford variables’ <code>m'</code> and <code>n'</code> and constraints that they are equal to <code>m</code> and <code>n</code> respectively, and then match and specialise <code>m'</code> and <code>n'</code> instead — this corresponds to how basic analyses keep the original input and output, and introduce constraints on the input (as well as new variables mentioned by the constraints):</p>
+<pre><code>wk₄ : (m n : ℕ) → suc m ≤ n → (m' n' : ℕ) → m' ≡ m → n' ≡ n → m ≤ n
+wk₄ m n (base _)     zero     zero           refl refl = base refl
+wk₄ m n (base refl)  zero    (suc .zero)     refl refl = step (base refl)
+wk₄ m n (base ())   (suc m')  zero           refl refl
+wk₄ m n (base refl) (suc m') (suc .(suc m')) refl refl = step (base refl)
+wk₄ m n (step m&lt;n)  m'       (suc n')        refl refl = step (wk₄ _ _ m&lt;n m' n' refl refl)
+</code></pre>
+<p>Even though I haven’t thought it through, I believe this Ford transformation always inserts <code>refl</code> as the proofs of the new constraints, which trigger unification.
+Then (maybe assuming axiom K) we can ‘unmatch’ proofs as needed, thereby delaying unification.
+For example, by ‘unmatching’ the two constraint arguments, we can make the first four clauses uniform except for the redundant case analysis on <code>m'</code> and <code>n'</code>:</p>
+<pre><code>wk₅ : (m n : ℕ) → suc m ≤ n → (m' n' : ℕ) → m' ≡ m → n' ≡ n → m ≤ n
+wk₅ m n (base refl)  zero     zero    meq  neq  = step (base refl)
+wk₅ m n (base refl)  zero    (suc n') meq  neq  = step (base refl)
+wk₅ m n (base refl) (suc m')  zero    meq  neq  = step (base refl)
+wk₅ m n (base refl) (suc m') (suc n') meq  neq  = step (base refl)
+wk₅ m n (step m&lt;n)  m'       (suc n') refl refl = step (wk₅ _ _ m&lt;n m' n' refl refl)
+</code></pre>
+<p>And now we can remove the redundant case analysis:</p>
+<pre><code>wk₆ : (m n : ℕ) → suc m ≤ n → (m' n' : ℕ) → m' ≡ m → n' ≡ n → m ≤ n
+wk₆ m n (base refl) m' n'       meq  neq  = step (base refl)
+wk₆ m n (step m&lt;n)  m' (suc n') refl refl = step (wk₆ _ _ m&lt;n m' n' refl refl)
+</code></pre>
+<p>Interestingly, after removing the redundant case analysis, we can rematch the constraint proofs with <code>refl</code>,</p>
+<pre><code>wk₇ : (m n : ℕ) → suc m ≤ n → (m' n' : ℕ) → m' ≡ m → n' ≡ n → m ≤ n
+wk₇ m n (base refl) m' n'       refl refl = step (base refl)
+wk₇ m n (step m&lt;n)  m' (suc n') refl refl = step (wk₇ _ _ m&lt;n m' n' refl refl)
+</code></pre>
+<p>so that we can un-Ford the program and reach <code>wk</code>:</p>
+<pre><code>wk : (m n : ℕ) → suc m ≤ n → m ≤ n
+wk m n       (base refl) = step (base refl)
+wk m (suc n) (step m&lt;n)  = step (wk m n m&lt;n)
+</code></pre>
+<p>So actually there’s no need to go through the translation to basic analyses, which is a relief!</p>
+<h3>A more complete story</h3>
+<p>To put the post into context:
+In Shin’s <a href="https://doi.org/10.1017/S0956796824000145">JFP pearl</a> on top-down vs bottom-up sublist computation, he gave an equational specification (3.1) and a derivation of a function which he called <code>upgrade</code>; subsequently I expressed Shin’s specification (3.1) in a dependent type and reimplemented (and simultaneously verified) the function, which I called <code>retabulate</code> in the <a href="https://doi.org/10.48550/arXiv.2503.04001">short story paper</a>.
+Shu-Ting and I were intrigued by how different the two solutions look.
+After Shu-Ting’s numerous experiments, gradually we suspected that the first solution can be systematically transformed into the second, and a key step is switching from a two-level analysis on indices and then indexed data to a direct analysis on indexed data, as illustrated by the <code>wk</code> example.</p>
+<p>The original example looks more like the following (which is still a simplified version; the complete code is included in the attached Agda file):</p>
+<pre><code>up : ∀ k → BTree A n (suc k) → 2 ≤ n → suc (suc k) ≤ n → BTree (Vec A (suc (suc k))) n (suc (suc k))
+up k (tipN x)                        l₁          l₂         = ⊥-elim (n≮n (suc k) (≤′⇒≤ l₂))
+up k (node (tip0 x)    (tipN y))     l₁          l₂         = tipN (x ∷ y ∷ [])
+up k (node (tip0 x)    (node u u'))  l₁          l₂         = node (mapB (λ q → x ∷ q ∷ []) (node u u')) (up zero (node u u') (s≤′s (bounded u')) (s≤′s (bounded u')))
+up k (node (tipN x)     u)           l₁          l₂         = ⊥-elim (n≮n (suc k) (≤′⇒≤ l₂))
+up k (node (node t t') (tipN x))    (step l₁)    l₂         = tipN (unTip (up _ (node t t') l₁ (base refl)) ∷ʳ x)
+up k (node (node t t') (node u u')) (base refl)  l₂         = ⊥-elim (n≮0 (≤-pred (≤-pred (≤′⇒≤ l₂))))
+up k (node (node t t') (node u u')) (step l₁)   (base refl) = ⊥-elim (unbounded u')
+up k (node (node t t') (node u u')) (step l₁)   (step l₂)   = node (zipBW _∷ʳ_ (up _ (node t t') l₁ (≤⇒≤′ (&lt;⇒≤ (≤′⇒≤ l₂)))) (node u u')) (up _ (node u u') l₁ l₂)
+</code></pre>
+<p>This <code>up</code> function is a dependently typed reimplementation of Shin’s <code>upgrade</code> function.
+Roughly speaking, <code>up</code> transforms a tree to another by performing pattern matching on the input tree; the trees have indexed types that express shape constraints, and on the indices there are some more constraints, which are conditions assumed by Shin’s specification (3.1).
+Upon closer inspection, Shin’s derivation starts with analyses on the indices and the constraints/conditions.
+If <code>up</code> used the same case analysis strategy, with the arguments rearranged in the order in which they are analysed, it would look like</p>
+<pre><code>up' : 2 ≤ n → ∀ k → suc (suc k) ≤ n → BTree A n (suc k) → BTree (Vec A (suc (suc k))) n (suc (suc k))
+up' (base refl) k      (base refl) (node (tip0 x)    (tipN y))    = tipN (x ∷ y ∷ [])
+up' (base refl) k      (step l₂)    t                             with step (base ()) ← l₂
+up' (step l₁)   k      (base refl) (node (tip0 x)    (tipN y))    with step (base ()) ← l₁
+up' (step l₁) .(suc _) (base refl) (node (node t t') (tipN x))    = tipN (unTip (up' l₁ _ (base refl) (node t t')) ∷ʳ x)
+up' (step l₁) .(suc _) (base refl) (node (node t t') (node u u')) = ⊥-elim (unbounded u')
+up' (step l₁)   zero   (step l₂)   (tipN x)                       = ⊥-elim (n≮0 (≤′⇒≤ l₂))
+up' (step l₁)   zero   (step l₂)   (node (tip0 x)     u)          = node (mapB (λ q → x ∷ q ∷ []) u) (up' l₁ zero l₂ u)
+up' (step l₁)  (suc k) (step l₂)   (tipN x)                       = ⊥-elim (n≮n (suc (suc k)) (≤′⇒≤ (step l₂)))
+up' (step l₁)  (suc k) (step l₂)   (node t            u)          = node (zipBW _∷ʳ_ (up' l₁ k (≤⇒≤′ (≤-pred (≤′⇒≤ (step l₂)))) t) u) (up' l₁ (suc k) l₂ u)
+</code></pre>
+<p>We believe that <code>up</code> and <code>up'</code> are related by the simple transformations described in this post.
+A more complete story involves more transformations:
+Shin started with an equational specification, which, as a type, looks like</p>
+<pre><code>2 ≤ n → ∀ k → suc (suc k) ≤ n → ∀ t → ch k xs ≡ t → ⋯
+</code></pre>
+<p>The involved functions can be replaced by inductively defined relations, for example</p>
+<pre><code>2 ≤ n → ∀ k → suc (suc k) ≤ n → ∀ t → Ch k xs t → ⋯
+</code></pre>
+<p>where the equation involving <code>ch</code> is replaced by a relation <code>Ch</code> whose inhabitants are <a href="/blog/0043/">execution traces</a> of <code>ch</code>.
+The output tree <code>t</code> is a simplified representation of those traces, so <code>Ch</code> looks like an algebraic ornamentation of <code>BTree</code>, which brings us closer to <code>up'</code>.
+Our hunch is that by applying a somewhat long series of transformations we may be able to get from Shin’s equational proof to the <code>retabulate</code> function on trees; each of the transformations may not be surprising, but the overall effect would be.
+Alas, this means that if we want to write a paper, we’ll need to cover quite a few transformations to make the paper interesting enough, but the workload seems too much.
+It might be worth a try if we could find more convincing examples, but examples also turned out to be difficult to conceive.
+So this is where we have to stop, write things up, and hope that suitable examples and follow-up ideas will show up some day.</p>
+<p>On the other hand, this was a nice opportunity for us to start studying the underlying mechanisms that make dependently typed programming practical (compared with, for example, programming directly in Martin-Löf type theory).
+We read Goguen et al’s <a href="https://doi.org/10.1007/11780274_27"><em>Eliminating dependent pattern matching</em></a> and followed the reference to Conor’s <a href="https://doi.org/10.1007/3-540-45842-5_13"><em>Elimination with a motive</em></a>, which was probably where the basic analysis idea was first published (although we actually like Goguen et al’s succinct presentation more).
+In these translations and our final version of transformations, Fording has been shown to be a technique that’s more important than it looks, but with the advent of homotopy type theory it’s less clear how harmless Fording is.
+Even though I’m not eager to embrace the full generality of homotopy type theory, it’s still important to be aware of the big picture, so I think at some point I’ll need to read the sequel <a href="https://doi.org/10.1017/S0956796816000174"><em>Eliminating dependent pattern matching without K</em></a> as well as <a href="https://doi.org/10.1017/S095679681800014X"><em>Proof-relevant unification: Dependent pattern matching with only the axioms of your type theory</em></a> by Cockx et al.
+Also written by Cockx et al (who have revised all the papers for JFP — very impressive) is <a href="https://doi.org/10.1017/S0956796819000182"><em>Elaborating dependent (co)pattern matching: No pattern left behind</em></a>, but I’m less sure about this one about (Agda’s) case trees because I’ve found Epigram’s approach to be clearer (without having to rely on argument reordering to try to express case analysis strategies, for example) and more general/extensible, as explained in <a href="https://doi.org/10.1017/S0956796803004829"><em>The view from the left</em></a>.</p>
+<p><strong>Agda file:</strong> <a href="BasicAnalysis.agda">BasicAnalysis.agda</a></p>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>

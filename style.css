@@ -131,7 +131,7 @@ a:active {
 }
 
 pre {
-  color: var(--cs-text);
+  color: inherit;
   background-color: transparent;
   border: none;
   margin-left: 1.5em;
@@ -143,7 +143,7 @@ pre {
 
 code {
   font-family: 'Fira Code', monospace;
-  color: var(--cs-text);
+  color: inherit;
   padding: 0;
   background: transparent;
   font-size: 100%;
@@ -172,10 +172,12 @@ blockquote {
 
 ul {
   margin-bottom: 2ex;
+  text-align: justify;
 }
 
 ol {
   margin-bottom: 2ex;
+  text-align: justify;
 }
 
 .theorem {
