@@ -31,11 +31,11 @@ publicationList =
       , year    = 2026
       , types   = [ (Unpublished, "Submitted")
                   ]
-      , links   = [ ("PDF", Nothing, "https://zenodo.org/records/18977527/files/BT.pdf")
-                  , ("Agda code", Just "GitHub", "https://github.com/josh-hs-ko/BT/blob/main/JFP/BT.agda")
+      , links   = [ ("PDF", Nothing, "https://zenodo.org/records/22065493/files/BT.pdf")
+                  , ("Agda code", Just "Zenodo", "https://zenodo.org/records/22065493/files/BT.agda")
                   ]
-      , info    = [ ("DOI", "10.5281/zenodo.18977527", Nothing)
-                  , ("Agda version", "2.7.0.1 with Standard Library 2.2", Nothing)
+      , info    = [ ("DOI", "10.5281/zenodo.22065493", Nothing)
+                  , ("Agda version", "2.8.0 with Standard Library 2.3", Nothing)
                   , ("Related blog posts", "0037, 0038, 0043, 0044", Nothing)
                   , ("Abstract", "We revisit the problem of implementing a recursion scheme over immediate sublists studied by Mu (2024), and provide a dependently typed solution in Agda. The recursion scheme can be implemented as either a top-down algorithm, which has a straightforward definition but results in lots of re-computation, or a bottom-up algorithm, which has a puzzling definition but avoids re-computation. We show that the types can be made precise to guide and understand the developments of the algorithms. In particular, a precisely typed version of the key data structure (binomial trees) can be derived from the problem specification. The precise types also allow us to prove that the two algorithms are extensionally equal using parametricity. Despite apparent dissimilarities, our proof can be compared to Mu’s equational proof, and be understood as a more economical version of Mu’s proof.", Nothing)
                   ]
