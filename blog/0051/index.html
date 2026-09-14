@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- METADATA -->
+    <title>The Yoneda lemma and parametricity — The trek goes on (Josh Ko’s blog)</title>
+    <meta name="description" content="I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
+Recently I’ve got a chance to rethink the lemma, and I think my recently reinforced intuition about parametricity may help.">
+    <!-- END OF METADATA -->
+
+    <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../images/favicon-16x16.png">
+    <link rel="manifest" href="../../images/site.webmanifest">
+    <link rel="mask-icon" href="../../images/safari-pinned-tab.svg" color="#002147">
+    <link rel="shortcut icon" href="../../images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#002147">
+    <meta name="msapplication-config" content="../../images/browserconfig.xml">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Noto+Sans+TC:wght@400;700&family=Open+Sans:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+    <script src="../../mathjax-config.js" defer></script>
+    <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+
+    <link rel="stylesheet" href="../../style.css">
+
+  </head>
+
+  <body>
+
+    <div><div class="container main blog">
+
+      <div class="row blog-header">
+        <div class="col-sm-12">
+          <h1>The trek goes on</h1>
+          <div class="subtitle"><a href="/">Josh Ko</a>’s <a href="/blog/">blog</a></div>
+        </div>
+      </div>
+
+<!-- POST -->
+<div class="post-number">
+0051
+</div>
+<h2>The Yoneda lemma and parametricity</h2>
+<div class="post-time">Posted at 17:09 on 14 September 2026</div>
+<p>I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
+Recently I’ve got a chance to rethink the lemma, and I think my intuition about parametricity (<a href="/blog/0047/">reinforced since last summer</a>) —which is obviously closely related to naturality (cf <a href="https://doi.org/10.1016/j.entcs.2014.02.008">Hermida et al’s treatment</a>)— may help.
+Parametricity characterises representation independence of a construction by saying that whatever property that holds for one or more representations is preserved by the construction.
+This preservation most frequently arises from <em>intensional</em> constraints imposed on parametrically typed programs, which must be <em>defined</em> uniformly over representations of parametric types without being able to peek into representation detail (and thus cannot interfere with whatever property that holds).
+What’s genius about parametricity, though, is that it’s an <em>extensional</em> characterisation, and a program can even use non-parametric constructs such as type-case carefully and still satisfy parametricity as long as it <em>behaves</em> uniformly (cf <a href="https://doi.org/10.1145/3676954">semantic type soundness</a>); although we don’t get to assume functions satisfying parametricity are defined uniformly, it can help to pretend that they are —that is, invoke the intuition gained by writing uniform programs in languages with parametric types— to predict what parametricity can say about them.</p>
+<p>I want to apply the same strategies to the Yoneda lemma, imagining that I’m programming it in a parametrically typed language that’s basically Agda but adapted to talk about categories natively.
+To set the scene:
+Let <code>C</code> be a category (which can be thought of as a special sort in the language), <code>C(c, d) : Set</code> the hom-set from <code>c : C</code> to <code>d : C</code>, and <code>F : C → Set</code> a functor (here the coincidence of <code>Set</code> between category theory and Agda is quite pleasing).
+The usual Yoneda lemma says that, for every object <code>c : C</code>, there’s an isomorphism between functions of type <code>∀ d → C(c, d) → F d</code> —which are natural in <code>d</code>— and elements of <code>F c</code>.
+Moreover, the forward map of type <code>(∀ d → C(c, d) → F d) → F c</code> is natural in both <code>c</code> and <code>F</code>.
+(Then a quick and generic argument shows that the naturality of the backward map follows from that of the forward map, its inverse.)</p>
+<p><em>Remark.</em>
+Apparently one could also talk about naturality in <code>C</code>, which is also a parameter, but that’s not usually talked about in standard presentations and I’ll skip it in this post, although it seems to be an interesting follow-up exercise to see how far the parametricity perspective can lead us.
+(<em>End of Remark.</em>)</p>
+<h3>Naturality in <code>d</code></h3>
+<p>I’ll start from a special case: continuation-passing style.
+We know that <code>∀ X → (A → X) → X</code> is isomorphic to <code>A</code>, because the only way for a function <code>f : ∀ X → (A → X) → X</code> to produce a result of type <code>X</code> is to apply a given continuation <code>k : A → X</code>, and therefore <code>f</code> must conceal an element <code>a : A</code> to which it can apply <code>k</code>; due to the special type of <code>f</code>, the element <code>a</code> can be revealed by supplying <code>id : A → A</code> as the continuation.
+This is an intensional argument (‘<code>f</code> can only be defined in this way’), which doesn’t necessarily hold (you can, for example, copy the element <code>a</code> into some data structure and do some crazy transformations before applying <code>k</code> to the elements and extract one of them as the result), but it gives us a good idea of what parametricity can prove: <code>f</code> necessarily behaves the same as <code>λ X k → k a</code> for some element <code>a</code> chosen uniformly in <code>X</code> (that is, the choice of <code>a</code> cannot depend on <code>X</code>), so <code>f A id</code> will reveal <code>a</code> and determine the behaviour of <code>f</code> for all <code>X</code> and <code>k</code>.
+Another example/exercise is that a function <code>g : ∀ X → X → X → X</code> is necessarily the first or second projection: the choice of ‘first’ or ‘second’ has to be made uniformly in <code>X</code>, so by evaluating a special instance like <code>g true false</code> we can find out which choice is made (cf <a href="https://doi.org/10.1145/1480881.1480904">Voigtländer’s ‘bidirectionalisation for free’</a>).</p>
+<p>To give more detail, the (binary) parametricity of <code>f</code> says that any relation <code>R : X → X' → Set</code> is preserved by <code>f</code>: if two inputs <code>k : A → X</code> and <code>k' : A → X'</code> are related by <code>R</code>, then the outputs <code>f X k</code> and <code>f X' k'</code> are related by <code>R</code> too.
+The latter means simply <code>R (f X k) (f X' k')</code> is inhabited, while the former intuitively means that <code>R</code> holds for all corresponding pairs of <code>X</code> and <code>X'</code> in <code>k</code> and <code>k'</code>; in this case <code>k</code>/<code>k'</code> can be thought of as <code>A</code>-indexed collections of <code>X</code>/<code>X'</code>, so the logical lifting of <code>R</code> to relate <code>k</code> and <code>k'</code> is <code>∀ a → R (k a) (k' a)</code>.
+Suppose that the parametricity of <code>f</code> is witnessed by</p>
+<pre><code>fᴿ : {X X' : Set}                (R : X → X' → Set)
+   → {k : A → X} {k' : A → X'} → (∀ a → R (k a) (k' a))
+                               →  R (f X k) (f X' k')
+</code></pre>
+<p>What we want to prove is <code>f X k ≡ k (f A id)</code> for any input <code>X</code> and <code>k</code> (where <code>f A id</code> is the concealed element <code>a</code> in the previous paragraph); choose <code>X' = A</code>,<code>k' = id</code>, and <code>R x a = x ≡ k a</code>, and the result type of <code>fᴿ</code> instantiates to exactly what we want.
+<code>fᴿ</code> requires us to prove the condition that the input functions <code>k</code> and <code>id</code> are related, which expands to <code>∀ a → k a ≡ k (id a)</code> and is obviously true.</p>
+<pre><code>λ X k → fᴿ (λ x a → x ≡ k a) (λ a → refl)
+  : ∀ X (k : A → X) → f X k ≡ k (f A id)
+</code></pre>
+<p>Note that the condition can be compressed to <code>k ≡ k ∘ id</code>, which is closer to the categorical language.</p>
+<p>The above argument can be readily generalised to the natural transformations in the Yoneda lemma, which have type</p>
+<pre><code>α : ∀ d → C(c, d) → F d
+</code></pre>
+<p>If we imagine programming <code>α</code> parametrically in <code>F</code>, <code>c</code>, and <code>d</code>, we’ll reach a similar conclusion that <code>α</code> must conceal an element of <code>F c</code>, which can be revealed as <code>α c id</code> (where <code>id : ∀ {c} → C(c, c)</code> denotes the identity morphisms), and in general for inputs <code>d : C</code> and <code>m : C(c, d)</code>, we can determine <code>α d m ≡ F m (α c id)</code> (where <code>F : ∀ {c d} → C(c, d) → F c → F d</code> is overloaded by convention).
+The naturality of <code>α</code> is usually stated as (the diagrammatic form of)</p>
+<pre><code>∀ {d d'} (f : C(d, d')) → α d' ∘ (f ∘_) ≡ F f ∘ α d
+</code></pre>
+<p>but in this case we’re dealing with sets/types and functions, so this can be restated as morphism preservation (which is less higher-order and more comprehensible),</p>
+<pre><code>nat : ∀ {d d'}                       (f : C(d, d'))
+    → {m : C(c, d)} {m' : C(c, d')} → m' ≡ f ∘ m
+                                    → α d' m' ≡ F f (α d m)
+</code></pre>
+<p>and can be used in essentially the same way as <code>fᴿ</code> above,</p>
+<pre><code>λ d m → nat m (sym id-r)
+  : ∀ d (m : C(c, d)) → α d m ≡ F m (α c id)
+</code></pre>
+<p>except that we need to invoke the category law <code>id-r : ∀ {m} → m ∘ id ≡ m</code>.</p>
+<h3>Naturality in <code>c</code></h3>
+<p>The proof of naturality in <code>c</code> usually gets complicated rather quickly, probably because the Yoneda lemma usually appears early on in a textbook and is used as an example for the reader to get familiar with the basic definitions, but the forward map in the isomorphism</p>
+<pre><code>yo : ∀ c → (∀ d → C(c, d) → F d) → F c
+yo c α = α c id
+</code></pre>
+<p>has rank 3  if <code>C(c, d)</code> is counted, and most people have difficulties dealing with functions so higher-order (Peirce’s law <code>((P → Q) → P) → P</code> is another example).
+But this naturality shouldn’t be so difficult — we actually have a uniform definition <code>yo</code> in hand, so we should get parametricity by construction, from which naturality shouldn’t be far away.</p>
+<p>Formally, ‘by construction’ refers to the parametricity translation:</p>
+<pre><code>yoᴿ : ∀ {c c'}                    (f : C(c, c'))
+    → {α  : ∀ d → C(c , d) → F d}
+      {α' : ∀ d → C(c', d) → F d} (αᴿ : ∀ {d d'} (g : C(d, d'))
+                                      → Related f g α α')
+                                 → yo c' α' ≡ F f (yo c α)
+yoᴿ f αᴿ = αᴿ f idᴿ
+</code></pre>
+<p>where</p>
+<pre><code>Related f g α α' =
+  {m : C(c, d)} {m' : C(c', d')} → m' ∘ f ≡ g ∘ m
+                                 → α' d' m' ≡ F g (α d m)
+</code></pre>
+<p>and</p>
+<pre><code>idᴿ : {c c' : C} {f : C(c, c')} → id ∘ f ≡ f ∘ id
+</code></pre>
+<p>I’ve adapted the translation to preserve morphisms instead of relations.
+Unlike relations, morphisms are directional, and in the type of <code>yoᴿ</code> I’ve chosen the directions of <code>f</code> and <code>g</code>, which in this case must match for the translation to work — if choosing <code>g : C(d', d)</code>, then <code>Related f g α α'</code> becomes</p>
+<pre><code>{m : C(c, d)} {m' : C(c', d')} → g ∘ m' ∘ f ≡ m
+                               → F g (α' d' m') ≡ α d m
+</code></pre>
+<p>(and is in fact a form of naturality), but then directly using <code>αᴿ</code> (as done by the translation in the definition of <code>yoᴿ</code>) no longer type-checks.
+My conjecture is that the full parametricity translation for this language with native support for categories —even if restricted to preserving morphisms— should allow the user to choose morphism directions.
+For example, <code>αᴿ</code> should let its user choose between <code>g : C(d, d')</code> and <code>g : C(d', d)</code>; in particular, when the translation applies <code>αᴿ</code> and substitute <code>f</code> for <code>g</code>, it can choose the same direction as <code>f</code>.
+More generally, maybe we should preserve <em>diagrams</em> and allow the user to choose which diagrams to preserve (but morphism preservation (with choice of direction) may well be enough).</p>
+<p>The type of <code>yoᴿ</code> goes strictly beyond naturality: when stated in the form of morphism preservation, the premise and conclusion of naturality are both functional (such as the type of <code>nat</code> in the previous section), whereas in <code>Related f g α α'</code> the premise <code>m' ∘ f ≡ g ∘ m</code> is not.
+(This was Reynolds’s original motivation for inventing relational parametricity.)
+Also note that even though <code>m' ∘ f ≡ g ∘ m</code> is conceptually morphism preservation, it can no longer be stated clearly as so (‘mapping related inputs to related outputs’), and needs to be phrased as an equality — <code>m</code> and <code>m'</code> are (abstract) morphisms rather than functions, so we can’t do pointwise expansion (as in <code>nat</code> above).
+This might make the parametricity approach less usable in more abstract settings (with more categorical structures than sets/types), where we may need to find ways to compress relations into morphisms so as to fit preservation statements into equalities.</p>
+<p>The definition of <code>yoᴿ</code> shows that it’s straightforward to prove the parametricity of a uniform term by following the term’s structure.
+But we’re hoping to prove naturality, not parametricity.
+In this case, the conclusion of (the morphism-preserving form of) naturality is the same as that of parametricity, and it remains to show that the naturality premises imply the parametricity premise — that is, we need to construct <code>αᴿ</code> from <code>nat</code> above and</p>
+<pre><code>rel : ∀ {c c'}                       (f : C(c, c'))
+    → ∀ {d}
+    → {m : C(c, d)} {m' : C(c', d)} → m' ∘ f ≡ m
+                                    → α' d m' ≡ α d m
+</code></pre>
+<p>which is the morphism-preserving form of</p>
+<pre><code>∀ {c c'} (f : C(c, c')) → ∀ {d} → α' d ≡ α d ∘ (_∘ f)
+</code></pre>
+<p>(which is already too higher-order for most people).
+The function <code>_∘ (_∘ f)</code> that maps <code>α d</code> to <code>α' d</code> (and is hopelessly higher-order) can be thought of as the result of logical lifting in the categorical language, but since we’re applying hom-functors to do the lifting, we lift only one morphism (in this case <code>f</code>) and change only one object (in this case from <code>c</code> to <code>c'</code>) at a time:</p>
+<pre><code>          f  : C(c, c')
+↦      _∘ f  : C(c', d) → C(c, d)
+↦  _∘ (_∘ f) : (C(c, d) → F d) → (C(c', d) → F d)
+</code></pre>
+<p>On the second and third lines, we’re changing the domain by lifting the morphism from the previous line while fixing the codomain; the overall effect is that we’re changing <code>c</code> to <code>c'</code> in a complex type while keeping everything else fixed.
+Compare this with <code>nat</code>, which changes <code>d</code> to <code>d'</code>.
+Now compose <code>rel</code> and <code>nat</code>, and we get <code>αᴿ</code>, changing both objects in one go:</p>
+<pre><code>λ {m : C(c, d)} {m' : C(c', d'))} (ir : m' ∘ f ≡ g ∘ m) →
+  begin
+    α' d' m'
+      ≡⟨ rel f refl ⟩
+    α d' (m' ∘ f)
+      ≡⟨ nat g ir ⟩
+    F g (α d m)
+  ∎ : Related f g α α'
+</code></pre>
+<p>My conjecture is that this is not a coincidence: it is well known that parametricity specialises to naturality; conversely, as observed here, we may be able to reconstruct parametricity if we have naturality in all the objects involved.
+Eventually we may be able to reason about uniform categorical constructions conveniently in terms of parametricity, but require only naturality as stated in the usual definitions, or can work out which naturality conditions are sufficient.</p>
+<h3>Naturality in <code>F</code></h3>
+<p>This naturality is actually pretty mundane, but well, simple things should be simple to prove, so let’s verify whether this motto holds for our methodology.
+If we include the quantification over <code>F</code> in <code>yo</code>,</p>
+<pre><code>yo : ∀ F → ∀ c → (∀ d → C(c, d) → F d) → F c
+yo F c α = α c id
+</code></pre>
+<p>and perform the parametricity translation only with respect to <code>F</code>, we get something very simple:</p>
+<pre><code>yoᴿ : ∀ {F F'}                    (β : ∀ d → F d → F' d))
+    → ∀ {c}
+    → {α  : ∀ d → C(c, d) → F  d}
+      {α' : ∀ d → C(c, d) → F' d} (αᴿ : ∀ {d} {m : C(c, d)}
+                                      → α' d m ≡ β d (α d m))
+                                 → yo F' c α' ≡ β c (yo F c α)
+yoᴿ β αᴿ = αᴿ
+</code></pre>
+<p>Since <code>yo</code> is only an invocation of <code>α</code>, if we know the result of <code>α</code> can be changed from <code>F d</code> to <code>F' d</code>, then surely the result of <code>yo</code> can be changed in the same way.</p>
+<hr />
+<div class="remark">
+I really need to get back to my parametric deque interface…
+</div>
+
+<!-- END OF POST -->
+
+      <div class="footer-stamp"><img id="stamp" src="../../images/PiSigma.svg" alt="End of page"></div>
+
+    </div></div>
+
+  </body>
+
+</html>
