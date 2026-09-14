@@ -9,8 +9,7 @@
 
     <!-- METADATA -->
     <title>The Yoneda lemma and parametricity — The trek goes on (Josh Ko’s blog)</title>
-    <meta name="description" content="I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
-Recently I’ve got a chance to rethink the lemma, and I think my recently reinforced intuition about parametricity may help.">
+    <meta name="description" content="I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it. Recently I’ve got a chance to rethink the lemma, and I think my recently reinforced intuition about parametricity may help.">
     <!-- END OF METADATA -->
 
     <link rel="apple-touch-icon" sizes="180x180" href="../../images/apple-touch-icon.png">
@@ -61,7 +60,7 @@ Recently I’ve got a chance to rethink the lemma, and I think my recently reinf
 0051
 </div>
 <h2>The Yoneda lemma and parametricity</h2>
-<div class="post-time">Posted at 17:09 on 14 September 2026</div>
+<div class="post-time">Posted at 17:09 on 14 September 2026, and revised at 17:42 on 14 September 2026</div>
 <p>I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
 Recently I’ve got a chance to rethink the lemma, and I think my intuition about parametricity (<a href="/blog/0047/">reinforced since last summer</a>) —which is obviously closely related to naturality (cf <a href="https://doi.org/10.1016/j.entcs.2014.02.008">Hermida et al’s treatment</a>)— may help.
 Parametricity characterises representation independence of a construction by saying that whatever property that holds for one or more representations is preserved by the construction.
@@ -116,7 +115,7 @@ The naturality of <code>α</code> is usually stated as (the diagrammatic form of
 <pre><code>yo : ∀ c → (∀ d → C(c, d) → F d) → F c
 yo c α = α c id
 </code></pre>
-<p>has rank 3  if <code>C(c, d)</code> is counted, and most people have difficulties dealing with functions so higher-order (Peirce’s law <code>((P → Q) → P) → P</code> is another example).
+<p>has order 3 if <code>C(c, d)</code> is counted, and most people have difficulties dealing with functions so higher-order (Peirce’s law <code>((P → Q) → P) → P</code> is another example).
 But this naturality shouldn’t be so difficult — we actually have a uniform definition <code>yo</code> in hand, so we should get parametricity by construction, from which naturality shouldn’t be far away.</p>
 <p>Formally, ‘by construction’ refers to the parametricity translation:</p>
 <pre><code>yoᴿ : ∀ {c c'}                    (f : C(c, c'))
