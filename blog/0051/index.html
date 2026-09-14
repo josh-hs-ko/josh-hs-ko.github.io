@@ -60,7 +60,7 @@
 0051
 </div>
 <h2>The Yoneda lemma and parametricity</h2>
-<div class="post-time">Posted at 17:09 on 14 September 2026, and revised at 17:42 on 14 September 2026</div>
+<div class="post-time">Posted at 17:09 on 14 September 2026, and revised at 22:41 on 14 September 2026</div>
 <p>I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
 Recently I’ve got a chance to rethink the lemma, and I think my intuition about parametricity (<a href="/blog/0047/">reinforced since last summer</a>) —which is obviously closely related to naturality (cf <a href="https://doi.org/10.1016/j.entcs.2014.02.008">Hermida et al’s treatment</a>)— may help.
 Parametricity characterises representation independence of a construction by saying that whatever property that holds for one or more representations is preserved by the construction.
@@ -166,12 +166,12 @@ The function <code>_∘ (_∘ f)</code> that maps <code>α d</code> to <code>α'
 <p>On the second and third lines, we’re changing the domain by lifting the morphism from the previous line while fixing the codomain; the overall effect is that we’re changing <code>c</code> to <code>c'</code> in a complex type while keeping everything else fixed.
 Compare this with <code>nat</code>, which changes <code>d</code> to <code>d'</code>.
 Now compose <code>rel</code> and <code>nat</code>, and we get <code>αᴿ</code>, changing both objects in one go:</p>
-<pre><code>λ {m : C(c, d)} {m' : C(c', d'))} (ir : m' ∘ f ≡ g ∘ m) →
+<pre><code>λ {m : C(c, d)} {m' : C(c', d'))} (mᴿ : m' ∘ f ≡ g ∘ m) →
   begin
     α' d' m'
       ≡⟨ rel f refl ⟩
     α d' (m' ∘ f)
-      ≡⟨ nat g ir ⟩
+      ≡⟨ nat g mᴿ ⟩
     F g (α d m)
   ∎ : Related f g α α'
 </code></pre>
