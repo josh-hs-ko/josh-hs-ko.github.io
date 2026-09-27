@@ -60,7 +60,7 @@
 0051
 </div>
 <h2>The Yoneda lemma and parametricity</h2>
-<div class="post-time">Posted at 17:09 on 14 September 2026, and revised at 14:59 on 20 September 2026</div>
+<div class="post-time">Posted at 17:09 on 14 September 2026, and revised at 17:00 on 27 September 2026</div>
 <p>I’ve always felt that I don’t have a good grasp of the Yoneda lemma, in particular the various sorts of naturality about it.
 Recently I’ve got a chance to rethink the lemma, and I think my <a href="/blog/0047/">recently reinforced</a> intuition about parametricity (which is obviously closely related to naturality — cf <a href="https://doi.org/10.1016/j.entcs.2014.02.008">Hermida et al’s treatment</a>) may help.
 Parametricity characterises representation independence of a construction by saying that whatever property that holds for one or more representations is preserved by the construction.
@@ -185,7 +185,7 @@ If we include the quantification over <code>F</code> in <code>yo</code>,</p>
 yo F c α = α c id
 </code></pre>
 <p>and perform the parametricity translation only with respect to <code>F</code>, we get something very simple:</p>
-<pre><code>yoᴿ : ∀ {F F'}                    (β : ∀ d → F d → F' d))
+<pre><code>yoᴿ : ∀ {F F'}                    (β : ∀ d → F d → F' d)
     → ∀ {c}
     → {α  : ∀ d → C(c, d) → F  d}
       {α' : ∀ d → C(c, d) → F' d} (αᴿ : ∀ {d} {m : C(c, d)}
